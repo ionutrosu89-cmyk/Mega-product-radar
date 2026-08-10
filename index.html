@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mega Radar">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Product Radar RO V4</title>
+<style>
+*{box-sizing:border-box}:root{--bg:#f3f5f7;--card:#fff;--text:#101828;--muted:#667085;--line:#e4e7ec;--dark:#0b1220;--green:#087443;--amber:#a15c00;--red:#b42318;--blue:#175cd3}
+body{margin:0;padding-bottom:env(safe-area-inset-bottom);background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(11,18,32,.97);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 12px}
+.head{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+h1{font-size:20px;margin:0}.sub{font-size:11px;opacity:.72;margin-top:3px}.syncState{font-size:10px;text-align:right;font-weight:800}
+.wrap{max-width:1100px;margin:auto;padding:13px}.tabs{display:flex;gap:7px;overflow:auto;padding-bottom:3px;margin-bottom:12px}
+.tabs button{border:0;border-radius:999px;background:#fff;padding:9px 12px;white-space:nowrap;font-weight:800;color:#344054}
+.tabs .active{background:var(--dark);color:#fff}.panel{display:none}.panel.active{display:block}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.kpi{background:#fff;border:1px solid var(--line);border-radius:15px;padding:11px}
+.kpi b{font-size:19px;display:block}.kpi span{font-size:10px;color:var(--muted)}
+.filters{display:grid;grid-template-columns:1fr 135px;gap:8px;margin-bottom:8px}.wide{grid-column:1/3}
+input,select{width:100%;font:inherit;border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff}
+.grid{display:grid;gap:10px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.top{display:flex;justify-content:space-between;gap:10px}.name{font-size:16px;font-weight:900;line-height:1.2}
+.score{min-width:58px;text-align:center;background:#eef2ff;padding:8px;border-radius:12px;font-weight:900}
+.badge,.stage{display:inline-block;margin-top:6px;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:900}
+.badge{background:#f2f4f7}.buy{background:#ecfdf3;color:#027a48}.watch{background:#fffaeb;color:#b54708}.reject{background:#fef3f2;color:#b42318}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.m{background:#f9fafb;border-radius:10px;padding:8px}.m small{display:block;color:var(--muted);font-size:9px}.m b{font-size:12px}
+.market{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:10px}.mk{text-align:center;background:#f9fafb;padding:7px 2px;border-radius:9px}.mk small{display:block;font-size:8px;color:var(--muted)}.flames{font-size:10px;letter-spacing:-1px}
+.details{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);font-size:11px;color:#475467;line-height:1.45}
+.actions{display:flex;gap:7px;margin-top:10px}.btn{border:0;border-radius:10px;background:var(--dark);color:#fff;font-weight:800;padding:10px;flex:1}.btn.alt{background:#f2f4f7;color:#344054}
+.box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}.box h2{font-size:17px;margin:0 0 10px}
+.small{font-size:11px;color:var(--muted);line-height:1.5}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.blue{color:var(--blue)}
+.source{border:1px solid var(--line);border-radius:14px;padding:11px;margin-top:8px;background:#fafafa}.sourceTop{display:flex;justify-content:space-between;gap:8px}
+.source a{display:inline-block;margin-top:8px;text-decoration:none;color:#fff;background:var(--dark);font-weight:800;padding:9px 11px;border-radius:10px}
+.sourceMeta{font-size:11px;color:var(--muted);margin-top:3px}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}label{font-size:10px;color:var(--muted)}label input{margin-top:3px}.result{margin-top:10px;padding:12px;background:#f0fdf4;border-radius:12px;line-height:1.55}
+.notice{padding:12px;border-radius:14px;background:#fffaeb;color:#7a2e0e;font-size:11px;line-height:1.5;margin-bottom:10px}
+@media(max-width:650px){.kpis{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.market{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="head"><div><h1>Mega Product Radar</h1><div class="sub">Global Scan → Romania Gap → Sourcing → Profit → Buy Zone • V4</div></div><div class="syncState" id="syncState">Dataset controlat<br>10 aug 2026</div></div></header>
+<main class="wrap">
+<div class="tabs">
+<button class="active" data-tab="radar">🔥 Radar</button>
+<button data-tab="buy">🟢 Buy Zone</button>
+<button data-tab="source">🔗 Sourcing</button>
+<button data-tab="kids">👶 Kids 0–6</button>
+<button data-tab="watch">❤️ Watchlist</button>
+<button data-tab="profit">🧮 Profit</button>
+<button data-tab="sync">🔄 Sync</button>
+</div>
+
+<section id="radar" class="panel active">
+<div class="kpis">
+<div class="kpi"><b id="kAll">0</b><span>candidați</span></div>
+<div class="kpi"><b id="kBuy">0</b><span>Buy Zone eligibile</span></div>
+<div class="kpi"><b id="kSource">0</b><span>cu link sourcing</span></div>
+<div class="kpi"><b id="kKids">0</b><span>Kids 0–6</span></div>
+</div>
+<div class="filters">
+<input id="q" placeholder="Caută produs...">
+<select id="cat"><option value="">Toate categoriile</option></select>
+<select id="stageFilter" class="wide"><option value="">Toate etapele</option><option>SCALE</option><option>TEST BUY</option><option>SAMPLE</option><option>VALIDATE</option><option>DISCOVERED</option></select>
+<select id="sort" class="wide"><option value="score">Scor ↓</option><option value="profit">Profit ↓</option><option value="gap">Romania Gap ↓</option><option value="china">Cost China ↑</option></select>
+</div>
+<div id="cards" class="grid"></div>
+</section>
+
+<section id="buy" class="panel">
+<div class="box"><h2>Buy Zone</h2><p class="small">Aici intră numai produse verificate, cu economie suficientă și fără gate critic. Pentru Kids este obligatoriu Kids Gate = PASS. Un produs fără link concret de sourcing nu apare ca “Ready to Buy”.</p></div>
+<div id="buyCards" class="grid"></div></section>
+
+<section id="source" class="panel">
+<div class="box"><h2>Sourcing Board</h2><p class="small">Linkuri concrete către furnizorii identificați. Prețurile și MOQ-urile sunt snapshot-uri de research și trebuie reconfirmate înainte de plată.</p></div>
+<div id="sourceCards"></div></section>
+
+<section id="kids" class="panel">
+<div class="box"><h2>Kids 0–6 • Compliance Gate</h2><p class="small">Produsele pentru copii nu pot ajunge în TEST BUY/SCALE până nu trec documentația, materialele, avertismentele și testele aplicabile.</p></div>
+<div id="kidsCards" class="grid"></div></section>
+
+<section id="watch" class="panel"><div id="watchCards" class="grid"></div></section>
+
+<section id="profit" class="panel">
+<div class="box"><h2>Profit Engine</h2>
+<div class="form">
+<label>Cost China / buc. (lei)<input id="cChina" type="number" value="50"></label>
+<label>Transport + import / buc. (lei)<input id="cImport" type="number" value="25"></label>
+<label>Fulfilment + ambalare (lei)<input id="cFulfill" type="number" value="5"></label>
+<label>Preț vânzare cu TVA (lei)<input id="cSell" type="number" value="249.90"></label>
+<label>TVA (%)<input id="cVat" type="number" value="21"></label>
+<label>Comision marketplace (%)<input id="cFee" type="number" value="17"></label>
+<label>Ads + retururi (%)<input id="cReserve" type="number" value="8"></label>
+<label>Impozit estimativ (%)<input id="cTax" type="number" value="16"></label>
+</div>
+<button class="btn" style="width:100%;margin-top:10px" onclick="calc()">Calculează</button>
+<div id="calcOut" class="result"></div></div>
+</section>
+
+<section id="sync" class="panel">
+<div class="notice"><b>Important:</b> versiunea actuală este pregătită pentru date live, dar nu pretinde că scanează singură marketplace-urile. Pentru scanare automată reală trebuie conectat un backend/API care colectează și normalizează datele.</div>
+<div class="box"><h2>Data Sync</h2>
+<label>URL JSON extern (opțional)<input id="remoteUrl" placeholder="https://.../products.json"></label>
+<button class="btn" style="width:100%;margin-top:10px" onclick="saveRemote()">Salvează sursa</button>
+<button class="btn alt" style="width:100%;margin-top:8px" onclick="loadData(true)">Sync acum</button>
+<p class="small">Dacă nu este setat un URL extern, aplicația folosește <b>products.json</b> de pe Netlify. Asta ne permite să actualizăm baza de produse separat de interfață.</p>
+</div></section>
+</main>
+
+<script>
+let P=[], saved=JSON.parse(localStorage.getItem('megaRadarWatch')||'[]');
+
+function econ(p){
+ const net=p.sell/1.21, fee=p.sell*.17, reserve=p.sell*.08;
+ const profit=net-p.landed-fee-reserve, roi=profit/p.landed*100;
+ return {profit,roi};
+}
+function lifecycle(p){
+ const x=econ(p), verified=(p.status||'').startsWith('VERIFICAT');
+ const isKids=(p.cat||'').startsWith('Kids 0–6'), kidsPass=!isKids || p.kidsGate==='PASS';
+ if(verified && kidsPass && p.score>=90 && x.profit>=70 && x.roi>=70) return 'SCALE';
+ if(verified && kidsPass && p.score>=82 && x.profit>=50 && x.roi>=60) return 'TEST BUY';
+ if((p.status||'').includes('PRIORITAR') && p.score>=82) return 'SAMPLE';
+ if(p.score>=72) return 'VALIDATE';
+ return 'DISCOVERED';
+}
+function readyToBuy(p){
+ const stage=lifecycle(p);
+ return ['TEST BUY','SCALE'].includes(stage) && (p.sourcing||[]).some(s=>s.verified);
+}
+function stageClass(v){return ['TEST BUY','SCALE'].includes(v)?'buy':['SAMPLE','VALIDATE'].includes(v)?'watch':'reject'}
+function flames(n){return '🔥'.repeat(Math.max(1,Math.min(5,n||1)))}
+function card(p){
+ const i=P.indexOf(p),x=econ(p),stage=lifecycle(p), capital100=p.landed*100, profit100=x.profit*100;
+ const reduced=p.sell*.85, reducedProfit=reduced/1.21-p.landed-reduced*.17-reduced*.08;
+ return `<article class="card"><div class="top"><div><div class="name">${p.name}</div><span class="badge">${p.status||'RESEARCH'}</span><span class="stage ${stageClass(stage)}">${stage}</span>${readyToBuy(p)?'<span class="stage buy">LINK READY</span>':''}</div><div class="score">${Number.isFinite(Number(p.score))?p.score:'—'}/100</div></div>
+ <div class="metrics">
+ <div class="m"><small>China</small><b>${p.chinaMin}–${p.chinaMax} lei</b></div>
+ <div class="m"><small>Landed</small><b>${p.landed} lei</b></div>
+ <div class="m"><small>Vânzare</small><b>${p.sell.toFixed(0)} lei</b></div>
+ <div class="m"><small>Profit op.</small><b class="${x.profit>=70?'green':x.profit>=40?'amber':'red'}">${x.profit.toFixed(0)} lei</b></div>
+ <div class="m"><small>ROI</small><b>${x.roi.toFixed(0)}%</b></div>
+ <div class="m"><small>Romania Gap</small><b>${p.gap}/100</b></div>
+ <div class="m"><small>Profit 100 buc.</small><b>${profit100.toFixed(0)} lei</b></div>
+ <div class="m"><small>Capital 100 buc.</small><b>${capital100.toFixed(0)} lei</b></div>
+ ${p.age?`<div class="m"><small>Vârstă</small><b>${p.age}</b></div><div class="m"><small>Kids Gate</small><b class="${p.kidsGate==='PASS'?'green':'red'}">${p.kidsGate}</b></div>`:''}
+ </div>
+ <div class="market">${Object.keys(p.markets||{}).map(k=>`<div class="mk"><small>${k}</small><div class="flames">${flames(p.markets[k])}</div></div>`).join('')}</div>
+ <div class="details"><b>Stress -15% preț:</b> ${reducedProfit.toFixed(0)} lei profit/buc.<br><b>WHY NOW:</b> ${p.evidence||''}<br><b>Ultima verificare:</b> ${p.lastChecked||'—'}</div>
+ <div class="actions"><button class="btn alt" onclick="toggleWatch(${i})">${saved.includes(i)?'✓ Salvat':'♡ Urmărește'}</button><button class="btn" onclick="useProfit(${i})">Profit</button></div>
+ </article>`;
+}
+function sourceCard(p){
+ const sources=p.sourcing||[];
+ if(!sources.length) return '';
+ const x=econ(p),stage=lifecycle(p);
+ return `<div class="box"><div class="top"><div><div class="name">${p.name}</div><span class="stage ${stageClass(stage)}">${stage}</span></div><div class="score">${p.score}/100</div></div>
+ <div class="metrics"><div class="m"><small>China est.</small><b>${p.chinaMin}–${p.chinaMax} lei</b></div><div class="m"><small>Vânzare țintă</small><b>${p.sell.toFixed(0)} lei</b></div><div class="m"><small>Profit op.</small><b>${x.profit.toFixed(0)} lei</b></div><div class="m"><small>ROI</small><b>${x.roi.toFixed(0)}%</b></div></div>
+ ${sources.map(s=>`<div class="source"><div class="sourceTop"><b>${s.market} • ${s.label}</b><span>${s.verified?'✅':'🟡'}</span></div><div class="sourceMeta">Preț snapshot: ${s.price} • MOQ: ${s.moq}</div><a target="_blank" rel="noopener" href="${s.url}">Deschide furnizorul ↗</a></div>`).join('')}
+ </div>`;
+}
+function render(){
+ const q=(document.getElementById('q').value||'').toLowerCase(),cat=document.getElementById('cat').value,st=document.getElementById('stageFilter').value,sort=document.getElementById('sort').value;
+ let a=P.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(!cat||p.cat===cat)&&(!st||lifecycle(p)===st));
+ a.sort((a,b)=>sort==='profit'?econ(b).profit-econ(a).profit:sort==='gap'?b.gap-a.gap:sort==='china'?a.chinaMin-b.chinaMin:b.score-a.score);
+ document.getElementById('cards').innerHTML=a.map(card).join('');
+}
+function renderAux(){
+ const buy=P.filter(readyToBuy).sort((a,b)=>b.score-a.score);
+ document.getElementById('buyCards').innerHTML=buy.length?buy.map(card).join(''):'<div class="box small">Momentan niciun produs nu este complet Ready to Buy cu toate gate-urile și link concret de sourcing.</div>';
+ document.getElementById('sourceCards').innerHTML=P.filter(p=>(p.sourcing||[]).length).sort((a,b)=>b.score-a.score).map(sourceCard).join('') || '<div class="box small">Nu există încă linkuri de sourcing verificate.</div>';
+ document.getElementById('kidsCards').innerHTML=P.filter(p=>(p.cat||'').startsWith('Kids 0–6')).sort((a,b)=>b.score-a.score).map(card).join('');
+ document.getElementById('watchCards').innerHTML=saved.length?saved.map(i=>card(P[i])).join(''):'<div class="box small">Nu ai produse salvate.</div>';
+ document.getElementById('kAll').textContent=P.length;
+ document.getElementById('kBuy').textContent=P.filter(readyToBuy).length;
+ document.getElementById('kSource').textContent=P.filter(p=>(p.sourcing||[]).length).length;
+ document.getElementById('kKids').textContent=P.filter(p=>(p.cat||'').startsWith('Kids 0–6')).length;
+}
+function buildCats(){
+ const el=document.getElementById('cat'); el.innerHTML='<option value="">Toate categoriile</option>';
+ [...new Set(P.map(p=>p.cat))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;el.appendChild(o)});
+}
+function toggleWatch(i){saved.includes(i)?saved=saved.filter(x=>x!==i):saved.push(i);localStorage.setItem('megaRadarWatch',JSON.stringify(saved));render();renderAux()}
+function useProfit(i){const p=P[i];document.querySelector('[data-tab="profit"]').click();document.getElementById('cChina').value=Math.round((p.chinaMin+p.chinaMax)/2);document.getElementById('cImport').value=Math.max(0,p.landed-Math.round((p.chinaMin+p.chinaMax)/2));document.getElementById('cSell').value=p.sell;calc()}
+function g(id){return parseFloat(document.getElementById(id).value)||0}
+function calc(){
+ const landed=g('cChina')+g('cImport')+g('cFulfill'),gross=g('cSell'),net=gross/(1+g('cVat')/100),vat=gross-net,fee=gross*g('cFee')/100,res=gross*g('cReserve')/100,op=net-landed-fee-res,tax=Math.max(0,op*g('cTax')/100),after=op-tax,roi=landed?after/landed*100:0;
+ const qtys=[50,100,300].map(q=>`${q} buc.: <b>${(after*q).toFixed(0)} lei</b> profit estimat`).join('<br>');
+ document.getElementById('calcOut').innerHTML=`Cost total: <b>${landed.toFixed(2)} lei</b><br>Preț fără TVA: ${net.toFixed(2)} lei<br>TVA inclus: ${vat.toFixed(2)} lei<br>Comision: ${fee.toFixed(2)} lei<br>Ads/retur: ${res.toFixed(2)} lei<br><b>Profit după impozitul setat: ${after.toFixed(2)} lei/buc.</b><br><b>ROI: ${roi.toFixed(0)}%</b><hr style="border:0;border-top:1px solid #d0d5dd">${qtys}`;
+}
+async function loadData(force=false){
+ const remote=localStorage.getItem('megaRadarRemote');
+ const url=remote||'products.json';
+ document.getElementById('syncState').innerHTML='Sincronizare…';
+ try{
+   const r=await fetch(url+(url.includes('?')?'&':'?')+'t='+Date.now(),{cache:'no-store'});
+   if(!r.ok) throw new Error('HTTP '+r.status);
+   const d=await r.json();
+   if(!Array.isArray(d)) throw new Error('Format JSON invalid');
+   P=d;
+   buildCats();render();renderAux();
+   const now=new Date();
+   document.getElementById('syncState').innerHTML=(remote?'Sursă externă':'Dataset Netlify')+'<br>'+now.toLocaleString('ro-RO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+ }catch(err){
+   document.getElementById('syncState').innerHTML='Sync eșuat<br>folosesc cache/local';
+   try{
+     const cached=localStorage.getItem('megaRadarCache');
+     if(cached){P=JSON.parse(cached);buildCats();render();renderAux();}
+   }catch(e){}
+ }
+ try{localStorage.setItem('megaRadarCache',JSON.stringify(P))}catch(e){}
+}
+function saveRemote(){
+ const u=document.getElementById('remoteUrl').value.trim();
+ if(u)localStorage.setItem('megaRadarRemote',u);else localStorage.removeItem('megaRadarRemote');
+ loadData(true);
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
+['q'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+['cat','stageFilter','sort'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+document.getElementById('remoteUrl').value=localStorage.getItem('megaRadarRemote')||'';
+calc();loadData();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body></html>

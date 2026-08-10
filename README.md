@@ -1,2 +1,11 @@
-# Mega-product-radar
-Mega product radar RO - product sourcing and opportunity engine
+# Mega Product Radar RO
+
+Mega Product Radar V4.
+
+Files:
+- `index.html`
+- `products.json`
+- `manifest.json`
+- `netlify.toml`
+
+Netlify publish directory: repository root (`.`).
