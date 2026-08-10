@@ -167,6 +167,10 @@ export default async (req) => {
     return new Response("Forbidden", { status: 403 });
   }
 
+  const store = getStore("mega-radar-live");
+  const startedAt = new Date().toISOString();
+  await store.set("scan-status", JSON.stringify({ status: "running", startedAt }));
+  try {
   const baseUrl = process.env.URL || new URL(req.url).origin;
   const day = Math.floor(Date.now() / 86400000);
   const bucket = BUCKETS[day % BUCKETS.length];
@@ -248,7 +252,6 @@ Kids products must be age 3-6 where applicable and should remain compliance-pend
     p.risk !== "Ridicat"
   );
 
-  const store = getStore("mega-radar-live");
   let previous = [];
   try {
     const raw = await store.get("latest");
@@ -284,7 +287,13 @@ Kids products must be age 3-6 where applicable and should remain compliance-pend
     products: fresh
   }));
 
+  await store.set("scan-status", JSON.stringify({ status: "completed", startedAt, completedAt: payload.updatedAt, newCandidates: fresh.length }));
+
   console.log(`Mega Radar: ${fresh.length} fresh candidates; ${merged.length} total`);
+  } catch (error) {
+    await store.set("scan-status", JSON.stringify({ status: "error", startedAt, completedAt: new Date().toISOString(), error: String(error?.message || error) }));
+    throw error;
+  }
 };
 
 export const config = {
