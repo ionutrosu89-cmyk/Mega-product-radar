@@ -3,8 +3,16 @@
   "private": true,
   "version": "5.0.0",
   "type": "module",
+  "scripts": {
+    "check": "node scripts/check-project.mjs",
+    "test": "node --test",
+    "build": "node scripts/check-project.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "@netlify/blobs": "latest",
-    "openai": "latest"
+    "@netlify/blobs": "10.7.12",
+    "openai": "7.4.0"
   }
 }
