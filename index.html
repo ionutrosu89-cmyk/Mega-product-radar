@@ -43,7 +43,7 @@ input,select{width:100%;font:inherit;border:1px solid var(--line);border-radius:
 </style>
 </head>
 <body>
-<header><div class="head"><div><h1>Mega Product Radar</h1><div class="sub">Global Scan → Romania Gap → Sourcing → Profit → Buy Zone • V4</div></div><div class="syncState" id="syncState">Dataset controlat<br>10 aug 2026</div></div></header>
+<header><div class="head"><div><h1>Mega Product Radar</h1><div class="sub">LIVE Global Scan → Romania Gap → China Sourcing → Profit → Buy Zone • V5</div></div><div class="syncState" id="syncState">Dataset controlat<br>10 aug 2026</div></div></header>
 <main class="wrap">
 <div class="tabs">
 <button class="active" data-tab="radar">🔥 Radar</button>
@@ -194,23 +194,32 @@ function calc(){
 }
 async function loadData(force=false){
  const remote=localStorage.getItem('megaRadarRemote');
+ document.getElementById('syncState').innerHTML='Sincronizare LIVE…';
+ let liveWorked=false;
+ try{
+   const live=await fetch('/api/radar/data?t='+Date.now(),{cache:'no-store'});
+   if(live.ok){
+     const j=await live.json();
+     if(j.live && Array.isArray(j.products) && j.products.length){
+       P=j.products;
+       liveWorked=true;
+       buildCats();render();renderAux();
+       document.getElementById('syncState').innerHTML='🟢 LIVE Radar<br>'+new Date(j.updatedAt).toLocaleString('ro-RO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+     }
+   }
+ }catch(e){}
+ if(liveWorked){try{localStorage.setItem('megaRadarCache',JSON.stringify(P))}catch(e){};return;}
  const url=remote||'products.json';
- document.getElementById('syncState').innerHTML='Sincronizare…';
  try{
    const r=await fetch(url+(url.includes('?')?'&':'?')+'t='+Date.now(),{cache:'no-store'});
    if(!r.ok) throw new Error('HTTP '+r.status);
    const d=await r.json();
    if(!Array.isArray(d)) throw new Error('Format JSON invalid');
-   P=d;
-   buildCats();render();renderAux();
-   const now=new Date();
-   document.getElementById('syncState').innerHTML=(remote?'Sursă externă':'Dataset Netlify')+'<br>'+now.toLocaleString('ro-RO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+   P=d;buildCats();render();renderAux();
+   document.getElementById('syncState').innerHTML='🟡 Dataset fallback<br>'+new Date().toLocaleString('ro-RO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
  }catch(err){
-   document.getElementById('syncState').innerHTML='Sync eșuat<br>folosesc cache/local';
-   try{
-     const cached=localStorage.getItem('megaRadarCache');
-     if(cached){P=JSON.parse(cached);buildCats();render();renderAux();}
-   }catch(e){}
+   document.getElementById('syncState').innerHTML='🔴 Sync eșuat<br>cache local';
+   try{const cached=localStorage.getItem('megaRadarCache');if(cached){P=JSON.parse(cached);buildCats();render();renderAux();}}catch(e){}
  }
  try{localStorage.setItem('megaRadarCache',JSON.stringify(P))}catch(e){}
 }

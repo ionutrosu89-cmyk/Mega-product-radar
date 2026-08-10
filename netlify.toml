@@ -1,5 +1,9 @@
 [build]
   publish = "."
+  functions = "."
+
+[functions]
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
