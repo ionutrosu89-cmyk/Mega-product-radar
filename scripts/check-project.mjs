@@ -13,7 +13,8 @@ const requiredFiles = [
   "products.json",
   "netlify/functions/radar-data.mjs",
   "netlify/functions/radar-scan-background.mjs",
-  "netlify/functions/radar-schedule.mjs"
+  "netlify/functions/radar-schedule.mjs",
+  "netlify/functions/radar-trigger.mjs"
 ];
 
 for (const file of requiredFiles) {
@@ -41,7 +42,7 @@ const functionDirectory = path.join(root, "netlify", "functions");
 const functionFiles = (await readdir(functionDirectory, { recursive: true }))
   .filter((file) => file.endsWith(".mjs"));
 
-const expectedFunctions = ["radar-data.mjs", "radar-scan-background.mjs", "radar-schedule.mjs"];
+const expectedFunctions = ["radar-data.mjs", "radar-scan-background.mjs", "radar-schedule.mjs", "radar-trigger.mjs"];
 if (functionFiles.length !== expectedFunctions.length || expectedFunctions.some((file) => !functionFiles.includes(file))) {
   throw new Error(`Unexpected Netlify Function layout: ${functionFiles.join(", ")}`);
 }
@@ -56,4 +57,3 @@ for (const file of expectedFunctions) {
 }
 
 console.log(`Project check passed: ${products.length} products, ${expectedFunctions.length} Netlify Functions.`);
-
