@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
-import OpenAI from 'openai';
 
-const MODEL = process.env.RADAR_MODEL || 'gpt-5-mini';
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const MODEL = process.env.RADAR_MODEL || 'openai/gpt-4o';
+const TOKEN = process.env.GITHUB_TOKEN;
+if (!TOKEN) throw new Error('GITHUB_TOKEN is missing. GitHub Actions must grant models: read.');
 
 const buckets = [
   'home organization, cleaning tools, kitchen non-electric, travel accessories',
@@ -14,88 +14,86 @@ const buckets = [
   'office, desk organization, content-creator accessories without batteries/electronics'
 ];
 
-const schema = {
-  type: 'object',
-  additionalProperties: false,
-  required: ['candidates'],
-  properties: {
-    candidates: {
-      type: 'array',
-      maxItems: 8,
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['name','category','isKids','age','chinaMin','chinaMax','sellTarget','gap','velocity','demand','competition','logistics','returns','compliance','social','supplier','risk','evidence','roListingsEst','roPriceMin','roPriceMax','sourceStatus','markets','sourcing'],
-        properties: {
-          name:{type:'string'}, category:{type:'string'}, isKids:{type:'boolean'}, age:{type:'string'},
-          chinaMin:{type:'number',minimum:0}, chinaMax:{type:'number',minimum:0}, sellTarget:{type:'number',minimum:0},
-          gap:{type:'integer',minimum:0,maximum:100}, velocity:{type:'integer',minimum:0,maximum:100}, demand:{type:'integer',minimum:0,maximum:100}, competition:{type:'integer',minimum:0,maximum:100}, logistics:{type:'integer',minimum:0,maximum:100}, returns:{type:'integer',minimum:0,maximum:100}, compliance:{type:'integer',minimum:0,maximum:100}, social:{type:'integer',minimum:0,maximum:100}, supplier:{type:'integer',minimum:0,maximum:100},
-          risk:{type:'string',enum:['Scăzut','Mediu','Ridicat']}, evidence:{type:'string'}, roListingsEst:{type:'string'}, roPriceMin:{type:'number',minimum:0}, roPriceMax:{type:'number',minimum:0}, sourceStatus:{type:'string',enum:['VERIFIED','PARTIAL']},
-          markets:{type:'object',additionalProperties:false,required:['US','DE','TR','PL','TikTok','RO'],properties:{US:{type:'integer',minimum:0,maximum:5},DE:{type:'integer',minimum:0,maximum:5},TR:{type:'integer',minimum:0,maximum:5},PL:{type:'integer',minimum:0,maximum:5},TikTok:{type:'integer',minimum:0,maximum:5},RO:{type:'integer',minimum:0,maximum:5}}},
-          sourcing:{type:'array',maxItems:3,items:{type:'object',additionalProperties:false,required:['market','label','url','price','moq','verified'],properties:{market:{type:'string',enum:['Alibaba','1688','AliExpress','Other China']},label:{type:'string'},url:{type:'string'},price:{type:'string'},moq:{type:'string'},verified:{type:'boolean'}}}}
-        }
-      }
-    }
-  }
-};
+const SYSTEM = `You are a severe ecommerce product-research analyst for Romania. Produce a conservative shortlist of generic product opportunities suitable for importing from China. IMPORTANT: you do NOT have live web browsing in this workflow. Never claim that a product, price, ranking, sales count, supplier page, MOQ, certification, or Romanian listing has been live-verified. Treat all market signals as hypotheses that require validation. Exclude branded/counterfeit goods, batteries, power banks, complex electrical goods, cosmetics, supplements, medical devices/claims, ingestibles, hazardous chemicals, weapons, adult products, fragile glass and app-dependent products. Prefer small/light products, low returns, low compliance complexity, China source-cost hypothesis 20-150 RON, Romanian retail hypothesis 70-800 RON.`;
 
-const SYSTEM = `You are a severe ecommerce product-research analyst for Romania. Reject weak opportunities. Find generic products demonstrably selling abroad but less mature in Romania. Prioritize sourcing from China, small/light products, source cost 20-150 RON, retail 70-800 RON, low returns and low compliance complexity. Exclude branded/counterfeit goods, batteries, power banks, complex electrical goods, cosmetics, supplements, medical devices/claims, ingestibles, hazardous chemicals, weapons, adult products, fragile glass and app-dependent products. Use evidence, not assumptions. Do not fabricate URLs, rankings, sales counts, certifications, MOQ or supplier facts.`;
+const day = Math.floor(Date.now() / 86400000);
+const bucket = buckets[day % buckets.length];
 
-function landedEstimate(p){
-  const mid=(Number(p.chinaMin)+Number(p.chinaMax))/2;
-  const inbound=Math.max(12,mid*0.55);
-  return Math.round((mid+inbound+3)*100)/100;
-}
-function econScore(sell,landed){
-  if(!landed||sell<=landed)return 0;
-  const profit=sell/1.21-sell*.17-sell*.08-landed;
-  return Math.max(0,Math.min(100,profit/landed*100));
-}
-function finalScore(p,landed){
-  const econ=econScore(p.sellTarget,landed);
-  return Math.round(p.gap*.25+p.velocity*.15+p.demand*.10+p.competition*.10+p.logistics*.10+p.returns*.05+p.compliance*.05+p.social*.05+p.supplier*.05+econ*.10);
-}
-function slug(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();}
-async function readJson(path,fallback){try{return JSON.parse(await fs.readFile(path,'utf8'));}catch{return fallback;}}
+const prompt = `Create 5-8 strong product hypotheses for this universe: ${bucket}.
+Return ONLY valid JSON, no markdown, in exactly this shape:
+{"candidates":[{"name":"","category":"","isKids":false,"age":"","chinaMin":0,"chinaMax":0,"sellTarget":0,"gap":0,"velocity":0,"demand":0,"competition":0,"logistics":0,"returns":0,"compliance":0,"social":0,"supplier":0,"risk":"Scăzut|Mediu|Ridicat","evidence":"","markets":{"US":0,"DE":0,"TR":0,"PL":0,"TikTok":0,"RO":0}}]}
+All numeric scores are integers 0-100, except markets which are integers 0-5. "competition" means 100 = favorable/low Romanian competition. evidence must explicitly say it is an AI hypothesis requiring live validation. Do not include URLs.`;
 
-if(!process.env.OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is missing from GitHub Actions secrets');
-
-const day=Math.floor(Date.now()/86400000);
-const bucket=buckets[day%buckets.length];
-const response=await client.responses.create({
-  model:MODEL,
-  store:false,
-  tools:[{type:'web_search',search_context_size:'low'}],
-  input:[
-    {role:'system',content:SYSTEM},
-    {role:'user',content:`Research this universe today: ${bucket}. Compare demand signals from foreign markets (Amazon US/DE, TikTok Shop, Etsy, Walmart, eBay, Allegro, Kaufland, Trendyol Turkey, Temu/AliExpress and relevant alternatives) against Romania (eMAG, Trendyol Romania, Infinity and other Romanian ecommerce results). Find concrete China sourcing evidence, prioritizing Alibaba and 1688-compatible products. Return at most 8 strong candidates, preferring fewer high-quality candidates. Competition score: 100 means favorable/low Romanian competition. VERIFIED requires at least one real, specific China sourcing URL with a visible price signal; otherwise PARTIAL.`}
-  ],
-  text:{format:{type:'json_schema',name:'mega_radar_candidates',strict:true,schema}}
+const response = await fetch('https://models.github.ai/inference/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': `Bearer ${TOKEN}`,
+    'Content-Type': 'application/json',
+    'X-GitHub-Api-Version': '2026-03-10'
+  },
+  body: JSON.stringify({
+    model: MODEL,
+    messages: [
+      { role: 'system', content: SYSTEM },
+      { role: 'user', content: prompt }
+    ],
+    temperature: 0.2,
+    max_tokens: 5000
+  })
 });
 
-const parsed=JSON.parse(response.output_text);
-const fresh=(parsed.candidates||[]).map(p=>{
-  const landed=landedEstimate(p); const score=finalScore(p,landed); const kids=!!p.isKids;
+if (!response.ok) {
+  const body = await response.text();
+  throw new Error(`GitHub Models HTTP ${response.status}: ${body.slice(0, 900)}`);
+}
+
+const api = await response.json();
+let raw = api?.choices?.[0]?.message?.content;
+if (Array.isArray(raw)) raw = raw.map(x => x?.text || x?.content || '').join('');
+raw = String(raw || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+if (!raw) throw new Error('GitHub Models returned an empty response');
+
+let parsed;
+try { parsed = JSON.parse(raw); }
+catch { throw new Error(`GitHub Models returned invalid JSON: ${raw.slice(0, 800)}`); }
+
+function n(v, min=0, max=100) { const x=Number(v); return Number.isFinite(x)?Math.max(min,Math.min(max,x)):0; }
+function landedEstimate(p){ const mid=(n(p.chinaMin,0,10000)+n(p.chinaMax,0,10000))/2; const inbound=Math.max(12,mid*.55); return Math.round((mid+inbound+3)*100)/100; }
+function econScore(sell,landed){ if(!landed||sell<=landed)return 0; const profit=sell/1.21-sell*.17-sell*.08-landed; return Math.max(0,Math.min(100,profit/landed*100)); }
+function finalScore(p,landed){ const econ=econScore(p.sellTarget,landed); return Math.round(n(p.gap)*.25+n(p.velocity)*.15+n(p.demand)*.10+n(p.competition)*.10+n(p.logistics)*.10+n(p.returns)*.05+n(p.compliance)*.05+n(p.social)*.05+n(p.supplier)*.05+econ*.10); }
+function slug(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim(); }
+async function readJson(path,fallback){ try{return JSON.parse(await fs.readFile(path,'utf8'));}catch{return fallback;} }
+function searchLinks(name){
+  const q=encodeURIComponent(String(name));
+  return [
+    {market:'Alibaba',label:`Caută ${name} pe Alibaba`,url:`https://www.alibaba.com/trade/search?SearchText=${q}`,price:'de verificat',moq:'de verificat',verified:false},
+    {market:'1688',label:`Caută ${name} pe 1688`,url:`https://s.1688.com/selloffer/offer_search.htm?keywords=${q}`,price:'de verificat',moq:'de verificat',verified:false}
+  ];
+}
+
+const fresh=(Array.isArray(parsed?.candidates)?parsed.candidates:[]).map(p=>{
+  const chinaMin=n(p.chinaMin,0,10000), chinaMax=n(p.chinaMax,0,10000), sellTarget=n(p.sellTarget,0,10000);
+  const normalized={...p,chinaMin,chinaMax,sellTarget,gap:n(p.gap),velocity:n(p.velocity),demand:n(p.demand),competition:n(p.competition),logistics:n(p.logistics),returns:n(p.returns),compliance:n(p.compliance),social:n(p.social),supplier:n(p.supplier)};
+  const landed=landedEstimate(normalized), score=finalScore(normalized,landed), kids=!!p.isKids;
+  const evidence=`${String(p.evidence||'Ipoteză AI pentru validare live.')} | NEVALIDAT LIVE: verifică cererea, concurența RO, prețurile și furnizorul înainte de comandă.`;
   return {
-    name:p.name, cat:kids?`Kids 3–6 • ${p.category}`:p.category,
-    chinaMin:Math.round(p.chinaMin*100)/100, chinaMax:Math.round(p.chinaMax*100)/100,
-    landed, sell:Math.round(p.sellTarget*100)/100, gap:p.gap, velocity:p.velocity, demand:p.demand,
-    competition:p.competition, logistics:p.logistics, returns:p.returns, compliance:p.compliance, social:p.social, supplier:p.supplier,
-    markets:p.markets, status:p.sourceStatus==='VERIFIED'?'VERIFICAT WEB+CN':'CANDIDAT LIVE',
-    evidence:`${p.evidence} | RO listări est.: ${p.roListingsEst}; interval preț RO observat: ${p.roPriceMin}-${p.roPriceMax} lei.`,
-    supplierUrl:p.sourcing?.[0]?.url||'', roUrl:'', risk:p.risk, score,
-    verdict:score>=88?'TEST BUY':score>=82?'BUY ZONE':score>=76?'SAMPLE':score>=70?'VALIDATE':'WATCH',
-    sourcing:p.sourcing, lastChecked:new Date().toISOString(), sourceStatus:p.sourceStatus,
-    ...(kids?{age:p.age||'3–6',kidsGate:'PENDING'}:{})
+    name:String(p.name||'').trim(), cat:kids?`Kids 3–6 • ${String(p.category||'Diverse')}`:String(p.category||'Diverse'),
+    chinaMin, chinaMax, landed, sell:Math.round(sellTarget*100)/100,
+    gap:n(p.gap), velocity:n(p.velocity), demand:n(p.demand), competition:n(p.competition), logistics:n(p.logistics), returns:n(p.returns), compliance:n(p.compliance), social:n(p.social), supplier:n(p.supplier),
+    markets:p.markets||{}, status:'IPOTEZĂ AI • VALIDARE NECESARĂ', evidence, supplierUrl:'', roUrl:'', risk:['Scăzut','Mediu','Ridicat'].includes(p.risk)?p.risk:'Mediu', score,
+    verdict:score>=88?'TEST DE VALIDARE':score>=82?'BUY ZONE CANDIDAT':score>=76?'SAMPLE':score>=70?'VALIDATE':'WATCH',
+    sourcing:searchLinks(p.name), lastChecked:new Date().toISOString(), sourceStatus:'PARTIAL',
+    ...(kids?{age:String(p.age||'3–6'),kidsGate:'PENDING'}:{})
   };
-}).filter(p=>p.chinaMin>=15&&p.chinaMax<=180&&p.sell>=70&&p.sell<=900&&p.score>=68&&p.risk!=='Ridicat');
+}).filter(p=>p.name&&p.chinaMin>=15&&p.chinaMax<=180&&p.sell>=70&&p.sell<=900&&p.score>=65&&p.risk!=='Ridicat');
 
 const existingLive=await readJson('radar-live.json',{products:[]});
 const fallback=await readJson('products.json',[]);
 const previous=(existingLive.products?.length?existingLive.products:fallback);
 const byName=new Map(previous.map(x=>[slug(x.name),x]));
-for(const item of fresh){const key=slug(item.name);const old=byName.get(key);if(!old||(item.score||0)>=(old.score||0))byName.set(key,item);}
+for(const item of fresh){ const key=slug(item.name); const old=byName.get(key); if(!old||(item.score||0)>=(old.score||0))byName.set(key,item); }
 const products=[...byName.values()].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,150);
-const payload={live:true,updatedAt:new Date().toISOString(),bucket,newCandidates:fresh.length,model:MODEL,products};
+const payload={live:true,updatedAt:new Date().toISOString(),bucket,newCandidates:fresh.length,model:MODEL,engine:'GitHub Models',validation:'AI hypotheses; live market validation required',products};
 await fs.writeFile('radar-live.json',JSON.stringify(payload,null,2)+'\n');
-console.log(`Mega Product Radar: ${fresh.length} fresh candidates; ${products.length} total; model=${MODEL}`);
+console.log(`Mega Product Radar: ${fresh.length} fresh hypotheses; ${products.length} total; model=${MODEL}`);
