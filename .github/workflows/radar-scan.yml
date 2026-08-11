@@ -1,0 +1,48 @@
+name: Mega Product Radar Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar-scan
+  cancel-in-progress: false
+
+jobs:
+  scan-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run product scan
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RADAR_MODEL: gpt-5-mini
+        run: node scripts/github-scan.mjs
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload site with fresh radar data
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy fresh radar
+        id: deployment
+        uses: actions/deploy-pages@v4
