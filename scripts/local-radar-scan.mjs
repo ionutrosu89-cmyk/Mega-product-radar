@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 
 const CLI = process.env.LLAMA_CLI || './llama.cpp/build/bin/llama-cli';
 const MODEL = process.env.LOCAL_MODEL || 'Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M';
@@ -20,10 +20,30 @@ Return ONLY one valid JSON object, no markdown, no explanation, exactly in this 
 {"candidates":[{"name":"","category":"","isKids":false,"age":"","chinaMin":0,"chinaMax":0,"sellTarget":0,"gap":0,"velocity":0,"demand":0,"competition":0,"logistics":0,"returns":0,"compliance":0,"social":0,"supplier":0,"risk":"Scăzut","evidence":"Ipoteză AI locală; necesită validare live.","markets":{"US":0,"DE":0,"TR":0,"PL":0,"TikTok":0,"RO":0}}]}
 Scores gap/velocity/demand/competition/logistics/returns/compliance/social/supplier are integers 0-100. competition 100 means favorable/low competition. markets values are integers 0-5. risk must be Scăzut, Mediu or Ridicat.`;
 
-const run=spawnSync(CLI,['-hf',MODEL,'-p',prompt,'-n','3500','--temp','0.2'],{encoding:'utf8',maxBuffer:20*1024*1024,timeout:12*60*1000});
-if(run.error) throw run.error;
-if(run.status!==0) throw new Error(`Local model failed with exit ${run.status}: ${(run.stderr||'').slice(-1200)}`);
-let raw=String(run.stdout||'').trim();
+function runModel(){
+  return new Promise((resolve,reject)=>{
+    const child=spawn(CLI,['-hf',MODEL,'-p',prompt,'-n','1800','--temp','0.2','--simple-io'],{stdio:['ignore','pipe','pipe']});
+    let stdout='', stderr='';
+    const MAX_OUT=8*1024*1024, MAX_ERR=512*1024;
+    const timer=setTimeout(()=>{child.kill('SIGKILL');reject(new Error('Local model timeout after 10 minutes'));},10*60*1000);
+    child.stdout.on('data',chunk=>{
+      if(stdout.length<MAX_OUT) stdout+=chunk.toString('utf8').slice(0,MAX_OUT-stdout.length);
+    });
+    child.stderr.on('data',chunk=>{
+      const text=chunk.toString('utf8');
+      process.stderr.write(text);
+      if(stderr.length<MAX_ERR) stderr=(stderr+text).slice(-MAX_ERR);
+    });
+    child.on('error',err=>{clearTimeout(timer);reject(err);});
+    child.on('close',code=>{
+      clearTimeout(timer);
+      if(code!==0) return reject(new Error(`Local model failed with exit ${code}: ${stderr.slice(-1200)}`));
+      resolve(stdout.trim());
+    });
+  });
+}
+
+let raw=await runModel();
 const first=raw.indexOf('{'), last=raw.lastIndexOf('}');
 if(first<0||last<=first) throw new Error(`Local model returned no JSON: ${raw.slice(0,900)}`);
 raw=raw.slice(first,last+1);
