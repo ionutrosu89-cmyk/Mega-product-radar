@@ -11,7 +11,6 @@ permissions:
   contents: write
   pages: write
   id-token: write
-  models: read
 
 concurrency:
   group: first-radar-scan
@@ -24,7 +23,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout radar
         uses: actions/checkout@v6
         with:
           persist-credentials: true
@@ -32,12 +31,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Run first product scan with GitHub Models
+      - name: Build llama.cpp
+        run: |
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+          cmake -S llama.cpp -B llama.cpp/build -DGGML_NATIVE=OFF -DLLAMA_CURL=ON
+          cmake --build llama.cpp/build --config Release -j 2 --target llama-cli
+      - name: Run zero-cost local AI product scan
         id: scan
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RADAR_MODEL: openai/gpt-4o
+          LLAMA_CLI: ./llama.cpp/build/bin/llama-cli
+          LOCAL_MODEL: Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
         run: node scripts/run-github-scan.mjs
       - name: Persist scan result in repository
         if: always()
@@ -46,7 +50,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scan-status.json radar-live.json
           if ! git diff --cached --quiet; then
-            git commit -m "Update Mega Radar scan result"
+            git commit -m "Update Mega Radar local AI scan result"
             git push
           fi
       - name: Build static site folder
