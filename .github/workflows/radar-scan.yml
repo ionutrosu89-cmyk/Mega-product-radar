@@ -34,6 +34,11 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RADAR_MODEL: gpt-5-mini
         run: node scripts/github-scan.mjs
+      - name: Build static site folder
+        run: |
+          mkdir -p _site
+          cp index.html app.js manifest.json products.json radar-live.json _site/
+          touch _site/.nojekyll
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -41,7 +46,7 @@ jobs:
       - name: Upload site with fresh radar data
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
       - name: Deploy fresh radar
         id: deployment
         uses: actions/deploy-pages@v4
