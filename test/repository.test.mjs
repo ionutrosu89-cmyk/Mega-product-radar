@@ -10,6 +10,7 @@ test("only the canonical Netlify Functions are present", async () => {
 
   assert.deepEqual(entries, [
     "radar-data.mjs",
+    "radar-health.mjs",
     "radar-scan-background.mjs",
     "radar-schedule.mjs",
     "radar-trigger.mjs"
@@ -31,13 +32,13 @@ test("public trigger queues the protected background function without exposing i
   const { createTriggerHandler } = await import("../netlify/functions/radar-trigger.mjs");
   const writes = new Map(); let outbound;
   const handler = createTriggerHandler({
-    env: { URL: "https://radar.example", RADAR_INTERNAL_SECRET: "server-only" },
+    env: { RADAR_INTERNAL_SECRET: "server-only" },
     getStore: () => ({ set: (key,value) => writes.set(key,value) }),
     fetch: async (url, options) => { outbound={url,options}; return new Response(null,{status:202}); }
   });
   const response = await handler(new Request("https://radar.example/api/radar/trigger", { method: "POST" }));
   assert.equal(response.status, 202);
-  assert.equal(outbound.url, "https://radar.example/api/radar/scan");
+  assert.match(outbound.url, /^https:\/\/radar\.example\/\.netlify\/functions\/radar-scan-background\?scanId=/);
   assert.equal(outbound.options.headers["x-radar-secret"], "server-only");
   assert.equal(JSON.parse(writes.get("scan-status")).status, "queued");
   assert.equal(JSON.stringify(await response.json()).includes("server-only"), false);
