@@ -41,6 +41,11 @@ jobs:
           LOCAL_MODEL: Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
         run: node scripts/run-github-scan.mjs
 
+      - name: Enrich candidates with free live web signals
+        if: always()
+        continue-on-error: true
+        run: node scripts/free-market-scout.mjs
+
       - name: Persist radar data and scan status
         if: always()
         run: |
