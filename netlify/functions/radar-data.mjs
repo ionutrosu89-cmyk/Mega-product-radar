@@ -14,10 +14,14 @@ function isStale(scan, now = Date.now()) {
   return !Number.isFinite(time) || now - time > STALE_SCAN_MS;
 }
 
+function strongStore(getStoreImpl) {
+  return getStoreImpl({ name: "mega-radar-live", consistency: "strong" });
+}
+
 export function createRadarDataHandler({ getStore: getStoreImpl = getStore, now = () => Date.now() } = {}) {
   return async () => {
     try {
-      const store = getStoreImpl("mega-radar-live");
+      const store = strongStore(getStoreImpl);
       const raw = await store.get("latest");
       const scanRaw = await store.get("scan-status");
       let scan = scanRaw ? JSON.parse(scanRaw) : { status: "idle" };
