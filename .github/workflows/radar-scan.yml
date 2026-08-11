@@ -6,54 +6,50 @@ on:
     - cron: '30 4 * * *'
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: radar-scan
   cancel-in-progress: false
 
 jobs:
-  scan-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - name: Checkout radar
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Build llama.cpp
         run: |
           git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
           cmake -S llama.cpp -B llama.cpp/build -DGGML_NATIVE=OFF -DLLAMA_CURL=ON
           cmake --build llama.cpp/build --config Release -j 2 --target llama-cli
+
       - name: Run zero-cost local AI product scan
+        id: scan
+        continue-on-error: true
         env:
           LLAMA_CLI: ./llama.cpp/build/bin/llama-cli
           LOCAL_MODEL: Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
         run: node scripts/run-github-scan.mjs
-      - name: Build static site folder
+
+      - name: Persist radar data and scan status
         if: always()
         run: |
-          mkdir -p _site
-          cp index.html app.js manifest.json products.json radar-live.json scan-status.json _site/
-          touch _site/.nojekyll
-      - name: Configure Pages
-        if: always()
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload site with fresh radar data
-        if: always()
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site
-      - name: Deploy fresh radar
-        if: always()
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add radar-live.json scan-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Mega Product Radar daily scan"
+            git push
+          else
+            echo "No radar data changes to commit."
+          fi
