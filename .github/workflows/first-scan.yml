@@ -11,6 +11,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  models: read
 
 concurrency:
   group: first-radar-scan
@@ -31,14 +32,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-      - name: Run first product scan
+      - name: Run first product scan with GitHub Models
         id: scan
         continue-on-error: true
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          RADAR_MODEL: gpt-5-mini
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RADAR_MODEL: openai/gpt-4o
         run: node scripts/run-github-scan.mjs
       - name: Persist scan result in repository
         if: always()
