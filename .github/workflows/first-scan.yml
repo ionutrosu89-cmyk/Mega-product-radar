@@ -5,9 +5,10 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/first-scan.yml'
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: true
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -31,23 +34,39 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Run first product scan
+        id: scan
+        continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RADAR_MODEL: gpt-5-mini
-        run: node scripts/github-scan.mjs
+        run: node scripts/run-github-scan.mjs
+      - name: Persist scan result in repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scan-status.json radar-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Mega Radar scan result"
+            git push
+          fi
       - name: Build static site folder
+        if: always()
         run: |
           mkdir -p _site
-          cp index.html app.js manifest.json products.json radar-live.json _site/
+          cp index.html app.js manifest.json products.json radar-live.json scan-status.json _site/
           touch _site/.nojekyll
       - name: Configure Pages
+        if: always()
         uses: actions/configure-pages@v5
         with:
           enablement: true
       - name: Upload site with fresh radar data
+        if: always()
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
       - name: Deploy fresh radar
+        if: always()
         id: deployment
         uses: actions/deploy-pages@v4
