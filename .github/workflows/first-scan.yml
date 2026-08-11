@@ -1,0 +1,53 @@
+name: First Mega Radar Scan
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/first-scan.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: first-radar-scan
+  cancel-in-progress: false
+
+jobs:
+  first-scan:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Run first product scan
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RADAR_MODEL: gpt-5-mini
+        run: node scripts/github-scan.mjs
+      - name: Build static site folder
+        run: |
+          mkdir -p _site
+          cp index.html app.js manifest.json products.json radar-live.json _site/
+          touch _site/.nojekyll
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload site with fresh radar data
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy fresh radar
+        id: deployment
+        uses: actions/deploy-pages@v4
