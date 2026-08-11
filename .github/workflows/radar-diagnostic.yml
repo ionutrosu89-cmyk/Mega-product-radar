@@ -1,0 +1,45 @@
+name: Mega Radar Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/radar-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Run radar scan with persistent status
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RADAR_MODEL: gpt-5-mini
+        run: node scripts/run-github-scan.mjs
+      - name: Commit diagnostic result
+        if: always()
+        run: |
+          if [ ! -f scan-status.json ]; then
+            printf '%s\n' '{"ok":false,"status":"error","error":"Workflow ended before scan-status.json was created"}' > scan-status.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scan-status.json radar-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Mega Radar diagnostic result"
+            git push
+          fi
