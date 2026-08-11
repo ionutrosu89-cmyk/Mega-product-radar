@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout radar
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           persist-credentials: true
       - name: Setup Node
