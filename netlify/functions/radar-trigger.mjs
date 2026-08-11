@@ -20,10 +20,11 @@ export function createTriggerHandler({ getStore: getStoreImpl = getStore, fetch:
     const scan = { status: "queued", scanId, requestedAt };
     await store.set("scan-status", JSON.stringify(scan));
 
-    // Invoke the deployed Background Function by its canonical Netlify Functions URL.
-    // This avoids relying on custom-path routing for an internal server-to-server call.
+    // radar-scan-background has an explicit custom path in its Netlify config.
+    // Invoke that deployed route rather than the canonical function-name URL,
+    // which can return 404 for functions configured with a custom path.
     const origin = new URL(req.url).origin;
-    const backgroundUrl = `${origin}/.netlify/functions/radar-scan-background?scanId=${encodeURIComponent(scanId)}`;
+    const backgroundUrl = `${origin}/api/radar/scan?scanId=${encodeURIComponent(scanId)}`;
 
     let response;
     try {
