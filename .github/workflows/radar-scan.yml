@@ -9,7 +9,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  models: read
 
 concurrency:
   group: radar-scan
@@ -22,16 +21,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout radar
         uses: actions/checkout@v6
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Run product scan with GitHub Models
+      - name: Build llama.cpp
+        run: |
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+          cmake -S llama.cpp -B llama.cpp/build -DGGML_NATIVE=OFF -DLLAMA_CURL=ON
+          cmake --build llama.cpp/build --config Release -j 2 --target llama-cli
+      - name: Run zero-cost local AI product scan
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RADAR_MODEL: openai/gpt-4o
+          LLAMA_CLI: ./llama.cpp/build/bin/llama-cli
+          LOCAL_MODEL: Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
         run: node scripts/run-github-scan.mjs
       - name: Build static site folder
         if: always()
