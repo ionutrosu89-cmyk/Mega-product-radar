@@ -7,6 +7,9 @@ on:
 
 permissions:
   contents: write
+  models: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: radar-scan
@@ -15,7 +18,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 15
     steps:
       - name: Checkout radar
         uses: actions/checkout@v4
@@ -27,18 +30,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build llama.cpp
-        run: |
-          git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
-          cmake -S llama.cpp -B llama.cpp/build -DGGML_NATIVE=OFF -DLLAMA_CURL=ON
-          cmake --build llama.cpp/build --config Release -j 2 --target llama-cli
-
-      - name: Run zero-cost local AI product scan
+      - name: Run GitHub Models product scan
         id: scan
         continue-on-error: true
         env:
-          LLAMA_CLI: ./llama.cpp/build/bin/llama-cli
-          LOCAL_MODEL: Qwen/Qwen2.5-1.5B-Instruct-GGUF:Q4_K_M
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RADAR_MODEL: openai/gpt-4o
         run: node scripts/run-github-scan.mjs
 
       - name: Enrich candidates with free live web signals
@@ -58,3 +55,34 @@ jobs:
           else
             echo "No radar data changes to commit."
           fi
+
+      - name: Build current Pages artifact
+        if: always()
+        run: |
+          mkdir -p _site
+          cp index.html app.js manifest.json products.json radar-live.json scan-status.json _site/
+          touch _site/.nojekyll
+
+      - name: Configure Pages
+        if: always()
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: always()
+    needs: scan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy refreshed radar
+        id: deployment
+        uses: actions/deploy-pages@v4
