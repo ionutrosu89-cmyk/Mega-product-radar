@@ -6,6 +6,7 @@ try {
   await import('./web-radar-scan.mjs');
   await import('./data-quality-postprocess.mjs');
   await import('./discovery-scan.mjs');
+  await import('./discovery-v6-expand.mjs');
   let live = {}, discovery = {}, history = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   try { discovery = JSON.parse(await fs.readFile('discovery-live.json', 'utf8')); } catch {}
@@ -18,8 +19,8 @@ try {
     updatedAt: live.updatedAt || null,
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
-    model: 'Mega Product Radar 5.7',
-    engine: 'Romania Arbitrage Engine v4.5 + Product Discovery Engine v5.7',
+    model: 'Mega Product Radar 6.0',
+    engine: 'Romania Arbitrage Engine v4.5 + Product Discovery Engine v6.0 + Decision Core v6',
     dataQualityPolicy: live.dataQualityPolicy || null,
     discovery: {
       updatedAt: discovery.updatedAt || null,
@@ -28,6 +29,7 @@ try {
       openDiscovered: Number(discovery.openDiscovered || 0),
       successfulChecks: Number(discovery.successfulChecks || 0),
       reviewChecks: Number(discovery.reviewChecks || 0),
+      multilingual: discovery.multilingual || null,
       historyProducts: Object.keys(history.products || {}).length
     }
   };
@@ -40,7 +42,7 @@ try {
     status: 'error',
     startedAt,
     completedAt: new Date().toISOString(),
-    model: 'Mega Product Radar 5.7',
+    model: 'Mega Product Radar 6.0',
     error: message.slice(0, 1600)
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
