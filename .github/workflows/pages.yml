@@ -26,7 +26,7 @@ jobs:
       - name: Build static site folder
         run: |
           mkdir -p _site
-          cp index.html app.js purchase-manager.html purchase-manager.js landed-cost.html landed-cost.js manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
+          cp index.html app.js data-quality.js purchase-manager.html purchase-manager.js landed-cost.html landed-cost.js discovery-inbox.html discovery-inbox.js discovery-engine.js discovery-live.json manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
           touch _site/.nojekyll
       - name: Configure Pages
         uses: actions/configure-pages@v5
