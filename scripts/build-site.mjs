@@ -16,7 +16,7 @@ await writePatched('app.js','app.js',text=>text
   .replace('<small>MEGA 4.2</small>','<small>MEGA 6.0</small>'));
 for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
-  'v6-core.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
+  'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js',
   'discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js',
   'data-vault.html','data-vault.js'
