@@ -23,11 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build static site folder
-        run: |
-          mkdir -p _site
-          cp index.html app.js data-quality.js purchase-manager.html purchase-manager.js landed-cost.html landed-cost.js discovery-inbox.html discovery-inbox.js discovery-engine.js discovery-live.json manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
-          touch _site/.nojekyll
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build Mega Product Radar 5.0
+        run: node scripts/build-site.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
