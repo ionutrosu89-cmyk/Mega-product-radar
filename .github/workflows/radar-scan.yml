@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/radar-scan.yml'
       - 'scripts/**'
+      - 'discovery-catalogue.json'
       - '.deploy-trigger'
   schedule:
     - cron: '30 4 * * *'
@@ -33,32 +34,29 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
-      - name: Run zero-cost live web radar scan
+      - name: Run Radar 5.0 + Product Discovery scan
         id: scan
         continue-on-error: true
         run: node scripts/run-github-scan.mjs
 
-      - name: Persist radar data, history and scan status
+      - name: Persist radar, discovery, history and scan status
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json scan-status.json
+          git add radar-live.json radar-history.json discovery-live.json scan-status.json
           if ! git diff --cached --quiet; then
-            git commit -m "Update Mega Product Radar daily scan"
+            git commit -m "Update Mega Product Radar 5.0 daily scan"
             git push
           else
             echo "No radar data changes to commit."
           fi
 
-      - name: Build current Pages artifact
+      - name: Build current Radar 5.0 site
         if: always()
-        run: |
-          mkdir -p _site
-          cp index.html app.js purchase-manager.html purchase-manager.js landed-cost.html landed-cost.js manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
-          touch _site/.nojekyll
+        run: node scripts/build-site.mjs
 
       - name: Configure Pages
         if: always()
@@ -80,6 +78,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy refreshed radar
+      - name: Deploy refreshed Radar 5.0
         id: deployment
         uses: actions/deploy-pages@v4

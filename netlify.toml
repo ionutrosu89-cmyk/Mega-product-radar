@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "node scripts/build-site.mjs"
+  publish = "_site"
 
 [functions]
   directory = "netlify/functions"
@@ -12,5 +13,15 @@
 
 [[headers]]
   for = "/products.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/radar-live.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/discovery-live.json"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
