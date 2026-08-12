@@ -27,8 +27,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Build Mega Product Radar 5.0
-        run: node scripts/build-site.mjs
+      - name: Build Mega Product Radar 5.7
+        run: |
+          node scripts/build-site.mjs
+          node scripts/qa-mobile.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
