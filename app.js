@@ -4,7 +4,10 @@ const n=v=>Number.isFinite(Number(v))?Number(v):0;
 const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,n(v)));
 const money=v=>`${n(v).toLocaleString('ro-RO',{maximumFractionDigits:2})} lei`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-function economics(p){const sell=n(p.sell),landed=n(p.landed),profit=sell/1.21-sell*.17-sell*.08-landed;return{profit,margin:sell?profit/sell*100:0,roi:landed?profit/landed*100:0};}
+export function economics(p){const sell=n(p.sell),landed=n(p.landed),profit=sell/1.21-sell*.17-sell*.08-landed;return{profit,margin:sell?profit/sell*100:0,roi:landed?profit/landed*100:0};}
+
+export function isBuyZone(product){const e=economics(product);return n(product.megaScore||product.score)>=82&&e.profit>=50&&e.margin>=20&&(!isKids(product)||String(product.kidsGate||'').toUpperCase()==='PASS');}
+export function normalizeProducts(value){return Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&String(x.name||'').trim()).map(x=>({...x,name:String(x.name),cat:String(x.cat||'Fără categorie'),evidence:String(x.evidence||''),chinaMin:n(x.chinaMin),chinaMax:n(x.chinaMax),landed:n(x.landed),sell:n(x.sell),score:n(x.score),megaScore:n(x.megaScore||x.score),sourcing:Array.isArray(x.sourcing)?x.sourcing:[]})):[];}
 function isKids(p){return /kids|copii|3.?6|0.?6/i.test(`${p.cat||''} ${p.age||''}`);}
 function hasLiveSignal(p){return String(p.sourceStatus||'').toUpperCase()==='WEB_SIGNAL'&&n(p.marketScout?.checks)>=3&&n(p.marketScout?.foreignPresence)>=1;}
 function fallbackAnalysis(p){
@@ -29,7 +32,7 @@ function card(p){
   ${plan?`<div class="testplan"><b>Test recomandat: ${n(plan.units)} buc.</b><span>Investiție ${money(plan.investment)} • Profit potențial ${money(plan.profitPotential)}</span></div>`:''}${signals(p)}${checked?`<div class="validated">Ultima verificare: ${esc(new Date(checked).toLocaleString('ro-RO'))} • ${hasLiveSignal(p)?'semnal web live':'validare parțială'}</div>`:''}
   <div class="actions"><a target="_blank" rel="noopener" href="${link('Alibaba',p.name)}">Alibaba ↗</a><a target="_blank" rel="noopener" href="${link('1688',p.name)}">1688 ↗</a><a target="_blank" rel="noopener" href="${link('eMAG',p.name)}">eMAG ↗</a><a target="_blank" rel="noopener" href="${link('Trendyol',p.name)}">Trendyol ↗</a><a target="_blank" rel="noopener" href="${link('Amazon',p.name)}">Amazon DE ↗</a></div></article>`;
 }
-function normalize(a){return Array.isArray(a)?a.filter(x=>x&&x.name).map(x=>({...x,score:n(x.score),megaScore:n(x.megaScore||x.score),sell:n(x.sell),landed:n(x.landed),chinaMin:n(x.chinaMin),chinaMax:n(x.chinaMax)})):[];}
+function normalize(a){return normalizeProducts(a);}
 function renderTop(){const top=[...products].sort((a,b)=>n(analysis(b).score)-n(analysis(a).score)).slice(0,3);$('#top3').innerHTML=top.map((p,i)=>`<div class="topitem"><span>#${i+1}</span><div><b>${esc(p.name)}</b><small>${esc(actionOf(p))} • Gap ${Math.round(n(analysis(p).components?.romaniaGap))}</small></div><strong>${Math.round(n(analysis(p).score))}</strong></div>`).join('');}
 function render(){
   const q=$('#search').value.trim().toLowerCase(),cat=$('#category').value,sort=$('#sort').value;let a=products.filter(p=>(!cat||p.cat===cat)&&(!q||`${p.name} ${p.cat}`.toLowerCase().includes(q)));
@@ -44,5 +47,7 @@ async function load(){
     const cats=[...new Set(products.map(p=>p.cat).filter(Boolean))].sort();$('#category').innerHTML='<option value="">Toate categoriile</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join('');render();
   }catch(e){$('#status').innerHTML=`<span class="error">Eroare: ${esc(e.message)}</span>`;$('#grid').innerHTML='<div class="empty">Datele nu s-au putut încărca. Apasă Refresh.</div>';}finally{btn.disabled=false;}
 }
-$('#search').addEventListener('input',render);$('#category').addEventListener('change',render);$('#sort').addEventListener('change',render);$('#refresh').addEventListener('click',load);$$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');tab=b.dataset.tab;render();}));
-load();
+if(typeof document!=='undefined'){
+  $('#search').addEventListener('input',render);$('#category').addEventListener('change',render);$('#sort').addEventListener('change',render);$('#refresh').addEventListener('click',load);$$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');tab=b.dataset.tab;render();}));
+  load();
+}
