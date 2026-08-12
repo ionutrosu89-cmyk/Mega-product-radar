@@ -2,6 +2,12 @@ name: Mega Product Radar Scan
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/radar-scan.yml'
+      - 'scripts/**'
+      - '.deploy-trigger'
   schedule:
     - cron: '30 4 * * *'
 
