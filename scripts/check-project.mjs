@@ -6,6 +6,8 @@ import process from "node:process";
 
 const root = process.cwd();
 const requiredFiles = [
+  "home5.html",
+  "home5.js",
   "index.html",
   "app.js",
   "manifest.json",
@@ -22,6 +24,7 @@ const requiredFiles = [
   "discovery-engine.js",
   "discovery-catalogue.json",
   "discovery-live.json",
+  "scripts/build-site.mjs",
   "scripts/discovery-scan.mjs",
   "scripts/data-quality-postprocess.mjs",
   "scripts/run-github-scan.mjs",
@@ -60,12 +63,14 @@ if (functionFiles.length !== expectedFunctions.length || expectedFunctions.some(
 
 const syntaxFiles = [
   ...expectedFunctions.map(file => path.join("netlify", "functions", file)),
+  "home5.js",
   "app.js",
   "purchase-manager.js",
   "landed-cost.js",
   "data-quality.js",
   "discovery-inbox.js",
   "discovery-engine.js",
+  path.join("scripts", "build-site.mjs"),
   path.join("scripts", "discovery-scan.mjs"),
   path.join("scripts", "data-quality-postprocess.mjs"),
   path.join("scripts", "run-github-scan.mjs"),
