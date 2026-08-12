@@ -29,8 +29,18 @@ test('complete checklist reaches READY TO ORDER and order reference reaches COMA
   assert.equal(highestAllowedStatus({...ready,orderNumber:'PO-123'},s),'COMANDAT');
 });
 
-test('purchase economics uses confirmed target cost when available',()=>{
-  const e=purchaseEconomics({landed:70,sell:200},{quantity:10,targetUnitCost:55},{});
-  assert.equal(e.orderValue,550);
-  assert.equal(e.revenue,2000);
+test('confirmed Landed Cost 4.4 satisfies landed checklist automatically',()=>{
+  const s={supplierName:'A',moq:20,rating:4.7,years:4,tradeAssurance:true};
+  const ready={quantity:20,sampleOrdered:true,sampleApproved:true,complianceDocs:true,packagingConfirmed:true,paymentTermsConfirmed:true};
+  const landed={currency:'USD',fxRate:5,unitPriceForeign:10,quantity:20,confirmed:true};
+  assert.equal(highestAllowedStatus(ready,s,landed),'READY TO ORDER');
+  assert.ok(!purchaseBlockers(ready,s,landed).some(x=>x.includes('Landed cost')));
+});
+
+test('purchase economics prefers confirmed Landed Cost 4.4 over manual target',()=>{
+  const landed={currency:'USD',fxRate:5,unitPriceForeign:10,quantity:10,internationalFreight:100,confirmed:true};
+  const e=purchaseEconomics({landed:70,sell:200},{quantity:10,targetUnitCost:55},{},landed);
+  assert.equal(e.unitCost,60);
+  assert.equal(e.orderValue,600);
+  assert.equal(e.costSource,'CONFIRMAT 4.4');
 });
