@@ -1,40 +1,53 @@
-export const safeNumber=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let products=[],tab='all';
+const n=v=>Number.isFinite(Number(v))?Number(v):0;
+const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,n(v)));
+const money=v=>`${n(v).toLocaleString('ro-RO',{maximumFractionDigits:2})} lei`;
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+export function economics(p){const sell=n(p.sell),landed=n(p.landed),profit=sell/1.21-sell*.17-sell*.08-landed;return{profit,margin:sell?profit/sell*100:0,roi:landed?profit/landed*100:0};}
 
-export function economics(product){const sell=safeNumber(product.sell),landed=safeNumber(product.landed);const profit=sell/1.21-sell*.17-sell*.08-landed;return{profit,margin:sell?profit/sell*100:0};}
-export function isBuyZone(product){const{profit,margin}=economics(product);return safeNumber(product.score)>=82&&profit>=50&&margin>=20&&(!(String(product.cat||'').startsWith('Kids'))||product.kidsGate==='PASS');}
-export function normalizeProducts(value){if(!Array.isArray(value))return[];return value.filter(p=>p&&typeof p==='object'&&String(p.name||'').trim()).map(p=>({...p,name:String(p.name),cat:String(p.cat||'Fără categorie'),evidence:String(p.evidence||''),chinaMin:safeNumber(p.chinaMin),chinaMax:safeNumber(p.chinaMax),landed:safeNumber(p.landed),sell:safeNumber(p.sell),score:safeNumber(p.score),sourcing:Array.isArray(p.sourcing)?p.sourcing:[]}));}
-
-const money=value=>`${safeNumber(value).toLocaleString('ro-RO',{maximumFractionDigits:2})} lei`;
-const text=(tag,value,className)=>{const node=document.createElement(tag);node.textContent=String(value);if(className)node.className=className;return node;};
-let products=[];
-
-function metric(label,value){const box=text('div','', 'metric');box.append(text('small',label),text('b',value));return box;}
-function validUrl(value){try{const u=new URL(String(value));return['https:','http:'].includes(u.protocol)?u.href:null;}catch{return null;}}
-function productCard(product){const card=text('article','', 'card'),top=text('div','', 'top'),title=text('div','');title.append(text('div',product.name,'name'),text('span',isBuyZone(product)?'BUY ZONE':String(product.verdict||product.status||'WATCH'),'pill'));top.append(title,text('div',`${Math.round(product.score)}/100`,'score'));card.append(top);const{profit,margin}=economics(product),metrics=text('div','', 'metrics');metrics.append(metric('Cost estimat',`${money(product.chinaMin)} – ${money(product.chinaMax)}`),metric('Landed cost',money(product.landed)),metric('Preț vânzare',money(product.sell)),metric('Profit / buc.',money(profit)),metric('Marjă',`${margin.toFixed(1)}%`),metric('Opportunity Score',`${Math.round(product.score)}/100`));card.append(metrics);if(product.evidence)card.append(text('div',product.evidence,'evidence'));const links=text('div','', 'links');for(const source of product.sourcing){const href=validUrl(source?.url);if(!href)continue;const a=text('a',`${String(source.market||'Sursă')}: ${String(source.label||'detalii')} ↗`);a.href=href;a.target='_blank';a.rel='noopener noreferrer';links.append(a);}if(links.childNodes.length)card.append(links);return card;}
-function render(){const query=document.querySelector('#search').value.trim().toLocaleLowerCase('ro'),category=document.querySelector('#category').value;const visible=products.filter(p=>(!category||p.cat===category)&&(!query||`${p.name} ${p.cat}`.toLocaleLowerCase('ro').includes(query)));const root=document.querySelector('#products');root.replaceChildren(...(visible.length?visible.map(productCard):[text('div','Nu există produse pentru filtrele selectate.','empty')]));document.querySelector('#total').textContent=products.length;document.querySelector('#buyCount').textContent=products.filter(isBuyZone).length;document.querySelector('#avgScore').textContent=products.length?Math.round(products.reduce((n,p)=>n+p.score,0)/products.length):'—';}
-function setProducts(next){products=normalizeProducts(next);const select=document.querySelector('#category'),current=select.value;select.replaceChildren(new Option('Toate categoriile',''),...[...new Set(products.map(p=>p.cat))].sort().map(c=>new Option(c,c)));select.value=current;render();}
-function updateStatus({updatedAt=null,status='ready',error=''},source){document.querySelector('#dataSource').textContent=source;document.querySelector('#lastScan').textContent=updatedAt?new Date(updatedAt).toLocaleString('ro-RO'):'Date inițiale';document.querySelector('#scanStatus').textContent=status;document.querySelector('#scanError').textContent=error?` — ${error}`:'';document.querySelector('#runScan').disabled=false;}
-
-export async function loadRadar(fetcher=fetch){
-  try{
-    const liveResponse=await fetcher(`radar-live.json?t=${Date.now()}`,{cache:'no-store'});
-    if(liveResponse.ok){const live=await liveResponse.json();if(live.live&&normalizeProducts(live.products).length){setProducts(live.products);updateStatus({updatedAt:live.updatedAt,status:'actualizat automat'},'GitHub Actions • LIVE');return live;}}
-  }catch{}
-  const fallback=await fetcher(`products.json?t=${Date.now()}`,{cache:'no-store'});
-  if(!fallback.ok)throw new Error(`HTTP ${fallback.status}`);
-  setProducts(await fallback.json());
-  updateStatus({status:'date de bază'},'GitHub Pages • products.json');
-  return{live:false,products};
+export function isBuyZone(product){const e=economics(product);return n(product.megaScore||product.score)>=82&&e.profit>=50&&e.margin>=20&&(!isKids(product)||String(product.kidsGate||'').toUpperCase()==='PASS');}
+export function normalizeProducts(value){return Array.isArray(value)?value.filter(x=>x&&typeof x==='object'&&String(x.name||'').trim()).map(x=>({...x,name:String(x.name),cat:String(x.cat||'Fără categorie'),evidence:String(x.evidence||''),chinaMin:n(x.chinaMin),chinaMax:n(x.chinaMax),landed:n(x.landed),sell:n(x.sell),score:n(x.score),megaScore:n(x.megaScore||x.score),sourcing:Array.isArray(x.sourcing)?x.sourcing:[]})):[];}
+function isKids(p){return /kids|copii|3.?6|0.?6/i.test(`${p.cat||''} ${p.age||''}`);}
+function hasLiveSignal(p){return String(p.sourceStatus||'').toUpperCase()==='WEB_SIGNAL'&&n(p.marketScout?.checks)>=3&&n(p.marketScout?.foreignPresence)>=1;}
+function fallbackAnalysis(p){
+  const e=economics(p),foreign=n(p.marketScout?.foreignPresence),ro=n(p.marketScout?.romaniaPresence),china=n(p.marketScout?.chinaSourcingPresence),score=n(p.megaScore||p.score);
+  const gap=clamp(55+foreign*12+china*8-ro*25),sat=ro?58:90,margin=clamp(e.margin*1.7+e.roi*.25),demand=clamp(40+foreign*18),trend=55;
+  let action=String(p.action||p.verdict||'WATCH').toUpperCase();if(action==='BUY ZONE')action='BUY';if(action==='SAMPLE'||action==='VALIDATE')action='TEST';if(!['BUY','TEST','WATCH','REJECT'].includes(action))action=score>=82?'BUY':score>=76?'TEST':'WATCH';
+  return{score,action,lifecycle:p.lifecycle||'WATCH',components:{demand,trend,romaniaGap:gap,saturation:sat,margin,supplier:china?72:45,logistics:n(p.logistics)||78,compliance:n(p.compliance)||78},trendVelocity:{percent:null,label:'BASELINE'},economics:{...e,landed:n(p.landed),sell:n(p.sell)},testPlan:null};
 }
-
-export async function runScan(fetcher=fetch){
-  const button=document.querySelector('#runScan');button.disabled=true;button.textContent='Se actualizează…';document.querySelector('#scanError').textContent='';
-  try{return await loadRadar(fetcher);}catch(error){updateStatus({status:'error',error:error.message},'GitHub Pages');throw error;}finally{button.disabled=false;button.textContent='Refresh';}
+function analysis(p){return p.megaAnalysis||fallbackAnalysis(p);}
+function actionOf(p){if(isKids(p)&&String(p.kidsGate||'').toUpperCase()!=='PASS'&&analysis(p).action==='BUY')return'TEST';return analysis(p).action||'WATCH';}
+function link(site,name){const q=encodeURIComponent(name);return site==='Alibaba'?`https://www.alibaba.com/trade/search?SearchText=${q}`:site==='1688'?`https://s.1688.com/selloffer/offer_search.htm?keywords=${q}`:site==='eMAG'?`https://www.emag.ro/search/${q}`:site==='Trendyol'?`https://www.trendyol.com/sr?q=${q}`:`https://www.amazon.de/s?k=${q}`;}
+function tone(action){return action==='BUY'?'buy':action==='TEST'?'test':action==='REJECT'?'reject':'watch';}
+function component(label,value){const v=Math.round(clamp(value));return `<div class="component"><div><span>${esc(label)}</span><b>${v}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`;}
+function signals(p){const s=p.marketScout?.signals;if(!s)return'';const keys=[['amazonDE','Amazon DE',''],['allegroPL','Allegro PL',''],['trendyolTR','Trendyol',''],['emagRO','eMAG RO','ro'],['alibabaCN','Alibaba','']];return `<div class="signals">${keys.map(([k,l,c])=>`<span class="signal ${s[k]?.present?(c||'on'):''}">${esc(l)} ${s[k]?.present?'✓':'–'}</span>`).join('')}</div>`;}
+function why(p,a){const e=a.economics||economics(p),items=[];if(a.components?.romaniaGap>=70)items.push(`Romania Gap ${Math.round(a.components.romaniaGap)}/100`);if(a.components?.saturation>=70)items.push('competiție RO estimată redusă');if(a.components?.margin>=70)items.push(`economie bună: ${money(e.profit)} profit/buc.`);if(a.components?.trend>=65)items.push(`trend ${a.trendVelocity?.label||'în creștere'}`);if(n(p.marketScout?.foreignPresence)>=2)items.push(`semnal în ${n(p.marketScout.foreignPresence)} piețe externe`);return items.slice(0,3).join(' • ')||'Necesită validare suplimentară înainte de comandă.';}
+function card(p){
+  const a=analysis(p),e=a.economics||economics(p),action=actionOf(p),checked=p.marketScout?.checkedAt||p.lastChecked,trend=a.trendVelocity||{},plan=a.testPlan;
+  return `<article class="card ${tone(action)}card"><div class="top"><div><div class="name">${esc(p.name)}</div><div class="cat">${esc(p.cat||'Fără categorie')} • ${esc(a.lifecycle||'WATCH')}</div><span class="badge ${tone(action)}">${esc(action)}</span></div><div class="score"><small>MEGA</small>${Math.round(n(a.score||p.score))}<span>/100</span></div></div>
+  <div class="hero-metrics"><div><small>Romania Gap</small><b>${Math.round(n(a.components?.romaniaGap))}/100</b></div><div><small>Trend</small><b>${esc(trend.label||'BASELINE')}</b><em>${trend.percent==null?'—':`${trend.percent>0?'+':''}${trend.percent}%`}</em></div><div><small>Profit / buc.</small><b>${money(e.profit)}</b><em>ROI ${n(e.roi).toFixed(0)}%</em></div><div><small>Saturație</small><b>${Math.round(n(a.components?.saturation))}/100</b></div></div>
+  <details><summary>De ce acest produs?</summary><p class="why">${esc(why(p,a))}</p><div class="components">${component('Demand',a.components?.demand)}${component('Trend',a.components?.trend)}${component('Romania Gap',a.components?.romaniaGap)}${component('Saturation',a.components?.saturation)}${component('Margin',a.components?.margin)}${component('Supplier',a.components?.supplier)}${component('Logistics',a.components?.logistics)}${component('Compliance',a.components?.compliance)}</div></details>
+  <div class="metrics"><div class="metric"><small>Cost China</small><b>${money(p.chinaMin)} – ${money(p.chinaMax)}</b></div><div class="metric"><small>Landed</small><b>${money(e.landed||p.landed)}</b></div><div class="metric"><small>Preț RO</small><b>${money(e.sell||p.sell)}</b></div><div class="metric"><small>Marjă</small><b>${n(e.margin).toFixed(1)}%</b></div></div>
+  ${plan?`<div class="testplan"><b>Test recomandat: ${n(plan.units)} buc.</b><span>Investiție ${money(plan.investment)} • Profit potențial ${money(plan.profitPotential)}</span></div>`:''}${signals(p)}${checked?`<div class="validated">Ultima verificare: ${esc(new Date(checked).toLocaleString('ro-RO'))} • ${hasLiveSignal(p)?'semnal web live':'validare parțială'}</div>`:''}
+  <div class="actions"><a target="_blank" rel="noopener" href="${link('Alibaba',p.name)}">Alibaba ↗</a><a target="_blank" rel="noopener" href="${link('1688',p.name)}">1688 ↗</a><a target="_blank" rel="noopener" href="${link('eMAG',p.name)}">eMAG ↗</a><a target="_blank" rel="noopener" href="${link('Trendyol',p.name)}">Trendyol ↗</a><a target="_blank" rel="noopener" href="${link('Amazon',p.name)}">Amazon DE ↗</a></div></article>`;
 }
-
+function normalize(a){return normalizeProducts(a);}
+function renderTop(){const top=[...products].sort((a,b)=>n(analysis(b).score)-n(analysis(a).score)).slice(0,3);$('#top3').innerHTML=top.map((p,i)=>`<div class="topitem"><span>#${i+1}</span><div><b>${esc(p.name)}</b><small>${esc(actionOf(p))} • Gap ${Math.round(n(analysis(p).components?.romaniaGap))}</small></div><strong>${Math.round(n(analysis(p).score))}</strong></div>`).join('');}
+function render(){
+  const q=$('#search').value.trim().toLowerCase(),cat=$('#category').value,sort=$('#sort').value;let a=products.filter(p=>(!cat||p.cat===cat)&&(!q||`${p.name} ${p.cat}`.toLowerCase().includes(q)));
+  if(tab!=='all')a=a.filter(p=>actionOf(p).toLowerCase()===tab);a.sort((x,y)=>sort==='gap'?n(analysis(y).components?.romaniaGap)-n(analysis(x).components?.romaniaGap):sort==='profit'?n(analysis(y).economics?.profit)-n(analysis(x).economics?.profit):n(analysis(y).score)-n(analysis(x).score));
+  $('#grid').innerHTML=a.length?a.map(card).join(''):'<div class="empty">Nu există produse pentru filtrele selectate.</div>';
+  $('#total').textContent=products.length;$('#buy').textContent=products.filter(p=>actionOf(p)==='BUY').length;$('#test').textContent=products.filter(p=>actionOf(p)==='TEST').length;$('#avg').textContent=products.length?Math.round(products.reduce((s,p)=>s+n(analysis(p).score),0)/products.length):'—';renderTop();
+}
+async function load(){
+  const btn=$('#refresh');btn.disabled=true;$('#status').textContent='Se actualizează…';
+  try{let live=null;try{const r=await fetch(`radar-live.json?t=${Date.now()}`,{cache:'no-store'});if(r.ok)live=await r.json();}catch{}
+    if(live?.live&&normalize(live.products).length){products=normalize(live.products);$('#source').textContent=`${live.engine||'Radar LIVE'} • ${n(live.successfulChecks)} checks`;$('#updated').textContent=live.updatedAt?new Date(live.updatedAt).toLocaleString('ro-RO'):'—';$('#status').innerHTML='<span class="good">Online</span>';}else{const r=await fetch(`products.json?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status}`);products=normalize(await r.json());$('#source').textContent='Bază fallback';$('#updated').textContent='date de bază';$('#status').innerHTML='<span class="good">Online</span>';}
+    const cats=[...new Set(products.map(p=>p.cat).filter(Boolean))].sort();$('#category').innerHTML='<option value="">Toate categoriile</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join('');render();
+  }catch(e){$('#status').innerHTML=`<span class="error">Eroare: ${esc(e.message)}</span>`;$('#grid').innerHTML='<div class="empty">Datele nu s-au putut încărca. Apasă Refresh.</div>';}finally{btn.disabled=false;}
+}
 if(typeof document!=='undefined'){
-  document.querySelector('#search').addEventListener('input',render);
-  document.querySelector('#category').addEventListener('change',render);
-  document.querySelector('#runScan').addEventListener('click',()=>runScan().catch(()=>{}));
-  loadRadar().catch(error=>updateStatus({status:'error',error:error.message},'Indisponibil'));
+  $('#search').addEventListener('input',render);$('#category').addEventListener('change',render);$('#sort').addEventListener('change',render);$('#refresh').addEventListener('click',load);$$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');tab=b.dataset.tab;render();}));
+  load();
 }
