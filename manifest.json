@@ -1,5 +1,5 @@
 {
-  "name": "Mega Product Radar 5.7",
+  "name": "Mega Product Radar 6.0",
   "short_name": "Mega Radar",
   "start_url": "./",
   "scope": "./",
@@ -7,27 +7,12 @@
   "orientation": "portrait-primary",
   "background_color": "#f4f6f8",
   "theme_color": "#08111f",
-  "description": "Open Product Discovery, evidence, trend, review intelligence, sourcing și purchase workflow pentru România.",
+  "description": "Multilingual Product Discovery, supplier intelligence, capital allocation, portfolio, feedback loop și purchase workflow pentru România.",
   "shortcuts": [
-    {
-      "name": "New Product Inbox",
-      "short_name": "Discovery",
-      "url": "./discovery-inbox.html"
-    },
-    {
-      "name": "Purchase Manager",
-      "short_name": "Purchase",
-      "url": "./purchase-manager.html"
-    },
-    {
-      "name": "Landed Cost Real",
-      "short_name": "Landed Cost",
-      "url": "./landed-cost.html"
-    },
-    {
-      "name": "Data Vault",
-      "short_name": "Backup",
-      "url": "./data-vault.html"
-    }
+    {"name":"Executive Dashboard","short_name":"Executive","url":"./executive-dashboard.html"},
+    {"name":"New Product Inbox","short_name":"Discovery","url":"./discovery-inbox.html"},
+    {"name":"Supplier Intelligence","short_name":"Suppliers","url":"./supplier-intelligence.html"},
+    {"name":"Purchase Manager","short_name":"Purchase","url":"./purchase-manager.html"},
+    {"name":"Landed Cost Real","short_name":"Landed Cost","url":"./landed-cost.html"}
   ]
 }
