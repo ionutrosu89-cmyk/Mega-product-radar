@@ -4,6 +4,7 @@ const startedAt = new Date().toISOString();
 
 try {
   await import('./web-radar-scan.mjs');
+  await import('./data-quality-postprocess.mjs');
   let live = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   const status = {
@@ -14,8 +15,9 @@ try {
     updatedAt: live.updatedAt || null,
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
-    model: null,
-    engine: live.engine || 'Zero-cost web signal radar'
+    model: live.model || 'MEGA Score 4.5',
+    engine: live.engine || 'Romania Arbitrage Engine v4.5',
+    dataQualityPolicy: live.dataQualityPolicy || null
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
   console.log('SCAN_STATUS', JSON.stringify(status));
