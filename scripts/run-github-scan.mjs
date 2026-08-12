@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 const startedAt = new Date().toISOString();
 
 try {
-  await import('./github-scan.mjs');
+  await import('./web-radar-scan.mjs');
   let live = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   const status = {
@@ -14,8 +14,8 @@ try {
     updatedAt: live.updatedAt || null,
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
-    model: live.model || process.env.RADAR_MODEL || 'openai/gpt-4o',
-    engine: live.engine || 'GitHub Models'
+    model: null,
+    engine: live.engine || 'Zero-cost web signal radar'
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
   console.log('SCAN_STATUS', JSON.stringify(status));
