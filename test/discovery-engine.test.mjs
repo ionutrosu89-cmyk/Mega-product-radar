@@ -29,7 +29,9 @@ test('strong LIVE candidate can become BUY CANDIDATE but not purchase-flow ready
   assert.equal(canEnterPurchaseFlow(p,{stage:'BUY CANDIDATE'}),true);
 });
 
-test('kids candidate is not automatically promoted to BUY CANDIDATE',()=>{
-  const p={sellTarget:329,landedEstimate:60,checks:8,foreignPresence:3,chinaPresence:2,romaniaPresence:0,foreignResults:24,chinaResults:16,romaniaResults:0,socialResults:22,cat:'Kids 3–6 • Travel'};
-  assert.notEqual(suggestedDiscoveryStage(p),'BUY CANDIDATE');
+test('kids candidate cannot enter purchase flow without kidsGate PASS',()=>{
+  const base={sellTarget:329,landedEstimate:60,checks:8,foreignPresence:3,chinaPresence:2,romaniaPresence:0,foreignResults:24,chinaResults:16,romaniaResults:0,socialResults:22,cat:'Kids 3–6 • Travel'};
+  assert.notEqual(suggestedDiscoveryStage(base),'BUY CANDIDATE');
+  assert.equal(canEnterPurchaseFlow(base,{stage:'BUY CANDIDATE'}),false);
+  assert.equal(canEnterPurchaseFlow({...base,kidsGate:'PASS'},{stage:'BUY CANDIDATE'}),true);
 });
