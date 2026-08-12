@@ -1,0 +1,39 @@
+name: Mega Product Radar CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - 'agent/**'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Syntax check frontend
+        run: node --check app.js
+
+      - name: Syntax check scanner
+        run: node --check scripts/web-radar-scan.mjs
+
+      - name: Run tests
+        run: npm test
+
+      - name: Validate build
+        run: npm run build
