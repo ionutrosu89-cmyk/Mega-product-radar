@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-const root=process.cwd(),files=['home5.html','discovery-inbox.html','purchase-manager.html','landed-cost.html','data-vault.html'],results=[];
+const root=process.cwd(),files=['index.html','radar.html','discovery-inbox.html','purchase-manager.html','landed-cost.html','data-vault.html'],results=[];
 for(const file of files){const text=await fs.readFile(path.join(root,file),'utf8'),checks={viewport:/name="viewport"[^>]*viewport-fit=cover/i.test(text),responsive:/@media\s*\(/i.test(text),mobileWidth:/max-width/i.test(text),safeArea:/safe-area-inset-(top|bottom)/i.test(text)};const required=file==='purchase-manager.html'||file==='landed-cost.html'?['viewport','responsive','mobileWidth']:['viewport','responsive','mobileWidth','safeArea'];const failed=required.filter(k=>!checks[k]);results.push({file,checks,ok:failed.length===0,failed});if(failed.length)throw new Error(`${file} failed mobile QA: ${failed.join(', ')}`);}
 const manifest=JSON.parse(await fs.readFile(path.join(root,'manifest.json'),'utf8'));if(manifest.display!=='standalone')throw new Error('manifest display must remain standalone');
-const report={version:'5.7',checkedAt:new Date().toISOString(),deviceTarget:'iPhone/PWA static readiness',physicalDeviceTest:false,results};
-await fs.mkdir(path.join(root,'_site'),{recursive:true});await fs.writeFile(path.join(root,'_site','qa-mobile-report.json'),JSON.stringify(report,null,2)+'\n');console.log(`iPhone readiness QA passed: ${results.length} pages. Physical-device test remains a manual acceptance step.`);
+const report={version:'5.7',checkedAt:new Date().toISOString(),deviceTarget:'iPhone/PWA static readiness',pagesSource:'GitHub Pages legacy main:/',physicalDeviceTest:false,results};
+await fs.mkdir(path.join(root,'_site'),{recursive:true});await fs.writeFile(path.join(root,'_site','qa-mobile-report.json'),JSON.stringify(report,null,2)+'\n');console.log(`iPhone readiness QA passed: ${results.length} canonical pages. Physical-device test remains a manual acceptance step.`);
