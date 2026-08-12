@@ -1,13 +1,13 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-12T21:43:11.519Z",
-  "completedAt": "2026-08-12T21:43:53.485Z",
-  "updatedAt": "2026-08-12T21:43:25.337Z",
+  "startedAt": "2026-08-12T21:59:57.944Z",
+  "completedAt": "2026-08-12T22:02:24.348Z",
+  "updatedAt": "2026-08-12T22:00:11.723Z",
   "newCandidates": 0,
   "totalProducts": 81,
-  "model": "Mega Product Radar 5.7",
-  "engine": "Romania Arbitrage Engine v4.5 + Product Discovery Engine v5.7",
+  "model": "Mega Product Radar 6.0",
+  "engine": "Romania Arbitrage Engine v4.5 + Product Discovery Engine v6.0 + Decision Core v6",
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
@@ -15,12 +15,27 @@
     "historyDeltas": "LIVE_ONLY"
   },
   "discovery": {
-    "updatedAt": "2026-08-12T21:43:53.480Z",
+    "updatedAt": "2026-08-12T22:02:24.344Z",
     "candidates": 10,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 36,
     "reviewChecks": 12,
+    "multilingual": {
+      "enabled": true,
+      "locales": [
+        "en",
+        "de",
+        "pl",
+        "tr",
+        "ro",
+        "zh"
+      ],
+      "theme": "small space apartment organizer",
+      "queriesChecked": 12,
+      "newCandidates": 0,
+      "sourcePolicy": "DIRECT_SEARCH_LINKS + WEB_PROXY_EVIDENCE"
+    },
     "historyProducts": 10
   }
 }
