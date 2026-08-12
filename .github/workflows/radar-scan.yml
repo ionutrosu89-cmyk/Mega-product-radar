@@ -54,12 +54,9 @@ jobs:
             echo "No radar data changes to commit."
           fi
 
-      - name: Build current Pages artifact
+      - name: Build current Radar 5.0 site
         if: always()
-        run: |
-          mkdir -p _site
-          cp index.html app.js data-quality.js purchase-manager.html purchase-manager.js landed-cost.html landed-cost.js discovery-inbox.html discovery-inbox.js discovery-engine.js discovery-live.json manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
-          touch _site/.nojekyll
+        run: node scripts/build-site.mjs
 
       - name: Configure Pages
         if: always()
@@ -81,6 +78,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy refreshed radar
+      - name: Deploy refreshed Radar 5.0
         id: deployment
         uses: actions/deploy-pages@v4
