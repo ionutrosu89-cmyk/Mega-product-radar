@@ -17,6 +17,12 @@ const requiredFiles = [
   "landed-cost.html",
   "landed-cost.js",
   "data-quality.js",
+  "discovery-inbox.html",
+  "discovery-inbox.js",
+  "discovery-engine.js",
+  "discovery-catalogue.json",
+  "discovery-live.json",
+  "scripts/discovery-scan.mjs",
   "scripts/data-quality-postprocess.mjs",
   "scripts/run-github-scan.mjs",
   "netlify/functions/radar-data.mjs",
@@ -27,7 +33,7 @@ const requiredFiles = [
 ];
 
 for (const file of requiredFiles) await access(path.join(root, file), constants.R_OK);
-for (const file of ["manifest.json", "package.json", "products.json"]) JSON.parse(await readFile(path.join(root, file), "utf8"));
+for (const file of ["manifest.json", "package.json", "products.json", "discovery-catalogue.json", "discovery-live.json"]) JSON.parse(await readFile(path.join(root, file), "utf8"));
 
 const products = JSON.parse(await readFile(path.join(root, "products.json"), "utf8"));
 if (!Array.isArray(products) || products.length === 0) throw new Error("products.json must contain a non-empty array");
@@ -35,6 +41,16 @@ const requiredProductFields = ["name", "cat", "chinaMin", "chinaMax", "landed", 
 for (const [index, product] of products.entries()) {
   const missing = requiredProductFields.filter((field) => !(field in product));
   if (missing.length) throw new Error(`products.json item ${index} is missing: ${missing.join(", ")}`);
+}
+
+const discoveryCatalogue = JSON.parse(await readFile(path.join(root, "discovery-catalogue.json"), "utf8"));
+if (!Array.isArray(discoveryCatalogue) || discoveryCatalogue.length < 40) throw new Error("discovery-catalogue.json must contain at least 40 candidate seeds");
+const discoveryNames = new Set();
+for (const [index, item] of discoveryCatalogue.entries()) {
+  for (const field of ["name","cat","chinaMin","chinaMax","sellTarget"]) if (!(field in item)) throw new Error(`discovery-catalogue.json item ${index} missing ${field}`);
+  const key=String(item.name).trim().toLowerCase();
+  if (discoveryNames.has(key)) throw new Error(`Duplicate discovery candidate: ${item.name}`);
+  discoveryNames.add(key);
 }
 
 const functionDirectory = path.join(root, "netlify", "functions");
@@ -48,6 +64,9 @@ const syntaxFiles = [
   "purchase-manager.js",
   "landed-cost.js",
   "data-quality.js",
+  "discovery-inbox.js",
+  "discovery-engine.js",
+  path.join("scripts", "discovery-scan.mjs"),
   path.join("scripts", "data-quality-postprocess.mjs"),
   path.join("scripts", "run-github-scan.mjs"),
   path.join("scripts", "web-radar-scan.mjs")
@@ -56,4 +75,4 @@ for (const file of syntaxFiles) {
   const result = spawnSync(process.execPath, ["--check", path.join(root, file)], { encoding: "utf8" });
   if (result.status !== 0) throw new Error(result.stderr || `Syntax check failed for ${file}`);
 }
-console.log(`Project check passed: ${products.length} products, ${expectedFunctions.length} Netlify Functions, ${syntaxFiles.length} syntax-checked modules.`);
+console.log(`Project check passed: ${products.length} radar products, ${discoveryCatalogue.length} discovery seeds, ${expectedFunctions.length} Netlify Functions, ${syntaxFiles.length} syntax-checked modules.`);
