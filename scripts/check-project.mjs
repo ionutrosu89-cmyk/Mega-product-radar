@@ -7,17 +7,21 @@ import process from "node:process";
 const root = process.cwd();
 const requiredFiles = [
   "home5.html","home5.js","alerts.js","sw.js","index.html","radar.html","app.js","manifest.json","netlify.toml","package.json","products.json",
+  "v6-core.js","executive-dashboard.html","executive-dashboard.js","supplier-intelligence.html","supplier-intelligence.js",
   "purchase-manager.html","purchase-manager.js","landed-cost.html","landed-cost.js","data-vault.html","data-vault.js","data-quality.js",
   "discovery-inbox.html","discovery-inbox.js","discovery-engine.js","discovery-catalogue.json","discovery-themes.json","discovery-live.json","discovery-history.json","discovery-history.js","review-intelligence.js",
-  "scripts/build-site.mjs","scripts/qa-mobile.mjs","scripts/discovery-scan.mjs","scripts/data-quality-postprocess.mjs","scripts/run-github-scan.mjs",
+  "scripts/build-site.mjs","scripts/qa-mobile.mjs","scripts/discovery-scan.mjs","scripts/discovery-v6-expand.mjs","scripts/data-quality-postprocess.mjs","scripts/run-github-scan.mjs",
   "netlify/functions/radar-data.mjs","netlify/functions/radar-health.mjs","netlify/functions/radar-scan-background.mjs","netlify/functions/radar-schedule.mjs","netlify/functions/radar-trigger.mjs","netlify/functions/radar-sync.mjs"
 ];
 for (const file of requiredFiles) await access(path.join(root, file), constants.R_OK);
 for (const file of ["manifest.json","package.json","products.json","discovery-catalogue.json","discovery-themes.json","discovery-live.json","discovery-history.json"]) JSON.parse(await readFile(path.join(root, file), "utf8"));
 
-const index=await readFile(path.join(root,"index.html"),"utf8"),radarPage=await readFile(path.join(root,"radar.html"),"utf8");
-if(!index.includes('Command Center 5.7')) throw new Error('Legacy Pages index.html must be the 5.7 Command Center');
+const pkg=JSON.parse(await readFile(path.join(root,"package.json"),"utf8"));
+if(pkg.version!=="6.0.0") throw new Error("package.json must be Mega Product Radar 6.0.0");
+const index=await readFile(path.join(root,"index.html"),"utf8"),radarPage=await readFile(path.join(root,"radar.html"),"utf8"),execPage=await readFile(path.join(root,"executive-dashboard.html"),"utf8");
+if(!index.includes('Command Center 6.0')||!index.includes('executive-dashboard.html')||!index.includes('supplier-intelligence.html')) throw new Error('Legacy Pages index.html must be the 6.0 Command Center');
 if(!radarPage.includes('id="grid"')||!radarPage.includes('app.js')) throw new Error('radar.html must remain the Opportunity Radar page');
+if(!execPage.includes('Executive Dashboard 6.0')) throw new Error('Executive Dashboard 6.0 is missing');
 
 const products = JSON.parse(await readFile(path.join(root, "products.json"), "utf8"));
 if (!Array.isArray(products) || products.length === 0) throw new Error("products.json must contain a non-empty array");
@@ -38,8 +42,8 @@ if (functionFiles.length !== expectedFunctions.length || expectedFunctions.some(
 
 const syntaxFiles = [
   ...expectedFunctions.map(file => path.join("netlify", "functions", file)),
-  "home5.js","alerts.js","sw.js","app.js","purchase-manager.js","landed-cost.js","data-vault.js","data-quality.js","discovery-inbox.js","discovery-engine.js","discovery-history.js","review-intelligence.js",
-  path.join("scripts", "build-site.mjs"),path.join("scripts", "qa-mobile.mjs"),path.join("scripts", "discovery-scan.mjs"),path.join("scripts", "data-quality-postprocess.mjs"),path.join("scripts", "run-github-scan.mjs"),path.join("scripts", "web-radar-scan.mjs")
+  "home5.js","alerts.js","sw.js","app.js","v6-core.js","executive-dashboard.js","supplier-intelligence.js","purchase-manager.js","landed-cost.js","data-vault.js","data-quality.js","discovery-inbox.js","discovery-engine.js","discovery-history.js","review-intelligence.js",
+  path.join("scripts", "build-site.mjs"),path.join("scripts", "qa-mobile.mjs"),path.join("scripts", "discovery-scan.mjs"),path.join("scripts", "discovery-v6-expand.mjs"),path.join("scripts", "data-quality-postprocess.mjs"),path.join("scripts", "run-github-scan.mjs"),path.join("scripts", "web-radar-scan.mjs")
 ];
 for (const file of syntaxFiles) {const result = spawnSync(process.execPath, ["--check", path.join(root, file)], { encoding: "utf8" });if (result.status !== 0) throw new Error(result.stderr || `Syntax check failed for ${file}`);}
-console.log(`Project check passed: canonical Pages root, ${products.length} radar products, ${discoveryCatalogue.length} discovery seeds, ${themes.length} open themes, ${expectedFunctions.length} Netlify Functions, ${syntaxFiles.length} syntax-checked modules.`);
+console.log(`Project check passed: Radar 6.0 canonical Pages root, ${products.length} radar products, ${discoveryCatalogue.length} discovery seeds, ${themes.length} open themes, ${expectedFunctions.length} Netlify Functions, ${syntaxFiles.length} syntax-checked modules.`);
