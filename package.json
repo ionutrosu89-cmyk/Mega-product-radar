@@ -1,12 +1,13 @@
 {
   "name": "mega-product-radar",
   "private": true,
-  "version": "5.0.0",
+  "version": "5.7.0",
   "type": "module",
   "scripts": {
     "check": "node scripts/check-project.mjs",
     "test": "node --test",
-    "build": "node scripts/check-project.mjs && node scripts/build-site.mjs"
+    "qa:mobile": "node scripts/qa-mobile.mjs",
+    "build": "node scripts/check-project.mjs && node scripts/build-site.mjs && node scripts/qa-mobile.mjs"
   },
   "engines": {
     "node": ">=22"

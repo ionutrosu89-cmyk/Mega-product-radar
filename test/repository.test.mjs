@@ -5,7 +5,7 @@ import test from "node:test";
 
 test("only the canonical Netlify Functions are present", async () => {
   const entries = (await readdir("netlify/functions", { recursive: true })).filter((entry) => entry.endsWith(".mjs")).sort();
-  assert.deepEqual(entries, ["radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-trigger.mjs"]);
+  assert.deepEqual(entries, ["radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-sync.mjs","radar-trigger.mjs"]);
 });
 
 test("radar-data exposes live data and scan state from blobs", async () => {
@@ -32,6 +32,17 @@ test("background scan rejects missing server secret before calling paid services
   const previous = process.env.RADAR_INTERNAL_SECRET; delete process.env.RADAR_INTERNAL_SECRET;
   try { const { default: scan } = await import("../netlify/functions/radar-scan-background.mjs"); const response = await scan(new Request("https://radar.example/api/radar/scan", { method: "POST" })); assert.equal(response.status, 403); }
   finally { if (previous === undefined) delete process.env.RADAR_INTERNAL_SECRET; else process.env.RADAR_INTERNAL_SECRET = previous; }
+});
+
+test("cloud sync is disabled without server secret and rejects wrong secret", async () => {
+  const { createRadarSyncHandler } = await import("../netlify/functions/radar-sync.mjs");
+  let touched=false;
+  const disabled=createRadarSyncHandler({env:{},getStore:()=>{touched=true;return{};}});
+  const noSecret=await disabled(new Request("https://radar.example/api/radar/sync"));
+  assert.equal(noSecret.status,503);assert.equal(touched,false);
+  const protectedHandler=createRadarSyncHandler({env:{RADAR_SYNC_SECRET:'correct'},getStore:()=>{touched=true;return{};}});
+  const wrong=await protectedHandler(new Request("https://radar.example/api/radar/sync",{headers:{'x-radar-sync-secret':'wrong'}}));
+  assert.equal(wrong.status,401);assert.equal(touched,false);
 });
 
 test("frontend normalization and economics handle untrusted malformed live fields", async () => {
