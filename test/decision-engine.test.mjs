@@ -27,13 +27,13 @@ test('Supplier Verification stays VERIFY when only web sourcing presence exists'
   assert.equal(supplierVerification(p).verdict,'VERIFY');
 });
 
-test('Supplier Verification stays VERIFY when manual commercial data is incomplete', () => {
-  const p={supplierIntel:{coverage:2,moq:20,rating:4.1,years:1,tradeAssurance:false,certifications:[]},megaAnalysis:{components:{supplier:90}}};
+test('Supplier Verification stays VERIFY when manually confirmed commercial data is incomplete', () => {
+  const p={supplierIntel:{coverage:2,manualVerified:true,moq:20,rating:4.1,years:1,tradeAssurance:false,certifications:[]},megaAnalysis:{components:{supplier:90}}};
   assert.equal(supplierVerification(p).verdict,'VERIFY');
 });
 
-test('Supplier Verification can reach SUPPLIER OK only with confirmed commercial fields', () => {
-  const p={supplierIntel:{coverage:2,moq:20,sampleCost:80,rating:4.7,years:4,tradeAssurance:true,certifications:[]},megaAnalysis:{components:{supplier:90}}};
+test('Supplier Verification reaches SUPPLIER OK only with explicit manual verification and complete commercial fields', () => {
+  const p={supplierIntel:{coverage:2,manualVerified:true,moq:20,sampleCost:80,rating:4.7,years:4,tradeAssurance:true,certifications:[]},megaAnalysis:{components:{supplier:90}}};
   assert.equal(supplierVerification(p).verdict,'SUPPLIER OK');
 });
 
