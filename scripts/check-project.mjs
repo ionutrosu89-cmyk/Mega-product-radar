@@ -7,7 +7,7 @@ import process from "node:process";
 const root = process.cwd();
 const requiredFiles = [
   "home5.html","home5.js","alerts.js","sw.js","index.html","radar.html","app.js","manifest.json","netlify.toml","package.json","products.json",
-  "v6-core.js","executive-dashboard.html","executive-dashboard.js","supplier-intelligence.html","supplier-intelligence.js",
+  "v6-core.js","source-connectors.js","executive-dashboard.html","executive-dashboard.js","supplier-intelligence.html","supplier-intelligence.js",
   "purchase-manager.html","purchase-manager.js","landed-cost.html","landed-cost.js","data-vault.html","data-vault.js","data-quality.js",
   "discovery-inbox.html","discovery-inbox.js","discovery-engine.js","discovery-catalogue.json","discovery-themes.json","discovery-live.json","discovery-history.json","discovery-history.js","review-intelligence.js",
   "scripts/build-site.mjs","scripts/qa-mobile.mjs","scripts/discovery-scan.mjs","scripts/discovery-v6-expand.mjs","scripts/data-quality-postprocess.mjs","scripts/run-github-scan.mjs",
@@ -42,7 +42,7 @@ if (functionFiles.length !== expectedFunctions.length || expectedFunctions.some(
 
 const syntaxFiles = [
   ...expectedFunctions.map(file => path.join("netlify", "functions", file)),
-  "home5.js","alerts.js","sw.js","app.js","v6-core.js","executive-dashboard.js","supplier-intelligence.js","purchase-manager.js","landed-cost.js","data-vault.js","data-quality.js","discovery-inbox.js","discovery-engine.js","discovery-history.js","review-intelligence.js",
+  "home5.js","alerts.js","sw.js","app.js","v6-core.js","source-connectors.js","executive-dashboard.js","supplier-intelligence.js","purchase-manager.js","landed-cost.js","data-vault.js","data-quality.js","discovery-inbox.js","discovery-engine.js","discovery-history.js","review-intelligence.js",
   path.join("scripts", "build-site.mjs"),path.join("scripts", "qa-mobile.mjs"),path.join("scripts", "discovery-scan.mjs"),path.join("scripts", "discovery-v6-expand.mjs"),path.join("scripts", "data-quality-postprocess.mjs"),path.join("scripts", "run-github-scan.mjs"),path.join("scripts", "web-radar-scan.mjs")
 ];
 for (const file of syntaxFiles) {const result = spawnSync(process.execPath, ["--check", path.join(root, file)], { encoding: "utf8" });if (result.status !== 0) throw new Error(result.stderr || `Syntax check failed for ${file}`);}
