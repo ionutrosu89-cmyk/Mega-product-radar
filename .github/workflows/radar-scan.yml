@@ -40,12 +40,12 @@ jobs:
         continue-on-error: true
         run: node scripts/run-github-scan.mjs
 
-      - name: Persist radar data and scan status
+      - name: Persist radar data, history and scan status
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json scan-status.json
+          git add radar-live.json radar-history.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar daily scan"
             git push
@@ -57,7 +57,7 @@ jobs:
         if: always()
         run: |
           mkdir -p _site
-          cp index.html app.js manifest.json products.json radar-live.json scan-status.json _site/
+          cp index.html app.js manifest.json products.json radar-live.json radar-history.json scan-status.json _site/
           touch _site/.nojekyll
 
       - name: Configure Pages
