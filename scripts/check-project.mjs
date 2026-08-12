@@ -7,10 +7,18 @@ import process from "node:process";
 const root = process.cwd();
 const requiredFiles = [
   "index.html",
+  "app.js",
   "manifest.json",
   "netlify.toml",
   "package.json",
   "products.json",
+  "purchase-manager.html",
+  "purchase-manager.js",
+  "landed-cost.html",
+  "landed-cost.js",
+  "data-quality.js",
+  "scripts/data-quality-postprocess.mjs",
+  "scripts/run-github-scan.mjs",
   "netlify/functions/radar-data.mjs",
   "netlify/functions/radar-health.mjs",
   "netlify/functions/radar-scan-background.mjs",
@@ -34,8 +42,18 @@ const functionFiles = (await readdir(functionDirectory, { recursive: true })).fi
 const expectedFunctions = ["radar-data.mjs", "radar-health.mjs", "radar-scan-background.mjs", "radar-schedule.mjs", "radar-trigger.mjs"].sort();
 if (functionFiles.length !== expectedFunctions.length || expectedFunctions.some((file) => !functionFiles.includes(file))) throw new Error(`Unexpected Netlify Function layout: ${functionFiles.join(", ")}`);
 
-for (const file of expectedFunctions) {
-  const result = spawnSync(process.execPath, ["--check", path.join(functionDirectory, file)], { encoding: "utf8" });
+const syntaxFiles = [
+  ...expectedFunctions.map(file => path.join("netlify", "functions", file)),
+  "app.js",
+  "purchase-manager.js",
+  "landed-cost.js",
+  "data-quality.js",
+  path.join("scripts", "data-quality-postprocess.mjs"),
+  path.join("scripts", "run-github-scan.mjs"),
+  path.join("scripts", "web-radar-scan.mjs")
+];
+for (const file of syntaxFiles) {
+  const result = spawnSync(process.execPath, ["--check", path.join(root, file)], { encoding: "utf8" });
   if (result.status !== 0) throw new Error(result.stderr || `Syntax check failed for ${file}`);
 }
-console.log(`Project check passed: ${products.length} products, ${expectedFunctions.length} Netlify Functions.`);
+console.log(`Project check passed: ${products.length} products, ${expectedFunctions.length} Netlify Functions, ${syntaxFiles.length} syntax-checked modules.`);
