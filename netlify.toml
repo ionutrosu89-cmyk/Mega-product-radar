@@ -1,5 +1,5 @@
 [build]
-  command = "node scripts/build-site.mjs"
+  command = "npm run build"
   publish = "_site"
 
 [functions]
@@ -25,3 +25,13 @@
   for = "/discovery-live.json"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/discovery-history.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
