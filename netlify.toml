@@ -1,6 +1,10 @@
 [build]
+  ignore = "exit 0"
   command = "npm run build"
   publish = "_site"
+
+# Mega Product Radar 6.0 runs operationally from GitHub Pages + GitHub Actions.
+# Netlify builds are intentionally ignored so the app does not depend on Netlify credits.
 
 [functions]
   directory = "netlify/functions"
@@ -10,28 +14,3 @@
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/products.json"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/radar-live.json"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/discovery-live.json"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/discovery-history.json"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache"
