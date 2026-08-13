@@ -1,3 +1,4 @@
+import {importRiskGate} from './import-risk.js';
 const n=v=>Number.isFinite(Number(v))?Number(v):0;
 const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,n(v)));
 const txt=v=>String(v||'').toUpperCase();
@@ -26,6 +27,7 @@ export function strictAuditProduct(p){
   const ci=p.competitorIntel||{};
   const hist=p.historySummary||{};
   const v=p.v2Validation||{};
+  const riskGate=importRiskGate(p);
 
   const dataLive=v.marketLive===true||txt(dq.level)==='LIVE'||txt(p.sourceStatus)==='WEB_SIGNAL';
   const checks=n(dq.checks||ms.checks);
@@ -44,7 +46,7 @@ export function strictAuditProduct(p){
   const economicsScore=clamp((n(e.margin)-10)*2.2+n(e.roi)*.22+Math.min(n(e.profit),100)*.22);
   const marketScore=clamp(n(c.demand)*.28+n(c.trend)*.24+n(c.romaniaGap)*.30+n(c.saturation)*.18);
   const supplierScore=clamp(n(c.supplier)*.50+supplierCoverage*14+(supplierReady?25:supplierPartial?10:0));
-  const safetyScore=clamp(n(c.compliance)*.55+n(c.logistics)*.30+(kidsPass?15:0));
+  const safetyScore=clamp(n(c.compliance)*.55+n(c.logistics)*.30+(kidsPass?15:0)-(riskGate.level==='HIGH'?25:riskGate.level==='MEDIUM'?8:0));
 
   let score=Math.round(dataScore*.19+economicsScore*.22+marketScore*.19+supplierScore*.13+safetyScore*.12+evidenceScore*.15);
 
@@ -56,6 +58,8 @@ export function strictAuditProduct(p){
   if(reviewEvidence==='NONE'&&reviewSources<1) blockers.push('NO_REVIEW_EVIDENCE');
   if(evidenceScore<55) blockers.push('EVIDENCE_LOW');
   if(!kidsPass) blockers.push('KIDS_GATE');
+  if(riskGate.decision==='BLOCK') blockers.push('IMPORT_RISK_BLOCK');
+  else if(riskGate.level==='HIGH') blockers.push('IMPORT_RISK_REVIEW');
   if(n(e.profit)<25) blockers.push('LOW_PROFIT');
   if(n(e.margin)<20) blockers.push('LOW_MARGIN');
   if(n(c.compliance)<80) blockers.push('COMPLIANCE_RISK');
@@ -64,15 +68,17 @@ export function strictAuditProduct(p){
   if(evidenceScore<55) score-=10;
   if(!supplierReady&&!supplierPartial) score-=7;
   if(!kidsPass) score-=25;
+  if(riskGate.level==='HIGH') score-=12;
   score=Math.round(clamp(score));
 
-  const hardBuy=dataLive&&checks>=5&&foreign>=1&&evidenceScore>=80&&supplierReady&&reviewSources>=1&&kidsPass&&n(e.profit)>=40&&n(e.margin)>=24&&n(e.roi)>=70&&n(c.compliance)>=85&&score>=80;
-  const smallTest=dataLive&&checks>=5&&foreign>=1&&evidenceScore>=55&&(supplierReady||supplierPartial)&&kidsPass&&n(e.profit)>=25&&n(e.margin)>=20&&n(e.roi)>=45&&n(c.compliance)>=80&&score>=64;
+  const riskAllowsBuy=riskGate.level==='LOW'||riskGate.decision==='DOCUMENT CHECK';
+  const hardBuy=dataLive&&checks>=5&&foreign>=1&&evidenceScore>=80&&supplierReady&&reviewSources>=1&&kidsPass&&riskAllowsBuy&&n(e.profit)>=40&&n(e.margin)>=24&&n(e.roi)>=70&&n(c.compliance)>=85&&score>=80;
+  const smallTest=dataLive&&checks>=5&&foreign>=1&&evidenceScore>=55&&(supplierReady||supplierPartial)&&kidsPass&&riskGate.decision!=='BLOCK'&&n(e.profit)>=25&&n(e.margin)>=20&&n(e.roi)>=45&&n(c.compliance)>=80&&score>=64;
 
   let decision='WAIT';
   if(hardBuy) decision='BUY';
   else if(smallTest) decision='TEST';
-  if(n(e.profit)<10||n(c.compliance)<60||!kidsPass) decision='REJECT';
+  if(n(e.profit)<10||n(c.compliance)<60||!kidsPass||riskGate.decision==='BLOCK') decision='REJECT';
 
   const confidence=txt(v.confidence)||(!dataLive?'LOW':evidenceScore>=80?'HIGH':evidenceScore>=55?'MEDIUM':'LOW');
   const lifecycle=txt(a.lifecycle||p.lifecycle||'EARLY');
@@ -89,6 +95,7 @@ export function strictAuditProduct(p){
     evidenceScore,
     blockers,
     earlyWarning,
+    importRisk:riskGate,
     economics:{profit:n(e.profit),margin:n(e.margin),roi:n(e.roi),landed:n(p.landed),sell:n(p.sell)},
     signals:{dataLive,checks,foreign,supplierReady,supplierPartial,supplierCoverage,supplierEvidence,reviewSources,reviewEvidence,competitorQuality,romaniaGap:n(c.romaniaGap),trend:n(c.trend),saturation:n(c.saturation),compliance:n(c.compliance)},
     testPlan:testUnits?{units:testUnits,investment:testUnits*n(p.landed),revenue:testUnits*n(p.sell),profitPotential:testUnits*n(e.profit)}:null
