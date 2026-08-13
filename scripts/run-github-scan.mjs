@@ -18,10 +18,10 @@ try {
     strictAudit: await exists('v2-audit.js'),
     evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
     globalDiscovery: await exists('scripts/discovery-scan.mjs'),
-    romaniaGap2: await exists('romania-gap.js'),
-    trendVelocity: await exists('trend-velocity.js'),
+    romaniaGap2: await exists('discovery-engine.js'),
+    trendVelocity: await exists('discovery-history.js'),
     supplierHunter: await exists('scripts/supplier-hunter-postprocess.mjs'),
-    profitEngine: await exists('profit-engine.js'),
+    profitEngine: await exists('profit-engine-v2.js') && await exists('landed-cost.js'),
     importRiskGate: await exists('import-risk.js'),
     todaysOpportunities: await exists('todays-opportunities.html') && await exists('todays-opportunities.js'),
     premiumUI: await exists('premium-ui.css')
@@ -52,7 +52,8 @@ try {
       network: discovery.network || null,
       supplierHunter: discovery.supplierHunter || null,
       multilingual: discovery.multilingual || null,
-      historyProducts: Object.keys(history.products || {}).length
+      historyProducts: Object.keys(history.products || {}).length,
+      trendWarmup: Object.keys(history.products || {}).length > 0
     }
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
