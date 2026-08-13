@@ -3,6 +3,26 @@ await installCloudAutosync();
 import { canEnterPurchaseFlow, discoveryScore, effectiveDiscoveryProduct, normalizeDiscoveryRecord, suggestedDiscoveryStage } from './discovery-engine.js';
 import { trendLabel } from './discovery-history.js';
 
+function installDiscoveryContrast(){
+  if(document.querySelector('#discoveryContrastFix'))return;
+  const s=document.createElement('style');s.id='discoveryContrastFix';s.textContent=`
+  body{background:linear-gradient(180deg,#07101c,#0a1220)!important;color:#f5f7fb!important}
+  main{color:#f5f7fb!important}
+  .note,.toolbar{background:linear-gradient(180deg,rgba(18,29,45,.98),rgba(11,19,31,.98))!important;border-color:rgba(255,255,255,.09)!important;color:#aebdd0!important}
+  .note b{color:#e7eef8!important}
+  .kpi b{color:#f8fbff!important;text-shadow:0 1px 0 #0008}.kpi small{color:#a4b5ca!important}
+  .toolbar input{background:#0b1422!important;border-color:rgba(255,255,255,.14)!important;color:#f5f7fb!important}.toolbar input::placeholder{color:#7f91a9!important}
+  .filter{background:#101a2a!important;border-color:rgba(255,255,255,.13)!important;color:#b8d5ff!important}.filter.active{background:linear-gradient(135deg,#5b9cff,#7ab6ff)!important;color:#07111f!important;border-color:transparent!important}
+  .card{color:#f5f7fb!important}.top h3{color:#f5f7fb!important}.cat,.evidence{color:#93a5bc!important}
+  .score{background:rgba(54,211,153,.13)!important;color:#7de9bf!important;border:1px solid rgba(54,211,153,.2)!important}.score small{color:#9ce7c8!important}
+  .metric,.intel{background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.07)!important;color:#dbe4ef!important}.metric b{color:#f5f7fb!important}.metric small{color:#91a4bc!important}
+  details{border-color:rgba(255,255,255,.09)!important}summary{color:#8fc0ff!important}.sources a{background:rgba(255,255,255,.045)!important;color:#8fc0ff!important}.sources small{color:#8ea0b8!important}
+  .empty{background:#0f1827!important;border-color:rgba(255,255,255,.09)!important;color:#a4b5ca!important}
+  @media(max-width:700px){main{padding:12px!important}.kpis{gap:10px!important}.kpi{min-height:96px!important;padding:14px!important}.kpi b{font-size:30px!important}.toolbar{padding:12px!important;border-radius:18px!important}.card{padding:14px!important}.metrics{gap:8px!important}}
+  `;document.head.appendChild(s);
+}
+installDiscoveryContrast();
+
 const RECORD_KEY='megaRadarDiscoveryRecordsV1';
 const keyOf=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
