@@ -1,11 +1,11 @@
 {
   "live": true,
-  "updatedAt": "2026-08-13T11:31:43.729Z",
+  "updatedAt": "2026-08-13T14:34:11.740Z",
   "bucket": "Romania Arbitrage Engine • market + social + sourcing + history",
   "newCandidates": 0,
   "model": "MEGA Score 4.5",
   "engine": "Romania Arbitrage Engine v4.5",
-  "successfulChecks": 55,
+  "successfulChecks": 54,
   "validation": "All counts are web-search proxies; prices, sales, seller counts, reviews, MOQ and supplier terms require confirmation",
   "products": [
     {
@@ -221,7 +221,7 @@
         "legacyStatus": "WEB_SIGNAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.763Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 40,
         "confidence": "LOW",
         "marketLive": true,
@@ -455,7 +455,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -682,7 +682,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -909,7 +909,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -1144,7 +1144,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -1379,7 +1379,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -1388,243 +1388,6 @@
           "webCoverage": 0,
           "verifiedListings": 0,
           "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Șevalet de masă premium cu cutie de depozitare, lemn",
-      "cat": "Kids 0–6 / Creative",
-      "chinaMin": 40,
-      "chinaMax": 75,
-      "landed": 95,
-      "sell": 299.9,
-      "gap": 82,
-      "velocity": 65,
-      "demand": 72,
-      "competition": 68,
-      "logistics": 72,
-      "returns": 84,
-      "compliance": 70,
-      "social": 88,
-      "supplier": 86,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 3,
-        "PL": 3,
-        "TikTok": 3,
-        "RO": 2
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "https://www.alibaba.com/wholesale/portable-easel-box.html",
-      "roUrl": "",
-      "risk": "Mediu",
-      "age": "4–6",
-      "kidsGate": "PENDING",
-      "score": 57,
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Șevalet de masă premium cu cutie de depozitare, lemn pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=%C8%98evalet%20de%20mas%C4%83%20premium%20cu%20cutie%20de%20depozitare%2C%20lemn",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Șevalet de masă premium cu cutie de depozitare, lemn pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=%C8%98evalet%20de%20mas%C4%83%20premium%20cu%20cutie%20de%20depozitare%2C%20lemn",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:15:46.024Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Alibaba are sketch/easel boxes din lemn în jur de $6.89–9.64 și modele premium mai scumpe; există furnizori care menționează EN71 pentru produse de artă destinate copiilor. Aș vinde fără vopsele/markere incluse pentru a simplifica riscul.",
-      "megaScore": 57,
-      "action": "REJECT",
-      "verdict": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 57,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 45,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 83,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 72,
-          "compliance": 70
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 77.8762396694215,
-          "margin": 25.96740235725959,
-          "roi": 81.97498912570683,
-          "marketplace": 50.983,
-          "ads": 23.991999999999997,
-          "grossNoVat": 247.8512396694215,
-          "landed": 95,
-          "sell": 299.9,
-          "breakEvenAds": 101.86823966942148
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:15:46.024Z",
-        "checks": 0,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 45,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 0,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 1,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 25,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "PARTIAL",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": true
         },
         "reviewEvidence": "NONE",
         "competitionEvidence": "NO_SIGNAL",
@@ -1851,7 +1614,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2086,7 +1849,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2321,7 +2084,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2556,7 +2319,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2577,62 +2340,64 @@
       }
     },
     {
-      "name": "Organizator documente familie, RFID-free, premium",
-      "cat": "Travel",
-      "chinaMin": 25,
-      "chinaMax": 40,
-      "landed": 55,
+      "name": "Coș textil premium pentru jucării, separator detașabil și capac",
+      "cat": "Kids 0–6 / Organization",
+      "chinaMin": 20,
+      "chinaMax": 36,
+      "landed": 52,
       "sell": 169.9,
-      "gap": 78,
-      "velocity": 62,
-      "demand": 66,
-      "competition": 62,
-      "logistics": 95,
+      "gap": 72,
+      "velocity": 60,
+      "demand": 74,
+      "competition": 52,
+      "logistics": 84,
       "returns": 90,
-      "compliance": 99,
-      "social": 68,
-      "supplier": 80,
+      "compliance": 88,
+      "social": 74,
+      "supplier": 88,
       "markets": {
         "US": 4,
-        "DE": 3,
-        "TR": 3,
+        "DE": 4,
+        "TR": 4,
         "PL": 3,
         "TikTok": 2,
-        "RO": 2
+        "RO": 3
       },
       "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
       "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
+      "supplierUrl": "https://www.alibaba.com/wholesale/art-caddy-kids.html",
+      "roUrl": "https://www.trendyol.com/cocuk-odasi-duzenleyici-x-c144163",
       "risk": "Scăzut",
-      "score": 56,
-      "verdict": "REJECT",
+      "age": "0–6",
+      "kidsGate": "LOW",
+      "score": 57,
       "sourcing": [
         {
           "market": "Alibaba",
-          "label": "Caută Organizator documente familie, RFID-free, premium pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Organizator%20documente%20familie%2C%20RFID-free%2C%20premium",
+          "label": "Caută Coș textil premium pentru jucării, separator detașabil și capac pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Co%C8%99%20textil%20premium%20pentru%20juc%C4%83rii%2C%20separator%20deta%C8%99abil%20%C8%99i%20capac",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         },
         {
           "market": "1688",
-          "label": "Caută Organizator documente familie, RFID-free, premium pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Organizator%20documente%20familie%2C%20RFID-free%2C%20premium",
+          "label": "Caută Coș textil premium pentru jucării, separator detașabil și capac pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Co%C8%99%20textil%20premium%20pentru%20juc%C4%83rii%2C%20separator%20deta%C8%99abil%20%C8%99i%20capac",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-12T21:15:44.610Z",
+      "lastChecked": "2026-08-13T14:34:04.048Z",
       "sourceStatus": "PARTIAL",
-      "notes": "Fără promisiuni RFID inutile; accent pe familie, pașapoarte, boarding passes.",
-      "megaScore": 56,
+      "notes": "Alibaba are organizatoare textile/cotton rope cu separator detașabil la ~$2.89–6.99 și o ofertă cu 21.742 vândute. Trendyol are însă multe produse similare. Bun ca produs complementar, nu ca hero SKU.",
+      "megaScore": 57,
       "action": "REJECT",
+      "verdict": "REJECT",
       "lifecycle": "EARLY",
       "megaAnalysis": {
-        "score": 56,
+        "score": 57,
         "action": "REJECT",
         "lifecycle": "EARLY",
         "components": {
@@ -2640,29 +2405,61 @@
           "trend": 55,
           "romaniaGap": 35,
           "saturation": 92,
-          "margin": 72,
+          "margin": 78,
           "viral": 30,
           "supplier": 38,
-          "logistics": 95,
-          "compliance": 99
+          "logistics": 84,
+          "compliance": 88
         },
         "trendVelocity": {
           "percent": null,
           "label": "NEW SIGNAL"
         },
         "economics": {
-          "profit": 42.93822314049588,
-          "margin": 25.272644579456077,
-          "roi": 78.06949661908341,
+          "profit": 45.93822314049588,
+          "margin": 27.038389135077033,
+          "roi": 88.34273680864591,
           "marketplace": 28.883000000000003,
           "ads": 13.592,
           "grossNoVat": 140.4132231404959,
-          "landed": 55,
+          "landed": 52,
           "sell": 169.9,
-          "breakEvenAds": 56.53022314049588
+          "breakEvenAds": 59.53022314049588
         },
         "testPlan": null,
         "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
       },
       "radarAlert": {
         "active": false,
@@ -2672,7 +2469,7 @@
         "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
       },
       "marketScout": {
-        "checkedAt": "2026-08-12T21:15:44.610Z",
+        "checkedAt": "2026-08-13T14:34:04.048Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -2758,48 +2555,16 @@
         "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
         "legacyStatus": "PARTIAL"
       },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 1,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
+        "at": "2026-08-13T14:34:11.767Z",
+        "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
-        "supplierEvidence": "NONE",
+        "supplierEvidence": "PARTIAL",
         "supplierEvidenceSources": {
           "webCoverage": 0,
           "verifiedListings": 0,
-          "directSupplierUrl": false
+          "directSupplierUrl": true
         },
         "reviewEvidence": "NONE",
         "competitionEvidence": "NO_SIGNAL",
@@ -3026,7 +2791,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3261,7 +3026,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3475,7 +3240,7 @@
         "legacyStatus": "WEB_SIGNAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 55,
         "confidence": "MEDIUM",
         "marketLive": true,
@@ -3709,7 +3474,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3944,7 +3709,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4179,7 +3944,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4414,7 +4179,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.767Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4649,7 +4414,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4884,7 +4649,242 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Organizator vertical pentru mopuri/mături, clamp mecanic premium",
+      "cat": "Home organization",
+      "chinaMin": 22,
+      "chinaMax": 35,
+      "landed": 48,
+      "sell": 149.9,
+      "gap": 72,
+      "velocity": 60,
+      "demand": 76,
+      "competition": 50,
+      "logistics": 90,
+      "returns": 74,
+      "compliance": 99,
+      "social": 68,
+      "supplier": 82,
+      "markets": {
+        "US": 4,
+        "DE": 4,
+        "TR": 3,
+        "PL": 3,
+        "TikTok": 2,
+        "RO": 4
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 56,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Organizator vertical pentru mopuri/mături, clamp mecanic premium pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Organizator%20vertical%20pentru%20mopuri%2Fm%C4%83turi%2C%20clamp%20mecanic%20premium",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Organizator vertical pentru mopuri/mături, clamp mecanic premium pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Organizator%20vertical%20pentru%20mopuri%2Fm%C4%83turi%2C%20clamp%20mecanic%20premium",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:34:08.403Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Cunoscut în RO; doar mecanism premium poate justifica prețul.",
+      "megaScore": 56,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 56,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 45,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 72,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 90,
+          "compliance": 99
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 38.409297520661156,
+          "margin": 25.62328053413019,
+          "roi": 80.01936983471074,
+          "marketplace": 25.483000000000004,
+          "ads": 11.992,
+          "grossNoVat": 123.88429752066116,
+          "landed": 48,
+          "sell": 149.9,
+          "breakEvenAds": 50.40129752066116
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:34:08.403Z",
+        "checks": 0,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 45,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 0,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5121,7 +5121,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -5355,7 +5355,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5590,7 +5590,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5825,7 +5825,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6060,7 +6060,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6130,7 +6130,7 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-12T21:35:15.864Z",
+      "lastChecked": "2026-08-13T14:34:11.389Z",
       "sourceStatus": "PARTIAL",
       "notes": "Alibaba are mese de activități/copii reglabile în zona ~$16–18.30 și modele mai sofisticate. Valoarea percepută este bună, dar produsul poate fi eliminat de transportul volumetric și cerințele de stabilitate/siguranță.",
       "megaScore": 55,
@@ -6195,7 +6195,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 2,
+        "totalScans": 3,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -6210,7 +6210,7 @@
         "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
       },
       "marketScout": {
-        "checkedAt": "2026-08-12T21:35:15.864Z",
+        "checkedAt": "2026-08-13T14:34:11.389Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -6297,7 +6297,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -6532,7 +6532,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6767,7 +6767,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7002,477 +7002,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Protecție portbagaj pliabilă pentru animale, side-wall",
-      "cat": "Pet/Auto",
-      "chinaMin": 40,
-      "chinaMax": 65,
-      "landed": 88,
-      "sell": 259.9,
-      "gap": 78,
-      "velocity": 68,
-      "demand": 72,
-      "competition": 58,
-      "logistics": 72,
-      "returns": 74,
-      "compliance": 96,
-      "social": 87,
-      "supplier": 80,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 3,
-        "PL": 3,
-        "TikTok": 4,
-        "RO": 2
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 55,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Protecție portbagaj pliabilă pentru animale, side-wall pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Protec%C8%9Bie%20portbagaj%20pliabil%C4%83%20pentru%20animale%2C%20side-wall",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Protecție portbagaj pliabilă pentru animale, side-wall pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Protec%C8%9Bie%20portbagaj%20pliabil%C4%83%20pentru%20animale%2C%20side-wall",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:15:47.439Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Bun pentru SUV/crossover; dimensiunile trebuie clarificate.",
-      "megaScore": 55,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 55,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 45,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 72,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 72,
-          "compliance": 96
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 61.81838842975205,
-          "margin": 23.78545149278648,
-          "roi": 70.24816867017279,
-          "marketplace": 44.183,
-          "ads": 20.791999999999998,
-          "grossNoVat": 214.79338842975204,
-          "landed": 88,
-          "sell": 259.9,
-          "breakEvenAds": 82.61038842975205
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:15:47.439Z",
-        "checks": 0,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 45,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 0,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Geantă picnic organizată, izolată mecanic, fără componente electrice",
-      "cat": "Outdoor",
-      "chinaMin": 45,
-      "chinaMax": 80,
-      "landed": 105,
-      "sell": 299.9,
-      "gap": 74,
-      "velocity": 75,
-      "demand": 72,
-      "competition": 58,
-      "logistics": 70,
-      "returns": 82,
-      "compliance": 92,
-      "social": 84,
-      "supplier": 82,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 3,
-        "PL": 3,
-        "TikTok": 4,
-        "RO": 3
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 55,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Geantă picnic organizată, izolată mecanic, fără componente electrice pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Geant%C4%83%20picnic%20organizat%C4%83%2C%20izolat%C4%83%20mecanic%2C%20f%C4%83r%C4%83%20componente%20electrice",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Geantă picnic organizată, izolată mecanic, fără componente electrice pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Geant%C4%83%20picnic%20organizat%C4%83%2C%20izolat%C4%83%20mecanic%2C%20f%C4%83r%C4%83%20componente%20electrice",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:15:50.256Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Sezonalitate mare; bună doar cu timing de import corect.",
-      "megaScore": 55,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 55,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 45,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 70,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 70,
-          "compliance": 92
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 67.8762396694215,
-          "margin": 22.632957542321275,
-          "roi": 64.64403778040142,
-          "marketplace": 50.983,
-          "ads": 23.991999999999997,
-          "grossNoVat": 247.8512396694215,
-          "landed": 105,
-          "sell": 299.9,
-          "breakEvenAds": 91.86823966942148
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:15:50.256Z",
-        "checks": 0,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 45,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 0,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7707,7 +7237,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7942,7 +7472,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8177,7 +7707,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8412,7 +7942,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8647,7 +8177,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8882,7 +8412,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9117,7 +8647,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9352,7 +8882,479 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack",
+      "cat": "Kids 0–6 / Furniture",
+      "chinaMin": 45,
+      "chinaMax": 75,
+      "landed": 115,
+      "sell": 349.9,
+      "gap": 84,
+      "velocity": 68,
+      "demand": 72,
+      "competition": 70,
+      "logistics": 44,
+      "returns": 76,
+      "compliance": 74,
+      "social": 84,
+      "supplier": 78,
+      "markets": {
+        "US": 4,
+        "DE": 4,
+        "TR": 3,
+        "PL": 3,
+        "TikTok": 3,
+        "RO": 2
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "https://www.alibaba.com/wholesale/portable-kids-desk-plastic.html",
+      "roUrl": "https://www.emag.ro/search/biblioteca%2Bcopii%2Broti",
+      "risk": "Ridicat",
+      "age": "2–6",
+      "kidsGate": "PENDING",
+      "score": 55,
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Bibliotec%C4%83%20mobil%C4%83%20joas%C4%83%20pentru%20copii%2C%20pe%20ro%C8%9Bi%2C%20flat-pack",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bibliotec%C4%83%20mobil%C4%83%20joas%C4%83%20pentru%20copii%2C%20pe%20ro%C8%9Bi%2C%20flat-pack",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:34:02.592Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Alibaba listează biblioteci mobile pentru copii cu roți în jur de $8.43–8.45. În eMAG există biblioteci pentru copii în jur de 344–399 lei. Oportunitatea există doar dacă furnizorul livrează flat-pack și produsul trece testele de stabilitate.",
+      "megaScore": 55,
+      "action": "REJECT",
+      "verdict": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 55,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 45,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 81,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 44,
+          "compliance": 74
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 86.69855371900829,
+          "margin": 24.778094803946356,
+          "roi": 75.39004671218112,
+          "marketplace": 59.483,
+          "ads": 27.991999999999997,
+          "grossNoVat": 289.1735537190083,
+          "landed": 115,
+          "sell": 349.9,
+          "breakEvenAds": 114.69055371900828
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:34:02.592Z",
+        "checks": 0,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 45,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 0,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 25,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "PARTIAL",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": true
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Husă auto premium pentru câine tip hammock, impermeabilă",
+      "cat": "Pet/Auto",
+      "chinaMin": 45,
+      "chinaMax": 80,
+      "landed": 105,
+      "sell": 299.9,
+      "gap": 74,
+      "velocity": 70,
+      "demand": 82,
+      "competition": 48,
+      "logistics": 65,
+      "returns": 72,
+      "compliance": 96,
+      "social": 85,
+      "supplier": 82,
+      "markets": {
+        "US": 5,
+        "DE": 4,
+        "TR": 3,
+        "PL": 4,
+        "TikTok": 4,
+        "RO": 3
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 55,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Husă auto premium pentru câine tip hammock, impermeabilă pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Hus%C4%83%20auto%20premium%20pentru%20c%C3%A2ine%20tip%20hammock%2C%20impermeabil%C4%83",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Husă auto premium pentru câine tip hammock, impermeabilă pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Hus%C4%83%20auto%20premium%20pentru%20c%C3%A2ine%20tip%20hammock%2C%20impermeabil%C4%83",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:34:05.497Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Cerere bună, dar compatibilitatea și concurența pot crește retururile. Doar model universal bine dimensionat.",
+      "megaScore": 55,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 55,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 45,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 70,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 65,
+          "compliance": 96
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 67.8762396694215,
+          "margin": 22.632957542321275,
+          "roi": 64.64403778040142,
+          "marketplace": 50.983,
+          "ads": 23.991999999999997,
+          "grossNoVat": 247.8512396694215,
+          "landed": 105,
+          "sell": 299.9,
+          "breakEvenAds": 91.86823966942148
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:34:05.497Z",
+        "checks": 0,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 45,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 0,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9587,7 +9589,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9657,7 +9659,7 @@
           "verified": true
         }
       ],
-      "lastChecked": "2026-08-12T21:35:14.400Z",
+      "lastChecked": "2026-08-13T14:34:09.857Z",
       "sourceStatus": "PARTIAL",
       "notes": "Amazon Best Sellers pentru Infant & Toddler Travel Bed Products are un Toddler Nap Mat cu pernă și pătură pe locul #1. Alibaba are nap mats pentru daycare/preschool, inclusiv variante OEKO-TEX 100. În România există saltele de grădiniță și sleeping mats, dar formatul compact all-in-one merită analizat.",
       "megaScore": 54,
@@ -9722,7 +9724,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 2,
+        "totalScans": 3,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -9737,7 +9739,7 @@
         "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
       },
       "marketScout": {
-        "checkedAt": "2026-08-12T21:35:14.400Z",
+        "checkedAt": "2026-08-13T14:34:09.857Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -9824,7 +9826,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -10058,242 +10060,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Tavă rotativă premium pentru masă/dulap, rulment ascuns",
-      "cat": "Kitchen",
-      "chinaMin": 30,
-      "chinaMax": 50,
-      "landed": 68,
-      "sell": 199.9,
-      "gap": 76,
-      "velocity": 70,
-      "demand": 78,
-      "competition": 55,
-      "logistics": 63,
-      "returns": 75,
-      "compliance": 97,
-      "social": 86,
-      "supplier": 80,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 4,
-        "PL": 3,
-        "TikTok": 4,
-        "RO": 3
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 54,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Tavă rotativă premium pentru masă/dulap, rulment ascuns pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Tav%C4%83%20rotativ%C4%83%20premium%20pentru%20mas%C4%83%2Fdulap%2C%20rulment%20ascuns",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Tavă rotativă premium pentru masă/dulap, rulment ascuns pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Tav%C4%83%20rotativ%C4%83%20premium%20pentru%20mas%C4%83%2Fdulap%2C%20rulment%20ascuns",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:15:48.849Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Vizual bun, dar fragilitate/diametru pot afecta transportul.",
-      "megaScore": 54,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 54,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 45,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 68,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 63,
-          "compliance": 97
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 47.23161157024792,
-          "margin": 23.62761959492142,
-          "roi": 69.45825230918811,
-          "marketplace": 33.983000000000004,
-          "ads": 15.992,
-          "grossNoVat": 165.20661157024793,
-          "landed": 68,
-          "sell": 199.9,
-          "breakEvenAds": 63.223611570247925
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:15:48.849Z",
-        "checks": 0,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 45,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 0,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -10530,7 +10297,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -10765,7 +10532,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11000,7 +10767,714 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă",
+      "cat": "Home organization",
+      "chinaMin": 30,
+      "chinaMax": 50,
+      "landed": 68,
+      "sell": 199.9,
+      "gap": 74,
+      "velocity": 68,
+      "demand": 80,
+      "competition": 52,
+      "logistics": 62,
+      "returns": 86,
+      "compliance": 99,
+      "social": 78,
+      "supplier": 82,
+      "markets": {
+        "US": 4,
+        "DE": 4,
+        "TR": 4,
+        "PL": 4,
+        "TikTok": 3,
+        "RO": 3
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Scăzut",
+      "score": 54,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Cutie%20pliabil%C4%83%20pentru%20depozitare%20lenjerii%20cu%20fereastr%C4%83%20rigid%C4%83",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Cutie%20pliabil%C4%83%20pentru%20depozitare%20lenjerii%20cu%20fereastr%C4%83%20rigid%C4%83",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:34:06.956Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Cerere evergreen, dar generic. Doar versiune premium pliabilă și compactă.",
+      "megaScore": 54,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 54,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 45,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 68,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 62,
+          "compliance": 99
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 47.23161157024792,
+          "margin": 23.62761959492142,
+          "roi": 69.45825230918811,
+          "marketplace": 33.983000000000004,
+          "ads": 15.992,
+          "grossNoVat": 165.20661157024793,
+          "landed": 68,
+          "sell": 199.9,
+          "breakEvenAds": 63.223611570247925
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:34:06.956Z",
+        "checks": 0,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 45,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 0,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Șevalet de masă premium cu cutie de depozitare, lemn",
+      "cat": "Kids 0–6 / Creative",
+      "chinaMin": 40,
+      "chinaMax": 75,
+      "landed": 95,
+      "sell": 299.9,
+      "gap": 82,
+      "velocity": 65,
+      "demand": 72,
+      "competition": 68,
+      "logistics": 72,
+      "returns": 84,
+      "compliance": 70,
+      "social": 88,
+      "supplier": 86,
+      "markets": {
+        "US": 4,
+        "DE": 4,
+        "TR": 3,
+        "PL": 3,
+        "TikTok": 3,
+        "RO": 2
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "https://www.alibaba.com/wholesale/portable-easel-box.html",
+      "roUrl": "",
+      "risk": "Mediu",
+      "age": "4–6",
+      "kidsGate": "PENDING",
+      "score": 53,
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Șevalet de masă premium cu cutie de depozitare, lemn pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=%C8%98evalet%20de%20mas%C4%83%20premium%20cu%20cutie%20de%20depozitare%2C%20lemn",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Șevalet de masă premium cu cutie de depozitare, lemn pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=%C8%98evalet%20de%20mas%C4%83%20premium%20cu%20cutie%20de%20depozitare%2C%20lemn",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:33:59.197Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Alibaba are sketch/easel boxes din lemn în jur de $6.89–9.64 și modele premium mai scumpe; există furnizori care menționează EN71 pentru produse de artă destinate copiilor. Aș vinde fără vopsele/markere incluse pentru a simplifica riscul.",
+      "megaScore": 53,
+      "action": "REJECT",
+      "verdict": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 53,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 25,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 83,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 72,
+          "compliance": 70
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 77.8762396694215,
+          "margin": 25.96740235725959,
+          "roi": 81.97498912570683,
+          "marketplace": 50.983,
+          "ads": 23.991999999999997,
+          "grossNoVat": 247.8512396694215,
+          "landed": 95,
+          "sell": 299.9,
+          "breakEvenAds": 101.86823966942148
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:33:59.197Z",
+        "checks": 9,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 25,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 9,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 2,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 25,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "PARTIAL",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": true
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Organizator documente familie, RFID-free, premium",
+      "cat": "Travel",
+      "chinaMin": 25,
+      "chinaMax": 40,
+      "landed": 55,
+      "sell": 169.9,
+      "gap": 78,
+      "velocity": 62,
+      "demand": 66,
+      "competition": 62,
+      "logistics": 95,
+      "returns": 90,
+      "compliance": 99,
+      "social": 68,
+      "supplier": 80,
+      "markets": {
+        "US": 4,
+        "DE": 3,
+        "TR": 3,
+        "PL": 3,
+        "TikTok": 2,
+        "RO": 2
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Scăzut",
+      "score": 53,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Organizator documente familie, RFID-free, premium pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Organizator%20documente%20familie%2C%20RFID-free%2C%20premium",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Organizator documente familie, RFID-free, premium pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Organizator%20documente%20familie%2C%20RFID-free%2C%20premium",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:33:58.722Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Fără promisiuni RFID inutile; accent pe familie, pașapoarte, boarding passes.",
+      "megaScore": 53,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 53,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 25,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 72,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 95,
+          "compliance": 99
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 42.93822314049588,
+          "margin": 25.272644579456077,
+          "roi": 78.06949661908341,
+          "marketplace": 28.883000000000003,
+          "ads": 13.592,
+          "grossNoVat": 140.4132231404959,
+          "landed": 55,
+          "sell": 169.9,
+          "breakEvenAds": 56.53022314049588
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:33:58.722Z",
+        "checks": 9,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 25,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 9,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 2,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11235,7 +11709,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11470,7 +11944,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11707,242 +12181,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Organizator vertical pentru mopuri/mături, clamp mecanic premium",
-      "cat": "Home organization",
-      "chinaMin": 22,
-      "chinaMax": 35,
-      "landed": 48,
-      "sell": 149.9,
-      "gap": 72,
-      "velocity": 60,
-      "demand": 76,
-      "competition": 50,
-      "logistics": 90,
-      "returns": 74,
-      "compliance": 99,
-      "social": 68,
-      "supplier": 82,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 3,
-        "PL": 3,
-        "TikTok": 2,
-        "RO": 4
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 53,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Organizator vertical pentru mopuri/mături, clamp mecanic premium pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Organizator%20vertical%20pentru%20mopuri%2Fm%C4%83turi%2C%20clamp%20mecanic%20premium",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Organizator vertical pentru mopuri/mături, clamp mecanic premium pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Organizator%20vertical%20pentru%20mopuri%2Fm%C4%83turi%2C%20clamp%20mecanic%20premium",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:35:12.946Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Cunoscut în RO; doar mecanism premium poate justifica prețul.",
-      "megaScore": 53,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 53,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 25,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 72,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 90,
-          "compliance": 99
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 38.409297520661156,
-          "margin": 25.62328053413019,
-          "roi": 80.01936983471074,
-          "marketplace": 25.483000000000004,
-          "ads": 11.992,
-          "grossNoVat": 123.88429752066116,
-          "landed": 48,
-          "sell": 149.9,
-          "breakEvenAds": 50.40129752066116
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:35:12.946Z",
-        "checks": 9,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 25,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 9,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12177,7 +12416,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12198,64 +12437,62 @@
       }
     },
     {
-      "name": "Coș textil premium pentru jucării, separator detașabil și capac",
-      "cat": "Kids 0–6 / Organization",
-      "chinaMin": 20,
-      "chinaMax": 36,
-      "landed": 52,
-      "sell": 169.9,
-      "gap": 72,
-      "velocity": 60,
-      "demand": 74,
-      "competition": 52,
-      "logistics": 84,
-      "returns": 90,
-      "compliance": 88,
-      "social": 74,
-      "supplier": 88,
+      "name": "Protecție portbagaj pliabilă pentru animale, side-wall",
+      "cat": "Pet/Auto",
+      "chinaMin": 40,
+      "chinaMax": 65,
+      "landed": 88,
+      "sell": 259.9,
+      "gap": 78,
+      "velocity": 68,
+      "demand": 72,
+      "competition": 58,
+      "logistics": 72,
+      "returns": 74,
+      "compliance": 96,
+      "social": 87,
+      "supplier": 80,
       "markets": {
         "US": 4,
         "DE": 4,
-        "TR": 4,
+        "TR": 3,
         "PL": 3,
-        "TikTok": 2,
-        "RO": 3
+        "TikTok": 4,
+        "RO": 2
       },
       "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
       "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "https://www.alibaba.com/wholesale/art-caddy-kids.html",
-      "roUrl": "https://www.trendyol.com/cocuk-odasi-duzenleyici-x-c144163",
-      "risk": "Scăzut",
-      "age": "0–6",
-      "kidsGate": "LOW",
-      "score": 53,
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 52,
+      "verdict": "REJECT",
       "sourcing": [
         {
           "market": "Alibaba",
-          "label": "Caută Coș textil premium pentru jucării, separator detașabil și capac pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Co%C8%99%20textil%20premium%20pentru%20juc%C4%83rii%2C%20separator%20deta%C8%99abil%20%C8%99i%20capac",
+          "label": "Caută Protecție portbagaj pliabilă pentru animale, side-wall pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Protec%C8%9Bie%20portbagaj%20pliabil%C4%83%20pentru%20animale%2C%20side-wall",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         },
         {
           "market": "1688",
-          "label": "Caută Coș textil premium pentru jucării, separator detașabil și capac pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Co%C8%99%20textil%20premium%20pentru%20juc%C4%83rii%2C%20separator%20deta%C8%99abil%20%C8%99i%20capac",
+          "label": "Caută Protecție portbagaj pliabilă pentru animale, side-wall pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Protec%C8%9Bie%20portbagaj%20pliabil%C4%83%20pentru%20animale%2C%20side-wall",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-12T21:35:11.409Z",
+      "lastChecked": "2026-08-13T14:33:59.679Z",
       "sourceStatus": "PARTIAL",
-      "notes": "Alibaba are organizatoare textile/cotton rope cu separator detașabil la ~$2.89–6.99 și o ofertă cu 21.742 vândute. Trendyol are însă multe produse similare. Bun ca produs complementar, nu ca hero SKU.",
-      "megaScore": 53,
+      "notes": "Bun pentru SUV/crossover; dimensiunile trebuie clarificate.",
+      "megaScore": 52,
       "action": "REJECT",
-      "verdict": "REJECT",
       "lifecycle": "EARLY",
       "megaAnalysis": {
-        "score": 53,
+        "score": 52,
         "action": "REJECT",
         "lifecycle": "EARLY",
         "components": {
@@ -12263,26 +12500,26 @@
           "trend": 55,
           "romaniaGap": 35,
           "saturation": 92,
-          "margin": 78,
+          "margin": 72,
           "viral": 30,
           "supplier": 38,
-          "logistics": 84,
-          "compliance": 88
+          "logistics": 72,
+          "compliance": 96
         },
         "trendVelocity": {
           "percent": null,
           "label": "NEW SIGNAL"
         },
         "economics": {
-          "profit": 45.93822314049588,
-          "margin": 27.038389135077033,
-          "roi": 88.34273680864591,
-          "marketplace": 28.883000000000003,
-          "ads": 13.592,
-          "grossNoVat": 140.4132231404959,
-          "landed": 52,
-          "sell": 169.9,
-          "breakEvenAds": 59.53022314049588
+          "profit": 61.81838842975205,
+          "margin": 23.78545149278648,
+          "roi": 70.24816867017279,
+          "marketplace": 44.183,
+          "ads": 20.791999999999998,
+          "grossNoVat": 214.79338842975204,
+          "landed": 88,
+          "sell": 259.9,
+          "breakEvenAds": 82.61038842975205
         },
         "testPlan": null,
         "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
@@ -12312,7 +12549,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 2,
+        "totalScans": 3,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -12327,7 +12564,7 @@
         "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
       },
       "marketScout": {
-        "checkedAt": "2026-08-12T21:35:11.409Z",
+        "checkedAt": "2026-08-13T14:33:59.679Z",
         "checks": 9,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -12414,15 +12651,15 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 25,
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
-        "supplierEvidence": "PARTIAL",
+        "supplierEvidence": "NONE",
         "supplierEvidenceSources": {
           "webCoverage": 0,
           "verifiedListings": 0,
-          "directSupplierUrl": true
+          "directSupplierUrl": false
         },
         "reviewEvidence": "NONE",
         "competitionEvidence": "NO_SIGNAL",
@@ -12649,7 +12886,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12884,7 +13121,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13119,7 +13356,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13356,7 +13593,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13591,7 +13828,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13826,7 +14063,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13847,64 +14084,62 @@
       }
     },
     {
-      "name": "Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack",
-      "cat": "Kids 0–6 / Furniture",
+      "name": "Geantă picnic organizată, izolată mecanic, fără componente electrice",
+      "cat": "Outdoor",
       "chinaMin": 45,
-      "chinaMax": 75,
-      "landed": 115,
-      "sell": 349.9,
-      "gap": 84,
-      "velocity": 68,
+      "chinaMax": 80,
+      "landed": 105,
+      "sell": 299.9,
+      "gap": 74,
+      "velocity": 75,
       "demand": 72,
-      "competition": 70,
-      "logistics": 44,
-      "returns": 76,
-      "compliance": 74,
+      "competition": 58,
+      "logistics": 70,
+      "returns": 82,
+      "compliance": 92,
       "social": 84,
-      "supplier": 78,
+      "supplier": 82,
       "markets": {
         "US": 4,
         "DE": 4,
         "TR": 3,
         "PL": 3,
-        "TikTok": 3,
-        "RO": 2
+        "TikTok": 4,
+        "RO": 3
       },
       "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
       "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "https://www.alibaba.com/wholesale/portable-kids-desk-plastic.html",
-      "roUrl": "https://www.emag.ro/search/biblioteca%2Bcopii%2Broti",
-      "risk": "Ridicat",
-      "age": "2–6",
-      "kidsGate": "PENDING",
-      "score": 52,
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 51,
+      "verdict": "REJECT",
       "sourcing": [
         {
           "market": "Alibaba",
-          "label": "Caută Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Bibliotec%C4%83%20mobil%C4%83%20joas%C4%83%20pentru%20copii%2C%20pe%20ro%C8%9Bi%2C%20flat-pack",
+          "label": "Caută Geantă picnic organizată, izolată mecanic, fără componente electrice pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Geant%C4%83%20picnic%20organizat%C4%83%2C%20izolat%C4%83%20mecanic%2C%20f%C4%83r%C4%83%20componente%20electrice",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         },
         {
           "market": "1688",
-          "label": "Caută Bibliotecă mobilă joasă pentru copii, pe roți, flat-pack pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bibliotec%C4%83%20mobil%C4%83%20joas%C4%83%20pentru%20copii%2C%20pe%20ro%C8%9Bi%2C%20flat-pack",
+          "label": "Caută Geantă picnic organizată, izolată mecanic, fără componente electrice pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Geant%C4%83%20picnic%20organizat%C4%83%2C%20izolat%C4%83%20mecanic%2C%20f%C4%83r%C4%83%20componente%20electrice",
           "price": "de verificat",
           "moq": "de verificat",
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-12T21:35:10.927Z",
+      "lastChecked": "2026-08-13T14:34:01.136Z",
       "sourceStatus": "PARTIAL",
-      "notes": "Alibaba listează biblioteci mobile pentru copii cu roți în jur de $8.43–8.45. În eMAG există biblioteci pentru copii în jur de 344–399 lei. Oportunitatea există doar dacă furnizorul livrează flat-pack și produsul trece testele de stabilitate.",
-      "megaScore": 52,
+      "notes": "Sezonalitate mare; bună doar cu timing de import corect.",
+      "megaScore": 51,
       "action": "REJECT",
-      "verdict": "REJECT",
       "lifecycle": "EARLY",
       "megaAnalysis": {
-        "score": 52,
+        "score": 51,
         "action": "REJECT",
         "lifecycle": "EARLY",
         "components": {
@@ -13912,26 +14147,26 @@
           "trend": 55,
           "romaniaGap": 35,
           "saturation": 92,
-          "margin": 81,
+          "margin": 70,
           "viral": 30,
           "supplier": 38,
-          "logistics": 44,
-          "compliance": 74
+          "logistics": 70,
+          "compliance": 92
         },
         "trendVelocity": {
           "percent": null,
           "label": "NEW SIGNAL"
         },
         "economics": {
-          "profit": 86.69855371900829,
-          "margin": 24.778094803946356,
-          "roi": 75.39004671218112,
-          "marketplace": 59.483,
-          "ads": 27.991999999999997,
-          "grossNoVat": 289.1735537190083,
-          "landed": 115,
-          "sell": 349.9,
-          "breakEvenAds": 114.69055371900828
+          "profit": 67.8762396694215,
+          "margin": 22.632957542321275,
+          "roi": 64.64403778040142,
+          "marketplace": 50.983,
+          "ads": 23.991999999999997,
+          "grossNoVat": 247.8512396694215,
+          "landed": 105,
+          "sell": 299.9,
+          "breakEvenAds": 91.86823966942148
         },
         "testPlan": null,
         "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
@@ -13961,7 +14196,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 2,
+        "totalScans": 3,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -13976,7 +14211,242 @@
         "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
       },
       "marketScout": {
-        "checkedAt": "2026-08-12T21:35:10.927Z",
+        "checkedAt": "2026-08-13T14:34:01.136Z",
+        "checks": 9,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 25,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        }
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 9,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Tavă rotativă premium pentru masă/dulap, rulment ascuns",
+      "cat": "Kitchen",
+      "chinaMin": 30,
+      "chinaMax": 50,
+      "landed": 68,
+      "sell": 199.9,
+      "gap": 76,
+      "velocity": 70,
+      "demand": 78,
+      "competition": 55,
+      "logistics": 63,
+      "returns": 75,
+      "compliance": 97,
+      "social": 86,
+      "supplier": 80,
+      "markets": {
+        "US": 4,
+        "DE": 4,
+        "TR": 4,
+        "PL": 3,
+        "TikTok": 4,
+        "RO": 3
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 51,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Tavă rotativă premium pentru masă/dulap, rulment ascuns pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Tav%C4%83%20rotativ%C4%83%20premium%20pentru%20mas%C4%83%2Fdulap%2C%20rulment%20ascuns",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Tavă rotativă premium pentru masă/dulap, rulment ascuns pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Tav%C4%83%20rotativ%C4%83%20premium%20pentru%20mas%C4%83%2Fdulap%2C%20rulment%20ascuns",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-13T14:34:00.161Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Vizual bun, dar fragilitate/diametru pot afecta transportul.",
+      "megaScore": 51,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 51,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 25,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 68,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 63,
+          "compliance": 97
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 47.23161157024792,
+          "margin": 23.62761959492142,
+          "roi": 69.45825230918811,
+          "marketplace": 33.983000000000004,
+          "ads": 15.992,
+          "grossNoVat": 165.20661157024793,
+          "landed": 68,
+          "sell": 199.9,
+          "breakEvenAds": 63.223611570247925
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 3,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "marketScout": {
+        "checkedAt": "2026-08-13T14:34:00.161Z",
         "checks": 9,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -14063,15 +14533,15 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 25,
+        "at": "2026-08-13T14:34:11.768Z",
+        "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
-        "supplierEvidence": "PARTIAL",
+        "supplierEvidence": "NONE",
         "supplierEvidenceSources": {
           "webCoverage": 0,
           "verifiedListings": 0,
-          "directSupplierUrl": true
+          "directSupplierUrl": false
         },
         "reviewEvidence": "NONE",
         "competitionEvidence": "NO_SIGNAL",
@@ -14298,7 +14768,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14533,7 +15003,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14768,477 +15238,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Husă auto premium pentru câine tip hammock, impermeabilă",
-      "cat": "Pet/Auto",
-      "chinaMin": 45,
-      "chinaMax": 80,
-      "landed": 105,
-      "sell": 299.9,
-      "gap": 74,
-      "velocity": 70,
-      "demand": 82,
-      "competition": 48,
-      "logistics": 65,
-      "returns": 72,
-      "compliance": 96,
-      "social": 85,
-      "supplier": 82,
-      "markets": {
-        "US": 5,
-        "DE": 4,
-        "TR": 3,
-        "PL": 4,
-        "TikTok": 4,
-        "RO": 3
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 51,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Husă auto premium pentru câine tip hammock, impermeabilă pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Hus%C4%83%20auto%20premium%20pentru%20c%C3%A2ine%20tip%20hammock%2C%20impermeabil%C4%83",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Husă auto premium pentru câine tip hammock, impermeabilă pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Hus%C4%83%20auto%20premium%20pentru%20c%C3%A2ine%20tip%20hammock%2C%20impermeabil%C4%83",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:35:11.894Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Cerere bună, dar compatibilitatea și concurența pot crește retururile. Doar model universal bine dimensionat.",
-      "megaScore": 51,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 51,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 25,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 70,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 65,
-          "compliance": 96
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 67.8762396694215,
-          "margin": 22.632957542321275,
-          "roi": 64.64403778040142,
-          "marketplace": 50.983,
-          "ads": 23.991999999999997,
-          "grossNoVat": 247.8512396694215,
-          "landed": 105,
-          "sell": 299.9,
-          "breakEvenAds": 91.86823966942148
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:35:11.894Z",
-        "checks": 9,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 25,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 9,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă",
-      "cat": "Home organization",
-      "chinaMin": 30,
-      "chinaMax": 50,
-      "landed": 68,
-      "sell": 199.9,
-      "gap": 74,
-      "velocity": 68,
-      "demand": 80,
-      "competition": 52,
-      "logistics": 62,
-      "returns": 86,
-      "compliance": 99,
-      "social": 78,
-      "supplier": 82,
-      "markets": {
-        "US": 4,
-        "DE": 4,
-        "TR": 4,
-        "PL": 4,
-        "TikTok": 3,
-        "RO": 3
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Scăzut",
-      "score": 51,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Cutie%20pliabil%C4%83%20pentru%20depozitare%20lenjerii%20cu%20fereastr%C4%83%20rigid%C4%83",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Cutie pliabilă pentru depozitare lenjerii cu fereastră rigidă pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Cutie%20pliabil%C4%83%20pentru%20depozitare%20lenjerii%20cu%20fereastr%C4%83%20rigid%C4%83",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-12T21:35:12.461Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Cerere evergreen, dar generic. Doar versiune premium pliabilă și compactă.",
-      "megaScore": 51,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 51,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 25,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 68,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 62,
-          "compliance": 99
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 47.23161157024792,
-          "margin": 23.62761959492142,
-          "roi": 69.45825230918811,
-          "marketplace": 33.983000000000004,
-          "ads": 15.992,
-          "grossNoVat": 165.20661157024793,
-          "landed": 68,
-          "sell": 199.9,
-          "breakEvenAds": 63.223611570247925
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 2,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "marketScout": {
-        "checkedAt": "2026-08-12T21:35:12.461Z",
-        "checks": 9,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 25,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        }
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 9,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15473,7 +15473,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15708,7 +15708,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15945,7 +15945,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -16160,7 +16160,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16378,7 +16378,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16594,7 +16594,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16810,7 +16810,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17026,7 +17026,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17242,7 +17242,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17458,7 +17458,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17674,7 +17674,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17890,7 +17890,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18106,7 +18106,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18324,7 +18324,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18542,7 +18542,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18758,7 +18758,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18974,7 +18974,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19190,7 +19190,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19406,7 +19406,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19622,7 +19622,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19838,7 +19838,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20054,7 +20054,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20272,7 +20272,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20488,7 +20488,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-13T11:31:43.764Z",
+        "at": "2026-08-13T14:34:11.768Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20517,7 +20517,7 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-13T11:31:43.764Z",
+    "updatedAt": "2026-08-13T14:34:11.768Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   }
 }

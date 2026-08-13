@@ -1,13 +1,26 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-13T11:31:30.502Z",
-  "completedAt": "2026-08-13T11:34:56.955Z",
-  "updatedAt": "2026-08-13T11:31:43.729Z",
+  "startedAt": "2026-08-13T14:33:57.848Z",
+  "completedAt": "2026-08-13T14:37:24.934Z",
+  "updatedAt": "2026-08-13T14:34:11.740Z",
   "newCandidates": 0,
   "totalProducts": 89,
   "model": "Mega Product Radar V2",
-  "engine": "Romania Arbitrage Engine + Product Discovery + Decision Core + V2 Evidence Validation",
+  "engine": "Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
+  "modules": {
+    "strictAudit": true,
+    "evidenceValidation": true,
+    "globalDiscovery": true,
+    "romaniaGap2": false,
+    "trendVelocity": false,
+    "supplierHunter": true,
+    "profitEngine": false,
+    "importRiskGate": true,
+    "todaysOpportunities": true,
+    "premiumUI": true
+  },
+  "v2Ready": false,
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
@@ -16,16 +29,132 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-13T11:31:43.764Z",
+    "updatedAt": "2026-08-13T14:34:11.768Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-13T11:34:56.945Z",
+    "updatedAt": "2026-08-13T14:37:24.923Z",
     "candidates": 28,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
     "reviewChecks": 7,
+    "network": {
+      "markets": [
+        {
+          "key": "amazonUS",
+          "label": "Amazon US",
+          "kind": "foreign"
+        },
+        {
+          "key": "amazonDE",
+          "label": "Amazon DE",
+          "kind": "foreign"
+        },
+        {
+          "key": "amazonIT",
+          "label": "Amazon IT",
+          "kind": "foreign"
+        },
+        {
+          "key": "amazonFR",
+          "label": "Amazon FR",
+          "kind": "foreign"
+        },
+        {
+          "key": "allegroPL",
+          "label": "Allegro PL",
+          "kind": "foreign"
+        },
+        {
+          "key": "trendyolTR",
+          "label": "Trendyol TR",
+          "kind": "foreign"
+        },
+        {
+          "key": "etsy",
+          "label": "Etsy",
+          "kind": "foreign"
+        },
+        {
+          "key": "temu",
+          "label": "Temu",
+          "kind": "foreign"
+        },
+        {
+          "key": "aliexpress",
+          "label": "AliExpress",
+          "kind": "foreign"
+        },
+        {
+          "key": "kickstarter",
+          "label": "Kickstarter",
+          "kind": "early"
+        },
+        {
+          "key": "indiegogo",
+          "label": "Indiegogo",
+          "kind": "early"
+        },
+        {
+          "key": "emagRO",
+          "label": "eMAG RO",
+          "kind": "romania"
+        },
+        {
+          "key": "alibabaCN",
+          "label": "Alibaba",
+          "kind": "china"
+        },
+        {
+          "key": "1688CN",
+          "label": "1688",
+          "kind": "china"
+        },
+        {
+          "key": "madeInChina",
+          "label": "Made-in-China",
+          "kind": "china"
+        },
+        {
+          "key": "globalSources",
+          "label": "Global Sources",
+          "kind": "china"
+        },
+        {
+          "key": "tiktok",
+          "label": "TikTok",
+          "kind": "social"
+        },
+        {
+          "key": "facebook",
+          "label": "Meta/Facebook",
+          "kind": "social"
+        },
+        {
+          "key": "pinterest",
+          "label": "Pinterest",
+          "kind": "social"
+        },
+        {
+          "key": "youtube",
+          "label": "YouTube",
+          "kind": "social"
+        }
+      ],
+      "sourceCount": 20,
+      "reviewSourceCount": 4
+    },
+    "supplierHunter": {
+      "version": "2.0",
+      "updatedAt": "2026-08-13T14:35:40.913Z",
+      "platforms": [
+        "Alibaba",
+        "1688",
+        "Made-in-China",
+        "Global Sources"
+      ]
+    },
     "multilingual": {
       "enabled": true,
       "locales": [
