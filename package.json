@@ -1,7 +1,7 @@
 {
   "name": "mega-product-radar",
   "private": true,
-  "version": "6.0.0",
+  "version": "7.0.0",
   "type": "module",
   "scripts": {
     "check": "node scripts/check-project.mjs",
@@ -9,9 +9,7 @@
     "qa:mobile": "node scripts/qa-mobile.mjs",
     "build": "node scripts/check-project.mjs && node scripts/build-site.mjs && node scripts/qa-mobile.mjs"
   },
-  "engines": {
-    "node": ">=22"
-  },
+  "engines": {"node": ">=22"},
   "dependencies": {
     "@netlify/blobs": "10.7.12",
     "openai": "7.4.0"
