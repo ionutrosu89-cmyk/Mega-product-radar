@@ -1,26 +1,12 @@
 import {installCloudAutosync} from './cloud-sync.js';
 await installCloudAutosync();
 import {V6_STORAGE,allocateCapital,portfolioMetrics,feedbackCalibration,executiveActions} from './v6-core.js';
+import {dedupePortfolio,upsertPortfolio,removePortfolio} from './portfolio-store.js';
 const $=s=>document.querySelector(s),read=(k,f=[])=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f));}catch{return f;}},write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 let radar=[],discovery=[];
-const portfolioKey=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
-const itemTime=x=>{const t=Date.parse(x?.updatedAt||x?.at||'');return Number.isFinite(t)?t:0;};
-export function dedupePortfolio(rows=[]){
-  const map=new Map();
-  for(const row of Array.isArray(rows)?rows:[]){const key=portfolioKey(row?.name);if(!key)continue;const old=map.get(key);if(!old||itemTime(row)>=itemTime(old))map.set(key,row);}
-  return [...map.values()];
-}
-export function upsertPortfolio(rows=[],item={}){
-  const clean=dedupePortfolio(rows),key=portfolioKey(item.name),index=clean.findIndex(x=>portfolioKey(x.name)===key);
-  if(index>=0)clean[index]={...clean[index],...item};else clean.push(item);
-  return clean;
-}
-export function removePortfolio(rows=[],name=''){const key=portfolioKey(name);return dedupePortfolio(rows).filter(x=>portfolioKey(x.name)!==key);}
 function cleanExistingPortfolio(){const rows=read(V6_STORAGE.portfolio,[]),clean=dedupePortfolio(rows);if(JSON.stringify(rows)!==JSON.stringify(clean))write(V6_STORAGE.portfolio,clean);}
 cleanExistingPortfolio();
-async function load(){
-  const [r,d]=await Promise.all([fetch('radar-live.json',{cache:'no-store'}).then(x=>x.json()).catch(()=>({products:[]})),fetch('discovery-live.json',{cache:'no-store'}).then(x=>x.json()).catch(()=>({products:[]}))]);radar=r.products||[];discovery=d.products||[];render();
-}
+async function load(){const [r,d]=await Promise.all([fetch('radar-live.json',{cache:'no-store'}).then(x=>x.json()).catch(()=>({products:[]})),fetch('discovery-live.json',{cache:'no-store'}).then(x=>x.json()).catch(()=>({products:[]}))]);radar=r.products||[];discovery=d.products||[];render();}
 const itemList=(rows,key='name')=>rows.length?rows.map(x=>`<div class="item">${x[key]||'Produs'}</div>`).join(''):'<div class="item">Nimic acum</div>';
 function candidateCapitalItems(){return radar.map(p=>({name:p.name,unitCost:Number(p.landed||0),profitPerUnit:Number(p.buyingDecision?.profit||p.profit||0),readiness:Number(p.buyingDecision?.readiness||p.buyingReadiness||0),risk:Number(p.buyingDecision?.killScore||p.killScore||0),score:Number(p.megaScore||p.score||0)}));}
 function render(){const portfolio=dedupePortfolio(read(V6_STORAGE.portfolio,[])),feedback=read(V6_STORAGE.feedback,[]),pm=portfolioMetrics(portfolio),cal=feedbackCalibration(feedback),actions=executiveActions({radar,discovery,portfolio});$('#kCapital').textContent=`${pm.capitalBlocked.toFixed(0)} lei`;$('#kRevenue').textContent=`${pm.revenue30.toFixed(0)} lei`;$('#kGross').textContent=`${pm.grossProfit30.toFixed(0)} lei`;$('#kReorder').textContent=pm.reorder;$('#kStop').textContent=pm.stop;$('#kFeedback').textContent=cal.confidence;$('#buyList').innerHTML=itemList(actions.buy);$('#testList').innerHTML=itemList(actions.test);$('#reorderList').innerHTML=itemList(actions.reorder);$('#stopList').innerHTML=itemList(actions.stop);$('#feedbackSummary').textContent=`Sample ${cal.sample} • bias scor ${cal.scoreBias} • mediană marjă ${cal.marginMedian}% • penalizare retur ${cal.returnPenalty} • încredere ${cal.confidence}`;renderPortfolio(pm.actions);}
