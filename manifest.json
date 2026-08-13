@@ -1,18 +1,17 @@
 {
-  "name": "Mega Product Radar 6.0",
+  "name": "Mega Product Radar 7.0",
   "short_name": "Mega Radar",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f4f6f8",
-  "theme_color": "#08111f",
-  "description": "Multilingual Product Discovery, supplier intelligence, capital allocation, portfolio, feedback loop și purchase workflow pentru România.",
+  "background_color": "#f4f7fb",
+  "theme_color": "#07111f",
+  "description": "Cross-platform product discovery, sourcing and purchase intelligence platform with SaaS foundation.",
   "shortcuts": [
+    {"name":"Account / Login","short_name":"Login","url":"./login.html"},
     {"name":"Executive Dashboard","short_name":"Executive","url":"./executive-dashboard.html"},
     {"name":"New Product Inbox","short_name":"Discovery","url":"./discovery-inbox.html"},
-    {"name":"Supplier Intelligence","short_name":"Suppliers","url":"./supplier-intelligence.html"},
-    {"name":"Purchase Manager","short_name":"Purchase","url":"./purchase-manager.html"},
-    {"name":"Landed Cost Real","short_name":"Landed Cost","url":"./landed-cost.html"}
+    {"name":"Purchase Manager","short_name":"Purchase","url":"./purchase-manager.html"}
   ]
 }
