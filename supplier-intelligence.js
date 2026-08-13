@@ -1,3 +1,5 @@
+import {installCloudAutosync} from './cloud-sync.js';
+await installCloudAutosync();
 import {V6_STORAGE,rankSuppliers} from './v6-core.js';
 const $=s=>document.querySelector(s),read=()=>{try{return JSON.parse(localStorage.getItem(V6_STORAGE.supplierMatrix)||'[]')}catch{return[]}},write=v=>localStorage.setItem(V6_STORAGE.supplierMatrix,JSON.stringify(v));
 function render(){const filter=$('#filter').value.trim().toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter)),ranked=rankSuppliers(rows,{targetQty:Number($('#qty').value),targetUnitCost:Number($('#target').value)});$('#results').innerHTML=ranked.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Risk</th><th>V6 Score</th></tr></thead><tbody>${ranked.map(x=>`<tr><td>${x.product}</td><td>${x.supplierName}</td><td>${Number(x.quotedPrice||0).toFixed(2)}</td><td>${x.moq||0}</td><td class="${x.risk<=35?'good':x.risk>=65?'bad':''}">${x.risk}</td><td><b>${Math.round(x.score)}</b></td></tr>`).join('')}</tbody></table>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';}

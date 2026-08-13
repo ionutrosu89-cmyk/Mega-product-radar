@@ -1,3 +1,5 @@
+import {installCloudAutosync} from './cloud-sync.js';
+await installCloudAutosync();
 import { canEnterPurchaseFlow, discoveryScore, effectiveDiscoveryProduct, normalizeDiscoveryRecord, suggestedDiscoveryStage } from './discovery-engine.js';
 import { trendLabel } from './discovery-history.js';
 

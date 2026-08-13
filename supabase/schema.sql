@@ -42,6 +42,12 @@ create table if not exists public.suppliers (
   product_name text not null, supplier_name text, platform text, url text, verified boolean not null default false, payload jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(), updated_at timestamptz not null default now()
 );
+create table if not exists public.supplier_offers (
+  id uuid primary key default gen_random_uuid(), workspace_id uuid not null references public.workspaces(id) on delete cascade,
+  product_name text not null, supplier_name text, platform text, url text, quoted_price numeric, moq numeric, rating numeric, years numeric, sample_cost numeric,
+  trade_assurance boolean not null default false, certifications jsonb not null default '[]'::jsonb, payload jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(), updated_at timestamptz not null default now()
+);
 create table if not exists public.landed_costs (
   id uuid primary key default gen_random_uuid(), workspace_id uuid not null references public.workspaces(id) on delete cascade,
   product_name text not null, landed_per_unit numeric, confirmed boolean not null default false, payload jsonb not null default '{}'::jsonb,
@@ -94,6 +100,7 @@ alter table public.workspace_members enable row level security;
 alter table public.products enable row level security;
 alter table public.discovery_candidates enable row level security;
 alter table public.suppliers enable row level security;
+alter table public.supplier_offers enable row level security;
 alter table public.landed_costs enable row level security;
 alter table public.purchases enable row level security;
 alter table public.portfolio_items enable row level security;
@@ -105,10 +112,10 @@ create policy "profile_self" on public.profiles for all using (id=auth.uid()) wi
 create policy "workspace_member_read" on public.workspaces for select using (public.is_workspace_member(id));
 create policy "workspace_owner_update" on public.workspaces for update using (owner_id=auth.uid()) with check (owner_id=auth.uid());
 create policy "members_workspace_read" on public.workspace_members for select using (public.is_workspace_member(workspace_id));
-
 create policy "products_member" on public.products for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
 create policy "discovery_member" on public.discovery_candidates for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
 create policy "suppliers_member" on public.suppliers for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
+create policy "supplier_offers_member" on public.supplier_offers for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
 create policy "landed_member" on public.landed_costs for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
 create policy "purchases_member" on public.purchases for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
 create policy "portfolio_member" on public.portfolio_items for all using (public.is_workspace_member(workspace_id)) with check (public.is_workspace_member(workspace_id));
@@ -120,3 +127,9 @@ create or replace function public.handle_new_user() returns trigger language plp
 begin insert into public.profiles(id,email) values(new.id,new.email) on conflict (id) do nothing; return new; end;$$;
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();
+
+revoke execute on function public.create_personal_workspace(text,text) from public, anon;
+revoke execute on function public.is_workspace_member(uuid) from public, anon;
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+grant execute on function public.create_personal_workspace(text,text) to authenticated;
+grant execute on function public.is_workspace_member(uuid) to authenticated;

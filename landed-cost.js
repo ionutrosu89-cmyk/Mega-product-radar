@@ -1,3 +1,5 @@
+import {installCloudAutosync} from './cloud-sync.js';
+await installCloudAutosync();
 const LANDED_KEY='megaRadarLandedCostRecordsV1';
 const n=v=>Number.isFinite(Number(v))?Number(v):0;
 const keyOf=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
