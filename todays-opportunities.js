@@ -1,0 +1,21 @@
+import {buildStrictAudit} from './v2-audit.js';
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),money=v=>`${Number(v||0).toLocaleString('ro-RO',{maximumFractionDigits:0})} lei`;
+function radarCard(x,i){const p=x.testPlan,r=x.importRisk||{};return `<article class="card"><div class="row"><div><div class="rank">#${i+1} • ${esc(x.category)} • Evidence ${Math.round(x.evidenceScore||0)}</div><div class="name">${esc(x.name)}</div><span class="badge ${x.decision==='BUY'?'buy':'test'}">${x.decision}</span></div><div class="score">${x.score}</div></div><div class="meta">Profit ${money(x.economics.profit)} • marjă ${x.economics.margin.toFixed(1)}% • ROI ${x.economics.roi.toFixed(0)}% • landed ${money(x.economics.landed)} • sell ${money(x.economics.sell)}</div><div class="signals">RO gap ${x.signals.romaniaGap} • trend ${x.signals.trend} • supplier ${x.signals.supplierReady?'OK':x.signals.supplierPartial?'PARTIAL':'NEVALIDAT'} • review ${x.signals.reviewSources}</div><div class="risk">Import risk: <b>${esc(r.level||'—')}</b> ${r.flags?.length?`• ${esc(r.flags.join(', '))}`:''}</div>${p?`<div class="plan">Plan test: ${p.units} buc. • investiție ${money(p.investment)} • profit potențial ${money(p.profitPotential)}</div>`:''}</article>`;}
+function discoveryCard(p,i){const a=p.discoveryAnalysis||{},g=a.romaniaGap2||{},t=p.trendWindows||{},s=p.supplierHunter||{};return `<article class="card"><div class="row"><div><div class="rank">#${i+1} • ${esc(p.cat||'Discovery')} • ${esc(p.sourceStatus||'')}</div><div class="name">${esc(p.name)}</div><span class="badge watch">${esc(p.suggestedStage||'VALIDATE')}</span></div><div class="score">${Math.round(a.score||0)}</div></div><div class="signals">Romania Gap ${Math.round(g.opportunityScore||0)}/100 • ${esc(g.saturation||'—')} saturation • Trend ${esc(t.label||'BASELINE')} ${t.velocityScore!=null?`(${t.velocityScore})`:''} • Supplier ${esc(s.readiness||'—')}</div><div class="meta">Extern ${p.foreignPresence||0} • RO ${p.romaniaPresence||0} • China ${p.chinaPresence||0} • Social ${p.socialPresence||0} • Early ${p.earlyPresence||0}</div></article>`;}
+async function load(){
+  $('#refresh').disabled=true;
+  try{
+    const [rr,dr]=await Promise.all([fetch(`radar-live.json?t=${Date.now()}`,{cache:'no-store'}),fetch(`discovery-live.json?t=${Date.now()}`,{cache:'no-store'})]);
+    if(!rr.ok||!dr.ok)throw new Error('Datele live nu s-au încărcat');
+    const radar=await rr.json(),discovery=await dr.json(),audit=buildStrictAudit(radar.products||[]),dp=Array.isArray(discovery.products)?discovery.products:[];
+    const today=[...audit.buy,...audit.test].sort((a,b)=>b.score-a.score||b.evidenceScore-a.evidenceScore).slice(0,6);
+    const early=dp.filter(p=>p.trendWindows?.earlyWarning===true&&p.discoveryAnalysis?.quality?.level==='LIVE').sort((a,b)=>(b.trendWindows?.velocityScore||0)-(a.trendWindows?.velocityScore||0)).slice(0,6);
+    const gaps=dp.filter(p=>Number(p.discoveryAnalysis?.romaniaGap2?.opportunityScore||0)>=68&&p.discoveryAnalysis?.romaniaGap2?.saturation!=='HIGH').sort((a,b)=>Number(b.discoveryAnalysis?.romaniaGap2?.opportunityScore||0)-Number(a.discoveryAnalysis?.romaniaGap2?.opportunityScore||0)).slice(0,6);
+    $('#kBuy').textContent=audit.buy.length;$('#kTest').textContent=audit.test.length;$('#kEarly').textContent=early.length;$('#kOpen').textContent=gaps.length;$('#kSup').textContent=dp.filter(p=>['STRONG','MEDIUM'].includes(p.supplierHunter?.readiness)).length;
+    $('#today').innerHTML=today.length?today.map(radarCard).join(''):'<p class="empty">Nicio oportunitate nu a trecut încă pragul TEST/BUY strict.</p>';
+    $('#early').innerHTML=early.length?early.map(discoveryCard).join(''):'<p class="empty">Niciun Early Warning validat LIVE în acest moment.</p>';
+    $('#gaps').innerHTML=gaps.length?gaps.map(discoveryCard).join(''):'<p class="empty">Niciun Romania Gap suficient de puternic în acest moment.</p>';
+  }catch(e){$('#today').innerHTML=`<p class="empty">Eroare: ${esc(e.message)}</p>`;}
+  finally{$('#refresh').disabled=false;}
+}
+$('#refresh').onclick=load;load();
