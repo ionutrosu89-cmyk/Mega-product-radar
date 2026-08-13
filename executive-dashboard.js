@@ -1,3 +1,5 @@
+import {installCloudAutosync} from './cloud-sync.js';
+await installCloudAutosync();
 import {V6_STORAGE,allocateCapital,portfolioMetrics,feedbackCalibration,executiveActions} from './v6-core.js';
 const $=s=>document.querySelector(s),read=(k,f=[])=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f));}catch{return f;}},write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 let radar=[],discovery=[];
