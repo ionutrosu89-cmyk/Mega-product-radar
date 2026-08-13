@@ -5,6 +5,7 @@ const startedAt = new Date().toISOString();
 try {
   await import('./web-radar-scan.mjs');
   await import('./data-quality-postprocess.mjs');
+  await import('./v2-validation-postprocess.mjs');
   await import('./discovery-scan.mjs');
   await import('./discovery-v6-expand.mjs');
   let live = {}, discovery = {}, history = {};
@@ -19,9 +20,10 @@ try {
     updatedAt: live.updatedAt || null,
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
-    model: 'Mega Product Radar 6.0',
-    engine: 'Romania Arbitrage Engine v4.5 + Product Discovery Engine v6.0 + Decision Core v6',
+    model: 'Mega Product Radar V2',
+    engine: 'Romania Arbitrage Engine + Product Discovery + Decision Core + V2 Evidence Validation',
     dataQualityPolicy: live.dataQualityPolicy || null,
+    v2Validation: live.v2Validation || null,
     discovery: {
       updatedAt: discovery.updatedAt || null,
       candidates: Array.isArray(discovery.products) ? discovery.products.length : 0,
@@ -42,7 +44,7 @@ try {
     status: 'error',
     startedAt,
     completedAt: new Date().toISOString(),
-    model: 'Mega Product Radar 6.0',
+    model: 'Mega Product Radar V2',
     error: message.slice(0, 1600)
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
