@@ -122,7 +122,7 @@ export async function installCloudAutosync({hydrate=true,reloadOnHydrate=true}={
     window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&datasetFor(e.key))queueSync(e.key,250);});
   }
   let changed=false;
-  if(hydrate){for(const d of CLOUD_DATASETS){try{if(await reconcileDataset(d)==='PULLED')changed=true;}catch(e){console.warn('Radar cloud hydrate',d.key,e?.message||e);}}
+  if(hydrate){for(const d of CLOUD_DATASETS){try{if(await reconcileDataset(d)==='PULLED')changed=true;}catch(e){console.warn('Radar cloud hydrate',d.key,e?.message||e);}}}
   if(changed&&reloadOnHydrate){const marker='radarCloudHydrated:'+location.pathname;if(sessionStorage.getItem(marker)!=='1'){sessionStorage.setItem(marker,'1');location.reload();}}
   return{active:true,changed};
 }
