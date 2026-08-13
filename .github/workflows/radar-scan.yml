@@ -56,7 +56,8 @@ jobs:
           git add radar-live.json radar-history.json discovery-live.json discovery-history.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
-            git push
+            git pull --rebase origin main
+            git push origin main
           else
             echo "No radar data changes to commit."
           fi
