@@ -7,7 +7,7 @@ try {
   await import('./web-radar-scan.mjs');
   await import('./data-quality-postprocess.mjs');
   await import('./v2-validation-postprocess.mjs');
-  await import('./discovery-scan.mjs');
+  await import('./wide-discovery-orchestrator.mjs');
   await import('./supplier-hunter-postprocess.mjs');
   await import('./discovery-v6-expand.mjs');
   let live = {}, discovery = {}, history = {};
@@ -17,7 +17,7 @@ try {
   const modules = {
     strictAudit: await exists('v2-audit.js'),
     evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
-    globalDiscovery: await exists('scripts/discovery-scan.mjs'),
+    globalDiscovery: await exists('scripts/discovery-scan.mjs') && await exists('scripts/wide-discovery-orchestrator.mjs'),
     romaniaGap2: await exists('discovery-engine.js'),
     trendVelocity: await exists('discovery-history.js'),
     supplierHunter: await exists('scripts/supplier-hunter-postprocess.mjs'),
@@ -37,7 +37,7 @@ try {
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
     model: 'Mega Product Radar V2',
-    engine: 'Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation',
+    engine: 'Romania Arbitrage + Wide Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation',
     modules,
     v2Ready,
     dataQualityPolicy: live.dataQualityPolicy || null,
@@ -53,7 +53,8 @@ try {
       supplierHunter: discovery.supplierHunter || null,
       multilingual: discovery.multilingual || null,
       historyProducts: Object.keys(history.products || {}).length,
-      trendWarmup: Object.keys(history.products || {}).length > 0
+      trendWarmup: Object.keys(history.products || {}).length > 0,
+      mode: 'WIDE_DISCOVERY_STRICT_VALIDATION'
     }
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
