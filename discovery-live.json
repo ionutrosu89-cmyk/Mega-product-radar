@@ -1,12 +1,118 @@
 {
   "version": "6.0",
   "engine": "Product Discovery Engine 6.0",
-  "updatedAt": "2026-08-13T11:14:19.854Z",
+  "updatedAt": "2026-08-13T11:34:56.945Z",
   "scanSize": 10,
   "openDiscovered": 0,
-  "successfulChecks": 36,
-  "reviewChecks": 12,
-  "validation": "Discovery combines a rotating seed universe with open web discovery. Search counts and review snippets are evidence proxies, not verified sales/review volume.",
+  "successfulChecks": 40,
+  "reviewChecks": 7,
+  "network": {
+    "markets": [
+      {
+        "key": "amazonUS",
+        "label": "Amazon US",
+        "kind": "foreign"
+      },
+      {
+        "key": "amazonDE",
+        "label": "Amazon DE",
+        "kind": "foreign"
+      },
+      {
+        "key": "amazonIT",
+        "label": "Amazon IT",
+        "kind": "foreign"
+      },
+      {
+        "key": "amazonFR",
+        "label": "Amazon FR",
+        "kind": "foreign"
+      },
+      {
+        "key": "allegroPL",
+        "label": "Allegro PL",
+        "kind": "foreign"
+      },
+      {
+        "key": "trendyolTR",
+        "label": "Trendyol TR",
+        "kind": "foreign"
+      },
+      {
+        "key": "etsy",
+        "label": "Etsy",
+        "kind": "foreign"
+      },
+      {
+        "key": "temu",
+        "label": "Temu",
+        "kind": "foreign"
+      },
+      {
+        "key": "aliexpress",
+        "label": "AliExpress",
+        "kind": "foreign"
+      },
+      {
+        "key": "kickstarter",
+        "label": "Kickstarter",
+        "kind": "early"
+      },
+      {
+        "key": "indiegogo",
+        "label": "Indiegogo",
+        "kind": "early"
+      },
+      {
+        "key": "emagRO",
+        "label": "eMAG RO",
+        "kind": "romania"
+      },
+      {
+        "key": "alibabaCN",
+        "label": "Alibaba",
+        "kind": "china"
+      },
+      {
+        "key": "1688CN",
+        "label": "1688",
+        "kind": "china"
+      },
+      {
+        "key": "madeInChina",
+        "label": "Made-in-China",
+        "kind": "china"
+      },
+      {
+        "key": "globalSources",
+        "label": "Global Sources",
+        "kind": "china"
+      },
+      {
+        "key": "tiktok",
+        "label": "TikTok",
+        "kind": "social"
+      },
+      {
+        "key": "facebook",
+        "label": "Meta/Facebook",
+        "kind": "social"
+      },
+      {
+        "key": "pinterest",
+        "label": "Pinterest",
+        "kind": "social"
+      },
+      {
+        "key": "youtube",
+        "label": "YouTube",
+        "kind": "social"
+      }
+    ],
+    "sourceCount": 20,
+    "reviewSourceCount": 4
+  },
+  "validation": "Discovery combines rotating seeds with a global open-web network. Search counts and snippets are evidence proxies, not verified sales/review volume.",
   "products": [
     {
       "name": "Car headrest hidden hook premium",
@@ -523,6 +629,285 @@
         "d30": null,
         "d90": null
       }
+    },
+    {
+      "name": "Reusable furniture moving sliders kit",
+      "cat": "Casă",
+      "chinaMin": 20,
+      "chinaMax": 45,
+      "sellTarget": 119,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 53.38,
+      "checkedAt": "2026-08-13T11:33:12.783Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Reusable%20furniture%20moving%20sliders%20kit",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Reusable%20furniture%20moving%20sliders%20kit",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Reusable%20furniture%20moving%20sliders%20kit",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Reusable%20furniture%20moving%20sliders%20kit",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Reusable%20furniture%20moving%20sliders%20kit",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Reusable%20furniture%20moving%20sliders%20kit%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Reusable%20furniture%20moving%20sliders%20kit%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Reusable%20furniture%20moving%20sliders%20kit%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Reusable%20furniture%20moving%20sliders%20kit%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 37,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 17
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 119,
+          "landed": 53.38,
+          "priceComplete": true,
+          "profit": 10.457107438016536,
+          "margin": 8.787485242030703,
+          "roi": 19.589935252934684
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:33:12.783Z"
     },
     {
       "name": "Bedside phone holder clamp",
@@ -1555,6 +1940,1122 @@
         "d90": null
       },
       "firstDiscoveredAt": "2026-08-13T06:18:23.725Z"
+    },
+    {
+      "name": "Oil spray bottle glass free plastic",
+      "cat": "Bucătărie",
+      "chinaMin": 18,
+      "chinaMax": 38,
+      "sellTarget": 99,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 46.4,
+      "checkedAt": "2026-08-13T11:31:44.904Z",
+      "checks": 20,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Oil%20spray%20bottle%20glass%20free%20plastic",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Oil%20spray%20bottle%20glass%20free%20plastic",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Oil%20spray%20bottle%20glass%20free%20plastic",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Oil%20spray%20bottle%20glass%20free%20plastic",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Oil%20spray%20bottle%20glass%20free%20plastic",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Oil%20spray%20bottle%20glass%20free%20plastic%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Oil%20spray%20bottle%20glass%20free%20plastic%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Oil%20spray%20bottle%20glass%20free%20plastic%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Oil%20spray%20bottle%20glass%20free%20plastic%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 36,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 13
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 20,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 99,
+          "landed": 46.4,
+          "priceComplete": true,
+          "profit": 6.708181818181828,
+          "margin": 6.775941230486694,
+          "roi": 14.45728840125394
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:31:44.904Z"
+    },
+    {
+      "name": "Pan lid organizer adjustable rack",
+      "cat": "Bucătărie",
+      "chinaMin": 25,
+      "chinaMax": 55,
+      "sellTarget": 139,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 65,
+      "checkedAt": "2026-08-13T11:31:45.728Z",
+      "checks": 20,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": true,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pan%20lid%20organizer%20adjustable%20rack",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Pan%20lid%20organizer%20adjustable%20rack",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Pan%20lid%20organizer%20adjustable%20rack",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Pan%20lid%20organizer%20adjustable%20rack",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Pan%20lid%20organizer%20adjustable%20rack",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pan%20lid%20organizer%20adjustable%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pan%20lid%20organizer%20adjustable%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Pan%20lid%20organizer%20adjustable%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pan%20lid%20organizer%20adjustable%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 36,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 13
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 20,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 139,
+          "landed": 65,
+          "priceComplete": true,
+          "profit": 9.566033057851229,
+          "margin": 6.882038171115992,
+          "roi": 14.716973935155735
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:31:45.728Z"
+    },
+    {
+      "name": "Puzzle sorting trays stackable",
+      "cat": "Sport & hobby",
+      "chinaMin": 25,
+      "chinaMax": 55,
+      "sellTarget": 139,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 65,
+      "checkedAt": "2026-08-13T11:32:30.296Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Puzzle%20sorting%20trays%20stackable",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Puzzle%20sorting%20trays%20stackable",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Puzzle%20sorting%20trays%20stackable",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Puzzle%20sorting%20trays%20stackable",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Puzzle%20sorting%20trays%20stackable",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Puzzle%20sorting%20trays%20stackable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Puzzle%20sorting%20trays%20stackable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Puzzle%20sorting%20trays%20stackable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Puzzle%20sorting%20trays%20stackable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 36,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 13
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 139,
+          "landed": 65,
+          "priceComplete": true,
+          "profit": 9.566033057851229,
+          "margin": 6.882038171115992,
+          "roi": 14.716973935155735
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:32:30.296Z"
+    },
+    {
+      "name": "Reusable food bag drying rack",
+      "cat": "Bucătărie",
+      "chinaMin": 15,
+      "chinaMax": 34,
+      "sellTarget": 89,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 40.98,
+      "checkedAt": "2026-08-13T11:32:58.621Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Reusable%20food%20bag%20drying%20rack",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Reusable%20food%20bag%20drying%20rack",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Reusable%20food%20bag%20drying%20rack",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Reusable%20food%20bag%20drying%20rack",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Reusable%20food%20bag%20drying%20rack",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Reusable%20food%20bag%20drying%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Reusable%20food%20bag%20drying%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Reusable%20food%20bag%20drying%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Reusable%20food%20bag%20drying%20rack%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 36,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 15
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 89,
+          "landed": 40.98,
+          "priceComplete": true,
+          "profit": 6.7637190082644665,
+          "margin": 7.599684278948839,
+          "roi": 16.504926813724907
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:32:58.621Z"
     },
     {
       "name": "Airplane seat pocket organizer pouch",
@@ -3103,6 +4604,1401 @@
         "d90": null
       },
       "firstDiscoveredAt": "2026-08-13T06:18:37.881Z"
+    },
+    {
+      "name": "Pet food scoop bag clip combo",
+      "cat": "Pet",
+      "chinaMin": 12,
+      "chinaMax": 26,
+      "sellTarget": 69,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 34,
+      "checkedAt": "2026-08-13T11:31:46.983Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pet%20food%20scoop%20bag%20clip%20combo",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Pet%20food%20scoop%20bag%20clip%20combo",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Pet%20food%20scoop%20bag%20clip%20combo",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Pet%20food%20scoop%20bag%20clip%20combo",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Pet%20food%20scoop%20bag%20clip%20combo",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pet%20food%20scoop%20bag%20clip%20combo%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pet%20food%20scoop%20bag%20clip%20combo%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Pet%20food%20scoop%20bag%20clip%20combo%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pet%20food%20scoop%20bag%20clip%20combo%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 35,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 8
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 69,
+          "landed": 34,
+          "priceComplete": true,
+          "profit": 3.0147933884297515,
+          "margin": 4.369265780332973,
+          "roi": 8.867039377734564
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:31:46.983Z"
+    },
+    {
+      "name": "Pet toy storage basket foldable",
+      "cat": "Pet",
+      "chinaMin": 24,
+      "chinaMax": 52,
+      "sellTarget": 129,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 61.9,
+      "checkedAt": "2026-08-13T11:31:47.812Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pet%20toy%20storage%20basket%20foldable",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Pet%20toy%20storage%20basket%20foldable",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Pet%20toy%20storage%20basket%20foldable",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Pet%20toy%20storage%20basket%20foldable",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Pet%20toy%20storage%20basket%20foldable",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Pet%20toy%20storage%20basket%20foldable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Pet%20toy%20storage%20basket%20foldable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Pet%20toy%20storage%20basket%20foldable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Pet%20toy%20storage%20basket%20foldable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 35,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 11
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 129,
+          "landed": 61.9,
+          "priceComplete": true,
+          "profit": 7.301570247933888,
+          "margin": 5.660131975142549,
+          "roi": 11.795751612171063
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:31:47.812Z"
+    },
+    {
+      "name": "Resistance band door organizer pouch",
+      "cat": "Sport & hobby",
+      "chinaMin": 18,
+      "chinaMax": 40,
+      "sellTarget": 99,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 47.95,
+      "checkedAt": "2026-08-13T11:32:44.460Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Resistance%20band%20door%20organizer%20pouch",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Resistance%20band%20door%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Resistance%20band%20door%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Resistance%20band%20door%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Resistance%20band%20door%20organizer%20pouch",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Resistance%20band%20door%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Resistance%20band%20door%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Resistance%20band%20door%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Resistance%20band%20door%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 35,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 10
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 99,
+          "landed": 47.95,
+          "priceComplete": true,
+          "profit": 5.1581818181818235,
+          "margin": 5.210284664830125,
+          "roi": 10.757417764717045
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:32:44.460Z"
+    },
+    {
+      "name": "Plant pot drainage mesh pad set",
+      "cat": "Grădină & balcon",
+      "chinaMin": 12,
+      "chinaMax": 28,
+      "sellTarget": 69,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 35,
+      "checkedAt": "2026-08-13T11:32:01.971Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Plant%20pot%20drainage%20mesh%20pad%20set",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Plant%20pot%20drainage%20mesh%20pad%20set",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Plant%20pot%20drainage%20mesh%20pad%20set",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Plant%20pot%20drainage%20mesh%20pad%20set",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Plant%20pot%20drainage%20mesh%20pad%20set",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Plant%20pot%20drainage%20mesh%20pad%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Plant%20pot%20drainage%20mesh%20pad%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Plant%20pot%20drainage%20mesh%20pad%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Plant%20pot%20drainage%20mesh%20pad%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 34,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 6
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 69,
+          "landed": 35,
+          "priceComplete": true,
+          "profit": 2.0147933884297515,
+          "margin": 2.919990418014133,
+          "roi": 5.756552538370718
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:32:01.971Z"
+    },
+    {
+      "name": "Plant support clips reusable set",
+      "cat": "Grădină & balcon",
+      "chinaMin": 10,
+      "chinaMax": 24,
+      "sellTarget": 59,
+      "pricingStatus": "SEED_ESTIMATE",
+      "landedEstimate": 32,
+      "checkedAt": "2026-08-13T11:32:16.133Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "earlyPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "earlyResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Plant%20support%20clips%20reusable%20set",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Plant%20support%20clips%20reusable%20set",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Plant%20support%20clips%20reusable%20set",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Plant%20support%20clips%20reusable%20set",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Plant%20support%20clips%20reusable%20set",
+          "verified": false
+        }
+      ],
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Plant%20support%20clips%20reusable%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Plant%20support%20clips%20reusable%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Plant%20support%20clips%20reusable%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Plant%20support%20clips%20reusable%20set%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 33,
+        "components": {
+          "demand": 35,
+          "gap": 75,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 0
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 59,
+          "landed": 32,
+          "priceComplete": true,
+          "profit": -0.3496694214876044,
+          "margin": -0.5926600364196685,
+          "roi": -1.0927169421487637
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "trendWindows": {
+        "d7": null,
+        "d30": null,
+        "d90": null
+      },
+      "firstDiscoveredAt": "2026-08-13T11:32:16.133Z"
     }
   ],
   "multilingual": {
