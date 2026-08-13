@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 
 const startedAt = new Date().toISOString();
+async function exists(path){try{await fs.access(path);return true;}catch{return false;}}
 
 try {
   await import('./web-radar-scan.mjs');
@@ -13,6 +14,20 @@ try {
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   try { discovery = JSON.parse(await fs.readFile('discovery-live.json', 'utf8')); } catch {}
   try { history = JSON.parse(await fs.readFile('discovery-history.json', 'utf8')); } catch {}
+  const modules = {
+    strictAudit: await exists('v2-audit.js'),
+    evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
+    globalDiscovery: await exists('scripts/discovery-scan.mjs'),
+    romaniaGap2: await exists('romania-gap.js'),
+    trendVelocity: await exists('trend-velocity.js'),
+    supplierHunter: await exists('scripts/supplier-hunter-postprocess.mjs'),
+    profitEngine: await exists('profit-engine.js'),
+    importRiskGate: await exists('import-risk.js'),
+    todaysOpportunities: await exists('todays-opportunities.html') && await exists('todays-opportunities.js'),
+    premiumUI: await exists('premium-ui.css')
+  };
+  const moduleValues=Object.values(modules);
+  const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean);
   const status = {
     ok: true,
     status: 'completed',
@@ -22,7 +37,9 @@ try {
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
     model: 'Mega Product Radar V2',
-    engine: 'Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Evidence Validation',
+    engine: 'Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation',
+    modules,
+    v2Ready,
     dataQualityPolicy: live.dataQualityPolicy || null,
     v2Validation: live.v2Validation || null,
     discovery: {
