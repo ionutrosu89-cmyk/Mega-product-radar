@@ -1,13 +1,13 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-13T14:48:17.957Z",
-  "completedAt": "2026-08-13T14:51:44.561Z",
-  "updatedAt": "2026-08-13T14:48:31.523Z",
+  "startedAt": "2026-08-13T15:52:57.091Z",
+  "completedAt": "2026-08-13T15:59:27.329Z",
+  "updatedAt": "2026-08-13T15:53:10.022Z",
   "newCandidates": 0,
   "totalProducts": 89,
   "model": "Mega Product Radar V2",
-  "engine": "Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
+  "engine": "Romania Arbitrage + Wide Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
   "modules": {
     "strictAudit": true,
     "evidenceValidation": true,
@@ -29,16 +29,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-13T14:48:31.552Z",
+    "updatedAt": "2026-08-13T15:53:10.053Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-13T14:51:44.549Z",
+    "updatedAt": "2026-08-13T15:59:27.316Z",
     "candidates": 28,
     "scanSize": 10,
     "openDiscovered": 0,
-    "successfulChecks": 40,
-    "reviewChecks": 6,
+    "successfulChecks": 0,
+    "reviewChecks": 0,
     "network": {
       "markets": [
         {
@@ -147,7 +147,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-13T14:50:00.532Z",
+      "updatedAt": "2026-08-13T15:57:43.305Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -171,6 +171,7 @@
       "sourcePolicy": "DIRECT_SEARCH_LINKS + WEB_PROXY_EVIDENCE"
     },
     "historyProducts": 28,
-    "trendWarmup": true
+    "trendWarmup": true,
+    "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   }
 }
