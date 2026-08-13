@@ -1,21 +1,26 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-13T08:54:59.506Z",
-  "completedAt": "2026-08-13T08:57:26.068Z",
-  "updatedAt": "2026-08-13T08:55:13.598Z",
+  "startedAt": "2026-08-13T11:11:55.077Z",
+  "completedAt": "2026-08-13T11:14:19.863Z",
+  "updatedAt": "2026-08-13T11:12:08.002Z",
   "newCandidates": 0,
   "totalProducts": 89,
-  "model": "Mega Product Radar 6.0",
-  "engine": "Romania Arbitrage Engine v4.5 + Product Discovery Engine v6.0 + Decision Core v6",
+  "model": "Mega Product Radar V2",
+  "engine": "Romania Arbitrage Engine + Product Discovery + Decision Core + V2 Evidence Validation",
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
     "foreignPresenceMin": 1,
     "historyDeltas": "LIVE_ONLY"
   },
+  "v2Validation": {
+    "version": "2.1",
+    "updatedAt": "2026-08-13T11:12:08.034Z",
+    "policy": "Evidence first: BUY requires strong live evidence; never fabricate supplier/review confirmation."
+  },
   "discovery": {
-    "updatedAt": "2026-08-13T08:57:26.060Z",
+    "updatedAt": "2026-08-13T11:14:19.854Z",
     "candidates": 18,
     "scanSize": 10,
     "openDiscovered": 0,
