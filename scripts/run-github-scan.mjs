@@ -7,6 +7,7 @@ try {
   await import('./data-quality-postprocess.mjs');
   await import('./v2-validation-postprocess.mjs');
   await import('./discovery-scan.mjs');
+  await import('./supplier-hunter-postprocess.mjs');
   await import('./discovery-v6-expand.mjs');
   let live = {}, discovery = {}, history = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
@@ -21,7 +22,7 @@ try {
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
     model: 'Mega Product Radar V2',
-    engine: 'Romania Arbitrage Engine + Product Discovery + Decision Core + V2 Evidence Validation',
+    engine: 'Romania Arbitrage + Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Evidence Validation',
     dataQualityPolicy: live.dataQualityPolicy || null,
     v2Validation: live.v2Validation || null,
     discovery: {
@@ -31,6 +32,8 @@ try {
       openDiscovered: Number(discovery.openDiscovered || 0),
       successfulChecks: Number(discovery.successfulChecks || 0),
       reviewChecks: Number(discovery.reviewChecks || 0),
+      network: discovery.network || null,
+      supplierHunter: discovery.supplierHunter || null,
       multilingual: discovery.multilingual || null,
       historyProducts: Object.keys(history.products || {}).length
     }
