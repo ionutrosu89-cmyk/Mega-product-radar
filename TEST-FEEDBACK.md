@@ -27,4 +27,40 @@ Refacere completă a paginii Audit strict pentru mobil și desktop, fără modif
 
 ---
 
+## 2026-08-14 — Inbox produse noi / Descoperire pe iPhone
+
+Observație utilizator: pagina este prea îngrămădită și nu arată premium.
+
+### Probleme vizibile din captură
+- Headerul este prea dens și ocupă prea mult spațiu pe mobil.
+- Titlul și subtitlul sunt prea mari raportat la lățimea ecranului.
+- Navigația de sus folosește linkuri text simple, cu aspect nefinisat.
+- Secțiunea explicativă „Regulă 6.0” este prea lungă și domină ecranul.
+- KPI-urile sunt voluminoase și folosesc prea mult spațiu vertical.
+- Ierarhia vizuală nu conduce rapid utilizatorul către „ce este nou / ce merită atenție / ce merită testat”.
+- Căutarea și filtrele trebuie integrate mai elegant într-un flux mobil compact.
+- Pagina trebuie să aibă mai mult spațiu controlat între secțiuni și mai puține elemente concurente vizual.
+
+### Cerință după perioada de test
+Redesign premium mobile-first pentru Descoperire, cu navigație tip tab/chip, KPI-uri compacte, explicații scurte și accent pe decizia de business.
+
+---
+
+## 2026-08-14 — Numele produselor în aplicația pentru România
+
+Observație utilizator: „Produsele sunt in limba engleza, trebuiesc in limba romana”.
+
+### Cerință
+- Toate numele produselor afișate utilizatorului trebuie să fie în limba română.
+- Traducerea trebuie aplicată consecvent în Descoperire, Radar, Audit, Oportunitățile de azi, Furnizori, Achiziții și orice alt ecran unde apare produsul.
+- Numele originale în engleză pot fi păstrate intern pentru căutare, surse și potrivire, dar interfața pentru România trebuie să afișeze denumirea românească.
+- Traducerile trebuie să fie naturale și comerciale, nu traduceri mot-a-mot nefirești.
+- Pentru produse noi descoperite automat, aplicația trebuie să genereze automat și câmpul de denumire în română înainte de afișare.
+- Căutarea ar trebui să poată găsi produsul atât după denumirea românească, cât și după denumirea originală.
+
+### Prioritate după perioada de test
+RIDICATĂ — este necesar pentru coerența unei aplicații dedicate pieței din România.
+
+---
+
 Adăugăm aici toate observațiile următoare ale utilizatorului pe durata testării.
