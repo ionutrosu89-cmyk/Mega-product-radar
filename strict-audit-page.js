@@ -2,6 +2,7 @@ import {buildStrictAudit} from './v2-audit.js';
 const $=s=>document.querySelector(s);
 const money=v=>`${Number(v||0).toLocaleString('ro-RO',{maximumFractionDigits:2})} lei`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
+function installPremiumShell(){if(!document.querySelector('link[href="premium-ui.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='premium-ui.css';document.head.appendChild(l);}if(!document.querySelector('.bottom-nav'))document.body.insertAdjacentHTML('beforeend','<nav class="bottom-nav"><a href="index.html"><b>⌂</b>Home</a><a href="todays-opportunities.html"><b>🔥</b>Today</a><a href="discovery-inbox.html"><b>⌕</b>Discover</a><a href="supplier-intelligence.html"><b>⌘</b>Suppliers</a><a class="active" href="strict-audit.html"><b>✓</b>Audit</a></nav>');}
 function badge(decision){const c=decision==='BUY'?'buy':decision==='TEST'?'test':decision==='REJECT'?'reject':'wait';return `<span class="badge ${c}">${decision}</span>`;}
 function card(x,rank,extra=''){
   const p=x.testPlan;
@@ -20,4 +21,4 @@ async function load(){
   catch(e){$('#top3').innerHTML=`<p class="note">Eroare: ${esc(e.message)}</p>`;}
   finally{$(`#refresh`).disabled=false;$('#refresh').textContent='Rulează auditul';}
 }
-$('#refresh').onclick=load;load();
+installPremiumShell();$('#refresh').onclick=load;load();
