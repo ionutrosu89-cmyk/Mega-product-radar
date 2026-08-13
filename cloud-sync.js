@@ -29,6 +29,13 @@ function localRecords(d){
 }
 function localCount(d){const raw=parseLocal(d.key,d.shape);return d.shape==='map'?Object.keys(raw).length:raw.length;}
 function stripMeta(record){if(!record||typeof record!=='object')return record;const {__radarKey,...clean}=record;return clean;}
+function recordTime(record){
+  if(!record||typeof record!=='object')return 0;
+  for(const key of ['updatedAt','verifiedAt','orderedAt','at']){const t=Date.parse(record[key]||'');if(Number.isFinite(t))return t;}
+  return 0;
+}
+function latestTime(records=[]){return records.reduce((m,r)=>Math.max(m,recordTime(r)),0);}
+function stablePayload(records=[]){return JSON.stringify(records.map(r=>{const clean=stripMeta(r);return clean&&typeof clean==='object'?Object.keys(clean).sort().reduce((o,k)=>(o[k]=clean[k],o),{}):clean;}));}
 function writeDatasetLocal(d,records){
   muted=true;
   try{
@@ -74,9 +81,14 @@ async function reconcileDataset(d){
   const {client,workspace}=await context();
   const {data,error}=await client.from(d.table).select('payload').eq('workspace_id',workspace.id).order('created_at',{ascending:true});if(error)throw error;
   const cloud=(data||[]).map(x=>x.payload).filter(Boolean),local=localRecords(d);
-  if(cloud.length){const before=JSON.stringify(local.map(stripMeta)),after=JSON.stringify(cloud.map(stripMeta));if(before!==after){writeDatasetLocal(d,cloud);return 'PULLED';}return 'SAME';}
-  if(local.length){await pushDatasetToCloud(d.key);return 'PUSHED';}
-  return 'EMPTY';
+  if(!cloud.length&&!local.length)return 'EMPTY';
+  if(!cloud.length&&local.length){await pushDatasetToCloud(d.key);return 'PUSHED';}
+  if(cloud.length&&!local.length){writeDatasetLocal(d,cloud);return 'PULLED';}
+  const localStamp=latestTime(local),cloudStamp=latestTime(cloud);
+  if(localStamp>cloudStamp){await pushDatasetToCloud(d.key);return 'PUSHED';}
+  if(cloudStamp>localStamp){writeDatasetLocal(d,cloud);return 'PULLED';}
+  if(stablePayload(local)!==stablePayload(cloud)){writeDatasetLocal(d,cloud);return 'PULLED';}
+  return 'SAME';
 }
 
 function queueSync(key,delay=700){
