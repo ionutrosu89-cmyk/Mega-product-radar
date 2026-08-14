@@ -76,6 +76,10 @@ jobs:
         if: always()
         run: node scripts/market-trend-postprocess.mjs
 
+      - name: Build Opportunity Ranking V2
+        if: always()
+        run: node scripts/opportunity-ranking-v2.mjs
+
       - name: Validate Organic Rising data
         if: always()
         run: node scripts/qa-organic-rising.mjs
