@@ -38,6 +38,9 @@ jobs:
       - name: Generate Market Intelligence fixture
         run: node scripts/market-intelligence-postprocess.mjs
 
+      - name: Validate Organic Rising data integrity
+        run: node scripts/qa-organic-rising.mjs
+
       - name: Run tests
         run: npm test
 
