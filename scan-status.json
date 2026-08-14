@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T11:59:39.882Z",
-  "completedAt": "2026-08-14T12:04:16.927Z",
-  "updatedAt": "2026-08-14T11:59:53.280Z",
+  "startedAt": "2026-08-14T12:06:37.411Z",
+  "completedAt": "2026-08-14T12:11:27.194Z",
+  "updatedAt": "2026-08-14T12:06:51.767Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T11:59:53.314Z",
+    "updatedAt": "2026-08-14T12:06:51.929Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T12:04:16.914Z",
+    "updatedAt": "2026-08-14T12:11:27.181Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 6,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T12:02:32.900Z",
+      "updatedAt": "2026-08-14T12:09:43.161Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,11 +176,11 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T12:02:32.894Z",
+    "updatedAt": "2026-08-14T12:09:43.155Z",
     "category": "Fitness & recuperare",
-    "successfulPages": 9,
-    "totalObserved": 89,
-    "totalClusters": 57,
+    "successfulPages": 8,
+    "totalObserved": 66,
+    "totalClusters": 40,
     "feedCount": 1,
     "feedThreshold": 55,
     "operational": true,
@@ -193,30 +193,30 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 2,
-        "items": 25,
+        "successful": 3,
+        "items": 36,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
+          503,
           200
         ],
         "sources": [
           "DIRECT",
           "DIRECT",
-          "DIRECT",
-          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
           "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 2,
-        "items": 28,
+        "successful": 1,
+        "items": 6,
         "statuses": [
           200,
           200,
@@ -227,20 +227,20 @@
         ],
         "sources": [
           "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
+          "DIRECT"
         ]
       },
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 1,
-        "items": 12,
+        "successful": 0,
+        "items": 0,
         "statuses": [
-          200,
+          503,
           503,
           503,
           503,
@@ -248,7 +248,7 @@
           503
         ],
         "sources": [
-          "DIRECT",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
