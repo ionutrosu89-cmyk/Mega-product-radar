@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -57,12 +58,19 @@ jobs:
       - name: Persist radar, discovery, organic histories and scan status
         if: always()
         run: |
+          set -e
+          mkdir -p /tmp/radar-output
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json scan-status.json; do
+            if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
+          done
+          git fetch origin main
+          git reset --hard origin/main
+          for f in /tmp/radar-output/*.json; do cp "$f" .; done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
-            git pull --rebase origin main
             git push origin main
           else
             echo "No radar data changes to commit."
