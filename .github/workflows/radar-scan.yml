@@ -48,6 +48,11 @@ jobs:
         continue-on-error: true
         run: node scripts/run-github-scan.mjs
 
+      - name: Enrich real product preview images
+        if: always()
+        continue-on-error: true
+        run: node scripts/enrich-discovery-images.mjs
+
       - name: Persist radar, discovery, histories and scan status
         if: always()
         run: |
