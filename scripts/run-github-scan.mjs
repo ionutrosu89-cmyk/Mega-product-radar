@@ -11,11 +11,12 @@ try {
   await import('./organic-rising-scan.mjs');
   await import('./supplier-hunter-postprocess.mjs');
   await import('./discovery-v6-expand.mjs');
-  let live = {}, discovery = {}, history = {}, organic = {};
+  let live = {}, discovery = {}, history = {}, organic = {}, organicConfig = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   try { discovery = JSON.parse(await fs.readFile('discovery-live.json', 'utf8')); } catch {}
   try { history = JSON.parse(await fs.readFile('discovery-history.json', 'utf8')); } catch {}
   try { organic = JSON.parse(await fs.readFile('organic-rising-live.json', 'utf8')); } catch {}
+  try { organicConfig = JSON.parse(await fs.readFile('organic-rising-config.json', 'utf8')); } catch {}
   const modules = {
     strictAudit: await exists('v2-audit.js'),
     evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
@@ -29,8 +30,11 @@ try {
     todaysOpportunities: await exists('todays-opportunities.html') && await exists('todays-opportunities.js'),
     premiumUI: await exists('premium-ui.css')
   };
-  const marketStates=Object.values(organic.marketStatus||{});
-  const organicOperational=Number(organic.successfulPages||0)>=2&&Number(organic.totalObserved||0)>0&&marketStates.length>0&&marketStates.every(m=>Number(m.attempted||0)===0||Number(m.successful||0)>=2);
+  const configuredMarkets=Array.isArray(organicConfig.markets)?organicConfig.markets:[];
+  const requiredMarketKeys=configuredMarkets.filter(m=>m.requiredForOperational!==false).map(m=>m.key);
+  const marketStatus=organic.marketStatus||{};
+  const requiredCoverage=requiredMarketKeys.length>0&&requiredMarketKeys.every(k=>Number(marketStatus[k]?.successful||0)>=2&&Number(marketStatus[k]?.items||0)>0);
+  const organicOperational=Number(organic.successfulPages||0)>=4&&Number(organic.totalObserved||0)>0&&requiredCoverage;
   const moduleValues=Object.values(modules);
   const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean)&&organicOperational;
   const status = {
@@ -70,7 +74,9 @@ try {
       feedCount: Array.isArray(organic.feed) ? organic.feed.length : 0,
       feedThreshold: Number(organic.feedThreshold || 0),
       operational: organicOperational,
-      marketStatus: organic.marketStatus || null,
+      requiredMarkets: requiredMarketKeys,
+      requiredCoverage,
+      marketStatus,
       policy: organic.policy || null
     }
   };
