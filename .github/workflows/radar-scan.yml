@@ -55,6 +55,10 @@ jobs:
         continue-on-error: true
         run: node scripts/enrich-discovery-images.mjs
 
+      - name: Validate Organic Rising data
+        if: always()
+        run: node scripts/qa-organic-rising.mjs
+
       - name: Persist radar, discovery, organic histories and scan status
         if: always()
         run: |
