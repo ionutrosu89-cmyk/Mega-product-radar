@@ -8,6 +8,7 @@ if(Number(data.maxReviews)!==10)fatal.push('maxReviews');
 if(Number(data.maxOrganicPage)!==2)fatal.push('maxOrganicPage');
 if(!data.marketStatus||typeof data.marketStatus!=='object')fatal.push('marketStatus');
 if(data.qualityPostprocess?.exactListingReviewGate!==true)fatal.push('exactListingReviewGate');
+if(data.qualityPostprocess?.missingReviewIsNotZero!==true)fatal.push('missingReviewIsNotZero');
 if(data.qualityPostprocess?.categoryRelevanceGate!==true)fatal.push('categoryRelevanceGate');
 if(data.qualityPostprocess?.imagePlaceholderFilter!==true)fatal.push('imagePlaceholderFilter');
 const markets=Object.values(data.marketStatus||{});
