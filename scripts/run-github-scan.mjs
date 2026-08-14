@@ -8,16 +8,19 @@ try {
   await import('./data-quality-postprocess.mjs');
   await import('./v2-validation-postprocess.mjs');
   await import('./wide-discovery-orchestrator.mjs');
+  await import('./organic-rising-scan.mjs');
   await import('./supplier-hunter-postprocess.mjs');
   await import('./discovery-v6-expand.mjs');
-  let live = {}, discovery = {}, history = {};
+  let live = {}, discovery = {}, history = {}, organic = {};
   try { live = JSON.parse(await fs.readFile('radar-live.json', 'utf8')); } catch {}
   try { discovery = JSON.parse(await fs.readFile('discovery-live.json', 'utf8')); } catch {}
   try { history = JSON.parse(await fs.readFile('discovery-history.json', 'utf8')); } catch {}
+  try { organic = JSON.parse(await fs.readFile('organic-rising-live.json', 'utf8')); } catch {}
   const modules = {
     strictAudit: await exists('v2-audit.js'),
     evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
     globalDiscovery: await exists('scripts/discovery-scan.mjs') && await exists('scripts/wide-discovery-orchestrator.mjs'),
+    organicRising: await exists('scripts/organic-rising-scan.mjs') && await exists('organic-rising-config.json'),
     romaniaGap2: await exists('discovery-engine.js'),
     trendVelocity: await exists('discovery-history.js'),
     supplierHunter: await exists('scripts/supplier-hunter-postprocess.mjs'),
@@ -37,7 +40,7 @@ try {
     newCandidates: Number(live.newCandidates || 0),
     totalProducts: Array.isArray(live.products) ? live.products.length : 0,
     model: 'Mega Product Radar V2',
-    engine: 'Romania Arbitrage + Wide Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation',
+    engine: 'Romania Arbitrage + Wide Global Discovery + Organic Rising + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation',
     modules,
     v2Ready,
     dataQualityPolicy: live.dataQualityPolicy || null,
@@ -55,6 +58,16 @@ try {
       historyProducts: Object.keys(history.products || {}).length,
       trendWarmup: Object.keys(history.products || {}).length > 0,
       mode: 'WIDE_DISCOVERY_STRICT_VALIDATION'
+    },
+    organicRising: {
+      updatedAt: organic.updatedAt || null,
+      category: organic.category || null,
+      successfulPages: Number(organic.successfulPages || 0),
+      totalObserved: Number(organic.totalObserved || 0),
+      totalClusters: Number(organic.totalClusters || 0),
+      feedCount: Array.isArray(organic.feed) ? organic.feed.length : 0,
+      feedThreshold: Number(organic.feedThreshold || 0),
+      policy: organic.policy || null
     }
   };
   await fs.writeFile('scan-status.json', JSON.stringify(status, null, 2) + '\n');
