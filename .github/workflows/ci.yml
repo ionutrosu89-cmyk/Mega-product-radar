@@ -41,6 +41,9 @@ jobs:
       - name: Syntax check Trend Intelligence
         run: node --check scripts/market-trend-postprocess.mjs
 
+      - name: Syntax check Opportunity Ranking V2
+        run: node --check scripts/opportunity-ranking-v2.mjs
+
       - name: Syntax check Trend Intelligence UI
         run: |
           node --check market-trend-ui.js
@@ -60,6 +63,9 @@ jobs:
 
       - name: Generate Trend Intelligence fixture
         run: node scripts/market-trend-postprocess.mjs
+
+      - name: Generate Opportunity Ranking V2 fixture
+        run: node scripts/opportunity-ranking-v2.mjs
 
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
