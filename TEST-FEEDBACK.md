@@ -1,29 +1,33 @@
 # Mega Product Radar — Backlog feedback testare
 
-Scop: colectăm toate observațiile din perioada de test fără să schimbăm motorul sau interfața în timpul evaluării, cu excepția erorilor critice. După încheierea testului, aplicăm îmbunătățirile în ordinea priorității.
+Scop: colectăm toate observațiile din perioada de test și aplicăm îmbunătățirile cu prioritate pe experiența mobilă, fără să relaxăm logica TEST/BUY sau să inventăm dovezi comerciale.
 
 ## 2026-08-14 — Audit strict V2 pe iPhone
 
 Observație utilizator: „Asta trebuie sa arate profi, acum nu arata.”
 
-### Probleme vizibile din captură
-- Tipografia nu este coerentă cu restul aplicației premium; aspectul pare de pagină web simplă, nu de aplicație SaaS.
-- Linkurile de navigare apar în albastrul implicit al browserului și arată nefinisat.
-- Butonul „Rulează auditul” are aspect implicit de browser/iOS și nu respectă designul premium.
-- KPI-urile sunt afișate ca listă verticală de text, fără carduri sau ierarhie vizuală clară.
-- Spațierea dintre titluri, KPI-uri și secțiuni este neuniformă.
-- „TOP 3 pentru bani reali” ocupă mult spațiu chiar când nu există rezultate; empty state-ul trebuie compactat și stilizat.
-- Cardurile din TOP 10 sunt prea dense și greu de scanat pe mobil.
-- Codurile tehnice sunt afișate direct utilizatorului în engleză: SUPPLIER_UNVERIFIED, NO_REVIEW_EVIDENCE, EVIDENCE_LOW, LOW_NET_PROFIT, LOW_NET_MARGIN, LOW_ROI etc. Trebuie mapate la explicații clare în română.
-- Informațiile importante (profit, marjă, ROI, dovezi, furnizor, risc) nu au suficientă ierarhie vizuală.
-- Bara de navigare de jos se suprapune peste conținut/carduri și ascunde informații.
-- Safe-area / padding inferior trebuie îmbunătățit pentru iPhone.
-- Contrastul și dimensiunea textului secundar trebuie optimizate pentru citire rapidă.
-- Cardul produsului ar trebui să aibă structură clară: verdict → scor → profit → dovezi → risc → blocaje → acțiune.
-- Auditul trebuie să folosească același limbaj vizual ca Descoperire / Command Center.
+### Probleme identificate
+- Tipografie și ierarhie vizuală neuniforme.
+- Linkuri și butoane cu aspect nefinisat.
+- KPI-uri fără structură suficient de clară.
+- TOP 3 și TOP 10 prea dense pe mobil.
+- Coduri tehnice afișate direct: SUPPLIER_UNVERIFIED, NO_REVIEW_EVIDENCE, EVIDENCE_LOW, LOW_NET_PROFIT, LOW_NET_MARGIN, LOW_ROI etc.
+- Bara de jos putea acoperi conținutul.
+- Safe-area și padding inferior trebuiau optimizate pentru iPhone.
 
-### Cerință după perioada de test
-Refacere completă a paginii Audit strict pentru mobil și desktop, fără modificarea logicii de audit sau a pragurilor BUY/TEST.
+### Implementat
+- Redesign mobile-first al paginii Audit strict.
+- Header și navigație premium.
+- KPI-uri în carduri compacte.
+- Safe-area pentru iPhone și spațiu inferior pentru bottom navigation.
+- Denumiri produse afișate în română în Audit.
+- Categorii localizate în română.
+- Blocajele tehnice sunt mapate la explicații clare în română.
+- Empty-state pentru TOP 3 refăcut și simplificat.
+- Cardurile pun accent pe verdict → scor → dovezi → profit → risc → motivul blocării.
+
+### Stare
+IMPLEMENTAT — pragurile BUY/TEST nu au fost relaxate.
 
 ---
 
@@ -31,18 +35,23 @@ Refacere completă a paginii Audit strict pentru mobil și desktop, fără modif
 
 Observație utilizator: pagina este prea îngrămădită și nu arată premium.
 
-### Probleme vizibile din captură
-- Headerul este prea dens și ocupă prea mult spațiu pe mobil.
-- Titlul și subtitlul sunt prea mari raportat la lățimea ecranului.
-- Navigația de sus folosește linkuri text simple, cu aspect nefinisat.
-- Secțiunea explicativă „Regulă 6.0” este prea lungă și domină ecranul.
-- KPI-urile sunt voluminoase și folosesc prea mult spațiu vertical.
-- Ierarhia vizuală nu conduce rapid utilizatorul către „ce este nou / ce merită atenție / ce merită testat”.
-- Căutarea și filtrele trebuie integrate mai elegant într-un flux mobil compact.
-- Pagina trebuie să aibă mai mult spațiu controlat între secțiuni și mai puține elemente concurente vizual.
+### Probleme identificate
+- Header prea dens.
+- Navigație de sus prea încărcată.
+- KPI-uri voluminoase.
+- Căutare și filtre aglomerate.
+- Cardurile de produs aveau prea multe informații concurente vizual.
 
-### Cerință după perioada de test
-Redesign premium mobile-first pentru Descoperire, cu navigație tip tab/chip, KPI-uri compacte, explicații scurte și accent pe decizia de business.
+### Implementat
+- Navigație tip chip/tab cu scroll orizontal pe mobil.
+- KPI-uri compacte în grid responsive.
+- Toolbar sticky, filtre scrollabile și spațiere mobile-first.
+- Carduri mai aerisite și tipografie coerentă.
+- Mini-imagine în card atunci când scannerul poate valida o imagine reală din sursă.
+- Placeholder explicit dacă imaginea reală nu a putut fi validată.
+
+### Stare
+IMPLEMENTAT — continuă validarea vizuală pe dispozitiv real.
 
 ---
 
@@ -52,15 +61,41 @@ Observație utilizator: „Produsele sunt in limba engleza, trebuiesc in limba r
 
 ### Cerință
 - Toate numele produselor afișate utilizatorului trebuie să fie în limba română.
-- Traducerea trebuie aplicată consecvent în Descoperire, Radar, Audit, Oportunitățile de azi, Furnizori, Achiziții și orice alt ecran unde apare produsul.
-- Numele originale în engleză pot fi păstrate intern pentru căutare, surse și potrivire, dar interfața pentru România trebuie să afișeze denumirea românească.
-- Traducerile trebuie să fie naturale și comerciale, nu traduceri mot-a-mot nefirești.
-- Pentru produse noi descoperite automat, aplicația trebuie să genereze automat și câmpul de denumire în română înainte de afișare.
-- Căutarea ar trebui să poată găsi produsul atât după denumirea românească, cât și după denumirea originală.
+- Numele originale pot rămâne intern pentru căutări și surse.
+- Căutarea trebuie să funcționeze și după numele original.
 
-### Prioritate după perioada de test
-RIDICATĂ — este necesar pentru coerența unei aplicații dedicate pieței din România.
+### Implementat
+- Modul central `product-ro.js` cu traduceri comerciale pentru catalogul curent și fallback pentru produse noi.
+- Descoperire afișează numele în română, dar păstrează numele original pentru matching și căutare.
+- Audit strict afișează numele și categoriile în română.
+- Radar aplică localizarea denumirilor după randarea dinamică a cardurilor.
+
+### Stare
+IMPLEMENTAT în ecranele principale de decizie. Se extinde gradual și la orice ecran secundar unde apare numele brut.
 
 ---
 
-Adăugăm aici toate observațiile următoare ale utilizatorului pe durata testării.
+## 2026-08-14 — Mini-imagine produs
+
+Observație utilizator: produsele asemănătoare trebuie diferențiate vizual; simplul titlu nu este suficient.
+
+### Cerință
+- Fiecare candidat ar trebui să aibă mini-imagine reală a produsului găsit.
+- Nu se folosesc imagini generice sau inventate.
+- Imaginea trebuie să provină dintr-o sursă web reală asociată candidatului.
+
+### Implementat
+- Scannerul încearcă să extragă `og:image` / `twitter:image` din prima sursă reală disponibilă.
+- Sunt acceptate doar URL-uri HTTP/HTTPS reale.
+- `imageUrl` și `imageSourceUrl` sunt salvate în discovery data.
+- Cardul de Descoperire afișează imaginea reală dacă există; altfel afișează placeholder de validare.
+
+### Stare
+IMPLEMENTAT — acoperirea imaginilor va crește pe măsură ce produsele sunt rescannate și sursele permit accesul la preview.
+
+---
+
+## QA
+- Workflow-ul Mega Product Radar Scan a trecut scanarea, persistarea datelor și validarea site-ului pe ultima rulare verificată.
+- Safe-area mobil este inclus în UI-ul comun.
+- Pragurile comerciale TEST/BUY nu au fost modificate.
