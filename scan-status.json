@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T04:57:32.995Z",
-  "completedAt": "2026-08-14T05:01:06.592Z",
-  "updatedAt": "2026-08-14T04:57:45.872Z",
+  "startedAt": "2026-08-14T06:51:40.451Z",
+  "completedAt": "2026-08-14T06:55:15.272Z",
+  "updatedAt": "2026-08-14T06:51:53.220Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -21,7 +21,7 @@
     "todaysOpportunities": true,
     "premiumUI": true
   },
-  "v2Ready": true,
+  "v2Ready": false,
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T04:57:45.905Z",
+    "updatedAt": "2026-08-14T06:51:53.257Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T05:01:06.579Z",
+    "updatedAt": "2026-08-14T06:55:15.259Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T04:59:22.561Z",
+      "updatedAt": "2026-08-14T06:53:31.247Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,13 +176,72 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T04:59:22.558Z",
-    "category": "Pet",
-    "successfulPages": 0,
-    "totalObserved": 0,
-    "totalClusters": 0,
+    "updatedAt": "2026-08-14T06:53:31.243Z",
+    "category": "Beauty accesorii",
+    "successfulPages": 1,
+    "totalObserved": 11,
+    "totalClusters": 7,
     "feedCount": 0,
     "feedThreshold": 55,
+    "operational": false,
+    "marketStatus": {
+      "amazonUS": {
+        "label": "Amazon US",
+        "attempted": 6,
+        "successful": 1,
+        "items": 11,
+        "statuses": [
+          503,
+          200,
+          503,
+          503,
+          503,
+          503
+        ]
+      },
+      "amazonDE": {
+        "label": "Amazon DE",
+        "attempted": 6,
+        "successful": 0,
+        "items": 0,
+        "statuses": [
+          503,
+          503,
+          503,
+          503,
+          503,
+          503
+        ]
+      },
+      "ebayUS": {
+        "label": "eBay US",
+        "attempted": 6,
+        "successful": 0,
+        "items": 0,
+        "statuses": [
+          403,
+          403,
+          403,
+          403,
+          403,
+          403
+        ]
+      },
+      "emagRO": {
+        "label": "eMAG RO",
+        "attempted": 6,
+        "successful": 0,
+        "items": 0,
+        "statuses": [
+          511,
+          511,
+          511,
+          511,
+          511,
+          511
+        ]
+      }
+    },
     "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Scorul adaugă cross-market, România gap, noutate observată și rank velocity. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
   }
 }
