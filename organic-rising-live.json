@@ -1,7 +1,7 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "engine": "Organic Rising Products",
-  "updatedAt": "2026-08-14T10:16:56.686Z",
+  "updatedAt": "2026-08-14T10:59:00.355Z",
   "category": "Beauty accesorii",
   "queries": [
     "beauty organizer new",
@@ -22,6 +22,14 @@
         503,
         503,
         503
+      ],
+      "sources": [
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED"
       ]
     },
     "amazonDE": {
@@ -36,6 +44,14 @@
         503,
         503,
         503
+      ],
+      "sources": [
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED"
       ]
     },
     "ebayUS": {
@@ -50,6 +66,14 @@
         403,
         403,
         403
+      ],
+      "sources": [
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED"
       ]
     },
     "emagRO": {
@@ -64,6 +88,14 @@
         511,
         511,
         511
+      ],
+      "sources": [
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED",
+        "DIRECT+JINA_FAILED"
       ]
     }
   },
@@ -75,5 +107,5 @@
   "maxObservedSellers": 8,
   "products": [],
   "feed": [],
-  "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Scorul adaugă cross-market, România gap, noutate observată și rank velocity. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
+  "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; Jina Reader este fallback de randare pentru aceeași pagină când marketplace-ul blochează IP-ul GitHub. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
 }

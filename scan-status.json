@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T10:15:07.625Z",
-  "completedAt": "2026-08-14T10:18:40.713Z",
-  "updatedAt": "2026-08-14T10:15:20.580Z",
+  "startedAt": "2026-08-14T10:56:02.550Z",
+  "completedAt": "2026-08-14T11:00:44.388Z",
+  "updatedAt": "2026-08-14T10:56:15.407Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T10:15:20.614Z",
+    "updatedAt": "2026-08-14T10:56:15.440Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T10:18:40.700Z",
+    "updatedAt": "2026-08-14T11:00:44.374Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T10:16:56.690Z",
+      "updatedAt": "2026-08-14T10:59:00.358Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,7 +176,7 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T10:16:56.686Z",
+    "updatedAt": "2026-08-14T10:59:00.355Z",
     "category": "Beauty accesorii",
     "successfulPages": 0,
     "totalObserved": 0,
@@ -197,6 +197,14 @@
           503,
           503,
           503
+        ],
+        "sources": [
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED"
         ]
       },
       "amazonDE": {
@@ -211,6 +219,14 @@
           503,
           503,
           503
+        ],
+        "sources": [
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED"
         ]
       },
       "ebayUS": {
@@ -225,6 +241,14 @@
           403,
           403,
           403
+        ],
+        "sources": [
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED"
         ]
       },
       "emagRO": {
@@ -239,9 +263,17 @@
           511,
           511,
           511
+        ],
+        "sources": [
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED",
+          "DIRECT+JINA_FAILED"
         ]
       }
     },
-    "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Scorul adaugă cross-market, România gap, noutate observată și rank velocity. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
+    "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; Jina Reader este fallback de randare pentru aceeași pagină când marketplace-ul blochează IP-ul GitHub. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
   }
 }
