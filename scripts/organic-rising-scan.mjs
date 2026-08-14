@@ -10,34 +10,42 @@ const clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,Number(v)||0));
 async function readJson(path,fallback){try{return JSON.parse(await fs.readFile(path,'utf8'));}catch{return fallback;}}
 
 let lastReaderRequestAt=0;
-async function directFetch(url){
-  const c=new AbortController(),t=setTimeout(()=>c.abort(),12000);
+async function fetchWithTimeout(url,headers,timeoutMs=20000){
+  const c=new AbortController(),t=setTimeout(()=>c.abort(),timeoutMs);
   try{
-    const r=await fetch(url,{signal:c.signal,headers:{'user-agent':ua,'accept-language':'en-US,en;q=0.8,ro;q=0.7'}});
-    return {ok:r.ok,status:r.status,url:r.url,html:r.ok?await r.text():'',source:'DIRECT'};
-  }catch(e){return{ok:false,status:0,url,error:String(e?.message||e),html:'',source:'DIRECT'};}
+    const r=await fetch(url,{signal:c.signal,headers,redirect:'follow'});
+    return {ok:r.ok,status:r.status,url:r.url,html:r.ok?await r.text():'',error:''};
+  }catch(e){return{ok:false,status:0,url,error:String(e?.message||e),html:''};}
   finally{clearTimeout(t);}
+}
+async function directFetch(url){
+  const r=await fetchWithTimeout(url,{'user-agent':ua,'accept-language':'en-US,en;q=0.8,ro;q=0.7'},12000);
+  return {...r,source:'DIRECT'};
 }
 async function readerFetch(url){
   const wait=Math.max(0,3300-(Date.now()-lastReaderRequestAt));
   if(wait)await delay(wait);
   lastReaderRequestAt=Date.now();
-  const c=new AbortController(),t=setTimeout(()=>c.abort(),45000);
-  try{
-    const readerUrl=`https://r.jina.ai/${url}`;
-    const r=await fetch(readerUrl,{signal:c.signal,headers:{
-      'user-agent':ua,
-      'accept-language':'en-US,en;q=0.8,ro;q=0.7',
-      'x-respond-with':'html',
-      'x-engine':'browser',
-      'x-timeout':'25',
-      'x-no-cache':'true',
-      'x-max-tokens':'50000',
-      'x-retain-images':'all'
-    }});
-    return {ok:r.ok,status:r.status,url,html:r.ok?await r.text():'',source:'JINA_READER'};
-  }catch(e){return{ok:false,status:0,url,error:String(e?.message||e),html:'',source:'JINA_READER'};}
-  finally{clearTimeout(t);}
+  const readerUrl=`https://r.jina.ai/${url}`;
+  const r=await fetchWithTimeout(readerUrl,{
+    'user-agent':ua,
+    'accept-language':'en-US,en;q=0.8,ro;q=0.7',
+    'x-respond-with':'html',
+    'x-engine':'browser',
+    'x-timeout':'25',
+    'x-no-cache':'true',
+    'x-max-tokens':'50000',
+    'x-retain-images':'all'
+  },45000);
+  return {...r,url,source:'JINA_READER'};
+}
+async function translateFetch(url){
+  const proxy=`https://translate.google.com/translate?sl=auto&tl=en&u=${encodeURIComponent(url)}`;
+  const r=await fetchWithTimeout(proxy,{
+    'user-agent':ua,
+    'accept-language':'en-US,en;q=0.9'
+  },25000);
+  return {...r,url,source:'GOOGLE_TRANSLATE_RENDER'};
 }
 async function fetchHtml(url){
   const direct=await directFetch(url);
@@ -46,7 +54,9 @@ async function fetchHtml(url){
   if(!blocked&&direct.html.length>1500)return direct;
   const reader=await readerFetch(url);
   if(reader.ok&&reader.html.length>1500)return reader;
-  return {...direct,readerStatus:reader.status||0,readerError:reader.error||'',source:'DIRECT+JINA_FAILED'};
+  const translated=await translateFetch(url);
+  if(translated.ok&&translated.html.length>1500)return translated;
+  return {...direct,readerStatus:reader.status||0,readerError:reader.error||'',translateStatus:translated.status||0,translateError:translated.error||'',source:'DIRECT+FALLBACKS_FAILED'};
 }
 
 function first(block,res){for(const re of res){const m=block.match(re);if(m)return clean(m[1]||m[0]);}return'';}
@@ -76,7 +86,19 @@ function numReview(text,market){
   for(const re of patterns){const m=html.match(re);if(!m)continue;const n=parseCount(m[1]);if(n!==null)return n;}
   return null;
 }
-function hrefFrom(block,base){const m=block.match(/<a[^>]+href=["']([^"'#]+)["']/i);if(!m)return'';try{return new URL(decodeEntities(m[1]),base).href;}catch{return'';}}
+function hrefFrom(block,base){
+  const matches=[...String(block).matchAll(/<a[^>]+href=["']([^"'#]+)["']/gi)];
+  for(const m of matches){
+    const raw=decodeEntities(m[1]);
+    try{
+      const u=new URL(raw,base);
+      const translatedTarget=u.searchParams.get('u');
+      if(translatedTarget&&/^https?:\/\//i.test(translatedTarget))return translatedTarget;
+      if(/^https?:\/\//i.test(u.href))return u.href;
+    }catch{}
+  }
+  return'';
+}
 function validImage(u){const s=decodeEntities(u).trim();if(!/^https?:\/\//i.test(s))return false;if(/\.svg(?:$|\?)/i.test(s)||/sprite|transparent|pixel|spacer|01rrzVoKd5L|loading|placeholder/i.test(s))return false;return /\.(?:jpe?g|png|webp)(?:$|\?)/i.test(s)||/m\.media-amazon\.com\/images\/I\//i.test(s);}
 function imgFrom(block){
   const attrs=[...String(block).matchAll(/<img[^>]+(?:src|data-src|srcset)=["']([^"']+)["']/gi)].flatMap(m=>decodeEntities(m[1]).split(',').map(x=>x.trim().split(/\s+/)[0]));
@@ -99,7 +121,7 @@ async function scanPage(market,query,page){
   else if(market.key.startsWith('ebay'))url=`${market.base}${encodeURIComponent(query)}&_pgn=${page}`;
   else url=`${market.base}${encodeURIComponent(query)}?ref=effective_search&page[limit]=60&page[offset]=${(page-1)*60}`;
   const r=await fetchHtml(url);
-  if(!r.ok)return{ok:false,status:r.status,url,items:[],error:r.error||r.readerError||'',source:r.source||'UNKNOWN',readerStatus:r.readerStatus||0};
+  if(!r.ok)return{ok:false,status:r.status,url,items:[],error:r.error||r.readerError||r.translateError||'',source:r.source||'UNKNOWN',readerStatus:r.readerStatus||0,translateStatus:r.translateStatus||0};
   const raw=blocks(r.html,market),items=[];let organic=0;
   for(const b of raw.slice(0,90)){
     const sponsored=/\bSponsored\b|\bPromoted\b|\bpromovat\b|\bsponsorizat\b/i.test(clean(b).slice(0,2400));
@@ -107,7 +129,8 @@ async function scanPage(market,query,page){
     const globalRank=(page-1)*pageCapacity(market)+organic,x=parseBlock(b,market,globalRank,page,url);
     if(x&&!x.sponsored)items.push(x);
   }
-  return{ok:true,status:r.status,url,items,source:r.source||'UNKNOWN'};
+  const structurallyValid=raw.length>0;
+  return{ok:structurallyValid,status:r.status,url,items,source:r.source||'UNKNOWN',error:structurallyValid?'':'NO_MARKETPLACE_RESULT_BLOCKS'};
 }
 function similar(a,b){const A=new Set(key(a).split(' ').filter(x=>x.length>2)),B=new Set(key(b).split(' ').filter(x=>x.length>2));if(!A.size||!B.size)return false;let i=0;for(const x of A)if(B.has(x))i++;return i/Math.min(A.size,B.size)>=0.65;}
 function historyDelta(points,rank,market){const prev=[...points].reverse().find(p=>p.sourceMarket===market&&Number.isFinite(p.organicRank));return prev?prev.organicRank-rank:null;}
@@ -137,7 +160,7 @@ for(const g of groups){
   const foreign=g.items.filter(i=>i.market!=='emagRO'),ro=g.items.filter(i=>i.market==='emagRO');if(!foreign.length)continue;
   const best=[...foreign].sort((a,b)=>a.organicRank-b.organicRank)[0],k=key(g.title),points=history.products?.[k]?.points||[],rankDelta=historyDelta(points,best.organicRank,best.market),marketKeys=[...new Set(foreign.map(i=>i.market))],reviewKnown=foreign.filter(i=>i.reviewCount!==null).map(i=>i.reviewCount),reviewCount=reviewKnown.length?Math.min(...reviewKnown):null,observedSellerCount=Math.max(1,foreign.length),romaniaCompetition=ro.length,firstSeenAt=previous.get(k)?.firstSeenAt||now,daysSinceFirstSeen=Math.max(0,Math.floor((Date.now()-new Date(firstSeenAt).getTime())/86400000));
   const eligibleReview=reviewCount!==null&&Number.isInteger(reviewCount)&&reviewCount<=Number(cfg.maxReviews||10),eligibleSellers=observedSellerCount<=Number(cfg.maxObservedSellers||8),eligiblePage=best.page<=Number(cfg.maxOrganicPage||2);
-  const p={key:k,name:clean(g.title),category:g.category,query:g.query,firstSeenAt,lastSeenAt:now,daysSinceFirstSeen,newnessStatus:'PRIMA_APARITIE_OBSERVATA_DE_RADAR',image:best.image||foreign.find(i=>i.image)?.image||'',sourceUrl:best.url,sourceMarket:best.marketLabel,sourceMarketKey:best.market,organicRank:best.organicRank,organicPage:best.page,reviewCount,reviewStatus:reviewCount===null?'NECUNOSCUT':'OBSERVAT',promoted:false,observedSellerCount,sellerCountStatus:'PROXY_DIN_LISTARI_SIMILARE',crossMarketCount:marketKeys.length,markets:marketKeys,romaniaCompetition,romaniaCompetitionStatus:'PROXY_DIN_REZULTATE_EMAG',rankDelta,rankStatus:rankDelta===null?'ISTORIC_INSUFICIENT':'COMPARAT_CU_ACELASI_MARKETPLACE',eligibleForFeed:eligibleReview&&eligibleSellers&&eligiblePage,evidence:g.items.slice(0,12),validation:'Poziția este observată în primele 2 pagini publice ale marketplace-ului. Când accesul direct din GitHub este blocat, aceeași pagină este randată prin Jina Reader și ordinea DOM rezultată este folosită ca poziție observată. Sponsored/Promoted este exclus când marcajul este detectabil. Review-urile sunt acceptate doar ca număr întreg asociat explicit cu reviews/ratings, nu ca scor de stele. Sellerii și competiția RO sunt proxy-uri din listări similare, nu număr comercial verificat.'};
+  const p={key:k,name:clean(g.title),category:g.category,query:g.query,firstSeenAt,lastSeenAt:now,daysSinceFirstSeen,newnessStatus:'PRIMA_APARITIE_OBSERVATA_DE_RADAR',image:best.image||foreign.find(i=>i.image)?.image||'',sourceUrl:best.url,sourceMarket:best.marketLabel,sourceMarketKey:best.market,organicRank:best.organicRank,organicPage:best.page,reviewCount,reviewStatus:reviewCount===null?'NECUNOSCUT':'OBSERVAT',promoted:false,observedSellerCount,sellerCountStatus:'PROXY_DIN_LISTARI_SIMILARE',crossMarketCount:marketKeys.length,markets:marketKeys,romaniaCompetition,romaniaCompetitionStatus:'PROXY_DIN_REZULTATE_EMAG',rankDelta,rankStatus:rankDelta===null?'ISTORIC_INSUFICIENT':'COMPARAT_CU_ACELASI_MARKETPLACE',eligibleForFeed:eligibleReview&&eligibleSellers&&eligiblePage,evidence:g.items.slice(0,12),validation:'Poziția este observată în primele 2 pagini publice ale marketplace-ului. Accesul direct este preferat; dacă IP-ul GitHub este blocat, aceeași pagină poate fi randată printr-un serviciu public de browser/proxy, iar sursa tehnică este salvată în evidence. Sponsored/Promoted este exclus când marcajul este detectabil. Review-urile sunt acceptate doar ca număr întreg asociat explicit cu reviews/ratings, nu ca scor de stele. Sellerii și competiția RO sunt proxy-uri din listări similare, nu număr comercial verificat.'};
   p.organicRiseScore=score(p,Number(cfg.maxReviews||10));
   p.signal=!p.eligibleForFeed?'⚪ NU TRECE GATE-UL':p.organicRiseScore>=80?'🔥 URCARE PUTERNICĂ':p.organicRiseScore>=65?'🟢 PROMIȚĂTOR':p.organicRiseScore>=55?'🟡 DE URMĂRIT':'⚪ SLAB';
   products.push(p);
@@ -145,7 +168,7 @@ for(const g of groups){
   history.products=history.products||{};history.products[k]={name:p.name,points:next};
 }
 products.sort((a,b)=>Number(b.eligibleForFeed)-Number(a.eligibleForFeed)||b.organicRiseScore-a.organicRiseScore||((b.rankDelta||0)-(a.rankDelta||0)));
-history.version='1.3';history.updatedAt=now;
-const threshold=Number(cfg.minScoreForFeed||55),feed=products.filter(p=>p.eligibleForFeed&&p.organicRiseScore>=threshold).slice(0,30),payload={version:'1.3',engine:'Organic Rising Products',updatedAt:now,category:category?.name||null,queries,successfulPages,marketStatus,totalObserved:all.length,totalClusters:groups.length,feedThreshold:threshold,maxReviews:Number(cfg.maxReviews||10),maxOrganicPage:Number(cfg.maxOrganicPage||2),maxObservedSellers:Number(cfg.maxObservedSellers||8),products:products.slice(0,120),feed,policy:'Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; Jina Reader este fallback de randare pentru aceeași pagină când marketplace-ul blochează IP-ul GitHub. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate.'};
+history.version='1.4';history.updatedAt=now;
+const threshold=Number(cfg.minScoreForFeed||55),feed=products.filter(p=>p.eligibleForFeed&&p.organicRiseScore>=threshold).slice(0,30),payload={version:'1.4',engine:'Organic Rising Products',updatedAt:now,category:category?.name||null,queries,successfulPages,marketStatus,totalObserved:all.length,totalClusters:groups.length,feedThreshold:threshold,maxReviews:Number(cfg.maxReviews||10),maxOrganicPage:Number(cfg.maxOrganicPage||2),maxObservedSellers:Number(cfg.maxObservedSellers||8),products:products.slice(0,120),feed,policy:'Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; fallback-urile de randare sunt acceptate doar dacă structura reală de rezultate a marketplace-ului poate fi identificată. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate.'};
 await Promise.all([fs.writeFile(LIVE,JSON.stringify(payload,null,2)+'\n'),fs.writeFile(HISTORY,JSON.stringify(history,null,2)+'\n')]);
-console.log(`Organic Rising v1.3: ${category?.name||'General'}; pages ${successfulPages}; observed ${all.length}; clusters ${groups.length}; eligible ${products.filter(p=>p.eligibleForFeed).length}; feed ${feed.length}.`,JSON.stringify(marketStatus));
+console.log(`Organic Rising v1.4: ${category?.name||'General'}; pages ${successfulPages}; observed ${all.length}; clusters ${groups.length}; eligible ${products.filter(p=>p.eligibleForFeed).length}; feed ${feed.length}.`,JSON.stringify(marketStatus));
