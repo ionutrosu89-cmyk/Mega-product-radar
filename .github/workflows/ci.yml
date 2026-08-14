@@ -35,6 +35,9 @@ jobs:
       - name: Syntax check Market Intelligence engine
         run: node --check scripts/market-intelligence-postprocess.mjs
 
+      - name: Syntax check Market Intelligence history
+        run: node --check scripts/market-intelligence-history.mjs
+
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
 
@@ -43,6 +46,9 @@ jobs:
 
       - name: Verify DataForSEO zero-cost fallback
         run: node scripts/dataforseo-keywords.mjs
+
+      - name: Generate Market Intelligence history fixture
+        run: node scripts/market-intelligence-history.mjs
 
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
