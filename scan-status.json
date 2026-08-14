@@ -1,17 +1,18 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T03:03:00.355Z",
-  "completedAt": "2026-08-14T03:06:19.205Z",
-  "updatedAt": "2026-08-14T03:03:13.056Z",
+  "startedAt": "2026-08-14T03:59:57.171Z",
+  "completedAt": "2026-08-14T04:03:33.393Z",
+  "updatedAt": "2026-08-14T04:00:10.553Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
-  "engine": "Romania Arbitrage + Wide Global Discovery + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
+  "engine": "Romania Arbitrage + Wide Global Discovery + Organic Rising + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
   "modules": {
     "strictAudit": true,
     "evidenceValidation": true,
     "globalDiscovery": true,
+    "organicRising": true,
     "romaniaGap2": true,
     "trendVelocity": true,
     "supplierHunter": true,
@@ -29,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T03:03:13.093Z",
+    "updatedAt": "2026-08-14T04:00:10.587Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T03:06:19.194Z",
+    "updatedAt": "2026-08-14T04:03:33.380Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 5,
     "network": {
       "markets": [
         {
@@ -147,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T03:04:35.182Z",
+      "updatedAt": "2026-08-14T04:01:49.366Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -173,5 +174,15 @@
     "historyProducts": 35,
     "trendWarmup": true,
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
+  },
+  "organicRising": {
+    "updatedAt": "2026-08-14T04:01:49.361Z",
+    "category": "Pet",
+    "successfulPages": 1,
+    "totalObserved": 14,
+    "totalClusters": 12,
+    "feedCount": 5,
+    "feedThreshold": 55,
+    "policy": "Gate obligatoriu: review-uri observate <=10, poziție organică în max. pagina 2 și competiție observată redusă. Scorul adaugă cross-market, România gap, noutate observată și rank velocity. Câmpurile necunoscute nu sunt inventate."
   }
 }
