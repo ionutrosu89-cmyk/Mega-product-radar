@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T11:52:36.075Z",
-  "completedAt": "2026-08-14T11:57:17.968Z",
-  "updatedAt": "2026-08-14T11:52:49.580Z",
+  "startedAt": "2026-08-14T11:59:39.882Z",
+  "completedAt": "2026-08-14T12:04:16.927Z",
+  "updatedAt": "2026-08-14T11:59:53.280Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T11:52:49.613Z",
+    "updatedAt": "2026-08-14T11:59:53.314Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T11:57:17.955Z",
+    "updatedAt": "2026-08-14T12:04:16.914Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T11:55:33.946Z",
+      "updatedAt": "2026-08-14T12:02:32.900Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,12 +176,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T11:55:33.913Z",
-    "category": "Beauty accesorii",
-    "successfulPages": 12,
-    "totalObserved": 101,
-    "totalClusters": 67,
-    "feedCount": 0,
+    "updatedAt": "2026-08-14T12:02:32.894Z",
+    "category": "Fitness & recuperare",
+    "successfulPages": 9,
+    "totalObserved": 89,
+    "totalClusters": 57,
+    "feedCount": 1,
     "feedThreshold": 55,
     "operational": true,
     "requiredMarkets": [
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 6,
-        "items": 72,
+        "successful": 2,
+        "items": 25,
         "statuses": [
           200,
           200,
@@ -204,11 +204,11 @@
           200
         ],
         "sources": [
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER"
         ]
       },
@@ -216,7 +216,7 @@
         "label": "Amazon IT",
         "attempted": 6,
         "successful": 2,
-        "items": 17,
+        "items": 28,
         "statuses": [
           200,
           200,
@@ -228,8 +228,8 @@
         "sources": [
           "DIRECT",
           "DIRECT",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
+          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER"
         ]
@@ -237,11 +237,11 @@
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 0,
-        "items": 0,
+        "successful": 1,
+        "items": 12,
         "statuses": [
           200,
-          200,
+          503,
           503,
           503,
           503,
@@ -249,7 +249,7 @@
         ],
         "sources": [
           "DIRECT",
-          "DIRECT",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
@@ -282,7 +282,7 @@
         "label": "eMAG RO",
         "attempted": 6,
         "successful": 4,
-        "items": 12,
+        "items": 24,
         "statuses": [
           200,
           200,
