@@ -44,6 +44,9 @@ jobs:
       - name: Syntax check Opportunity Ranking V2
         run: node --check scripts/opportunity-ranking-v2.mjs
 
+      - name: Syntax check Smart Watchlist
+        run: node --check scripts/watchlist-postprocess.mjs
+
       - name: Syntax check Trend Intelligence UI
         run: |
           node --check market-trend-ui.js
@@ -66,6 +69,9 @@ jobs:
 
       - name: Generate Opportunity Ranking V2 fixture
         run: node scripts/opportunity-ranking-v2.mjs
+
+      - name: Generate Smart Watchlist fixture
+        run: node scripts/watchlist-postprocess.mjs
 
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
