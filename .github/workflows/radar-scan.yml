@@ -11,6 +11,7 @@ on:
       - 'discovery-catalogue.json'
       - 'discovery-themes.json'
       - 'discovery-themes-wide.json'
+      - 'organic-rising-config.json'
       - 'discovery-engine.js'
       - 'discovery-history.js'
       - 'review-intelligence.js'
@@ -43,7 +44,7 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Run Radar V2 + Wide Product Discovery scan
+      - name: Run Radar V2 + Wide Product Discovery + Organic Rising scan
         id: scan
         continue-on-error: true
         run: node scripts/run-github-scan.mjs
@@ -53,12 +54,12 @@ jobs:
         continue-on-error: true
         run: node scripts/enrich-discovery-images.mjs
 
-      - name: Persist radar, discovery, histories and scan status
+      - name: Persist radar, discovery, organic histories and scan status
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json discovery-live.json discovery-history.json scan-status.json
+          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
             git pull --rebase origin main
