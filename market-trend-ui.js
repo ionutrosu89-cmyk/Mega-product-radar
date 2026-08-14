@@ -12,6 +12,14 @@ function selectedTrend(){return document.querySelector('#trendStatus')?.value||'
 function selectedSignal(){return document.querySelector('#trendSignal')?.value||'';}
 function selectedRank(){return document.querySelector('#opportunityTier')?.value||'';}
 
+function injectNav(){
+  const nav=document.querySelector('.nav');
+  if(!nav||nav.querySelector('a[href="watchlist.html"]'))return;
+  const link=document.createElement('a');link.className='chip';link.href='watchlist.html';link.textContent='Top Opportunities';
+  const purchase=nav.querySelector('a[href="purchase-manager-ro.html"]');
+  if(purchase)nav.insertBefore(link,purchase);else nav.appendChild(link);
+}
+
 function injectFilters(){
   const filters=document.querySelector('.filters');
   if(!filters||document.querySelector('#trendStatus'))return;
@@ -75,6 +83,7 @@ function injectXray(){
 
 async function init(){
   try{
+    injectNav();
     const res=await fetch('./market-intelligence-live.json',{cache:'no-store'});const data=await res.json();
     byRoName=new Map((data.products||[]).map(p=>[norm(roProductName(p.name)),p]));injectFilters();decorateAndFilter();
     const grid=document.querySelector('#grid');if(grid)new MutationObserver(()=>decorateAndFilter()).observe(grid,{childList:true,subtree:false});
