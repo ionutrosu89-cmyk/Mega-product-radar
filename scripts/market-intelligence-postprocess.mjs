@@ -8,6 +8,10 @@ const round=v=>Math.round(num(v)*10)/10;
 
 async function readJson(path,fallback){try{return JSON.parse(await fs.readFile(path,'utf8'));}catch{return fallback;}}
 
+function domainOf(url){
+  try{return new URL(String(url||'')).hostname.replace(/^www\./,'').toLowerCase();}catch{return '';}
+}
+
 function scoreProfit(product){
   const e=product?.discoveryAnalysis?.economics||{};
   const margin=num(e.margin), roi=num(e.roi), profit=num(e.profit);
@@ -54,6 +58,51 @@ function scoreCompetition(product){
   return {pressure:round(pressure),label:pressure>=70?'RIDICATĂ':pressure>=35?'MEDIE':'REDUSĂ',romaniaPresence:ro,romaniaResults:roResults};
 }
 
+function competitorIntelligence(product){
+  const signals=product?.signals&&typeof product.signals==='object'?product.signals:{};
+  const rows=[];
+  for(const [key,s] of Object.entries(signals)){
+    const links=Array.isArray(s?.links)?s.links.filter(Boolean):[];
+    const domains=[...new Set(links.map(domainOf).filter(Boolean))];
+    rows.push({
+      key,
+      label:s?.label||key,
+      ok:Boolean(s?.ok),
+      present:Boolean(s?.present),
+      resultCount:num(s?.resultCount),
+      observedLinks:links.length,
+      domains,
+      searchUrl:s?.searchUrl||''
+    });
+  }
+  const roRows=rows.filter(r=>r.key==='emagRO'||r.domains.some(d=>d.endsWith('.ro')));
+  const foreignRows=rows.filter(r=>!roRows.includes(r)&&!['alibabaCN','1688CN','madeInChina','globalSources','tiktok','facebook','pinterest','youtube'].includes(r.key));
+  const roDomains=[...new Set(roRows.flatMap(r=>r.domains))];
+  const foreignDomains=[...new Set(foreignRows.flatMap(r=>r.domains))];
+  const roObservedLinks=roRows.reduce((a,r)=>a+r.observedLinks,0);
+  const roResultProxy=roRows.reduce((a,r)=>a+r.resultCount,0);
+  const evidence=roRows.filter(r=>r.ok).length;
+  const saturationScore=clamp(roDomains.length*18+Math.min(40,roObservedLinks*8)+Math.min(30,roResultProxy*3));
+  const label=evidence===0?'NEVALIDATĂ':saturationScore>=70?'RIDICATĂ':saturationScore>=35?'MEDIE':'REDUSĂ';
+  return {
+    saturationScore:round(saturationScore),
+    label,
+    evidenceMarkets:evidence,
+    romania:{domains:roDomains,domainCount:roDomains.length,observedLinks:roObservedLinks,resultProxy:roResultProxy,markets:roRows},
+    foreign:{domains:foreignDomains,domainCount:foreignDomains.length,observedLinks:foreignRows.reduce((a,r)=>a+r.observedLinks,0),markets:foreignRows},
+    policy:'Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări.'
+  };
+}
+
+function marketEvidence(product){
+  const signals=product?.signals&&typeof product.signals==='object'?product.signals:{};
+  const rows=Object.entries(signals).map(([key,s])=>({key,label:s?.label||key,ok:Boolean(s?.ok),present:Boolean(s?.present),resultCount:num(s?.resultCount),observedLinks:Array.isArray(s?.links)?s.links.length:0}));
+  const checked=rows.filter(r=>r.ok).length;
+  const present=rows.filter(r=>r.present).length;
+  const observedLinks=rows.reduce((a,r)=>a+r.observedLinks,0);
+  return {checked,present,observedLinks,coverageScore:round(clamp((checked/Math.max(1,rows.length))*70+Math.min(30,observedLinks*3))),rows};
+}
+
 function scoreSourcing(product){
   const hunter=product?.supplierHunter||{};
   const sources=num(hunter.sourceCount||product?.chinaPresence);
@@ -97,6 +146,8 @@ const products=(Array.isArray(discovery.products)?discovery.products:[]).map(pro
   const demand=scoreDemand(product);
   const marketGap=scoreMarketGap(product);
   const competition=scoreCompetition(product);
+  const competitors=competitorIntelligence(product);
+  const evidenceCoverage=marketEvidence(product);
   const sourcing=scoreSourcing(product);
   const profit=scoreProfit(product);
   const reviews=reviewSummary(product);
@@ -114,6 +165,8 @@ const products=(Array.isArray(discovery.products)?discovery.products:[]).map(pro
     demand,
     marketGap,
     competition,
+    competitors,
+    evidenceCoverage,
     sourcing,
     reviews,
     keywordDemand,
@@ -130,19 +183,21 @@ const stats={
   testCandidates:products.filter(p=>p.launchScore.verdict==='CANDIDAT TEST').length,
   strongGaps:products.filter(p=>p.marketGap.label==='GAP PUTERNIC').length,
   evidenceReady:products.filter(p=>p.launchScore.enoughEvidence).length,
+  competitorCoverage:products.filter(p=>p.competitors.evidenceMarkets>0).length,
+  observedRomaniaDomains:[...new Set(products.flatMap(p=>p.competitors.romania.domains))].length,
   partial:products.filter(p=>String(p.sourceStatus).toUpperCase().includes('PARTIAL')).length
 };
 
 const output={
-  version:'1.0',
+  version:'1.1',
   engine:'Mega Product Radar Market Intelligence',
   updatedAt:new Date().toISOString(),
   sourceUpdatedAt:discovery.updatedAt||null,
   mode:'STRICT_EVIDENCE_FIRST',
-  dataPolicy:'Scorurile sunt calculate exclusiv din dovezile existente. Volumele de căutare și vânzările nu sunt inventate; keyword demand rămâne proxy până la integrarea unui furnizor precum DataForSEO.',
+  dataPolicy:'Scorurile sunt calculate exclusiv din dovezile existente. Volumele de căutare, sellerii și vânzările nu sunt inventate; keyword demand și competitor intelligence rămân proxy-uri observabile până la surse verificate.',
   providerReadiness:{dataForSEO:{ready:true,enabled:false,purpose:['keyword volume RO','SERP RO','Google Shopping','cross-market demand']},apify:{ready:true,enabled:false,purpose:['dynamic marketplace enrichment','fallback scraping']}},
   stats,
   products
 };
 await fs.writeFile(OUTPUT,JSON.stringify(output,null,2)+'\n');
-console.log(`Market Intelligence: ${products.length} produse, ${stats.testCandidates} TEST candidates, ${stats.buyCandidates} BUY candidates, ${stats.evidenceReady} cu dovezi suficiente.`);
+console.log(`Market Intelligence: ${products.length} produse, ${stats.testCandidates} TEST, ${stats.buyCandidates} BUY, ${stats.competitorCoverage} cu competitor evidence, ${stats.evidenceReady} cu dovezi suficiente.`);
