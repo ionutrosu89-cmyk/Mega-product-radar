@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "maxReviews": 10,
+  "maxOrganicPage": 2,
+  "maxObservedSellers": 8,
+  "maxProductsPerMarketQuery": 60,
+  "minScoreForFeed": 55,
+  "categories": [
+    {"name":"Casă & organizare","queries":["home problem solver","space saving home","smart home organizer"]},
+    {"name":"Bucătărie","queries":["kitchen problem solver","kitchen gadget new","food storage innovation"]},
+    {"name":"Auto","queries":["car accessory new","car problem solver","car organization gadget"]},
+    {"name":"Travel","queries":["travel accessory new","travel problem solver","luggage gadget"]},
+    {"name":"Copii 3-6","queries":["kids travel accessory","kids learning activity new","kids organization product"]},
+    {"name":"Baby","queries":["baby travel accessory new","stroller accessory new","baby organization product"]},
+    {"name":"Pet","queries":["pet problem solver new","dog accessory new","cat accessory new"]},
+    {"name":"Beauty accesorii","queries":["beauty organizer new","hair accessory innovation","makeup accessory new"]},
+    {"name":"Fitness & recuperare","queries":["fitness accessory new","recovery accessory new","home workout gadget"]}
+  ],
+  "markets": [
+    {"key":"amazonUS","label":"Amazon US","kind":"foreign","base":"https://www.amazon.com/s?k="},
+    {"key":"amazonDE","label":"Amazon DE","kind":"foreign","base":"https://www.amazon.de/s?k="},
+    {"key":"ebayUS","label":"eBay US","kind":"foreign","base":"https://www.ebay.com/sch/i.html?_nkw="},
+    {"key":"emagRO","label":"eMAG RO","kind":"romania","base":"https://www.emag.ro/search/"}
+  ]
+}
