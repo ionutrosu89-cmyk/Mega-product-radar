@@ -16,6 +16,7 @@ on:
       - 'discovery-history.js'
       - 'review-intelligence.js'
       - 'market-intelligence.html'
+      - 'watchlist.html'
       - '.deploy-trigger'
   schedule:
     - cron: '30 3 * * *'
@@ -80,6 +81,10 @@ jobs:
         if: always()
         run: node scripts/opportunity-ranking-v2.mjs
 
+      - name: Build Smart Opportunity Watchlist
+        if: always()
+        run: node scripts/watchlist-postprocess.mjs
+
       - name: Validate Organic Rising data
         if: always()
         run: node scripts/qa-organic-rising.mjs
@@ -89,7 +94,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
@@ -97,7 +102,7 @@ jobs:
           for f in /tmp/radar-output/*.json; do cp "$f" .; done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json scan-status.json
+          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
             git push origin main
