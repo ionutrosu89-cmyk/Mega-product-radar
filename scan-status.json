@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T13:57:14.672Z",
-  "completedAt": "2026-08-14T14:01:55.403Z",
-  "updatedAt": "2026-08-14T13:57:27.614Z",
+  "startedAt": "2026-08-14T14:03:39.828Z",
+  "completedAt": "2026-08-14T14:08:37.049Z",
+  "updatedAt": "2026-08-14T14:03:53.064Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T13:57:27.817Z",
+    "updatedAt": "2026-08-14T14:03:53.239Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T14:01:55.388Z",
+    "updatedAt": "2026-08-14T14:08:37.038Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 6,
+    "reviewChecks": 7,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T14:00:11.372Z",
+      "updatedAt": "2026-08-14T14:06:53.029Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,12 +176,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T14:00:11.357Z",
+    "updatedAt": "2026-08-14T14:06:53.017Z",
     "category": "Fitness & recuperare",
-    "successfulPages": 10,
-    "totalObserved": 95,
-    "totalClusters": 60,
-    "feedCount": 30,
+    "successfulPages": 11,
+    "totalObserved": 112,
+    "totalClusters": 75,
+    "feedCount": 0,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,8 +194,30 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 6,
-        "items": 71,
+        "successful": 4,
+        "items": 46,
+        "statuses": [
+          200,
+          200,
+          200,
+          200,
+          503,
+          503
+        ],
+        "sources": [
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
+        ]
+      },
+      "amazonIT": {
+        "label": "Amazon IT",
+        "attempted": 6,
+        "successful": 3,
+        "items": 42,
         "statuses": [
           200,
           200,
@@ -211,28 +233,6 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER"
-        ]
-      },
-      "amazonIT": {
-        "label": "Amazon IT",
-        "attempted": 6,
-        "successful": 0,
-        "items": 0,
-        "statuses": [
-          200,
-          200,
-          200,
-          200,
-          200,
-          200
-        ],
-        "sources": [
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT",
-          "DIRECT"
         ]
       },
       "amazonDE": {
@@ -303,12 +303,13 @@
       }
     },
     "qualityPostprocess": {
-      "version": "1.0",
-      "at": "2026-08-14T14:00:11.366Z",
+      "version": "1.1",
+      "at": "2026-08-14T14:06:53.025Z",
       "exactListingReviewGate": true,
+      "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
       "imagePlaceholderFilter": true
     },
-    "policy": "Gate obligatoriu pe listarea sursă: review-uri observate ca număr întreg <=10, poziție organică în maximum pagina 2, rezultat nepromovat când marcajul este detectabil, competiție observată redusă și potrivire cu nișa scanată. Sellerii și competiția RO rămân proxy-uri explicite; câmpurile necunoscute nu sunt inventate."
+    "policy": "Gate obligatoriu pe listarea sursă: review-uri observate ca număr întreg <=10; lipsa review-urilor rămâne NECUNOSCUT și nu trece filtrul. Poziție organică în maximum pagina 2, rezultat nepromovat când marcajul este detectabil, competiție observată redusă și potrivire cu nișa scanată. Sellerii și competiția RO rămân proxy-uri explicite; câmpurile necunoscute nu sunt inventate."
   }
 }
