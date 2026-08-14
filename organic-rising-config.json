@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "maxReviews": 10,
   "maxOrganicPage": 2,
   "maxObservedSellers": 8,
@@ -17,9 +17,9 @@
     {"name":"Fitness & recuperare","queries":["fitness accessory new","recovery accessory new","home workout gadget"]}
   ],
   "markets": [
-    {"key":"amazonUS","label":"Amazon US","kind":"foreign","base":"https://www.amazon.com/s?k="},
-    {"key":"amazonDE","label":"Amazon DE","kind":"foreign","base":"https://www.amazon.de/s?k="},
-    {"key":"ebayUS","label":"eBay US","kind":"foreign","base":"https://www.ebay.com/sch/i.html?_nkw="},
-    {"key":"emagRO","label":"eMAG RO","kind":"romania","base":"https://www.emag.ro/search/"}
+    {"key":"amazonUS","label":"Amazon US","kind":"foreign","requiredForOperational":true,"base":"https://www.amazon.com/s?k="},
+    {"key":"amazonDE","label":"Amazon DE","kind":"foreign","requiredForOperational":false,"base":"https://www.amazon.de/s?k="},
+    {"key":"ebayUS","label":"eBay US","kind":"foreign","requiredForOperational":false,"base":"https://www.ebay.com/sch/i.html?_nkw="},
+    {"key":"emagRO","label":"eMAG RO","kind":"romania","requiredForOperational":true,"base":"https://www.emag.ro/search/"}
   ]
 }
