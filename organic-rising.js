@@ -4,42 +4,23 @@ const safe=u=>{try{const x=new URL(u);return['http:','https:'].includes(x.protoc
 function commercialRoName(name,cat=''){
   const s=String(name||'').replace(/&#x27;|&#39;/gi,"'");
   const rules=[
-    [/hair grippers?|hair clips?|claw clips?|barrettes?/i,'Set clipsuri și agrafe pentru păr'],
-    [/hair elastics?|hair ties?|scrunchies?|hair bands?|head bands?/i,'Set elastice și accesorii pentru păr'],
-    [/hair jewelry|braid(?:s|ing)? accessories|hair cuffs|loc jewelry|dreadlock/i,'Set accesorii decorative pentru păr și împletituri'],
-    [/banana hair clips?/i,'Clamă tip banană pentru păr'],
-    [/hair bun maker|bun clips?/i,'Accesoriu pentru realizarea cocului'],
-    [/powder puff|makeup sponge|beauty sponge|blender sponge/i,'Set bureți și pufuri pentru machiaj'],
-    [/makeup organizer cart|rolling makeup organizer/i,'Organizator mobil pentru cosmetice'],
-    [/makeup bag|cosmetic bag|toiletry bag|vanity bag/i,'Geantă organizatoare pentru cosmetice'],
-    [/refillable cosmetic.*bottles?|travel bottles?|squeeze bottles?/i,'Set recipiente cosmetice reîncărcabile pentru călătorie'],
-    [/glitter freckles|face tattoo/i,'Set tatuaje cosmetice temporare tip pistrui'],
-    [/car.*organizer|car organization/i,'Organizator auto'],
-    [/car.*holder|car holder/i,'Suport auto'],
-    [/car.*accessor/i,'Accesoriu auto'],
-    [/kitchen.*organizer|food storage/i,'Organizator pentru bucătărie și depozitarea alimentelor'],
-    [/kitchen.*gadget|kitchen.*tool/i,'Accesoriu practic pentru bucătărie'],
-    [/travel.*organizer|luggage.*organizer/i,'Organizator pentru călătorie și bagaje'],
-    [/travel.*accessor|luggage.*gadget/i,'Accesoriu de călătorie'],
-    [/stroller.*accessor/i,'Accesoriu pentru cărucior'],
-    [/baby.*organizer/i,'Organizator pentru bebeluși'],
-    [/baby.*travel/i,'Accesoriu de călătorie pentru bebeluși'],
-    [/kids.*activity|learning.*kids|activity.*kids/i,'Activitate educațională pentru copii'],
-    [/kids.*organizer|kids.*organization/i,'Organizator pentru copii'],
-    [/dog.*accessor|pet.*accessor/i,'Accesoriu pentru animale de companie'],
-    [/cat.*accessor/i,'Accesoriu pentru pisici'],
-    [/pet.*organizer/i,'Organizator pentru accesorii de animale'],
-    [/fitness.*accessor|workout.*gadget/i,'Accesoriu pentru antrenament'],
-    [/recovery.*accessor/i,'Accesoriu pentru recuperare'],
-    [/home.*organizer|space saving home/i,'Organizator pentru casă, cu economie de spațiu'],
-    [/home.*problem solver/i,'Accesoriu practic pentru casă']
+    [/pilates bar/i,'Kit bară Pilates cu benzi elastice'],[/resistance bands?/i,'Set benzi elastice pentru antrenament'],[/massage (?:gun|tool|roller)|muscle massager/i,'Dispozitiv pentru masaj și recuperare musculară'],[/foam roller/i,'Rolă pentru masaj și recuperare musculară'],[/stretch(?:ing)? (?:strap|tool|band)/i,'Accesoriu pentru stretching și mobilitate'],[/yoga (?:mat|accessory|strap|block)/i,'Accesoriu pentru yoga și mobilitate'],
+    [/pet stain.*odor|dog stain.*odor|urine.*cleaner|enzymatic cleaner/i,'Soluție enzimatică pentru pete și mirosuri de animale'],[/dog.*leash/i,'Accesoriu pentru lesa câinelui'],[/cat litter/i,'Accesoriu pentru litiera pisicii'],[/pet.*feeding|dog.*feeding|cat.*feeding/i,'Accesoriu pentru hrănirea animalelor'],
+    [/hair grippers?|hair clips?|claw clips?|barrettes?/i,'Set clipsuri și agrafe pentru păr'],[/hair elastics?|hair ties?|scrunchies?|hair bands?|head bands?/i,'Set elastice și accesorii pentru păr'],[/hair jewelry|braid(?:s|ing)? accessories|hair cuffs|loc jewelry|dreadlock/i,'Set accesorii decorative pentru păr și împletituri'],[/banana hair clips?/i,'Clamă tip banană pentru păr'],[/hair bun maker|bun clips?/i,'Accesoriu pentru realizarea cocului'],[/powder puff|makeup sponge|beauty sponge|blender sponge/i,'Set bureți și pufuri pentru machiaj'],[/makeup organizer cart|rolling makeup organizer/i,'Organizator mobil pentru cosmetice'],[/makeup bag|cosmetic bag|toiletry bag|vanity bag/i,'Geantă organizatoare pentru cosmetice'],[/refillable cosmetic.*bottles?|travel bottles?|squeeze bottles?/i,'Set recipiente cosmetice reîncărcabile pentru călătorie'],[/glitter freckles|face tattoo/i,'Set tatuaje cosmetice temporare tip pistrui'],
+    [/car.*seat.*organizer/i,'Organizator pentru spătarul scaunului auto'],[/car.*trunk.*organizer/i,'Organizator pentru portbagaj'],[/car.*cup holder/i,'Accesoriu pentru suportul de pahare auto'],[/car.*phone holder/i,'Suport auto pentru telefon'],[/car.*organizer|car organization/i,'Organizator auto'],[/car.*holder|car holder/i,'Suport auto'],[/car.*accessor/i,'Accesoriu auto'],
+    [/food storage.*container|food container/i,'Recipient pentru depozitarea alimentelor'],[/kitchen.*organizer|food storage/i,'Organizator pentru bucătărie și depozitarea alimentelor'],[/vegetable.*cutter|food.*chopper|kitchen.*cutter/i,'Dispozitiv pentru tăiere și pregătirea alimentelor'],[/kitchen.*gadget|kitchen.*tool/i,'Accesoriu practic pentru bucătărie'],
+    [/packing cubes?|luggage organizer/i,'Set organizatoare pentru bagaje'],[/travel.*organizer|luggage.*organizer/i,'Organizator pentru călătorie și bagaje'],[/travel.*pillow/i,'Pernă de călătorie'],[/travel.*accessor|luggage.*gadget/i,'Accesoriu de călătorie'],
+    [/stroller.*organizer/i,'Organizator pentru cărucior'],[/stroller.*accessor/i,'Accesoriu pentru cărucior'],[/baby.*organizer/i,'Organizator pentru bebeluși'],[/baby.*travel/i,'Accesoriu de călătorie pentru bebeluși'],[/kids.*activity|learning.*kids|activity.*kids/i,'Activitate educațională pentru copii'],[/kids.*organizer|kids.*organization/i,'Organizator pentru copii'],
+    [/dog.*accessor|pet.*accessor/i,'Accesoriu pentru animale de companie'],[/cat.*accessor/i,'Accesoriu pentru pisici'],[/pet.*organizer/i,'Organizator pentru accesorii de animale'],
+    [/fitness.*accessor|workout.*gadget|exercise.*equipment/i,'Accesoriu pentru antrenament'],[/recovery.*accessor/i,'Accesoriu pentru recuperare'],[/drawer.*organizer/i,'Organizator pentru sertare'],[/closet.*organizer|wardrobe.*organizer/i,'Organizator pentru garderobă'],[/home.*organizer|space saving home/i,'Organizator pentru casă, cu economie de spațiu'],[/home.*problem solver/i,'Accesoriu practic pentru casă']
   ];
   for(const [re,label] of rules)if(re.test(s)){
     const qty=s.match(/\b(\d{1,3})\s*(?:pcs|pc|ct|count|pack)\b/i)?.[1];
     return qty?`${label}, ${qty} buc.`:label;
   }
-  const translated=roProductName(s).replace(/\bfor\b/gi,'pentru').replace(/\band\b/gi,'și').replace(/\bwith\b/gi,'cu').replace(/\bwomen\b/gi,'femei').replace(/\bmen\b/gi,'bărbați').replace(/\bhair\b/gi,'păr').replace(/\baccessories\b/gi,'accesorii').replace(/\baccessory\b/gi,'accesoriu').replace(/\bnew\b/gi,'nou').replace(/\bpack\b/gi,'set').replace(/\bpcs?\b/gi,'buc.').replace(/\bcount\b/gi,'buc.').replace(/\bblack\b/gi,'negru').replace(/\bbrown\b/gi,'maro').replace(/\bpink\b/gi,'roz').replace(/\bblue\b/gi,'albastru').replace(/\bwhite\b/gi,'alb').replace(/\bportable\b/gi,'portabil').replace(/\bwaterproof\b/gi,'impermeabil').replace(/\btransparent\b/gi,'transparent').replace(/\brefillable\b/gi,'reîncărcabil').replace(/\bset\b/gi,'set').replace(/\s+/g,' ').trim();
-  if(/[a-z]{3,}\s+[a-z]{3,}/i.test(translated)&&!/[ăâîșț]/i.test(translated))return `Produs nou din categoria ${cat||'selectată'}`;
+  const translated=roProductName(s).replace(/\bfor\b/gi,'pentru').replace(/\band\b/gi,'și').replace(/\bwith\b/gi,'cu').replace(/\bwomen\b/gi,'femei').replace(/\bmen\b/gi,'bărbați').replace(/\bhair\b/gi,'păr').replace(/\baccessories\b/gi,'accesorii').replace(/\baccessory\b/gi,'accesoriu').replace(/\bnew\b/gi,'nou').replace(/\bpack\b/gi,'set').replace(/\bpcs?\b/gi,'buc.').replace(/\bcount\b/gi,'buc.').replace(/\bblack\b/gi,'negru').replace(/\bbrown\b/gi,'maro').replace(/\bpink\b/gi,'roz').replace(/\bblue\b/gi,'albastru').replace(/\bwhite\b/gi,'alb').replace(/\bportable\b/gi,'portabil').replace(/\bwaterproof\b/gi,'impermeabil').replace(/\btransparent\b/gi,'transparent').replace(/\brefillable\b/gi,'reîncărcabil').replace(/\s+/g,' ').trim();
+  const englishWords=(translated.match(/\b(?:the|and|with|for|kit|tool|design|heavy|duty|home|women|men|adjustable|equipment|cleaner|remover|storage|holder|accessory|new)\b/gi)||[]).length;
+  if(englishWords>=2)return `Produs nou din categoria ${cat||'selectată'} — identificare vizuală în imagine`;
   return translated.slice(0,115);
 }
 function imageOk(u){const s=String(u||'');return /^https?:\/\//i.test(s)&&!/\.svg(?:$|\?)/i.test(s)&&!/01rrzVoKd5L|sprite|transparent|pixel|spacer|placeholder/i.test(s)}
