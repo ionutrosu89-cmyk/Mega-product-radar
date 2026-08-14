@@ -29,8 +29,10 @@ try {
     todaysOpportunities: await exists('todays-opportunities.html') && await exists('todays-opportunities.js'),
     premiumUI: await exists('premium-ui.css')
   };
+  const marketStates=Object.values(organic.marketStatus||{});
+  const organicOperational=Number(organic.successfulPages||0)>=2&&Number(organic.totalObserved||0)>0&&marketStates.length>0&&marketStates.every(m=>Number(m.attempted||0)===0||Number(m.successful||0)>=2);
   const moduleValues=Object.values(modules);
-  const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean);
+  const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean)&&organicOperational;
   const status = {
     ok: true,
     status: 'completed',
@@ -67,6 +69,8 @@ try {
       totalClusters: Number(organic.totalClusters || 0),
       feedCount: Array.isArray(organic.feed) ? organic.feed.length : 0,
       feedThreshold: Number(organic.feedThreshold || 0),
+      operational: organicOperational,
+      marketStatus: organic.marketStatus || null,
       policy: organic.policy || null
     }
   };
