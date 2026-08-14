@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T10:56:02.550Z",
-  "completedAt": "2026-08-14T11:00:44.388Z",
-  "updatedAt": "2026-08-14T10:56:15.407Z",
+  "startedAt": "2026-08-14T11:02:57.815Z",
+  "completedAt": "2026-08-14T11:07:21.769Z",
+  "updatedAt": "2026-08-14T11:03:11.212Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T10:56:15.440Z",
+    "updatedAt": "2026-08-14T11:03:11.246Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T11:00:44.374Z",
+    "updatedAt": "2026-08-14T11:07:21.756Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 7,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T10:59:00.358Z",
+      "updatedAt": "2026-08-14T11:05:37.743Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,11 +176,11 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T10:59:00.355Z",
+    "updatedAt": "2026-08-14T11:05:37.738Z",
     "category": "Beauty accesorii",
-    "successfulPages": 0,
-    "totalObserved": 0,
-    "totalClusters": 0,
+    "successfulPages": 9,
+    "totalObserved": 60,
+    "totalClusters": 40,
     "feedCount": 0,
     "feedThreshold": 55,
     "operational": false,
@@ -188,23 +188,23 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 0,
-        "items": 0,
+        "successful": 3,
+        "items": 34,
         "statuses": [
-          503,
-          503,
-          503,
-          503,
-          503,
-          503
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
         ],
         "sources": [
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED"
+          "DIRECT",
+          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "amazonDE": {
@@ -213,20 +213,20 @@
         "successful": 0,
         "items": 0,
         "statuses": [
-          503,
-          503,
-          503,
-          503,
+          200,
+          200,
+          200,
+          200,
           503,
           503
         ],
         "sources": [
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED"
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "ebayUS": {
@@ -243,37 +243,37 @@
           403
         ],
         "sources": [
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 0,
-        "items": 0,
+        "successful": 6,
+        "items": 26,
         "statuses": [
-          511,
-          511,
-          511,
-          511,
-          511,
-          511
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
         ],
         "sources": [
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED",
-          "DIRECT+JINA_FAILED"
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       }
     },
-    "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; Jina Reader este fallback de randare pentru aceeași pagină când marketplace-ul blochează IP-ul GitHub. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
+    "policy": "Gate obligatoriu: review-uri observate și validate ca număr întreg <=10, poziție organică în max. pagina 2 și competiție observată redusă. Accesul direct este preferat; fallback-urile de randare sunt acceptate doar dacă structura reală de rezultate a marketplace-ului poate fi identificată. Ratingul în stele nu este acceptat ca număr de review-uri. Câmpurile necunoscute nu sunt inventate."
   }
 }
