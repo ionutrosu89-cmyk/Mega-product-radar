@@ -9,6 +9,7 @@ try {
   await import('./v2-validation-postprocess.mjs');
   await import('./wide-discovery-orchestrator.mjs');
   await import('./organic-rising-scan.mjs');
+  await import('./organic-rising-quality-postprocess.mjs');
   await import('./supplier-hunter-postprocess.mjs');
   await import('./discovery-v6-expand.mjs');
   let live = {}, discovery = {}, history = {}, organic = {}, organicConfig = {};
@@ -21,7 +22,7 @@ try {
     strictAudit: await exists('v2-audit.js'),
     evidenceValidation: await exists('scripts/v2-validation-postprocess.mjs'),
     globalDiscovery: await exists('scripts/discovery-scan.mjs') && await exists('scripts/wide-discovery-orchestrator.mjs'),
-    organicRising: await exists('scripts/organic-rising-scan.mjs') && await exists('organic-rising-config.json'),
+    organicRising: await exists('scripts/organic-rising-scan.mjs') && await exists('scripts/organic-rising-quality-postprocess.mjs') && await exists('organic-rising-config.json'),
     romaniaGap2: await exists('discovery-engine.js'),
     trendVelocity: await exists('discovery-history.js'),
     supplierHunter: await exists('scripts/supplier-hunter-postprocess.mjs'),
@@ -34,7 +35,8 @@ try {
   const requiredMarketKeys=configuredMarkets.filter(m=>m.requiredForOperational!==false).map(m=>m.key);
   const marketStatus=organic.marketStatus||{};
   const requiredCoverage=requiredMarketKeys.length>0&&requiredMarketKeys.every(k=>Number(marketStatus[k]?.successful||0)>=2&&Number(marketStatus[k]?.items||0)>0);
-  const organicOperational=Number(organic.successfulPages||0)>=4&&Number(organic.totalObserved||0)>0&&requiredCoverage;
+  const qualityReady=organic.qualityPostprocess?.exactListingReviewGate===true&&organic.qualityPostprocess?.categoryRelevanceGate===true&&organic.qualityPostprocess?.imagePlaceholderFilter===true;
+  const organicOperational=Number(organic.successfulPages||0)>=4&&Number(organic.totalObserved||0)>0&&requiredCoverage&&qualityReady;
   const moduleValues=Object.values(modules);
   const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean)&&organicOperational;
   const status = {
@@ -74,9 +76,11 @@ try {
       feedCount: Array.isArray(organic.feed) ? organic.feed.length : 0,
       feedThreshold: Number(organic.feedThreshold || 0),
       operational: organicOperational,
+      qualityReady,
       requiredMarkets: requiredMarketKeys,
       requiredCoverage,
       marketStatus,
+      qualityPostprocess: organic.qualityPostprocess || null,
       policy: organic.policy || null
     }
   };
