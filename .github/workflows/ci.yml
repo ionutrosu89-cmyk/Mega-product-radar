@@ -41,6 +41,11 @@ jobs:
       - name: Syntax check Trend Intelligence
         run: node --check scripts/market-trend-postprocess.mjs
 
+      - name: Syntax check Trend Intelligence UI
+        run: |
+          node --check market-trend-ui.js
+          node --check product-ro.js
+
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
 
