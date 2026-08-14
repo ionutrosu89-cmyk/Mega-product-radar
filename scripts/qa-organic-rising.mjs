@@ -5,6 +5,13 @@ if(!data||data.engine!=='Organic Rising Products')errors.push('engine');
 if(Number(data.maxReviews)!==10)errors.push('maxReviews');
 if(Number(data.maxOrganicPage)!==2)errors.push('maxOrganicPage');
 if(!data.marketStatus||typeof data.marketStatus!=='object')errors.push('marketStatus');
+const markets=Object.values(data.marketStatus||{});
+if(Number(data.successfulPages||0)<2)errors.push('noLiveMarketplaceCoverage');
+if(Number(data.totalObserved||0)<1)errors.push('noObservedProducts');
+if(!markets.length)errors.push('noMarketStatus');
+for(const m of markets){
+  if(Number(m.attempted||0)>0&&Number(m.successful||0)<2)errors.push(`market:${m.label||'unknown'}:under2pages`);
+}
 for(const [i,p] of (data.feed||[]).entries()){
   if(p.reviewCount===null||!Number.isInteger(Number(p.reviewCount))||Number(p.reviewCount)>10)errors.push(`feed[${i}].reviewCount`);
   if(Number(p.organicPage)>2)errors.push(`feed[${i}].organicPage`);
