@@ -38,6 +38,9 @@ jobs:
       - name: Syntax check Market Intelligence history
         run: node --check scripts/market-intelligence-history.mjs
 
+      - name: Syntax check Trend Intelligence
+        run: node --check scripts/market-trend-postprocess.mjs
+
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
 
@@ -49,6 +52,9 @@ jobs:
 
       - name: Generate Market Intelligence history fixture
         run: node scripts/market-intelligence-history.mjs
+
+      - name: Generate Trend Intelligence fixture
+        run: node scripts/market-trend-postprocess.mjs
 
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
