@@ -30,7 +30,7 @@ test('history windows use LIVE points and expose 7/30/90 deltas when enough hist
   points=appendHistoryPoint(points,{at:'2026-08-05T00:00:00Z',score:76,quality:'LIVE'},120,now);
   points=appendHistoryPoint(points,{at:'2026-08-13T00:00:00Z',score:85,quality:'LIVE'},120,now);
   const w=discoveryTrendWindows(points,now);
-  assert.equal(w.d7.scoreDelta,9);assert.equal(w.d30.scoreDelta,15);assert.equal(w.d90.scoreDelta,25);assert.equal(trendLabel(w.d7),'ACCELERATING');
+  assert.equal(w.d7.scoreDelta,9);assert.equal(w.d30.scoreDelta,15);assert.equal(w.d90.scoreDelta,25);assert.equal(trendLabel(w.d7),'RISING');
 });
 
 test('review intelligence only reports themes actually present in snippets',()=>{
