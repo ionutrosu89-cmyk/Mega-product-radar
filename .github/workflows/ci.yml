@@ -32,6 +32,12 @@ jobs:
       - name: Syntax check scanner
         run: node --check scripts/web-radar-scan.mjs
 
+      - name: Syntax check Market Intelligence engine
+        run: node --check scripts/market-intelligence-postprocess.mjs
+
+      - name: Generate Market Intelligence fixture
+        run: node scripts/market-intelligence-postprocess.mjs
+
       - name: Run tests
         run: npm test
 
