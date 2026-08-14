@@ -74,3 +74,7 @@ export function roProductName(name=''){
 }
 export function roCategory(cat=''){const raw=String(cat||'').trim();return CAT[raw]||raw;}
 export function originalProductName(name=''){return String(name||'').trim();}
+
+if(typeof window!=='undefined'&&/market-intelligence\.html$/.test(window.location.pathname)){
+  import('./market-trend-ui.js').catch(err=>console.warn('Trend UI indisponibil:',err?.message||err));
+}
