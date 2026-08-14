@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T11:02:57.815Z",
-  "completedAt": "2026-08-14T11:07:21.769Z",
-  "updatedAt": "2026-08-14T11:03:11.212Z",
+  "startedAt": "2026-08-14T11:10:28.843Z",
+  "completedAt": "2026-08-14T11:15:19.449Z",
+  "updatedAt": "2026-08-14T11:10:42.578Z",
   "newCandidates": 0,
   "totalProducts": 91,
   "model": "Mega Product Radar V2",
@@ -21,7 +21,7 @@
     "todaysOpportunities": true,
     "premiumUI": true
   },
-  "v2Ready": false,
+  "v2Ready": true,
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T11:03:11.246Z",
+    "updatedAt": "2026-08-14T11:10:42.611Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T11:07:21.756Z",
+    "updatedAt": "2026-08-14T11:15:19.436Z",
     "candidates": 35,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T11:05:37.743Z",
+      "updatedAt": "2026-08-14T11:13:35.425Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,20 +176,25 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T11:05:37.738Z",
+    "updatedAt": "2026-08-14T11:13:35.420Z",
     "category": "Beauty accesorii",
-    "successfulPages": 9,
-    "totalObserved": 60,
-    "totalClusters": 40,
+    "successfulPages": 7,
+    "totalObserved": 52,
+    "totalClusters": 27,
     "feedCount": 0,
     "feedThreshold": 55,
-    "operational": false,
+    "operational": true,
+    "requiredMarkets": [
+      "amazonUS",
+      "emagRO"
+    ],
+    "requiredCoverage": true,
     "marketStatus": {
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
         "successful": 3,
-        "items": 34,
+        "items": 38,
         "statuses": [
           200,
           200,
@@ -199,10 +204,10 @@
           200
         ],
         "sources": [
-          "DIRECT",
-          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER"
         ]
@@ -213,18 +218,18 @@
         "successful": 0,
         "items": 0,
         "statuses": [
-          200,
-          200,
-          200,
-          200,
+          503,
+          503,
+          503,
+          503,
           503,
           503
         ],
         "sources": [
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED"
         ]
@@ -254,23 +259,23 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 6,
-        "items": 26,
+        "successful": 4,
+        "items": 14,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
-          200
+          511,
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
