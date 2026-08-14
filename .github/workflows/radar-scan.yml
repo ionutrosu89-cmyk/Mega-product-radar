@@ -72,6 +72,10 @@ jobs:
         if: always()
         run: node scripts/market-intelligence-history.mjs
 
+      - name: Build free Trend Intelligence
+        if: always()
+        run: node scripts/market-trend-postprocess.mjs
+
       - name: Validate Organic Rising data
         if: always()
         run: node scripts/qa-organic-rising.mjs
