@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-15T08:37:16.621Z",
-  "completedAt": "2026-08-15T08:45:43.218Z",
-  "updatedAt": "2026-08-15T08:37:30.336Z",
+  "startedAt": "2026-08-15T10:01:37.101Z",
+  "completedAt": "2026-08-15T10:08:25.678Z",
+  "updatedAt": "2026-08-15T10:01:50.630Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -21,7 +21,7 @@
     "todaysOpportunities": true,
     "premiumUI": true
   },
-  "v2Ready": true,
+  "v2Ready": false,
   "dataQualityPolicy": {
     "version": "4.5",
     "liveMinChecks": 5,
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-15T08:37:30.378Z",
+    "updatedAt": "2026-08-15T10:01:50.673Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-15T08:45:43.203Z",
+    "updatedAt": "2026-08-15T10:08:25.663Z",
     "candidates": 42,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 7,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-15T08:43:59.192Z",
+      "updatedAt": "2026-08-15T10:06:41.639Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -176,63 +176,63 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-15T08:40:32.249Z",
+    "updatedAt": "2026-08-15T10:04:28.018Z",
     "category": "Auto",
     "successfulPages": 9,
-    "totalObserved": 80,
-    "totalClusters": 48,
-    "feedCount": 0,
+    "totalObserved": 90,
+    "totalClusters": 68,
+    "feedCount": 1,
     "feedThreshold": 55,
-    "operational": true,
+    "operational": false,
     "qualityReady": true,
     "requiredMarkets": [
       "amazonUS",
       "emagRO"
     ],
-    "requiredCoverage": true,
+    "requiredCoverage": false,
     "marketStatus": {
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 3,
-        "items": 36,
+        "successful": 1,
+        "items": 13,
         "statuses": [
           200,
           200,
           200,
           200,
           200,
-          503
+          200
         ],
         "sources": [
           "DIRECT",
           "DIRECT",
+          "DIRECT",
+          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED"
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 1,
-        "items": 14,
+        "successful": 4,
+        "items": 53,
         "statuses": [
           200,
           200,
           200,
           200,
-          503,
-          503
+          200,
+          200
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT"
         ]
       },
       "amazonDE": {
@@ -241,18 +241,18 @@
         "successful": 0,
         "items": 0,
         "statuses": [
-          503,
-          503,
-          503,
-          503,
+          200,
+          200,
+          200,
+          200,
           503,
           503
         ],
         "sources": [
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED"
         ]
@@ -282,15 +282,15 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 5,
-        "items": 30,
+        "successful": 4,
+        "items": 24,
         "statuses": [
           200,
           200,
           200,
           200,
           511,
-          200
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -298,20 +298,20 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-15T08:43:59.182Z",
+      "at": "2026-08-15T10:06:41.602Z",
       "attempted": 24,
-      "enriched": 2,
+      "enriched": 7,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-15T08:43:59.188Z",
+      "at": "2026-08-15T10:06:41.634Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
