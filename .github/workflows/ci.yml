@@ -17,84 +17,64 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-
       - name: Install dependencies
         run: npm install --no-audit --no-fund
-
       - name: Syntax check frontend
         run: node --check app.js
-
       - name: Syntax check scanner
         run: node --check scripts/web-radar-scan.mjs
-
       - name: Syntax check Market Intelligence engine
         run: node --check scripts/market-intelligence-postprocess.mjs
-
       - name: Syntax check Market Intelligence history
         run: node --check scripts/market-intelligence-history.mjs
-
       - name: Syntax check Trend Intelligence
         run: node --check scripts/market-trend-postprocess.mjs
-
       - name: Syntax check Opportunity Ranking V2
         run: node --check scripts/opportunity-ranking-v2.mjs
-
       - name: Syntax check Full Free Intelligence Suite
         run: node --check scripts/free-intelligence-suite.mjs
-
       - name: Syntax check Smart Watchlist
         run: node --check scripts/watchlist-postprocess.mjs
-
+      - name: Syntax check Free Readiness audit
+        run: node --check scripts/free-readiness-audit.mjs
       - name: Syntax check intelligence UIs
         run: |
           node --check market-trend-ui.js
           node --check free-intelligence-ui.js
           node --check product-ro.js
-
       - name: Validate Action Center structure
         run: node -e "const fs=require('fs');const s=fs.readFileSync('action-center.html','utf8');for(const x of ['viewport-fit=cover','watchlist-live.json','Ce fac azi?','Maximum 3'])if(!s.includes(x))throw new Error('Action Center missing '+x)"
-
       - name: Validate Product Decision structure
-        run: node -e "const fs=require('fs');const s=fs.readFileSync('product-decision.html','utf8');for(const x of ['viewport-fit=cover','market-intelligence-live.json','Dosar produs','Review Intelligence V2','Supplier Intelligence','Validare spre TEST'])if(!s.includes(x))throw new Error('Product Decision missing '+x)"
-
+        run: |
+          node -e "const fs=require('fs');const s=fs.readFileSync('product-decision.html','utf8');for(const x of ['viewport-fit=cover','market-intelligence-live.json','Dosar produs','Review Intelligence V2','Supplier Intelligence','Validare spre TEST','Decision Summary','Blocaj #1','Acțiunea cu impact maxim'])if(!s.includes(x))throw new Error('Product Decision missing '+x)"
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
-
       - name: Generate Market Intelligence fixture
         run: node scripts/market-intelligence-postprocess.mjs
-
       - name: Verify DataForSEO zero-cost fallback
         run: node scripts/dataforseo-keywords.mjs
-
       - name: Generate Market Intelligence history fixture
         run: node scripts/market-intelligence-history.mjs
-
       - name: Generate Trend Intelligence fixture
         run: node scripts/market-trend-postprocess.mjs
-
       - name: Generate Opportunity Ranking V2 fixture
         run: node scripts/opportunity-ranking-v2.mjs
-
       - name: Generate Full Free Intelligence Suite fixture
         run: node scripts/free-intelligence-suite.mjs
-
       - name: Generate Smart Watchlist fixture
         run: node scripts/watchlist-postprocess.mjs
-
+      - name: Generate Free Readiness audit fixture
+        run: node scripts/free-readiness-audit.mjs
       - name: Verify generated intelligence JSON
         run: |
-          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json']){const d=require('./'+f);if(!d||!d.version)throw new Error('invalid '+f)}"
-
+          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json','free-readiness-live.json']){const d=require('./'+f);if(!d||(!d.version&&f!=='free-readiness-live.json'))throw new Error('invalid '+f)};const r=require('./free-readiness-live.json');if(r.technicalReadiness<88)throw new Error('free readiness below target')"
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
-
       - name: Run tests
         run: npm test
-
       - name: Validate build
         run: npm run build
