@@ -1,0 +1,135 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-08-15T10:28:10.427Z",
+  "technicalReadiness": 100,
+  "freeStage": "FREE_READY_FOR_PAID_DATA",
+  "paidDemandActive": false,
+  "keywordProviders": [
+    "OPEN_WEB_PROXY"
+  ],
+  "checks": [
+    {
+      "id": "radar-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "discovery-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "organic-rising-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "market-intelligence-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "market-intelligence-history.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "watchlist-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "alerts-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "validation-queue-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "data-confidence-live.json",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "action-center.html",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "validation-workflow-v2.html",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "product-decision.html",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "supplier-intelligence.html",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "review-intelligence-v2.html",
+      "ok": true,
+      "weight": 1
+    },
+    {
+      "id": "market-products",
+      "ok": true,
+      "weight": 3
+    },
+    {
+      "id": "decision-layer",
+      "ok": true,
+      "weight": 3
+    },
+    {
+      "id": "supplier-layer",
+      "ok": true,
+      "weight": 2
+    },
+    {
+      "id": "review-layer",
+      "ok": true,
+      "weight": 2
+    },
+    {
+      "id": "profit-layer",
+      "ok": true,
+      "weight": 2
+    },
+    {
+      "id": "trend-layer",
+      "ok": true,
+      "weight": 2
+    }
+  ],
+  "bottlenecks": [
+    {
+      "area": "Demand Intelligence România",
+      "status": "PAID_DATA_REQUIRED",
+      "reason": "Search volume/CPC/competition reale necesită provider comercial."
+    },
+    {
+      "area": "Keyword Intelligence",
+      "status": "PAID_DATA_REQUIRED",
+      "reason": "Proxy-urile gratuite nu sunt suficiente pentru keyword volume verificat."
+    },
+    {
+      "area": "Competitor depth",
+      "status": "FREE_LIMIT",
+      "reason": "Domeniile observate sunt utile, dar nu oferă sales estimate sau market share verificat."
+    },
+    {
+      "area": "Marketplace sales estimates",
+      "status": "PAID_DATA_REQUIRED",
+      "reason": "Nu sunt inventate din pagini publice."
+    }
+  ],
+  "policy": "TEST/CUMPĂRĂ rămân independente de scorul de readiness; necunoscut nu este tratat ca zero."
+}
