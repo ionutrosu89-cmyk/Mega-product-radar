@@ -56,6 +56,9 @@ jobs:
           node --check free-intelligence-ui.js
           node --check product-ro.js
 
+      - name: Validate Action Center structure
+        run: node -e "const fs=require('fs');const s=fs.readFileSync('action-center.html','utf8');for(const x of ['viewport-fit=cover','watchlist-live.json','Ce fac azi?','Maximum 3'])if(!s.includes(x))throw new Error('Action Center missing '+x)"
+
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
 
