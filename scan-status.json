@@ -1,11 +1,11 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-14T22:01:42.398Z",
-  "completedAt": "2026-08-14T22:08:11.642Z",
-  "updatedAt": "2026-08-14T22:01:55.671Z",
-  "newCandidates": 0,
-  "totalProducts": 91,
+  "startedAt": "2026-08-15T04:58:10.850Z",
+  "completedAt": "2026-08-15T05:04:51.373Z",
+  "updatedAt": "2026-08-15T04:58:24.102Z",
+  "newCandidates": 6,
+  "totalProducts": 97,
   "model": "Mega Product Radar V2",
   "engine": "Romania Arbitrage + Wide Global Discovery + Organic Rising + Romania Gap 2.0 + Trend Velocity + Supplier Hunter + Profit Engine + Import Risk + Evidence Validation",
   "modules": {
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-14T22:01:55.707Z",
+    "updatedAt": "2026-08-15T04:58:24.137Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-14T22:08:11.628Z",
-    "candidates": 35,
+    "updatedAt": "2026-08-15T05:04:51.359Z",
+    "candidates": 42,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 6,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-14T22:06:27.618Z",
+      "updatedAt": "2026-08-15T05:03:07.345Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -166,22 +166,22 @@
         "ro",
         "zh"
       ],
-      "theme": "DIY tool organization compact accessory",
+      "theme": "small home organization problem solver",
       "queriesChecked": 12,
       "newCandidates": 0,
       "sourcePolicy": "DIRECT_SEARCH_LINKS + WEB_PROXY_EVIDENCE"
     },
-    "historyProducts": 35,
+    "historyProducts": 42,
     "trendWarmup": true,
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-14T22:04:53.912Z",
-    "category": "Casă & organizare",
-    "successfulPages": 14,
-    "totalObserved": 135,
-    "totalClusters": 90,
-    "feedCount": 3,
+    "updatedAt": "2026-08-15T05:01:26.262Z",
+    "category": "Bucătărie",
+    "successfulPages": 7,
+    "totalObserved": 69,
+    "totalClusters": 47,
+    "feedCount": 0,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,45 +194,45 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 4,
-        "items": 46,
+        "successful": 3,
+        "items": 37,
         "statuses": [
           200,
           200,
           200,
           200,
           200,
-          200
+          503
         ],
         "sources": [
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT",
           "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 5,
-        "items": 59,
+        "successful": 1,
+        "items": 14,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
-          200
+          503,
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "amazonDE": {
@@ -282,21 +282,21 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 5,
-        "items": 30,
+        "successful": 3,
+        "items": 18,
         "statuses": [
           200,
           200,
-          200,
-          200,
+          511,
+          511,
           511,
           200
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
           "GOOGLE_TRANSLATE_RENDER"
         ]
@@ -304,14 +304,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-14T22:06:27.605Z",
-      "attempted": 23,
-      "enriched": 7,
+      "at": "2026-08-15T05:03:07.333Z",
+      "attempted": 24,
+      "enriched": 2,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-14T22:06:27.613Z",
+      "at": "2026-08-15T05:03:07.340Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
