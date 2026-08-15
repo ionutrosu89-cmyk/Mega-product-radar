@@ -77,4 +77,5 @@ export function originalProductName(name=''){return String(name||'').trim();}
 
 if(typeof window!=='undefined'&&/market-intelligence\.html$/.test(window.location.pathname)){
   import('./market-trend-ui.js').catch(err=>console.warn('Trend UI indisponibil:',err?.message||err));
+  import('./free-intelligence-ui.js').catch(err=>console.warn('Free Intelligence UI indisponibil:',err?.message||err));
 }
