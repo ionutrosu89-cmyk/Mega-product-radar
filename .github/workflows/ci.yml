@@ -44,12 +44,16 @@ jobs:
       - name: Syntax check Opportunity Ranking V2
         run: node --check scripts/opportunity-ranking-v2.mjs
 
+      - name: Syntax check Full Free Intelligence Suite
+        run: node --check scripts/free-intelligence-suite.mjs
+
       - name: Syntax check Smart Watchlist
         run: node --check scripts/watchlist-postprocess.mjs
 
-      - name: Syntax check Trend Intelligence UI
+      - name: Syntax check intelligence UIs
         run: |
           node --check market-trend-ui.js
+          node --check free-intelligence-ui.js
           node --check product-ro.js
 
       - name: Syntax check DataForSEO adapter
@@ -70,8 +74,15 @@ jobs:
       - name: Generate Opportunity Ranking V2 fixture
         run: node scripts/opportunity-ranking-v2.mjs
 
+      - name: Generate Full Free Intelligence Suite fixture
+        run: node scripts/free-intelligence-suite.mjs
+
       - name: Generate Smart Watchlist fixture
         run: node scripts/watchlist-postprocess.mjs
+
+      - name: Verify generated intelligence JSON
+        run: |
+          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json']){const d=require('./'+f);if(!d||!d.version)throw new Error('invalid '+f)}"
 
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
