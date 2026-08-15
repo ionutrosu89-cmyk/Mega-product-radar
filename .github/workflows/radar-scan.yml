@@ -17,6 +17,7 @@ on:
       - 'review-intelligence.js'
       - 'market-intelligence.html'
       - 'watchlist.html'
+      - 'free-readiness.html'
       - 'alerts.html'
       - 'validation-queue.html'
       - 'data-confidence.html'
@@ -45,26 +46,21 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-
       - name: Run Radar V2 + Wide Product Discovery + Organic Rising scan
         id: scan
         continue-on-error: true
         run: node scripts/run-github-scan.mjs
-
       - name: Enrich real product preview images
         if: always()
         continue-on-error: true
         run: node scripts/enrich-discovery-images.mjs
-
       - name: Build strict Market Intelligence dataset
         if: always()
         run: node scripts/market-intelligence-postprocess.mjs
-
       - name: Enrich Romania keyword demand with DataForSEO when configured
         if: always()
         continue-on-error: true
@@ -72,37 +68,33 @@ jobs:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
           DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
         run: node scripts/dataforseo-keywords.mjs
-
       - name: Update Market Intelligence history
         if: always()
         run: node scripts/market-intelligence-history.mjs
-
       - name: Build free Trend Intelligence
         if: always()
         run: node scripts/market-trend-postprocess.mjs
-
       - name: Build Opportunity Ranking V2
         if: always()
         run: node scripts/opportunity-ranking-v2.mjs
-
       - name: Build Full Free Intelligence Suite
         if: always()
         run: node scripts/free-intelligence-suite.mjs
-
       - name: Build Smart Opportunity Watchlist
         if: always()
         run: node scripts/watchlist-postprocess.mjs
-
+      - name: Audit Free Readiness
+        if: always()
+        run: node scripts/free-readiness-audit.mjs
       - name: Validate Organic Rising data
         if: always()
         run: node scripts/qa-organic-rising.mjs
-
       - name: Persist radar, discovery, organic and intelligence histories and scan status
         if: always()
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json free-readiness-live.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
@@ -110,20 +102,18 @@ jobs:
           for f in /tmp/radar-output/*.json; do cp "$f" .; done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json scan-status.json
+          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json free-readiness-live.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
             git push origin main
           else
             echo "No radar data changes to commit."
           fi
-
       - name: Validate current Radar V2 site
         if: always()
         run: |
           node scripts/build-site.mjs
           node scripts/qa-mobile.mjs
-
       - name: Explain Pages publishing
         if: always()
         run: echo "GitHub Pages publishes the committed root automatically."
