@@ -39,6 +39,8 @@ jobs:
         run: node --check scripts/free-intelligence-suite.mjs
       - name: Syntax check Smart Watchlist
         run: node --check scripts/watchlist-postprocess.mjs
+      - name: Syntax check Free Readiness audit
+        run: node --check scripts/free-readiness-audit.mjs
       - name: Syntax check intelligence UIs
         run: |
           node --check market-trend-ui.js
@@ -65,9 +67,11 @@ jobs:
         run: node scripts/free-intelligence-suite.mjs
       - name: Generate Smart Watchlist fixture
         run: node scripts/watchlist-postprocess.mjs
+      - name: Generate Free Readiness audit fixture
+        run: node scripts/free-readiness-audit.mjs
       - name: Verify generated intelligence JSON
         run: |
-          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json']){const d=require('./'+f);if(!d||!d.version)throw new Error('invalid '+f)}"
+          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json','free-readiness-live.json']){const d=require('./'+f);if(!d||(!d.version&&f!=='free-readiness-live.json'))throw new Error('invalid '+f)};const r=require('./free-readiness-live.json');if(r.technicalReadiness<88)throw new Error('free readiness below target')"
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
       - name: Run tests
