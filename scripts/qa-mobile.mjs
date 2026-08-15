@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 const root=process.cwd();
-const files=['index.html','login.html','account.html','executive-ro.html','supplier-intelligence.html','radar-ro.html','discovery-inbox.html','organic-rising.html','market-intelligence.html','strict-audit-ro.html','todays-opportunities.html','fresh-finds.html','purchase-manager-ro.html','landed-cost.html','data-vault.html'];
+const files=['index.html','login.html','account.html','executive-ro.html','supplier-intelligence.html','radar-ro.html','discovery-inbox.html','organic-rising.html','market-intelligence.html','watchlist.html','alerts.html','validation-queue.html','data-confidence.html','strict-audit-ro.html','todays-opportunities.html','fresh-finds.html','purchase-manager-ro.html','landed-cost.html','data-vault.html'];
 const premium=await fs.readFile(path.join(root,'premium-ui.css'),'utf8');
 const shared={responsive:/@media\s*\(/i.test(premium),mobileWidth:/max-width/i.test(premium),safeArea:/safe-area-inset-(top|bottom)/i.test(premium)};
 const results=[];
@@ -20,7 +20,7 @@ for(const file of files){
 }
 const manifest=JSON.parse(await fs.readFile(path.join(root,'manifest.json'),'utf8'));
 if(manifest.display!=='standalone')throw new Error('manifest display must remain standalone');
-const report={version:'8.0-ro-market-intelligence',checkedAt:new Date().toISOString(),deviceTarget:'Web/iPhone/Android PWA static readiness',pagesSource:'GitHub Pages main:/',physicalDeviceTest:false,results};
+const report={version:'9.0-free-intelligence-suite',checkedAt:new Date().toISOString(),deviceTarget:'Web/iPhone/Android PWA static readiness',pagesSource:'GitHub Pages main:/',physicalDeviceTest:false,results};
 await fs.mkdir(path.join(root,'_site'),{recursive:true});
 await fs.writeFile(path.join(root,'_site','qa-mobile-report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(`Cross-platform Romanian UI QA passed: ${results.length} canonical pages. Physical-device acceptance remains manual.`);
