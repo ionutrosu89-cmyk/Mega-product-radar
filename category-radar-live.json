@@ -1,0 +1,1742 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-08-16T19:57:27.005Z",
+  "policy": "Category Radar separă oportunitățile pe categorie. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne permis numai după toate gate-urile comerciale.",
+  "stats": {
+    "categories": 24,
+    "categoriesAtMinimum": 0,
+    "categoriesAtTarget": 0,
+    "totalMappedProducts": 42,
+    "totalTestReady": 0,
+    "minimumPerCategory": 10,
+    "targetPerCategory": 20
+  },
+  "categories": [
+    {
+      "key": "baby",
+      "label": "Bebeluși 0–2 ani",
+      "queries": [
+        "baby feeding organizer",
+        "stroller accessory non electronic",
+        "nursery storage solution",
+        "baby travel organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 1,
+      "coveragePct": 5,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Stroller snack cup universal no electronics",
+          "cat": "Kids 3–6 • Travel",
+          "imageUrl": "",
+          "opportunityRank": 33,
+          "opportunityScore": 25.6,
+          "launchScore": 20.1,
+          "margin": 5,
+          "roi": 10.3,
+          "profit": 4.4,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 121.3
+        }
+      ]
+    },
+    {
+      "key": "kids",
+      "label": "Copii 3–6 ani",
+      "queries": [
+        "kids travel accessory age 3 6",
+        "preschool activity product",
+        "kids room organizer",
+        "reusable learning activity"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "toys",
+      "label": "Jucării & Educațional",
+      "queries": [
+        "educational toy non electronic",
+        "Montessori activity product",
+        "reusable kids activity",
+        "fine motor learning toy"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 1,
+      "coveragePct": 5,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Pet toy storage basket foldable",
+          "cat": "Pet",
+          "imageUrl": "",
+          "opportunityRank": 26,
+          "opportunityScore": 26.1,
+          "launchScore": 21,
+          "margin": 5.7,
+          "roi": 11.8,
+          "profit": 7.3,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.9
+        }
+      ]
+    },
+    {
+      "key": "home",
+      "label": "Casă",
+      "queries": [
+        "home problem solving product",
+        "small home convenience product",
+        "space saving home accessory",
+        "home comfort organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 3,
+      "coveragePct": 15,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Reusable furniture moving sliders kit",
+          "cat": "Casă",
+          "imageUrl": "",
+          "opportunityRank": 13,
+          "opportunityScore": 27.5,
+          "launchScore": 23.2,
+          "margin": 8.8,
+          "roi": 19.6,
+          "profit": 10.5,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 135.5
+        },
+        {
+          "rank": 2,
+          "name": "Sofa arm tray organizer",
+          "cat": "Casă",
+          "imageUrl": "",
+          "opportunityRank": 9,
+          "opportunityScore": 33.1,
+          "launchScore": 21,
+          "margin": 5.7,
+          "roi": 11.8,
+          "profit": 7.3,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 129.7
+        },
+        {
+          "rank": 3,
+          "name": "Bed sheet corner holder straps premium",
+          "cat": "Casă",
+          "imageUrl": "",
+          "opportunityRank": 38,
+          "opportunityScore": 25.2,
+          "launchScore": 19.6,
+          "margin": 4.4,
+          "roi": 8.9,
+          "profit": 3,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 119.8
+        }
+      ]
+    },
+    {
+      "key": "kitchen",
+      "label": "Bucătărie",
+      "queries": [
+        "kitchen problem solving tool",
+        "kitchen organizer compact",
+        "food prep accessory non electric",
+        "small kitchen convenience product"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 7,
+      "coveragePct": 35,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Reusable food bag drying rack",
+          "cat": "Bucătărie",
+          "imageUrl": "",
+          "opportunityRank": 5,
+          "opportunityScore": 33.7,
+          "launchScore": 22,
+          "margin": 7.6,
+          "roi": 16.5,
+          "profit": 6.8,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 134.4
+        },
+        {
+          "rank": 2,
+          "name": "Pan lid organizer adjustable rack",
+          "cat": "Bucătărie",
+          "imageUrl": "",
+          "opportunityRank": 4,
+          "opportunityScore": 33.7,
+          "launchScore": 22,
+          "margin": 6.9,
+          "roi": 14.7,
+          "profit": 9.6,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 132.7
+        },
+        {
+          "rank": 3,
+          "name": "Oil spray bottle glass free plastic",
+          "cat": "Bucătărie",
+          "imageUrl": "",
+          "opportunityRank": 7,
+          "opportunityScore": 33.4,
+          "launchScore": 21.5,
+          "margin": 6.8,
+          "roi": 14.5,
+          "profit": 6.7,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 132.4
+        },
+        {
+          "rank": 4,
+          "name": "Clip on pot strainer silicone",
+          "cat": "Bucătărie",
+          "imageUrl": "",
+          "opportunityRank": 8,
+          "opportunityScore": 33.3,
+          "launchScore": 21.2,
+          "margin": 6.7,
+          "roi": 14.2,
+          "profit": 5.3,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 132.1
+        },
+        {
+          "rank": 5,
+          "name": "Sink splash guard silicone mat",
+          "cat": "Bucătărie",
+          "imageUrl": "",
+          "opportunityRank": 11,
+          "opportunityScore": 33,
+          "launchScore": 20.7,
+          "margin": 5.9,
+          "roi": 12.3,
+          "profit": 5.2,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 130.2
+        },
+        {
+          "rank": 6,
+          "name": "Pet food scoop bag clip combo",
+          "cat": "Pet",
+          "imageUrl": "",
+          "opportunityRank": 39,
+          "opportunityScore": 25.2,
+          "launchScore": 19.6,
+          "margin": 4.4,
+          "roi": 8.9,
+          "profit": 3,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 119.8
+        },
+        {
+          "rank": 7,
+          "name": "Plant pot drainage mesh pad set",
+          "cat": "Grădină & balcon",
+          "imageUrl": "",
+          "opportunityRank": 41,
+          "opportunityScore": 24.7,
+          "launchScore": 18.6,
+          "margin": 2.9,
+          "roi": 5.8,
+          "profit": 2,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 116.4
+        }
+      ]
+    },
+    {
+      "key": "bath",
+      "label": "Baie",
+      "queries": [
+        "bathroom organizer no drill",
+        "bathroom problem solving accessory",
+        "shower storage compact",
+        "sink organization product"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 3,
+      "coveragePct": 15,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Shower corner shelf adhesive no drill",
+          "cat": "Baie",
+          "imageUrl": "",
+          "opportunityRank": 17,
+          "opportunityScore": 26.8,
+          "launchScore": 22.1,
+          "margin": 6.9,
+          "roi": 14.8,
+          "profit": 10.3,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 130.7
+        },
+        {
+          "rank": 2,
+          "name": "Toothbrush wall organizer cover",
+          "cat": "Baie",
+          "imageUrl": "",
+          "opportunityRank": 21,
+          "opportunityScore": 26.7,
+          "launchScore": 21.9,
+          "margin": 6.9,
+          "roi": 14.7,
+          "profit": 8.9,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 125.9
+        },
+        {
+          "rank": 3,
+          "name": "Rotating bathroom organizer turntable",
+          "cat": "Baie",
+          "imageUrl": "",
+          "opportunityRank": 31,
+          "opportunityScore": 26,
+          "launchScore": 20.8,
+          "margin": 5.5,
+          "roi": 11.5,
+          "profit": 6.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.5
+        }
+      ]
+    },
+    {
+      "key": "closet",
+      "label": "Organizare & Garderobă",
+      "queries": [
+        "closet organizer space saving",
+        "wardrobe storage accessory",
+        "drawer organizer product",
+        "clothing organization solution"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 4,
+      "coveragePct": 20,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Desk drawer organizer modular trays",
+          "cat": "Birou",
+          "imageUrl": "",
+          "opportunityRank": 16,
+          "opportunityScore": 26.9,
+          "launchScore": 22.2,
+          "margin": 7.5,
+          "roi": 16.2,
+          "profit": 8.9,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 132.1
+        },
+        {
+          "rank": 2,
+          "name": "Wardrobe handbag hanging organizer",
+          "cat": "Organizare garderobă",
+          "imageUrl": "",
+          "opportunityRank": 10,
+          "opportunityScore": 33.1,
+          "launchScore": 21,
+          "margin": 5.7,
+          "roi": 11.8,
+          "profit": 7.3,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 129.7
+        },
+        {
+          "rank": 3,
+          "name": "Closet belt hanger rotating",
+          "cat": "Organizare garderobă",
+          "imageUrl": "",
+          "opportunityRank": 32,
+          "opportunityScore": 26,
+          "launchScore": 20.7,
+          "margin": 5.9,
+          "roi": 12.3,
+          "profit": 5.2,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 123.4
+        },
+        {
+          "rank": 4,
+          "name": "Closet shelf hanging basket",
+          "cat": "Organizare garderobă",
+          "imageUrl": "",
+          "opportunityRank": 28,
+          "opportunityScore": 26,
+          "launchScore": 20.8,
+          "margin": 5.5,
+          "roi": 11.5,
+          "profit": 6.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.5
+        }
+      ]
+    },
+    {
+      "key": "laundry",
+      "label": "Curățenie & Laundry",
+      "queries": [
+        "laundry organizer product",
+        "cleaning storage accessory",
+        "reusable cleaning tool compact",
+        "laundry problem solving product"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 2,
+      "coveragePct": 10,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Shoe washing laundry bag structured",
+          "cat": "Laundry",
+          "imageUrl": "",
+          "opportunityRank": 15,
+          "opportunityScore": 27.2,
+          "launchScore": 22.7,
+          "margin": 8.2,
+          "roi": 18.1,
+          "profit": 9,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 134
+        },
+        {
+          "rank": 2,
+          "name": "Reusable lint remover storage case",
+          "cat": "Laundry",
+          "imageUrl": "",
+          "opportunityRank": 37,
+          "opportunityScore": 25.4,
+          "launchScore": 19.9,
+          "margin": 4.7,
+          "roi": 9.6,
+          "profit": 3.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 120.5
+        }
+      ]
+    },
+    {
+      "key": "auto",
+      "label": "Auto",
+      "queries": [
+        "car interior organizer accessory",
+        "car trunk organizer compact",
+        "car comfort accessory non electronic",
+        "vehicle storage problem solving"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 6,
+      "coveragePct": 30,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Car sunglasses magnetic visor holder",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 2,
+          "opportunityScore": 34.9,
+          "launchScore": 23.9,
+          "margin": 10.2,
+          "roi": 23.5,
+          "profit": 9.1,
+          "confidenceScore": 47.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 146
+        },
+        {
+          "rank": 2,
+          "name": "Car trunk side storage net",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 3,
+          "opportunityScore": 34.5,
+          "launchScore": 23.2,
+          "margin": 8.8,
+          "roi": 19.6,
+          "profit": 10.5,
+          "confidenceScore": 47.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 142.3
+        },
+        {
+          "rank": 3,
+          "name": "Car headrest hidden hook premium",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 14,
+          "opportunityScore": 27.4,
+          "launchScore": 23.1,
+          "margin": 9.3,
+          "roi": 21.1,
+          "profit": 7.4,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 136.8
+        },
+        {
+          "rank": 4,
+          "name": "Dog car door protector set",
+          "cat": "Pet",
+          "imageUrl": "",
+          "opportunityRank": 18,
+          "opportunityScore": 26.7,
+          "launchScore": 22,
+          "margin": 6.9,
+          "roi": 14.7,
+          "profit": 9.6,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 130.6
+        },
+        {
+          "rank": 5,
+          "name": "Car cup holder expander adjustable",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 19,
+          "opportunityScore": 26.7,
+          "launchScore": 22,
+          "margin": 6.9,
+          "roi": 14.7,
+          "profit": 9.6,
+          "confidenceScore": 31.4,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 130.6
+        },
+        {
+          "rank": 6,
+          "name": "Car seat back foldable tray organizer",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 25,
+          "opportunityScore": 26.1,
+          "launchScore": 21,
+          "margin": 5.4,
+          "roi": 11.3,
+          "profit": 8.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.3
+        }
+      ]
+    },
+    {
+      "key": "travel",
+      "label": "Travel & Bagaje",
+      "queries": [
+        "travel organizer accessory",
+        "luggage problem solving product",
+        "airplane travel accessory compact",
+        "packing organizer new product"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 3,
+      "coveragePct": 15,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Travel luggage cup holder sleeve",
+          "cat": "Travel",
+          "imageUrl": "",
+          "opportunityRank": 23,
+          "opportunityScore": 26.4,
+          "launchScore": 21.4,
+          "margin": 6.7,
+          "roi": 14.4,
+          "profit": 6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 125.5
+        },
+        {
+          "rank": 2,
+          "name": "Airplane seat pocket organizer pouch",
+          "cat": "Travel",
+          "imageUrl": "",
+          "opportunityRank": 30,
+          "opportunityScore": 26,
+          "launchScore": 20.8,
+          "margin": 5.5,
+          "roi": 11.5,
+          "profit": 6.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.5
+        },
+        {
+          "rank": 3,
+          "name": "Travel cable organizer roll pouch",
+          "cat": "Travel",
+          "imageUrl": "",
+          "opportunityRank": 35,
+          "opportunityScore": 25.5,
+          "launchScore": 20.1,
+          "margin": 4.7,
+          "roi": 9.5,
+          "profit": 5.1,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 120.5
+        }
+      ]
+    },
+    {
+      "key": "pet",
+      "label": "Pet",
+      "queries": [
+        "dog organizer accessory",
+        "cat problem solving product",
+        "pet travel accessory",
+        "pet feeding organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 2,
+      "coveragePct": 10,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Cat litter scoop holder closed",
+          "cat": "Pet",
+          "imageUrl": "",
+          "opportunityRank": 6,
+          "opportunityScore": 33.4,
+          "launchScore": 21.5,
+          "margin": 6.8,
+          "roi": 14.5,
+          "profit": 6.7,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 132.4
+        },
+        {
+          "rank": 2,
+          "name": "Dog leash wall organizer station",
+          "cat": "Pet",
+          "imageUrl": "",
+          "opportunityRank": 29,
+          "opportunityScore": 26,
+          "launchScore": 20.8,
+          "margin": 5.5,
+          "roi": 11.5,
+          "profit": 6.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.5
+        }
+      ]
+    },
+    {
+      "key": "office",
+      "label": "Birou & Work from Home",
+      "queries": [
+        "desk organizer problem solving",
+        "work from home accessory compact",
+        "laptop desk accessory non electronic",
+        "cable management desk product"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 1,
+      "coveragePct": 5,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Under desk headphone hanger clamp",
+          "cat": "Birou",
+          "imageUrl": "",
+          "opportunityRank": 1,
+          "opportunityScore": 35.6,
+          "launchScore": 23.3,
+          "margin": 9.4,
+          "roi": 21.1,
+          "profit": 8.3,
+          "confidenceScore": 47.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 143.9
+        }
+      ]
+    },
+    {
+      "key": "phone",
+      "label": "Telefon & Accesorii Tech",
+      "queries": [
+        "phone holder accessory non electronic",
+        "charging cable organizer",
+        "tablet stand compact",
+        "tech organizer pouch"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 1,
+      "coveragePct": 5,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Bedside phone holder clamp",
+          "cat": "Casă",
+          "imageUrl": "",
+          "opportunityRank": 22,
+          "opportunityScore": 26.4,
+          "launchScore": 21.5,
+          "margin": 6.8,
+          "roi": 14.5,
+          "profit": 6.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 125.6
+        }
+      ]
+    },
+    {
+      "key": "beauty",
+      "label": "Beauty & Îngrijire",
+      "queries": [
+        "beauty organizer accessory",
+        "makeup storage problem solving",
+        "hair tool organizer",
+        "cosmetic travel organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 1,
+      "coveragePct": 5,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Cosmetic bag divider insert adjustable",
+          "cat": "Beauty organizare",
+          "imageUrl": "",
+          "opportunityRank": 34,
+          "opportunityScore": 25.5,
+          "launchScore": 20.1,
+          "margin": 4.7,
+          "roi": 9.5,
+          "profit": 5.1,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 120.5
+        }
+      ]
+    },
+    {
+      "key": "fashion",
+      "label": "Fashion & Accesorii",
+      "queries": [
+        "fashion accessory organizer",
+        "jewelry travel organizer",
+        "hat storage travel",
+        "shoe accessory organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "fitness",
+      "label": "Fitness & Recovery",
+      "queries": [
+        "home fitness organizer",
+        "recovery accessory non electronic",
+        "resistance band accessory",
+        "exercise storage compact"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 2,
+      "coveragePct": 10,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Resistance band door organizer pouch",
+          "cat": "Sport & hobby",
+          "imageUrl": "",
+          "opportunityRank": 12,
+          "opportunityScore": 32.7,
+          "launchScore": 20.4,
+          "margin": 5.2,
+          "roi": 10.8,
+          "profit": 5.2,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 128.5
+        },
+        {
+          "rank": 2,
+          "name": "Yoga mat wall storage rack",
+          "cat": "Sport & hobby",
+          "imageUrl": "",
+          "opportunityRank": 27,
+          "opportunityScore": 26.1,
+          "launchScore": 21,
+          "margin": 5.4,
+          "roi": 11.3,
+          "profit": 8.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 122.3
+        }
+      ]
+    },
+    {
+      "key": "outdoor",
+      "label": "Outdoor & Camping",
+      "queries": [
+        "camping organizer compact",
+        "outdoor problem solving accessory",
+        "picnic storage product",
+        "hiking gear organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "garden",
+      "label": "Grădină & Balcon",
+      "queries": [
+        "balcony gardening accessory",
+        "plant support product",
+        "garden organization small product",
+        "plant care non electronic"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 2,
+      "coveragePct": 10,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Balcony plant drip tray adjustable",
+          "cat": "Grădină & balcon",
+          "imageUrl": "",
+          "opportunityRank": 40,
+          "opportunityScore": 25,
+          "launchScore": 19.3,
+          "margin": 3.6,
+          "roi": 7.3,
+          "profit": 3.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 118
+        },
+        {
+          "rank": 2,
+          "name": "Plant support clips reusable set",
+          "cat": "Grădină & balcon",
+          "imageUrl": "",
+          "opportunityRank": 42,
+          "opportunityScore": 23.5,
+          "launchScore": 16.8,
+          "margin": -0.6,
+          "roi": -1.1,
+          "profit": -0.3,
+          "confidenceScore": 14.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 107.3
+        }
+      ]
+    },
+    {
+      "key": "diy",
+      "label": "DIY & Home Improvement",
+      "queries": [
+        "DIY organizer small tool",
+        "home repair accessory compact",
+        "drill free mounting accessory",
+        "small workshop organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "party",
+      "label": "Party & Evenimente",
+      "queries": [
+        "party decoration reusable accessory",
+        "event organizer product",
+        "birthday party convenience product",
+        "party serving accessory"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "hobby",
+      "label": "Hobby & Craft",
+      "queries": [
+        "craft organizer product",
+        "painting accessory organizer",
+        "puzzle board accessory",
+        "hobby storage compact"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 3,
+      "coveragePct": 15,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": [
+        {
+          "rank": 1,
+          "name": "Puzzle sorting trays stackable",
+          "cat": "Sport & hobby",
+          "imageUrl": "",
+          "opportunityRank": 20,
+          "opportunityScore": 26.7,
+          "launchScore": 22,
+          "margin": 6.9,
+          "roi": 14.7,
+          "profit": 9.6,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 125.9
+        },
+        {
+          "rank": 2,
+          "name": "Sports medal display hanger wall",
+          "cat": "Sport & hobby",
+          "imageUrl": "",
+          "opportunityRank": 24,
+          "opportunityScore": 26.3,
+          "launchScore": 21.3,
+          "margin": 5.9,
+          "roi": 12.3,
+          "profit": 8.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 123.4
+        },
+        {
+          "rank": 3,
+          "name": "Board game card holder hands free",
+          "cat": "Sport & hobby",
+          "imageUrl": "",
+          "opportunityRank": 36,
+          "opportunityScore": 25.4,
+          "launchScore": 19.9,
+          "margin": 4.7,
+          "roi": 9.6,
+          "profit": 3.7,
+          "confidenceScore": 17.9,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România verificată",
+            "preț de vânzare și landed cost verificate",
+            "furnizor + MOQ/preț/transport confirmate comercial",
+            "review evidence suficient",
+            "dovezi piață și competiție suficiente",
+            "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+            "Data Confidence minimum MEDIE"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 8
+          },
+          "commercialScore": 120.5
+        }
+      ]
+    },
+    {
+      "key": "sports",
+      "label": "Sport & Hobby",
+      "queries": [
+        "sports gear organizer",
+        "medal display product",
+        "ball storage accessory",
+        "sports travel organizer"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "seasonal",
+      "label": "Sezon & Cadouri",
+      "queries": [
+        "giftable problem solving product",
+        "seasonal home accessory",
+        "holiday organizer reusable",
+        "small gift product useful"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    },
+    {
+      "key": "senior",
+      "label": "Confort & Seniori",
+      "queries": [
+        "daily living aid non medical",
+        "home convenience senior accessory",
+        "easy grip household product",
+        "comfort organizer accessibility"
+      ],
+      "target": 20,
+      "minimum": 10,
+      "current": 0,
+      "coveragePct": 0,
+      "ready": 0,
+      "needsDiscovery": true,
+      "products": []
+    }
+  ]
+}
