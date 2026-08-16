@@ -27,6 +27,8 @@ jobs:
         run: node --check app.js
       - name: Syntax check scanner
         run: node --check scripts/web-radar-scan.mjs
+      - name: Syntax check category discovery
+        run: node --check scripts/discovery-v6-expand.mjs
       - name: Syntax check Market Intelligence engine
         run: node --check scripts/market-intelligence-postprocess.mjs
       - name: Syntax check Market Intelligence history
@@ -39,6 +41,8 @@ jobs:
         run: node --check scripts/free-intelligence-suite.mjs
       - name: Syntax check Test Buy decision
         run: node --check scripts/test-buy-decision.mjs
+      - name: Syntax check Category Radar
+        run: node --check scripts/category-radar-postprocess.mjs
       - name: Syntax check Smart Watchlist
         run: node --check scripts/watchlist-postprocess.mjs
       - name: Syntax check Free Readiness audit
@@ -55,6 +59,8 @@ jobs:
           node -e "const fs=require('fs');const s=fs.readFileSync('product-decision.html','utf8');for(const x of ['viewport-fit=cover','market-intelligence-live.json','Dosar produs','Review Intelligence V2','Supplier Intelligence','Validare spre TEST','Decision Summary','Blocaj #1','Acțiunea cu impact maxim'])if(!s.includes(x))throw new Error('Product Decision missing '+x)"
       - name: Validate Test Buy dashboard structure
         run: node -e "const fs=require('fs');const s=fs.readFileSync('test-buy.html','utf8');for(const x of ['viewport-fit=cover','Test Buy 20–30','testBuyDecision','Buget test','Landed/unit'])if(!s.includes(x))throw new Error('Test Buy dashboard missing '+x)"
+      - name: Validate Category Radar structure
+        run: node -e "const fs=require('fs');const s=fs.readFileSync('category-radar.html','utf8');for(const x of ['viewport-fit=cover','Category Radar','category-radar-live.json','10–20','TEST-ready'])if(!s.includes(x))throw new Error('Category Radar missing '+x);const u=require('./category-universe.json');if((u.categories||[]).length<20)throw new Error('category universe too small');if(u.minimumDisplayPerCategory!==10||u.targetPerCategory!==20)throw new Error('category targets invalid')"
       - name: Syntax check DataForSEO adapter
         run: node --check scripts/dataforseo-keywords.mjs
       - name: Generate Market Intelligence fixture
@@ -73,13 +79,17 @@ jobs:
         run: node scripts/test-buy-decision.mjs
       - name: Verify Test Buy safety gates
         run: node -e "const d=require('./market-intelligence-live.json');for(const p of d.products||[]){const t=p.testBuyDecision;if(!t)throw new Error('missing testBuyDecision');if(t.status==='TEST_BUY'&&(t.quantity<20||t.quantity>30||t.blockers.length))throw new Error('unsafe TEST_BUY '+p.name)}"
+      - name: Generate Category Radar fixture
+        run: node scripts/category-radar-postprocess.mjs
+      - name: Verify Category Radar data
+        run: node -e "const d=require('./category-radar-live.json');if((d.categories||[]).length<20)throw new Error('missing categories');for(const c of d.categories||[]){if(c.products.length>20)throw new Error('category over target '+c.key);if(c.target!==20||c.minimum!==10)throw new Error('bad category targets '+c.key)}"
       - name: Generate Smart Watchlist fixture
         run: node scripts/watchlist-postprocess.mjs
       - name: Generate Free Readiness audit fixture
         run: node scripts/free-readiness-audit.mjs
       - name: Verify generated intelligence JSON
         run: |
-          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json','free-readiness-live.json']){const d=require('./'+f);if(!d||(!d.version&&f!=='free-readiness-live.json'))throw new Error('invalid '+f)};const r=require('./free-readiness-live.json');if(r.technicalReadiness<88)throw new Error('free readiness below target')"
+          node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json','category-radar-live.json','free-readiness-live.json']){const d=require('./'+f);if(!d||(!d.version&&f!=='free-readiness-live.json'))throw new Error('invalid '+f)};const r=require('./free-readiness-live.json');if(r.technicalReadiness<88)throw new Error('free readiness below target')"
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
       - name: Run tests
