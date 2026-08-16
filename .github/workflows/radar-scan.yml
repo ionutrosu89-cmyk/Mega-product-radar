@@ -17,6 +17,7 @@ on:
       - 'review-intelligence.js'
       - 'market-intelligence.html'
       - 'watchlist.html'
+      - 'test-buy.html'
       - 'free-readiness.html'
       - 'alerts.html'
       - 'validation-queue.html'
@@ -80,6 +81,9 @@ jobs:
       - name: Build Full Free Intelligence Suite
         if: always()
         run: node scripts/free-intelligence-suite.mjs
+      - name: Build strict Test Buy decision
+        if: always()
+        run: node scripts/test-buy-decision.mjs
       - name: Build Smart Opportunity Watchlist
         if: always()
         run: node scripts/watchlist-postprocess.mjs
