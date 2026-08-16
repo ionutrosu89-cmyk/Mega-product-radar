@@ -1,8 +1,8 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-16T10:10:58.508Z",
-  "sourceUpdatedAt": "2026-08-16T10:10:50.312Z",
+  "updatedAt": "2026-08-16T10:54:18.717Z",
+  "sourceUpdatedAt": "2026-08-16T10:54:10.348Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile sunt calculate exclusiv din dovezile existente. Volumele de căutare, sellerii și vânzările nu sunt inventate; keyword demand și competitor intelligence rămân proxy-uri observabile până la surse verificate.",
   "providerReadiness": {
@@ -17,7 +17,7 @@
       ],
       "status": "ACTIVE",
       "trialMode": true,
-      "lastKeywordEnrichmentAt": "2026-08-16T10:10:58.508Z",
+      "lastKeywordEnrichmentAt": "2026-08-16T10:54:18.388Z",
       "lastRequestCostUsd": 0.09,
       "lastKeywordCount": 10,
       "lastEnrichedProducts": 10,
@@ -50,7 +50,8 @@
     "cooling": 0,
     "topOpportunities": 0,
     "priorityWatch": 0,
-    "validationQueue": 0
+    "validationQueue": 0,
+    "testBuyReady": 0
   },
   "products": [
     {
@@ -60,7 +61,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:02:54.670Z",
+      "checkedAt": "2026-08-16T10:48:00.343Z",
       "economics": {
         "score": 26.9,
         "margin": 9.4,
@@ -432,7 +433,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.387Z"
       },
       "launchScore": {
         "score": 23.3,
@@ -710,7 +711,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 80,
+        "targetSalePrice": 88.3,
+        "unitProfit": 8.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 47.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Car sunglasses magnetic visor holder",
@@ -923,7 +960,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.507Z"
+        "checkedAt": "2026-08-16T10:54:18.387Z"
       },
       "launchScore": {
         "score": 23.9,
@@ -1164,7 +1201,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 80.1,
+        "targetSalePrice": 89.2,
+        "unitProfit": 9.1,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 47.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Car trunk side storage net",
@@ -1377,7 +1450,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.387Z"
       },
       "launchScore": {
         "score": 23.2,
@@ -1618,7 +1691,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 108.8,
+        "targetSalePrice": 119.3,
+        "unitProfit": 10.5,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 47.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Pan lid organizer adjustable rack",
@@ -2259,7 +2368,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 129.5,
+        "targetSalePrice": 139.1,
+        "unitProfit": 9.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Reusable food bag drying rack",
@@ -2900,7 +3045,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 82.7,
+        "targetSalePrice": 89.5,
+        "unitProfit": 6.8,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Cat litter scoop holder closed",
@@ -3345,7 +3526,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 91.8,
+        "targetSalePrice": 98.5,
+        "unitProfit": 6.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Oil spray bottle glass free plastic",
@@ -3986,7 +4203,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 91.8,
+        "targetSalePrice": 98.5,
+        "unitProfit": 6.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Clip on pot strainer silicone",
@@ -4431,7 +4684,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 73.8,
+        "targetSalePrice": 79.1,
+        "unitProfit": 5.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Sofa arm tray organizer",
@@ -5072,7 +5361,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 120.8,
+        "targetSalePrice": 128.1,
+        "unitProfit": 7.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Wardrobe handbag hanging organizer",
@@ -5081,7 +5406,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:02:55.419Z",
+      "checkedAt": "2026-08-16T10:48:01.095Z",
       "economics": {
         "score": 17.3,
         "margin": 5.7,
@@ -5713,7 +6038,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 120.8,
+        "targetSalePrice": 128.1,
+        "unitProfit": 7.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Sink splash guard silicone mat",
@@ -6348,7 +6709,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 82.9,
+        "targetSalePrice": 88.1,
+        "unitProfit": 5.2,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Resistance band door organizer pouch",
@@ -6983,7 +7380,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 94.8,
+        "targetSalePrice": 100,
+        "unitProfit": 5.2,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 34.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Reusable furniture moving sliders kit",
@@ -7364,7 +7797,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 23.2,
@@ -7636,7 +8069,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 108.8,
+        "targetSalePrice": 119.3,
+        "unitProfit": 10.5,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Car headrest hidden hook premium",
@@ -7645,7 +8114,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:04:22.430Z",
+      "checkedAt": "2026-08-16T10:49:28.117Z",
       "economics": {
         "score": 26.3,
         "margin": 9.3,
@@ -8017,7 +8486,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 23.1,
@@ -8289,7 +8758,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 72.2,
+        "targetSalePrice": 79.6,
+        "unitProfit": 7.4,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Shoe washing laundry bag structured",
@@ -8670,7 +9175,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 22.7,
@@ -8942,7 +9447,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 100.8,
+        "targetSalePrice": 109.8,
+        "unitProfit": 9,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Desk drawer organizer modular trays",
@@ -9155,7 +9696,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 22.2,
@@ -9399,7 +9940,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 109.8,
+        "targetSalePrice": 118.7,
+        "unitProfit": 8.9,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Shower corner shelf adhesive no drill",
@@ -9780,7 +10357,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 22.1,
@@ -10052,7 +10629,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 139,
+        "targetSalePrice": 149.3,
+        "unitProfit": 10.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Dog car door protector set",
@@ -10265,7 +10878,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 22,
@@ -10509,7 +11122,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 129.5,
+        "targetSalePrice": 139.1,
+        "unitProfit": 9.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Car cup holder expander adjustable",
@@ -10518,7 +11167,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:04:08.271Z",
+      "checkedAt": "2026-08-16T10:49:13.959Z",
       "economics": {
         "score": 21.6,
         "margin": 6.9,
@@ -10890,7 +11539,7 @@
         "lowTopOfPageBid": 0,
         "highTopOfPageBid": 0,
         "monthlySearches": [],
-        "checkedAt": "2026-08-16T10:10:58.508Z"
+        "checkedAt": "2026-08-16T10:54:18.388Z"
       },
       "launchScore": {
         "score": 22,
@@ -11162,7 +11811,43 @@
           "priority": 75,
           "label": "Adaugă review evidence"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 129.5,
+        "targetSalePrice": 139.1,
+        "unitProfit": 9.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 31.4,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Puzzle sorting trays stackable",
@@ -11804,7 +12489,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 129.5,
+        "targetSalePrice": 139.1,
+        "unitProfit": 9.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Toothbrush wall organizer cover",
@@ -12446,7 +13167,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 120.1,
+        "targetSalePrice": 129,
+        "unitProfit": 8.9,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Bedside phone holder clamp",
@@ -12455,7 +13212,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:03:39.948Z",
+      "checkedAt": "2026-08-16T10:48:45.637Z",
       "economics": {
         "score": 19.6,
         "margin": 6.8,
@@ -13088,7 +13845,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 91.8,
+        "targetSalePrice": 98.5,
+        "unitProfit": 6.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Travel luggage cup holder sleeve",
@@ -13730,7 +14523,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 83.6,
+        "targetSalePrice": 89.6,
+        "unitProfit": 6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Sports medal display hanger wall",
@@ -14372,7 +15201,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 138.8,
+        "targetSalePrice": 147.5,
+        "unitProfit": 8.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Car seat back foldable tray organizer",
@@ -14818,7 +15683,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 152.4,
+        "targetSalePrice": 161.1,
+        "unitProfit": 8.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Pet toy storage basket foldable",
@@ -15460,7 +16361,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 120.8,
+        "targetSalePrice": 128.1,
+        "unitProfit": 7.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Yoga mat wall storage rack",
@@ -15469,7 +16406,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:02:56.652Z",
+      "checkedAt": "2026-08-16T10:48:02.339Z",
       "economics": {
         "score": 17.6,
         "margin": 5.4,
@@ -16102,7 +17039,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 152.4,
+        "targetSalePrice": 161.1,
+        "unitProfit": 8.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Closet shelf hanging basket",
@@ -16548,7 +17521,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 113.4,
+        "targetSalePrice": 120,
+        "unitProfit": 6.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Dog leash wall organizer station",
@@ -16994,7 +18003,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 113.4,
+        "targetSalePrice": 120,
+        "unitProfit": 6.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Airplane seat pocket organizer pouch",
@@ -17003,7 +18048,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:02:57.462Z",
+      "checkedAt": "2026-08-16T10:48:03.154Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -17636,7 +18681,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 113.4,
+        "targetSalePrice": 120,
+        "unitProfit": 6.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Rotating bathroom organizer turntable",
@@ -18278,7 +19359,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 113.4,
+        "targetSalePrice": 120,
+        "unitProfit": 6.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Closet belt hanger rotating",
@@ -18724,7 +19841,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 82.9,
+        "targetSalePrice": 88.1,
+        "unitProfit": 5.2,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Stroller snack cup universal no electronics",
@@ -19366,7 +20519,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 83.6,
+        "targetSalePrice": 88,
+        "unitProfit": 4.4,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Cosmetic bag divider insert adjustable",
@@ -19812,7 +21001,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 103.4,
+        "targetSalePrice": 108.5,
+        "unitProfit": 5.1,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Travel cable organizer roll pouch",
@@ -20454,7 +21679,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 103.4,
+        "targetSalePrice": 108.5,
+        "unitProfit": 5.1,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Board game card holder hands free",
@@ -20463,7 +21724,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:03:54.110Z",
+      "checkedAt": "2026-08-16T10:48:59.798Z",
       "economics": {
         "score": 12.8,
         "margin": 4.7,
@@ -21096,7 +22357,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 75,
+        "targetSalePrice": 78.7,
+        "unitProfit": 3.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Reusable lint remover storage case",
@@ -21738,7 +23035,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 75,
+        "targetSalePrice": 78.7,
+        "unitProfit": 3.7,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Bed sheet corner holder straps premium",
@@ -21747,7 +23080,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:03:25.787Z",
+      "checkedAt": "2026-08-16T10:48:31.477Z",
       "economics": {
         "score": 11.6,
         "margin": 4.4,
@@ -22380,7 +23713,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 65.2,
+        "targetSalePrice": 68.2,
+        "unitProfit": 3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Pet food scoop bag clip combo",
@@ -23022,7 +24391,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 65.2,
+        "targetSalePrice": 68.2,
+        "unitProfit": 3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Balcony plant drip tray adjustable",
@@ -23031,7 +24436,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T10:03:11.625Z",
+      "checkedAt": "2026-08-16T10:48:17.316Z",
       "economics": {
         "score": 10.3,
         "margin": 3.6,
@@ -23664,7 +25069,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 96.4,
+        "targetSalePrice": 100,
+        "unitProfit": 3.6,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Plant pot drainage mesh pad set",
@@ -24306,7 +25747,43 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 67,
+        "targetSalePrice": 69,
+        "unitProfit": 2,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 17.9,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     },
     {
       "name": "Plant support clips reusable set",
@@ -24926,14 +26403,50 @@
           "priority": 55,
           "label": "Mai așteaptă istoric de trend"
         }
-      ]
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 0,
+        "targetSalePrice": 0,
+        "unitProfit": -0.3,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 14.3,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": true
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
     }
   ],
   "trendPolicy": "Trend Intelligence folosește numai snapshoturile istorice interne și nu modifică verdictul TEST/CUMPĂRĂ.",
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-16T10:10:58.764Z",
+    "updatedAt": "2026-08-16T10:54:18.650Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -24945,5 +26458,11 @@
       "Data Confidence Dashboard"
     ],
     "policy": "Toate modulele gratuite folosesc doar date deja observate/derivate și nu modifică pragurile TEST/CUMPĂRĂ."
+  },
+  "testBuyEngine": {
+    "version": "1.0",
+    "updatedAt": "2026-08-16T10:54:18.717Z",
+    "readyProducts": 0,
+    "policy": "Loturile de test sunt limitate la 20–30 bucăți și necesită toate gate-urile comerciale."
   }
 }
