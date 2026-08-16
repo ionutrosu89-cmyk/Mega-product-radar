@@ -1,11 +1,11 @@
 {
   "live": true,
-  "updatedAt": "2026-08-15T21:58:20.611Z",
+  "updatedAt": "2026-08-16T05:03:34.044Z",
   "bucket": "Romania Arbitrage Engine • market + social + sourcing + history",
   "newCandidates": 0,
   "model": "MEGA Score 4.5",
   "engine": "Romania Arbitrage Engine v4.5",
-  "successfulChecks": 55,
+  "successfulChecks": 51,
   "validation": "All counts are web-search proxies; prices, sales, seller counts, reviews, MOQ and supplier terms require confirmation",
   "products": [
     {
@@ -226,7 +226,7 @@
         "legacyStatus": "WEB_SIGNAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 55,
         "confidence": "MEDIUM",
         "marketLive": true,
@@ -460,7 +460,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -687,7 +687,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -924,7 +924,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -938,241 +938,6 @@
         "competitionEvidence": "NO_SIGNAL",
         "blockers": [
           "MARKET_DATA_NOT_LIVE",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Sac profesional pentru spălarea pantofilor, structură 3D",
-      "cat": "Cleaning",
-      "chinaMin": 20,
-      "chinaMax": 32,
-      "landed": 44,
-      "sell": 139.9,
-      "gap": 91,
-      "velocity": 86,
-      "demand": 76,
-      "competition": 80,
-      "logistics": 95,
-      "returns": 86,
-      "compliance": 99,
-      "social": 96,
-      "supplier": 80,
-      "markets": {
-        "US": 4,
-        "DE": 3,
-        "TR": 3,
-        "PL": 2,
-        "TikTok": 5,
-        "RO": 1
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Scăzut",
-      "score": 57,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Sac profesional pentru spălarea pantofilor, structură 3D pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Sac%20profesional%20pentru%20sp%C4%83larea%20pantofilor%2C%20structur%C4%83%203D",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Sac profesional pentru spălarea pantofilor, structură 3D pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Sac%20profesional%20pentru%20sp%C4%83larea%20pantofilor%2C%20structur%C4%83%203D",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-15T05:30:11.784Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Problem-solution excelent pentru video. Test obligatoriu pe fermoar, cusături și protecția pantofului.",
-      "marketScout": {
-        "checkedAt": "2026-08-15T05:30:11.784Z",
-        "checks": 0,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 45,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": false
-          }
-        }
-      },
-      "megaScore": 57,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 57,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 45,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 73,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 95,
-          "compliance": 99
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 36.64483471074382,
-          "margin": 26.19359164456313,
-          "roi": 83.28371525169051,
-          "marketplace": 23.783,
-          "ads": 11.192,
-          "grossNoVat": 115.61983471074382,
-          "landed": 44,
-          "sell": 139.9,
-          "breakEvenAds": 47.83683471074382
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 7,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 0,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
           "REVIEW_EVIDENCE_MISSING"
         ],
         "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
@@ -1393,7 +1158,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -1630,7 +1395,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -1857,7 +1622,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -2092,7 +1857,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2327,7 +2092,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2562,7 +2327,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -2797,7 +2562,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3032,7 +2797,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3267,7 +3032,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3502,7 +3267,242 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Suport modular pentru capace oale, montaj fără găurire",
+      "cat": "Kitchen",
+      "chinaMin": 20,
+      "chinaMax": 32,
+      "landed": 44,
+      "sell": 139.9,
+      "gap": 88,
+      "velocity": 74,
+      "demand": 70,
+      "competition": 74,
+      "logistics": 92,
+      "returns": 76,
+      "compliance": 98,
+      "social": 80,
+      "supplier": 76,
+      "markets": {
+        "US": 4,
+        "DE": 3,
+        "TR": 3,
+        "PL": 2,
+        "TikTok": 3,
+        "RO": 1
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Mediu",
+      "score": 56,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Suport modular pentru capace oale, montaj fără găurire pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Suport%20modular%20pentru%20capace%20oale%2C%20montaj%20f%C4%83r%C4%83%20g%C4%83urire",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Suport modular pentru capace oale, montaj fără găurire pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Suport%20modular%20pentru%20capace%20oale%2C%20montaj%20f%C4%83r%C4%83%20g%C4%83urire",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-16T05:03:24.958Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Cost bun; adezivul și capacitatea de încărcare sunt punctele critice.",
+      "marketScout": {
+        "checkedAt": "2026-08-16T05:03:24.958Z",
+        "checks": 0,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 45,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": false
+          }
+        }
+      },
+      "megaScore": 56,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 56,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 45,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 73,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 92,
+          "compliance": 98
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 36.64483471074382,
+          "margin": 26.19359164456313,
+          "roi": 83.28371525169051,
+          "marketplace": 23.783,
+          "ads": 11.192,
+          "grossNoVat": 115.61983471074382,
+          "landed": 44,
+          "sell": 139.9,
+          "breakEvenAds": 47.83683471074382
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 8,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 0,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3737,7 +3737,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -3972,7 +3972,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4207,7 +4207,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4442,7 +4442,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4677,7 +4677,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -4912,7 +4912,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5147,7 +5147,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5382,7 +5382,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -5619,7 +5619,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -5854,7 +5854,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6089,7 +6089,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6324,7 +6324,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6559,7 +6559,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -6794,7 +6794,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7029,7 +7029,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7098,11 +7098,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:08.264Z",
+      "lastChecked": "2026-08-16T05:03:20.927Z",
       "sourceStatus": "PARTIAL",
       "notes": "Nișă vizuală și compactă; bună pentru TikTok/Reels. Cererea totală poate fi mai mică decât home generic.",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:08.264Z",
+        "checkedAt": "2026-08-16T05:03:20.927Z",
         "checks": 9,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -7241,7 +7241,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -7264,7 +7264,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7499,7 +7499,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7734,7 +7734,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -7971,7 +7971,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -8205,7 +8205,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8442,7 +8442,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8677,7 +8677,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -8912,7 +8912,242 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
+        "evidenceScore": 10,
+        "confidence": "LOW",
+        "marketLive": false,
+        "supplierEvidence": "NONE",
+        "supplierEvidenceSources": {
+          "webCoverage": 0,
+          "verifiedListings": 0,
+          "directSupplierUrl": false
+        },
+        "reviewEvidence": "NONE",
+        "competitionEvidence": "NO_SIGNAL",
+        "blockers": [
+          "MARKET_DATA_NOT_LIVE",
+          "SUPPLIER_EVIDENCE_WEAK",
+          "REVIEW_EVIDENCE_MISSING"
+        ],
+        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
+      }
+    },
+    {
+      "name": "Sac profesional pentru spălarea pantofilor, structură 3D",
+      "cat": "Cleaning",
+      "chinaMin": 20,
+      "chinaMax": 32,
+      "landed": 44,
+      "sell": 139.9,
+      "gap": 91,
+      "velocity": 86,
+      "demand": 76,
+      "competition": 80,
+      "logistics": 95,
+      "returns": 86,
+      "compliance": 99,
+      "social": 96,
+      "supplier": 80,
+      "markets": {
+        "US": 4,
+        "DE": 3,
+        "TR": 3,
+        "PL": 2,
+        "TikTok": 5,
+        "RO": 1
+      },
+      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
+      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
+      "supplierUrl": "",
+      "roUrl": "",
+      "risk": "Scăzut",
+      "score": 53,
+      "verdict": "REJECT",
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "label": "Caută Sac profesional pentru spălarea pantofilor, structură 3D pe Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Sac%20profesional%20pentru%20sp%C4%83larea%20pantofilor%2C%20structur%C4%83%203D",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "label": "Caută Sac profesional pentru spălarea pantofilor, structură 3D pe 1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Sac%20profesional%20pentru%20sp%C4%83larea%20pantofilor%2C%20structur%C4%83%203D",
+          "price": "de verificat",
+          "moq": "de verificat",
+          "verified": false
+        }
+      ],
+      "lastChecked": "2026-08-16T05:03:20.443Z",
+      "sourceStatus": "PARTIAL",
+      "notes": "Problem-solution excelent pentru video. Test obligatoriu pe fermoar, cusături și protecția pantofului.",
+      "marketScout": {
+        "checkedAt": "2026-08-16T05:03:20.443Z",
+        "checks": 9,
+        "foreignPresence": 0,
+        "romaniaPresence": 0,
+        "chinaSourcingPresence": 0,
+        "socialPresence": 0,
+        "signalScore": 25,
+        "signals": {
+          "amazonDE": {
+            "label": "Amazon DE",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "allegroPL": {
+            "label": "Allegro PL",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "trendyolTR": {
+            "label": "Trendyol TR",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagRO": {
+            "label": "eMAG RO",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "alibabaCN": {
+            "label": "Alibaba",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "1688CN": {
+            "label": "1688",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "tiktok": {
+            "label": "TikTok",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "pinterest": {
+            "label": "Pinterest",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "youtube": {
+            "label": "YouTube",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        },
+        "reviewSignals": {
+          "amazonReviews": {
+            "label": "Amazon reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          },
+          "emagReviews": {
+            "label": "eMAG reviews",
+            "present": false,
+            "resultCount": 0,
+            "ok": true
+          }
+        }
+      },
+      "megaScore": 53,
+      "action": "REJECT",
+      "lifecycle": "EARLY",
+      "megaAnalysis": {
+        "score": 53,
+        "action": "REJECT",
+        "lifecycle": "EARLY",
+        "components": {
+          "demand": 25,
+          "trend": 55,
+          "romaniaGap": 35,
+          "saturation": 92,
+          "margin": 73,
+          "viral": 30,
+          "supplier": 38,
+          "logistics": 95,
+          "compliance": 99
+        },
+        "trendVelocity": {
+          "percent": null,
+          "label": "NEW SIGNAL"
+        },
+        "economics": {
+          "profit": 36.64483471074382,
+          "margin": 26.19359164456313,
+          "roi": 83.28371525169051,
+          "marketplace": 23.783,
+          "ads": 11.192,
+          "grossNoVat": 115.61983471074382,
+          "landed": 44,
+          "sell": 139.9,
+          "breakEvenAds": 47.83683471074382
+        },
+        "testPlan": null,
+        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
+      },
+      "supplierIntel": {
+        "coverage": 0,
+        "alibabaResults": 0,
+        "results1688": 0,
+        "readiness": "WEAK",
+        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
+      },
+      "reviewIntel": {
+        "sourceCount": 0,
+        "evidenceCount": 0,
+        "status": "NO REVIEW EVIDENCE",
+        "sources": [],
+        "sentiment": null,
+        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
+      },
+      "competitorIntel": {
+        "market": "eMAG RO",
+        "resultProxy": 0,
+        "delta": null,
+        "status": "BASELINE",
+        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
+        "quality": "PARTIAL"
+      },
+      "historySummary": {
+        "scans": 0,
+        "totalScans": 8,
+        "scoreDelta": null,
+        "competitorDelta": null,
+        "firstAt": null,
+        "lastAt": null,
+        "quality": "PARTIAL"
+      },
+      "radarAlert": {
+        "active": false,
+        "type": null,
+        "message": null,
+        "suppressed": true,
+        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
+      },
+      "dataQuality": {
+        "level": "PARTIAL",
+        "sourceStatus": "PARTIAL",
+        "checks": 9,
+        "foreignPresence": 0,
+        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
+        "legacyStatus": "PARTIAL"
+      },
+      "v2Validation": {
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9149,7 +9384,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9384,7 +9619,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9621,7 +9856,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -9856,7 +10091,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -9925,11 +10160,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:09.157Z",
+      "lastChecked": "2026-08-16T05:03:21.895Z",
       "sourceStatus": "PARTIAL",
       "notes": "TikTok Shop arată volume foarte mari pe cleaning tools simple; această subnișă merită verificată local.",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:09.157Z",
+        "checkedAt": "2026-08-16T05:03:21.895Z",
         "checks": 9,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -10068,7 +10303,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -10091,242 +10326,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
-        "evidenceScore": 10,
-        "confidence": "LOW",
-        "marketLive": false,
-        "supplierEvidence": "NONE",
-        "supplierEvidenceSources": {
-          "webCoverage": 0,
-          "verifiedListings": 0,
-          "directSupplierUrl": false
-        },
-        "reviewEvidence": "NONE",
-        "competitionEvidence": "NO_SIGNAL",
-        "blockers": [
-          "MARKET_DATA_NOT_LIVE",
-          "SUPPLIER_EVIDENCE_WEAK",
-          "REVIEW_EVIDENCE_MISSING"
-        ],
-        "note": "Verified supplier links count as sourcing evidence, not confirmed MOQ/price/terms. Commercial terms still require manual confirmation before payment."
-      }
-    },
-    {
-      "name": "Suport modular pentru capace oale, montaj fără găurire",
-      "cat": "Kitchen",
-      "chinaMin": 20,
-      "chinaMax": 32,
-      "landed": 44,
-      "sell": 139.9,
-      "gap": 88,
-      "velocity": 74,
-      "demand": 70,
-      "competition": 74,
-      "logistics": 92,
-      "returns": 76,
-      "compliance": 98,
-      "social": 80,
-      "supplier": 76,
-      "markets": {
-        "US": 4,
-        "DE": 3,
-        "TR": 3,
-        "PL": 2,
-        "TikTok": 3,
-        "RO": 1
-      },
-      "status": "VALIDARE PARȚIALĂ • NU FOLOSI DELTA",
-      "evidence": "Semnale automate: fără prezență suficient de clară. Faza 3 adaugă istoric, competitor proxy, sourcing multi-source și review evidence. Nu reprezintă vânzări sau selleri confirmați.",
-      "supplierUrl": "",
-      "roUrl": "",
-      "risk": "Mediu",
-      "score": 53,
-      "verdict": "REJECT",
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "label": "Caută Suport modular pentru capace oale, montaj fără găurire pe Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Suport%20modular%20pentru%20capace%20oale%2C%20montaj%20f%C4%83r%C4%83%20g%C4%83urire",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "label": "Caută Suport modular pentru capace oale, montaj fără găurire pe 1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Suport%20modular%20pentru%20capace%20oale%2C%20montaj%20f%C4%83r%C4%83%20g%C4%83urire",
-          "price": "de verificat",
-          "moq": "de verificat",
-          "verified": false
-        }
-      ],
-      "lastChecked": "2026-08-15T06:16:10.033Z",
-      "sourceStatus": "PARTIAL",
-      "notes": "Cost bun; adezivul și capacitatea de încărcare sunt punctele critice.",
-      "marketScout": {
-        "checkedAt": "2026-08-15T06:16:10.033Z",
-        "checks": 9,
-        "foreignPresence": 0,
-        "romaniaPresence": 0,
-        "chinaSourcingPresence": 0,
-        "socialPresence": 0,
-        "signalScore": 25,
-        "signals": {
-          "amazonDE": {
-            "label": "Amazon DE",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "allegroPL": {
-            "label": "Allegro PL",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "trendyolTR": {
-            "label": "Trendyol TR",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagRO": {
-            "label": "eMAG RO",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "alibabaCN": {
-            "label": "Alibaba",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "1688CN": {
-            "label": "1688",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "tiktok": {
-            "label": "TikTok",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "pinterest": {
-            "label": "Pinterest",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "youtube": {
-            "label": "YouTube",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        },
-        "reviewSignals": {
-          "amazonReviews": {
-            "label": "Amazon reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          },
-          "emagReviews": {
-            "label": "eMAG reviews",
-            "present": false,
-            "resultCount": 0,
-            "ok": true
-          }
-        }
-      },
-      "megaScore": 53,
-      "action": "REJECT",
-      "lifecycle": "EARLY",
-      "megaAnalysis": {
-        "score": 53,
-        "action": "REJECT",
-        "lifecycle": "EARLY",
-        "components": {
-          "demand": 25,
-          "trend": 55,
-          "romaniaGap": 35,
-          "saturation": 92,
-          "margin": 73,
-          "viral": 30,
-          "supplier": 38,
-          "logistics": 92,
-          "compliance": 98
-        },
-        "trendVelocity": {
-          "percent": null,
-          "label": "NEW SIGNAL"
-        },
-        "economics": {
-          "profit": 36.64483471074382,
-          "margin": 26.19359164456313,
-          "roi": 83.28371525169051,
-          "marketplace": 23.783,
-          "ads": 11.192,
-          "grossNoVat": 115.61983471074382,
-          "landed": 44,
-          "sell": 139.9,
-          "breakEvenAds": 47.83683471074382
-        },
-        "testPlan": null,
-        "methodology": "MEGA Score 3.0 uses market, social, sourcing and economics web signals. It does not claim verified sales volume."
-      },
-      "supplierIntel": {
-        "coverage": 0,
-        "alibabaResults": 0,
-        "results1688": 0,
-        "readiness": "WEAK",
-        "note": "Prezență web furnizori; prețul, MOQ, ratingul și termenii trebuie confirmați."
-      },
-      "reviewIntel": {
-        "sourceCount": 0,
-        "evidenceCount": 0,
-        "status": "NO REVIEW EVIDENCE",
-        "sources": [],
-        "sentiment": null,
-        "note": "Nu se atribuie sentiment fără citirea efectivă a review-urilor."
-      },
-      "competitorIntel": {
-        "market": "eMAG RO",
-        "resultProxy": 0,
-        "delta": null,
-        "status": "BASELINE",
-        "note": "Proxy bazat pe rezultate web indexate, nu număr verificat de selleri.",
-        "quality": "PARTIAL"
-      },
-      "historySummary": {
-        "scans": 0,
-        "totalScans": 7,
-        "scoreDelta": null,
-        "competitorDelta": null,
-        "firstAt": null,
-        "lastAt": null,
-        "quality": "PARTIAL"
-      },
-      "radarAlert": {
-        "active": false,
-        "type": null,
-        "message": null,
-        "suppressed": true,
-        "reason": "Scanare PARTIAL: alertele de trend/competiție sunt suprimate."
-      },
-      "dataQuality": {
-        "level": "PARTIAL",
-        "sourceStatus": "PARTIAL",
-        "checks": 9,
-        "foreignPresence": 0,
-        "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
-        "legacyStatus": "PARTIAL"
-      },
-      "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -10561,7 +10561,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -10798,7 +10798,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 25,
         "confidence": "LOW",
         "marketLive": false,
@@ -11033,7 +11033,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11268,7 +11268,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11503,7 +11503,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11738,7 +11738,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -11975,7 +11975,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12210,7 +12210,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12279,11 +12279,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:08.711Z",
+      "lastChecked": "2026-08-16T05:03:21.406Z",
       "sourceStatus": "PARTIAL",
       "notes": "Problem-solution foarte vizual și mic. Bundle multi-tool poate evita comparația directă.",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:08.711Z",
+        "checkedAt": "2026-08-16T05:03:21.406Z",
         "checks": 9,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -12422,7 +12422,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -12445,7 +12445,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12514,12 +12514,12 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:09.596Z",
+      "lastChecked": "2026-08-16T05:03:23.502Z",
       "sourceStatus": "PARTIAL",
       "notes": "Produs vizual, compact, potrivit pentru locuințe mici. Trebuie evitate modelele fragile.",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:09.596Z",
-        "checks": 9,
+        "checkedAt": "2026-08-16T05:03:23.502Z",
+        "checks": 7,
         "foreignPresence": 0,
         "romaniaPresence": 0,
         "chinaSourcingPresence": 0,
@@ -12530,7 +12530,7 @@
             "label": "Amazon DE",
             "present": false,
             "resultCount": 0,
-            "ok": true
+            "ok": false
           },
           "allegroPL": {
             "label": "Allegro PL",
@@ -12572,7 +12572,7 @@
             "label": "Pinterest",
             "present": false,
             "resultCount": 0,
-            "ok": true
+            "ok": false
           },
           "youtube": {
             "label": "YouTube",
@@ -12586,13 +12586,13 @@
             "label": "Amazon reviews",
             "present": false,
             "resultCount": 0,
-            "ok": true
+            "ok": false
           },
           "emagReviews": {
             "label": "eMAG reviews",
             "present": false,
             "resultCount": 0,
-            "ok": true
+            "ok": false
           }
         }
       },
@@ -12657,7 +12657,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -12674,13 +12674,13 @@
       "dataQuality": {
         "level": "PARTIAL",
         "sourceStatus": "PARTIAL",
-        "checks": 9,
+        "checks": 7,
         "foreignPresence": 0,
         "reason": "Necesită minimum 5 verificări web și cel puțin o prezență externă pentru LIVE.",
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -12915,7 +12915,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13150,7 +13150,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13385,7 +13385,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13620,7 +13620,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -13855,7 +13855,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14090,7 +14090,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14325,7 +14325,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14560,7 +14560,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -14797,7 +14797,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 35,
         "confidence": "LOW",
         "marketLive": false,
@@ -15031,7 +15031,7 @@
         "quality": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15266,7 +15266,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15501,7 +15501,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15736,7 +15736,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -15788,9 +15788,9 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:17.175Z",
+      "lastChecked": "2026-08-16T05:03:32.243Z",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:17.175Z",
+        "checkedAt": "2026-08-16T05:03:32.243Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -15929,7 +15929,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -15952,7 +15952,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16168,7 +16168,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16384,7 +16384,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16436,11 +16436,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:14.318Z",
+      "lastChecked": "2026-08-16T05:03:29.336Z",
       "age": "3–6",
       "kidsGate": "PENDING",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:14.318Z",
+        "checkedAt": "2026-08-16T05:03:29.336Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -16579,7 +16579,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -16602,7 +16602,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16654,11 +16654,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:12.882Z",
+      "lastChecked": "2026-08-16T05:03:27.872Z",
       "age": "3–6",
       "kidsGate": "PENDING",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:12.882Z",
+        "checkedAt": "2026-08-16T05:03:27.872Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -16797,7 +16797,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -16820,7 +16820,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -16872,11 +16872,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:15.745Z",
+      "lastChecked": "2026-08-16T05:03:30.788Z",
       "age": "3–6",
       "kidsGate": "PENDING",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:15.745Z",
+        "checkedAt": "2026-08-16T05:03:30.788Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -17015,7 +17015,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -17038,7 +17038,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17254,7 +17254,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17470,7 +17470,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17686,7 +17686,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -17902,7 +17902,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18118,7 +18118,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18334,7 +18334,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18550,7 +18550,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18766,7 +18766,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -18982,7 +18982,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19198,7 +19198,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19250,9 +19250,9 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:18.598Z",
+      "lastChecked": "2026-08-16T05:03:33.693Z",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:18.598Z",
+        "checkedAt": "2026-08-16T05:03:33.693Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -19391,7 +19391,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -19414,7 +19414,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19630,7 +19630,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19846,7 +19846,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -19898,11 +19898,11 @@
           "verified": false
         }
       ],
-      "lastChecked": "2026-08-15T06:16:11.454Z",
+      "lastChecked": "2026-08-16T05:03:26.414Z",
       "age": "3–6",
       "kidsGate": "PENDING",
       "marketScout": {
-        "checkedAt": "2026-08-15T06:16:11.454Z",
+        "checkedAt": "2026-08-16T05:03:26.414Z",
         "checks": 0,
         "foreignPresence": 0,
         "romaniaPresence": 0,
@@ -20041,7 +20041,7 @@
       },
       "historySummary": {
         "scans": 0,
-        "totalScans": 7,
+        "totalScans": 8,
         "scoreDelta": null,
         "competitorDelta": null,
         "firstAt": null,
@@ -20064,7 +20064,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20280,7 +20280,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20496,7 +20496,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20712,7 +20712,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -20928,7 +20928,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -21144,7 +21144,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -21360,7 +21360,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -21576,7 +21576,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -21792,7 +21792,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -22008,7 +22008,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -22224,7 +22224,7 @@
         "legacyStatus": "PARTIAL"
       },
       "v2Validation": {
-        "at": "2026-08-15T21:58:20.652Z",
+        "at": "2026-08-16T05:03:34.084Z",
         "evidenceScore": 10,
         "confidence": "LOW",
         "marketLive": false,
@@ -22253,7 +22253,7 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-15T21:58:20.652Z",
+    "updatedAt": "2026-08-16T05:03:34.084Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   }
 }

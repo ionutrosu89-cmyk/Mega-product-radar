@@ -1,11 +1,11 @@
 {
   "version": "6.0",
   "engine": "Product Discovery Engine 6.0",
-  "updatedAt": "2026-08-15T22:04:51.451Z",
+  "updatedAt": "2026-08-16T05:10:13.779Z",
   "scanSize": 10,
   "openDiscovered": 0,
   "successfulChecks": 40,
-  "reviewChecks": 6,
+  "reviewChecks": 8,
   "network": {
     "markets": [
       {
@@ -114,186 +114,6 @@
   },
   "validation": "Discovery combines rotating seeds with a global open-web network. Search counts and snippets are evidence proxies, not verified sales/review volume.",
   "products": [
-    {
-      "name": "Car headrest hidden hook premium",
-      "cat": "Auto",
-      "chinaMin": 12,
-      "chinaMax": 28,
-      "sellTarget": 79,
-      "landedEstimate": 35,
-      "checkedAt": "2026-08-12T22:00:17.469Z",
-      "checks": 0,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20headrest%20hidden%20hook%20premium",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20headrest%20hidden%20hook%20premium",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20headrest%20hidden%20hook%20premium",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 37,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 18
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 0,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 79,
-          "landed": 35,
-          "priceComplete": true,
-          "profit": 7.379256198347107,
-          "margin": 9.340830630819124,
-          "roi": 21.08358913813459
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:53.395Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
     {
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
@@ -629,366 +449,6 @@
             "label": "YouTube review search",
             "present": false,
             "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20trunk%20side%20storage%20net%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Bedside phone holder clamp",
-      "cat": "Casă",
-      "chinaMin": 18,
-      "chinaMax": 38,
-      "sellTarget": 99,
-      "landedEstimate": 46.4,
-      "checkedAt": "2026-08-12T22:00:13.609Z",
-      "checks": 9,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bedside%20phone%20holder%20clamp",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Bedside%20phone%20holder%20clamp",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bedside%20phone%20holder%20clamp",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 36,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 13
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 9,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 99,
-          "landed": 46.4,
-          "priceComplete": true,
-          "profit": 6.708181818181828,
-          "margin": 6.775941230486694,
-          "roi": 14.45728840125394
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:51.545Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "chinaMin": 25,
-      "chinaMax": 55,
-      "sellTarget": 139,
-      "landedEstimate": 65,
-      "checkedAt": "2026-08-12T22:00:16.183Z",
-      "checks": 0,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20cup%20holder%20expander%20adjustable",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20cup%20holder%20expander%20adjustable",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20cup%20holder%20expander%20adjustable",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 36,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 13
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 0,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 139,
-          "landed": 65,
-          "priceComplete": true,
-          "profit": 9.566033057851229,
-          "margin": 6.882038171115992,
-          "roi": 14.716973935155735
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:52.613Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
             "links": [],
             "snippets": []
           }
@@ -1725,726 +1185,6 @@
         "d90": null
       },
       "firstDiscoveredAt": "2026-08-13T06:18:23.725Z",
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Airplane seat pocket organizer pouch",
-      "cat": "Travel",
-      "chinaMin": 22,
-      "chinaMax": 48,
-      "sellTarget": 119,
-      "landedEstimate": 57.25,
-      "checkedAt": "2026-08-12T22:00:12.628Z",
-      "checks": 9,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Airplane%20seat%20pocket%20organizer%20pouch",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Airplane%20seat%20pocket%20organizer%20pouch",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Airplane%20seat%20pocket%20organizer%20pouch",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 35,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 11
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 9,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 119,
-          "landed": 57.25,
-          "priceComplete": true,
-          "profit": 6.587107438016538,
-          "margin": 5.53538440169457,
-          "roi": 11.505864520552905
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:50.687Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Balcony plant drip tray adjustable",
-      "cat": "Grădină & balcon",
-      "chinaMin": 18,
-      "chinaMax": 42,
-      "sellTarget": 99,
-      "landedEstimate": 49.5,
-      "checkedAt": "2026-08-12T22:00:12.951Z",
-      "checks": 9,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Balcony%20plant%20drip%20tray%20adjustable",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Balcony%20plant%20drip%20tray%20adjustable",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Balcony%20plant%20drip%20tray%20adjustable",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 35,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 7
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 9,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 99,
-          "landed": 49.5,
-          "priceComplete": true,
-          "profit": 3.6081818181818264,
-          "margin": 3.6446280991735622,
-          "roi": 7.2892561983471245
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:50.971Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Bed sheet corner holder straps premium",
-      "cat": "Casă",
-      "chinaMin": 12,
-      "chinaMax": 26,
-      "sellTarget": 69,
-      "landedEstimate": 34,
-      "checkedAt": "2026-08-12T22:00:13.283Z",
-      "checks": 9,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": true,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Bed%20sheet%20corner%20holder%20straps%20premium",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bed%20sheet%20corner%20holder%20straps%20premium",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 35,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 8
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 9,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 69,
-          "landed": 34,
-          "priceComplete": true,
-          "profit": 3.0147933884297515,
-          "margin": 4.369265780332973,
-          "roi": 8.867039377734564
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:51.258Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
-      "supplierHunter": {
-        "version": "2.0",
-        "sourceCount": 0,
-        "readiness": "NONE",
-        "sources": [],
-        "requiresManualCommercialCheck": true,
-        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
-      }
-    },
-    {
-      "name": "Board game card holder hands free",
-      "cat": "Sport & hobby",
-      "chinaMin": 14,
-      "chinaMax": 32,
-      "sellTarget": 79,
-      "landedEstimate": 38.65,
-      "checkedAt": "2026-08-12T22:00:14.896Z",
-      "checks": 0,
-      "foreignPresence": 0,
-      "romaniaPresence": 0,
-      "chinaPresence": 0,
-      "socialPresence": 0,
-      "foreignResults": 0,
-      "romaniaResults": 0,
-      "chinaResults": 0,
-      "socialResults": 0,
-      "signals": {
-        "amazonDE": {
-          "label": "Amazon DE",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "allegroPL": {
-          "label": "Allegro PL",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "trendyolTR": {
-          "label": "Trendyol TR",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "emagRO": {
-          "label": "eMAG RO",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "alibabaCN": {
-          "label": "Alibaba",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "1688CN": {
-          "label": "1688",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "tiktok": {
-          "label": "TikTok",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "pinterest": {
-          "label": "Pinterest",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        },
-        "youtube": {
-          "label": "YouTube",
-          "ok": false,
-          "present": false,
-          "resultCount": 0,
-          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Board%20game%20card%20holder%20hands%20free",
-          "links": []
-        }
-      },
-      "sourcing": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Board%20game%20card%20holder%20hands%20free",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Board%20game%20card%20holder%20hands%20free",
-          "verified": false
-        }
-      ],
-      "sourceType": "DISCOVERY_POOL + LIVE WEB VALIDATION",
-      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
-      "discoveryAnalysis": {
-        "score": 35,
-        "components": {
-          "demand": 35,
-          "gap": 75,
-          "supplier": 30,
-          "viral": 30,
-          "margin": 9
-        },
-        "quality": {
-          "level": "PARTIAL",
-          "checks": 0,
-          "foreignPresence": 0,
-          "chinaPresence": 0,
-          "romaniaPresence": 0
-        },
-        "economics": {
-          "sell": 79,
-          "landed": 38.65,
-          "priceComplete": true,
-          "profit": 3.729256198347109,
-          "margin": 4.720577466262163,
-          "roi": 9.64878705911283
-        }
-      },
-      "suggestedStage": "REJECT",
-      "sourceStatus": "PARTIAL",
-      "evidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "firstDiscoveredAt": "2026-08-12T21:15:51.831Z",
-      "pricingStatus": "SEED_ESTIMATE",
-      "reviewIntel": {
-        "sources": [
-          {
-            "label": "Amazon DE review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "Reddit review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          },
-          {
-            "label": "YouTube review search",
-            "present": false,
-            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
-            "links": [],
-            "snippets": []
-          }
-        ],
-        "sourceCount": 0,
-        "links": [],
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "confidence": "INSUFFICIENT",
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "trendWindows": {
-        "d7": null,
-        "d30": null,
-        "d90": null
-      },
       "supplierHunter": {
         "version": "2.0",
         "sourceCount": 0,
@@ -3355,6 +2095,320 @@
       }
     },
     {
+      "name": "Car headrest hidden hook premium",
+      "cat": "Auto",
+      "chinaMin": 12,
+      "chinaMax": 28,
+      "sellTarget": 79,
+      "landedEstimate": 35,
+      "checkedAt": "2026-08-16T05:04:56.145Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20headrest%20hidden%20hook%20premium",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20headrest%20hidden%20hook%20premium",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20headrest%20hidden%20hook%20premium",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20headrest%20hidden%20hook%20premium",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Car%20headrest%20hidden%20hook%20premium",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 31,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 18
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 79,
+          "landed": 35,
+          "priceComplete": true,
+          "profit": 7.379256198347107,
+          "margin": 9.340830630819124,
+          "roi": 21.08358913813459
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:53.395Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20headrest%20hidden%20hook%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
+    },
+    {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "chinaMin": 15,
@@ -3364,8 +2418,8 @@
       "imageSourceUrl": "",
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 39.42,
-      "checkedAt": "2026-08-15T21:59:27.650Z",
-      "checks": 0,
+      "checkedAt": "2026-08-16T05:03:35.260Z",
+      "checks": 20,
       "foreignPresence": 0,
       "romaniaPresence": 0,
       "chinaPresence": 0,
@@ -3379,7 +2433,7 @@
       "signals": {
         "amazonUS": {
           "label": "Amazon US",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3387,7 +2441,7 @@
         },
         "amazonDE": {
           "label": "Amazon DE",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3395,7 +2449,7 @@
         },
         "amazonIT": {
           "label": "Amazon IT",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3403,7 +2457,7 @@
         },
         "amazonFR": {
           "label": "Amazon FR",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3411,7 +2465,7 @@
         },
         "allegroPL": {
           "label": "Allegro PL",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3419,7 +2473,7 @@
         },
         "trendyolTR": {
           "label": "Trendyol TR",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3427,7 +2481,7 @@
         },
         "etsy": {
           "label": "Etsy",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3435,7 +2489,7 @@
         },
         "temu": {
           "label": "Temu",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3443,7 +2497,7 @@
         },
         "aliexpress": {
           "label": "AliExpress",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3451,7 +2505,7 @@
         },
         "kickstarter": {
           "label": "Kickstarter",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3459,7 +2513,7 @@
         },
         "indiegogo": {
           "label": "Indiegogo",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3467,7 +2521,7 @@
         },
         "emagRO": {
           "label": "eMAG RO",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3475,7 +2529,7 @@
         },
         "alibabaCN": {
           "label": "Alibaba",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3483,7 +2537,7 @@
         },
         "1688CN": {
           "label": "1688",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3491,7 +2545,7 @@
         },
         "madeInChina": {
           "label": "Made-in-China",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3499,7 +2553,7 @@
         },
         "globalSources": {
           "label": "Global Sources",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3507,7 +2561,7 @@
         },
         "tiktok": {
           "label": "TikTok",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3515,7 +2569,7 @@
         },
         "facebook": {
           "label": "Meta/Facebook",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3523,7 +2577,7 @@
         },
         "pinterest": {
           "label": "Pinterest",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3531,7 +2585,7 @@
         },
         "youtube": {
           "label": "YouTube",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Under%20desk%20headphone%20hanger%20clamp",
@@ -3632,7 +2686,7 @@
         },
         "quality": {
           "level": "PARTIAL",
-          "checks": 0,
+          "checks": 20,
           "foreignPresence": 0,
           "chinaPresence": 0,
           "romaniaPresence": 0
@@ -3667,6 +2721,634 @@
         "requiresManualCommercialCheck": true,
         "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
       }
+    },
+    {
+      "name": "Bedside phone holder clamp",
+      "cat": "Casă",
+      "chinaMin": 18,
+      "chinaMax": 38,
+      "sellTarget": 99,
+      "landedEstimate": 46.4,
+      "checkedAt": "2026-08-16T05:04:13.661Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bedside%20phone%20holder%20clamp",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Bedside%20phone%20holder%20clamp",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bedside%20phone%20holder%20clamp",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Bedside%20phone%20holder%20clamp",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Bedside%20phone%20holder%20clamp",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 30,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 13
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 99,
+          "landed": 46.4,
+          "priceComplete": true,
+          "profit": 6.708181818181828,
+          "margin": 6.775941230486694,
+          "roi": 14.45728840125394
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:51.545Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bedside%20phone%20holder%20clamp%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
+    },
+    {
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "chinaMin": 25,
+      "chinaMax": 55,
+      "sellTarget": 139,
+      "landedEstimate": 65,
+      "checkedAt": "2026-08-16T05:04:41.984Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20cup%20holder%20expander%20adjustable",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20cup%20holder%20expander%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20cup%20holder%20expander%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20cup%20holder%20expander%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Car%20cup%20holder%20expander%20adjustable",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 30,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 13
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 139,
+          "landed": 65,
+          "priceComplete": true,
+          "profit": 9.566033057851229,
+          "margin": 6.882038171115992,
+          "roi": 14.716973935155735
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:52.613Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Car%20cup%20holder%20expander%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
     },
     {
       "name": "Reusable furniture moving sliders kit",
@@ -6493,6 +6175,948 @@
         "requiresManualCommercialCheck": true,
         "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
       }
+    },
+    {
+      "name": "Airplane seat pocket organizer pouch",
+      "cat": "Travel",
+      "chinaMin": 22,
+      "chinaMax": 48,
+      "sellTarget": 119,
+      "landedEstimate": 57.25,
+      "checkedAt": "2026-08-16T05:03:38.074Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Airplane%20seat%20pocket%20organizer%20pouch",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Airplane%20seat%20pocket%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Airplane%20seat%20pocket%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Airplane%20seat%20pocket%20organizer%20pouch",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Airplane%20seat%20pocket%20organizer%20pouch",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 29,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 11
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 119,
+          "landed": 57.25,
+          "priceComplete": true,
+          "profit": 6.587107438016538,
+          "margin": 5.53538440169457,
+          "roi": 11.505864520552905
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:50.687Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Airplane%20seat%20pocket%20organizer%20pouch%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
+    },
+    {
+      "name": "Bed sheet corner holder straps premium",
+      "cat": "Casă",
+      "chinaMin": 12,
+      "chinaMax": 26,
+      "sellTarget": 69,
+      "landedEstimate": 34,
+      "checkedAt": "2026-08-16T05:03:59.498Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bed%20sheet%20corner%20holder%20straps%20premium",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Bed%20sheet%20corner%20holder%20straps%20premium",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Bed%20sheet%20corner%20holder%20straps%20premium",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Bed%20sheet%20corner%20holder%20straps%20premium",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Bed%20sheet%20corner%20holder%20straps%20premium",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 29,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 8
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 69,
+          "landed": 34,
+          "priceComplete": true,
+          "profit": 3.0147933884297515,
+          "margin": 4.369265780332973,
+          "roi": 8.867039377734564
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:51.258Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Bed%20sheet%20corner%20holder%20straps%20premium%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
+    },
+    {
+      "name": "Board game card holder hands free",
+      "cat": "Sport & hobby",
+      "chinaMin": 14,
+      "chinaMax": 32,
+      "sellTarget": 79,
+      "landedEstimate": 38.65,
+      "checkedAt": "2026-08-16T05:04:27.823Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Board%20game%20card%20holder%20hands%20free",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Board%20game%20card%20holder%20hands%20free",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Board%20game%20card%20holder%20hands%20free",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Board%20game%20card%20holder%20hands%20free",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Board%20game%20card%20holder%20hands%20free",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 29,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 9
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 79,
+          "landed": 38.65,
+          "priceComplete": true,
+          "profit": 3.729256198347109,
+          "margin": 4.720577466262163,
+          "roi": 9.64878705911283
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:51.831Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Board%20game%20card%20holder%20hands%20free%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
     },
     {
       "name": "Pet food scoop bag clip combo",
@@ -9644,8 +10268,8 @@
       "imageSourceUrl": "",
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 61.9,
-      "checkedAt": "2026-08-15T21:59:41.813Z",
-      "checks": 0,
+      "checkedAt": "2026-08-16T05:03:35.553Z",
+      "checks": 20,
       "foreignPresence": 0,
       "romaniaPresence": 0,
       "chinaPresence": 0,
@@ -9659,7 +10283,7 @@
       "signals": {
         "amazonUS": {
           "label": "Amazon US",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9667,7 +10291,7 @@
         },
         "amazonDE": {
           "label": "Amazon DE",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9675,7 +10299,7 @@
         },
         "amazonIT": {
           "label": "Amazon IT",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9683,7 +10307,7 @@
         },
         "amazonFR": {
           "label": "Amazon FR",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9691,7 +10315,7 @@
         },
         "allegroPL": {
           "label": "Allegro PL",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9699,7 +10323,7 @@
         },
         "trendyolTR": {
           "label": "Trendyol TR",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9707,7 +10331,7 @@
         },
         "etsy": {
           "label": "Etsy",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9715,7 +10339,7 @@
         },
         "temu": {
           "label": "Temu",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9723,7 +10347,7 @@
         },
         "aliexpress": {
           "label": "AliExpress",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9731,7 +10355,7 @@
         },
         "kickstarter": {
           "label": "Kickstarter",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9739,7 +10363,7 @@
         },
         "indiegogo": {
           "label": "Indiegogo",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9747,7 +10371,7 @@
         },
         "emagRO": {
           "label": "eMAG RO",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9755,7 +10379,7 @@
         },
         "alibabaCN": {
           "label": "Alibaba",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9763,7 +10387,7 @@
         },
         "1688CN": {
           "label": "1688",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9771,7 +10395,7 @@
         },
         "madeInChina": {
           "label": "Made-in-China",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9779,7 +10403,7 @@
         },
         "globalSources": {
           "label": "Global Sources",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9787,7 +10411,7 @@
         },
         "tiktok": {
           "label": "TikTok",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9795,7 +10419,7 @@
         },
         "facebook": {
           "label": "Meta/Facebook",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9803,7 +10427,7 @@
         },
         "pinterest": {
           "label": "Pinterest",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9811,7 +10435,7 @@
         },
         "youtube": {
           "label": "YouTube",
-          "ok": false,
+          "ok": true,
           "present": false,
           "resultCount": 0,
           "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Wardrobe%20handbag%20hanging%20organizer",
@@ -9912,7 +10536,7 @@
         },
         "quality": {
           "level": "PARTIAL",
-          "checks": 0,
+          "checks": 20,
           "foreignPresence": 0,
           "chinaPresence": 0,
           "romaniaPresence": 0
@@ -9958,7 +10582,7 @@
       "imageSourceUrl": "",
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 76.63,
-      "checkedAt": "2026-08-15T21:59:55.976Z",
+      "checkedAt": "2026-08-16T05:03:36.808Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -10261,6 +10885,320 @@
         "requiresManualCommercialCheck": true,
         "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
       }
+    },
+    {
+      "name": "Balcony plant drip tray adjustable",
+      "cat": "Grădină & balcon",
+      "chinaMin": 18,
+      "chinaMax": 42,
+      "sellTarget": 99,
+      "landedEstimate": 49.5,
+      "checkedAt": "2026-08-16T05:03:45.336Z",
+      "checks": 0,
+      "foreignPresence": 0,
+      "romaniaPresence": 0,
+      "chinaPresence": 0,
+      "socialPresence": 0,
+      "foreignResults": 0,
+      "romaniaResults": 0,
+      "chinaResults": 0,
+      "socialResults": 0,
+      "signals": {
+        "amazonUS": {
+          "label": "Amazon US",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "amazonDE": {
+          "label": "Amazon DE",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "amazonIT": {
+          "label": "Amazon IT",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "amazonFR": {
+          "label": "Amazon FR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "allegroPL": {
+          "label": "Allegro PL",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "trendyolTR": {
+          "label": "Trendyol TR",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "etsy": {
+          "label": "Etsy",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "temu": {
+          "label": "Temu",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "aliexpress": {
+          "label": "AliExpress",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "kickstarter": {
+          "label": "Kickstarter",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "indiegogo": {
+          "label": "Indiegogo",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "emagRO": {
+          "label": "eMAG RO",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "alibabaCN": {
+          "label": "Alibaba",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aalibaba.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "1688CN": {
+          "label": "1688",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3A1688.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "madeInChina": {
+          "label": "Made-in-China",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Amade-in-china.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "globalSources": {
+          "label": "Global Sources",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aglobalsources.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atiktok.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "facebook": {
+          "label": "Meta/Facebook",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Afacebook.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "pinterest": {
+          "label": "Pinterest",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Apinterest.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        },
+        "youtube": {
+          "label": "YouTube",
+          "ok": false,
+          "present": false,
+          "resultCount": 0,
+          "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Balcony%20plant%20drip%20tray%20adjustable",
+          "links": []
+        }
+      },
+      "sourcing": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Balcony%20plant%20drip%20tray%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Balcony%20plant%20drip%20tray%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Balcony%20plant%20drip%20tray%20adjustable",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Balcony%20plant%20drip%20tray%20adjustable",
+          "verified": false
+        }
+      ],
+      "sourceType": "GLOBAL_DISCOVERY_NETWORK + LIVE WEB VALIDATION",
+      "validation": "Counts are web-search proxies. Sales, seller counts, supplier terms, MOQ, certifications and exact prices are not verified.",
+      "discoveryAnalysis": {
+        "score": 28,
+        "components": {
+          "demand": 35,
+          "gap": 50,
+          "supplier": 30,
+          "viral": 30,
+          "margin": 7
+        },
+        "romaniaGap2": {
+          "version": "2.0",
+          "opportunityScore": 50,
+          "saturation": "LOW",
+          "label": "WATCH",
+          "evidence": {
+            "roPresence": 0,
+            "roResults": 0,
+            "foreignPresence": 0,
+            "foreignResults": 0,
+            "socialResults": 0,
+            "earlyPresence": 0,
+            "reviewSources": 0
+          },
+          "components": {
+            "scarcity": 100,
+            "foreignValidation": 0,
+            "momentum": 0
+          },
+          "note": "Romania Gap 2.0 uses web-search presence/result proxies, not verified seller counts or sales volume."
+        },
+        "quality": {
+          "level": "PARTIAL",
+          "checks": 0,
+          "foreignPresence": 0,
+          "chinaPresence": 0,
+          "romaniaPresence": 0
+        },
+        "economics": {
+          "sell": 99,
+          "landed": 49.5,
+          "priceComplete": true,
+          "profit": 3.6081818181818264,
+          "margin": 3.6446280991735622,
+          "roi": 7.2892561983471245
+        }
+      },
+      "suggestedStage": "REJECT",
+      "sourceStatus": "PARTIAL",
+      "evidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "firstDiscoveredAt": "2026-08-12T21:15:50.971Z",
+      "pricingStatus": "SEED_ESTIMATE",
+      "reviewIntel": {
+        "sources": [
+          {
+            "label": "Amazon US review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Amazon DE review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "Reddit review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Areddit.com%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          },
+          {
+            "label": "YouTube review search",
+            "present": false,
+            "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Ayoutube.com%20Balcony%20plant%20drip%20tray%20adjustable%20review%20OR%20reviews",
+            "links": [],
+            "snippets": []
+          }
+        ],
+        "sourceCount": 0,
+        "links": [],
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "confidence": "INSUFFICIENT",
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "trendWindows": {
+        "d7": null,
+        "d14": null,
+        "d30": null,
+        "d90": null,
+        "label": "BASELINE",
+        "velocityScore": 50,
+        "earlyWarning": false
+      },
+      "supplierHunter": {
+        "version": "2.0",
+        "sourceCount": 0,
+        "readiness": "NONE",
+        "sources": [],
+        "requiresManualCommercialCheck": true,
+        "note": "Supplier Hunter confirms web sourcing presence only. Price, MOQ, rating, Trade Assurance, certifications and sample terms require manual verification before BUY."
+      },
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "earlyPresence": 0,
+      "earlyResults": 0
     },
     {
       "name": "Plant pot drainage mesh pad set",
@@ -10893,7 +11831,7 @@
   ],
   "supplierHunter": {
     "version": "2.0",
-    "updatedAt": "2026-08-15T22:03:07.439Z",
+    "updatedAt": "2026-08-16T05:08:29.765Z",
     "platforms": [
       "Alibaba",
       "1688",
@@ -10911,13 +11849,13 @@
       "ro",
       "zh"
     ],
-    "theme": "small home organization problem solver",
+    "theme": "kitchen storage problem solver non electric",
     "queriesChecked": 12,
     "newCandidates": 0,
     "sourcePolicy": "DIRECT_SEARCH_LINKS + WEB_PROXY_EVIDENCE"
   },
   "imageEnrichment": {
-    "updatedAt": "2026-08-15T22:04:55.412Z",
+    "updatedAt": "2026-08-16T05:10:17.741Z",
     "checked": 0,
     "enriched": 0,
     "maxPerRun": 12,
