@@ -1,20 +1,30 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-16T05:10:17.801Z",
-  "sourceUpdatedAt": "2026-08-16T05:10:13.779Z",
+  "updatedAt": "2026-08-16T07:14:12.766Z",
+  "sourceUpdatedAt": "2026-08-16T07:14:05.725Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile sunt calculate exclusiv din dovezile existente. Volumele de căutare, sellerii și vânzările nu sunt inventate; keyword demand și competitor intelligence rămân proxy-uri observabile până la surse verificate.",
   "providerReadiness": {
     "dataForSEO": {
       "ready": true,
-      "enabled": false,
+      "enabled": true,
       "purpose": [
         "keyword volume RO",
         "SERP RO",
         "Google Shopping",
         "cross-market demand"
-      ]
+      ],
+      "status": "ACTIVE",
+      "trialMode": true,
+      "lastKeywordEnrichmentAt": "2026-08-16T07:14:12.766Z",
+      "lastRequestCostUsd": 0.09,
+      "lastKeywordCount": 10,
+      "lastEnrichedProducts": 10,
+      "budgetGuard": {
+        "maxKeywords": 10,
+        "maxRequestCostUsd": 0.1
+      }
     },
     "apify": {
       "ready": true,
@@ -34,8 +44,9 @@
     "competitorCoverage": 12,
     "observedRomaniaDomains": 0,
     "partial": 42,
-    "accelerating": 0,
-    "rising": 0,
+    "keywordVerified": 10,
+    "accelerating": 1,
+    "rising": 1,
     "cooling": 0,
     "topOpportunities": 0,
     "priorityWatch": 0,
@@ -43,458 +54,13 @@
   },
   "products": [
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "imageUrl": "",
-      "imageSourceUrl": "",
-      "sourceStatus": "PARTIAL",
-      "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-13T11:12:08.628Z",
-      "economics": {
-        "score": 29.6,
-        "margin": 10.2,
-        "roi": 23.5,
-        "profit": 9.1,
-        "pricingVerified": false,
-        "pricingStatus": "SEED_ESTIMATE"
-      },
-      "demand": {
-        "score": 0,
-        "confidence": "MEDIE",
-        "checks": 9,
-        "foreignPresence": 0,
-        "socialPresence": 0,
-        "reviewSources": 0,
-        "trendSignals": 0
-      },
-      "marketGap": {
-        "score": 45,
-        "label": "DATE INSUFICIENTE",
-        "evidenceReady": false,
-        "checks": 9,
-        "foreignPresence": 0,
-        "foreignResults": 0,
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competition": {
-        "pressure": 0,
-        "label": "REDUSĂ",
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competitors": {
-        "saturationScore": 0,
-        "label": "REDUSĂ",
-        "evidenceMarkets": 1,
-        "romania": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "resultProxy": 0,
-          "markets": [
-            {
-              "key": "emagRO",
-              "label": "eMAG RO",
-              "ok": true,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20sunglasses%20magnetic%20visor%20holder"
-            }
-          ]
-        },
-        "foreign": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "markets": [
-            {
-              "key": "amazonDE",
-              "label": "Amazon DE",
-              "ok": true,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "allegroPL",
-              "label": "Allegro PL",
-              "ok": true,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "trendyolTR",
-              "label": "Trendyol TR",
-              "ok": true,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            }
-          ]
-        },
-        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
-      },
-      "evidenceCoverage": {
-        "checked": 9,
-        "present": 0,
-        "observedLinks": 0,
-        "coverageScore": 70,
-        "rows": [
-          {
-            "key": "amazonDE",
-            "label": "Amazon DE",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "allegroPL",
-            "label": "Allegro PL",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "trendyolTR",
-            "label": "Trendyol TR",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "emagRO",
-            "label": "eMAG RO",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "alibabaCN",
-            "label": "Alibaba",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "1688CN",
-            "label": "1688",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "tiktok",
-            "label": "TikTok",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "pinterest",
-            "label": "Pinterest",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "youtube",
-            "label": "YouTube",
-            "ok": true,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          }
-        ]
-      },
-      "sourcing": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "chinaResults": 0,
-        "requiresManualCommercialCheck": true,
-        "items": []
-      },
-      "reviews": {
-        "confidence": "INSUFFICIENT",
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "keywordDemand": {
-        "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
-        "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
-      },
-      "launchScore": {
-        "score": 23.9,
-        "verdict": "RESPINGE / AȘTEAPTĂ",
-        "enoughEvidence": false,
-        "reviewEvidence": false,
-        "quality": "PARTIAL",
-        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
-      },
-      "sourceEvidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
-      "sourcingLinks": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        }
-      ],
-      "rawOpportunityScore": 37,
-      "trendIntelligence": {
-        "status": "INSUFICIENT",
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
-        "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
-      },
-      "opportunityRanking": {
-        "score": 34.9,
-        "tier": "PRIORITATE MICĂ",
-        "reasons": [
-          "presiune concurențială RO redusă",
-          "acoperire bună a dovezilor"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "preț/landed cost neverificat",
-          "istoric insuficient pentru trend"
-        ],
-        "components": {
-          "demand": 0,
-          "marketGap": 9,
-          "lowCompetition": 12,
-          "sourcing": 0,
-          "economics": 4.4,
-          "evidence": 7,
-          "trend": 2.5
-        },
-        "evidenceReady": false,
-        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 1
-      },
-      "marketGapV2": {
-        "score": 12,
-        "label": "GAP SLAB",
-        "romaniaPressure": 0,
-        "externalMarketsChecked": 3,
-        "externalMarketsPresent": 0,
-        "markets": [
-          {
-            "market": "Germania",
-            "key": "amazonDE",
-            "checked": true,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Polonia",
-            "key": "allegroPL",
-            "checked": true,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Turcia",
-            "key": "trendyolTR",
-            "checked": true,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "România",
-            "key": "emagRO",
-            "checked": true,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          }
-        ],
-        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
-      },
-      "reviewIntelligenceV2": {
-        "confidence": "SCĂZUTĂ",
-        "coverageScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "improvementIdeas": [],
-        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
-      },
-      "chinaIntelligenceV2": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "domains": [],
-        "observedLinks": [
-          {
-            "market": "Alibaba",
-            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          },
-          {
-            "market": "1688",
-            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          }
-        ],
-        "risks": [
-          "fără sursă China observată",
-          "diversificare furnizori insuficientă",
-          "MOQ/preț/transport/conformitate necesită confirmare manuală"
-        ],
-        "commercialChecklist": [
-          "confirmă prețul real",
-          "confirmă MOQ",
-          "confirmă costul transportului",
-          "confirmă materialele și conformitatea",
-          "cere mostre înainte de comandă mare"
-        ],
-        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
-      },
-      "profitEngineV2": {
-        "confidence": "MEDIE",
-        "pricingVerified": false,
-        "derivedSalePrice": 89.2,
-        "derivedLandedCost": 80.1,
-        "maxLandedCostFor20Margin": 71.4,
-        "scenarios": {
-          "conservator": {
-            "salePrice": 84.8,
-            "landedCost": 88.1,
-            "profit": -3.4,
-            "margin": -4,
-            "roi": -3.8
-          },
-          "realist": {
-            "salePrice": 89.2,
-            "landedCost": 80.1,
-            "profit": 9.1,
-            "margin": 10.2,
-            "roi": 11.4
-          },
-          "optimist": {
-            "salePrice": 93.7,
-            "landedCost": 76.1,
-            "profit": 17.6,
-            "margin": 18.8,
-            "roi": 23.1
-          }
-        },
-        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
-      },
-      "xrayV2": {
-        "strengths": [
-          "presiune concurențială RO redusă",
-          "acoperire bună a dovezilor"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "preț/landed cost neverificat",
-          "istoric insuficient pentru trend",
-          "lipsește: dovezi comerciale suficiente",
-          "lipsește: preț și landed cost verificate",
-          "lipsește: review evidence",
-          "lipsește: sourcing China",
-          "lipsește: istoric de trend"
-        ],
-        "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.9 · Launch 23.9 · Trend INSUFICIENT"
-      },
-      "dataConfidence": {
-        "overall": 34.3,
-        "level": "SCĂZUTĂ",
-        "dimensions": {
-          "market": 70,
-          "demand": 30,
-          "competition": 70,
-          "reviews": 0,
-          "sourcing": 0,
-          "pricing": 45,
-          "history": 25
-        },
-        "missing": [
-          "demand",
-          "reviews",
-          "sourcing",
-          "pricing",
-          "history"
-        ]
-      },
-      "alerts": [
-        {
-          "type": "TOP10",
-          "severity": "HIGH",
-          "message": "A intrat/este în Top 1"
-        }
-      ],
-      "validationTasks": [
-        {
-          "key": "pricing",
-          "priority": 95,
-          "label": "Validează prețul și landed cost"
-        },
-        {
-          "key": "sourcing",
-          "priority": 90,
-          "label": "Găsește/validează sursa China"
-        },
-        {
-          "key": "evidence",
-          "priority": 80,
-          "label": "Completează dovezile comerciale"
-        },
-        {
-          "key": "reviews",
-          "priority": 75,
-          "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
-        }
-      ]
-    },
-    {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "imageUrl": "",
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:35.260Z",
+      "checkedAt": "2026-08-16T07:07:40.964Z",
       "economics": {
         "score": 26.9,
         "margin": 9.4,
@@ -854,10 +420,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Suport cu clemă pentru căști montaj sub birou",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 23.3,
@@ -892,24 +467,36 @@
       ],
       "rawOpportunityScore": 31,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
-        "score": 0,
+        "status": "ACCELERATING",
+        "score": 42,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
-        "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 70
+        },
+        "signals": [
+          "acoperire dovezi în creștere"
+        ],
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 34.5,
+        "score": 35.6,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă",
+          "trend intern pozitiv",
           "acoperire bună a dovezilor"
         ],
         "blockers": [
           "dovezi comerciale insuficiente",
-          "preț/landed cost neverificat",
-          "istoric insuficient pentru trend"
+          "preț/landed cost neverificat"
         ],
         "components": {
           "demand": 0,
@@ -918,11 +505,11 @@
           "sourcing": 0,
           "economics": 4,
           "evidence": 7,
-          "trend": 2.5
+          "trend": 3.6
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 2
+        "rank": 1
       },
       "marketGapV2": {
         "score": 12,
@@ -1058,39 +645,495 @@
       "xrayV2": {
         "strengths": [
           "presiune concurențială RO redusă",
+          "trend intern pozitiv",
           "acoperire bună a dovezilor"
         ],
         "blockers": [
           "dovezi comerciale insuficiente",
           "preț/landed cost neverificat",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
           "lipsește: review evidence",
-          "lipsește: sourcing China",
-          "lipsește: istoric de trend"
+          "lipsește: sourcing China"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.5 · Launch 23.3 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 35.6 · Launch 23.3 · Trend ACCELERATING"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 47.9,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 70,
-          "demand": 30,
+          "demand": 90,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
-          "demand",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
+        ]
+      },
+      "alerts": [
+        {
+          "type": "TOP10",
+          "severity": "HIGH",
+          "message": "A intrat/este în Top 1"
+        },
+        {
+          "type": "ACCELERATING",
+          "severity": "HIGH",
+          "message": "Trendul intern accelerează"
+        }
+      ],
+      "validationTasks": [
+        {
+          "key": "pricing",
+          "priority": 95,
+          "label": "Validează prețul și landed cost"
+        },
+        {
+          "key": "sourcing",
+          "priority": 90,
+          "label": "Găsește/validează sursa China"
+        },
+        {
+          "key": "evidence",
+          "priority": 80,
+          "label": "Completează dovezile comerciale"
+        },
+        {
+          "key": "reviews",
+          "priority": 75,
+          "label": "Adaugă review evidence"
+        }
+      ]
+    },
+    {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "sourceStatus": "PARTIAL",
+      "suggestedStage": "REJECT",
+      "checkedAt": "2026-08-13T11:12:08.628Z",
+      "economics": {
+        "score": 29.6,
+        "margin": 10.2,
+        "roi": 23.5,
+        "profit": 9.1,
+        "pricingVerified": false,
+        "pricingStatus": "SEED_ESTIMATE"
+      },
+      "demand": {
+        "score": 0,
+        "confidence": "MEDIE",
+        "checks": 9,
+        "foreignPresence": 0,
+        "socialPresence": 0,
+        "reviewSources": 0,
+        "trendSignals": 0
+      },
+      "marketGap": {
+        "score": 45,
+        "label": "DATE INSUFICIENTE",
+        "evidenceReady": false,
+        "checks": 9,
+        "foreignPresence": 0,
+        "foreignResults": 0,
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competition": {
+        "pressure": 0,
+        "label": "REDUSĂ",
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competitors": {
+        "saturationScore": 0,
+        "label": "REDUSĂ",
+        "evidenceMarkets": 1,
+        "romania": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "resultProxy": 0,
+          "markets": [
+            {
+              "key": "emagRO",
+              "label": "eMAG RO",
+              "ok": true,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20sunglasses%20magnetic%20visor%20holder"
+            }
+          ]
+        },
+        "foreign": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "markets": [
+            {
+              "key": "amazonDE",
+              "label": "Amazon DE",
+              "ok": true,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "allegroPL",
+              "label": "Allegro PL",
+              "ok": true,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "trendyolTR",
+              "label": "Trendyol TR",
+              "ok": true,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            }
+          ]
+        },
+        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
+      },
+      "evidenceCoverage": {
+        "checked": 9,
+        "present": 0,
+        "observedLinks": 0,
+        "coverageScore": 70,
+        "rows": [
+          {
+            "key": "amazonDE",
+            "label": "Amazon DE",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "allegroPL",
+            "label": "Allegro PL",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "trendyolTR",
+            "label": "Trendyol TR",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "emagRO",
+            "label": "eMAG RO",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "alibabaCN",
+            "label": "Alibaba",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "1688CN",
+            "label": "1688",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "tiktok",
+            "label": "TikTok",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "pinterest",
+            "label": "Pinterest",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "youtube",
+            "label": "YouTube",
+            "ok": true,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          }
+        ]
+      },
+      "sourcing": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "chinaResults": 0,
+        "requiresManualCommercialCheck": true,
+        "items": []
+      },
+      "reviews": {
+        "confidence": "INSUFFICIENT",
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "keywordDemand": {
+        "score": 9,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
+        "label": "Proxy cerere keyword",
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Suport magnetic pentru ochelari montaj pe parasolar auto",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
+      },
+      "launchScore": {
+        "score": 23.9,
+        "verdict": "RESPINGE / AȘTEAPTĂ",
+        "enoughEvidence": false,
+        "reviewEvidence": false,
+        "quality": "PARTIAL",
+        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
+      },
+      "sourceEvidence": "0 piețe externe prezente • 0 surse China prezente • 0 semnal RO • 0 semnale social • 0 surse review-search. Proxy web, nu volum de vânzări.",
+      "sourcingLinks": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        }
+      ],
+      "rawOpportunityScore": 37,
+      "trendIntelligence": {
+        "status": "STABIL",
+        "score": 0,
+        "confidence": "SCĂZUTĂ",
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
+        "signals": [],
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
+      },
+      "opportunityRanking": {
+        "score": 34.9,
+        "tier": "PRIORITATE MICĂ",
+        "reasons": [
+          "presiune concurențială RO redusă",
+          "acoperire bună a dovezilor"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "preț/landed cost neverificat"
+        ],
+        "components": {
+          "demand": 0,
+          "marketGap": 9,
+          "lowCompetition": 12,
+          "sourcing": 0,
+          "economics": 4.4,
+          "evidence": 7,
+          "trend": 2.5
+        },
+        "evidenceReady": false,
+        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
+        "rank": 2
+      },
+      "marketGapV2": {
+        "score": 12,
+        "label": "GAP SLAB",
+        "romaniaPressure": 0,
+        "externalMarketsChecked": 3,
+        "externalMarketsPresent": 0,
+        "markets": [
+          {
+            "market": "Germania",
+            "key": "amazonDE",
+            "checked": true,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Polonia",
+            "key": "allegroPL",
+            "checked": true,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Turcia",
+            "key": "trendyolTR",
+            "checked": true,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "România",
+            "key": "emagRO",
+            "checked": true,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          }
+        ],
+        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
+      },
+      "reviewIntelligenceV2": {
+        "confidence": "SCĂZUTĂ",
+        "coverageScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "improvementIdeas": [],
+        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
+      },
+      "chinaIntelligenceV2": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "domains": [],
+        "observedLinks": [
+          {
+            "market": "Alibaba",
+            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          },
+          {
+            "market": "1688",
+            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          }
+        ],
+        "risks": [
+          "fără sursă China observată",
+          "diversificare furnizori insuficientă",
+          "MOQ/preț/transport/conformitate necesită confirmare manuală"
+        ],
+        "commercialChecklist": [
+          "confirmă prețul real",
+          "confirmă MOQ",
+          "confirmă costul transportului",
+          "confirmă materialele și conformitatea",
+          "cere mostre înainte de comandă mare"
+        ],
+        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
+      },
+      "profitEngineV2": {
+        "confidence": "MEDIE",
+        "pricingVerified": false,
+        "derivedSalePrice": 89.2,
+        "derivedLandedCost": 80.1,
+        "maxLandedCostFor20Margin": 71.4,
+        "scenarios": {
+          "conservator": {
+            "salePrice": 84.8,
+            "landedCost": 88.1,
+            "profit": -3.4,
+            "margin": -4,
+            "roi": -3.8
+          },
+          "realist": {
+            "salePrice": 89.2,
+            "landedCost": 80.1,
+            "profit": 9.1,
+            "margin": 10.2,
+            "roi": 11.4
+          },
+          "optimist": {
+            "salePrice": 93.7,
+            "landedCost": 76.1,
+            "profit": 17.6,
+            "margin": 18.8,
+            "roi": 23.1
+          }
+        },
+        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
+      },
+      "xrayV2": {
+        "strengths": [
+          "presiune concurențială RO redusă",
+          "acoperire bună a dovezilor"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "preț/landed cost neverificat",
+          "lipsește: dovezi comerciale suficiente",
+          "lipsește: preț și landed cost verificate",
+          "lipsește: review evidence",
+          "lipsește: sourcing China"
+        ],
+        "nextCondition": "dovezi comerciale suficiente",
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.9 · Launch 23.9 · Trend STABIL"
+      },
+      "dataConfidence": {
+        "overall": 47.9,
+        "level": "SCĂZUTĂ",
+        "dimensions": {
+          "market": 70,
+          "demand": 90,
+          "competition": 70,
+          "reviews": 0,
+          "sourcing": 0,
+          "pricing": 45,
+          "history": 60
+        },
+        "missing": [
+          "reviews",
+          "sourcing",
+          "pricing"
         ]
       },
       "alerts": [
@@ -1120,11 +1163,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -1327,10 +1365,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Plasă laterală de depozitare pentru portbagaj auto",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 23.2,
@@ -1355,12 +1402,22 @@
       ],
       "rawOpportunityScore": 37,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 34.5,
@@ -1371,8 +1428,7 @@
         ],
         "blockers": [
           "dovezi comerciale insuficiente",
-          "preț/landed cost neverificat",
-          "istoric insuficient pentru trend"
+          "preț/landed cost neverificat"
         ],
         "components": {
           "demand": 0,
@@ -1508,34 +1564,30 @@
         "blockers": [
           "dovezi comerciale insuficiente",
           "preț/landed cost neverificat",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
           "lipsește: review evidence",
-          "lipsește: sourcing China",
-          "lipsește: istoric de trend"
+          "lipsește: sourcing China"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.5 · Launch 23.2 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.5 · Launch 23.2 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 47.9,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 70,
-          "demand": 30,
+          "demand": 90,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
-          "demand",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [
@@ -1565,11 +1617,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -5034,7 +5081,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:35.553Z",
+      "checkedAt": "2026-08-16T07:07:41.746Z",
       "economics": {
         "score": 17.3,
         "margin": 5.7,
@@ -7305,10 +7352,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Set reutilizabil de glisiere pentru mutarea mobilierului",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 23.2,
@@ -7343,12 +7399,22 @@
       ],
       "rawOpportunityScore": 30,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 27.5,
@@ -7360,8 +7426,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -7516,34 +7581,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.5 · Launch 23.2 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.5 · Launch 23.2 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -7572,11 +7635,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -7587,7 +7645,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:04:56.145Z",
+      "checkedAt": "2026-08-16T07:09:08.801Z",
       "economics": {
         "score": 26.3,
         "margin": 9.3,
@@ -7947,10 +8005,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Cârlig premium ascuns pentru tetiera auto",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 23.1,
@@ -7985,12 +8052,22 @@
       ],
       "rawOpportunityScore": 31,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 27.4,
@@ -8002,8 +8079,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -8158,34 +8234,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.4 · Launch 23.1 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.4 · Launch 23.1 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -8214,11 +8288,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -8589,10 +8658,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Sac structurat pentru spălarea pantofilor în mașina de spălat",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 22.7,
@@ -8627,12 +8705,22 @@
       ],
       "rawOpportunityScore": 30,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 27.2,
@@ -8644,8 +8732,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -8800,34 +8887,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.2 · Launch 22.7 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.2 · Launch 22.7 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -8856,11 +8941,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -9063,10 +9143,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Tăvi modulare pentru organizarea sertarului de birou",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.765Z"
       },
       "launchScore": {
         "score": 22.2,
@@ -9091,12 +9180,22 @@
       ],
       "rawOpportunityScore": 36,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 26.9,
@@ -9108,8 +9207,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -9246,34 +9344,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.9 · Launch 22.2 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.9 · Launch 22.2 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -9302,11 +9398,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -9677,10 +9768,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Raft de colț pentru duș autoadeziv fără găurire",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.766Z"
       },
       "launchScore": {
         "score": 22.1,
@@ -9715,12 +9815,22 @@
       ],
       "rawOpportunityScore": 30,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 26.8,
@@ -9732,8 +9842,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -9888,34 +9997,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.8 · Launch 22.1 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.8 · Launch 22.1 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -9944,11 +10051,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -10151,10 +10253,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Set protecții pentru portiere auto pentru câini",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.766Z"
       },
       "launchScore": {
         "score": 22,
@@ -10179,12 +10290,22 @@
       ],
       "rawOpportunityScore": 36,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 26.7,
@@ -10196,8 +10317,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -10334,34 +10454,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.7 · Launch 22 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.7 · Launch 22 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -10390,11 +10508,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -10405,7 +10518,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:04:41.984Z",
+      "checkedAt": "2026-08-16T07:08:54.642Z",
       "economics": {
         "score": 21.6,
         "margin": 6.9,
@@ -10765,10 +10878,19 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "OPEN_WEB_PROXY",
-        "verifiedSearchVolume": false,
+        "provider": "DATAFORSEO_GOOGLE_ADS",
+        "verifiedSearchVolume": true,
         "label": "Proxy cerere keyword",
-        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
+        "keyword": "Adaptor reglabil pentru suportul de pahare auto",
+        "searchVolume": 0,
+        "competition": null,
+        "competitionIndex": 0,
+        "cpc": 0,
+        "lowTopOfPageBid": 0,
+        "highTopOfPageBid": 0,
+        "monthlySearches": [],
+        "checkedAt": "2026-08-16T07:14:12.766Z"
       },
       "launchScore": {
         "score": 22,
@@ -10803,12 +10925,22 @@
       ],
       "rawOpportunityScore": 30,
       "trendIntelligence": {
-        "status": "INSUFICIENT",
+        "status": "STABIL",
         "score": 0,
         "confidence": "SCĂZUTĂ",
-        "sampleCount": 1,
+        "sampleCount": 2,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": 0
+        },
         "signals": [],
-        "note": "Sunt necesare cel puțin 2 observații pentru direcție."
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
         "score": 26.7,
@@ -10820,8 +10952,7 @@
           "dovezi comerciale insuficiente",
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend"
+          "competiția RO nu este suficient observată"
         ],
         "components": {
           "demand": 0,
@@ -10976,34 +11107,32 @@
           "acoperire redusă a surselor",
           "preț/landed cost neverificat",
           "competiția RO nu este suficient observată",
-          "istoric insuficient pentru trend",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată"
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.7 · Launch 22 · Trend INSUFICIENT"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.7 · Launch 22 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 17.9,
+        "overall": 31.4,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 30,
+          "demand": 90,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 25
+          "history": 60
         },
         "missing": [
           "market",
-          "demand",
           "competition",
           "reviews",
           "sourcing",
-          "pricing",
-          "history"
+          "pricing"
         ]
       },
       "alerts": [],
@@ -11032,11 +11161,6 @@
           "key": "reviews",
           "priority": 75,
           "label": "Adaugă review evidence"
-        },
-        {
-          "key": "history",
-          "priority": 55,
-          "label": "Mai așteaptă istoric de trend"
         }
       ]
     },
@@ -12331,7 +12455,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:04:13.661Z",
+      "checkedAt": "2026-08-16T07:08:26.323Z",
       "economics": {
         "score": 19.6,
         "margin": 6.8,
@@ -15345,7 +15469,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:36.808Z",
+      "checkedAt": "2026-08-16T07:07:42.999Z",
       "economics": {
         "score": 17.6,
         "margin": 5.4,
@@ -16879,7 +17003,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:38.074Z",
+      "checkedAt": "2026-08-16T07:07:43.846Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -20339,7 +20463,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:04:27.823Z",
+      "checkedAt": "2026-08-16T07:08:40.482Z",
       "economics": {
         "score": 12.8,
         "margin": 4.7,
@@ -21623,7 +21747,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:59.498Z",
+      "checkedAt": "2026-08-16T07:08:12.164Z",
       "economics": {
         "score": 11.6,
         "margin": 4.4,
@@ -22907,7 +23031,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-16T05:03:45.336Z",
+      "checkedAt": "2026-08-16T07:07:58.005Z",
       "economics": {
         "score": 10.3,
         "margin": 3.6,
@@ -24809,7 +24933,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-16T05:10:18.698Z",
+    "updatedAt": "2026-08-16T07:14:12.965Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",

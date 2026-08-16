@@ -1,10 +1,11 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-08-16T05:10:18.813Z",
+  "generatedAt": "2026-08-16T07:14:13.058Z",
   "technicalReadiness": 100,
   "freeStage": "FREE_READY_FOR_PAID_DATA",
-  "paidDemandActive": false,
+  "paidDemandActive": true,
   "keywordProviders": [
+    "DATAFORSEO_GOOGLE_ADS",
     "OPEN_WEB_PROXY"
   ],
   "checks": [
@@ -112,12 +113,12 @@
   "bottlenecks": [
     {
       "area": "Demand Intelligence România",
-      "status": "PAID_DATA_REQUIRED",
-      "reason": "Search volume/CPC/competition reale necesită provider comercial."
+      "status": "ENRICHED",
+      "reason": "Provider comercial activ."
     },
     {
       "area": "Keyword Intelligence",
-      "status": "PAID_DATA_REQUIRED",
+      "status": "ENRICHED",
       "reason": "Proxy-urile gratuite nu sunt suficiente pentru keyword volume verificat."
     },
     {

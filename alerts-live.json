@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-16T05:10:18.706Z",
+  "updatedAt": "2026-08-16T07:14:12.972Z",
   "policy": "Alertele prioritizează atenția; nu reprezintă recomandare de cumpărare.",
   "stats": {
     "products": 10,
@@ -8,27 +8,32 @@
   },
   "items": [
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
+      "name": "Under desk headphone hanger clamp",
+      "cat": "Birou",
       "imageUrl": "",
       "rank": 1,
-      "opportunityScore": 34.9,
+      "opportunityScore": 35.6,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 1"
+        },
+        {
+          "type": "ACCELERATING",
+          "severity": "HIGH",
+          "message": "Trendul intern accelerează"
         }
       ],
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Under desk headphone hanger clamp",
-      "cat": "Birou",
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
       "imageUrl": "",
       "rank": 2,
-      "opportunityScore": 34.5,
+      "opportunityScore": 34.9,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
