@@ -90,6 +90,8 @@ jobs:
       - name: Verify generated intelligence JSON
         run: |
           node -e "for(const f of ['market-intelligence-live.json','alerts-live.json','validation-queue-live.json','data-confidence-live.json','category-radar-live.json','free-readiness-live.json']){const d=require('./'+f);if(!d||(!d.version&&f!=='free-readiness-live.json'))throw new Error('invalid '+f)};const r=require('./free-readiness-live.json');if(r.technicalReadiness<88)throw new Error('free readiness below target')"
+      - name: Rebuild Organic Rising quality gates
+        run: node scripts/organic-rising-quality-postprocess.mjs
       - name: Validate Organic Rising data integrity
         run: node scripts/qa-organic-rising.mjs
       - name: Run tests
