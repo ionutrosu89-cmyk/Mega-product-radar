@@ -64,6 +64,9 @@ jobs:
       - name: Build strict Market Intelligence dataset
         if: always()
         run: node scripts/market-intelligence-postprocess.mjs
+      - name: Build Golden Product Pipeline pre-paid funnel
+        if: always()
+        run: node scripts/golden-product-pipeline.mjs --phase=prepaid
       - name: Enrich Romania keyword demand with DataForSEO when configured
         if: always()
         continue-on-error: true
@@ -86,6 +89,9 @@ jobs:
       - name: Build strict Test Buy decision
         if: always()
         run: node scripts/test-buy-decision.mjs
+      - name: Finalize Golden Product Pipeline
+        if: always()
+        run: node scripts/golden-product-pipeline.mjs --phase=final
       - name: Build Category Radar
         if: always()
         run: node scripts/category-radar-postprocess.mjs
@@ -103,7 +109,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
@@ -111,7 +117,7 @@ jobs:
           for f in /tmp/radar-output/*.json; do cp "$f" .; done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json scan-status.json
+          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json scan-status.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
             git push origin main
