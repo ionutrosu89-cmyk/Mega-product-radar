@@ -41,6 +41,12 @@ jobs:
         run: node --check scripts/free-intelligence-suite.mjs
       - name: Syntax check Test Buy decision
         run: node --check scripts/test-buy-decision.mjs
+      - name: Syntax check Commercial Signal V2
+        run: node --check scripts/commercial-signal-v2.mjs
+      - name: Syntax check Organic Rising readiness
+        run: |
+          node --check scripts/run-github-scan.mjs
+          node --check scripts/qa-organic-rising.mjs
       - name: Syntax check Category Radar
         run: node --check scripts/category-radar-postprocess.mjs
       - name: Syntax check Smart Watchlist
@@ -52,6 +58,7 @@ jobs:
           node --check market-trend-ui.js
           node --check free-intelligence-ui.js
           node --check product-ro.js
+          node --check todays-opportunities.js
       - name: Validate Action Center structure
         run: node -e "const fs=require('fs');const s=fs.readFileSync('action-center.html','utf8');for(const x of ['viewport-fit=cover','watchlist-live.json','Ce fac azi?','Maximum 3'])if(!s.includes(x))throw new Error('Action Center missing '+x)"
       - name: Validate Product Decision structure
@@ -77,6 +84,10 @@ jobs:
         run: node scripts/free-intelligence-suite.mjs
       - name: Generate Test Buy fixture
         run: node scripts/test-buy-decision.mjs
+      - name: Generate Commercial Signal V2 fixture
+        run: node scripts/commercial-signal-v2.mjs
+      - name: Verify Commercial Signal V2 safety gates
+        run: node -e "const d=require('./market-intelligence-live.json');if(!d.commercialSignalV2)throw new Error('missing Commercial Signal V2');for(const p of d.products||[]){const s=p.commercialSignalV2;if(!s)throw new Error('missing commercial signal');if(['TEST','BUY'].includes(s.status)&&(!s.commerciallyValidated||s.blockers.length))throw new Error('unsafe commercial signal '+p.name);if(s.status==='BUY'&&s.confidence.score<75)throw new Error('BUY confidence too low '+p.name)}"
       - name: Verify Test Buy safety gates
         run: node -e "const d=require('./market-intelligence-live.json');for(const p of d.products||[]){const t=p.testBuyDecision;if(!t)throw new Error('missing testBuyDecision');if(t.status==='TEST_BUY'&&(t.quantity<20||t.quantity>30||t.blockers.length))throw new Error('unsafe TEST_BUY '+p.name)}"
       - name: Generate Category Radar fixture
