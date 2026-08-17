@@ -1,13 +1,13 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-17T16:11:35.547Z",
-  "sourceUpdatedAt": "2026-08-17T16:11:35.411Z",
+  "updatedAt": "2026-08-17T22:11:53.101Z",
+  "sourceUpdatedAt": "2026-08-17T22:11:52.969Z",
   "policy": "Watchlist-ul prioritizează atenția și schimbările dintre scanări. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes.",
   "stats": {
-    "total": 1,
+    "total": 2,
     "changed": 0,
     "urgent": 0,
-    "needsValidation": 1
+    "needsValidation": 2
   },
   "items": [
     {
@@ -16,12 +16,47 @@
       "imageUrl": "",
       "checkedAt": "2026-08-16T21:57:58.332Z",
       "rank": 1,
-      "opportunityScore": 35.6,
+      "opportunityScore": 36.5,
       "tier": "PRIORITATE MICĂ",
       "launchScore": 23.3,
       "verdict": "RESPINGE / AȘTEAPTĂ",
       "trend": "ACCELERATING",
-      "trendScore": 42,
+      "trendScore": 21,
+      "reasons": [
+        "presiune concurențială RO redusă",
+        "trend intern pozitiv",
+        "acoperire bună a dovezilor"
+      ],
+      "blockers": [
+        "dovezi comerciale insuficiente",
+        "preț/landed cost neverificat"
+      ],
+      "delta": {
+        "launch": 0,
+        "demand": 0,
+        "marketGap": 0,
+        "competition": 0,
+        "sourcing": 0,
+        "margin": 0,
+        "roi": 0
+      },
+      "changed": false,
+      "hasPrevious": true,
+      "action": "VALIDEAZĂ PREȚUL",
+      "urgency": 0
+    },
+    {
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "imageUrl": "",
+      "checkedAt": "2026-08-17T22:03:42.038Z",
+      "rank": 2,
+      "opportunityScore": 35.7,
+      "tier": "PRIORITATE MICĂ",
+      "launchScore": 22,
+      "verdict": "RESPINGE / AȘTEAPTĂ",
+      "trend": "ACCELERATING",
+      "trendScore": 21,
       "reasons": [
         "presiune concurențială RO redusă",
         "trend intern pozitiv",

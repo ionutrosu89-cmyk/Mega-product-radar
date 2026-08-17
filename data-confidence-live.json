@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-17T16:11:35.358Z",
+  "updatedAt": "2026-08-17T22:11:52.913Z",
   "policy": "Data Confidence măsoară completitudinea dovezilor, nu probabilitatea de succes.",
   "stats": {
     "total": 42,
@@ -12,16 +12,16 @@
   },
   "dimensionAverages": {
     "market": 16.7,
-    "demand": 44.3,
+    "demand": 30,
     "competition": 35.7,
     "reviews": 0,
     "sourcing": 0,
     "pricing": 44.4,
-    "history": 33.3
+    "history": 38.1
   },
   "missingCounts": {
     "market": 32,
-    "demand": 32,
+    "demand": 42,
     "competition": 32,
     "reviews": 42,
     "sourcing": 42,
@@ -33,9 +33,10 @@
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "rank": 1,
-      "score": 47.9,
+      "score": 42.1,
       "level": "SCĂZUTĂ",
       "missing": [
+        "demand",
         "reviews",
         "sourcing",
         "pricing"
@@ -45,9 +46,10 @@
       "name": "Car cup holder expander adjustable",
       "cat": "Auto",
       "rank": 2,
-      "score": 47.9,
+      "score": 42.1,
       "level": "SCĂZUTĂ",
       "missing": [
+        "demand",
         "reviews",
         "sourcing",
         "pricing"
@@ -166,41 +168,14 @@
       ]
     },
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "rank": 11,
-      "score": 31.4,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
-      "rank": 12,
-      "score": 31.4,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
-      "rank": 13,
-      "score": 31.4,
+      "rank": 11,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -210,11 +185,12 @@
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
-      "rank": 14,
-      "score": 31.4,
+      "rank": 12,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -224,11 +200,27 @@
     {
       "name": "Shoe washing laundry bag structured",
       "cat": "Laundry",
-      "rank": 15,
-      "score": 31.4,
+      "rank": 13,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "rank": 14,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -238,11 +230,12 @@
     {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
-      "rank": 16,
-      "score": 31.4,
+      "rank": 15,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -252,11 +245,27 @@
     {
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
-      "rank": 17,
-      "score": 31.4,
+      "rank": 16,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
+      "rank": 17,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -267,10 +276,11 @@
       "name": "Dog car door protector set",
       "cat": "Pet",
       "rank": 18,
-      "score": 31.4,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",

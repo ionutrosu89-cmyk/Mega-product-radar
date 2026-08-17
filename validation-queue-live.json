@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-17T16:11:35.357Z",
+  "updatedAt": "2026-08-17T22:11:52.912Z",
   "policy": "Coada arată ce trebuie validat înainte de o decizie comercială.",
   "stats": {
     "products": 42,
@@ -14,7 +14,7 @@
       "cat": "Birou",
       "imageUrl": "",
       "rank": 1,
-      "opportunityScore": 35.6,
+      "opportunityScore": 36.5,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -53,7 +53,7 @@
       "cat": "Auto",
       "imageUrl": "",
       "rank": 2,
-      "opportunityScore": 33.7,
+      "opportunityScore": 35.7,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -456,103 +456,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "imageUrl": "",
-      "rank": 11,
-      "opportunityScore": 27.9,
-      "tier": "PRIORITATE MICĂ",
-      "tasks": [
-        {
-          "key": "pricing",
-          "priority": 95,
-          "label": "Validează prețul și landed cost"
-        },
-        {
-          "key": "sourcing",
-          "priority": 90,
-          "label": "Găsește/validează sursa China"
-        },
-        {
-          "key": "competition",
-          "priority": 85,
-          "label": "Validează competiția din România"
-        },
-        {
-          "key": "evidence",
-          "priority": 80,
-          "label": "Completează dovezile comerciale"
-        },
-        {
-          "key": "reviews",
-          "priority": 75,
-          "label": "Adaugă review evidence"
-        }
-      ],
-      "blockers": [
-        "dovezi comerciale insuficiente",
-        "acoperire redusă a surselor",
-        "preț/landed cost neverificat",
-        "competiția RO nu este suficient observată",
-        "lipsește: dovezi comerciale suficiente",
-        "lipsește: preț și landed cost verificate",
-        "lipsește: competiție RO observată",
-        "lipsește: review evidence"
-      ],
-      "confidence": "SCĂZUTĂ"
-    },
-    {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
-      "imageUrl": "",
-      "rank": 12,
-      "opportunityScore": 27.5,
-      "tier": "PRIORITATE MICĂ",
-      "tasks": [
-        {
-          "key": "pricing",
-          "priority": 95,
-          "label": "Validează prețul și landed cost"
-        },
-        {
-          "key": "sourcing",
-          "priority": 90,
-          "label": "Găsește/validează sursa China"
-        },
-        {
-          "key": "competition",
-          "priority": 85,
-          "label": "Validează competiția din România"
-        },
-        {
-          "key": "evidence",
-          "priority": 80,
-          "label": "Completează dovezile comerciale"
-        },
-        {
-          "key": "reviews",
-          "priority": 75,
-          "label": "Adaugă review evidence"
-        }
-      ],
-      "blockers": [
-        "dovezi comerciale insuficiente",
-        "acoperire redusă a surselor",
-        "preț/landed cost neverificat",
-        "competiția RO nu este suficient observată",
-        "lipsește: dovezi comerciale suficiente",
-        "lipsește: preț și landed cost verificate",
-        "lipsește: competiție RO observată",
-        "lipsește: review evidence"
-      ],
-      "confidence": "SCĂZUTĂ"
-    },
-    {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "imageUrl": "",
-      "rank": 13,
-      "opportunityScore": 27.5,
+      "rank": 11,
+      "opportunityScore": 28.8,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -597,8 +505,8 @@
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
       "imageUrl": "",
-      "rank": 14,
-      "opportunityScore": 27.4,
+      "rank": 12,
+      "opportunityScore": 28.7,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -643,8 +551,54 @@
       "name": "Shoe washing laundry bag structured",
       "cat": "Laundry",
       "imageUrl": "",
-      "rank": 15,
-      "opportunityScore": 27.2,
+      "rank": 13,
+      "opportunityScore": 28.5,
+      "tier": "PRIORITATE MICĂ",
+      "tasks": [
+        {
+          "key": "pricing",
+          "priority": 95,
+          "label": "Validează prețul și landed cost"
+        },
+        {
+          "key": "sourcing",
+          "priority": 90,
+          "label": "Găsește/validează sursa China"
+        },
+        {
+          "key": "competition",
+          "priority": 85,
+          "label": "Validează competiția din România"
+        },
+        {
+          "key": "evidence",
+          "priority": 80,
+          "label": "Completează dovezile comerciale"
+        },
+        {
+          "key": "reviews",
+          "priority": 75,
+          "label": "Adaugă review evidence"
+        }
+      ],
+      "blockers": [
+        "dovezi comerciale insuficiente",
+        "acoperire redusă a surselor",
+        "preț/landed cost neverificat",
+        "competiția RO nu este suficient observată",
+        "lipsește: dovezi comerciale suficiente",
+        "lipsește: preț și landed cost verificate",
+        "lipsește: competiție RO observată",
+        "lipsește: review evidence"
+      ],
+      "confidence": "SCĂZUTĂ"
+    },
+    {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "imageUrl": "",
+      "rank": 14,
+      "opportunityScore": 28.4,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -689,8 +643,8 @@
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
       "imageUrl": "",
-      "rank": 16,
-      "opportunityScore": 26.9,
+      "rank": 15,
+      "opportunityScore": 28.2,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -735,8 +689,54 @@
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
       "imageUrl": "",
+      "rank": 16,
+      "opportunityScore": 28.1,
+      "tier": "PRIORITATE MICĂ",
+      "tasks": [
+        {
+          "key": "pricing",
+          "priority": 95,
+          "label": "Validează prețul și landed cost"
+        },
+        {
+          "key": "sourcing",
+          "priority": 90,
+          "label": "Găsește/validează sursa China"
+        },
+        {
+          "key": "competition",
+          "priority": 85,
+          "label": "Validează competiția din România"
+        },
+        {
+          "key": "evidence",
+          "priority": 80,
+          "label": "Completează dovezile comerciale"
+        },
+        {
+          "key": "reviews",
+          "priority": 75,
+          "label": "Adaugă review evidence"
+        }
+      ],
+      "blockers": [
+        "dovezi comerciale insuficiente",
+        "acoperire redusă a surselor",
+        "preț/landed cost neverificat",
+        "competiția RO nu este suficient observată",
+        "lipsește: dovezi comerciale suficiente",
+        "lipsește: preț și landed cost verificate",
+        "lipsește: competiție RO observată",
+        "lipsește: review evidence"
+      ],
+      "confidence": "SCĂZUTĂ"
+    },
+    {
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
+      "imageUrl": "",
       "rank": 17,
-      "opportunityScore": 26.8,
+      "opportunityScore": 28,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {
@@ -782,7 +782,7 @@
       "cat": "Pet",
       "imageUrl": "",
       "rank": 18,
-      "opportunityScore": 26.7,
+      "opportunityScore": 28,
       "tier": "PRIORITATE MICĂ",
       "tasks": [
         {

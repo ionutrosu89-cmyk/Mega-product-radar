@@ -1,30 +1,20 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-17T16:11:35.411Z",
-  "sourceUpdatedAt": "2026-08-17T16:11:25.273Z",
+  "updatedAt": "2026-08-17T22:11:52.969Z",
+  "sourceUpdatedAt": "2026-08-17T22:11:46.551Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile sunt calculate exclusiv din dovezile existente. Volumele de căutare, sellerii și vânzările nu sunt inventate; keyword demand și competitor intelligence rămân proxy-uri observabile până la surse verificate.",
   "providerReadiness": {
     "dataForSEO": {
       "ready": true,
-      "enabled": true,
+      "enabled": false,
       "purpose": [
         "keyword volume RO",
         "SERP RO",
         "Google Shopping",
         "cross-market demand"
-      ],
-      "status": "ACTIVE",
-      "trialMode": true,
-      "lastKeywordEnrichmentAt": "2026-08-17T16:11:35.086Z",
-      "lastRequestCostUsd": 0.09,
-      "lastKeywordCount": 10,
-      "lastEnrichedProducts": 10,
-      "budgetGuard": {
-        "maxKeywords": 10,
-        "maxRequestCostUsd": 0.1
-      }
+      ]
     },
     "apify": {
       "ready": true,
@@ -44,10 +34,9 @@
     "competitorCoverage": 10,
     "observedRomaniaDomains": 0,
     "partial": 42,
-    "keywordVerified": 10,
-    "accelerating": 1,
-    "rising": 1,
-    "cooling": 0,
+    "accelerating": 2,
+    "rising": 2,
+    "cooling": 2,
     "topOpportunities": 0,
     "priorityWatch": 0,
     "validationQueue": 0,
@@ -421,19 +410,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Suport cu clemă pentru căști montaj sub birou",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 23.3,
@@ -469,9 +449,9 @@
       "rawOpportunityScore": 31,
       "trendIntelligence": {
         "status": "ACCELERATING",
-        "score": 42,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "score": 21,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -480,7 +460,7 @@
           "marketGap": 0,
           "competition": 0,
           "sourcing": 0,
-          "evidence": 70
+          "evidence": 35
         },
         "signals": [
           "acoperire dovezi în creștere"
@@ -488,7 +468,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 35.6,
+        "score": 36.5,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă",
@@ -506,7 +486,7 @@
           "sourcing": 0,
           "economics": 4,
           "evidence": 7,
-          "trend": 3.6
+          "trend": 4.5
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
@@ -658,21 +638,22 @@
           "lipsește: sourcing China"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 35.6 · Launch 23.3 · Trend ACCELERATING"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 36.5 · Launch 23.3 · Trend ACCELERATING"
       },
       "dataConfidence": {
-        "overall": 47.9,
+        "overall": 42.1,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 70,
-          "demand": 90,
+          "demand": 30,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
+          "demand",
           "reviews",
           "sourcing",
           "pricing"
@@ -725,7 +706,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 47.9,
+        "confidenceScore": 42.1,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -756,7 +737,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:26.238Z",
+      "checkedAt": "2026-08-17T22:03:42.038Z",
       "economics": {
         "score": 21.6,
         "margin": 6.9,
@@ -1116,19 +1097,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Adaptor reglabil pentru suportul de pahare auto",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22,
@@ -1163,10 +1135,10 @@
       ],
       "rawOpportunityScore": 30,
       "trendIntelligence": {
-        "status": "STABIL",
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "status": "ACCELERATING",
+        "score": 21,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -1175,16 +1147,19 @@
           "marketGap": 0,
           "competition": 0,
           "sourcing": 0,
-          "evidence": 0
+          "evidence": 35
         },
-        "signals": [],
+        "signals": [
+          "acoperire dovezi în creștere"
+        ],
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 33.7,
+        "score": 35.7,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă",
+          "trend intern pozitiv",
           "acoperire bună a dovezilor"
         ],
         "blockers": [
@@ -1198,7 +1173,7 @@
           "sourcing": 0,
           "economics": 3.2,
           "evidence": 7,
-          "trend": 2.5
+          "trend": 4.5
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
@@ -1338,6 +1313,7 @@
       "xrayV2": {
         "strengths": [
           "presiune concurențială RO redusă",
+          "trend intern pozitiv",
           "acoperire bună a dovezilor"
         ],
         "blockers": [
@@ -1349,21 +1325,22 @@
           "lipsește: sourcing China"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 33.7 · Launch 22 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 35.7 · Launch 22 · Trend ACCELERATING"
       },
       "dataConfidence": {
-        "overall": 47.9,
+        "overall": 42.1,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 70,
-          "demand": 90,
+          "demand": 30,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
+          "demand",
           "reviews",
           "sourcing",
           "pricing"
@@ -1374,6 +1351,11 @@
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 2"
+        },
+        {
+          "type": "ACCELERATING",
+          "severity": "HIGH",
+          "message": "Trendul intern accelerează"
         }
       ],
       "validationTasks": [
@@ -1411,7 +1393,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 47.9,
+        "confidenceScore": 42.1,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -6181,7 +6163,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:25.469Z",
+      "checkedAt": "2026-08-17T22:03:41.306Z",
       "economics": {
         "score": 12.8,
         "margin": 4.7,
@@ -6852,1384 +6834,6 @@
       }
     },
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "imageUrl": "",
-      "imageSourceUrl": "",
-      "sourceStatus": "PARTIAL",
-      "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:42.485Z",
-      "economics": {
-        "score": 29.6,
-        "margin": 10.2,
-        "roi": 23.5,
-        "profit": 9.1,
-        "pricingVerified": false,
-        "pricingStatus": "SEED_ESTIMATE"
-      },
-      "demand": {
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "checks": 0,
-        "foreignPresence": 0,
-        "socialPresence": 0,
-        "reviewSources": 0,
-        "trendSignals": 0
-      },
-      "marketGap": {
-        "score": 45,
-        "label": "DATE INSUFICIENTE",
-        "evidenceReady": false,
-        "checks": 0,
-        "foreignPresence": 0,
-        "foreignResults": 0,
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competition": {
-        "pressure": 0,
-        "label": "REDUSĂ",
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competitors": {
-        "saturationScore": 0,
-        "label": "NEVALIDATĂ",
-        "evidenceMarkets": 0,
-        "romania": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "resultProxy": 0,
-          "markets": [
-            {
-              "key": "emagRO",
-              "label": "eMAG RO",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20sunglasses%20magnetic%20visor%20holder"
-            }
-          ]
-        },
-        "foreign": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "markets": [
-            {
-              "key": "amazonUS",
-              "label": "Amazon US",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "amazonDE",
-              "label": "Amazon DE",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "amazonIT",
-              "label": "Amazon IT",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "amazonFR",
-              "label": "Amazon FR",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "allegroPL",
-              "label": "Allegro PL",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "trendyolTR",
-              "label": "Trendyol TR",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "etsy",
-              "label": "Etsy",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "temu",
-              "label": "Temu",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "aliexpress",
-              "label": "AliExpress",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "kickstarter",
-              "label": "Kickstarter",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            },
-            {
-              "key": "indiegogo",
-              "label": "Indiegogo",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20sunglasses%20magnetic%20visor%20holder"
-            }
-          ]
-        },
-        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
-      },
-      "evidenceCoverage": {
-        "checked": 0,
-        "present": 0,
-        "observedLinks": 0,
-        "coverageScore": 0,
-        "rows": [
-          {
-            "key": "amazonUS",
-            "label": "Amazon US",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonDE",
-            "label": "Amazon DE",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonIT",
-            "label": "Amazon IT",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonFR",
-            "label": "Amazon FR",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "allegroPL",
-            "label": "Allegro PL",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "trendyolTR",
-            "label": "Trendyol TR",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "etsy",
-            "label": "Etsy",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "temu",
-            "label": "Temu",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "aliexpress",
-            "label": "AliExpress",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "kickstarter",
-            "label": "Kickstarter",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "indiegogo",
-            "label": "Indiegogo",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "emagRO",
-            "label": "eMAG RO",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "alibabaCN",
-            "label": "Alibaba",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "1688CN",
-            "label": "1688",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "madeInChina",
-            "label": "Made-in-China",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "globalSources",
-            "label": "Global Sources",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "tiktok",
-            "label": "TikTok",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "facebook",
-            "label": "Meta/Facebook",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "pinterest",
-            "label": "Pinterest",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "youtube",
-            "label": "YouTube",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          }
-        ]
-      },
-      "sourcing": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "chinaResults": 0,
-        "requiresManualCommercialCheck": true,
-        "items": []
-      },
-      "reviews": {
-        "confidence": "INSUFFICIENT",
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "keywordDemand": {
-        "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
-        "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Suport magnetic pentru ochelari montaj pe parasolar auto",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.085Z"
-      },
-      "launchScore": {
-        "score": 23.9,
-        "verdict": "RESPINGE / AȘTEAPTĂ",
-        "enoughEvidence": false,
-        "reviewEvidence": false,
-        "quality": "PARTIAL",
-        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
-      },
-      "sourceEvidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
-      "sourcingLinks": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        },
-        {
-          "market": "Made-in-China",
-          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        },
-        {
-          "market": "Global Sources",
-          "url": "https://www.globalsources.com/search?query=Car%20sunglasses%20magnetic%20visor%20holder",
-          "verified": false
-        }
-      ],
-      "rawOpportunityScore": 31,
-      "trendIntelligence": {
-        "status": "STABIL",
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
-        "deltaLaunch": 0,
-        "deltaDemand": 0,
-        "slopes": {
-          "launch": 0,
-          "demand": 0,
-          "marketGap": 0,
-          "competition": 0,
-          "sourcing": 0,
-          "evidence": 0
-        },
-        "signals": [],
-        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
-      },
-      "opportunityRanking": {
-        "score": 27.9,
-        "tier": "PRIORITATE MICĂ",
-        "reasons": [
-          "presiune concurențială RO redusă"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "acoperire redusă a surselor",
-          "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată"
-        ],
-        "components": {
-          "demand": 0,
-          "marketGap": 9,
-          "lowCompetition": 12,
-          "sourcing": 0,
-          "economics": 4.4,
-          "evidence": 0,
-          "trend": 2.5
-        },
-        "evidenceReady": false,
-        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 11
-      },
-      "marketGapV2": {
-        "score": 0,
-        "label": "DATE INSUFICIENTE",
-        "romaniaPressure": 0,
-        "externalMarketsChecked": 0,
-        "externalMarketsPresent": 0,
-        "markets": [
-          {
-            "market": "SUA",
-            "key": "amazonUS",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Germania",
-            "key": "amazonDE",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Polonia",
-            "key": "allegroPL",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Turcia",
-            "key": "trendyolTR",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "România",
-            "key": "emagRO",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          }
-        ],
-        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
-      },
-      "reviewIntelligenceV2": {
-        "confidence": "SCĂZUTĂ",
-        "coverageScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "improvementIdeas": [],
-        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
-      },
-      "chinaIntelligenceV2": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "domains": [],
-        "observedLinks": [
-          {
-            "market": "Alibaba",
-            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          },
-          {
-            "market": "1688",
-            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          },
-          {
-            "market": "Made-in-China",
-            "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          },
-          {
-            "market": "Global Sources",
-            "url": "https://www.globalsources.com/search?query=Car%20sunglasses%20magnetic%20visor%20holder",
-            "verified": false
-          }
-        ],
-        "risks": [
-          "fără sursă China observată",
-          "diversificare furnizori insuficientă",
-          "MOQ/preț/transport/conformitate necesită confirmare manuală"
-        ],
-        "commercialChecklist": [
-          "confirmă prețul real",
-          "confirmă MOQ",
-          "confirmă costul transportului",
-          "confirmă materialele și conformitatea",
-          "cere mostre înainte de comandă mare"
-        ],
-        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
-      },
-      "profitEngineV2": {
-        "confidence": "MEDIE",
-        "pricingVerified": false,
-        "derivedSalePrice": 89.2,
-        "derivedLandedCost": 80.1,
-        "maxLandedCostFor20Margin": 71.4,
-        "scenarios": {
-          "conservator": {
-            "salePrice": 84.8,
-            "landedCost": 88.1,
-            "profit": -3.4,
-            "margin": -4,
-            "roi": -3.8
-          },
-          "realist": {
-            "salePrice": 89.2,
-            "landedCost": 80.1,
-            "profit": 9.1,
-            "margin": 10.2,
-            "roi": 11.4
-          },
-          "optimist": {
-            "salePrice": 93.7,
-            "landedCost": 76.1,
-            "profit": 17.6,
-            "margin": 18.8,
-            "roi": 23.1
-          }
-        },
-        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
-      },
-      "xrayV2": {
-        "strengths": [
-          "presiune concurențială RO redusă"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "acoperire redusă a surselor",
-          "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "lipsește: dovezi comerciale suficiente",
-          "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată",
-          "lipsește: review evidence"
-        ],
-        "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.9 · Launch 23.9 · Trend STABIL"
-      },
-      "dataConfidence": {
-        "overall": 31.4,
-        "level": "SCĂZUTĂ",
-        "dimensions": {
-          "market": 0,
-          "demand": 90,
-          "competition": 25,
-          "reviews": 0,
-          "sourcing": 0,
-          "pricing": 45,
-          "history": 60
-        },
-        "missing": [
-          "market",
-          "competition",
-          "reviews",
-          "sourcing",
-          "pricing"
-        ]
-      },
-      "alerts": [],
-      "validationTasks": [
-        {
-          "key": "pricing",
-          "priority": 95,
-          "label": "Validează prețul și landed cost"
-        },
-        {
-          "key": "sourcing",
-          "priority": 90,
-          "label": "Găsește/validează sursa China"
-        },
-        {
-          "key": "competition",
-          "priority": 85,
-          "label": "Validează competiția din România"
-        },
-        {
-          "key": "evidence",
-          "priority": 80,
-          "label": "Completează dovezile comerciale"
-        },
-        {
-          "key": "reviews",
-          "priority": 75,
-          "label": "Adaugă review evidence"
-        }
-      ],
-      "testBuyDecision": {
-        "version": "1.0",
-        "status": "HOLD",
-        "verdict": "NU TESTA ÎNCĂ",
-        "quantity": 0,
-        "unitLandedCost": 80.1,
-        "targetSalePrice": 89.2,
-        "unitProfit": 9.1,
-        "testBudget": 0,
-        "expectedRevenue": 0,
-        "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
-        "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
-        "gates": {
-          "demandVerified": false,
-          "pricingVerified": false,
-          "supplierReady": false,
-          "reviewEvidence": false,
-          "marketEvidence": false,
-          "economicsHealthy": false,
-          "confidenceReady": false,
-          "trendSafe": true
-        },
-        "blockers": [
-          "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
-          "review evidence suficient",
-          "dovezi piață și competiție suficiente",
-          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
-          "Data Confidence minimum MEDIE"
-        ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
-      }
-    },
-    {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
-      "imageUrl": "",
-      "imageSourceUrl": "",
-      "sourceStatus": "PARTIAL",
-      "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:56.646Z",
-      "economics": {
-        "score": 26.8,
-        "margin": 8.8,
-        "roi": 19.6,
-        "profit": 10.5,
-        "pricingVerified": false,
-        "pricingStatus": "SEED_ESTIMATE"
-      },
-      "demand": {
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "checks": 0,
-        "foreignPresence": 0,
-        "socialPresence": 0,
-        "reviewSources": 0,
-        "trendSignals": 0
-      },
-      "marketGap": {
-        "score": 45,
-        "label": "DATE INSUFICIENTE",
-        "evidenceReady": false,
-        "checks": 0,
-        "foreignPresence": 0,
-        "foreignResults": 0,
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competition": {
-        "pressure": 0,
-        "label": "REDUSĂ",
-        "romaniaPresence": 0,
-        "romaniaResults": 0
-      },
-      "competitors": {
-        "saturationScore": 0,
-        "label": "NEVALIDATĂ",
-        "evidenceMarkets": 0,
-        "romania": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "resultProxy": 0,
-          "markets": [
-            {
-              "key": "emagRO",
-              "label": "eMAG RO",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20trunk%20side%20storage%20net"
-            }
-          ]
-        },
-        "foreign": {
-          "domains": [],
-          "domainCount": 0,
-          "observedLinks": 0,
-          "markets": [
-            {
-              "key": "amazonUS",
-              "label": "Amazon US",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "amazonDE",
-              "label": "Amazon DE",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "amazonIT",
-              "label": "Amazon IT",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "amazonFR",
-              "label": "Amazon FR",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "allegroPL",
-              "label": "Allegro PL",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "trendyolTR",
-              "label": "Trendyol TR",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "etsy",
-              "label": "Etsy",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "temu",
-              "label": "Temu",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "aliexpress",
-              "label": "AliExpress",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "kickstarter",
-              "label": "Kickstarter",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20trunk%20side%20storage%20net"
-            },
-            {
-              "key": "indiegogo",
-              "label": "Indiegogo",
-              "ok": false,
-              "present": false,
-              "resultCount": 0,
-              "observedLinks": 0,
-              "domains": [],
-              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20trunk%20side%20storage%20net"
-            }
-          ]
-        },
-        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
-      },
-      "evidenceCoverage": {
-        "checked": 0,
-        "present": 0,
-        "observedLinks": 0,
-        "coverageScore": 0,
-        "rows": [
-          {
-            "key": "amazonUS",
-            "label": "Amazon US",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonDE",
-            "label": "Amazon DE",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonIT",
-            "label": "Amazon IT",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "amazonFR",
-            "label": "Amazon FR",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "allegroPL",
-            "label": "Allegro PL",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "trendyolTR",
-            "label": "Trendyol TR",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "etsy",
-            "label": "Etsy",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "temu",
-            "label": "Temu",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "aliexpress",
-            "label": "AliExpress",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "kickstarter",
-            "label": "Kickstarter",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "indiegogo",
-            "label": "Indiegogo",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "emagRO",
-            "label": "eMAG RO",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "alibabaCN",
-            "label": "Alibaba",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "1688CN",
-            "label": "1688",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "madeInChina",
-            "label": "Made-in-China",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "globalSources",
-            "label": "Global Sources",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "tiktok",
-            "label": "TikTok",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "facebook",
-            "label": "Meta/Facebook",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "pinterest",
-            "label": "Pinterest",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          },
-          {
-            "key": "youtube",
-            "label": "YouTube",
-            "ok": false,
-            "present": false,
-            "resultCount": 0,
-            "observedLinks": 0
-          }
-        ]
-      },
-      "sourcing": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "chinaResults": 0,
-        "requiresManualCommercialCheck": true,
-        "items": []
-      },
-      "reviews": {
-        "confidence": "INSUFFICIENT",
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
-      },
-      "keywordDemand": {
-        "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
-        "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Plasă laterală de depozitare pentru portbagaj auto",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
-      },
-      "launchScore": {
-        "score": 23.2,
-        "verdict": "RESPINGE / AȘTEAPTĂ",
-        "enoughEvidence": false,
-        "reviewEvidence": false,
-        "quality": "PARTIAL",
-        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
-      },
-      "sourceEvidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
-      "sourcingLinks": [
-        {
-          "market": "Alibaba",
-          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20trunk%20side%20storage%20net",
-          "verified": false
-        },
-        {
-          "market": "1688",
-          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20trunk%20side%20storage%20net",
-          "verified": false
-        },
-        {
-          "market": "Made-in-China",
-          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20trunk%20side%20storage%20net",
-          "verified": false
-        },
-        {
-          "market": "Global Sources",
-          "url": "https://www.globalsources.com/search?query=Car%20trunk%20side%20storage%20net",
-          "verified": false
-        }
-      ],
-      "rawOpportunityScore": 30,
-      "trendIntelligence": {
-        "status": "STABIL",
-        "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
-        "deltaLaunch": 0,
-        "deltaDemand": 0,
-        "slopes": {
-          "launch": 0,
-          "demand": 0,
-          "marketGap": 0,
-          "competition": 0,
-          "sourcing": 0,
-          "evidence": 0
-        },
-        "signals": [],
-        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
-      },
-      "opportunityRanking": {
-        "score": 27.5,
-        "tier": "PRIORITATE MICĂ",
-        "reasons": [
-          "presiune concurențială RO redusă"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "acoperire redusă a surselor",
-          "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată"
-        ],
-        "components": {
-          "demand": 0,
-          "marketGap": 9,
-          "lowCompetition": 12,
-          "sourcing": 0,
-          "economics": 4,
-          "evidence": 0,
-          "trend": 2.5
-        },
-        "evidenceReady": false,
-        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 12
-      },
-      "marketGapV2": {
-        "score": 0,
-        "label": "DATE INSUFICIENTE",
-        "romaniaPressure": 0,
-        "externalMarketsChecked": 0,
-        "externalMarketsPresent": 0,
-        "markets": [
-          {
-            "market": "SUA",
-            "key": "amazonUS",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Germania",
-            "key": "amazonDE",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Polonia",
-            "key": "allegroPL",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "Turcia",
-            "key": "trendyolTR",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          },
-          {
-            "market": "România",
-            "key": "emagRO",
-            "checked": false,
-            "present": false,
-            "resultProxy": 0,
-            "observedLinks": 0
-          }
-        ],
-        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
-      },
-      "reviewIntelligenceV2": {
-        "confidence": "SCĂZUTĂ",
-        "coverageScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "improvementIdeas": [],
-        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
-      },
-      "chinaIntelligenceV2": {
-        "score": 0,
-        "readiness": "NONE",
-        "sources": 0,
-        "domains": [],
-        "observedLinks": [
-          {
-            "market": "Alibaba",
-            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20trunk%20side%20storage%20net",
-            "verified": false
-          },
-          {
-            "market": "1688",
-            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20trunk%20side%20storage%20net",
-            "verified": false
-          },
-          {
-            "market": "Made-in-China",
-            "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20trunk%20side%20storage%20net",
-            "verified": false
-          },
-          {
-            "market": "Global Sources",
-            "url": "https://www.globalsources.com/search?query=Car%20trunk%20side%20storage%20net",
-            "verified": false
-          }
-        ],
-        "risks": [
-          "fără sursă China observată",
-          "diversificare furnizori insuficientă",
-          "MOQ/preț/transport/conformitate necesită confirmare manuală"
-        ],
-        "commercialChecklist": [
-          "confirmă prețul real",
-          "confirmă MOQ",
-          "confirmă costul transportului",
-          "confirmă materialele și conformitatea",
-          "cere mostre înainte de comandă mare"
-        ],
-        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
-      },
-      "profitEngineV2": {
-        "confidence": "MEDIE",
-        "pricingVerified": false,
-        "derivedSalePrice": 119.3,
-        "derivedLandedCost": 108.8,
-        "maxLandedCostFor20Margin": 95.5,
-        "scenarios": {
-          "conservator": {
-            "salePrice": 113.4,
-            "landedCost": 119.7,
-            "profit": -6.3,
-            "margin": -5.6,
-            "roi": -5.3
-          },
-          "realist": {
-            "salePrice": 119.3,
-            "landedCost": 108.8,
-            "profit": 10.5,
-            "margin": 8.8,
-            "roi": 9.6
-          },
-          "optimist": {
-            "salePrice": 125.3,
-            "landedCost": 103.4,
-            "profit": 21.9,
-            "margin": 17.5,
-            "roi": 21.2
-          }
-        },
-        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
-      },
-      "xrayV2": {
-        "strengths": [
-          "presiune concurențială RO redusă"
-        ],
-        "blockers": [
-          "dovezi comerciale insuficiente",
-          "acoperire redusă a surselor",
-          "preț/landed cost neverificat",
-          "competiția RO nu este suficient observată",
-          "lipsește: dovezi comerciale suficiente",
-          "lipsește: preț și landed cost verificate",
-          "lipsește: competiție RO observată",
-          "lipsește: review evidence"
-        ],
-        "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.5 · Launch 23.2 · Trend STABIL"
-      },
-      "dataConfidence": {
-        "overall": 31.4,
-        "level": "SCĂZUTĂ",
-        "dimensions": {
-          "market": 0,
-          "demand": 90,
-          "competition": 25,
-          "reviews": 0,
-          "sourcing": 0,
-          "pricing": 45,
-          "history": 60
-        },
-        "missing": [
-          "market",
-          "competition",
-          "reviews",
-          "sourcing",
-          "pricing"
-        ]
-      },
-      "alerts": [],
-      "validationTasks": [
-        {
-          "key": "pricing",
-          "priority": 95,
-          "label": "Validează prețul și landed cost"
-        },
-        {
-          "key": "sourcing",
-          "priority": 90,
-          "label": "Găsește/validează sursa China"
-        },
-        {
-          "key": "competition",
-          "priority": 85,
-          "label": "Validează competiția din România"
-        },
-        {
-          "key": "evidence",
-          "priority": 80,
-          "label": "Completează dovezile comerciale"
-        },
-        {
-          "key": "reviews",
-          "priority": 75,
-          "label": "Adaugă review evidence"
-        }
-      ],
-      "testBuyDecision": {
-        "version": "1.0",
-        "status": "HOLD",
-        "verdict": "NU TESTA ÎNCĂ",
-        "quantity": 0,
-        "unitLandedCost": 108.8,
-        "targetSalePrice": 119.3,
-        "unitProfit": 10.5,
-        "testBudget": 0,
-        "expectedRevenue": 0,
-        "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
-        "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
-        "gates": {
-          "demandVerified": false,
-          "pricingVerified": false,
-          "supplierReady": false,
-          "reviewEvidence": false,
-          "marketEvidence": false,
-          "economicsHealthy": false,
-          "confidenceReady": false,
-          "trendSafe": true
-        },
-        "blockers": [
-          "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
-          "review evidence suficient",
-          "dovezi piață și competiție suficiente",
-          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
-          "Data Confidence minimum MEDIE"
-        ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
-      }
-    },
-    {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "imageUrl": "",
@@ -8596,19 +7200,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Set reutilizabil de glisiere pentru mutarea mobilierului",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 23.2,
@@ -8645,8 +7240,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -8661,7 +7256,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 27.5,
+        "score": 28.8,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -8679,11 +7274,11 @@
           "sourcing": 0,
           "economics": 4,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 13
+        "rank": 11
       },
       "marketGapV2": {
         "score": 0,
@@ -8831,22 +7426,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.5 · Launch 23.2 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.8 · Launch 23.2 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -8894,7 +7490,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -8925,7 +7521,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:27.477Z",
+      "checkedAt": "2026-08-17T22:03:43.264Z",
       "economics": {
         "score": 26.3,
         "margin": 9.3,
@@ -9285,19 +7881,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Cârlig premium ascuns pentru tetiera auto",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 23.1,
@@ -9334,8 +7921,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -9350,7 +7937,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 27.4,
+        "score": 28.7,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -9368,11 +7955,11 @@
           "sourcing": 0,
           "economics": 3.9,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 14
+        "rank": 12
       },
       "marketGapV2": {
         "score": 0,
@@ -9520,22 +8107,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.4 · Launch 23.1 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.7 · Launch 23.1 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -9583,7 +8171,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -9974,19 +8562,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Sac structurat pentru spălarea pantofilor în mașina de spălat",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.7,
@@ -10023,8 +8602,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -10039,7 +8618,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 27.2,
+        "score": 28.5,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -10057,11 +8636,11 @@
           "sourcing": 0,
           "economics": 3.7,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 15
+        "rank": 13
       },
       "marketGapV2": {
         "score": 0,
@@ -10209,22 +8788,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 27.2 · Launch 22.7 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.5 · Launch 22.7 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -10272,7 +8852,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -10291,6 +8871,688 @@
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
+    },
+    {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "sourceStatus": "PARTIAL",
+      "suggestedStage": "REJECT",
+      "checkedAt": "2026-08-17T22:03:58.311Z",
+      "economics": {
+        "score": 29.6,
+        "margin": 10.2,
+        "roi": 23.5,
+        "profit": 9.1,
+        "pricingVerified": false,
+        "pricingStatus": "SEED_ESTIMATE"
+      },
+      "demand": {
+        "score": 0,
+        "confidence": "SCĂZUTĂ",
+        "checks": 0,
+        "foreignPresence": 0,
+        "socialPresence": 0,
+        "reviewSources": 0,
+        "trendSignals": 0
+      },
+      "marketGap": {
+        "score": 45,
+        "label": "DATE INSUFICIENTE",
+        "evidenceReady": false,
+        "checks": 0,
+        "foreignPresence": 0,
+        "foreignResults": 0,
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competition": {
+        "pressure": 0,
+        "label": "REDUSĂ",
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competitors": {
+        "saturationScore": 0,
+        "label": "NEVALIDATĂ",
+        "evidenceMarkets": 0,
+        "romania": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "resultProxy": 0,
+          "markets": [
+            {
+              "key": "emagRO",
+              "label": "eMAG RO",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20sunglasses%20magnetic%20visor%20holder"
+            }
+          ]
+        },
+        "foreign": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "markets": [
+            {
+              "key": "amazonUS",
+              "label": "Amazon US",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "amazonDE",
+              "label": "Amazon DE",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "amazonIT",
+              "label": "Amazon IT",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "amazonFR",
+              "label": "Amazon FR",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "allegroPL",
+              "label": "Allegro PL",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "trendyolTR",
+              "label": "Trendyol TR",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "etsy",
+              "label": "Etsy",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "temu",
+              "label": "Temu",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "aliexpress",
+              "label": "AliExpress",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "kickstarter",
+              "label": "Kickstarter",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            },
+            {
+              "key": "indiegogo",
+              "label": "Indiegogo",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20sunglasses%20magnetic%20visor%20holder"
+            }
+          ]
+        },
+        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
+      },
+      "evidenceCoverage": {
+        "checked": 0,
+        "present": 0,
+        "observedLinks": 0,
+        "coverageScore": 0,
+        "rows": [
+          {
+            "key": "amazonUS",
+            "label": "Amazon US",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonDE",
+            "label": "Amazon DE",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonIT",
+            "label": "Amazon IT",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonFR",
+            "label": "Amazon FR",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "allegroPL",
+            "label": "Allegro PL",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "trendyolTR",
+            "label": "Trendyol TR",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "etsy",
+            "label": "Etsy",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "temu",
+            "label": "Temu",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "aliexpress",
+            "label": "AliExpress",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "kickstarter",
+            "label": "Kickstarter",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "indiegogo",
+            "label": "Indiegogo",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "emagRO",
+            "label": "eMAG RO",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "alibabaCN",
+            "label": "Alibaba",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "1688CN",
+            "label": "1688",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "madeInChina",
+            "label": "Made-in-China",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "globalSources",
+            "label": "Global Sources",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "tiktok",
+            "label": "TikTok",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "facebook",
+            "label": "Meta/Facebook",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "pinterest",
+            "label": "Pinterest",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "youtube",
+            "label": "YouTube",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          }
+        ]
+      },
+      "sourcing": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "chinaResults": 0,
+        "requiresManualCommercialCheck": true,
+        "items": []
+      },
+      "reviews": {
+        "confidence": "INSUFFICIENT",
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "keywordDemand": {
+        "score": 9,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
+        "label": "Proxy cerere keyword",
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+      },
+      "launchScore": {
+        "score": 23.9,
+        "verdict": "RESPINGE / AȘTEAPTĂ",
+        "enoughEvidence": false,
+        "reviewEvidence": false,
+        "quality": "PARTIAL",
+        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
+      },
+      "sourceEvidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "sourcingLinks": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Car%20sunglasses%20magnetic%20visor%20holder",
+          "verified": false
+        }
+      ],
+      "rawOpportunityScore": 31,
+      "trendIntelligence": {
+        "status": "DECLINING",
+        "score": -21,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": -35
+        },
+        "signals": [],
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
+      },
+      "opportunityRanking": {
+        "score": 28.4,
+        "tier": "PRIORITATE MICĂ",
+        "reasons": [
+          "presiune concurențială RO redusă"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "acoperire redusă a surselor",
+          "preț/landed cost neverificat",
+          "competiția RO nu este suficient observată"
+        ],
+        "components": {
+          "demand": 0,
+          "marketGap": 9,
+          "lowCompetition": 12,
+          "sourcing": 0,
+          "economics": 4.4,
+          "evidence": 0,
+          "trend": 3
+        },
+        "evidenceReady": false,
+        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
+        "rank": 14
+      },
+      "marketGapV2": {
+        "score": 0,
+        "label": "DATE INSUFICIENTE",
+        "romaniaPressure": 0,
+        "externalMarketsChecked": 0,
+        "externalMarketsPresent": 0,
+        "markets": [
+          {
+            "market": "SUA",
+            "key": "amazonUS",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Germania",
+            "key": "amazonDE",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Polonia",
+            "key": "allegroPL",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Turcia",
+            "key": "trendyolTR",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "România",
+            "key": "emagRO",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          }
+        ],
+        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
+      },
+      "reviewIntelligenceV2": {
+        "confidence": "SCĂZUTĂ",
+        "coverageScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "improvementIdeas": [],
+        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
+      },
+      "chinaIntelligenceV2": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "domains": [],
+        "observedLinks": [
+          {
+            "market": "Alibaba",
+            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          },
+          {
+            "market": "1688",
+            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          },
+          {
+            "market": "Made-in-China",
+            "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          },
+          {
+            "market": "Global Sources",
+            "url": "https://www.globalsources.com/search?query=Car%20sunglasses%20magnetic%20visor%20holder",
+            "verified": false
+          }
+        ],
+        "risks": [
+          "fără sursă China observată",
+          "diversificare furnizori insuficientă",
+          "MOQ/preț/transport/conformitate necesită confirmare manuală"
+        ],
+        "commercialChecklist": [
+          "confirmă prețul real",
+          "confirmă MOQ",
+          "confirmă costul transportului",
+          "confirmă materialele și conformitatea",
+          "cere mostre înainte de comandă mare"
+        ],
+        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
+      },
+      "profitEngineV2": {
+        "confidence": "MEDIE",
+        "pricingVerified": false,
+        "derivedSalePrice": 89.2,
+        "derivedLandedCost": 80.1,
+        "maxLandedCostFor20Margin": 71.4,
+        "scenarios": {
+          "conservator": {
+            "salePrice": 84.8,
+            "landedCost": 88.1,
+            "profit": -3.4,
+            "margin": -4,
+            "roi": -3.8
+          },
+          "realist": {
+            "salePrice": 89.2,
+            "landedCost": 80.1,
+            "profit": 9.1,
+            "margin": 10.2,
+            "roi": 11.4
+          },
+          "optimist": {
+            "salePrice": 93.7,
+            "landedCost": 76.1,
+            "profit": 17.6,
+            "margin": 18.8,
+            "roi": 23.1
+          }
+        },
+        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
+      },
+      "xrayV2": {
+        "strengths": [
+          "presiune concurențială RO redusă"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "acoperire redusă a surselor",
+          "preț/landed cost neverificat",
+          "competiția RO nu este suficient observată",
+          "lipsește: dovezi comerciale suficiente",
+          "lipsește: preț și landed cost verificate",
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
+        ],
+        "nextCondition": "dovezi comerciale suficiente",
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.4 · Launch 23.9 · Trend DECLINING"
+      },
+      "dataConfidence": {
+        "overall": 25.7,
+        "level": "SCĂZUTĂ",
+        "dimensions": {
+          "market": 0,
+          "demand": 30,
+          "competition": 25,
+          "reviews": 0,
+          "sourcing": 0,
+          "pricing": 45,
+          "history": 80
+        },
+        "missing": [
+          "market",
+          "demand",
+          "competition",
+          "reviews",
+          "sourcing",
+          "pricing"
+        ]
+      },
+      "alerts": [],
+      "validationTasks": [
+        {
+          "key": "pricing",
+          "priority": 95,
+          "label": "Validează prețul și landed cost"
+        },
+        {
+          "key": "sourcing",
+          "priority": 90,
+          "label": "Găsește/validează sursa China"
+        },
+        {
+          "key": "competition",
+          "priority": 85,
+          "label": "Validează competiția din România"
+        },
+        {
+          "key": "evidence",
+          "priority": 80,
+          "label": "Completează dovezile comerciale"
+        },
+        {
+          "key": "reviews",
+          "priority": 75,
+          "label": "Adaugă review evidence"
+        }
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 80.1,
+        "targetSalePrice": 89.2,
+        "unitProfit": 9.1,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 25.7,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": false
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE",
+          "trendul nu este DECLINING"
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
@@ -10495,19 +9757,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Tăvi modulare pentru organizarea sertarului de birou",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.2,
@@ -10534,8 +9787,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -10550,7 +9803,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 26.9,
+        "score": 28.2,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -10568,11 +9821,11 @@
           "sourcing": 0,
           "economics": 3.4,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 16
+        "rank": 15
       },
       "marketGapV2": {
         "score": 0,
@@ -10702,22 +9955,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.9 · Launch 22.2 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.2 · Launch 22.2 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -10765,7 +10019,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -11156,19 +10410,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Raft de colț pentru duș autoadeziv fără găurire",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.1,
@@ -11205,8 +10450,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -11221,7 +10466,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 26.8,
+        "score": 28.1,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -11239,11 +10484,11 @@
           "sourcing": 0,
           "economics": 3.3,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
-        "rank": 17
+        "rank": 16
       },
       "marketGapV2": {
         "score": 0,
@@ -11391,22 +10636,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.8 · Launch 22.1 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.1 · Launch 22.1 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -11454,7 +10700,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -11473,6 +10719,688 @@
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
+        ],
+        "nextAction": "cerere România verificată",
+        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+      }
+    },
+    {
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
+      "imageUrl": "",
+      "imageSourceUrl": "",
+      "sourceStatus": "PARTIAL",
+      "suggestedStage": "REJECT",
+      "checkedAt": "2026-08-17T22:04:12.474Z",
+      "economics": {
+        "score": 26.8,
+        "margin": 8.8,
+        "roi": 19.6,
+        "profit": 10.5,
+        "pricingVerified": false,
+        "pricingStatus": "SEED_ESTIMATE"
+      },
+      "demand": {
+        "score": 0,
+        "confidence": "SCĂZUTĂ",
+        "checks": 0,
+        "foreignPresence": 0,
+        "socialPresence": 0,
+        "reviewSources": 0,
+        "trendSignals": 0
+      },
+      "marketGap": {
+        "score": 45,
+        "label": "DATE INSUFICIENTE",
+        "evidenceReady": false,
+        "checks": 0,
+        "foreignPresence": 0,
+        "foreignResults": 0,
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competition": {
+        "pressure": 0,
+        "label": "REDUSĂ",
+        "romaniaPresence": 0,
+        "romaniaResults": 0
+      },
+      "competitors": {
+        "saturationScore": 0,
+        "label": "NEVALIDATĂ",
+        "evidenceMarkets": 0,
+        "romania": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "resultProxy": 0,
+          "markets": [
+            {
+              "key": "emagRO",
+              "label": "eMAG RO",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aemag.ro%20Car%20trunk%20side%20storage%20net"
+            }
+          ]
+        },
+        "foreign": {
+          "domains": [],
+          "domainCount": 0,
+          "observedLinks": 0,
+          "markets": [
+            {
+              "key": "amazonUS",
+              "label": "Amazon US",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "amazonDE",
+              "label": "Amazon DE",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.de%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "amazonIT",
+              "label": "Amazon IT",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.it%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "amazonFR",
+              "label": "Amazon FR",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aamazon.fr%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "allegroPL",
+              "label": "Allegro PL",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aallegro.pl%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "trendyolTR",
+              "label": "Trendyol TR",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atrendyol.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "etsy",
+              "label": "Etsy",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aetsy.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "temu",
+              "label": "Temu",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Atemu.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "aliexpress",
+              "label": "AliExpress",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aaliexpress.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "kickstarter",
+              "label": "Kickstarter",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Akickstarter.com%20Car%20trunk%20side%20storage%20net"
+            },
+            {
+              "key": "indiegogo",
+              "label": "Indiegogo",
+              "ok": false,
+              "present": false,
+              "resultCount": 0,
+              "observedLinks": 0,
+              "domains": [],
+              "searchUrl": "https://html.duckduckgo.com/html/?q=site%3Aindiegogo.com%20Car%20trunk%20side%20storage%20net"
+            }
+          ]
+        },
+        "policy": "Domeniile și linkurile provin doar din rezultate observate de scanner. Nu reprezintă număr verificat de selleri, cotă de piață sau vânzări."
+      },
+      "evidenceCoverage": {
+        "checked": 0,
+        "present": 0,
+        "observedLinks": 0,
+        "coverageScore": 0,
+        "rows": [
+          {
+            "key": "amazonUS",
+            "label": "Amazon US",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonDE",
+            "label": "Amazon DE",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonIT",
+            "label": "Amazon IT",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "amazonFR",
+            "label": "Amazon FR",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "allegroPL",
+            "label": "Allegro PL",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "trendyolTR",
+            "label": "Trendyol TR",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "etsy",
+            "label": "Etsy",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "temu",
+            "label": "Temu",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "aliexpress",
+            "label": "AliExpress",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "kickstarter",
+            "label": "Kickstarter",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "indiegogo",
+            "label": "Indiegogo",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "emagRO",
+            "label": "eMAG RO",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "alibabaCN",
+            "label": "Alibaba",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "1688CN",
+            "label": "1688",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "madeInChina",
+            "label": "Made-in-China",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "globalSources",
+            "label": "Global Sources",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "tiktok",
+            "label": "TikTok",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "facebook",
+            "label": "Meta/Facebook",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "pinterest",
+            "label": "Pinterest",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          },
+          {
+            "key": "youtube",
+            "label": "YouTube",
+            "ok": false,
+            "present": false,
+            "resultCount": 0,
+            "observedLinks": 0
+          }
+        ]
+      },
+      "sourcing": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "chinaResults": 0,
+        "requiresManualCommercialCheck": true,
+        "items": []
+      },
+      "reviews": {
+        "confidence": "INSUFFICIENT",
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "validation": "Review intelligence is derived from review-search result snippets/links, not a verified review count or full review corpus."
+      },
+      "keywordDemand": {
+        "score": 9,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
+        "label": "Proxy cerere keyword",
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
+      },
+      "launchScore": {
+        "score": 23.2,
+        "verdict": "RESPINGE / AȘTEAPTĂ",
+        "enoughEvidence": false,
+        "reviewEvidence": false,
+        "quality": "PARTIAL",
+        "note": "Launch Score este un strat de prioritizare și nu modifică pragurile comerciale existente TEST/CUMPĂRĂ."
+      },
+      "sourceEvidence": "0 piețe externe • 0 early-signal • 0 sourcing China • 0 semnal RO • 0 social • 0 review-search. Proxy web, nu volum de vânzări.",
+      "sourcingLinks": [
+        {
+          "market": "Alibaba",
+          "url": "https://www.alibaba.com/trade/search?SearchText=Car%20trunk%20side%20storage%20net",
+          "verified": false
+        },
+        {
+          "market": "1688",
+          "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20trunk%20side%20storage%20net",
+          "verified": false
+        },
+        {
+          "market": "Made-in-China",
+          "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20trunk%20side%20storage%20net",
+          "verified": false
+        },
+        {
+          "market": "Global Sources",
+          "url": "https://www.globalsources.com/search?query=Car%20trunk%20side%20storage%20net",
+          "verified": false
+        }
+      ],
+      "rawOpportunityScore": 30,
+      "trendIntelligence": {
+        "status": "DECLINING",
+        "score": -21,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
+        "deltaLaunch": 0,
+        "deltaDemand": 0,
+        "slopes": {
+          "launch": 0,
+          "demand": 0,
+          "marketGap": 0,
+          "competition": 0,
+          "sourcing": 0,
+          "evidence": -35
+        },
+        "signals": [],
+        "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
+      },
+      "opportunityRanking": {
+        "score": 28,
+        "tier": "PRIORITATE MICĂ",
+        "reasons": [
+          "presiune concurențială RO redusă"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "acoperire redusă a surselor",
+          "preț/landed cost neverificat",
+          "competiția RO nu este suficient observată"
+        ],
+        "components": {
+          "demand": 0,
+          "marketGap": 9,
+          "lowCompetition": 12,
+          "sourcing": 0,
+          "economics": 4,
+          "evidence": 0,
+          "trend": 3
+        },
+        "evidenceReady": false,
+        "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
+        "rank": 17
+      },
+      "marketGapV2": {
+        "score": 0,
+        "label": "DATE INSUFICIENTE",
+        "romaniaPressure": 0,
+        "externalMarketsChecked": 0,
+        "externalMarketsPresent": 0,
+        "markets": [
+          {
+            "market": "SUA",
+            "key": "amazonUS",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Germania",
+            "key": "amazonDE",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Polonia",
+            "key": "allegroPL",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "Turcia",
+            "key": "trendyolTR",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          },
+          {
+            "market": "România",
+            "key": "emagRO",
+            "checked": false,
+            "present": false,
+            "resultProxy": 0,
+            "observedLinks": 0
+          }
+        ],
+        "policy": "Market Gap V2 folosește doar prezență, rezultate-proxy și linkuri observate; nu estimează vânzări sau cotă de piață."
+      },
+      "reviewIntelligenceV2": {
+        "confidence": "SCĂZUTĂ",
+        "coverageScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "improvementIdeas": [],
+        "policy": "Temele provin exclusiv din review evidence deja colectat. Nu sunt generate ca feedback real dacă nu există dovezi."
+      },
+      "chinaIntelligenceV2": {
+        "score": 0,
+        "readiness": "NONE",
+        "sources": 0,
+        "domains": [],
+        "observedLinks": [
+          {
+            "market": "Alibaba",
+            "url": "https://www.alibaba.com/trade/search?SearchText=Car%20trunk%20side%20storage%20net",
+            "verified": false
+          },
+          {
+            "market": "1688",
+            "url": "https://s.1688.com/selloffer/offer_search.htm?keywords=Car%20trunk%20side%20storage%20net",
+            "verified": false
+          },
+          {
+            "market": "Made-in-China",
+            "url": "https://www.made-in-china.com/productdirectory.do?word=Car%20trunk%20side%20storage%20net",
+            "verified": false
+          },
+          {
+            "market": "Global Sources",
+            "url": "https://www.globalsources.com/search?query=Car%20trunk%20side%20storage%20net",
+            "verified": false
+          }
+        ],
+        "risks": [
+          "fără sursă China observată",
+          "diversificare furnizori insuficientă",
+          "MOQ/preț/transport/conformitate necesită confirmare manuală"
+        ],
+        "commercialChecklist": [
+          "confirmă prețul real",
+          "confirmă MOQ",
+          "confirmă costul transportului",
+          "confirmă materialele și conformitatea",
+          "cere mostre înainte de comandă mare"
+        ],
+        "policy": "China Intelligence V2 clasifică doar sursele observate și readiness-ul existent; nu declară furnizor verificat fără confirmare comercială."
+      },
+      "profitEngineV2": {
+        "confidence": "MEDIE",
+        "pricingVerified": false,
+        "derivedSalePrice": 119.3,
+        "derivedLandedCost": 108.8,
+        "maxLandedCostFor20Margin": 95.5,
+        "scenarios": {
+          "conservator": {
+            "salePrice": 113.4,
+            "landedCost": 119.7,
+            "profit": -6.3,
+            "margin": -5.6,
+            "roi": -5.3
+          },
+          "realist": {
+            "salePrice": 119.3,
+            "landedCost": 108.8,
+            "profit": 10.5,
+            "margin": 8.8,
+            "roi": 9.6
+          },
+          "optimist": {
+            "salePrice": 125.3,
+            "landedCost": 103.4,
+            "profit": 21.9,
+            "margin": 17.5,
+            "roi": 21.2
+          }
+        },
+        "policy": "Scenariile sunt derivate matematic din economia curentă și sunt orientative. Dacă pricingVerified=false, nu reprezintă prețuri comerciale confirmate."
+      },
+      "xrayV2": {
+        "strengths": [
+          "presiune concurențială RO redusă"
+        ],
+        "blockers": [
+          "dovezi comerciale insuficiente",
+          "acoperire redusă a surselor",
+          "preț/landed cost neverificat",
+          "competiția RO nu este suficient observată",
+          "lipsește: dovezi comerciale suficiente",
+          "lipsește: preț și landed cost verificate",
+          "lipsește: competiție RO observată",
+          "lipsește: review evidence"
+        ],
+        "nextCondition": "dovezi comerciale suficiente",
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28 · Launch 23.2 · Trend DECLINING"
+      },
+      "dataConfidence": {
+        "overall": 25.7,
+        "level": "SCĂZUTĂ",
+        "dimensions": {
+          "market": 0,
+          "demand": 30,
+          "competition": 25,
+          "reviews": 0,
+          "sourcing": 0,
+          "pricing": 45,
+          "history": 80
+        },
+        "missing": [
+          "market",
+          "demand",
+          "competition",
+          "reviews",
+          "sourcing",
+          "pricing"
+        ]
+      },
+      "alerts": [],
+      "validationTasks": [
+        {
+          "key": "pricing",
+          "priority": 95,
+          "label": "Validează prețul și landed cost"
+        },
+        {
+          "key": "sourcing",
+          "priority": 90,
+          "label": "Găsește/validează sursa China"
+        },
+        {
+          "key": "competition",
+          "priority": 85,
+          "label": "Validează competiția din România"
+        },
+        {
+          "key": "evidence",
+          "priority": 80,
+          "label": "Completează dovezile comerciale"
+        },
+        {
+          "key": "reviews",
+          "priority": 75,
+          "label": "Adaugă review evidence"
+        }
+      ],
+      "testBuyDecision": {
+        "version": "1.0",
+        "status": "HOLD",
+        "verdict": "NU TESTA ÎNCĂ",
+        "quantity": 0,
+        "unitLandedCost": 108.8,
+        "targetSalePrice": 119.3,
+        "unitProfit": 10.5,
+        "testBudget": 0,
+        "expectedRevenue": 0,
+        "expectedGrossProfit": 0,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 25.7,
+        "gates": {
+          "demandVerified": false,
+          "pricingVerified": false,
+          "supplierReady": false,
+          "reviewEvidence": false,
+          "marketEvidence": false,
+          "economicsHealthy": false,
+          "confidenceReady": false,
+          "trendSafe": false
+        },
+        "blockers": [
+          "cerere România verificată",
+          "preț de vânzare și landed cost verificate",
+          "furnizor + MOQ/preț/transport confirmate comercial",
+          "review evidence suficient",
+          "dovezi piață și competiție suficiente",
+          "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
+          "Data Confidence minimum MEDIE",
+          "trendul nu este DECLINING"
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
@@ -11677,19 +11605,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Volum și competiție Google Ads pentru România prin DataForSEO. Aceste date nu modifică automat verdictul TEST/CUMPĂRĂ până la calibrarea motorului.",
-        "keyword": "Set protecții pentru portiere auto pentru câini",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-17T16:11:35.086Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22,
@@ -11716,8 +11635,8 @@
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
-        "confidence": "SCĂZUTĂ",
-        "sampleCount": 2,
+        "confidence": "MEDIE",
+        "sampleCount": 3,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -11732,7 +11651,7 @@
         "note": "Trend calculat exclusiv din istoricul intern al Radarului; nu reprezintă volum de vânzări."
       },
       "opportunityRanking": {
-        "score": 26.7,
+        "score": 28,
         "tier": "PRIORITATE MICĂ",
         "reasons": [
           "presiune concurențială RO redusă"
@@ -11750,7 +11669,7 @@
           "sourcing": 0,
           "economics": 3.2,
           "evidence": 0,
-          "trend": 2.5
+          "trend": 3.8
         },
         "evidenceReady": false,
         "policy": "Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.",
@@ -11884,22 +11803,23 @@
           "lipsește: review evidence"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 26.7 · Launch 22 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28 · Launch 22 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 31.4,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
           "pricing": 45,
-          "history": 60
+          "history": 80
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -11947,7 +11867,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 31.4,
+        "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
@@ -13334,7 +13254,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:03:10.805Z",
+      "checkedAt": "2026-08-17T22:04:26.635Z",
       "economics": {
         "score": 19.6,
         "margin": 6.8,
@@ -16046,7 +15966,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:03:24.967Z",
+      "checkedAt": "2026-08-17T22:04:40.794Z",
       "economics": {
         "score": 18.4,
         "margin": 6.7,
@@ -16724,7 +16644,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:02:28.324Z",
+      "checkedAt": "2026-08-17T22:03:44.148Z",
       "economics": {
         "score": 17.6,
         "margin": 5.4,
@@ -19240,7 +19160,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:03:53.289Z",
+      "checkedAt": "2026-08-17T22:05:09.114Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -21274,7 +21194,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-17T16:03:39.127Z",
+      "checkedAt": "2026-08-17T22:04:54.953Z",
       "economics": {
         "score": 16.4,
         "margin": 5.9,
@@ -27834,7 +27754,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-17T16:11:35.346Z",
+    "updatedAt": "2026-08-17T22:11:52.901Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -27849,7 +27769,7 @@
   },
   "testBuyEngine": {
     "version": "1.0",
-    "updatedAt": "2026-08-17T16:11:35.411Z",
+    "updatedAt": "2026-08-17T22:11:52.969Z",
     "readyProducts": 0,
     "policy": "Loturile de test sunt limitate la 20–30 bucăți și necesită toate gate-urile comerciale."
   }

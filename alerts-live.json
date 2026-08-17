@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-17T16:11:35.357Z",
+  "updatedAt": "2026-08-17T22:11:52.912Z",
   "policy": "Alertele prioritizează atenția; nu reprezintă recomandare de cumpărare.",
   "stats": {
     "products": 10,
@@ -12,7 +12,7 @@
       "cat": "Birou",
       "imageUrl": "",
       "rank": 1,
-      "opportunityScore": 35.6,
+      "opportunityScore": 36.5,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -33,13 +33,18 @@
       "cat": "Auto",
       "imageUrl": "",
       "rank": 2,
-      "opportunityScore": 33.7,
+      "opportunityScore": 35.7,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 2"
+        },
+        {
+          "type": "ACCELERATING",
+          "severity": "HIGH",
+          "message": "Trendul intern accelerează"
         }
       ],
       "confidence": "SCĂZUTĂ"
