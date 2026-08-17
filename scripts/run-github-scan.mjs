@@ -33,11 +33,22 @@ try {
     premiumUI: await exists('premium-ui.css')
   };
   const configuredMarkets=Array.isArray(organicConfig.markets)?organicConfig.markets:[];
-  const requiredMarketKeys=configuredMarkets.filter(m=>m.requiredForOperational!==false).map(m=>m.key);
   const marketStatus=organic.marketStatus||{};
-  const requiredCoverage=requiredMarketKeys.length>0&&requiredMarketKeys.every(k=>Number(marketStatus[k]?.successful||0)>=2&&Number(marketStatus[k]?.items||0)>0);
+  const op=organicConfig.operationalPolicy||{};
+  const minSuccessfulPagesTotal=Number(op.minSuccessfulPagesTotal||4);
+  const minForeignMarkets=Number(op.minForeignMarkets||1);
+  const minSuccessfulPagesPerForeignMarket=Number(op.minSuccessfulPagesPerForeignMarket||1);
+  const minRomaniaSuccessfulPages=Number(op.minRomaniaSuccessfulPages||2);
+  const requireRomaniaItems=op.requireRomaniaItems!==false;
+  const foreignMarkets=configuredMarkets.filter(m=>m.kind==='foreign');
+  const romaniaMarkets=configuredMarkets.filter(m=>m.kind==='romania');
+  const healthyForeign=foreignMarkets.filter(m=>Number(marketStatus[m.key]?.successful||0)>=minSuccessfulPagesPerForeignMarket&&Number(marketStatus[m.key]?.items||0)>0);
+  const healthyRomania=romaniaMarkets.filter(m=>Number(marketStatus[m.key]?.successful||0)>=minRomaniaSuccessfulPages&&(!requireRomaniaItems||Number(marketStatus[m.key]?.items||0)>0));
+  const foreignCoverage=healthyForeign.length>=minForeignMarkets;
+  const romaniaCoverage=romaniaMarkets.length===0||healthyRomania.length>0;
+  const requiredCoverage=foreignCoverage&&romaniaCoverage;
   const qualityReady=organic.qualityPostprocess?.exactListingReviewGate===true&&organic.qualityPostprocess?.missingReviewIsNotZero===true&&organic.qualityPostprocess?.categoryRelevanceGate===true&&organic.qualityPostprocess?.imagePlaceholderFilter===true;
-  const organicOperational=Number(organic.successfulPages||0)>=4&&Number(organic.totalObserved||0)>0&&requiredCoverage&&qualityReady;
+  const organicOperational=Number(organic.successfulPages||0)>=minSuccessfulPagesTotal&&Number(organic.totalObserved||0)>0&&requiredCoverage&&qualityReady;
   const moduleValues=Object.values(modules);
   const v2Ready=moduleValues.length>0&&moduleValues.every(Boolean)&&organicOperational;
   const status = {
@@ -78,8 +89,12 @@ try {
       feedThreshold: Number(organic.feedThreshold || 0),
       operational: organicOperational,
       qualityReady,
-      requiredMarkets: requiredMarketKeys,
       requiredCoverage,
+      foreignCoverage,
+      romaniaCoverage,
+      healthyForeignMarkets: healthyForeign.map(m=>m.key),
+      healthyRomaniaMarkets: healthyRomania.map(m=>m.key),
+      operationalPolicy:{minSuccessfulPagesTotal,minForeignMarkets,minSuccessfulPagesPerForeignMarket,minRomaniaSuccessfulPages,requireRomaniaItems},
       marketStatus,
       reviewEnrichment: organic.reviewEnrichment || null,
       qualityPostprocess: organic.qualityPostprocess || null,

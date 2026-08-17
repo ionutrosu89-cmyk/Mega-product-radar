@@ -1,10 +1,17 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "maxReviews": 10,
   "maxOrganicPage": 2,
   "maxObservedSellers": 8,
   "maxProductsPerMarketQuery": 60,
   "minScoreForFeed": 55,
+  "operationalPolicy": {
+    "minSuccessfulPagesTotal": 4,
+    "minForeignMarkets": 1,
+    "minSuccessfulPagesPerForeignMarket": 1,
+    "minRomaniaSuccessfulPages": 2,
+    "requireRomaniaItems": true
+  },
   "categories": [
     {"name":"Casă & organizare","queries":["home problem solver","space saving home","smart home organizer"]},
     {"name":"Bucătărie","queries":["kitchen problem solver","kitchen gadget new","food storage innovation"]},
@@ -17,7 +24,7 @@
     {"name":"Fitness & recuperare","queries":["fitness accessory new","recovery accessory new","home workout gadget"]}
   ],
   "markets": [
-    {"key":"amazonUS","label":"Amazon US","kind":"foreign","requiredForOperational":true,"base":"https://www.amazon.com/s?k="},
+    {"key":"amazonUS","label":"Amazon US","kind":"foreign","requiredForOperational":false,"base":"https://www.amazon.com/s?k="},
     {"key":"amazonIT","label":"Amazon IT","kind":"foreign","requiredForOperational":false,"base":"https://www.amazon.it/s?k="},
     {"key":"amazonDE","label":"Amazon DE","kind":"foreign","requiredForOperational":false,"base":"https://www.amazon.de/s?k="},
     {"key":"ebayUS","label":"eBay US","kind":"foreign","requiredForOperational":false,"base":"https://www.ebay.com/sch/i.html?_nkw="},
