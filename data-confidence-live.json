@@ -1,176 +1,53 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-17T22:11:52.913Z",
+  "updatedAt": "2026-08-18T17:45:24.204Z",
   "policy": "Data Confidence măsoară completitudinea dovezilor, nu probabilitatea de succes.",
   "stats": {
-    "total": 42,
+    "total": 45,
     "levels": {
       "RIDICATĂ": 0,
       "MEDIE": 0,
-      "SCĂZUTĂ": 42
+      "SCĂZUTĂ": 45
     }
   },
   "dimensionAverages": {
-    "market": 16.7,
+    "market": 0,
     "demand": 30,
-    "competition": 35.7,
+    "competition": 25,
     "reviews": 0,
     "sourcing": 0,
     "pricing": 44.4,
-    "history": 38.1
+    "history": 37.2
   },
   "missingCounts": {
-    "market": 32,
-    "demand": 42,
-    "competition": 32,
-    "reviews": 42,
-    "sourcing": 42,
-    "pricing": 42,
-    "history": 32
+    "market": 45,
+    "demand": 45,
+    "competition": 45,
+    "reviews": 45,
+    "sourcing": 45,
+    "pricing": 45,
+    "history": 35
   },
   "products": [
     {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "rank": 1,
-      "score": 42.1,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
+        "market",
         "demand",
+        "competition",
         "reviews",
         "sourcing",
         "pricing"
-      ]
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "rank": 2,
-      "score": 42.1,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Pan lid organizer adjustable rack",
-      "cat": "Bucătărie",
-      "rank": 3,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Reusable food bag drying rack",
-      "cat": "Bucătărie",
-      "rank": 4,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Oil spray bottle glass free plastic",
-      "cat": "Bucătărie",
-      "rank": 5,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Sofa arm tray organizer",
-      "cat": "Casă",
-      "rank": 6,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Wardrobe handbag hanging organizer",
-      "cat": "Organizare garderobă",
-      "rank": 7,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Sink splash guard silicone mat",
-      "cat": "Bucătărie",
-      "rank": 8,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Resistance band door organizer pouch",
-      "cat": "Sport & hobby",
-      "rank": 9,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Board game card holder hands free",
-      "cat": "Sport & hobby",
-      "rank": 10,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "demand",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
       ]
     },
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
-      "rank": 11,
+      "rank": 2,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -185,7 +62,22 @@
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
-      "rank": 12,
+      "rank": 3,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "rank": 4,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -200,7 +92,7 @@
     {
       "name": "Shoe washing laundry bag structured",
       "cat": "Laundry",
-      "rank": 13,
+      "rank": 5,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -215,7 +107,7 @@
     {
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
-      "rank": 14,
+      "rank": 6,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -230,7 +122,7 @@
     {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
-      "rank": 15,
+      "rank": 7,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -245,7 +137,7 @@
     {
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
-      "rank": 16,
+      "rank": 8,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -260,7 +152,7 @@
     {
       "name": "Car trunk side storage net",
       "cat": "Auto",
-      "rank": 17,
+      "rank": 9,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -275,7 +167,7 @@
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
-      "rank": 18,
+      "rank": 10,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -288,9 +180,41 @@
       ]
     },
     {
+      "name": "Pan lid organizer adjustable rack",
+      "cat": "Bucătărie",
+      "rank": 11,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
       "name": "Puzzle sorting trays stackable",
       "cat": "Sport & hobby",
-      "rank": 19,
+      "rank": 12,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Reusable food bag drying rack",
+      "cat": "Bucătărie",
+      "rank": 13,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -306,7 +230,7 @@
     {
       "name": "Toothbrush wall organizer cover",
       "cat": "Baie",
-      "rank": 20,
+      "rank": 14,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -322,7 +246,7 @@
     {
       "name": "Cat litter scoop holder closed",
       "cat": "Pet",
-      "rank": 21,
+      "rank": 15,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -338,7 +262,23 @@
     {
       "name": "Bedside phone holder clamp",
       "cat": "Casă",
-      "rank": 22,
+      "rank": 16,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Oil spray bottle glass free plastic",
+      "cat": "Bucătărie",
+      "rank": 17,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -354,7 +294,7 @@
     {
       "name": "Travel luggage cup holder sleeve",
       "cat": "Travel",
-      "rank": 23,
+      "rank": 18,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -370,7 +310,7 @@
     {
       "name": "Sports medal display hanger wall",
       "cat": "Sport & hobby",
-      "rank": 24,
+      "rank": 19,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -386,7 +326,7 @@
     {
       "name": "Clip on pot strainer silicone",
       "cat": "Bucătărie",
-      "rank": 25,
+      "rank": 20,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -402,7 +342,7 @@
     {
       "name": "Car seat back foldable tray organizer",
       "cat": "Auto",
-      "rank": 26,
+      "rank": 21,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -418,7 +358,39 @@
     {
       "name": "Pet toy storage basket foldable",
       "cat": "Pet",
-      "rank": 27,
+      "rank": 22,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Sofa arm tray organizer",
+      "cat": "Casă",
+      "rank": 23,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Wardrobe handbag hanging organizer",
+      "cat": "Organizare garderobă",
+      "rank": 24,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -434,7 +406,7 @@
     {
       "name": "Yoga mat wall storage rack",
       "cat": "Sport & hobby",
-      "rank": 28,
+      "rank": 25,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -450,7 +422,7 @@
     {
       "name": "Dog leash wall organizer station",
       "cat": "Pet",
-      "rank": 29,
+      "rank": 26,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -466,7 +438,7 @@
     {
       "name": "Closet shelf hanging basket",
       "cat": "Organizare garderobă",
-      "rank": 30,
+      "rank": 27,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -482,7 +454,7 @@
     {
       "name": "Airplane seat pocket organizer pouch",
       "cat": "Travel",
-      "rank": 31,
+      "rank": 28,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -498,7 +470,23 @@
     {
       "name": "Rotating bathroom organizer turntable",
       "cat": "Baie",
-      "rank": 32,
+      "rank": 29,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Dryer lint bin magnetic wall",
+      "cat": "Laundry",
+      "rank": 30,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -514,7 +502,55 @@
     {
       "name": "Closet belt hanger rotating",
       "cat": "Organizare garderobă",
+      "rank": 31,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Sink splash guard silicone mat",
+      "cat": "Bucătărie",
+      "rank": 32,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Foldable laptop riser portable",
+      "cat": "Birou",
       "rank": 33,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Resistance band door organizer pouch",
+      "cat": "Sport & hobby",
+      "rank": 34,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -530,7 +566,23 @@
     {
       "name": "Stroller snack cup universal no electronics",
       "cat": "Kids 3–6 • Travel",
-      "rank": 34,
+      "rank": 35,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Drawer sock organizer honeycomb",
+      "cat": "Organizare garderobă",
+      "rank": 36,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -546,7 +598,7 @@
     {
       "name": "Cosmetic bag divider insert adjustable",
       "cat": "Beauty organizare",
-      "rank": 35,
+      "rank": 37,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -562,7 +614,23 @@
     {
       "name": "Travel cable organizer roll pouch",
       "cat": "Travel",
-      "rank": 36,
+      "rank": 38,
+      "score": 17.9,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing",
+        "history"
+      ]
+    },
+    {
+      "name": "Board game card holder hands free",
+      "cat": "Sport & hobby",
+      "rank": 39,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -578,7 +646,7 @@
     {
       "name": "Reusable lint remover storage case",
       "cat": "Laundry",
-      "rank": 37,
+      "rank": 40,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -594,7 +662,7 @@
     {
       "name": "Bed sheet corner holder straps premium",
       "cat": "Casă",
-      "rank": 38,
+      "rank": 41,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -610,7 +678,7 @@
     {
       "name": "Pet food scoop bag clip combo",
       "cat": "Pet",
-      "rank": 39,
+      "rank": 42,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -626,7 +694,7 @@
     {
       "name": "Balcony plant drip tray adjustable",
       "cat": "Grădină & balcon",
-      "rank": 40,
+      "rank": 43,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -642,7 +710,7 @@
     {
       "name": "Plant pot drainage mesh pad set",
       "cat": "Grădină & balcon",
-      "rank": 41,
+      "rank": 44,
       "score": 17.9,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -658,7 +726,7 @@
     {
       "name": "Plant support clips reusable set",
       "cat": "Grădină & balcon",
-      "rank": 42,
+      "rank": 45,
       "score": 14.3,
       "level": "SCĂZUTĂ",
       "missing": [
