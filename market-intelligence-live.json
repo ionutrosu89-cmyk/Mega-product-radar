@@ -1,7 +1,7 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-18T17:50:52.270Z",
+  "updatedAt": "2026-08-18T18:41:05.885Z",
   "sourceUpdatedAt": "2026-08-18T17:50:45.544Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc dovezi existente. Evidence Coverage nu acordă puncte pentru simple verificări fără rezultate; checkCoverage rămâne metrică tehnică separată. Volumele, sellerii și vânzările nu sunt inventate.",
@@ -459,11 +459,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 1,
-        "score": 19.4,
+        "score": 28.4,
         "paidDataEligible": true,
         "paidDataPriority": 1,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -723,14 +723,31 @@
       "commercialHardening": {
         "version": "1.0",
         "pricing": {
-          "verified": false,
-          "status": "MISSING",
-          "offerCount": 0,
-          "domainCount": 0,
-          "minPriceRon": null,
-          "medianPriceRon": 88.3,
-          "maxPriceRon": null,
-          "offers": [],
+          "verified": true,
+          "status": "VERIFIED",
+          "offerCount": 2,
+          "domainCount": 2,
+          "minPriceRon": 58.99,
+          "medianPriceRon": 92.72,
+          "maxPriceRon": 92.72,
+          "offers": [
+            {
+              "source": "eMAG.ro",
+              "priceRon": 58.99,
+              "url": "https://www.emag.ro/suport-pentru-casti-gaming-cu-clema-reglabila-headset-stacker-1-prindere-birou-pliabil-instalare-pe-verticala-sau-orizontal-loc-mufa-jack-protectie-silicon-compact-negru-zyt011/pd/D5PXSPYBM/",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Comparable under-desk/desk-clamp headphone hanger observed in stock."
+            },
+            {
+              "source": "LittleDomi.ro",
+              "priceRon": 92.72,
+              "url": "https://www.littledomi.ro/produse-2/suport-carlig-pentu-casti-gaming-cu-clema-reglabila-littledomi-compatibil-cu-casti-shure-akg-panasonic-avantree-sennheiser-sony-audio-technica-bose-prindere-birou-pliabil-instalare-pe-vertical-orizont.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Comparable clamp-mounted foldable headphone hanger observed in stock."
+            }
+          ],
           "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
         },
         "competitorSales": {
@@ -746,20 +763,53 @@
         },
         "supplierCommercial": {
           "verified": false,
-          "status": "MISSING",
-          "quoteCount": 0,
+          "status": "QUOTE_PARTIAL",
+          "quoteCount": 1,
           "completeQuoteCount": 0,
           "bestQuote": null,
-          "quotes": [],
+          "quotes": [
+            {
+              "supplier": "Shenzhen Yaika Electronic CO., Ltd.",
+              "platform": "Alibaba",
+              "unitPrice": 0.5,
+              "currency": "USD",
+              "moq": 20,
+              "sourceUrl": "https://www.alibaba.com/wholesale/headset-stand-clamp.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "note": "Public listing range starts at USD 0.50; shipping, sample cost and lead time not fully confirmed."
+            }
+          ],
           "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
         },
         "reviewEvidence": {
-          "verified": false,
-          "status": "MISSING",
-          "sourceCount": 0,
-          "snippetCount": 0,
-          "negativeThemes": [],
-          "manualEvidence": [],
+          "verified": true,
+          "status": "EVIDENCE_READY",
+          "sourceCount": 1,
+          "snippetCount": 2,
+          "negativeThemes": [
+            "robustness",
+            "desk grip"
+          ],
+          "manualEvidence": [
+            {
+              "source": "Skroutz.ro",
+              "url": "https://www.skroutz.ro/s/62903964/suport-casti-birou-neagra.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "text": "Comparable clamp headphone holder review reports that the product could feel more robust.",
+              "negativeThemes": [
+                "robustness"
+              ]
+            },
+            {
+              "source": "Skroutz.ro",
+              "url": "https://www.skroutz.ro/s/62903964/suport-casti-birou-neagra.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "text": "Comparable clamp headphone holder review reports some slipping at the desk contact point.",
+              "negativeThemes": [
+                "desk grip"
+              ]
+            }
+          ],
           "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
         },
         "feedback": {
@@ -769,12 +819,12 @@
           "latest": null
         },
         "gates": {
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
-          "reviewVerified": false
+          "reviewVerified": true
         },
-        "readiness": 0
+        "readiness": 50
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -792,10 +842,10 @@
         "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
-          "reviewVerified": false,
+          "reviewVerified": true,
           "marketEvidence": false,
           "economicsHealthy": false,
           "confidenceReady": false,
@@ -803,10 +853,8 @@
         },
         "blockers": [
           "cerere România verificată",
-          "pricing România verificat",
           "dovadă de vânzare/velocity verificată",
           "ofertă furnizor completă și verificată",
-          "review evidence verificat",
           "market evidence concret suficient",
           "marjă ≥20%, ROI ≥45%, profit pozitiv",
           "Data Confidence ≥50"
@@ -815,7 +863,7 @@
         "policy": "TEST requires all verified commercial gates. BUY additionally requires a completed real test with healthy sell-through, actual margin and unit profit. Proxies cannot satisfy verified gates.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 1,
+        "passedGates": 3,
         "buyGate": {
           "completedRealTest": false,
           "sellThroughPct": null,
@@ -823,7 +871,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 11.1
+        "commercialReadiness": 33.3
       }
     },
     {
@@ -1240,11 +1288,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 4,
-        "score": 16.9,
+        "score": 21.4,
         "paidDataEligible": true,
         "paidDataPriority": 4,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -1495,14 +1543,31 @@
       "commercialHardening": {
         "version": "1.0",
         "pricing": {
-          "verified": false,
-          "status": "MISSING",
-          "offerCount": 0,
-          "domainCount": 0,
-          "minPriceRon": null,
-          "medianPriceRon": 119.3,
-          "maxPriceRon": null,
-          "offers": [],
+          "verified": true,
+          "status": "VERIFIED",
+          "offerCount": 2,
+          "domainCount": 2,
+          "minPriceRon": 26.76,
+          "medianPriceRon": 56.9,
+          "maxPriceRon": 56.9,
+          "offers": [
+            {
+              "source": "eMAG.ro",
+              "priceRon": 26.76,
+              "url": "https://www.emag.ro/search/set%2Bde%2Bmutat%2Bmobila",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Four-piece furniture moving slider set observed in stock."
+            },
+            {
+              "source": "Pepita.com/ro",
+              "priceRon": 56.9,
+              "url": "https://pepita.com/ro/suport-picioare-mobila-de-protectie-a-podelei-c5515/set-de-alunecare-pentru-mutat-mobilier-p26354862",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Reusable heavy-duty furniture sliders for hard floors/carpets observed in stock."
+            }
+          ],
           "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
         },
         "competitorSales": {
@@ -1518,11 +1583,22 @@
         },
         "supplierCommercial": {
           "verified": false,
-          "status": "MISSING",
-          "quoteCount": 0,
+          "status": "QUOTE_PARTIAL",
+          "quoteCount": 1,
           "completeQuoteCount": 0,
           "bestQuote": null,
-          "quotes": [],
+          "quotes": [
+            {
+              "supplier": "Quankai Housewares (Xiamen) Co., Ltd.",
+              "platform": "Alibaba",
+              "unitPrice": 0.13,
+              "currency": "USD",
+              "moq": 50,
+              "sourceUrl": "https://www.alibaba.com/wholesale/furniture-slider-mover.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "note": "Public reusable furniture slider listing; shipping/sample/lead time incomplete."
+            }
+          ],
           "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
         },
         "reviewEvidence": {
@@ -1541,12 +1617,12 @@
           "latest": null
         },
         "gates": {
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 25
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -1564,7 +1640,7 @@
         "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false,
@@ -1575,7 +1651,6 @@
         },
         "blockers": [
           "cerere România verificată",
-          "pricing România verificat",
           "dovadă de vânzare/velocity verificată",
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
@@ -1587,7 +1662,7 @@
         "policy": "TEST requires all verified commercial gates. BUY additionally requires a completed real test with healthy sell-through, actual margin and unit profit. Proxies cannot satisfy verified gates.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 1,
+        "passedGates": 2,
         "buyGate": {
           "completedRealTest": false,
           "sellThroughPct": null,
@@ -1595,7 +1670,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 11.1
+        "commercialReadiness": 22.2
       }
     },
     {
@@ -2012,11 +2087,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 5,
-        "score": 16.8,
+        "score": 21.3,
         "paidDataEligible": true,
         "paidDataPriority": 5,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -2267,14 +2342,31 @@
       "commercialHardening": {
         "version": "1.0",
         "pricing": {
-          "verified": false,
-          "status": "MISSING",
-          "offerCount": 0,
-          "domainCount": 0,
-          "minPriceRon": null,
-          "medianPriceRon": 79.6,
-          "maxPriceRon": null,
-          "offers": [],
+          "verified": true,
+          "status": "VERIFIED",
+          "offerCount": 2,
+          "domainCount": 2,
+          "minPriceRon": 36,
+          "medianPriceRon": 49.99,
+          "maxPriceRon": 49.99,
+          "offers": [
+            {
+              "source": "RollFast.ro",
+              "priceRon": 36,
+              "url": "https://www.rollfast.ro/carlig-tetiera-scaun-auto-multifunctional-suport-telefon-reglabil-rotire-360-de-grade-greutate-suportata-10-kg-plastic-abs-11-x-10-x-5-cm-roll-fast-negru-set-2-bucati",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Two-piece multifunctional headrest hook/phone-holder set observed in stock."
+            },
+            {
+              "source": "Altex.ro",
+              "priceRon": 49.99,
+              "url": "https://altex.ro/organizatoare-si-suporti-auto/cpl/filtru/tip-produs-7810/carlig-tetiera/",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Same Roll Fast 22100R two-piece headrest-hook family observed in supplier stock."
+            }
+          ],
           "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
         },
         "competitorSales": {
@@ -2290,11 +2382,22 @@
         },
         "supplierCommercial": {
           "verified": false,
-          "status": "MISSING",
-          "quoteCount": 0,
+          "status": "QUOTE_PARTIAL",
+          "quoteCount": 1,
           "completeQuoteCount": 0,
           "bestQuote": null,
-          "quotes": [],
+          "quotes": [
+            {
+              "supplier": "Guangzhou Changdao Information Technology Co., Ltd.",
+              "platform": "Alibaba",
+              "unitPrice": 0.45,
+              "currency": "USD",
+              "moq": 10,
+              "sourceUrl": "https://www.alibaba.com/countrysearch/CN/car-hook.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "note": "Public hidden 2-in-1 headrest hook listing; shipping/sample/lead time incomplete."
+            }
+          ],
           "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
         },
         "reviewEvidence": {
@@ -2313,12 +2416,12 @@
           "latest": null
         },
         "gates": {
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 25
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -2336,7 +2439,7 @@
         "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false,
@@ -2347,7 +2450,6 @@
         },
         "blockers": [
           "cerere România verificată",
-          "pricing România verificat",
           "dovadă de vânzare/velocity verificată",
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
@@ -2359,7 +2461,7 @@
         "policy": "TEST requires all verified commercial gates. BUY additionally requires a completed real test with healthy sell-through, actual margin and unit profit. Proxies cannot satisfy verified gates.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 1,
+        "passedGates": 2,
         "buyGate": {
           "completedRealTest": false,
           "sellThroughPct": null,
@@ -2367,7 +2469,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 11.1
+        "commercialReadiness": 22.2
       }
     },
     {
@@ -2784,11 +2886,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 2,
-        "score": 19,
+        "score": 23.5,
         "paidDataEligible": true,
         "paidDataPriority": 2,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -3048,14 +3150,31 @@
       "commercialHardening": {
         "version": "1.0",
         "pricing": {
-          "verified": false,
-          "status": "MISSING",
-          "offerCount": 0,
-          "domainCount": 0,
-          "minPriceRon": null,
-          "medianPriceRon": 139.1,
-          "maxPriceRon": null,
-          "offers": [],
+          "verified": true,
+          "status": "VERIFIED",
+          "offerCount": 2,
+          "domainCount": 2,
+          "minPriceRon": 25.2,
+          "medianPriceRon": 39,
+          "maxPriceRon": 39,
+          "offers": [
+            {
+              "source": "Eurostoc.ro",
+              "priceRon": 25.2,
+              "url": "https://eurostoc.ro/suport-pahar-auto-multifunctional-rotativ-360-cu-baza-ajustabila-ac2380.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "AC2380 adjustable-base 360-degree cup holder observed in stock."
+            },
+            {
+              "source": "Okazii.ro",
+              "priceRon": 39,
+              "url": "https://www.okazii.ro/suport-pahar-multifunctional-rotativ-cu-baza-ajustabila-cod-ac2380-alta-marca-alt-model-7-a262228423",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Same AC2380 adjustable-base product code observed as new stock."
+            }
+          ],
           "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
         },
         "competitorSales": {
@@ -3071,11 +3190,22 @@
         },
         "supplierCommercial": {
           "verified": false,
-          "status": "MISSING",
-          "quoteCount": 0,
+          "status": "QUOTE_PARTIAL",
+          "quoteCount": 1,
           "completeQuoteCount": 0,
           "bestQuote": null,
-          "quotes": [],
+          "quotes": [
+            {
+              "supplier": "Yiwu Nice Show Accessories Co., Ltd.",
+              "platform": "Alibaba",
+              "unitPrice": 2.59,
+              "currency": "USD",
+              "moq": 5,
+              "sourceUrl": "https://www.alibaba.com/wholesale/cup-holder-car-large.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "note": "Public adjustable cup-holder expander listing; shipping/sample/lead time incomplete."
+            }
+          ],
           "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
         },
         "reviewEvidence": {
@@ -3094,12 +3224,12 @@
           "latest": null
         },
         "gates": {
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 25
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -3117,7 +3247,7 @@
         "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false,
@@ -3128,7 +3258,6 @@
         },
         "blockers": [
           "cerere România verificată",
-          "pricing România verificat",
           "dovadă de vânzare/velocity verificată",
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
@@ -3140,7 +3269,7 @@
         "policy": "TEST requires all verified commercial gates. BUY additionally requires a completed real test with healthy sell-through, actual margin and unit profit. Proxies cannot satisfy verified gates.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 1,
+        "passedGates": 2,
         "buyGate": {
           "completedRealTest": false,
           "sellThroughPct": null,
@@ -3148,7 +3277,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 11.1
+        "commercialReadiness": 22.2
       }
     },
     {
@@ -3569,7 +3698,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -4337,11 +4466,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 3,
-        "score": 16.9,
+        "score": 21.4,
         "paidDataEligible": true,
         "paidDataPriority": 3,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -4592,14 +4721,33 @@
       "commercialHardening": {
         "version": "1.0",
         "pricing": {
-          "verified": false,
-          "status": "MISSING",
-          "offerCount": 0,
-          "domainCount": 0,
-          "minPriceRon": null,
-          "medianPriceRon": 89.2,
-          "maxPriceRon": null,
-          "offers": [],
+          "verified": true,
+          "status": "VERIFIED",
+          "offerCount": 2,
+          "domainCount": 2,
+          "minPriceRon": 10.5,
+          "medianPriceRon": 19.04,
+          "maxPriceRon": 19.04,
+          "offers": [
+            {
+              "source": "eMAG.ro",
+              "priceRon": 19.04,
+              "url": "https://www.emag.ro/search/suport%2Bparasolar",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "JENUOS leather magnetic visor sunglasses holder observed in stock."
+            },
+            {
+              "source": "Chilipirul-Zilei.ro",
+              "priceRon": 10.5,
+              "originalPriceRon": 20.99,
+              "normalizedUnits": 2,
+              "url": "https://www.chilipirul-zilei.ro/cumpara/set-de-2-suporturi-auto-pentru-ochelari-tslbw-gri-piele-9-x-4-5-cm-81554",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "matchQuality": "HIGH",
+              "note": "Set of two magnetic PU-leather visor holders; normalized price per unit."
+            }
+          ],
           "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
         },
         "competitorSales": {
@@ -4615,11 +4763,22 @@
         },
         "supplierCommercial": {
           "verified": false,
-          "status": "MISSING",
-          "quoteCount": 0,
+          "status": "QUOTE_PARTIAL",
+          "quoteCount": 1,
           "completeQuoteCount": 0,
           "bestQuote": null,
-          "quotes": [],
+          "quotes": [
+            {
+              "supplier": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+              "platform": "Alibaba",
+              "unitPrice": 0.64,
+              "currency": "USD",
+              "moq": 2,
+              "sourceUrl": "https://www.alibaba.com/wholesale/car-visor-holder-clip.html",
+              "verifiedAt": "2026-08-18T18:38:00Z",
+              "note": "Public magnetic leather visor glasses holder listing; shipping/sample/lead time incomplete."
+            }
+          ],
           "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
         },
         "reviewEvidence": {
@@ -4638,12 +4797,12 @@
           "latest": null
         },
         "gates": {
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 25
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -4661,7 +4820,7 @@
         "confidenceScore": 25.7,
         "gates": {
           "demandVerified": false,
-          "pricingVerified": false,
+          "pricingVerified": true,
           "salesVerified": false,
           "supplierVerified": false,
           "reviewVerified": false,
@@ -4672,7 +4831,6 @@
         },
         "blockers": [
           "cerere România verificată",
-          "pricing România verificat",
           "dovadă de vânzare/velocity verificată",
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
@@ -4685,7 +4843,7 @@
         "policy": "TEST requires all verified commercial gates. BUY additionally requires a completed real test with healthy sell-through, actual margin and unit profit. Proxies cannot satisfy verified gates.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 0,
+        "passedGates": 1,
         "buyGate": {
           "completedRealTest": false,
           "sellThroughPct": null,
@@ -4693,7 +4851,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 0
+        "commercialReadiness": 11.1
       }
     },
     {
@@ -5114,7 +5272,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -5886,7 +6044,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -6658,7 +6816,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -7431,7 +7589,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -8203,7 +8361,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -8966,7 +9124,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -9729,7 +9887,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -10492,7 +10650,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -11255,7 +11413,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -12018,7 +12176,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -12781,7 +12939,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -13544,7 +13702,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -14307,7 +14465,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -15070,7 +15228,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -15833,7 +15991,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -16596,7 +16754,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -17359,7 +17517,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18122,7 +18280,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18885,7 +19043,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19648,7 +19806,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20411,7 +20569,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21174,7 +21332,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21937,7 +22095,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22700,7 +22858,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23463,7 +23621,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24226,7 +24384,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24989,7 +25147,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25752,7 +25910,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26515,7 +26673,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27278,7 +27436,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28041,7 +28199,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28804,7 +28962,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29567,7 +29725,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30330,7 +30488,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31093,7 +31251,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31856,7 +32014,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32619,7 +32777,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33382,7 +33540,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34145,7 +34303,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T17:50:52.270Z"
+        "updatedAt": "2026-08-18T18:41:05.885Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34472,7 +34630,7 @@
   "goldenPipeline": {
     "version": "1.1",
     "phase": "final",
-    "updatedAt": "2026-08-18T17:50:52.270Z",
+    "updatedAt": "2026-08-18T18:41:05.885Z",
     "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence is credible → TEST_READY only after all commercial gates → BUY_READY only after a successful real test.",
     "quotas": {
       "promising": 15,
@@ -34495,7 +34653,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-18T17:50:52.005Z",
+    "updatedAt": "2026-08-18T18:41:05.613Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -34510,13 +34668,13 @@
   },
   "commercialHardening": {
     "version": "1.0",
-    "updatedAt": "2026-08-18T17:50:52.079Z",
+    "updatedAt": "2026-08-18T18:41:05.684Z",
     "stats": {
       "products": 45,
-      "pricingVerified": 0,
+      "pricingVerified": 5,
       "salesVerified": 0,
       "supplierVerified": 0,
-      "reviewVerified": 0,
+      "reviewVerified": 1,
       "fullyVerified": 0
     },
     "calibration": {
@@ -34528,7 +34686,7 @@
   },
   "testBuyEngine": {
     "version": "2.1",
-    "updatedAt": "2026-08-18T17:50:52.207Z",
+    "updatedAt": "2026-08-18T18:41:05.817Z",
     "readyProducts": 0,
     "policy": "TEST cere toate gate-urile comerciale; BUY cere suplimentar performanță reală după lotul de test.",
     "testReady": 0,
