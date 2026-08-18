@@ -4,6 +4,7 @@ const root=process.cwd(),out=path.join(root,'_site');
 await fs.rm(out,{recursive:true,force:true});
 await fs.mkdir(out,{recursive:true});
 const copy=async(source,target=source)=>fs.copyFile(path.join(root,source),path.join(out,target));
+const copyIfExists=async source=>{try{await copy(source);}catch(e){if(e?.code!=='ENOENT')throw e;}};
 const writePatched=async(source,target,patcher)=>{const text=await fs.readFile(path.join(root,source),'utf8');await fs.writeFile(path.join(out,target),patcher(text));};
 await copy('index.html');
 await copy('radar.html');
@@ -16,7 +17,8 @@ for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','billing-plans.js','saas-shell.js','login.html','login.js','account.html','account.js'
-]) await copy(file);
+  'saas-config.js','supabase-client.js','workspace-client.js','billing-plans.js','saas-shell.js','login.html','login.js','account.html','account.js',
+  'commercial-validation.html','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json'
+]) await copyIfExists(file);
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0.');
+console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Commercial Hardening.');
