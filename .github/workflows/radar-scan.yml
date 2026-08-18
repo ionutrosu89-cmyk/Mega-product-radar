@@ -121,10 +121,14 @@ jobs:
           done
           git fetch origin main
           git reset --hard origin/main
-          for f in /tmp/radar-output/*.json; do cp "$f" .; done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json
+          for f in /tmp/radar-output/*.json; do
+            [ -e "$f" ] || continue
+            base="$(basename "$f")"
+            cp "$f" "$base"
+            git add -- "$base"
+          done
           if ! git diff --cached --quiet; then
             git commit -m "Update Mega Product Radar V2 scan"
             git push origin main
