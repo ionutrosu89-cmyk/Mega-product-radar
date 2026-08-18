@@ -18,7 +18,7 @@ for(const file of [
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
   'saas-config.js','supabase-client.js','workspace-client.js','billing-plans.js','saas-shell.js','login.html','login.js','account.html','account.js',
-  'commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json'
+  'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json'
 ]) await copyIfExists(file);
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Commercial Hardening.');
+console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening.');
