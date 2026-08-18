@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-18T17:45:39.273Z",
-  "completedAt": "2026-08-18T17:50:45.562Z",
-  "updatedAt": "2026-08-18T17:45:52.754Z",
+  "startedAt": "2026-08-18T18:41:25.932Z",
+  "completedAt": "2026-08-18T18:47:58.930Z",
+  "updatedAt": "2026-08-18T18:41:40.505Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-18T17:45:52.879Z",
+    "updatedAt": "2026-08-18T18:41:40.544Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-18T17:50:45.544Z",
+    "updatedAt": "2026-08-18T18:47:58.912Z",
     "candidates": 45,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 6,
+    "reviewChecks": 5,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-18T17:48:45.529Z",
+      "updatedAt": "2026-08-18T18:45:58.894Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,11 +175,11 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-18T17:48:34.705Z",
-    "category": "Pet",
-    "successfulPages": 16,
-    "totalObserved": 167,
-    "totalClusters": 106,
+    "updatedAt": "2026-08-18T18:44:33.429Z",
+    "category": "Beauty accesorii",
+    "successfulPages": 13,
+    "totalObserved": 119,
+    "totalClusters": 82,
     "feedCount": 4,
     "feedThreshold": 55,
     "operational": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 6,
-        "items": 77,
+        "successful": 4,
+        "items": 47,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 4,
-        "items": 56,
+        "successful": 5,
+        "items": 60,
         "statuses": [
           200,
           200,
@@ -226,8 +226,8 @@
           200
         ],
         "sources": [
-          "DIRECT",
-          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
@@ -281,36 +281,36 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 6,
-        "items": 34,
+        "successful": 4,
+        "items": 12,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
-          200
+          511,
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-18T17:48:45.511Z",
-      "attempted": 4,
-      "enriched": 2,
+      "at": "2026-08-18T18:45:58.871Z",
+      "attempted": 15,
+      "enriched": 7,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-18T17:48:45.521Z",
+      "at": "2026-08-18T18:45:58.887Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,

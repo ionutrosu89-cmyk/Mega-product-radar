@@ -1,14 +1,16 @@
 {
-  "version": "1.0",
-  "updatedAt": "2026-08-18T18:41:05.700Z",
-  "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified.",
+  "version": "1.1",
+  "updatedAt": "2026-08-18T18:48:05.553Z",
+  "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.",
   "stats": {
     "products": 45,
     "pricingVerified": 5,
     "salesVerified": 0,
     "supplierVerified": 0,
     "reviewVerified": 1,
-    "fullyVerified": 0
+    "fullyVerified": 0,
+    "withSupplierPartial": 5,
+    "withPublicPricing": 5
   },
   "calibration": {
     "sampleSize": 0,
@@ -32,7 +34,24 @@
       "salesStatus": "MISSING",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "EVIDENCE_READY",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 2,
+        "reviewSources": 1
+      }
     },
     {
       "name": "Reusable furniture moving sliders kit",
@@ -49,7 +68,26 @@
       "salesStatus": "MISSING",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Car headrest hidden hook premium",
@@ -66,7 +104,26 @@
       "salesStatus": "MISSING",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Car cup holder expander adjustable",
@@ -83,7 +140,26 @@
       "salesStatus": "MISSING",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Shoe washing laundry bag structured",
@@ -100,7 +176,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Car sunglasses magnetic visor holder",
@@ -117,7 +214,26 @@
       "salesStatus": "MISSING",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Desk drawer organizer modular trays",
@@ -134,7 +250,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Shower corner shelf adhesive no drill",
@@ -151,7 +288,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Car trunk side storage net",
@@ -168,7 +326,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Dog car door protector set",
@@ -185,7 +364,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Pan lid organizer adjustable rack",
@@ -202,7 +402,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Puzzle sorting trays stackable",
@@ -219,7 +440,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Reusable food bag drying rack",
@@ -236,7 +478,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Toothbrush wall organizer cover",
@@ -253,7 +516,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Cat litter scoop holder closed",
@@ -270,7 +554,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Bedside phone holder clamp",
@@ -287,7 +592,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Oil spray bottle glass free plastic",
@@ -304,7 +630,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Travel luggage cup holder sleeve",
@@ -321,7 +668,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Sports medal display hanger wall",
@@ -338,7 +706,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Clip on pot strainer silicone",
@@ -355,7 +744,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Car seat back foldable tray organizer",
@@ -372,7 +782,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Pet toy storage basket foldable",
@@ -389,7 +820,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Sofa arm tray organizer",
@@ -406,7 +858,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Wardrobe handbag hanging organizer",
@@ -423,7 +896,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Yoga mat wall storage rack",
@@ -440,7 +934,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Dog leash wall organizer station",
@@ -457,7 +972,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Closet shelf hanging basket",
@@ -474,7 +1010,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Airplane seat pocket organizer pouch",
@@ -491,7 +1048,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Rotating bathroom organizer turntable",
@@ -508,7 +1086,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Dryer lint bin magnetic wall",
@@ -525,7 +1124,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Closet belt hanger rotating",
@@ -542,7 +1162,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Sink splash guard silicone mat",
@@ -559,7 +1200,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Foldable laptop riser portable",
@@ -576,7 +1238,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Resistance band door organizer pouch",
@@ -593,7 +1276,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Stroller snack cup universal no electronics",
@@ -610,7 +1314,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Drawer sock organizer honeycomb",
@@ -627,7 +1352,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Cosmetic bag divider insert adjustable",
@@ -644,7 +1390,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Travel cable organizer roll pouch",
@@ -661,7 +1428,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Board game card holder hands free",
@@ -678,7 +1466,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Reusable lint remover storage case",
@@ -695,7 +1504,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Bed sheet corner holder straps premium",
@@ -712,7 +1542,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Pet food scoop bag clip combo",
@@ -729,7 +1580,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Balcony plant drip tray adjustable",
@@ -746,7 +1618,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Plant pot drainage mesh pad set",
@@ -763,7 +1656,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     },
     {
       "name": "Plant support clips reusable set",
@@ -780,7 +1694,28 @@
       "salesStatus": "MISSING",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST"
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
     }
   ]
 }

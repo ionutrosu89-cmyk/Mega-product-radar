@@ -1,8 +1,8 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-18T18:41:05.885Z",
-  "sourceUpdatedAt": "2026-08-18T17:50:45.544Z",
+  "updatedAt": "2026-08-18T18:48:05.745Z",
+  "sourceUpdatedAt": "2026-08-18T18:47:58.912Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc dovezi existente. Evidence Coverage nu acordă puncte pentru simple verificări fără rezultate; checkCoverage rămâne metrică tehnică separată. Volumele, sellerii și vânzările nu sunt inventate.",
   "providerReadiness": {
@@ -463,7 +463,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 1,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -721,12 +721,16 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
           "offerCount": 2,
           "domainCount": 2,
+          "domains": [
+            "emag.ro",
+            "littledomi.ro"
+          ],
           "minPriceRon": 58.99,
           "medianPriceRon": 92.72,
           "maxPriceRon": 92.72,
@@ -748,7 +752,7 @@
               "note": "Comparable clamp-mounted foldable headphone hanger observed in stock."
             }
           ],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -759,7 +763,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -779,7 +784,8 @@
               "note": "Public listing range starts at USD 0.50; shipping, sample cost and lead time not fully confirmed."
             }
           ],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": true,
@@ -810,7 +816,7 @@
               ]
             }
           ],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -824,7 +830,24 @@
           "supplierVerified": false,
           "reviewVerified": true
         },
-        "readiness": 50
+        "readiness": 50,
+        "missingEvidence": [
+          "salesVerified",
+          "supplierVerified"
+        ],
+        "nextActions": [
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 2,
+          "romaniaDomains": 2,
+          "salesObservations": 0,
+          "supplierQuotes": 1,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 2,
+          "reviewSources": 1
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -1292,7 +1315,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 4,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -1541,12 +1564,16 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
           "offerCount": 2,
           "domainCount": 2,
+          "domains": [
+            "emag.ro",
+            "pepita.com"
+          ],
           "minPriceRon": 26.76,
           "medianPriceRon": 56.9,
           "maxPriceRon": 56.9,
@@ -1568,7 +1595,7 @@
               "note": "Reusable heavy-duty furniture sliders for hard floors/carpets observed in stock."
             }
           ],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -1579,7 +1606,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -1599,7 +1627,8 @@
               "note": "Public reusable furniture slider listing; shipping/sample/lead time incomplete."
             }
           ],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -1608,7 +1637,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -1622,7 +1651,26 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 25
+        "readiness": 25,
+        "missingEvidence": [
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 2,
+          "romaniaDomains": 2,
+          "salesObservations": 0,
+          "supplierQuotes": 1,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -2091,7 +2139,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 5,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -2340,12 +2388,16 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
           "offerCount": 2,
           "domainCount": 2,
+          "domains": [
+            "rollfast.ro",
+            "altex.ro"
+          ],
           "minPriceRon": 36,
           "medianPriceRon": 49.99,
           "maxPriceRon": 49.99,
@@ -2367,7 +2419,7 @@
               "note": "Same Roll Fast 22100R two-piece headrest-hook family observed in supplier stock."
             }
           ],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -2378,7 +2430,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -2398,7 +2451,8 @@
               "note": "Public hidden 2-in-1 headrest hook listing; shipping/sample/lead time incomplete."
             }
           ],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -2407,7 +2461,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -2421,7 +2475,26 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 25
+        "readiness": 25,
+        "missingEvidence": [
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 2,
+          "romaniaDomains": 2,
+          "salesObservations": 0,
+          "supplierQuotes": 1,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -2890,7 +2963,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 2,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -3148,12 +3221,16 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
           "offerCount": 2,
           "domainCount": 2,
+          "domains": [
+            "eurostoc.ro",
+            "okazii.ro"
+          ],
           "minPriceRon": 25.2,
           "medianPriceRon": 39,
           "maxPriceRon": 39,
@@ -3175,7 +3252,7 @@
               "note": "Same AC2380 adjustable-base product code observed as new stock."
             }
           ],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -3186,7 +3263,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -3206,7 +3284,8 @@
               "note": "Public adjustable cup-holder expander listing; shipping/sample/lead time incomplete."
             }
           ],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -3215,7 +3294,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -3229,7 +3308,26 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 25
+        "readiness": 25,
+        "missingEvidence": [
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 2,
+          "romaniaDomains": 2,
+          "salesObservations": 0,
+          "supplierQuotes": 1,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -3698,7 +3796,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -3947,17 +4045,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 109.8,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -3968,7 +4067,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -3977,7 +4077,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -3986,7 +4087,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -4000,7 +4101,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -4470,7 +4592,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 3,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -4719,12 +4841,16 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
           "offerCount": 2,
           "domainCount": 2,
+          "domains": [
+            "emag.ro",
+            "chilipirul-zilei.ro"
+          ],
           "minPriceRon": 10.5,
           "medianPriceRon": 19.04,
           "maxPriceRon": 19.04,
@@ -4748,7 +4874,7 @@
               "note": "Set of two magnetic PU-leather visor holders; normalized price per unit."
             }
           ],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -4759,7 +4885,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -4779,7 +4906,8 @@
               "note": "Public magnetic leather visor glasses holder listing; shipping/sample/lead time incomplete."
             }
           ],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -4788,7 +4916,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -4802,7 +4930,26 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 25
+        "readiness": 25,
+        "missingEvidence": [
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 2,
+          "romaniaDomains": 2,
+          "salesObservations": 0,
+          "supplierQuotes": 1,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -4861,7 +5008,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:46:04.495Z",
+      "checkedAt": "2026-08-18T18:41:59.315Z",
       "economics": {
         "score": 22.6,
         "margin": 7.5,
@@ -5272,7 +5419,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -5521,17 +5668,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 118.7,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -5542,7 +5690,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -5551,7 +5700,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -5560,7 +5710,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -5574,7 +5724,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -6044,7 +6215,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -6293,17 +6464,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 149.3,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -6314,7 +6486,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -6323,7 +6496,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -6332,7 +6506,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -6346,7 +6520,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -6816,7 +7011,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -7065,17 +7260,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 119.3,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -7086,7 +7282,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -7095,7 +7292,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -7104,7 +7302,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -7118,7 +7316,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -7178,7 +7397,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:46:18.655Z",
+      "checkedAt": "2026-08-18T18:42:13.477Z",
       "economics": {
         "score": 21.6,
         "margin": 6.9,
@@ -7589,7 +7808,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -7838,17 +8057,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 139.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -7859,7 +8079,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -7868,7 +8089,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -7877,7 +8099,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -7891,7 +8113,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -8361,7 +8604,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -8601,17 +8844,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 139.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -8622,7 +8866,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -8631,7 +8876,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -8640,7 +8886,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -8654,7 +8900,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -9124,7 +9391,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -9364,17 +9631,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 139.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -9385,7 +9653,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -9394,7 +9663,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -9403,7 +9673,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -9417,7 +9687,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -9887,7 +10178,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -10127,17 +10418,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 89.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -10148,7 +10440,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -10157,7 +10450,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -10166,7 +10460,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -10180,7 +10474,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -10650,7 +10965,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -10890,17 +11205,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 129,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -10911,7 +11227,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -10920,7 +11237,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -10929,7 +11247,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -10943,7 +11261,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -11413,7 +11752,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -11653,17 +11992,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 98.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -11674,7 +12014,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -11683,7 +12024,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -11692,7 +12034,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -11706,7 +12048,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -12176,7 +12539,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -12416,17 +12779,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 98.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -12437,7 +12801,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -12446,7 +12811,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -12455,7 +12821,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -12469,7 +12835,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -12939,7 +13326,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -13179,17 +13566,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 98.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -13200,7 +13588,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -13209,7 +13598,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -13218,7 +13608,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -13232,7 +13622,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -13702,7 +14113,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -13942,17 +14353,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 89.6,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -13963,7 +14375,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -13972,7 +14385,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -13981,7 +14395,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -13995,7 +14409,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -14465,7 +14900,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -14705,17 +15140,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 147.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -14726,7 +15162,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -14735,7 +15172,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -14744,7 +15182,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -14758,7 +15196,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -14817,7 +15276,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:45:54.019Z",
+      "checkedAt": "2026-08-18T18:41:41.901Z",
       "economics": {
         "score": 18.4,
         "margin": 6.7,
@@ -15228,7 +15687,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -15468,17 +15927,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 79.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -15489,7 +15949,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -15498,7 +15959,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -15507,7 +15969,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -15521,7 +15983,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -15991,7 +16474,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -16231,17 +16714,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 161.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -16252,7 +16736,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -16261,7 +16746,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -16270,7 +16756,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -16284,7 +16770,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -16754,7 +17261,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -16994,17 +17501,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 128.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -17015,7 +17523,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -17024,7 +17533,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -17033,7 +17543,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -17047,7 +17557,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -17517,7 +18048,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -17757,17 +18288,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 128.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -17778,7 +18310,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -17787,7 +18320,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -17796,7 +18330,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -17810,7 +18344,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -18280,7 +18835,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18520,17 +19075,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 128.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -18541,7 +19097,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -18550,7 +19107,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -18559,7 +19117,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -18573,7 +19131,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -19043,7 +19622,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19283,17 +19862,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 161.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -19304,7 +19884,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -19313,7 +19894,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -19322,7 +19904,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -19336,7 +19918,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -19395,7 +19998,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:46:32.815Z",
+      "checkedAt": "2026-08-18T18:42:27.639Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -19806,7 +20409,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20046,17 +20649,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 120,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -20067,7 +20671,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -20076,7 +20681,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -20085,7 +20691,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -20099,7 +20705,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -20158,7 +20785,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:45:56.014Z",
+      "checkedAt": "2026-08-18T18:41:44.224Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -20569,7 +21196,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20809,17 +21436,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 120,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -20830,7 +21458,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -20839,7 +21468,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -20848,7 +21478,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -20862,7 +21492,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -21332,7 +21983,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21572,17 +22223,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 120,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -21593,7 +22245,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -21602,7 +22255,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -21611,7 +22265,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -21625,7 +22279,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -22095,7 +22770,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22335,17 +23010,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 120,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -22356,7 +23032,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -22365,7 +23042,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -22374,7 +23052,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -22388,7 +23066,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -22447,7 +23146,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:47:01.136Z",
+      "checkedAt": "2026-08-18T18:42:55.962Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -22858,7 +23557,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.744Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23098,17 +23797,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 120,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -23119,7 +23819,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -23128,7 +23829,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -23137,7 +23839,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -23151,7 +23853,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -23210,7 +23933,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:45:54.777Z",
+      "checkedAt": "2026-08-18T18:41:42.815Z",
       "economics": {
         "score": 16.4,
         "margin": 5.9,
@@ -23621,7 +24344,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23861,17 +24584,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 88.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -23882,7 +24606,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -23891,7 +24616,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -23900,7 +24626,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -23914,7 +24640,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -24384,7 +25131,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24624,17 +25371,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 88.1,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -24645,7 +25393,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -24654,7 +25403,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -24663,7 +25413,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -24677,7 +25427,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -24736,7 +25507,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:47:15.298Z",
+      "checkedAt": "2026-08-18T18:43:10.124Z",
       "economics": {
         "score": 16.2,
         "margin": 5.2,
@@ -25147,7 +25918,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25387,17 +26158,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 138.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -25408,7 +26180,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -25417,7 +26190,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -25426,7 +26200,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -25440,7 +26214,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -25910,7 +26705,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26150,17 +26945,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 100,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -26171,7 +26967,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -26180,7 +26977,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -26189,7 +26987,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -26203,7 +27001,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -26673,7 +27492,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26913,17 +27732,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 88,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -26934,7 +27754,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -26943,7 +27764,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -26952,7 +27774,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -26966,7 +27788,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -27025,7 +27868,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:46:46.975Z",
+      "checkedAt": "2026-08-18T18:42:41.799Z",
       "economics": {
         "score": 13.9,
         "margin": 5,
@@ -27436,7 +28279,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27676,17 +28519,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 88,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -27697,7 +28541,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -27706,7 +28551,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -27715,7 +28561,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -27729,7 +28575,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -27788,7 +28655,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-18T17:45:57.246Z",
+      "checkedAt": "2026-08-18T18:41:45.154Z",
       "economics": {
         "score": 13.6,
         "margin": 4.7,
@@ -28199,7 +29066,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28439,17 +29306,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 108.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -28460,7 +29328,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -28469,7 +29338,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -28478,7 +29348,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -28492,7 +29362,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -28962,7 +29853,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29202,17 +30093,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 108.5,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -29223,7 +30115,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -29232,7 +30125,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -29241,7 +30135,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -29255,7 +30149,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -29725,7 +30640,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29965,17 +30880,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 78.7,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -29986,7 +30902,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -29995,7 +30912,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -30004,7 +30922,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -30018,7 +30936,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -30488,7 +31427,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30728,17 +31667,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 78.7,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -30749,7 +31689,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -30758,7 +31699,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -30767,7 +31709,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -30781,7 +31723,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -31251,7 +32214,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31491,17 +32454,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 68.2,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -31512,7 +32476,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -31521,7 +32486,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -31530,7 +32496,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -31544,7 +32510,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -32014,7 +33001,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32254,17 +33241,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 68.2,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -32275,7 +33263,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -32284,7 +33273,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -32293,7 +33283,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -32307,7 +33297,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -32777,7 +33788,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33017,17 +34028,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 100,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -33038,7 +34050,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -33047,7 +34060,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -33056,7 +34070,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -33070,7 +34084,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -33540,7 +34575,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33780,17 +34815,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": 69,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -33801,7 +34837,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -33810,7 +34847,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -33819,7 +34857,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -33833,7 +34871,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -34303,7 +35362,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-18T18:41:05.885Z"
+        "updatedAt": "2026-08-18T18:48:05.745Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34521,17 +35580,18 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.0",
+        "version": "1.1",
         "pricing": {
           "verified": false,
           "status": "MISSING",
           "offerCount": 0,
           "domainCount": 0,
+          "domains": [],
           "minPriceRon": null,
           "medianPriceRon": null,
           "maxPriceRon": null,
           "offers": [],
-          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian offers from distinct domains."
+          "policy": "VERIFIED requires an already confirmed price or at least two dated Romanian/comparable-market offers from distinct domains. LOW-quality matches never qualify."
         },
         "competitorSales": {
           "salesVerified": false,
@@ -34542,7 +35602,8 @@
           "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
-          "policy": "Proxy demand is never presented as sales. VERIFIED_SALES requires a dated observation with units or revenue from a named source."
+          "romaniaObservedLinks": 0,
+          "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
           "verified": false,
@@ -34551,7 +35612,8 @@
           "completeQuoteCount": 0,
           "bestQuote": null,
           "quotes": [],
-          "policy": "Supplier is commercially verified only when a dated quote includes unit price, MOQ, shipping, sample cost and lead time."
+          "scannerListingSignals": [],
+          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
         },
         "reviewEvidence": {
           "verified": false,
@@ -34560,7 +35622,7 @@
           "snippetCount": 0,
           "negativeThemes": [],
           "manualEvidence": [],
-          "policy": "Review evidence requires at least two concrete snippets across one or more named sources."
+          "policy": "Review evidence requires at least two concrete snippets across one or more named sources. Comparable-product evidence informs pain points but does not prove sales."
         },
         "feedback": {
           "status": "NO_REAL_TEST",
@@ -34574,7 +35636,28 @@
           "supplierVerified": false,
           "reviewVerified": false
         },
-        "readiness": 0
+        "readiness": 0,
+        "missingEvidence": [
+          "pricingVerified",
+          "salesVerified",
+          "supplierVerified",
+          "reviewVerified"
+        ],
+        "nextActions": [
+          "Capture at least two dated Romanian offers from distinct domains.",
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        ],
+        "proofSummary": {
+          "romaniaOffers": 0,
+          "romaniaDomains": 0,
+          "salesObservations": 0,
+          "supplierQuotes": 0,
+          "completeSupplierQuotes": 0,
+          "reviewSnippets": 0,
+          "reviewSources": 0
+        }
       },
       "testBuyDecision": {
         "version": "2.1",
@@ -34630,7 +35713,7 @@
   "goldenPipeline": {
     "version": "1.1",
     "phase": "final",
-    "updatedAt": "2026-08-18T18:41:05.885Z",
+    "updatedAt": "2026-08-18T18:48:05.745Z",
     "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence is credible → TEST_READY only after all commercial gates → BUY_READY only after a successful real test.",
     "quotas": {
       "promising": 15,
@@ -34653,7 +35736,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-18T18:41:05.613Z",
+    "updatedAt": "2026-08-18T18:48:05.471Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -34667,26 +35750,29 @@
     "policy": "Toate modulele gratuite folosesc doar date deja observate/derivate și nu modifică pragurile TEST/CUMPĂRĂ."
   },
   "commercialHardening": {
-    "version": "1.0",
-    "updatedAt": "2026-08-18T18:41:05.684Z",
+    "version": "1.1",
+    "updatedAt": "2026-08-18T18:48:05.539Z",
     "stats": {
       "products": 45,
       "pricingVerified": 5,
       "salesVerified": 0,
       "supplierVerified": 0,
       "reviewVerified": 1,
-      "fullyVerified": 0
+      "fullyVerified": 0,
+      "withSupplierPartial": 5,
+      "withPublicPricing": 5
     },
     "calibration": {
       "sampleSize": 0,
       "unitProfitMaeRon": null,
       "autoCalibrationEnabled": false,
       "policy": "Weights must not auto-calibrate before at least 5 completed real commercial tests."
-    }
+    },
+    "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Public provider evidence may reduce unknowns but cannot bypass TEST/BUY gates."
   },
   "testBuyEngine": {
     "version": "2.1",
-    "updatedAt": "2026-08-18T18:41:05.817Z",
+    "updatedAt": "2026-08-18T18:48:05.673Z",
     "readyProducts": 0,
     "policy": "TEST cere toate gate-urile comerciale; BUY cere suplimentar performanță reală după lotul de test.",
     "testReady": 0,
