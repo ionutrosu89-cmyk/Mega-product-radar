@@ -1,6 +1,6 @@
 {
   "version": "2.5",
-  "updatedAt": "2026-08-19T20:38:07.177Z",
+  "updatedAt": "2026-08-19T21:42:35.200Z",
   "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
   "stats": {
     "products": 52,
@@ -10,7 +10,7 @@
     "providerVerifiedRomaniaDemand": 0,
     "reverseKeywordProviderReady": 0,
     "reviewOpportunityReady": 1,
-    "historicalTrackable": 10,
+    "historicalTrackable": 11,
     "niches": 15,
     "completedRealTests": 0
   },
@@ -221,7 +221,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 27,
+        "confidence": 22,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -230,8 +230,8 @@
           "demandScore": 0,
           "reviewSources": 1,
           "reviewSnippets": 2,
-          "historicalSnapshots": 3,
-          "trend": "ACCELERATING",
+          "historicalSnapshots": 4,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -267,10 +267,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -336,7 +336,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -373,10 +373,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -436,7 +436,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -473,10 +473,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -574,9 +574,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.9,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 38,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -592,6 +592,106 @@
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car cup holder expander adjustable",
+          "Auto"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 17,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 4,
+          "trend": "DECLINING",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "INSUFFICIENT",
+        "score": 10,
+        "providerVerified": false,
+        "marketEvidenceReady": false,
+        "keywordVolume": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": true,
+        "pricingDomains": 2,
+        "evidenceReady": false,
+        "readyForTestDemandGate": false,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 5,
+        "estimatedUnitsMedian": null,
+        "medianPriceRon": 49.99,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 10,
+        "top3EstimatedSalesConcentrationPct": null,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 12,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 4,
+        "observedDays": 4,
+        "direction": "STABLE",
+        "confidence": 48,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 0,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Car sunglasses magnetic visor holder",
           "Auto"
         ],
         "verifiedKeywordCount": 0,
@@ -636,7 +736,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -673,10 +773,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -693,106 +793,6 @@
         "seedKeywords": [
           "Shoe washing laundry bag structured",
           "Laundry"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": null,
-        "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 17,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 3,
-          "trend": "DECLINING",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 10,
-        "providerVerified": false,
-        "marketEvidenceReady": false,
-        "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": true,
-        "pricingDomains": 2,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 5,
-        "estimatedUnitsMedian": null,
-        "medianPriceRon": 49.99,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 10,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 0,
-        "nicheScore": 12,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
-        "direction": "STABLE",
-        "confidence": 37.9,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 0,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "PROXY_ONLY",
-        "seedKeywords": [
-          "Car sunglasses magnetic visor holder",
-          "Auto"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
@@ -836,7 +836,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -873,10 +873,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -893,106 +893,6 @@
         "seedKeywords": [
           "Desk drawer organizer modular trays",
           "Birou"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": null,
-        "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
-      "name": "Shower corner shelf adhesive no drill",
-      "cat": "Baie",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 12,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 3,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 0,
-        "providerVerified": false,
-        "marketEvidenceReady": false,
-        "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": false,
-        "pricingDomains": 0,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 4,
-        "estimatedUnitsMedian": null,
-        "medianPriceRon": 128.55,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 0,
-        "nicheScore": 7.5,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
-        "direction": "STABLE",
-        "confidence": 37.9,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 0,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "PROXY_ONLY",
-        "seedKeywords": [
-          "Shower corner shelf adhesive no drill",
-          "Baie"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
@@ -1036,7 +936,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "DECLINING",
           "actualSalesObserved": false
         },
@@ -1073,10 +973,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1093,6 +993,106 @@
         "seedKeywords": [
           "Car trunk side storage net",
           "Auto"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Shower corner shelf adhesive no drill",
+      "cat": "Baie",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 4,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "marketEvidenceReady": false,
+        "keywordVolume": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": false,
+        "pricingDomains": 0,
+        "evidenceReady": false,
+        "readyForTestDemandGate": false,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 4,
+        "estimatedUnitsMedian": null,
+        "medianPriceRon": 128.55,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 4,
+        "observedDays": 4,
+        "direction": "STABLE",
+        "confidence": 48,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 0,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Shower corner shelf adhesive no drill",
+          "Baie"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
@@ -1136,7 +1136,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -1173,10 +1173,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
-        "observedDays": 3.9,
+        "snapshotCount": 4,
+        "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 37.9,
+        "confidence": 48,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1227,7 +1227,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -1236,8 +1236,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -1273,15 +1273,15 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 10,
+        "confidence": 20.1,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 0,
         "priceHistoryPoints": 0,

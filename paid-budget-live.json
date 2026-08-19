@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "events": [
+    {
+      "at": "2026-08-19T21:42:31.283Z",
+      "provider": "DATAFORSEO_GOOGLE_ADS",
+      "costUsd": 0.09,
+      "keywordCount": 10,
+      "trialMode": true
+    }
+  ],
+  "updatedAt": "2026-08-19T21:42:31.283Z",
+  "guard": {
+    "maxRequestCostUsd": 0.1,
+    "maxDailyCostUsd": 0.3,
+    "maxMonthlyCostUsd": 5,
+    "cacheTtlDays": 7
+  },
+  "usage": {
+    "dailyUsd": 0.09,
+    "monthlyUsd": 0.09
+  }
+}
