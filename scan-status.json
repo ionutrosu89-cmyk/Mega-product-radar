@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-19T06:31:00.430Z",
-  "completedAt": "2026-08-19T06:36:49.914Z",
-  "updatedAt": "2026-08-19T06:31:13.196Z",
+  "startedAt": "2026-08-19T07:54:54.338Z",
+  "completedAt": "2026-08-19T08:01:15.735Z",
+  "updatedAt": "2026-08-19T07:55:08.155Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-19T06:31:13.238Z",
+    "updatedAt": "2026-08-19T07:55:08.194Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-19T06:36:49.886Z",
+    "updatedAt": "2026-08-19T08:01:15.709Z",
     "candidates": 52,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 7,
+    "reviewChecks": 8,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-19T06:34:49.865Z",
+      "updatedAt": "2026-08-19T07:59:15.690Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-19T06:34:00.301Z",
+    "updatedAt": "2026-08-19T07:58:01.634Z",
     "category": "Casă & organizare",
-    "successfulPages": 16,
-    "totalObserved": 151,
-    "totalClusters": 92,
-    "feedCount": 4,
+    "successfulPages": 14,
+    "totalObserved": 141,
+    "totalClusters": 87,
+    "feedCount": 3,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -223,7 +223,7 @@
           200,
           200,
           200,
-          200
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -231,7 +231,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "amazonDE": {
@@ -281,36 +281,36 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 6,
-        "items": 34,
+        "successful": 4,
+        "items": 24,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
-          200
+          511,
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-19T06:34:49.850Z",
-      "attempted": 12,
-      "enriched": 8,
+      "at": "2026-08-19T07:59:15.666Z",
+      "attempted": 11,
+      "enriched": 4,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-19T06:34:49.858Z",
+      "at": "2026-08-19T07:59:15.675Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
