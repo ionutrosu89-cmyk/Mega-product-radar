@@ -93,6 +93,17 @@ jobs:
       - name: Build V2.5 intelligence ecosystem
         if: always()
         run: node scripts/intelligence-ecosystem-v25.mjs
+      - name: Build V2.6 Romania Demand Sales and Reverse Keyword intelligence
+        if: always()
+        continue-on-error: true
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_V26_PAID_ENABLED: ${{ vars.DATAFORSEO_V26_PAID_ENABLED }}
+          V26_DEEP_PRODUCTS: '5'
+          V26_MAX_PAID_CALLS: '5'
+          V26_MAX_RUN_COST_USD: '0.50'
+        run: node scripts/provider-intelligence-v26.mjs
       - name: Build strict Test Buy decision
         if: always()
         run: node scripts/test-buy-decision.mjs
@@ -119,7 +130,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json provider-intelligence-live.json provider-intelligence-cache.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
