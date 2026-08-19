@@ -90,6 +90,9 @@ jobs:
       - name: Build verified commercial intelligence
         if: always()
         run: node scripts/commercial-hardening.mjs
+      - name: Build V2.5 intelligence ecosystem
+        if: always()
+        run: node scripts/intelligence-ecosystem-v25.mjs
       - name: Build strict Test Buy decision
         if: always()
         run: node scripts/test-buy-decision.mjs
@@ -116,7 +119,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
