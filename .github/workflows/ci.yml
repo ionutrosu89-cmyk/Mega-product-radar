@@ -64,15 +64,17 @@ jobs:
           node scripts/category-radar-postprocess.mjs
           node scripts/watchlist-postprocess.mjs
           node scripts/free-readiness-audit.mjs
-      - name: Verify V2.6 ecosystem and commercial safety
+      - name: Verify V2.7 ecosystem and commercial safety
         run: |
           node <<'NODE'
           const d=require('./market-intelligence-live.json');
           if(d.intelligenceEcosystem?.version!=='2.5')throw new Error('missing V2.5 ecosystem');
-          if(d.providerIntelligenceV26?.version!=='2.6')throw new Error('missing V2.6 provider layer');
-          if(d.providerIntelligenceV26?.stats?.paidProviderEnabled!==false)throw new Error('paid provider unexpectedly enabled in CI');
+          if(d.providerIntelligenceV27?.version!=='2.7')throw new Error('missing V2.7 provider layer');
+          if(d.providerIntelligenceV27?.stats?.paidProviderEnabled!==false)throw new Error('paid provider unexpectedly enabled in CI');
+          if(d.providerIntelligenceV27?.stats?.paidCalls!==0)throw new Error('paid provider called in CI');
           const provider=require('./provider-intelligence-live.json');
-          if(provider.version!=='2.6'||!provider.stats)throw new Error('provider output invalid');
+          if(provider.version!=='2.7'||!provider.stats)throw new Error('provider output invalid');
+          if(provider.stats.providerStatus!=='PAID_DISABLED')throw new Error('unexpected CI provider status');
           for(const p of d.products||[]){
             const e=p.evidenceCoverage||{};
             if((e.concreteRows||0)===0&&(e.coverageScore||0)>0)throw new Error('evidence inflated without proof '+p.name);
@@ -81,7 +83,8 @@ jobs:
             if(p.salesEstimation.status==='ESTIMATED_HIGH_CONFIDENCE'&&Number(p.salesEstimation.confidence||0)<75)throw new Error('high sales confidence below 75 '+p.name);
             if(p.salesEstimation.status!=='ACTUAL_OBSERVED'&&/verified competitor sales/i.test(String(p.salesEstimation.policy||'')))throw new Error('estimate mislabeled as verified sales '+p.name);
             if(p.romaniaDemand.providerVerified===true&&!(Number(p.romaniaDemand.bestKeywordVolume||p.romaniaDemand.keywordVolume||0)>0))throw new Error('RO provider verified without search volume '+p.name);
-            if((p.reverseKeywordIntelligence.competitorAsins||[]).length===0&&p.reverseKeywordIntelligence.status==='ASIN_READY')throw new Error('ASIN_READY without ASIN '+p.name);
+            if((p.reverseKeywordIntelligence.competitorAsins||[]).length===0&&['ASIN_READY','PROVIDER_READY'].includes(p.reverseKeywordIntelligence.status))throw new Error('reverse keyword ready without ASIN '+p.name);
+            if(p.reverseKeywordIntelligence.status==='PROVIDER_READY'&&!(p.reverseKeywordIntelligence.verifiedKeywordCount>0))throw new Error('provider reverse keywords without rows '+p.name);
             const t=p.testBuyDecision;
             if(!t)throw new Error('missing testBuyDecision '+p.name);
             if(Object.keys(t.gates||{}).length!==9)throw new Error('expected 9 final gates '+p.name);
