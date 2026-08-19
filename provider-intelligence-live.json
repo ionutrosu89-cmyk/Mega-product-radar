@@ -1,25 +1,47 @@
 {
-  "version": "2.6",
-  "updatedAt": "2026-08-19T17:02:02.558Z",
+  "version": "2.7",
+  "updatedAt": "2026-08-19T20:38:07.231Z",
   "stats": {
     "products": 52,
     "deepProducts": 5,
     "paidProviderEnabled": true,
+    "credentialsConfigured": true,
+    "providerStatus": "PROVIDER_ERROR",
     "paidCalls": 0,
     "runCostUsd": 0,
     "amazonEnriched": 0,
+    "reverseKeywordEnriched": 0,
     "salesHighConfidence": 0,
     "romaniaDemandReady": 0,
     "asinReady": 0,
+    "reverseKeywordProviderReady": 0,
     "nicheTrackable": 47
   },
+  "providerErrors": [
+    {
+      "product": "Car sunglasses magnetic visor holder",
+      "layer": "AMAZON_PRODUCTS",
+      "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+    },
+    {
+      "product": "Under desk headphone hanger clamp",
+      "layer": "AMAZON_PRODUCTS",
+      "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+    },
+    {
+      "product": "Car trunk side storage net",
+      "layer": "AMAZON_PRODUCTS",
+      "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+    }
+  ],
+  "nextAction": "Inspect providerErrors and correct the failing endpoint/request before another paid run.",
   "items": [
     {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "rank": 2,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -32,10 +54,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -57,7 +79,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Under desk headphone hanger clamp",
@@ -68,13 +90,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -87,14 +110,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "rank": 4,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -107,10 +131,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -132,7 +156,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable furniture moving sliders kit",
@@ -143,13 +167,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -162,14 +187,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
       "rank": 5,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -182,10 +208,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -207,7 +233,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car headrest hidden hook premium",
@@ -218,13 +244,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -237,14 +264,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Car cup holder expander adjustable",
       "cat": "Auto",
       "rank": 11,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -257,10 +285,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -282,7 +310,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car cup holder expander adjustable",
@@ -293,13 +321,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -312,14 +341,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Shoe washing laundry bag structured",
       "cat": "Laundry",
       "rank": 6,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -332,10 +362,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -357,7 +387,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Shoe washing laundry bag structured",
@@ -368,13 +398,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -387,14 +418,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
       "rank": 1,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -407,10 +439,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -432,7 +464,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car sunglasses magnetic visor holder",
@@ -443,13 +475,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -462,14 +495,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
       "rank": 8,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -482,10 +516,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -507,7 +541,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Desk drawer organizer modular trays",
@@ -518,13 +552,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -537,14 +572,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
       "rank": 9,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -557,10 +593,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -582,7 +618,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Shower corner shelf adhesive no drill",
@@ -593,13 +629,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -612,14 +649,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Car trunk side storage net",
       "cat": "Auto",
       "rank": 3,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -632,10 +670,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -657,7 +695,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car trunk side storage net",
@@ -668,13 +706,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -687,14 +726,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
       "rank": 10,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -707,10 +747,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -732,7 +772,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dog car door protector set",
@@ -743,13 +783,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -762,14 +803,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Kids bed bedside organizer felt",
       "cat": "Kids 3–6 • Cameră",
       "rank": 7,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -782,10 +824,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -807,7 +849,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Kids bed bedside organizer felt",
@@ -818,13 +860,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -837,14 +880,15 @@
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Pan lid organizer adjustable rack",
       "cat": "Bucătărie",
       "rank": 12,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -857,10 +901,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -882,7 +926,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pan lid organizer adjustable rack",
@@ -893,13 +937,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -912,14 +957,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Puzzle sorting trays stackable",
       "cat": "Sport & hobby",
       "rank": 13,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -932,10 +978,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -957,7 +1003,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Puzzle sorting trays stackable",
@@ -968,13 +1014,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -987,14 +1034,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Reusable food bag drying rack",
       "cat": "Bucătărie",
       "rank": 14,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1007,10 +1055,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1032,7 +1080,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable food bag drying rack",
@@ -1043,13 +1091,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -1062,14 +1111,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Toothbrush wall organizer cover",
       "cat": "Baie",
       "rank": 15,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1082,10 +1132,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1107,7 +1157,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Toothbrush wall organizer cover",
@@ -1118,13 +1168,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -1137,14 +1188,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Cat litter scoop holder closed",
       "cat": "Pet",
       "rank": 16,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1157,10 +1209,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1182,7 +1234,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Cat litter scoop holder closed",
@@ -1193,13 +1245,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -1212,14 +1265,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Bedside phone holder clamp",
       "cat": "Casă",
       "rank": 17,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1232,10 +1286,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1257,7 +1311,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Bedside phone holder clamp",
@@ -1268,13 +1322,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -1287,14 +1342,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Oil spray bottle glass free plastic",
       "cat": "Bucătărie",
       "rank": 18,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1307,10 +1363,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1332,7 +1388,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Oil spray bottle glass free plastic",
@@ -1343,13 +1399,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -1362,14 +1419,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Travel luggage cup holder sleeve",
       "cat": "Travel",
       "rank": 19,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1382,10 +1440,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1407,7 +1465,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Travel luggage cup holder sleeve",
@@ -1418,13 +1476,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -1437,14 +1496,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Sports medal display hanger wall",
       "cat": "Sport & hobby",
       "rank": 20,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1457,10 +1517,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1482,7 +1542,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sports medal display hanger wall",
@@ -1493,13 +1553,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -1512,14 +1573,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Hat travel case collapsible",
       "cat": "Fashion accessories",
       "rank": 21,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1532,10 +1594,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1557,7 +1619,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Hat travel case collapsible",
@@ -1568,13 +1630,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 2,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 123.75,
@@ -1587,14 +1650,15 @@
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Clip on pot strainer silicone",
       "cat": "Bucătărie",
       "rank": 22,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1607,10 +1671,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1632,7 +1696,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Clip on pot strainer silicone",
@@ -1643,13 +1707,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -1662,14 +1727,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Car seat back foldable tray organizer",
       "cat": "Auto",
       "rank": 23,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1682,10 +1748,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1707,7 +1773,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car seat back foldable tray organizer",
@@ -1718,13 +1784,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -1737,14 +1804,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Pet toy storage basket foldable",
       "cat": "Pet",
       "rank": 24,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1757,10 +1825,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1782,7 +1850,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pet toy storage basket foldable",
@@ -1793,13 +1861,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -1812,14 +1881,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Sofa arm tray organizer",
       "cat": "Casă",
       "rank": 25,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1832,10 +1902,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1857,7 +1927,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sofa arm tray organizer",
@@ -1868,13 +1938,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -1887,14 +1958,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Wardrobe handbag hanging organizer",
       "cat": "Organizare garderobă",
       "rank": 26,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1907,10 +1979,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1932,7 +2004,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Wardrobe handbag hanging organizer",
@@ -1943,13 +2015,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -1962,14 +2035,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Yoga mat wall storage rack",
       "cat": "Sport & hobby",
       "rank": 27,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -1982,10 +2056,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2007,7 +2081,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Yoga mat wall storage rack",
@@ -2018,13 +2092,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -2037,14 +2112,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Hair tool heat resistant organizer",
       "cat": "Baie",
       "rank": 28,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2057,10 +2133,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2082,7 +2158,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Hair tool heat resistant organizer",
@@ -2093,13 +2169,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -2112,14 +2189,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Dog leash wall organizer station",
       "cat": "Pet",
       "rank": 29,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2132,10 +2210,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2157,7 +2235,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dog leash wall organizer station",
@@ -2168,13 +2246,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -2187,14 +2266,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Closet shelf hanging basket",
       "cat": "Organizare garderobă",
       "rank": 30,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2207,10 +2287,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2232,7 +2312,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Closet shelf hanging basket",
@@ -2243,13 +2323,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -2262,14 +2343,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Airplane seat pocket organizer pouch",
       "cat": "Travel",
       "rank": 31,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2282,10 +2364,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2307,7 +2389,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Airplane seat pocket organizer pouch",
@@ -2318,13 +2400,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -2337,14 +2420,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Rotating bathroom organizer turntable",
       "cat": "Baie",
       "rank": 32,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2357,10 +2441,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2382,7 +2466,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Rotating bathroom organizer turntable",
@@ -2393,13 +2477,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -2412,14 +2497,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Dryer lint bin magnetic wall",
       "cat": "Laundry",
       "rank": 33,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2432,10 +2518,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2457,7 +2543,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dryer lint bin magnetic wall",
@@ -2468,13 +2554,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -2487,14 +2574,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Fridge drawer pull out organizer",
       "cat": "Bucătărie",
       "rank": 34,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2507,10 +2595,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2532,7 +2620,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Fridge drawer pull out organizer",
@@ -2543,13 +2631,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -2562,14 +2651,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Closet belt hanger rotating",
       "cat": "Organizare garderobă",
       "rank": 35,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2582,10 +2672,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2607,7 +2697,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Closet belt hanger rotating",
@@ -2618,13 +2708,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -2637,14 +2728,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Sink splash guard silicone mat",
       "cat": "Bucătărie",
       "rank": 36,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2657,10 +2749,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2682,7 +2774,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sink splash guard silicone mat",
@@ -2693,13 +2785,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -2712,14 +2805,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Foldable laptop riser portable",
       "cat": "Birou",
       "rank": 37,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2732,10 +2826,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2757,7 +2851,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Foldable laptop riser portable",
@@ -2768,13 +2862,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -2787,14 +2882,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Resistance band door organizer pouch",
       "cat": "Sport & hobby",
       "rank": 38,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2807,10 +2903,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2832,7 +2928,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Resistance band door organizer pouch",
@@ -2843,13 +2939,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -2862,14 +2959,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Foldable travel laundry bag divider",
       "cat": "Travel",
       "rank": 39,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2882,10 +2980,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2907,7 +3005,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Foldable travel laundry bag divider",
@@ -2918,13 +3016,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -2937,14 +3036,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Jewelry travel roll organizer",
       "cat": "Fashion accessories",
       "rank": 40,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -2957,10 +3057,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2982,7 +3082,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Jewelry travel roll organizer",
@@ -2993,13 +3093,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 2,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 123.75,
@@ -3012,14 +3113,15 @@
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Stroller snack cup universal no electronics",
       "cat": "Kids 3–6 • Travel",
       "rank": 42,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3032,10 +3134,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3057,7 +3159,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Stroller snack cup universal no electronics",
@@ -3068,13 +3170,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 88,
@@ -3087,14 +3190,15 @@
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Drawer sock organizer honeycomb",
       "cat": "Organizare garderobă",
       "rank": 44,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3107,10 +3211,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3132,7 +3236,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Drawer sock organizer honeycomb",
@@ -3143,13 +3247,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -3162,14 +3267,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Cosmetic bag divider insert adjustable",
       "cat": "Beauty organizare",
       "rank": 41,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3182,10 +3288,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3207,7 +3313,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Cosmetic bag divider insert adjustable",
@@ -3218,13 +3324,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 108.5,
@@ -3237,14 +3344,15 @@
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Travel cable organizer roll pouch",
       "cat": "Travel",
       "rank": 43,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3257,10 +3365,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3282,7 +3390,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Travel cable organizer roll pouch",
@@ -3293,13 +3401,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -3312,14 +3421,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Garden hose guide stake rollers set",
       "cat": "Grădină & balcon",
       "rank": 45,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3332,10 +3442,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3357,7 +3467,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Garden hose guide stake rollers set",
@@ -3368,13 +3478,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -3387,14 +3498,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Board game card holder hands free",
       "cat": "Sport & hobby",
       "rank": 46,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3407,10 +3519,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3432,7 +3544,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Board game card holder hands free",
@@ -3443,13 +3555,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -3462,14 +3575,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Reusable lint remover storage case",
       "cat": "Laundry",
       "rank": 47,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3482,10 +3596,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3507,7 +3621,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable lint remover storage case",
@@ -3518,13 +3632,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -3537,14 +3652,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Bed sheet corner holder straps premium",
       "cat": "Casă",
       "rank": 48,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3557,10 +3673,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3582,7 +3698,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Bed sheet corner holder straps premium",
@@ -3593,13 +3709,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -3612,14 +3729,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Pet food scoop bag clip combo",
       "cat": "Pet",
       "rank": 49,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3632,10 +3750,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3657,7 +3775,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pet food scoop bag clip combo",
@@ -3668,13 +3786,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -3687,14 +3806,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Balcony plant drip tray adjustable",
       "cat": "Grădină & balcon",
       "rank": 50,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3707,10 +3827,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3732,7 +3852,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Balcony plant drip tray adjustable",
@@ -3743,13 +3863,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -3762,14 +3883,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Plant pot drainage mesh pad set",
       "cat": "Grădină & balcon",
       "rank": 51,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3782,10 +3904,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3807,7 +3929,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Plant pot drainage mesh pad set",
@@ -3818,13 +3940,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -3837,14 +3960,15 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     },
     {
       "name": "Plant support clips reusable set",
       "cat": "Grădină & balcon",
       "rank": 52,
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -3857,10 +3981,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3882,7 +4006,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Plant support clips reusable set",
@@ -3893,13 +4017,14 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -3912,7 +4037,8 @@
         "status": "TRACKABLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null
+      "amazonMarket": null,
+      "rankedKeywords": null
     }
   ]
 }

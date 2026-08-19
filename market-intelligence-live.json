@@ -1,8 +1,8 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-19T17:02:05.247Z",
-  "sourceUpdatedAt": "2026-08-19T17:01:55.841Z",
+  "updatedAt": "2026-08-19T20:38:08.334Z",
+  "sourceUpdatedAt": "2026-08-19T20:38:00.552Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc dovezi existente. Evidence Coverage nu acordă puncte pentru simple verificări fără rezultate; checkCoverage rămâne metrică tehnică separată. Volumele, sellerii și vânzările nu sunt inventate.",
   "providerReadiness": {
@@ -463,7 +463,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 1,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-19T17:02:05.246Z"
+        "updatedAt": "2026-08-19T20:38:08.333Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -852,9 +852,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -866,7 +866,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -888,7 +888,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -901,10 +901,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Under desk headphone hanger clamp",
@@ -915,9 +915,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -943,7 +944,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -957,12 +958,13 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "amazonError": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402",
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 8,
           "providerVerified": false,
@@ -975,7 +977,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 2,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -1457,7 +1459,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 4,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -1817,9 +1819,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1831,7 +1833,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -1853,7 +1855,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -1866,10 +1868,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable furniture moving sliders kit",
@@ -1880,9 +1882,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -1902,7 +1905,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -1916,12 +1919,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
-        "amazonError": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402",
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 8,
           "providerVerified": false,
@@ -1934,7 +1937,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 2,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -2417,7 +2420,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 5,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -2777,9 +2780,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -2791,7 +2794,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -2813,7 +2816,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -2826,10 +2829,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car headrest hidden hook premium",
@@ -2840,9 +2843,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -2862,7 +2866,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -2876,12 +2880,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
-        "amazonError": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402",
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 8,
           "providerVerified": false,
@@ -2894,7 +2898,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 2,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -3377,7 +3381,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 2,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "ACCELERATING",
@@ -3746,9 +3750,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -3760,7 +3764,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -3782,7 +3786,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -3795,10 +3799,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car cup holder expander adjustable",
@@ -3809,9 +3813,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -3831,7 +3836,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -3845,11 +3850,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 8,
           "providerVerified": false,
@@ -3862,7 +3868,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 2,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -4345,7 +4351,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -4676,9 +4682,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -4690,7 +4696,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -4712,7 +4718,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -4725,10 +4731,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Shoe washing laundry bag structured",
@@ -4739,9 +4745,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -4761,7 +4768,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -4775,11 +4782,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -4792,7 +4800,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -5276,7 +5284,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 3,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -5638,9 +5646,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -5652,7 +5660,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -5674,7 +5682,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 8,
         "providerVerified": false,
@@ -5687,10 +5695,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car sunglasses magnetic visor holder",
@@ -5701,9 +5709,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -5723,7 +5732,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -5737,12 +5746,13 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "amazonError": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402",
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 8,
           "providerVerified": false,
@@ -5755,7 +5765,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 2,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -6239,7 +6249,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -6570,9 +6580,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -6584,7 +6594,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -6606,7 +6616,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -6619,10 +6629,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Desk drawer organizer modular trays",
@@ -6633,9 +6643,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -6655,7 +6666,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -6669,11 +6680,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -6686,7 +6698,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -7170,7 +7182,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -7501,9 +7513,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -7515,7 +7527,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -7537,7 +7549,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -7550,10 +7562,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Shower corner shelf adhesive no drill",
@@ -7564,9 +7576,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -7586,7 +7599,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -7600,11 +7613,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -7617,7 +7631,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -8101,7 +8115,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "DECLINING",
@@ -8432,9 +8446,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -8446,7 +8460,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -8468,7 +8482,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -8481,10 +8495,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car trunk side storage net",
@@ -8495,9 +8509,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -8517,7 +8532,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -8531,12 +8546,13 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "amazonError": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402",
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -8549,7 +8565,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -9034,7 +9050,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -9365,9 +9381,9 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 3.8,
+        "observedDays": 3.9,
         "direction": "STABLE",
-        "confidence": 37.6,
+        "confidence": 37.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -9379,7 +9395,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -9401,7 +9417,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -9414,10 +9430,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dog car door protector set",
@@ -9428,9 +9444,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -9450,7 +9467,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -9464,11 +9481,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -9481,7 +9499,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -9554,7 +9572,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:57:48.926Z",
+      "checkedAt": "2026-08-19T20:34:03.891Z",
       "economics": {
         "score": 24.5,
         "margin": 8.2,
@@ -9965,7 +9983,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -10301,7 +10319,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -10323,7 +10341,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -10336,10 +10354,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Kids bed bedside organizer felt",
@@ -10350,9 +10368,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -10372,7 +10391,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -10386,11 +10405,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -10403,7 +10423,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -10887,7 +10907,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -11223,7 +11243,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -11245,7 +11265,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -11258,10 +11278,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pan lid organizer adjustable rack",
@@ -11272,9 +11292,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -11294,7 +11315,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -11308,11 +11329,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -11325,7 +11347,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -11809,7 +11831,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -12145,7 +12167,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -12167,7 +12189,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -12180,10 +12202,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Puzzle sorting trays stackable",
@@ -12194,9 +12216,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -12216,7 +12239,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -12230,11 +12253,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -12247,7 +12271,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -12731,7 +12755,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -13067,7 +13091,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -13089,7 +13113,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -13102,10 +13126,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable food bag drying rack",
@@ -13116,9 +13140,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -13138,7 +13163,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -13152,11 +13177,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -13169,7 +13195,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -13653,7 +13679,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -13989,7 +14015,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -14011,7 +14037,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -14024,10 +14050,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Toothbrush wall organizer cover",
@@ -14038,9 +14064,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -14060,7 +14087,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -14074,11 +14101,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -14091,7 +14119,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -14575,7 +14603,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -14911,7 +14939,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -14933,7 +14961,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -14946,10 +14974,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Cat litter scoop holder closed",
@@ -14960,9 +14988,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -14982,7 +15011,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -14996,11 +15025,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -15013,7 +15043,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -15497,7 +15527,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -15833,7 +15863,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -15855,7 +15885,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -15868,10 +15898,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Bedside phone holder clamp",
@@ -15882,9 +15912,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -15904,7 +15935,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -15918,11 +15949,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -15935,7 +15967,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -16419,7 +16451,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -16755,7 +16787,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -16777,7 +16809,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -16790,10 +16822,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Oil spray bottle glass free plastic",
@@ -16804,9 +16836,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -16826,7 +16859,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -16840,11 +16873,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -16857,7 +16891,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -17341,7 +17375,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -17677,7 +17711,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -17699,7 +17733,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -17712,10 +17746,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Travel luggage cup holder sleeve",
@@ -17726,9 +17760,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -17748,7 +17783,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -17762,11 +17797,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -17779,7 +17815,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -18263,7 +18299,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18599,7 +18635,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -18621,7 +18657,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -18634,10 +18670,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sports medal display hanger wall",
@@ -18648,9 +18684,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -18670,7 +18707,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -18684,11 +18721,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -18701,7 +18739,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -18774,7 +18812,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:57:20.604Z",
+      "checkedAt": "2026-08-19T20:33:35.568Z",
       "economics": {
         "score": 18.6,
         "margin": 5.9,
@@ -19185,7 +19223,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19521,7 +19559,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -19543,7 +19581,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -19556,10 +19594,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Hat travel case collapsible",
@@ -19570,9 +19608,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -19592,7 +19631,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 2,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 123.75,
@@ -19606,11 +19645,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -19623,7 +19663,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -20107,7 +20147,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20443,7 +20483,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -20465,7 +20505,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -20478,10 +20518,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Clip on pot strainer silicone",
@@ -20492,9 +20532,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -20514,7 +20555,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -20528,11 +20569,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -20545,7 +20587,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -21029,7 +21071,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21365,7 +21407,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -21387,7 +21429,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -21400,10 +21442,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Car seat back foldable tray organizer",
@@ -21414,9 +21456,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -21436,7 +21479,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
@@ -21450,11 +21493,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -21467,7 +21511,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -21951,7 +21995,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22287,7 +22331,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -22309,7 +22353,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -22322,10 +22366,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pet toy storage basket foldable",
@@ -22336,9 +22380,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -22358,7 +22403,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -22372,11 +22417,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -22389,7 +22435,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -22873,7 +22919,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23209,7 +23255,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -23231,7 +23277,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -23244,10 +23290,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sofa arm tray organizer",
@@ -23258,9 +23304,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -23280,7 +23327,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -23294,11 +23341,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -23311,7 +23359,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -23795,7 +23843,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24131,7 +24179,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -24153,7 +24201,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -24166,10 +24214,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Wardrobe handbag hanging organizer",
@@ -24180,9 +24228,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -24202,7 +24251,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -24216,11 +24265,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -24233,7 +24283,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -24717,7 +24767,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25053,7 +25103,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -25075,7 +25125,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -25088,10 +25138,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Yoga mat wall storage rack",
@@ -25102,9 +25152,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -25124,7 +25175,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -25138,11 +25189,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -25155,7 +25207,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -25228,7 +25280,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:57:06.445Z",
+      "checkedAt": "2026-08-19T20:33:21.407Z",
       "economics": {
         "score": 17.3,
         "margin": 5.7,
@@ -25639,7 +25691,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25975,7 +26027,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -25997,7 +26049,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -26010,10 +26062,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Hair tool heat resistant organizer",
@@ -26024,9 +26076,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -26046,7 +26099,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -26060,11 +26113,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -26077,7 +26131,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -26561,7 +26615,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26897,7 +26951,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -26919,7 +26973,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -26932,10 +26986,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dog leash wall organizer station",
@@ -26946,9 +27000,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -26968,7 +27023,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -26982,11 +27037,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -26999,7 +27055,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -27483,7 +27539,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27819,7 +27875,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -27841,7 +27897,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -27854,10 +27910,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Closet shelf hanging basket",
@@ -27868,9 +27924,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -27890,7 +27947,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -27904,11 +27961,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -27921,7 +27979,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -28405,7 +28463,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28741,7 +28799,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -28763,7 +28821,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -28776,10 +28834,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Airplane seat pocket organizer pouch",
@@ -28790,9 +28848,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -28812,7 +28871,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -28826,11 +28885,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -28843,7 +28903,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -29327,7 +29387,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29663,7 +29723,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -29685,7 +29745,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -29698,10 +29758,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Rotating bathroom organizer turntable",
@@ -29712,9 +29772,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -29734,7 +29795,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
@@ -29748,11 +29809,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -29765,7 +29827,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -29838,7 +29900,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:21.907Z",
+      "checkedAt": "2026-08-19T20:32:36.744Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -30249,7 +30311,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30585,7 +30647,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -30607,7 +30669,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -30620,10 +30682,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Dryer lint bin magnetic wall",
@@ -30634,9 +30696,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -30656,7 +30719,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -30670,11 +30733,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -30687,7 +30751,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -30760,7 +30824,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:38.122Z",
+      "checkedAt": "2026-08-19T20:32:53.086Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -31171,7 +31235,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31507,7 +31571,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -31529,7 +31593,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -31542,10 +31606,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Fridge drawer pull out organizer",
@@ -31556,9 +31620,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -31578,7 +31643,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -31592,11 +31657,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -31609,7 +31675,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -32093,7 +32159,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32429,7 +32495,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -32451,7 +32517,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -32464,10 +32530,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Closet belt hanger rotating",
@@ -32478,9 +32544,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -32500,7 +32567,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -32514,11 +32581,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -32531,7 +32599,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -33015,7 +33083,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33351,7 +33419,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -33373,7 +33441,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -33386,10 +33454,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Sink splash guard silicone mat",
@@ -33400,9 +33468,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -33422,7 +33491,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 6,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 94,
@@ -33436,11 +33505,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -33453,7 +33523,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -33526,7 +33596,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:23.130Z",
+      "checkedAt": "2026-08-19T20:32:38.090Z",
       "economics": {
         "score": 16.2,
         "margin": 5.2,
@@ -33937,7 +34007,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34273,7 +34343,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -34295,7 +34365,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -34308,10 +34378,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Foldable laptop riser portable",
@@ -34322,9 +34392,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -34344,7 +34415,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 118.7,
@@ -34358,11 +34429,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -34375,7 +34447,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -34859,7 +34931,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -35195,7 +35267,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -35217,7 +35289,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -35230,10 +35302,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Resistance band door organizer pouch",
@@ -35244,9 +35316,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -35266,7 +35339,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -35280,11 +35353,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -35297,7 +35371,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -35370,7 +35444,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:23.961Z",
+      "checkedAt": "2026-08-19T20:32:38.924Z",
       "economics": {
         "score": 14.9,
         "margin": 5.2,
@@ -35781,7 +35855,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -36117,7 +36191,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -36139,7 +36213,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -36152,10 +36226,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Foldable travel laundry bag divider",
@@ -36166,9 +36240,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -36188,7 +36263,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -36202,11 +36277,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -36219,7 +36295,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -36292,7 +36368,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:57:34.765Z",
+      "checkedAt": "2026-08-19T20:33:49.730Z",
       "economics": {
         "score": 14.9,
         "margin": 5.2,
@@ -36703,7 +36779,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -37039,7 +37115,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -37061,7 +37137,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -37074,10 +37150,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Jewelry travel roll organizer",
@@ -37088,9 +37164,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -37110,7 +37187,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 2,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 123.75,
@@ -37124,11 +37201,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -37141,7 +37219,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -37625,7 +37703,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -37961,7 +38039,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -37983,7 +38061,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -37996,10 +38074,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Stroller snack cup universal no electronics",
@@ -38010,9 +38088,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -38032,7 +38111,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 88,
@@ -38046,11 +38125,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -38063,7 +38143,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -38136,7 +38216,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:21.168Z",
+      "checkedAt": "2026-08-19T20:32:35.988Z",
       "economics": {
         "score": 13.9,
         "margin": 5,
@@ -38547,7 +38627,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -38883,7 +38963,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -38905,7 +38985,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -38918,10 +38998,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Drawer sock organizer honeycomb",
@@ -38932,9 +39012,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -38954,7 +39035,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.05,
@@ -38968,11 +39049,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -38985,7 +39067,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -39469,7 +39551,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -39805,7 +39887,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -39827,7 +39909,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -39840,10 +39922,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Cosmetic bag divider insert adjustable",
@@ -39854,9 +39936,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -39876,7 +39959,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 1,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 108.5,
@@ -39890,11 +39973,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -39907,7 +39991,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -40391,7 +40475,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -40727,7 +40811,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -40749,7 +40833,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -40762,10 +40846,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Travel cable organizer roll pouch",
@@ -40776,9 +40860,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -40798,7 +40883,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 104.25,
@@ -40812,11 +40897,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -40829,7 +40915,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -40902,7 +40988,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-19T16:56:52.285Z",
+      "checkedAt": "2026-08-19T20:33:07.247Z",
       "economics": {
         "score": 13.6,
         "margin": 4.7,
@@ -41313,7 +41399,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -41649,7 +41735,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -41671,7 +41757,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -41684,10 +41770,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Garden hose guide stake rollers set",
@@ -41698,9 +41784,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -41720,7 +41807,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -41734,11 +41821,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -41751,7 +41839,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -42235,7 +42323,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -42571,7 +42659,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -42593,7 +42681,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -42606,10 +42694,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Board game card holder hands free",
@@ -42620,9 +42708,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -42642,7 +42731,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 139.1,
@@ -42656,11 +42745,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -42673,7 +42763,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -43157,7 +43247,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -43493,7 +43583,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -43515,7 +43605,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -43528,10 +43618,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Reusable lint remover storage case",
@@ -43542,9 +43632,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -43564,7 +43655,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 3,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
@@ -43578,11 +43669,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -43595,7 +43687,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -44079,7 +44171,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -44415,7 +44507,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -44437,7 +44529,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -44450,10 +44542,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Bed sheet corner holder straps premium",
@@ -44464,9 +44556,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -44486,7 +44579,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 83.35,
@@ -44500,11 +44593,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -44517,7 +44611,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -45001,7 +45095,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -45337,7 +45431,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -45359,7 +45453,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -45372,10 +45466,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Pet food scoop bag clip combo",
@@ -45386,9 +45480,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -45408,7 +45503,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 5,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 120,
@@ -45422,11 +45517,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -45439,7 +45535,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -45923,7 +46019,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -46259,7 +46355,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -46281,7 +46377,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -46294,10 +46390,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Balcony plant drip tray adjustable",
@@ -46308,9 +46404,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -46330,7 +46427,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -46344,11 +46441,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -46361,7 +46459,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -46845,7 +46943,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -47181,7 +47279,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -47203,7 +47301,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -47216,10 +47314,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Plant pot drainage mesh pad set",
@@ -47230,9 +47328,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -47252,7 +47351,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -47266,11 +47365,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -47283,7 +47383,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -47767,7 +47867,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-19T17:02:05.247Z"
+        "updatedAt": "2026-08-19T20:38:08.334Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -48081,7 +48181,7 @@
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
       "salesEstimation": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
@@ -48103,7 +48203,7 @@
         "method": "LEGACY_EVIDENCE_MODEL"
       },
       "romaniaDemand": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "INSUFFICIENT",
         "score": 0,
         "providerVerified": false,
@@ -48116,10 +48216,10 @@
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
         "keywords": [],
-        "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+        "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
       },
       "reverseKeywordIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "status": "PROXY_ONLY",
         "seedKeywords": [
           "Plant support clips reusable set",
@@ -48130,9 +48230,10 @@
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
-        "policy": "ASINs are collected from provider-observed Amazon results. Ranked keyword calls are a separate paid layer and are not fabricated.",
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
         "asinCount": 0,
+        "topRankedKeywords": [],
         "providerPath": "NONE"
       },
       "reviewOpportunity": {
@@ -48152,7 +48253,7 @@
         "predictionError": null
       },
       "nicheIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "products": 4,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 100,
@@ -48166,11 +48267,12 @@
         "romaniaDemandReadyProducts": 0
       },
       "providerIntelligence": {
-        "version": "2.6",
+        "version": "2.7",
         "romaniaKeywords": [],
         "paidProviderEnabled": true,
+        "credentialsConfigured": true,
         "romaniaDemand": {
-          "version": "2.6",
+          "version": "2.7",
           "status": "INSUFFICIENT",
           "score": 0,
           "providerVerified": false,
@@ -48183,7 +48285,7 @@
           "romaniaObservedLinks": 0,
           "pricingDomains": 0,
           "keywords": [],
-          "policy": "Romania demand combines provider search-volume variants, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts are proxies."
+          "policy": "Romania demand combines provider search-volume data, 12-month trend and concrete Romanian market evidence. Missing volume stays unknown; result counts remain proxies."
         }
       },
       "testBuyDecision": {
@@ -48253,7 +48355,7 @@
   "goldenPipeline": {
     "version": "2.5",
     "phase": "final",
-    "updatedAt": "2026-08-19T17:02:05.247Z",
+    "updatedAt": "2026-08-19T20:38:08.334Z",
     "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence + Romania demand + high-confidence sales model are credible → TEST_READY after all TEST gates → BUY_READY only after a successful real test.",
     "quotas": {
       "promising": 15,
@@ -48278,7 +48380,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-19T17:02:02.329Z",
+    "updatedAt": "2026-08-19T20:38:07.000Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -48293,7 +48395,7 @@
   },
   "commercialHardening": {
     "version": "1.1",
-    "updatedAt": "2026-08-19T17:02:02.404Z",
+    "updatedAt": "2026-08-19T20:38:07.077Z",
     "stats": {
       "products": 52,
       "pricingVerified": 5,
@@ -48314,7 +48416,7 @@
   },
   "intelligenceEcosystem": {
     "version": "2.5",
-    "updatedAt": "2026-08-19T17:02:02.484Z",
+    "updatedAt": "2026-08-19T20:38:07.159Z",
     "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
     "engines": {
       "salesEstimation": true,
@@ -48338,26 +48440,48 @@
       "completedRealTests": 0
     }
   },
-  "providerIntelligenceV26": {
-    "version": "2.6",
-    "updatedAt": "2026-08-19T17:02:02.558Z",
+  "providerIntelligenceV27": {
+    "version": "2.7",
+    "updatedAt": "2026-08-19T20:38:07.231Z",
     "stats": {
       "products": 52,
       "deepProducts": 5,
       "paidProviderEnabled": true,
+      "credentialsConfigured": true,
+      "providerStatus": "PROVIDER_ERROR",
       "paidCalls": 0,
       "runCostUsd": 0,
       "amazonEnriched": 0,
+      "reverseKeywordEnriched": 0,
       "salesHighConfidence": 0,
       "romaniaDemandReady": 0,
       "asinReady": 0,
+      "reverseKeywordProviderReady": 0,
       "nicheTrackable": 47
     },
-    "policy": "Provider-grade intelligence enriches only evidence-backed fields. New paid Amazon endpoints require explicit opt-in via DATAFORSEO_V26_PAID_ENABLED=true and are bounded by per-run cost/call guards."
+    "providerErrors": [
+      {
+        "product": "Car sunglasses magnetic visor holder",
+        "layer": "AMAZON_PRODUCTS",
+        "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+      },
+      {
+        "product": "Under desk headphone hanger clamp",
+        "layer": "AMAZON_PRODUCTS",
+        "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+      },
+      {
+        "product": "Car trunk side storage net",
+        "layer": "AMAZON_PRODUCTS",
+        "error": "DataForSEO /v3/merchant/amazon/products/live/advanced HTTP 402"
+      }
+    ],
+    "nextAction": "Inspect providerErrors and correct the failing endpoint/request before another paid run.",
+    "policy": "Provider-grade intelligence enriches only evidence-backed fields. Paid Amazon endpoints require explicit opt-in and are bounded by per-run cost/call guards. BUY still requires our own completed real test."
   },
   "testBuyEngine": {
     "version": "2.5",
-    "updatedAt": "2026-08-19T17:02:05.161Z",
+    "updatedAt": "2026-08-19T20:38:08.246Z",
     "readyProducts": 0,
     "policy": "TEST folosește demand validat + sales estimation HIGH confidence; BUY cere suplimentar performanță reală după lotul nostru de test.",
     "testReady": 0,
