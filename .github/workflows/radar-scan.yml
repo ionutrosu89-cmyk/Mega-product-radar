@@ -68,12 +68,23 @@ jobs:
       - name: Build Golden Product Pipeline pre-paid funnel
         if: always()
         run: node scripts/golden-product-pipeline.mjs --phase=prepaid
-      - name: Enrich Romania keyword demand with DataForSEO when configured
+      - name: Check cumulative DataForSEO test budget
         if: always()
+        id: total_budget
+        env:
+          DATAFORSEO_TOTAL_TEST_CAP_USD: '10.00'
+          DATAFORSEO_MAX_NEXT_CYCLE_USD: '0.50'
+        run: node scripts/dataforseo-total-budget.mjs pre
+      - name: Enrich Romania keyword demand with DataForSEO when configured
+        if: always() && steps.total_budget.outputs.allow_paid == 'true'
         continue-on-error: true
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
           DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_TRIAL_MODE: 'true'
+          DATAFORSEO_MAX_REQUEST_COST_USD: '0.10'
+          DATAFORSEO_MAX_DAILY_COST_USD: '0.20'
+          DATAFORSEO_MAX_MONTHLY_COST_USD: '5.00'
         run: node scripts/dataforseo-keywords.mjs
       - name: Update Market Intelligence history
         if: always()
@@ -93,8 +104,8 @@ jobs:
       - name: Build V2.5 intelligence ecosystem
         if: always()
         run: node scripts/intelligence-ecosystem-v25.mjs
-      - name: Build V2.6 Romania Demand Sales and Reverse Keyword intelligence
-        if: always()
+      - name: Build V2.7 Romania Demand Sales and Reverse Keyword intelligence
+        if: always() && steps.total_budget.outputs.allow_paid == 'true'
         continue-on-error: true
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
@@ -102,8 +113,14 @@ jobs:
           DATAFORSEO_V26_PAID_ENABLED: 'true'
           V26_DEEP_PRODUCTS: '5'
           V26_MAX_PAID_CALLS: '5'
-          V26_MAX_RUN_COST_USD: '0.50'
+          V26_MAX_RUN_COST_USD: '0.40'
         run: node scripts/provider-intelligence-v26.mjs
+      - name: Update cumulative DataForSEO test budget
+        if: always()
+        env:
+          DATAFORSEO_TOTAL_TEST_CAP_USD: '10.00'
+          DATAFORSEO_MAX_NEXT_CYCLE_USD: '0.50'
+        run: node scripts/dataforseo-total-budget.mjs post
       - name: Build strict Test Buy decision
         if: always()
         run: node scripts/test-buy-decision.mjs
@@ -130,7 +147,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json provider-intelligence-live.json provider-intelligence-cache.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json provider-intelligence-live.json provider-intelligence-cache.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json paid-budget-cap.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
