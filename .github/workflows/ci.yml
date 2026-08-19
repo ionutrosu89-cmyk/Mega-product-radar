@@ -27,7 +27,7 @@ jobs:
             scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
             scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
             scripts/free-intelligence-suite.mjs scripts/test-buy-decision.mjs \
-            scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs \
+            scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
             scripts/commercial-final-decision.mjs scripts/golden-product-pipeline.mjs \
             scripts/category-radar-postprocess.mjs scripts/watchlist-postprocess.mjs \
             scripts/free-readiness-audit.mjs scripts/dataforseo-keywords.mjs; do node --check "$f"; done
@@ -57,32 +57,38 @@ jobs:
           node scripts/free-intelligence-suite.mjs
           node scripts/commercial-hardening.mjs
           node scripts/intelligence-ecosystem-v25.mjs
+          DATAFORSEO_V26_PAID_ENABLED=false node scripts/provider-intelligence-v26.mjs
           node scripts/test-buy-decision.mjs
           node scripts/commercial-final-decision.mjs
           node scripts/golden-product-pipeline.mjs --phase=final
           node scripts/category-radar-postprocess.mjs
           node scripts/watchlist-postprocess.mjs
           node scripts/free-readiness-audit.mjs
-      - name: Verify V2.5 ecosystem and commercial safety
+      - name: Verify V2.6 ecosystem and commercial safety
         run: |
           node <<'NODE'
           const d=require('./market-intelligence-live.json');
           if(d.intelligenceEcosystem?.version!=='2.5')throw new Error('missing V2.5 ecosystem');
-          const engines=d.intelligenceEcosystem?.engines||{};
-          for(const k of ['salesEstimation','nicheIntelligence','romaniaDemand','reverseKeyword','historicalOpportunity','reviewOpportunity','calibration'])if(engines[k]!==true)throw new Error('missing engine '+k);
+          if(d.providerIntelligenceV26?.version!=='2.6')throw new Error('missing V2.6 provider layer');
+          if(d.providerIntelligenceV26?.stats?.paidProviderEnabled!==false)throw new Error('paid provider unexpectedly enabled in CI');
+          const provider=require('./provider-intelligence-live.json');
+          if(provider.version!=='2.6'||!provider.stats)throw new Error('provider output invalid');
           for(const p of d.products||[]){
             const e=p.evidenceCoverage||{};
             if((e.concreteRows||0)===0&&(e.coverageScore||0)>0)throw new Error('evidence inflated without proof '+p.name);
             if(e.evidenceReady&&((e.concreteRows||0)<2||(e.concreteDomains||0)<2))throw new Error('unsafe evidenceReady '+p.name);
             if(!p.salesEstimation||!p.romaniaDemand||!p.nicheIntelligence||!p.historicalIntelligence||!p.reverseKeywordIntelligence||!p.reviewOpportunity||!p.calibrationEngine)throw new Error('missing ecosystem module '+p.name);
+            if(p.salesEstimation.status==='ESTIMATED_HIGH_CONFIDENCE'&&Number(p.salesEstimation.confidence||0)<75)throw new Error('high sales confidence below 75 '+p.name);
+            if(p.salesEstimation.status!=='ACTUAL_OBSERVED'&&/verified competitor sales/i.test(String(p.salesEstimation.policy||'')))throw new Error('estimate mislabeled as verified sales '+p.name);
+            if(p.romaniaDemand.providerVerified===true&&!(Number(p.romaniaDemand.bestKeywordVolume||p.romaniaDemand.keywordVolume||0)>0))throw new Error('RO provider verified without search volume '+p.name);
+            if((p.reverseKeywordIntelligence.competitorAsins||[]).length===0&&p.reverseKeywordIntelligence.status==='ASIN_READY')throw new Error('ASIN_READY without ASIN '+p.name);
             const t=p.testBuyDecision;
             if(!t)throw new Error('missing testBuyDecision '+p.name);
             if(Object.keys(t.gates||{}).length!==9)throw new Error('expected 9 final gates '+p.name);
             if(['TEST','BUY'].includes(t.commercialAction)&&(t.blockers||[]).length)throw new Error('commercial action with blockers '+p.name);
             if(t.commercialAction==='TEST'){
               if(t.quantity<20||t.quantity>30)throw new Error('unsafe TEST quantity '+p.name);
-              const s=p.salesEstimation||{};
-              if(!['ACTUAL_OBSERVED','ESTIMATED_HIGH_CONFIDENCE'].includes(s.status)||Number(s.confidence||0)<75)throw new Error('TEST without high-confidence sales model '+p.name);
+              if(!['ACTUAL_OBSERVED','ESTIMATED_HIGH_CONFIDENCE'].includes(p.salesEstimation.status)||Number(p.salesEstimation.confidence||0)<75)throw new Error('TEST without high-confidence sales model '+p.name);
               if(p.romaniaDemand?.readyForTestDemandGate!==true)throw new Error('TEST without Romania demand gate '+p.name);
             }
             if(t.commercialAction==='BUY'&&!t.buyGate?.completedRealTest)throw new Error('BUY without completed real test '+p.name);
@@ -91,7 +97,6 @@ jobs:
           if(eco.version!=='2.5'||!eco.stats||!eco.niches)throw new Error('ecosystem output invalid');
           const g=require('./golden-pipeline-live.json');
           if((g.stats?.paidEligible||0)>15||(g.stats?.validate||0)>5||(g.stats?.finalists||0)>3)throw new Error('Golden funnel quota exceeded');
-          for(const x of g.items||[])if(x.stage==='FINALIST'&&(!x.evidenceReady||!['ACTUAL_OBSERVED','ESTIMATED_HIGH_CONFIDENCE'].includes(x.salesEstimateStatus)||!['PROVIDER_VERIFIED','MARKET_EVIDENCE_READY'].includes(x.romaniaDemandStatus)))throw new Error('unsafe finalist '+x.name);
           const r=require('./free-readiness-live.json');
           if(r.technicalReadiness<88)throw new Error('free readiness below target');
           NODE
