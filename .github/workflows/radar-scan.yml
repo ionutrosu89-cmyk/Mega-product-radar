@@ -99,7 +99,7 @@ jobs:
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
           DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
-          DATAFORSEO_V26_PAID_ENABLED: ${{ vars.DATAFORSEO_V26_PAID_ENABLED }}
+          DATAFORSEO_V26_PAID_ENABLED: 'true'
           V26_DEEP_PRODUCTS: '5'
           V26_MAX_PAID_CALLS: '5'
           V26_MAX_RUN_COST_USD: '0.50'
