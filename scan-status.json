@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-19T10:55:02.686Z",
-  "completedAt": "2026-08-19T11:00:46.633Z",
-  "updatedAt": "2026-08-19T10:55:16.846Z",
+  "startedAt": "2026-08-19T11:58:38.740Z",
+  "completedAt": "2026-08-19T12:03:48.085Z",
+  "updatedAt": "2026-08-19T11:58:51.303Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-19T10:55:16.886Z",
+    "updatedAt": "2026-08-19T11:58:51.348Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-19T11:00:46.605Z",
+    "updatedAt": "2026-08-19T12:03:48.059Z",
     "candidates": 52,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 5,
+    "reviewChecks": 6,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-19T10:58:46.584Z",
+      "updatedAt": "2026-08-19T12:01:48.039Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-19T10:57:57.124Z",
-    "category": "Casă & organizare",
-    "successfulPages": 13,
-    "totalObserved": 125,
-    "totalClusters": 84,
-    "feedCount": 5,
+    "updatedAt": "2026-08-19T12:01:39.770Z",
+    "category": "Bucătărie",
+    "successfulPages": 15,
+    "totalObserved": 146,
+    "totalClusters": 98,
+    "feedCount": 3,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 2,
-        "items": 24,
+        "successful": 6,
+        "items": 72,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 4,
-        "items": 55,
+        "successful": 2,
+        "items": 28,
         "statuses": [
           200,
           200,
@@ -227,7 +227,7 @@
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
@@ -240,20 +240,20 @@
         "successful": 1,
         "items": 12,
         "statuses": [
+          503,
+          503,
+          503,
+          503,
           200,
-          200,
-          503,
-          503,
-          503,
-          200
+          503
         ],
         "sources": [
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT",
-          "DIRECT",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "ebayUS": {
@@ -303,14 +303,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-19T10:58:46.566Z",
-      "attempted": 18,
-      "enriched": 15,
+      "at": "2026-08-19T12:01:48.022Z",
+      "attempted": 3,
+      "enriched": 3,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-19T10:58:46.575Z",
+      "at": "2026-08-19T12:01:48.030Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
