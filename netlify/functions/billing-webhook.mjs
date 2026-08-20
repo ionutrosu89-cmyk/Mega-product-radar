@@ -21,24 +21,31 @@ async function supabaseWrite(path,{method='POST',body,env,fetchImpl}){
   if(!response.ok)throw new Error(`Supabase billing update failed: ${response.status}`);
 }
 
+function grantedPlan(subscription){
+  const metadata=subscription?.metadata||{};
+  const requested=String(metadata.plan||'FREE').toUpperCase();
+  const status=String(subscription?.status||'unknown').toLowerCase();
+  if(!['active','trialing'].includes(status))return 'FREE';
+  return ['DISCOVER','RADAR','LAUNCH'].includes(requested)?requested:'FREE';
+}
+
 async function applySubscription(subscription,{env,fetchImpl}){
   const metadata=subscription?.metadata||{};
   const workspaceId=metadata.workspace_id;
-  let plan=String(metadata.plan||'FREE').toUpperCase();
-  const status=String(subscription?.status||'unknown');
-  const ended=['canceled','unpaid','incomplete_expired'].includes(status);
-  if(ended)plan='FREE';
   if(!workspaceId)return;
+  const status=String(subscription?.status||'unknown');
+  const plan=grantedPlan(subscription);
   await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
-  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:subscription.current_period_end?new Date(subscription.current_period_end*1000).toISOString():null,updated_at:new Date().toISOString()},env,fetchImpl});
+  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:subscription.current_period_end?new Date(subscription.current_period_end*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
 }
 
 async function applyCheckoutSession(session,{env,fetchImpl}){
   const workspaceId=session?.metadata?.workspace_id||session?.client_reference_id;
   const plan=String(session?.metadata?.plan||'FREE').toUpperCase();
   if(!workspaceId||!['DISCOVER','RADAR','LAUNCH'].includes(plan))return;
-  await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
-  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(session.customer||''),provider_subscription_id:String(session.subscription||''),plan,status:'active',updated_at:new Date().toISOString()},env,fetchImpl});
+  // Checkout completion alone never grants paid access. The subscription.created/updated
+  // event is the entitlement source of truth, preventing unpaid/incomplete sessions from unlocking features.
+  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(session.customer||''),provider_subscription_id:String(session.subscription||''),plan:'FREE',status:'checkout_completed',cancel_at_period_end:false,updated_at:new Date().toISOString()},env,fetchImpl});
 }
 
 export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.env}={}){
@@ -57,6 +64,6 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
   };
 }
 
-export {verifySignature};
+export {verifySignature,grantedPlan};
 export default createBillingWebhookHandler();
 export const config={path:'/api/billing/webhook',method:'POST'};
