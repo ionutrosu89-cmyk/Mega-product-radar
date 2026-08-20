@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs/promises';
 import {hasFeature,planByCode} from '../billing-plans.js';
+import {commercialPlanRank} from '../commercial-access.js';
 
 test('commercial Discover tiers preserve the agreed funnel',()=>{
   assert.equal(planByCode('FREE').monthlyPriceEur,0);
@@ -12,6 +13,8 @@ test('commercial Discover tiers preserve the agreed funnel',()=>{
   assert.equal(hasFeature('DISCOVER','TOP_PRODUCTS'),true);
   assert.equal(hasFeature('DISCOVER','RADAR'),false);
   assert.equal(hasFeature('RADAR','RADAR'),true);
+  assert.equal(commercialPlanRank('FREE'),0);
+  assert.equal(commercialPlanRank('LAUNCH'),3);
 });
 
 test('Discover UI does not mislabel web proxies as verified sales',async()=>{
@@ -25,9 +28,20 @@ test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
 });
 
-test('Free limits Discover while Radar remains a separate entitlement',async()=>{
+test('Free limits Discover and plan comes from authenticated workspace access',async()=>{
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
+  const access=await fs.readFile(new URL('../commercial-access.js',import.meta.url),'utf8');
   assert.match(js,/index>=3/);
-  assert.match(js,/hasFeature\(plan\.code,'RADAR'\)/);
+  assert.match(js,/resolveCommercialAccess/);
+  assert.match(js,/access\.has\('RADAR'\)/);
   assert.match(js,/Vezi Discover · €17,90/);
+  assert.match(access,/listWorkspaces/);
+  assert.doesNotMatch(js,/megaRadarCommercialPlanV1/);
+});
+
+test('database migration enables new commercial plan codes without breaking legacy rows',async()=>{
+  const sql=await fs.readFile(new URL('../supabase/migrations/20260820_commercial_plans.sql',import.meta.url),'utf8');
+  for(const code of ['FREE','DISCOVER','RADAR','LAUNCH','STARTER','PRO','BUSINESS'])assert.match(sql,new RegExp(`'${code}'`));
+  assert.match(sql,/alter column plan set default 'FREE'/);
+  assert.match(sql,/values\(workspace_name, workspace_slug \|\| .* 'FREE'\)/s);
 });
