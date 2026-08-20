@@ -1,15 +1,10 @@
-import {hasFeature,planByCode} from './billing-plans.js';
+import {resolveCommercialAccess} from './commercial-access.js';
 import {roCategory,roProductName} from './product-ro.js';
 
-const PLAN_KEY='megaRadarCommercialPlanV1';
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const safeUrl=u=>{try{const x=new URL(String(u||''),location.href);return['http:','https:'].includes(x.protocol)?x.href:'#';}catch{return'#';}};
 const num=v=>Number(v||0);
-const planCode=String(localStorage.getItem(PLAN_KEY)||'FREE').toUpperCase();
-const plan=planByCode(planCode);
-const discoverFull=hasFeature(plan.code,'TOP_PRODUCTS');
-const radarAccess=hasFeature(plan.code,'RADAR');
-let products=[],view='ALL';
+let access=null,products=[],view='ALL',discoverFull=false,radarAccess=false;
 
 function signal(p,key){return p?.signals?.[key]||{};}
 function signalCount(p,keys){return keys.reduce((sum,key)=>sum+num(signal(p,key).resultCount),0);}
@@ -32,7 +27,7 @@ function lockedCard(){return `<div class="lock-layer"><div class="lock-box"><b>�
 function card(p,index){const name=roProductName(p.name),cat=roCategory(p.cat||''),reviews=reviewEvidence(p),aCount=amazonCount(p),tCount=tiktokCount(p),locked=!discoverFull&&index>=3,src=evidenceLink(p),status=sourceStatus(p);return `<article class="card">${locked?lockedCard():''}<div class="top"><div class="product">${image(p,name)}<div class="copy"><h3>${esc(name)}</h3><small>${esc(cat||p.cat||'Categorie')} · ${esc(status)} data</small></div></div><div class="score">${score(p)}<small>DISCOVERY SCORE</small></div></div><div class="badges">${platformBadges(p)}<span class="badge derived">DERIVED</span></div><div class="metrics"><div class="metric"><small>Amazon web signal</small><b>${aCount||'—'}</b></div><div class="metric"><small>TikTok web signal</small><b>${tCount||'—'}</b></div><div class="metric"><small>Review evidence</small><b>${reviews.sources} surse</b></div><div class="metric"><small>Fragmente review</small><b>${reviews.snippets}</b></div></div><div class="trend"><b>Trend derivat:</b> 7 zile ${delta7(p)>0?'+':''}${delta7(p)} · 30 zile ${delta30(p)>0?'+':''}${delta30(p)} · confidence review ${esc(reviews.confidence)}</div><div class="actions">${src!=='#'?`<a href="${esc(src)}" target="_blank" rel="noopener">Vezi dovada</a>`:''}<a class="primary" href="${radarAccess?'radar.html':'pricing.html'}">${radarAccess?'Analizează în Radar':'🔒 Analizează pentru România'}</a></div></article>`;}
 function filtered(){const q=(document.querySelector('#search')?.value||'').trim().toLowerCase();let list=products.filter(p=>!q||`${p.name} ${roProductName(p.name)} ${p.cat||''} ${roCategory(p.cat||'')}`.toLowerCase().includes(q));if(view==='AMAZON')list=list.filter(p=>amazonPresent(p)||amazonCount(p)>0);if(view==='TIKTOK')list=list.filter(p=>tiktokPresent(p)||tiktokCount(p)>0);if(view==='RISING')list=list.filter(isRising);if(view==='NEW')list=list.filter(isNew);const sort=document.querySelector('#sort')?.value||'SCORE';list.sort((a,b)=>sort==='RISING'?delta7(b)-delta7(a):sort==='NEW'?Date.parse(b.firstDiscoveredAt||0)-Date.parse(a.firstDiscoveredAt||0):score(b)-score(a));return list.slice(0,20);}
 function render(){const list=filtered();document.querySelector('#grid').innerHTML=list.length?list.map(card).join(''):'<div class="empty">Nu există produse pentru filtrul selectat.</div>';document.querySelector('#kVisible').textContent=discoverFull?list.length:Math.min(3,list.length);document.querySelector('#kAmazon').textContent=products.filter(p=>amazonPresent(p)||amazonCount(p)>0).length;document.querySelector('#kTikTok').textContent=products.filter(p=>tiktokPresent(p)||tiktokCount(p)>0).length;document.querySelector('#kRising').textContent=products.filter(isRising).length;document.querySelector('#kLive').textContent=products.filter(p=>['LIVE','PARTIAL'].includes(sourceStatus(p))).length;}
-async function load(){document.querySelector('#planName').textContent=plan.name.toUpperCase();const cta=document.querySelector('#upgradeCta');if(cta){cta.textContent=discoverFull?'Discover activ':'Deblochează Discover · €17,90';if(discoverFull)cta.href='account.html';}try{const r=await fetch(`discovery-live.json?t=${Date.now()}`,{cache:'no-store'});const data=r.ok?await r.json():{};products=Array.isArray(data.products)?data.products:[];}catch{products=[];}render();}
+async function load(){access=await resolveCommercialAccess();discoverFull=access.has('TOP_PRODUCTS');radarAccess=access.has('RADAR');document.querySelector('#planName').textContent=access.plan.name.toUpperCase();const cta=document.querySelector('#upgradeCta');if(cta){cta.textContent=discoverFull?'Discover activ':'Deblochează Discover · €17,90';if(discoverFull)cta.href='account.html';}try{const r=await fetch(`discovery-live.json?t=${Date.now()}`,{cache:'no-store'});const data=r.ok?await r.json():{};products=Array.isArray(data.products)?data.products:[];}catch{products=[];}render();}
 
 document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');view=btn.dataset.view;render();}));
 document.querySelector('#search')?.addEventListener('input',render);
