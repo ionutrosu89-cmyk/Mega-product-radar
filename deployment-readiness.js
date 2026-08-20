@@ -1,0 +1,14 @@
+import {getCurrentSession} from './supabase-client.js';
+
+const $=s=>document.querySelector(s);
+const ENV_KEYS=['STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET','STRIPE_PRICE_DISCOVER','STRIPE_PRICE_RADAR','STRIPE_PRICE_LAUNCH','SUPABASE_SERVICE_ROLE_KEY'];
+const PRICE_LABELS={STRIPE_PRICE_DISCOVER:'Discover · €17,90',STRIPE_PRICE_RADAR:'Radar · €29',STRIPE_PRICE_LAUNCH:'Launch · €89'};
+function pill(ok,text){return `<span class="pill ${ok?'ok':'bad'}">${text}</span>`;}
+function setText(id,text,kind=''){const el=$(id);el.textContent=text;el.className=kind;}
+function renderConfig(configured={}){$('#configRows').innerHTML=ENV_KEYS.map(k=>`<div class="row"><code>${k}</code>${pill(Boolean(configured[k]),configured[k]?'CONFIGURAT':'LIPSEȘTE')}</div>`).join('');}
+function renderPrices(prices={}){const keys=Object.keys(PRICE_LABELS);$('#priceRows').innerHTML=keys.map(k=>{const p=prices[k]||{};const valid=Boolean(p.valid&&p.active&&p.currency==='eur'&&p.recurringInterval==='month');const amount=p.unitAmount==null?'—':`€${(Number(p.unitAmount)/100).toFixed(2).replace('.',',')}`;return `<div class="row"><div><b>${PRICE_LABELS[k]}</b><div class="status">${p.configured?'Price ID configurat':'Price ID lipsă'} · ${amount} · ${(p.currency||'—').toUpperCase()} · ${p.recurringInterval||'—'} · ${p.active?'activ':'inactiv'}</div></div>${pill(valid,valid?'VALID':'INVALID')}</div>`;}).join('');}
+function renderResult(data){renderConfig(data.configured);renderPrices(data.prices);const configured=Boolean(data.checks?.allConfigured);const prices=Boolean(data.checks?.allPricesValid&&data.checks?.amountsMatch);setText('#readyState',data.ready?'READY':'BLOCKED',data.ready?'ok':'bad');setText('#secretState',configured?'OK':'MISSING',configured?'ok':'bad');setText('#priceState',prices?'VALID':'INVALID',prices?'ok':'bad');setText('#verdict',data.ready?'GO':'NO-GO',data.ready?'ok':'bad');$('#status').textContent=data.ready?'Infrastructura tehnică Stripe/Supabase este pregătită pentru testul sandbox end-to-end.':'Există blocaje tehnice. Rezolvă elementele marcate înainte de testul sandbox.';}
+
+async function run(){const button=$('#runCheck');button.disabled=true;$('#status').textContent='Verific deployment-ul…';try{const session=await getCurrentSession();if(!session?.access_token){location.href='login.html?next=deployment-readiness.html';return;}const r=await fetch('/api/internal/billing-readiness',{headers:{authorization:`Bearer ${session.access_token}`,'cache-control':'no-cache'}});let data={};try{data=await r.json();}catch{}if(!r.ok)throw new Error(data.error||`Readiness check failed (${r.status})`);renderResult(data);}catch(error){$('#status').textContent=error.message||'Verificarea nu a putut fi executată.';setText('#readyState','BLOCKED','bad');setText('#verdict','NO-GO','bad');}finally{button.disabled=false;}}
+
+renderConfig({});$('#runCheck').addEventListener('click',run);run();
