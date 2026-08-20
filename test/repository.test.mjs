@@ -5,7 +5,7 @@ import test from "node:test";
 
 test("only the canonical Netlify Functions are present", async () => {
   const entries = (await readdir("netlify/functions", { recursive: true })).filter((entry) => entry.endsWith(".mjs")).sort();
-  assert.deepEqual(entries, ["billing-checkout.mjs","billing-webhook.mjs","commercial-discover.mjs","commercial-radar.mjs","radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-sync.mjs","radar-trigger.mjs"]);
+  assert.deepEqual(entries, ["beta-analytics.mjs","billing-checkout.mjs","billing-webhook.mjs","commercial-discover.mjs","commercial-radar.mjs","radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-sync.mjs","radar-trigger.mjs"]);
 });
 
 test("radar-data exposes live data and scan state from blobs", async () => {
