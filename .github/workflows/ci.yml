@@ -23,6 +23,7 @@ jobs:
       - name: Syntax check V2 engines
         run: |
           for f in app.js market-trend-ui.js free-intelligence-ui.js product-ro.js intelligence-ecosystem.js \
+            commercial-decision-engine.js commercial-decision-client.js commercial-validation.js supplier-intelligence.js landed-cost.js \
             scripts/web-radar-scan.mjs scripts/discovery-v6-expand.mjs \
             scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
             scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
@@ -42,7 +43,7 @@ jobs:
           const checks={
             'action-center.html':['viewport-fit=cover','watchlist-live.json','Ce fac azi?','Maximum 3'],
             'product-decision.html':['viewport-fit=cover','market-intelligence-live.json','Dosar produs','Review Intelligence V2','Supplier Intelligence','Validare spre TEST','Decision Summary','Blocaj','Acțiunea cu impact maxim'],
-            'test-buy.html':['viewport-fit=cover','Test Buy 20–30','testBuyDecision','Buget test','Landed/unit'],
+            'test-buy.html':['viewport-fit=cover','Test Buy 20–30','testBuyDecision','Buget test','Landed confirmat','commercial-decision-client.js','5/9'],
             'category-radar.html':['viewport-fit=cover','Category Radar','category-radar-live.json','10–20','TEST-ready'],
             'intelligence-ecosystem.html':['viewport-fit=cover','Intelligence Ecosystem','Sales Estimation','Niche Intelligence','Romania Demand','Reverse Keyword','Historical Opportunity','Review Opportunity','Calibration','intelligence-ecosystem.js']
           };
