@@ -19,7 +19,7 @@ test("radar-data exposes live data and scan state from blobs", async () => {
 test("public trigger queues the protected background route without exposing its secret", async () => {
   const { createTriggerHandler } = await import("../netlify/functions/radar-trigger.mjs");
   const writes = new Map(); let outbound;
-  const handler = createTriggerHandler({ env: { RADAR_INTERNAL_SECRET: "server-only" }, getStore: () => ({ get: key => values.get(key) }), fetch: async (url, options) => { outbound={url,options}; return new Response(null,{status:202}); } });
+  const handler = createTriggerHandler({ env: { RADAR_INTERNAL_SECRET: "server-only" }, getStore: () => ({ set: (key,value) => writes.set(key,value) }), fetch: async (url, options) => { outbound={url,options}; return new Response(null,{status:202}); } });
   const response = await handler(new Request("https://radar.example/api/radar/trigger", { method: "POST" }));
   assert.equal(response.status, 202);
   assert.match(outbound.url, /^https:\/\/radar\.example\/api\/radar\/scan\?scanId=/);
