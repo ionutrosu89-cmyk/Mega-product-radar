@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-20T05:07:50.397Z",
-  "completedAt": "2026-08-20T05:13:13.735Z",
-  "updatedAt": "2026-08-20T05:08:03.082Z",
+  "startedAt": "2026-08-20T08:00:05.234Z",
+  "completedAt": "2026-08-20T08:06:05.790Z",
+  "updatedAt": "2026-08-20T08:00:19.311Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-20T05:08:03.125Z",
+    "updatedAt": "2026-08-20T08:00:19.348Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-20T05:13:13.709Z",
+    "updatedAt": "2026-08-20T08:06:05.765Z",
     "candidates": 59,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 7,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-20T05:11:13.687Z",
+      "updatedAt": "2026-08-20T08:04:05.739Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-20T05:10:54.244Z",
-    "category": "Travel",
-    "successfulPages": 14,
-    "totalObserved": 116,
-    "totalClusters": 58,
-    "feedCount": 4,
+    "updatedAt": "2026-08-20T08:03:14.239Z",
+    "category": "Copii 3-6",
+    "successfulPages": 12,
+    "totalObserved": 130,
+    "totalClusters": 96,
+    "feedCount": 2,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 4,
-        "items": 43,
+        "successful": 6,
+        "items": 70,
         "statuses": [
           200,
           200,
@@ -215,23 +215,23 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 4,
-        "items": 37,
+        "successful": 3,
+        "items": 42,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
-          200
+          503,
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "amazonDE": {
@@ -281,36 +281,36 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 6,
-        "items": 36,
+        "successful": 3,
+        "items": 18,
         "statuses": [
           200,
           200,
-          200,
-          200,
-          200,
+          511,
+          511,
+          511,
           200
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
           "GOOGLE_TRANSLATE_RENDER"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-20T05:11:13.673Z",
-      "attempted": 7,
-      "enriched": 4,
+      "at": "2026-08-20T08:04:05.720Z",
+      "attempted": 8,
+      "enriched": 2,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-20T05:11:13.680Z",
+      "at": "2026-08-20T08:04:05.731Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
