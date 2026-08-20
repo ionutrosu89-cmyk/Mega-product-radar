@@ -18,10 +18,10 @@ test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   const html=await fs.readFile(new URL('../discover.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
   assert.match(html,/VERIFIED, ESTIMATED sau DERIVED/);
-  assert.match(html,/Amazon web signal/);
-  assert.match(html,/TikTok web signal/);
+  assert.match(js,/Amazon web signal/);
+  assert.match(js,/TikTok web signal/);
   assert.match(js,/DERIVED/);
-  assert.doesNotMatch(html,/unități vândute:\s*\d/i);
+  assert.doesNotMatch(`${html}\n${js}`,/unități vândute:\s*\d/i);
   assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
 });
 
