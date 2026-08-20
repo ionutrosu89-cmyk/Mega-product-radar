@@ -25,8 +25,8 @@ test('pricing Free copy matches server entitlement of three products, not credit
   const discoverFn=await readFile('netlify/functions/commercial-discover.mjs','utf8');
   assert.match(pricing,/3 produse afișate/);
   assert.doesNotMatch(pricing,/3 vizualizări\/credite/);
-  assert.match(discoverFn,/slice\(0,\s*limit\)/);
-  assert.match(discoverFn,/discoverFull\s*\?\s*20\s*:\s*3/);
+  assert.match(discoverFn,/const limit=full\?20:3/);
+  assert.match(discoverFn,/slice\(0,limit\)/);
 });
 
 test('paid data stays behind authenticated server endpoints in commercial journey',async()=>{
