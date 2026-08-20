@@ -28,15 +28,23 @@ test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
 });
 
-test('Free limits Discover and plan comes from authenticated workspace access',async()=>{
+test('Discover client loads commercial API instead of the raw discovery dataset',async()=>{
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
-  const access=await fs.readFile(new URL('../commercial-access.js',import.meta.url),'utf8');
-  assert.match(js,/index>=3/);
-  assert.match(js,/resolveCommercialAccess/);
-  assert.match(js,/access\.has\('RADAR'\)/);
+  assert.match(js,/\/api\/commercial\/discover/);
+  assert.match(js,/getCurrentSession/);
+  assert.match(js,/authorization/);
+  assert.doesNotMatch(js,/fetch\([^\n]*discovery-live\.json/);
   assert.match(js,/Vezi Discover · €17,90/);
-  assert.match(access,/listWorkspaces/);
-  assert.doesNotMatch(js,/megaRadarCommercialPlanV1/);
+});
+
+test('commercial endpoint enforces server-side product limits and strips sourcing economics',async()=>{
+  const fn=await fs.readFile(new URL('../netlify/functions/commercial-discover.mjs',import.meta.url),'utf8');
+  assert.match(fn,/const limit=full\?20:3/);
+  assert.match(fn,/\/auth\/v1\/user/);
+  assert.match(fn,/\/rest\/v1\/workspaces/);
+  assert.match(fn,/Vary':'Authorization/);
+  assert.doesNotMatch(fn,/sourcing:/);
+  assert.doesNotMatch(fn,/landedEstimate:/);
 });
 
 test('database migration enables new commercial plan codes without breaking legacy rows',async()=>{
