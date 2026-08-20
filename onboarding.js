@@ -1,5 +1,6 @@
 import {getCurrentSession} from './supabase-client.js';
 import {loadSellerPreferences,saveSellerPreferences} from './seller-preferences.js';
+import {trackJourneyEvent} from './journey-events.js';
 
 const $=s=>document.querySelector(s);
 function selected(container){return [...container.querySelectorAll('.chip.active')].map(x=>x.dataset.value).filter(Boolean);}
@@ -19,6 +20,7 @@ async function load(){
     $('#sourcing').value=p.sourcing_preference||'CHINA';
     setSelected($('#marketplaces'),p.marketplaces?.length?p.marketplaces:['EMAG_RO']);
     setSelected($('#categories'),p.categories||[]);
+    trackJourneyEvent('ONBOARDING_VIEW',{completed:Boolean(p.onboarding_completed)});
   }catch(e){$('#status').textContent=`Nu am putut încărca profilul: ${e.message}`;}
 }
 
@@ -26,9 +28,11 @@ $('#form').addEventListener('submit',async e=>{
   e.preventDefault();
   $('#status').textContent='Salvez profilul…';
   try{
-    await saveSellerPreferences({experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))});
-    $('#status').textContent='Profil salvat. Radarul și Launch vor folosi aceste preferințe.';
-    setTimeout(()=>{location.href='commercial-launch.html';},500);
+    const profile={experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))};
+    await saveSellerPreferences(profile);
+    await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length});
+    $('#status').textContent='Profil salvat. Recomandările vor folosi aceste preferințe.';
+    setTimeout(()=>{location.href='home.html';},350);
   }catch(error){$('#status').textContent=`Eroare: ${error.message}`;}
 });
 load();
