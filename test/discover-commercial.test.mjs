@@ -3,6 +3,7 @@ import test from 'node:test';
 import fs from 'node:fs/promises';
 import {hasFeature,planByCode} from '../billing-plans.js';
 import {commercialPlanRank} from '../commercial-access.js';
+import {bestEvidence,sortDiscoverProducts} from '../discover-ranking.js';
 
 test('commercial Discover tiers preserve the agreed funnel',()=>{
   assert.equal(planByCode('FREE').monthlyPriceEur,0);
@@ -20,13 +21,14 @@ test('commercial Discover tiers preserve the agreed funnel',()=>{
 test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   const html=await fs.readFile(new URL('../discover.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
+  const ranking=await fs.readFile(new URL('../discover-ranking.js',import.meta.url),'utf8');
   assert.match(html,/VERIFIED, ESTIMATED sau DERIVED/);
   assert.match(js,/Amazon evidence/);
   assert.match(js,/TikTok evidence/);
-  assert.match(js,/VERIFIED/);
-  assert.match(js,/DERIVED/);
-  assert.doesNotMatch(`${html}\n${js}`,/unități vândute:\s*\d/i);
-  assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
+  assert.match(`${js}\n${ranking}`,/VERIFIED/);
+  assert.match(`${js}\n${ranking}`,/DERIVED/);
+  assert.doesNotMatch(`${html}\n${js}\n${ranking}`,/unități vândute:\s*\d/i);
+  assert.doesNotMatch(`${js}\n${ranking}`,/soldUnits|verifiedSalesCount/);
 });
 
 test('Discover client loads commercial API instead of the raw discovery dataset',async()=>{
@@ -36,6 +38,21 @@ test('Discover client loads commercial API instead of the raw discovery dataset'
   assert.match(js,/authorization/);
   assert.doesNotMatch(js,/fetch\([^\n]*discovery-live\.json/);
   assert.match(js,/Vezi Discover · €17,90/);
+});
+
+test('Discover prioritizes verified observed evidence over higher derived score',()=>{
+  const derived={name:'Derived',discoveryAnalysis:{score:95},signals:{}};
+  const verified={name:'Verified',discoveryAnalysis:{score:40},signals:{amazonDE:{present:true,evidenceClass:'VERIFIED',links:[{url:'https://example.com/product'}]}}};
+  const ordered=sortDiscoverProducts([derived,verified],'BEST');
+  assert.equal(ordered[0].name,'Verified');
+  assert.deepEqual(bestEvidence(verified),{platform:'AMAZON',market:'Amazon DE',evidenceClass:'VERIFIED',url:'https://example.com/product',title:'',observed:true});
+});
+
+test('Discover source block never invents a verified source',()=>{
+  const none=bestEvidence({name:'No evidence',discoveryAnalysis:{score:99},signals:{}});
+  assert.equal(none.observed,false);
+  assert.equal(none.market,'Fără sursă verificată');
+  assert.equal(none.evidenceClass,'DERIVED');
 });
 
 test('commercial endpoint enforces server-side product limits and strips sourcing economics',async()=>{
@@ -58,6 +75,7 @@ test('Discover fuses only quality-gated Organic Rising evidence and never fabric
   assert.match(fn,/evidenceClass:'VERIFIED'/);
   assert.match(fn,/mergeProducts/);
   assert.match(build,/organic-rising-live\.json/);
+  assert.match(build,/discover-ranking\.js/);
   assert.doesNotMatch(fn,/tiktok[^\n]*present:true/i);
 });
 

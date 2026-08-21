@@ -20,7 +20,7 @@ for(const file of [
   'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','product-ro.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
-  'discover.html','discover.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
+  'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md'
 ]) await copyIfExists(file);
