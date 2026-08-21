@@ -21,13 +21,14 @@ test('commercial Discover tiers preserve the agreed funnel',()=>{
 test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   const html=await fs.readFile(new URL('../discover.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
+  const ranking=await fs.readFile(new URL('../discover-ranking.js',import.meta.url),'utf8');
   assert.match(html,/VERIFIED, ESTIMATED sau DERIVED/);
   assert.match(js,/Amazon evidence/);
   assert.match(js,/TikTok evidence/);
-  assert.match(js,/VERIFIED/);
-  assert.match(js,/DERIVED/);
-  assert.doesNotMatch(`${html}\n${js}`,/unități vândute:\s*\d/i);
-  assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
+  assert.match(`${js}\n${ranking}`,/VERIFIED/);
+  assert.match(`${js}\n${ranking}`,/DERIVED/);
+  assert.doesNotMatch(`${html}\n${js}\n${ranking}`,/unități vândute:\s*\d/i);
+  assert.doesNotMatch(`${js}\n${ranking}`,/soldUnits|verifiedSalesCount/);
 });
 
 test('Discover client loads commercial API instead of the raw discovery dataset',async()=>{
