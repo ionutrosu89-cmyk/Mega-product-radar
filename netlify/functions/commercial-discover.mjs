@@ -1,3 +1,5 @@
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {hasFeature,planByCode} from '../../billing-plans.js';
 
@@ -67,23 +69,39 @@ async function resolvePlan(request,{fetchImpl,env}){
   return {plan,authenticated:true,workspaceId:workspace?.id||null};
 }
 
-async function fetchJson(fetchImpl,url){const r=await fetchImpl(url,{headers:{accept:'application/json'}});if(!r.ok)throw new Error(`Source unavailable: ${url.pathname}`);return r.json();}
+async function fetchJson(fetchImpl,url){const r=await fetchImpl(url,{headers:{accept:'application/json'},cache:'no-store'});if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();}
+async function readBundledJson(filename){
+  const candidates=[path.join(process.cwd(),filename),path.join(process.cwd(),'..',filename),path.join(process.cwd(),'../..',filename)];
+  let lastError=null;
+  for(const file of candidates){try{return JSON.parse(await readFile(file,'utf8'));}catch(error){lastError=error;}}
+  throw lastError||new Error(`Bundled source unavailable: ${filename}`);
+}
+async function loadSource(fetchImpl,requestUrl,filename){
+  const url=new URL(`/${filename}`,requestUrl);
+  try{return {data:await fetchJson(fetchImpl,url),via:'HTTP',error:null};}
+  catch(httpError){
+    try{return {data:await readBundledJson(filename),via:'BUNDLED_FILE',error:String(httpError?.message||httpError)};}
+    catch(fileError){return {data:null,via:'UNAVAILABLE',error:`HTTP:${String(httpError?.message||httpError)}; FILE:${String(fileError?.message||fileError)}`};}
+  }
+}
 
 export function createCommercialDiscoverHandler({fetch:fetchImpl=fetch,env=process.env}={}){
   return async request=>{
     try{
       const access=await resolvePlan(request,{fetchImpl,env});
       if(access.error) return Response.json({ok:false,error:access.error},{status:access.status,headers:{'Cache-Control':'no-store'}});
-      const discoveryUrl=new URL('/discovery-live.json',request.url);
-      const organicUrl=new URL('/organic-rising-live.json',request.url);
-      const source=await fetchJson(fetchImpl,discoveryUrl);
-      let organic={products:[],updatedAt:null};
-      try{organic=await fetchJson(fetchImpl,organicUrl);}catch{}
+      const discoverySource=await loadSource(fetchImpl,request.url,'discovery-live.json');
+      if(!discoverySource.data) return Response.json({ok:false,error:'Discover source unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});
+      const organicSource=await loadSource(fetchImpl,request.url,'organic-rising-live.json');
+      const source=discoverySource.data;
+      const organic=organicSource.data||{products:[],updatedAt:null};
       const discoveryProducts=(Array.isArray(source.products)?source.products:[]).map(cleanProduct);
       const organicProducts=(Array.isArray(organic.products)?organic.products:[]).map(organicToDiscover).filter(Boolean);
       const full=hasFeature(access.plan.code,'TOP_PRODUCTS');
       const limit=full?20:3;
       const products=mergeProducts(discoveryProducts,organicProducts).slice(0,limit);
+      const amazonEvidenceCount=products.filter(p=>AMAZON_KEYS.some(k=>p?.signals?.[k]?.present)).length;
+      const risingCount=products.filter(p=>p?.risingSignal?.eligible).length;
       return Response.json({
         ok:true,
         plan:access.plan.code,
@@ -92,6 +110,7 @@ export function createCommercialDiscoverHandler({fetch:fetchImpl=fetch,env=proce
         limits:{products:limit},
         entitlements:{discoverFull:full,radar:hasFeature(access.plan.code,'RADAR'),launch:hasFeature(access.plan.code,'LAUNCH_PLAN')},
         integrity:{sales:'NOT_EXPOSED_WITHOUT_VERIFIABLE_PROVIDER',classification:'DERIVED',organicRising:'VERIFIED_LISTING_EVIDENCE_ONLY'},
+        sourceDiagnostics:{policy:'HTTP_OR_BUNDLED_FILE',discoverySourceStatus:discoverySource.via,organicSourceStatus:organicSource.via,organicEligibleProducts:organicProducts.length,amazonEvidenceCount,risingCount},
         updatedAt:[source.updatedAt,organic.updatedAt].filter(Boolean).sort().at(-1)||null,
         products
       },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
