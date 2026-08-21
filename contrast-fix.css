@@ -1,0 +1,22 @@
+/* Global readability guard applied after page styles. */
+::selection{background:#b9d2ff;color:#07111f;text-shadow:none}
+::-moz-selection{background:#b9d2ff;color:#07111f;text-shadow:none}
+
+body.app-light{color:#101828!important;background-color:#f4f7fb!important}
+body.app-light main,body.app-light main section,body.app-light main form{color:#101828}
+body.app-light main h1,body.app-light main h2,body.app-light main h3,body.app-light main h4,body.app-light main h5,body.app-light main h6{color:#101828!important}
+body.app-light :is(.card,.panel,.kpi,.module,.plan,.welcome,.progress,.upgrade){color:#101828!important}
+body.app-light :is(.card,.panel,.module,.plan,.welcome,.progress){background:#fff!important;border-color:#e4e7ec!important}
+body.app-light .kpi{background:#f8fafc!important;border-color:#e4e7ec!important}
+body.app-light :is(.tag,.sub,.meta,.signals,.notification-status,.rank,.status,.desc){color:#667085!important}
+body.app-light :is(.card,.panel,.module,.plan,.welcome,.progress,.upgrade) p{color:#667085}
+body.app-light :is(input,textarea,select){color:#101828!important;background:#fff!important;-webkit-text-fill-color:#101828;caret-color:#175cd3}
+body.app-light :is(input,textarea)::placeholder{color:#98a2b3!important;opacity:1;-webkit-text-fill-color:#98a2b3}
+body.app-light label{color:#344054}
+body.app-light a:not(.cta):not(.primary-link):not(.secondary-link){text-decoration-thickness:.08em;text-underline-offset:2px}
+
+/* Dark headers remain intentionally high contrast on light application pages. */
+body.app-light header,body.app-light header h1,body.app-light header h2,body.app-light header h3{color:#f8fafc!important}
+body.app-light header p{color:#cbd5e1!important}
+
+@media (forced-colors:active){::selection{background:Highlight;color:HighlightText}}
