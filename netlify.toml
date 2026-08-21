@@ -9,6 +9,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  included_files = ["discovery-live.json", "organic-rising-live.json"]
 
 [[headers]]
   for = "/*"
