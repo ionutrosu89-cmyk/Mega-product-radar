@@ -17,12 +17,23 @@ for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','premium-ui.css','login.html','login.js','account.html','account.js',
+  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'discover.html','discover.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md'
 ]) await copyIfExists(file);
+
+const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
+for(const entry of await fs.readdir(out)){
+  if(!entry.endsWith('.html'))continue;
+  const target=path.join(out,entry);
+  let html=await fs.readFile(target,'utf8');
+  if(lightBodyPattern.test(html))html=html.replace(/<body(\s[^>]*)?>/i,(match,attrs='')=>/\bclass\s*=/.test(attrs)?match.replace(/class=(['"])(.*?)\1/i,(_,q,classes)=>`class=${q}${classes} app-light${q}`):`<body${attrs} class="app-light">`);
+  if(!/contrast-fix\.css/i.test(html))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="contrast-fix.css"></head>');
+  await fs.writeFile(target,html);
+}
+
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening + Commercial SaaS pages.');
+console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening + Commercial SaaS pages + global contrast guard.');
