@@ -28,10 +28,12 @@ test('checkout prevents duplicate active Stripe subscriptions and client routes 
   assert.match(client,/\/api\/billing\/change-plan/);
 });
 
-test('checkout completion alone cannot grant a paid workspace plan',async()=>{
+test('checkout completion cannot overwrite subscription lifecycle state',async()=>{
   const webhook=await readFile(new URL('../netlify/functions/billing-webhook.mjs',import.meta.url),'utf8');
-  assert.match(webhook,/Checkout completion alone never grants paid access/);
-  assert.match(webhook,/plan:'FREE',status:'checkout_completed'/);
+  const checkoutSection=webhook.split('async function applyCheckoutSession')[1].split('export function createBillingWebhookHandler')[0];
+  assert.match(checkoutSection,/Subscription lifecycle events are the/);
+  assert.doesNotMatch(checkoutSection,/subscriptions\?on_conflict/);
+  assert.doesNotMatch(checkoutSection,/status:'checkout_completed'/);
 });
 
 test('billing lifecycle migration stores cancel-at-period-end state',async()=>{
