@@ -17,7 +17,7 @@ for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
+  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'discover.html','discover.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
