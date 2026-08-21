@@ -18,7 +18,11 @@ for(const file of [
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
   'saas-config.js','supabase-client.js','workspace-client.js','billing-plans.js','saas-shell.js','login.html','login.js','account.html','account.js',
-  'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json'
+  'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
+  'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
+  'discover.html','discover.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
+  'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
+  'beta-analytics.html','beta-analytics.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md'
 ]) await copyIfExists(file);
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening.');
+console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening + Commercial SaaS pages.');
