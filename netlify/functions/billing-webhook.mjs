@@ -39,13 +39,14 @@ async function applySubscription(subscription,{env,fetchImpl}){
   await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:subscription.current_period_end?new Date(subscription.current_period_end*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
 }
 
-async function applyCheckoutSession(session,{env,fetchImpl}){
+async function applyCheckoutSession(session){
   const workspaceId=session?.metadata?.workspace_id||session?.client_reference_id;
   const plan=String(session?.metadata?.plan||'FREE').toUpperCase();
   if(!workspaceId||!['DISCOVER','RADAR','LAUNCH'].includes(plan))return;
-  // Checkout completion alone never grants paid access. The subscription.created/updated
-  // event is the entitlement source of truth, preventing unpaid/incomplete sessions from unlocking features.
-  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(session.customer||''),provider_subscription_id:String(session.subscription||''),plan:'FREE',status:'checkout_completed',cancel_at_period_end:false,updated_at:new Date().toISOString()},env,fetchImpl});
+  // Checkout completion is only a receipt signal. Subscription lifecycle events are the
+  // sole source of truth for entitlement and subscription state, so this handler must
+  // never overwrite an active subscription if Stripe delivers events out of order.
+  return;
 }
 
 export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.env}={}){
@@ -55,7 +56,7 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
       const raw=await request.text();
       if(!verifySignature(raw,request.headers.get('stripe-signature'),env.STRIPE_WEBHOOK_SECRET))return new Response('Invalid signature',{status:400});
       const event=JSON.parse(raw);
-      if(event.type==='checkout.session.completed')await applyCheckoutSession(event.data?.object||{},{env,fetchImpl});
+      if(event.type==='checkout.session.completed')await applyCheckoutSession(event.data?.object||{});
       if(['customer.subscription.created','customer.subscription.updated','customer.subscription.deleted'].includes(event.type))await applySubscription(event.data?.object||{},{env,fetchImpl});
       return Response.json({received:true},{headers:{'Cache-Control':'no-store'}});
     }catch(error){
