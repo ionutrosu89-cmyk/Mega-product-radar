@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-21T20:51:16.142Z",
-  "completedAt": "2026-08-21T20:56:40.063Z",
-  "updatedAt": "2026-08-21T20:51:29.507Z",
+  "startedAt": "2026-08-21T20:57:39.920Z",
+  "completedAt": "2026-08-21T21:03:59.067Z",
+  "updatedAt": "2026-08-21T20:57:54.303Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-21T20:51:29.559Z",
+    "updatedAt": "2026-08-21T20:57:54.428Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-21T20:56:40.033Z",
+    "updatedAt": "2026-08-21T21:03:59.045Z",
     "candidates": 62,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-21T20:54:40.013Z",
+      "updatedAt": "2026-08-21T21:01:59.029Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-21T20:54:20.147Z",
+    "updatedAt": "2026-08-21T21:00:50.860Z",
     "category": "Bucătărie",
-    "successfulPages": 15,
-    "totalObserved": 156,
-    "totalClusters": 98,
-    "feedCount": 3,
+    "successfulPages": 19,
+    "totalObserved": 215,
+    "totalClusters": 153,
+    "feedCount": 2,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -215,36 +215,14 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 0,
-        "items": 0,
-        "statuses": [
-          200,
-          200,
-          200,
-          200,
-          503,
-          503
-        ],
-        "sources": [
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
-        ]
-      },
-      "amazonDE": {
-        "label": "Amazon DE",
-        "attempted": 6,
         "successful": 4,
-        "items": 53,
+        "items": 56,
         "statuses": [
           200,
           200,
           200,
           200,
-          503,
+          200,
           200
         ],
         "sources": [
@@ -252,8 +230,30 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT"
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
+        ]
+      },
+      "amazonDE": {
+        "label": "Amazon DE",
+        "attempted": 6,
+        "successful": 4,
+        "items": 56,
+        "statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "sources": [
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "ebayUS": {
@@ -288,29 +288,29 @@
           200,
           200,
           200,
-          511,
-          200
+          200,
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
-          "GOOGLE_TRANSLATE_RENDER"
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-21T20:54:39.993Z",
-      "attempted": 5,
-      "enriched": 0,
+      "at": "2026-08-21T21:01:59.007Z",
+      "attempted": 14,
+      "enriched": 1,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-21T20:54:40.003Z",
+      "at": "2026-08-21T21:01:59.021Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
