@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-21T10:59:37.639Z",
-  "completedAt": "2026-08-21T11:05:33.338Z",
-  "updatedAt": "2026-08-21T10:59:50.737Z",
+  "startedAt": "2026-08-21T17:03:22.443Z",
+  "completedAt": "2026-08-21T17:09:50.130Z",
+  "updatedAt": "2026-08-21T17:03:35.764Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-21T10:59:50.775Z",
+    "updatedAt": "2026-08-21T17:03:35.812Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-21T11:05:33.316Z",
+    "updatedAt": "2026-08-21T17:09:50.102Z",
     "candidates": 62,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 6,
+    "reviewChecks": 8,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-21T11:03:33.295Z",
+      "updatedAt": "2026-08-21T17:07:50.081Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-21T11:02:41.049Z",
-    "category": "Fitness & recuperare",
-    "successfulPages": 17,
-    "totalObserved": 170,
-    "totalClusters": 107,
-    "feedCount": 1,
+    "updatedAt": "2026-08-21T17:06:29.867Z",
+    "category": "Casă & organizare",
+    "successfulPages": 20,
+    "totalObserved": 233,
+    "totalClusters": 145,
+    "feedCount": 5,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 4,
-        "items": 47,
+        "successful": 6,
+        "items": 70,
         "statuses": [
           200,
           200,
@@ -216,7 +216,7 @@
         "label": "Amazon IT",
         "attempted": 6,
         "successful": 5,
-        "items": 60,
+        "items": 69,
         "statuses": [
           200,
           200,
@@ -226,7 +226,7 @@
           200
         ],
         "sources": [
-          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
@@ -237,8 +237,8 @@
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 3,
-        "items": 33,
+        "successful": 5,
+        "items": 70,
         "statuses": [
           200,
           200,
@@ -281,14 +281,14 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 5,
-        "items": 30,
+        "successful": 4,
+        "items": 24,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
+          511,
           511
         ],
         "sources": [
@@ -296,21 +296,21 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-21T11:03:33.281Z",
-      "attempted": 12,
+      "at": "2026-08-21T17:07:50.053Z",
+      "attempted": 15,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-21T11:03:33.288Z",
+      "at": "2026-08-21T17:07:50.071Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
