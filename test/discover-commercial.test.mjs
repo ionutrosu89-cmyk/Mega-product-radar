@@ -21,8 +21,9 @@ test('Discover UI does not mislabel web proxies as verified sales',async()=>{
   const html=await fs.readFile(new URL('../discover.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
   assert.match(html,/VERIFIED, ESTIMATED sau DERIVED/);
-  assert.match(js,/Amazon web signal/);
-  assert.match(js,/TikTok web signal/);
+  assert.match(js,/Amazon evidence/);
+  assert.match(js,/TikTok evidence/);
+  assert.match(js,/VERIFIED/);
   assert.match(js,/DERIVED/);
   assert.doesNotMatch(`${html}\n${js}`,/unități vândute:\s*\d/i);
   assert.doesNotMatch(js,/soldUnits|verifiedSalesCount/);
@@ -45,6 +46,19 @@ test('commercial endpoint enforces server-side product limits and strips sourcin
   assert.match(fn,/Vary':'Authorization/);
   assert.doesNotMatch(fn,/sourcing:/);
   assert.doesNotMatch(fn,/landedEstimate:/);
+});
+
+test('Discover fuses only quality-gated Organic Rising evidence and never fabricates TikTok',async()=>{
+  const fn=await fs.readFile(new URL('../netlify/functions/commercial-discover.mjs',import.meta.url),'utf8');
+  const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
+  assert.match(fn,/organic-rising-live\.json/);
+  assert.match(fn,/eligibleForFeed/);
+  assert.match(fn,/qualityGate\?\.topTwoPages/);
+  assert.match(fn,/qualityGate\?\.notPromoted/);
+  assert.match(fn,/evidenceClass:'VERIFIED'/);
+  assert.match(fn,/mergeProducts/);
+  assert.match(build,/organic-rising-live\.json/);
+  assert.doesNotMatch(fn,/tiktok[^\n]*present:true/i);
 });
 
 test('database migration enables new commercial plan codes without breaking legacy rows',async()=>{
