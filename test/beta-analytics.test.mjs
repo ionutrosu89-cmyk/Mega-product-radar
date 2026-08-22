@@ -8,8 +8,9 @@ test('beta analytics aggregates distinct workspace funnel without double countin
     {workspace_id:'w1',user_id:'u1',event_name:'ONBOARDING_COMPLETED'},{workspace_id:'w1',user_id:'u1',event_name:'HOME_VIEW'},
     {workspace_id:'w1',user_id:'u1',event_name:'DISCOVER_VIEW'},{workspace_id:'w1',user_id:'u1',event_name:'RADAR_VIEW'},
     {workspace_id:'w1',user_id:'u1',event_name:'UPGRADE_INTENT_RADAR'},{workspace_id:'w1',user_id:'u1',event_name:'CHECKOUT_STARTED'},
-    {workspace_id:'w1',user_id:'u1',event_name:'CHECKOUT_COMPLETED'},{workspace_id:'w2',user_id:'u2',event_name:'ONBOARDING_VIEW'}
-  ],workspaces:[{id:'w1',plan:'DISCOVER'},{id:'w2',plan:'FREE'}],preferences:[{workspace_id:'w1',onboarding_completed:true}],subscriptions:[{workspace_id:'w1',plan:'DISCOVER',status:'active'}]},30);
+    {workspace_id:'w1',user_id:'u1',event_name:'CHECKOUT_COMPLETED'},{workspace_id:'w1',user_id:'u1',event_name:'PLAN_CHANGED'},
+    {workspace_id:'w1',user_id:'u1',event_name:'PLAN_CHANGED'},{workspace_id:'w2',user_id:'u2',event_name:'ONBOARDING_VIEW'}
+  ],workspaces:[{id:'w1',plan:'LAUNCH'},{id:'w2',plan:'FREE'}],preferences:[{workspace_id:'w1',onboarding_completed:true}],subscriptions:[{workspace_id:'w1',plan:'LAUNCH',status:'active'}]},30);
   assert.equal(data.totals.activeWorkspaces,2);
   assert.equal(data.totals.onboardingCompleted,1);
   assert.equal(data.funnel.find(x=>x.key==='onboarding_view').workspaces,2);
@@ -17,8 +18,10 @@ test('beta analytics aggregates distinct workspace funnel without double countin
   assert.equal(data.funnel.find(x=>x.key==='radar').workspaces,1);
   assert.equal(data.funnel.find(x=>x.key==='checkout_started').workspaces,1);
   assert.equal(data.funnel.find(x=>x.key==='paid').workspaces,1);
-  assert.equal(data.byPlan.DISCOVER,1);
+  assert.equal(data.byPlan.LAUNCH,1);
   assert.equal(data.totals.upgradeIntentWorkspaces,1);
+  assert.equal(data.totals.planChangedWorkspaces,1);
+  assert.equal(data.eventCounts.PLAN_CHANGED,2);
   assert.equal(data.conversion.checkoutCompletion,100);
   assert.equal(data.dataScope,'REAL_EVENT_DATA');
 });
@@ -26,6 +29,7 @@ test('beta analytics aggregates distinct workspace funnel without double countin
 test('beta analytics conversions are zero-safe and never fabricate percentages',()=>{
   const data=aggregate({events:[],workspaces:[],preferences:[],subscriptions:[]},30);
   assert.equal(data.totals.events,0);
+  assert.equal(data.totals.planChangedWorkspaces,0);
   assert.equal(data.conversion.onboarding,0);
   assert.equal(data.conversion.checkoutFromUpgrade,0);
   assert.equal(data.conversion.paidFromCheckout,0);
