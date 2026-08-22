@@ -21,6 +21,16 @@ async function resolveUserWorkspace(request,{fetchImpl,env}){
   return {user,workspace,subscription};
 }
 
+async function recordJourneyEvent({workspaceId,userId,plan,eventName,metadata},{fetchImpl,env}){
+  const service=env.SUPABASE_SERVICE_ROLE_KEY;
+  if(!service||!workspaceId||!userId)return false;
+  try{
+    const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
+    const response=await fetchImpl(`${supabaseUrl}/rest/v1/journey_events`,{method:'POST',headers:{apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'return=minimal'},body:JSON.stringify({workspace_id:workspaceId,user_id:userId,event_name:eventName,plan:String(plan||'FREE').toUpperCase(),page:'/api/billing/checkout',metadata:metadata||{}})});
+    return response.ok;
+  }catch{return false;}
+}
+
 export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.env}={}){
   return async request=>{
     try{
@@ -55,6 +65,7 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
       const stripeResponse=await fetchImpl('https://api.stripe.com/v1/checkout/sessions',{method:'POST',headers:{authorization:`Bearer ${env.STRIPE_SECRET_KEY}`,'content-type':'application/x-www-form-urlencoded'},body:params});
       const stripe=await stripeResponse.json();
       if(!stripeResponse.ok||!stripe?.url)return Response.json({ok:false,error:'Stripe checkout creation failed'},{status:502,headers:{'Cache-Control':'no-store'}});
+      await recordJourneyEvent({workspaceId:access.workspace.id,userId:access.user?.id,plan:access.workspace.plan,eventName:'CHECKOUT_STARTED',metadata:{requestedPlan:plan,stripeSessionId:String(stripe.id||'')}},{fetchImpl,env});
       return Response.json({ok:true,url:stripe.url,plan,mode:'NEW_SUBSCRIPTION'},{headers:{'Cache-Control':'private, no-store'}});
     }catch(error){
       return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
@@ -62,5 +73,6 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
   };
 }
 
+export {recordJourneyEvent};
 export default createBillingCheckoutHandler();
 export const config={path:'/api/billing/checkout',method:'POST'};
