@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {grantedPlan} from '../netlify/functions/billing-webhook.mjs';
+import {grantedPlan,subscriptionPeriodEnd} from '../netlify/functions/billing-webhook.mjs';
 import {createBillingChangePlanHandler} from '../netlify/functions/billing-change-plan.mjs';
 import {createBillingCancelHandler} from '../netlify/functions/billing-cancel.mjs';
 
@@ -11,6 +11,13 @@ test('paid entitlement is granted only for active or trialing subscriptions',()=
   assert.equal(grantedPlan({status:'past_due',metadata:{plan:'LAUNCH'}}),'FREE');
   assert.equal(grantedPlan({status:'unpaid',metadata:{plan:'RADAR'}}),'FREE');
   assert.equal(grantedPlan({status:'canceled',metadata:{plan:'DISCOVER'}}),'FREE');
+});
+
+test('subscription period end supports legacy and Stripe Basil item-level periods',()=>{
+  assert.equal(subscriptionPeriodEnd({current_period_end:1780000000}),1780000000);
+  assert.equal(subscriptionPeriodEnd({items:{data:[{current_period_end:1781000000}]}}),1781000000);
+  assert.equal(subscriptionPeriodEnd({items:{data:[{current_period_end:1781000000},{current_period_end:1782000000}]}}),1782000000);
+  assert.equal(subscriptionPeriodEnd({items:{data:[]}}),null);
 });
 
 test('plan change and cancellation remain disabled until Stripe is configured',async()=>{
