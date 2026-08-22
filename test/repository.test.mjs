@@ -5,15 +5,21 @@ import test from "node:test";
 
 test("only the canonical Netlify Functions are present", async () => {
   const entries = (await readdir("netlify/functions", { recursive: true })).filter((entry) => entry.endsWith(".mjs")).sort();
-  assert.deepEqual(entries, ["beta-analytics.mjs","billing-cancel.mjs","billing-change-plan.mjs","billing-checkout.mjs","billing-readiness.mjs","billing-status.mjs","billing-webhook.mjs","commercial-discover.mjs","commercial-radar.mjs","radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-sync.mjs","radar-trigger.mjs","top25-history.mjs","top25-refresh.mjs"]);
+  assert.deepEqual(entries, ["beta-analytics.mjs","billing-cancel.mjs","billing-change-plan.mjs","billing-checkout.mjs","billing-readiness.mjs","billing-resume.mjs","billing-status.mjs","billing-webhook.mjs","commercial-discover.mjs","commercial-radar.mjs","radar-data.mjs","radar-health.mjs","radar-scan-background.mjs","radar-schedule.mjs","radar-sync.mjs","radar-trigger.mjs","top25-history.mjs","top25-refresh.mjs"]);
 });
 
-test("radar-data exposes live data and scan state from blobs", async () => {
+test("radar-data exposes live data and scan state from blobs only to Radar entitlement", async () => {
   const { createRadarDataHandler } = await import("../netlify/functions/radar-data.mjs");
   const values = new Map([["latest", JSON.stringify({ updatedAt: "2026-08-10T00:00:00Z", products: [{ name: "Live" }] })],["scan-status", JSON.stringify({ status: "completed" })]]);
-  const response = await createRadarDataHandler({ getStore: () => ({ get: key => values.get(key) }) })();
+  const fetchImpl=async url=>{
+    const u=String(url);
+    if(u.includes('/auth/v1/user'))return Response.json({id:'u1'});
+    if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1',plan:'RADAR'}]);
+    return new Response(null,{status:404});
+  };
+  const response = await createRadarDataHandler({ getStore: () => ({ get: key => values.get(key) }), fetch:fetchImpl, env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'} })(new Request('https://radar.example/api/radar/data',{headers:{authorization:'Bearer token'}}));
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { ok: true, live: true, scan: { status: "completed" }, updatedAt: "2026-08-10T00:00:00Z", products: [{ name: "Live" }] });
+  assert.deepEqual(await response.json(), { ok: true, live: true, scan: { status: "completed" }, plan:'RADAR', workspaceId:'w1', updatedAt: "2026-08-10T00:00:00Z", products: [{ name: "Live" }] });
 });
 
 test("public trigger queues the protected background route without exposing its secret", async () => {
