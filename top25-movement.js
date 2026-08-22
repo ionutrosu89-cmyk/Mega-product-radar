@@ -115,6 +115,29 @@ export function prepareTop25Movement(niche,reviewedAt,storage=globalThis?.localS
     movements,
     previousReviewedAt:previous?.reviewedAt||null,
     currentReviewedAt:current.reviewedAt,
-    trackingStatus:previous?'TRACKING':'BASELINE'
+    trackingStatus:previous?'TRACKING':'BASELINE',
+    historyMode:'LOCAL'
   };
+}
+
+export async function prepareTop25MovementCentral(niche,reviewedAt,{fetchImpl=globalThis?.fetch,storage=globalThis?.localStorage}={}){
+  const current=buildTop25Snapshot(niche,reviewedAt);
+  if(typeof fetchImpl!=='function') return prepareTop25Movement(niche,reviewedAt,storage);
+  try{
+    const response=await fetchImpl(`/api/top25/history?niche=${encodeURIComponent(current.nicheId)}`,{headers:{accept:'application/json'},cache:'no-store'});
+    if(!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload=await response.json();
+    if(!payload?.ok||payload.mode!=='CENTRAL') throw new Error('Central history unavailable');
+    const serverCurrent=payload.current&&Array.isArray(payload.current.products)?payload.current:current;
+    const previous=payload.previous&&Array.isArray(payload.previous.products)?payload.previous:null;
+    return {
+      movements:compareTop25Snapshots(serverCurrent,previous),
+      previousReviewedAt:previous?.reviewedAt||null,
+      currentReviewedAt:serverCurrent.reviewedAt||current.reviewedAt,
+      trackingStatus:previous?'TRACKING':'BASELINE',
+      historyMode:'CENTRAL'
+    };
+  }catch{
+    return prepareTop25Movement(niche,reviewedAt,storage);
+  }
 }
