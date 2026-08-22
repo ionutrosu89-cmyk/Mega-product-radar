@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-22T15:52:32.122Z",
-  "completedAt": "2026-08-22T15:58:34.282Z",
-  "updatedAt": "2026-08-22T15:52:45.427Z",
+  "startedAt": "2026-08-22T15:59:23.250Z",
+  "completedAt": "2026-08-22T16:04:55.021Z",
+  "updatedAt": "2026-08-22T15:59:35.872Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-22T15:52:45.479Z",
+    "updatedAt": "2026-08-22T15:59:35.920Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-22T15:58:34.250Z",
+    "updatedAt": "2026-08-22T16:04:54.993Z",
     "candidates": 62,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-22T15:56:34.228Z",
+      "updatedAt": "2026-08-22T16:02:54.973Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-22T15:55:25.022Z",
+    "updatedAt": "2026-08-22T16:02:09.410Z",
     "category": "Copii 3-6",
-    "successfulPages": 17,
-    "totalObserved": 195,
-    "totalClusters": 141,
-    "feedCount": 1,
+    "successfulPages": 15,
+    "totalObserved": 161,
+    "totalClusters": 117,
+    "feedCount": 2,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,7 +194,7 @@
         "label": "Amazon US",
         "attempted": 6,
         "successful": 4,
-        "items": 47,
+        "items": 49,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 3,
-        "items": 42,
+        "successful": 0,
+        "items": 0,
         "statuses": [
           200,
           200,
@@ -226,12 +226,12 @@
           200
         ],
         "sources": [
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT"
         ]
       },
       "amazonDE": {
@@ -281,14 +281,14 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 4,
-        "items": 24,
+        "successful": 5,
+        "items": 30,
         "statuses": [
           200,
           200,
           200,
           200,
-          511,
+          200,
           511
         ],
         "sources": [
@@ -296,21 +296,21 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
+          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-22T15:56:34.206Z",
-      "attempted": 14,
+      "at": "2026-08-22T16:02:54.954Z",
+      "attempted": 10,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-22T15:56:34.218Z",
+      "at": "2026-08-22T16:02:54.965Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
