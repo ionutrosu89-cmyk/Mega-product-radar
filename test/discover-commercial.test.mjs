@@ -57,7 +57,7 @@ test('Discover prioritizes verified observed evidence over higher derived score'
   const verified={name:'Verified',discoveryAnalysis:{score:40},signals:{amazonDE:{present:true,evidenceClass:'VERIFIED',links:[{url:'https://example.com/product'}]}}};
   const ordered=sortDiscoverProducts([derived,verified],'BEST');
   assert.equal(ordered[0].name,'Verified');
-  assert.deepEqual(bestEvidence(verified),{platform:'AMAZON',market:'Amazon DE',evidenceClass:'VERIFIED',url:'https://example.com/product',title:'',observed:true});
+  assert.deepEqual(bestEvidence(verified),{platform:'AMAZON',market:'Amazon DE',evidenceClass:'VERIFIED',url:'https://example.com/product',searchUrl:'',title:'',observed:true,direct:true});
 });
 
 test('Discover source block never invents a verified source',()=>{

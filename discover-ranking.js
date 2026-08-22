@@ -20,9 +20,11 @@ export function bestEvidence(p={}){
       platform:key.startsWith('amazon')?'AMAZON':'TIKTOK',
       market:PLATFORM_LABELS[key]||String(s.label||key),
       evidenceClass:String(s.evidenceClass||'DERIVED').toUpperCase(),
-      url:String(link?.url||s.searchUrl||''),
+      url:String(link?.url||''),
+      searchUrl:String(s.searchUrl||''),
       title:String(link?.title||''),
-      observed:true
+      observed:true,
+      direct:Boolean(link?.url)
     };
   }
   if(p?.risingSignal?.eligible){
@@ -30,10 +32,10 @@ export function bestEvidence(p={}){
       platform:'RISING',
       market:String(p.risingSignal.sourceMarket||'Marketplace extern'),
       evidenceClass:String(p.risingSignal.evidenceClass||'VERIFIED').toUpperCase(),
-      url:'',title:'',observed:true
+      url:'',searchUrl:'',title:'',observed:true,direct:false
     };
   }
-  return {platform:'NONE',market:'Fără sursă verificată',evidenceClass:evidenceClassOf(p),url:'',title:'',observed:false};
+  return {platform:'NONE',market:'Fără sursă verificată',evidenceClass:evidenceClassOf(p),url:'',searchUrl:'',title:'',observed:false,direct:false};
 }
 
 export function evidencePriority(p={}){
