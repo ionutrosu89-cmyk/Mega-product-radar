@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-21T22:02:37.347Z",
-  "completedAt": "2026-08-21T22:08:56.429Z",
-  "updatedAt": "2026-08-21T22:02:50.804Z",
+  "startedAt": "2026-08-22T05:01:45.158Z",
+  "completedAt": "2026-08-22T05:08:09.780Z",
+  "updatedAt": "2026-08-22T05:01:59.379Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-21T22:02:50.851Z",
+    "updatedAt": "2026-08-22T05:01:59.429Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-21T22:08:56.401Z",
+    "updatedAt": "2026-08-22T05:08:09.752Z",
     "candidates": 62,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 6,
+    "reviewChecks": 8,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-21T22:06:56.382Z",
+      "updatedAt": "2026-08-22T05:06:09.732Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-21T22:05:37.916Z",
-    "category": "Bucătărie",
-    "successfulPages": 16,
-    "totalObserved": 177,
-    "totalClusters": 130,
-    "feedCount": 2,
+    "updatedAt": "2026-08-22T05:04:46.291Z",
+    "category": "Auto",
+    "successfulPages": 18,
+    "totalObserved": 199,
+    "totalClusters": 143,
+    "feedCount": 0,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,7 +194,7 @@
         "label": "Amazon US",
         "attempted": 6,
         "successful": 4,
-        "items": 49,
+        "items": 47,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 2,
-        "items": 28,
+        "successful": 5,
+        "items": 58,
         "statuses": [
           200,
           200,
@@ -226,8 +226,8 @@
           200
         ],
         "sources": [
-          "DIRECT",
-          "DIRECT",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
@@ -245,7 +245,7 @@
           200,
           200,
           200,
-          200
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -253,7 +253,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "ebayUS": {
@@ -281,15 +281,15 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 5,
-        "items": 30,
+        "successful": 4,
+        "items": 24,
         "statuses": [
           200,
           200,
           200,
           200,
           511,
-          200
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -297,20 +297,20 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-21T22:06:56.356Z",
-      "attempted": 13,
+      "at": "2026-08-22T05:06:09.709Z",
+      "attempted": 18,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-21T22:06:56.371Z",
+      "at": "2026-08-22T05:06:09.721Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
