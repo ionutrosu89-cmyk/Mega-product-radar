@@ -4,7 +4,7 @@ import {constants} from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 
-const journeyPages=['beta.html','pricing.html','login.html','home.html','onboarding.html','discover.html','commercial-radar.html','commercial-launch.html','account.html','beta-feedback.html','terms.html','privacy.html'];
+const journeyPages=['beta.html','pricing.html','login.html','home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-launch.html','account.html','beta-feedback.html','terms.html','privacy.html'];
 
 async function exists(file){try{await access(file,constants.R_OK);return true;}catch{return false;}}
 function localRefs(html){const refs=[];for(const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)){const raw=match[1].trim();if(!raw||raw.startsWith('#')||raw.startsWith('http:')||raw.startsWith('https:')||raw.startsWith('mailto:')||raw.startsWith('tel:')||raw.startsWith('data:')||raw.startsWith('/api/'))continue;const clean=raw.split('#')[0].split('?')[0];if(clean&&clean!=='./')refs.push(clean);}return refs;}
@@ -20,10 +20,12 @@ test('signup preserves validated next destination like login does',async()=>{
   assert.doesNotMatch(source,/if\(data\.session\)location\.href='home\.html'/);
 });
 
-test('pricing Free copy matches server entitlement of three products, not credits',async()=>{
+test('pricing Free copy matches the Top 25 entitlement while dynamic Discover stays server limited',async()=>{
   const pricing=await readFile('pricing.html','utf8');
   const discoverFn=await readFile('netlify/functions/commercial-discover.mjs','utf8');
-  assert.match(pricing,/3 produse afișate/);
+  assert.match(pricing,/Top 25 pe nișă/);
+  assert.match(pricing,/8 nișe documentate/);
+  assert.match(pricing,/Vezi Top 25 gratuit/);
   assert.doesNotMatch(pricing,/3 vizualizări\/credite/);
   assert.match(discoverFn,/const limit=full\?20:3/);
   assert.match(discoverFn,/slice\(0,limit\)/);
