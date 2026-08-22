@@ -1,6 +1,8 @@
 import {createHmac,timingSafeEqual} from 'node:crypto';
 import {SAAS_CONFIG} from '../../saas-config.js';
 
+const PLAN_RANK={FREE:0,DISCOVER:1,RADAR:2,LAUNCH:3};
+
 function verifySignature(raw,header,secret,toleranceSeconds=300){
   const parts=String(header||'').split(',').map(x=>x.trim());
   const timestamp=parts.find(x=>x.startsWith('t='))?.slice(2)||'';
@@ -33,6 +35,12 @@ async function workspaceOwner(workspaceId,{env,fetchImpl}){
   return Array.isArray(rows)?rows[0]||null:null;
 }
 
+async function existingSubscription(workspaceId,{env,fetchImpl}){
+  if(!workspaceId)return null;
+  const rows=await supabaseRequest(`subscriptions?select=plan,status,provider_subscription_id&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{env,fetchImpl}).catch(()=>[]);
+  return Array.isArray(rows)?rows[0]||null:null;
+}
+
 async function recordJourneyEvent(workspaceId,eventName,metadata,{env,fetchImpl,plan='FREE'}){
   try{
     const owner=await workspaceOwner(workspaceId,{env,fetchImpl});
@@ -57,6 +65,12 @@ function subscriptionPeriodEnd(subscription){
   return ends.length?Math.max(...ends):null;
 }
 
+function planChangeDirection(previousPlan,nextPlan){
+  const before=PLAN_RANK[String(previousPlan||'FREE').toUpperCase()]??0;
+  const after=PLAN_RANK[String(nextPlan||'FREE').toUpperCase()]??0;
+  return after>before?'UPGRADE':after<before?'DOWNGRADE':'UNCHANGED';
+}
+
 async function applySubscription(subscription,{env,fetchImpl,eventType}){
   const metadata=subscription?.metadata||{};
   const workspaceId=metadata.workspace_id;
@@ -64,9 +78,22 @@ async function applySubscription(subscription,{env,fetchImpl,eventType}){
   const status=String(subscription?.status||'unknown');
   const plan=grantedPlan(subscription);
   const periodEnd=subscriptionPeriodEnd(subscription);
+  const previous=await existingSubscription(workspaceId,{env,fetchImpl});
+  const previousPlan=String(previous?.plan||'').toUpperCase();
   await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
   await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:periodEnd?new Date(periodEnd*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
-  if(['active','trialing'].includes(status.toLowerCase()))await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status}, {env,fetchImpl,plan});
+  const active=['active','trialing'].includes(status.toLowerCase());
+  if(eventType==='customer.subscription.created'&&active){
+    await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status},{env,fetchImpl,plan});
+    return;
+  }
+  if(eventType==='customer.subscription.updated'&&active&&previousPlan&&previousPlan!==plan){
+    await recordJourneyEvent(workspaceId,'PLAN_CHANGED',{eventType,providerSubscriptionId:String(subscription.id||''),status,previousPlan,newPlan:plan,direction:planChangeDirection(previousPlan,plan)},{env,fetchImpl,plan});
+    return;
+  }
+  if(eventType==='customer.subscription.updated'&&active&&!previousPlan){
+    await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status,recovered:true},{env,fetchImpl,plan});
+  }
 }
 
 async function applyCheckoutSession(session,{env,fetchImpl}){
@@ -95,6 +122,6 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
   };
 }
 
-export {verifySignature,grantedPlan,subscriptionPeriodEnd,recordJourneyEvent};
+export {verifySignature,grantedPlan,subscriptionPeriodEnd,planChangeDirection,recordJourneyEvent};
 export default createBillingWebhookHandler();
 export const config={path:'/api/billing/webhook',method:'POST'};
