@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-22T05:01:45.158Z",
-  "completedAt": "2026-08-22T05:08:09.780Z",
-  "updatedAt": "2026-08-22T05:01:59.379Z",
+  "startedAt": "2026-08-22T05:48:29.653Z",
+  "completedAt": "2026-08-22T05:55:10.257Z",
+  "updatedAt": "2026-08-22T05:48:42.181Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-22T05:01:59.429Z",
+    "updatedAt": "2026-08-22T05:48:42.231Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-22T05:08:09.752Z",
+    "updatedAt": "2026-08-22T05:55:10.230Z",
     "candidates": 62,
     "scanSize": 10,
     "openDiscovered": 0,
     "successfulChecks": 40,
-    "reviewChecks": 8,
+    "reviewChecks": 6,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-22T05:06:09.732Z",
+      "updatedAt": "2026-08-22T05:53:10.207Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-22T05:04:46.291Z",
+    "updatedAt": "2026-08-22T05:51:30.481Z",
     "category": "Auto",
-    "successfulPages": 18,
-    "totalObserved": 199,
-    "totalClusters": 143,
-    "feedCount": 0,
+    "successfulPages": 16,
+    "totalObserved": 170,
+    "totalClusters": 115,
+    "feedCount": 3,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,7 +194,7 @@
         "label": "Amazon US",
         "attempted": 6,
         "successful": 4,
-        "items": 47,
+        "items": 48,
         "statuses": [
           200,
           200,
@@ -215,30 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 5,
-        "items": 58,
-        "statuses": [
-          200,
-          200,
-          200,
-          200,
-          200,
-          200
-        ],
-        "sources": [
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
-        ]
-      },
-      "amazonDE": {
-        "label": "Amazon DE",
-        "attempted": 6,
-        "successful": 5,
-        "items": 70,
+        "successful": 4,
+        "items": 42,
         "statuses": [
           200,
           200,
@@ -250,10 +228,32 @@
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED"
+        ]
+      },
+      "amazonDE": {
+        "label": "Amazon DE",
+        "attempted": 6,
+        "successful": 4,
+        "items": 56,
+        "statuses": [
+          200,
+          200,
+          200,
+          200,
+          503,
+          200
+        ],
+        "sources": [
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT+FALLBACKS_FAILED",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "ebayUS": {
@@ -303,14 +303,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-22T05:06:09.709Z",
-      "attempted": 18,
+      "at": "2026-08-22T05:53:10.187Z",
+      "attempted": 17,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-22T05:06:09.721Z",
+      "at": "2026-08-22T05:53:10.198Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
