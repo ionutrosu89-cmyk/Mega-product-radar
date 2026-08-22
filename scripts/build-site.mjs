@@ -23,7 +23,7 @@ for(const file of [
   'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js',
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
-  'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
+  'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
