@@ -37,7 +37,7 @@ async function workspaceOwner(workspaceId,{env,fetchImpl}){
 
 async function existingSubscription(workspaceId,{env,fetchImpl}){
   if(!workspaceId)return null;
-  const rows=await supabaseRequest(`subscriptions?select=plan,status,provider_subscription_id&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{env,fetchImpl}).catch(()=>[]);
+  const rows=await supabaseRequest(`subscriptions?select=plan,status,provider_subscription_id,cancel_at_period_end,current_period_end&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{env,fetchImpl}).catch(()=>[]);
   return Array.isArray(rows)?rows[0]||null:null;
 }
 
@@ -80,9 +80,19 @@ async function applySubscription(subscription,{env,fetchImpl,eventType}){
   const periodEnd=subscriptionPeriodEnd(subscription);
   const previous=await existingSubscription(workspaceId,{env,fetchImpl});
   const previousPlan=String(previous?.plan||'').toUpperCase();
+  const previousCancelAtPeriodEnd=Boolean(previous?.cancel_at_period_end);
+  const nextCancelAtPeriodEnd=Boolean(subscription.cancel_at_period_end);
   await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
-  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:periodEnd?new Date(periodEnd*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
+  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:periodEnd?new Date(periodEnd*1000).toISOString():null,cancel_at_period_end:nextCancelAtPeriodEnd,updated_at:new Date().toISOString()},env,fetchImpl});
   const active=['active','trialing'].includes(status.toLowerCase());
+  if(eventType==='customer.subscription.updated'&&active&&previous){
+    if(!previousCancelAtPeriodEnd&&nextCancelAtPeriodEnd){
+      await recordJourneyEvent(workspaceId,'SUBSCRIPTION_CANCEL_SCHEDULED',{eventType,providerSubscriptionId:String(subscription.id||''),status,currentPeriodEnd:periodEnd?new Date(periodEnd*1000).toISOString():null},{env,fetchImpl,plan});
+    }
+    if(previousCancelAtPeriodEnd&&!nextCancelAtPeriodEnd){
+      await recordJourneyEvent(workspaceId,'SUBSCRIPTION_CANCEL_UNSCHEDULED',{eventType,providerSubscriptionId:String(subscription.id||''),status},{env,fetchImpl,plan});
+    }
+  }
   if(eventType==='customer.subscription.created'&&active){
     await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status},{env,fetchImpl,plan});
     return;
