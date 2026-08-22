@@ -56,6 +56,15 @@ test('subscription updates track PLAN_CHANGED only when the paid plan really cha
   assert.match(webhook,/previousPlan,newPlan:plan,direction:planChangeDirection/);
 });
 
+test('subscription updates track scheduled cancellation separately from activation and plan changes',async()=>{
+  const webhook=await readFile(new URL('../netlify/functions/billing-webhook.mjs',import.meta.url),'utf8');
+  assert.match(webhook,/cancel_at_period_end,current_period_end/);
+  assert.match(webhook,/SUBSCRIPTION_CANCEL_SCHEDULED/);
+  assert.match(webhook,/SUBSCRIPTION_CANCEL_UNSCHEDULED/);
+  assert.match(webhook,/!previousCancelAtPeriodEnd&&nextCancelAtPeriodEnd/);
+  assert.match(webhook,/previousCancelAtPeriodEnd&&!nextCancelAtPeriodEnd/);
+});
+
 test('billing lifecycle migration stores cancel-at-period-end state',async()=>{
   const sql=await readFile(new URL('../supabase/migrations/20260820_billing_lifecycle.sql',import.meta.url),'utf8');
   assert.match(sql,/cancel_at_period_end boolean not null default false/);
