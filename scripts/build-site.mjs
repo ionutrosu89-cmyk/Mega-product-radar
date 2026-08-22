@@ -21,7 +21,7 @@ for(const file of [
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js',
-  'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-launch.html','commercial-launch.js',
+  'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md'
 ]) await copyIfExists(file);
