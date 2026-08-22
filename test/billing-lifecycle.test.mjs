@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {grantedPlan,subscriptionPeriodEnd} from '../netlify/functions/billing-webhook.mjs';
+import {grantedPlan,subscriptionPeriodEnd,planChangeDirection} from '../netlify/functions/billing-webhook.mjs';
 import {createBillingChangePlanHandler} from '../netlify/functions/billing-change-plan.mjs';
 import {createBillingCancelHandler} from '../netlify/functions/billing-cancel.mjs';
 
@@ -18,6 +18,12 @@ test('subscription period end supports legacy and Stripe Basil item-level period
   assert.equal(subscriptionPeriodEnd({items:{data:[{current_period_end:1781000000}]}}),1781000000);
   assert.equal(subscriptionPeriodEnd({items:{data:[{current_period_end:1781000000},{current_period_end:1782000000}]}}),1782000000);
   assert.equal(subscriptionPeriodEnd({items:{data:[]}}),null);
+});
+
+test('plan change direction distinguishes upgrades, downgrades and no-op updates',()=>{
+  assert.equal(planChangeDirection('RADAR','LAUNCH'),'UPGRADE');
+  assert.equal(planChangeDirection('LAUNCH','DISCOVER'),'DOWNGRADE');
+  assert.equal(planChangeDirection('RADAR','RADAR'),'UNCHANGED');
 });
 
 test('plan change and cancellation remain disabled until Stripe is configured',async()=>{
@@ -41,6 +47,13 @@ test('checkout completion cannot overwrite subscription lifecycle state',async()
   assert.match(checkoutSection,/Subscription lifecycle events are the/);
   assert.doesNotMatch(checkoutSection,/subscriptions\?on_conflict/);
   assert.doesNotMatch(checkoutSection,/status:'checkout_completed'/);
+});
+
+test('subscription updates track PLAN_CHANGED only when the paid plan really changes',async()=>{
+  const webhook=await readFile(new URL('../netlify/functions/billing-webhook.mjs',import.meta.url),'utf8');
+  assert.match(webhook,/eventType==='customer\.subscription\.created'.*SUBSCRIPTION_ACTIVATED/s);
+  assert.match(webhook,/eventType==='customer\.subscription\.updated'.*previousPlan!==plan.*PLAN_CHANGED/s);
+  assert.match(webhook,/previousPlan,newPlan:plan,direction:planChangeDirection/);
 });
 
 test('billing lifecycle migration stores cancel-at-period-end state',async()=>{
