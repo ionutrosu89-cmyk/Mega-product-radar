@@ -35,7 +35,7 @@ test('Free Top 25 is free while dynamic Discover remains a paid entitlement',()=
 test('Top 25 UI clearly separates internal rank, source rank and search volume from sales',async()=>{
   const html=await fs.readFile(new URL('../top25.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../top25.js',import.meta.url),'utf8');
-  assert.match(html,/rank intern.*DERIVED/is);
+  assert.match(html,/ordinea internă.*DERIVED/is);
   assert.match(html,/rank-ul sursei/i);
   assert.match(html,/Search volume nu este prezentat ca vânzări/i);
   assert.match(js,/Rank sursă/);
