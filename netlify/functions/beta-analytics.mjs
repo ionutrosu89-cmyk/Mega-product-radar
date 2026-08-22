@@ -27,6 +27,7 @@ function aggregate({events=[],workspaces=[],preferences=[],subscriptions=[]},day
   const checkoutStarted=wsWith('CHECKOUT_STARTED');
   const checkoutCompleted=wsWith('CHECKOUT_COMPLETED');
   const subscriptionActivated=wsWith('SUBSCRIPTION_ACTIVATED');
+  const planChanged=wsWith('PLAN_CHANGED');
   const activeSubscriptions=subscriptions.filter(x=>['active','trialing'].includes(String(x.status||'').toLowerCase()));
   const activePaid=new Set(activeSubscriptions.map(x=>x.workspace_id).filter(Boolean));
   const activeWs=unique(events,'workspace_id');
@@ -44,7 +45,7 @@ function aggregate({events=[],workspaces=[],preferences=[],subscriptions=[]},day
     {key:'paid',label:'Abonament activ',workspaces:activePaid.size}
   ];
   for(let i=0;i<funnel.length;i++)funnel[i].conversionFromPrevious=i===0?100:pct(funnel[i].workspaces,funnel[i-1].workspaces);
-  return {days,generatedAt:new Date().toISOString(),dataScope:'REAL_EVENT_DATA',totals:{workspaces:workspaces.length,activeWorkspaces:activeWs.size,activeUsers:activeUsers.size,events:events.length,onboardingCompleted:onboardingComplete.size,upgradeIntentWorkspaces:upgradeIntent.size,checkoutStartedWorkspaces:checkoutStarted.size,checkoutCompletedWorkspaces:checkoutCompleted.size,subscriptionActivatedWorkspaces:subscriptionActivated.size,activePaidWorkspaces:activePaid.size},byPlan,funnel,eventCounts,conversion:{onboarding:pct(onboardingComplete.size,onboardingView.size),activation:pct(home.size,onboardingComplete.size),discoverToRadar:pct(radar.size,discover.size),radarToLaunch:pct(launch.size,radar.size),upgradeIntentFromActive:pct(upgradeIntent.size,activeWs.size),checkoutFromUpgrade:pct(checkoutStarted.size,upgradeIntent.size),checkoutCompletion:pct(checkoutCompleted.size,checkoutStarted.size),paidFromCheckout:pct(activePaid.size,checkoutCompleted.size),paidFromActive:pct(activePaid.size,activeWs.size)}};
+  return {days,generatedAt:new Date().toISOString(),dataScope:'REAL_EVENT_DATA',totals:{workspaces:workspaces.length,activeWorkspaces:activeWs.size,activeUsers:activeUsers.size,events:events.length,onboardingCompleted:onboardingComplete.size,upgradeIntentWorkspaces:upgradeIntent.size,checkoutStartedWorkspaces:checkoutStarted.size,checkoutCompletedWorkspaces:checkoutCompleted.size,subscriptionActivatedWorkspaces:subscriptionActivated.size,planChangedWorkspaces:planChanged.size,activePaidWorkspaces:activePaid.size},byPlan,funnel,eventCounts,conversion:{onboarding:pct(onboardingComplete.size,onboardingView.size),activation:pct(home.size,onboardingComplete.size),discoverToRadar:pct(radar.size,discover.size),radarToLaunch:pct(launch.size,radar.size),upgradeIntentFromActive:pct(upgradeIntent.size,activeWs.size),checkoutFromUpgrade:pct(checkoutStarted.size,upgradeIntent.size),checkoutCompletion:pct(checkoutCompleted.size,checkoutStarted.size),paidFromCheckout:pct(activePaid.size,checkoutCompleted.size),paidFromActive:pct(activePaid.size,activeWs.size)}};
 }
 
 async function isAnalyticsAdmin(user,{supabaseUrl,service,fetchImpl,env}){
