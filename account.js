@@ -2,7 +2,7 @@ import {SAAS_CONFIG,isSaasConfigured} from './saas-config.js';
 import {getCurrentSession,signOut} from './supabase-client.js';
 import {ensurePersonalWorkspace} from './workspace-client.js';
 import {installCloudAutosync,localCloudSummary,pushLocalToCloud,pullCloudToLocal} from './cloud-sync.js';
-import {getBillingStatus,cancelSubscription} from './billing-client.js';
+import {getBillingStatus,cancelSubscription,resumeSubscription} from './billing-client.js';
 const $=s=>document.querySelector(s);
 function refreshLocalCount(){const total=localCloudSummary().reduce((s,x)=>s+x.count,0);$('#localCount').textContent=String(total);return total;}
 function syncMessage(text,state='Pregatit'){ $('#syncMessage').textContent=text; $('#syncState').textContent=state; }
@@ -17,8 +17,10 @@ async function refreshBilling({retry=false}={}){
     $('#billingEnd').textContent=fmtDate(sub?.currentPeriodEnd);
     $('#plan').textContent=data.workspace?.plan||$('#plan').textContent;
     const managed=Boolean(sub?.managedByStripe),pending=Boolean(sub?.cancelAtPeriodEnd);
-    $('#cancelBilling').hidden=!managed||pending||!['active','trialing','past_due'].includes(String(sub?.status||'').toLowerCase());
-    message.textContent=pending?`Anulare programată. Accesul rămâne activ până la ${fmtDate(sub.currentPeriodEnd)}.`:managed?'Abonamentul este administrat prin Stripe. Schimbarea planului reutilizează același abonament.':'Nu există încă un abonament Stripe activ.';
+    const activeLike=['active','trialing','past_due'].includes(String(sub?.status||'').toLowerCase());
+    $('#cancelBilling').hidden=!managed||pending||!activeLike;
+    $('#resumeBilling').hidden=!managed||!pending||!activeLike;
+    message.textContent=pending?`Anulare programată. Accesul rămâne activ până la ${fmtDate(sub.currentPeriodEnd)}. Poți retrage anularea înainte de această dată.`:managed?'Abonamentul este administrat prin Stripe. Schimbarea planului reutilizează același abonament.':'Nu există încă un abonament Stripe activ.';
   }catch(e){message.textContent=`Billing indisponibil momentan: ${e.message}`;}
 }
 async function load(){
@@ -49,6 +51,11 @@ $('#cancelBilling').addEventListener('click',async()=>{
   if(!confirm('Anulezi abonamentul la finalul perioadei curente? Accesul rămâne activ până atunci.'))return;
   $('#cancelBilling').disabled=true;
   try{await cancelSubscription();await refreshBilling();}catch(e){$('#billingMessage').textContent=`Anularea nu a reușit: ${e.message}`;$('#cancelBilling').disabled=false;}
+});
+$('#resumeBilling').addEventListener('click',async()=>{
+  if(!confirm('Retragi anularea programată și păstrezi abonamentul activ?'))return;
+  $('#resumeBilling').disabled=true;
+  try{await resumeSubscription();await refreshBilling();}catch(e){$('#billingMessage').textContent=`Retragerea anulării nu a reușit: ${e.message}`;$('#resumeBilling').disabled=false;}
 });
 $('#logout').addEventListener('click',async()=>{await signOut();location.href='login.html';});
 load();

@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {grantedPlan,subscriptionPeriodEnd,planChangeDirection} from '../netlify/functions/billing-webhook.mjs';
 import {createBillingChangePlanHandler} from '../netlify/functions/billing-change-plan.mjs';
 import {createBillingCancelHandler} from '../netlify/functions/billing-cancel.mjs';
+import {createBillingResumeHandler} from '../netlify/functions/billing-resume.mjs';
 
 test('paid entitlement is granted only for active or trialing subscriptions',()=>{
   assert.equal(grantedPlan({status:'active',metadata:{plan:'RADAR'}}),'RADAR');
@@ -26,11 +27,33 @@ test('plan change direction distinguishes upgrades, downgrades and no-op updates
   assert.equal(planChangeDirection('RADAR','RADAR'),'UNCHANGED');
 });
 
-test('plan change and cancellation remain disabled until Stripe is configured',async()=>{
+test('plan change, cancellation and resume remain disabled until Stripe is configured',async()=>{
   const change=createBillingChangePlanHandler({env:{},fetch:async()=>new Response(null,{status:500})});
   const cancel=createBillingCancelHandler({env:{},fetch:async()=>new Response(null,{status:500})});
+  const resume=createBillingResumeHandler({env:{},fetch:async()=>new Response(null,{status:500})});
   assert.equal((await change(new Request('https://radar.example/api/billing/change-plan',{method:'POST'}))).status,503);
   assert.equal((await cancel(new Request('https://radar.example/api/billing/cancel',{method:'POST'}))).status,503);
+  assert.equal((await resume(new Request('https://radar.example/api/billing/resume',{method:'POST'}))).status,503);
+});
+
+test('resume cancellation calls Stripe only for a scheduled active subscription',async()=>{
+  const calls=[];
+  const fetchImpl=async (url,options={})=>{
+    const u=String(url);calls.push({u,options});
+    if(u.includes('/auth/v1/user'))return Response.json({id:'u1'});
+    if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1'}]);
+    if(u.includes('/rest/v1/subscriptions'))return Response.json([{status:'active',cancel_at_period_end:true,provider_subscription_id:'sub_1'}]);
+    if(u.includes('api.stripe.com/v1/subscriptions/sub_1'))return Response.json({id:'sub_1',status:'active',cancel_at_period_end:false,items:{data:[{current_period_end:1782000000}]}});
+    return new Response(null,{status:404});
+  };
+  const resume=createBillingResumeHandler({fetch:fetchImpl,env:{STRIPE_SECRET_KEY:'sk_test',SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
+  const response=await resume(new Request('https://radar.example/api/billing/resume',{method:'POST',headers:{authorization:'Bearer token'}}));
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.cancelAtPeriodEnd,false);
+  const stripeCall=calls.find(x=>x.u.includes('api.stripe.com'));
+  assert.ok(stripeCall);
+  assert.match(String(stripeCall.options.body),/cancel_at_period_end=false/);
 });
 
 test('checkout prevents duplicate active Stripe subscriptions and client routes to change-plan',async()=>{
@@ -39,6 +62,15 @@ test('checkout prevents duplicate active Stripe subscriptions and client routes 
   assert.match(checkout,/ACTIVE_SUBSCRIPTION_EXISTS/);
   assert.match(checkout,/provider_subscription_id/);
   assert.match(client,/\/api\/billing\/change-plan/);
+});
+
+test('account exposes cancellation and cancellation-resume controls',async()=>{
+  const html=await readFile(new URL('../account.html',import.meta.url),'utf8');
+  const js=await readFile(new URL('../account.js',import.meta.url),'utf8');
+  assert.match(html,/id="cancelBilling"/);
+  assert.match(html,/id="resumeBilling"/);
+  assert.match(js,/resumeSubscription/);
+  assert.match(js,/cancelAtPeriodEnd/);
 });
 
 test('checkout completion cannot overwrite subscription lifecycle state',async()=>{
