@@ -24,6 +24,9 @@ function aggregate({events=[],workspaces=[],preferences=[],subscriptions=[]},day
   const radar=new Set([...wsWith('RADAR_VIEW'),...wsWith('HOME_OPEN_RADAR')]);
   const launch=new Set([...wsWith('LAUNCH_VIEW'),...wsWith('HOME_OPEN_LAUNCH')]);
   const upgradeIntent=new Set([...wsPrefix('UPGRADE_INTENT_'),...wsPrefix('HOME_UPGRADE_')]);
+  const checkoutStarted=wsWith('CHECKOUT_STARTED');
+  const checkoutCompleted=wsWith('CHECKOUT_COMPLETED');
+  const subscriptionActivated=wsWith('SUBSCRIPTION_ACTIVATED');
   const activeSubscriptions=subscriptions.filter(x=>['active','trialing'].includes(String(x.status||'').toLowerCase()));
   const activePaid=new Set(activeSubscriptions.map(x=>x.workspace_id).filter(Boolean));
   const activeWs=unique(events,'workspace_id');
@@ -35,10 +38,21 @@ function aggregate({events=[],workspaces=[],preferences=[],subscriptions=[]},day
     {key:'home',label:'Home activat',workspaces:home.size},
     {key:'discover',label:'Discover folosit',workspaces:discover.size},
     {key:'radar',label:'Radar folosit',workspaces:radar.size},
-    {key:'launch',label:'Launch folosit',workspaces:launch.size}
+    {key:'launch',label:'Launch folosit',workspaces:launch.size},
+    {key:'checkout_started',label:'Checkout pornit',workspaces:checkoutStarted.size},
+    {key:'checkout_completed',label:'Checkout finalizat',workspaces:checkoutCompleted.size},
+    {key:'paid',label:'Abonament activ',workspaces:activePaid.size}
   ];
   for(let i=0;i<funnel.length;i++)funnel[i].conversionFromPrevious=i===0?100:pct(funnel[i].workspaces,funnel[i-1].workspaces);
-  return {days,generatedAt:new Date().toISOString(),totals:{workspaces:workspaces.length,activeWorkspaces:activeWs.size,activeUsers:activeUsers.size,events:events.length,onboardingCompleted:onboardingComplete.size,upgradeIntentWorkspaces:upgradeIntent.size,activePaidWorkspaces:activePaid.size},byPlan,funnel,eventCounts,conversion:{onboarding:pct(onboardingComplete.size,onboardingView.size),activation:pct(home.size,onboardingComplete.size),discoverToRadar:pct(radar.size,discover.size),radarToLaunch:pct(launch.size,radar.size),upgradeIntentFromActive:pct(upgradeIntent.size,activeWs.size),paidFromActive:pct(activePaid.size,activeWs.size)}};
+  return {days,generatedAt:new Date().toISOString(),dataScope:'REAL_EVENT_DATA',totals:{workspaces:workspaces.length,activeWorkspaces:activeWs.size,activeUsers:activeUsers.size,events:events.length,onboardingCompleted:onboardingComplete.size,upgradeIntentWorkspaces:upgradeIntent.size,checkoutStartedWorkspaces:checkoutStarted.size,checkoutCompletedWorkspaces:checkoutCompleted.size,subscriptionActivatedWorkspaces:subscriptionActivated.size,activePaidWorkspaces:activePaid.size},byPlan,funnel,eventCounts,conversion:{onboarding:pct(onboardingComplete.size,onboardingView.size),activation:pct(home.size,onboardingComplete.size),discoverToRadar:pct(radar.size,discover.size),radarToLaunch:pct(launch.size,radar.size),upgradeIntentFromActive:pct(upgradeIntent.size,activeWs.size),checkoutFromUpgrade:pct(checkoutStarted.size,upgradeIntent.size),checkoutCompletion:pct(checkoutCompleted.size,checkoutStarted.size),paidFromCheckout:pct(activePaid.size,checkoutCompleted.size),paidFromActive:pct(activePaid.size,activeWs.size)}};
+}
+
+async function isAnalyticsAdmin(user,{supabaseUrl,service,fetchImpl,env}){
+  const h={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
+  const rows=await jsonFetch(`${supabaseUrl}/rest/v1/beta_analytics_admins?select=user_id&user_id=eq.${encodeURIComponent(user.id)}&limit=1`,h,fetchImpl).catch(()=>[]);
+  if(Array.isArray(rows)&&rows.length)return true;
+  const allowed=String(env.BETA_ANALYTICS_ADMIN_EMAILS||'').split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);
+  return allowed.includes(String(user?.email||'').toLowerCase());
 }
 
 export function createBetaAnalyticsHandler({fetch:fetchImpl=fetch,env=process.env}={}){
@@ -49,11 +63,9 @@ export function createBetaAnalyticsHandler({fetch:fetchImpl=fetch,env=process.en
       const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
       const anon=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
       const user=await jsonFetch(`${supabaseUrl}/auth/v1/user`,{apikey:anon,authorization:auth},fetchImpl);
-      const allowed=String(env.BETA_ANALYTICS_ADMIN_EMAILS||'').split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);
-      if(!allowed.length)return Response.json({ok:false,error:'Beta analytics admin allowlist is not configured'},{status:503});
-      if(!allowed.includes(String(user?.email||'').toLowerCase()))return Response.json({ok:false,error:'Admin access required'},{status:403});
       const service=env.SUPABASE_SERVICE_ROLE_KEY;
       if(!service)return Response.json({ok:false,error:'Supabase service role is not configured'},{status:503});
+      if(!await isAnalyticsAdmin(user,{supabaseUrl,service,fetchImpl,env}))return Response.json({ok:false,error:'Admin access required'},{status:403});
       const url=new URL(request.url),days=Math.min(90,Math.max(1,Number(url.searchParams.get('days')||30)||30));
       const since=new Date(Date.now()-days*86400000).toISOString();
       const h={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
@@ -68,6 +80,6 @@ export function createBetaAnalyticsHandler({fetch:fetchImpl=fetch,env=process.en
   };
 }
 
-export {aggregate};
+export {aggregate,isAnalyticsAdmin};
 export default createBetaAnalyticsHandler();
 export const config={path:'/api/internal/beta-analytics',method:'GET'};

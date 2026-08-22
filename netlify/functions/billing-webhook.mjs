@@ -13,12 +13,33 @@ function verifySignature(raw,header,secret,toleranceSeconds=300){
   return signatures.some(sig=>{try{const candidate=Buffer.from(sig,'utf8');return candidate.length===expectedBuffer.length&&timingSafeEqual(candidate,expectedBuffer);}catch{return false;}});
 }
 
-async function supabaseWrite(path,{method='POST',body,env,fetchImpl}){
+async function supabaseRequest(path,{method='GET',body,env,fetchImpl,prefer='return=minimal'}){
   const url=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
   const key=env.SUPABASE_SERVICE_ROLE_KEY;
   if(!key)throw new Error('Supabase service role is not configured');
-  const response=await fetchImpl(`${url}/rest/v1/${path}`,{method,headers:{apikey:key,authorization:`Bearer ${key}`,'content-type':'application/json',prefer:'return=minimal,resolution=merge-duplicates'},body:body?JSON.stringify(body):undefined});
-  if(!response.ok)throw new Error(`Supabase billing update failed: ${response.status}`);
+  const response=await fetchImpl(`${url}/rest/v1/${path}`,{method,headers:{apikey:key,authorization:`Bearer ${key}`,'content-type':'application/json',accept:'application/json',prefer},body:body?JSON.stringify(body):undefined});
+  if(!response.ok)throw new Error(`Supabase billing request failed: ${response.status}`);
+  if(method==='GET')return response.json();
+  return null;
+}
+
+async function supabaseWrite(path,{method='POST',body,env,fetchImpl}){
+  return supabaseRequest(path,{method,body,env,fetchImpl,prefer:'return=minimal,resolution=merge-duplicates'});
+}
+
+async function workspaceOwner(workspaceId,{env,fetchImpl}){
+  if(!workspaceId)return null;
+  const rows=await supabaseRequest(`workspaces?select=owner_id,plan&id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{env,fetchImpl}).catch(()=>[]);
+  return Array.isArray(rows)?rows[0]||null:null;
+}
+
+async function recordJourneyEvent(workspaceId,eventName,metadata,{env,fetchImpl,plan='FREE'}){
+  try{
+    const owner=await workspaceOwner(workspaceId,{env,fetchImpl});
+    if(!owner?.owner_id)return false;
+    await supabaseWrite('journey_events',{body:{workspace_id:workspaceId,user_id:owner.owner_id,event_name:eventName,plan:String(plan||owner.plan||'FREE').toUpperCase(),page:'/api/billing/webhook',metadata:metadata||{}},env,fetchImpl});
+    return true;
+  }catch{return false;}
 }
 
 function grantedPlan(subscription){
@@ -29,7 +50,7 @@ function grantedPlan(subscription){
   return ['DISCOVER','RADAR','LAUNCH'].includes(requested)?requested:'FREE';
 }
 
-async function applySubscription(subscription,{env,fetchImpl}){
+async function applySubscription(subscription,{env,fetchImpl,eventType}){
   const metadata=subscription?.metadata||{};
   const workspaceId=metadata.workspace_id;
   if(!workspaceId)return;
@@ -37,16 +58,17 @@ async function applySubscription(subscription,{env,fetchImpl}){
   const plan=grantedPlan(subscription);
   await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
   await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:subscription.current_period_end?new Date(subscription.current_period_end*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
+  if(['active','trialing'].includes(status.toLowerCase()))await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status}, {env,fetchImpl,plan});
 }
 
-async function applyCheckoutSession(session){
+async function applyCheckoutSession(session,{env,fetchImpl}){
   const workspaceId=session?.metadata?.workspace_id||session?.client_reference_id;
   const plan=String(session?.metadata?.plan||'FREE').toUpperCase();
   if(!workspaceId||!['DISCOVER','RADAR','LAUNCH'].includes(plan))return;
+  await recordJourneyEvent(workspaceId,'CHECKOUT_COMPLETED',{stripeSessionId:String(session.id||''),paymentStatus:String(session.payment_status||''),requestedPlan:plan},{env,fetchImpl,plan});
   // Checkout completion is only a receipt signal. Subscription lifecycle events are the
   // sole source of truth for entitlement and subscription state, so this handler must
   // never overwrite an active subscription if Stripe delivers events out of order.
-  return;
 }
 
 export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.env}={}){
@@ -56,8 +78,8 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
       const raw=await request.text();
       if(!verifySignature(raw,request.headers.get('stripe-signature'),env.STRIPE_WEBHOOK_SECRET))return new Response('Invalid signature',{status:400});
       const event=JSON.parse(raw);
-      if(event.type==='checkout.session.completed')await applyCheckoutSession(event.data?.object||{});
-      if(['customer.subscription.created','customer.subscription.updated','customer.subscription.deleted'].includes(event.type))await applySubscription(event.data?.object||{},{env,fetchImpl});
+      if(event.type==='checkout.session.completed')await applyCheckoutSession(event.data?.object||{},{env,fetchImpl});
+      if(['customer.subscription.created','customer.subscription.updated','customer.subscription.deleted'].includes(event.type))await applySubscription(event.data?.object||{},{env,fetchImpl,eventType:event.type});
       return Response.json({received:true},{headers:{'Cache-Control':'no-store'}});
     }catch(error){
       return Response.json({received:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
@@ -65,6 +87,6 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
   };
 }
 
-export {verifySignature,grantedPlan};
+export {verifySignature,grantedPlan,recordJourneyEvent};
 export default createBillingWebhookHandler();
 export const config={path:'/api/billing/webhook',method:'POST'};
