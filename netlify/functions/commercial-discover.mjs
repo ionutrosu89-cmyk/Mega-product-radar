@@ -40,6 +40,14 @@ function organicToDiscover(p={}){
   });
 }
 
+function hasDirectObservedEvidence(p={}){
+  return DISCOVER_SIGNAL_KEYS.some(key=>{
+    const signal=p?.signals?.[key];
+    if(!signal?.present) return false;
+    return (Array.isArray(signal.links)?signal.links:[]).some(link=>/^https?:\/\//i.test(String(link?.url||'')));
+  });
+}
+
 function normalizeName(value=''){return String(value).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
 function evidenceWeight(p={}){const verified=Object.values(p.signals||{}).filter(s=>s.present&&s.evidenceClass==='VERIFIED').length;const amazon=AMAZON_KEYS.some(k=>p?.signals?.[k]?.present)?1:0;return verified*1000+amazon*100+(p?.risingSignal?.eligible?50:0)+Number(p?.discoveryAnalysis?.score||0);}
 function mergeProducts(discovery=[],organic=[]){
@@ -97,9 +105,11 @@ export function createCommercialDiscoverHandler({fetch:fetchImpl=fetch,env=proce
       const organic=organicSource.data||{products:[],updatedAt:null};
       const discoveryProducts=(Array.isArray(source.products)?source.products:[]).map(cleanProduct);
       const organicProducts=(Array.isArray(organic.products)?organic.products:[]).map(organicToDiscover).filter(Boolean);
+      const merged=mergeProducts(discoveryProducts,organicProducts);
+      const evidenceBackedProducts=merged.filter(hasDirectObservedEvidence);
       const full=hasFeature(access.plan.code,'TOP_PRODUCTS');
       const limit=full?20:3;
-      const products=mergeProducts(discoveryProducts,organicProducts).slice(0,limit);
+      const products=evidenceBackedProducts.slice(0,limit);
       const amazonEvidenceCount=products.filter(p=>AMAZON_KEYS.some(k=>p?.signals?.[k]?.present)).length;
       const risingCount=products.filter(p=>p?.risingSignal?.eligible).length;
       return Response.json({
@@ -109,8 +119,8 @@ export function createCommercialDiscoverHandler({fetch:fetchImpl=fetch,env=proce
         workspaceId:access.workspaceId,
         limits:{products:limit},
         entitlements:{discoverFull:full,radar:hasFeature(access.plan.code,'RADAR'),launch:hasFeature(access.plan.code,'LAUNCH_PLAN')},
-        integrity:{sales:'NOT_EXPOSED_WITHOUT_VERIFIABLE_PROVIDER',classification:'DERIVED',organicRising:'VERIFIED_LISTING_EVIDENCE_ONLY'},
-        sourceDiagnostics:{policy:'HTTP_OR_BUNDLED_FILE',discoverySourceStatus:discoverySource.via,organicSourceStatus:organicSource.via,organicEligibleProducts:organicProducts.length,amazonEvidenceCount,risingCount},
+        integrity:{sales:'NOT_EXPOSED_WITHOUT_VERIFIABLE_PROVIDER',classification:'SOURCE_REQUIRED_FOR_COMMERCIAL_FEED',organicRising:'VERIFIED_LISTING_EVIDENCE_ONLY'},
+        sourceDiagnostics:{policy:'HTTP_OR_BUNDLED_FILE',evidencePolicy:'DIRECT_PUBLIC_SOURCE_REQUIRED',discoverySourceStatus:discoverySource.via,organicSourceStatus:organicSource.via,organicEligibleProducts:organicProducts.length,evidenceBackedProducts:evidenceBackedProducts.length,excludedWithoutDirectSource:Math.max(0,merged.length-evidenceBackedProducts.length),amazonEvidenceCount,risingCount},
         updatedAt:[source.updatedAt,organic.updatedAt].filter(Boolean).sort().at(-1)||null,
         products
       },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
