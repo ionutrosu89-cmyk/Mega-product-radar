@@ -254,15 +254,24 @@
       "costStatus": "COST_REPORTED",
       "costAnomalyCount": 0,
       "source": "DATAFORSEO_PROVIDER"
+    },
+    {
+      "runId": "2026-08-22T22:26:55.134Z",
+      "at": "2026-08-22T22:27:17.880Z",
+      "costUsd": 0.0411,
+      "reportedCostUsd": 0.0411,
+      "costStatus": "COST_REPORTED",
+      "costAnomalyCount": 0,
+      "source": "DATAFORSEO_PROVIDER"
     }
   ],
   "keywordAccountedUsd": 0.18,
-  "providerAccountedUsd": 1.1508,
-  "spentUsd": 1.3308,
-  "remainingUsd": 8.6692,
+  "providerAccountedUsd": 1.1919,
+  "spentUsd": 1.3719,
+  "remainingUsd": 8.6281,
   "maxNextCycleUsd": 0.5,
   "allowPaid": true,
   "status": "ACTIVE",
-  "updatedAt": "2026-08-22T22:06:56.444Z",
+  "updatedAt": "2026-08-22T22:27:17.880Z",
   "policy": "Hard test budget: provider accountedCostUsd is authoritative. If a paid endpoint reports zero/missing cost, the provider layer books a conservative reserve. Stop new paid DataForSEO cycles when less than $0.50 remains, so configured per-cycle spending cannot exceed the $10.00 total cap."
 }
