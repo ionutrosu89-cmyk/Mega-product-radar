@@ -10,6 +10,13 @@ async function jsonFetch(url,options,fetchImpl){
   return {ok:r.ok,status:r.status,body};
 }
 
+function stripeMode(secret=''){
+  const value=String(secret||'');
+  if(value.startsWith('sk_live_'))return 'LIVE';
+  if(value.startsWith('sk_test_'))return 'SANDBOX';
+  return value?'UNKNOWN':'UNCONFIGURED';
+}
+
 export function createBillingReadinessHandler({fetch:fetchImpl=fetch,env=process.env}={}){
   return async request=>{
     try{
@@ -40,10 +47,21 @@ export function createBillingReadinessHandler({fetch:fetchImpl=fetch,env=process
       const allPricesValid=PRICE_KEYS.every(k=>prices[k]?.valid&&prices[k]?.active&&prices[k]?.recurringInterval==='month');
       const expected={STRIPE_PRICE_DISCOVER:1790,STRIPE_PRICE_RADAR:2900,STRIPE_PRICE_LAUNCH:8900};
       const amountsMatch=PRICE_KEYS.every(k=>prices[k]?.unitAmount===expected[k]&&String(prices[k]?.currency||'').toLowerCase()==='eur');
-      return Response.json({ok:true,ready:allConfigured&&allPricesValid&&amountsMatch,configured,prices,checks:{allConfigured,allPricesValid,amountsMatch,webhookSecretPresent:Boolean(env.STRIPE_WEBHOOK_SECRET),serviceRolePresent:Boolean(env.SUPABASE_SERVICE_ROLE_KEY)}},{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
+      const mode=stripeMode(stripeSecret);
+      const ready=allConfigured&&allPricesValid&&amountsMatch;
+      return Response.json({
+        ok:true,
+        ready,
+        stripeMode:mode,
+        publicLaunchBillingReady:ready&&mode==='LIVE',
+        configured,
+        prices,
+        checks:{allConfigured,allPricesValid,amountsMatch,webhookSecretPresent:Boolean(env.STRIPE_WEBHOOK_SECRET),serviceRolePresent:Boolean(env.SUPABASE_SERVICE_ROLE_KEY),liveMode:mode==='LIVE'}
+      },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
     }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});}
   };
 }
 
+export {stripeMode};
 export default createBillingReadinessHandler();
 export const config={path:'/api/internal/billing-readiness',method:'GET'};
