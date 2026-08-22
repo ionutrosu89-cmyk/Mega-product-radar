@@ -1,11 +1,11 @@
 {
-  "version": "6.0",
-  "engine": "Global Product Discovery Network 6.0",
-  "updatedAt": "2026-08-22T16:12:09.529Z",
+  "version": "6.2",
+  "engine": "Product Discovery Engine 6.2 · Category First",
+  "updatedAt": "2026-08-22T16:21:37.074Z",
   "scanSize": 10,
   "openDiscovered": 0,
   "successfulChecks": 40,
-  "reviewChecks": 7,
+  "reviewChecks": 8,
   "network": {
     "markets": [
       {
@@ -3576,7 +3576,7 @@
       "sellTarget": 119,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 53.38,
-      "checkedAt": "2026-08-22T16:11:55.216Z",
+      "checkedAt": "2026-08-22T16:16:55.382Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -4204,7 +4204,7 @@
       "sellTarget": 139,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 65,
-      "checkedAt": "2026-08-22T16:10:41.660Z",
+      "checkedAt": "2026-08-22T16:15:42.261Z",
       "checks": 20,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -4518,7 +4518,7 @@
       "sellTarget": 139,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 65,
-      "checkedAt": "2026-08-22T16:11:12.736Z",
+      "checkedAt": "2026-08-22T16:16:12.897Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -4832,7 +4832,7 @@
       "sellTarget": 89,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 40.98,
-      "checkedAt": "2026-08-22T16:11:41.056Z",
+      "checkedAt": "2026-08-22T16:16:41.219Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -11426,7 +11426,7 @@
       "sellTarget": 69,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 34,
-      "checkedAt": "2026-08-22T16:10:42.390Z",
+      "checkedAt": "2026-08-22T16:15:42.518Z",
       "checks": 20,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -11740,7 +11740,7 @@
       "sellTarget": 129,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 61.9,
-      "checkedAt": "2026-08-22T16:10:43.617Z",
+      "checkedAt": "2026-08-22T16:15:43.748Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -12054,7 +12054,7 @@
       "sellTarget": 99,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 47.95,
-      "checkedAt": "2026-08-22T16:11:26.896Z",
+      "checkedAt": "2026-08-22T16:16:27.059Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -12370,7 +12370,7 @@
       "imageSourceUrl": "",
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 38.65,
-      "checkedAt": "2026-08-22T16:12:09.378Z",
+      "checkedAt": "2026-08-22T16:17:09.544Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -18962,7 +18962,7 @@
       "sellTarget": 69,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 35,
-      "checkedAt": "2026-08-22T16:10:44.413Z",
+      "checkedAt": "2026-08-22T16:15:44.573Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -19276,7 +19276,7 @@
       "sellTarget": 59,
       "pricingStatus": "SEED_ESTIMATE",
       "landedEstimate": 32,
-      "checkedAt": "2026-08-22T16:10:58.575Z",
+      "checkedAt": "2026-08-22T16:15:58.736Z",
       "checks": 0,
       "foreignPresence": 0,
       "romaniaPresence": 0,
@@ -19583,21 +19583,64 @@
       "imageSourceUrl": ""
     }
   ],
-  "imageEnrichment": {
-    "updatedAt": "2026-08-22T16:14:43.810Z",
-    "checked": 0,
-    "enriched": 0,
-    "maxPerRun": 12,
-    "policy": "REAL_SOURCE_OG_IMAGE_ONLY"
-  },
   "supplierHunter": {
     "version": "2.0",
-    "updatedAt": "2026-08-22T16:14:44.188Z",
+    "updatedAt": "2026-08-22T16:19:37.052Z",
     "platforms": [
       "Alibaba",
       "1688",
       "Made-in-China",
       "Global Sources"
     ]
+  },
+  "categoryDiscovery": {
+    "enabled": true,
+    "focusCategories": [
+      {
+        "key": "baby",
+        "label": "Bebeluși 0–2 ani",
+        "currentBefore": 0,
+        "target": 20
+      },
+      {
+        "key": "toys",
+        "label": "Jucării & Educațional",
+        "currentBefore": 0,
+        "target": 20
+      },
+      {
+        "key": "phone",
+        "label": "Telefon & Accesorii Tech",
+        "currentBefore": 0,
+        "target": 20
+      }
+    ],
+    "targetPerCategory": 20,
+    "minimumPerCategory": 10,
+    "queriesChecked": 24,
+    "newCandidates": 0,
+    "categoryCount": 24,
+    "policy": "Fiecare scanare prioritizează cele 3 categorii cu cea mai mică acoperire și poate adăuga până la 4 candidați per categorie."
+  },
+  "multilingual": {
+    "enabled": true,
+    "locales": [
+      "en",
+      "de",
+      "pl",
+      "tr",
+      "ro",
+      "zh"
+    ],
+    "queriesChecked": 24,
+    "newCandidates": 0,
+    "sourcePolicy": "DIRECT_SEARCH_LINKS + WEB_PROXY_EVIDENCE"
+  },
+  "imageEnrichment": {
+    "updatedAt": "2026-08-22T16:21:42.545Z",
+    "checked": 0,
+    "enriched": 0,
+    "maxPerRun": 12,
+    "policy": "REAL_SOURCE_OG_IMAGE_ONLY"
   }
 }
