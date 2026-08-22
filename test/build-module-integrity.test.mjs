@@ -36,3 +36,7 @@ test('commercial Home runtime dependencies are included in Netlify build',()=>{
 test('Discover runtime dependencies are included in Netlify build',()=>{
   assertEntryDependenciesArePublished('discover.js');
 });
+
+test('Top25 runtime dependencies are included in Netlify build',()=>{
+  assertEntryDependenciesArePublished('top25.js');
+});
