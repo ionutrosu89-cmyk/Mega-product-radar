@@ -17,7 +17,7 @@ for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','organic-rising-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','product-ro.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
+  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js',
@@ -25,6 +25,10 @@ for(const file of [
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
+
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js']){
+  await fs.access(path.join(out,required));
+}
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
 for(const entry of await fs.readdir(out)){
