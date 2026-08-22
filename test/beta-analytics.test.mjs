@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {aggregate,createBetaAnalyticsHandler} from '../netlify/functions/beta-analytics.mjs';
 
-test('beta analytics aggregates funnel, retention and churn without double counting workspaces',()=>{
+test('beta analytics separates usage, billing, retention and churn without double counting workspaces',()=>{
   const data=aggregate({events:[
     {workspace_id:'w1',user_id:'u1',event_name:'ONBOARDING_VIEW'},{workspace_id:'w1',user_id:'u1',event_name:'ONBOARDING_VIEW'},
     {workspace_id:'w1',user_id:'u1',event_name:'ONBOARDING_COMPLETED'},{workspace_id:'w1',user_id:'u1',event_name:'HOME_VIEW'},
@@ -12,7 +12,9 @@ test('beta analytics aggregates funnel, retention and churn without double count
     {workspace_id:'w1',user_id:'u1',event_name:'SUBSCRIPTION_CANCEL_SCHEDULED'},{workspace_id:'w2',user_id:'u2',event_name:'SUBSCRIPTION_ENDED'}
   ],workspaces:[{id:'w1',plan:'LAUNCH'},{id:'w2',plan:'FREE'}],preferences:[{workspace_id:'w1',onboarding_completed:true}],subscriptions:[{workspace_id:'w1',plan:'LAUNCH',status:'active',cancel_at_period_end:true}]},30);
   assert.equal(data.totals.activeWorkspaces,2);
-  assert.equal(data.funnel.find(x=>x.key==='paid').workspaces,1);
+  assert.equal(data.usageFunnel.find(x=>x.key==='radar').workspaces,1);
+  assert.equal(data.billingFunnel.find(x=>x.key==='paid').workspaces,1);
+  assert.equal(data.billingFunnel.find(x=>x.key==='checkout_started').conversionFromPrevious,100);
   assert.equal(data.totals.cancelPendingWorkspaces,1);
   assert.equal(data.totals.endedWorkspaces,1);
   assert.equal(data.retention.activePaid,1);
@@ -23,9 +25,26 @@ test('beta analytics aggregates funnel, retention and churn without double count
   assert.equal(data.dataScope,'REAL_EVENT_DATA');
 });
 
+test('beta analytics marks conversion unavailable instead of zero when previous billing stage has no workspaces',()=>{
+  const data=aggregate({events:[
+    {workspace_id:'w1',user_id:'u1',event_name:'CHECKOUT_STARTED'},
+    {workspace_id:'w1',user_id:'u1',event_name:'CHECKOUT_COMPLETED'}
+  ],workspaces:[{id:'w1',plan:'DISCOVER'}],preferences:[],subscriptions:[]},30);
+  const started=data.billingFunnel.find(x=>x.key==='checkout_started');
+  const completed=data.billingFunnel.find(x=>x.key==='checkout_completed');
+  assert.equal(started.workspaces,1);
+  assert.equal(started.conversionFromPrevious,null);
+  assert.equal(completed.conversionFromPrevious,100);
+});
+
 test('beta analytics conversions and retention are zero-safe',()=>{
   const data=aggregate({events:[],workspaces:[],preferences:[],subscriptions:[]},30);
-  assert.equal(data.totals.events,0);assert.equal(data.conversion.onboarding,0);assert.equal(data.retention.retentionRate,0);assert.equal(data.retention.churnRate,0);
+  assert.equal(data.totals.events,0);
+  assert.equal(data.conversion.onboarding,0);
+  assert.equal(data.retention.retentionRate,0);
+  assert.equal(data.retention.churnRate,0);
+  assert.equal(data.usageFunnel[1].conversionFromPrevious,null);
+  assert.equal(data.billingFunnel[1].conversionFromPrevious,null);
 });
 
 test('beta analytics rejects users outside server-side admin registry before cross-workspace reads',async()=>{
@@ -35,5 +54,5 @@ test('beta analytics rejects users outside server-side admin registry before cro
 
 test('beta analytics accepts a registered admin and uses service role only server-side',async()=>{
   const fetchImpl=async url=>{const s=String(url);if(s.includes('/auth/v1/user'))return Response.json({id:'admin-1',email:'admin@example.com'});if(s.includes('/beta_analytics_admins?'))return Response.json([{user_id:'admin-1'}]);if(s.includes('/journey_events?')||s.includes('/workspaces?')||s.includes('/seller_preferences?')||s.includes('/subscriptions?'))return Response.json([]);return new Response('not found',{status:404});};
-  const handler=createBetaAnalyticsHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service'}});const r=await handler(new Request('https://radar.example/api/internal/beta-analytics',{headers:{authorization:'Bearer token'}}));assert.equal(r.status,200);const body=await r.json();assert.equal(body.ok,true);assert.equal(body.totals.events,0);
+  const handler=createBetaAnalyticsHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service'}});const r=await handler(new Request('https://radar.example/api/internal/beta-analytics',{headers:{authorization:'Bearer token'}}));assert.equal(r.status,200);const body=await r.json();assert.equal(body.ok,true);assert.equal(body.totals.events,0);assert.ok(Array.isArray(body.usageFunnel));assert.ok(Array.isArray(body.billingFunnel));
 });
