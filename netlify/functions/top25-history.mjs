@@ -6,20 +6,26 @@ import {buildTop25Snapshot} from '../../top25-movement.js';
 const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'public, max-age=60, stale-while-revalidate=300'}});
 
 function supabaseHeaders(serviceRole){
-  return {
-    apikey:serviceRole,
-    authorization:`Bearer ${serviceRole}`,
-    'content-type':'application/json',
-    accept:'application/json'
-  };
+  return {apikey:serviceRole,authorization:`Bearer ${serviceRole}`,'content-type':'application/json',accept:'application/json'};
 }
 
 function normalizeRows(rows=[]){
   return (Array.isArray(rows)?rows:[]).map(row=>({
-    nicheId:String(row.niche_id||''),
-    reviewedAt:String(row.reviewed_at||''),
-    products:Array.isArray(row.products)?row.products:[]
+    nicheId:String(row.niche_id||''),reviewedAt:String(row.reviewed_at||''),products:Array.isArray(row.products)?row.products:[]
   }));
+}
+
+async function latestRefresh(supabaseUrl,headers,fetchImpl){
+  const url=new URL(`${supabaseUrl}/rest/v1/top25_refresh_runs`);
+  url.searchParams.set('select','checked_at,status,sources_checked,sources_ok,niches_changed');
+  url.searchParams.set('order','checked_at.desc');
+  url.searchParams.set('limit','1');
+  const response=await fetchImpl(url,{headers});
+  if(!response.ok)return null;
+  const row=(await response.json())?.[0];
+  return row?{
+    checkedAt:String(row.checked_at||''),status:String(row.status||''),sourcesChecked:Number(row.sources_checked||0),sourcesOk:Number(row.sources_ok||0),nichesChanged:Number(row.niches_changed||0)
+  }:null;
 }
 
 export function createTop25HistoryHandler({fetch:fetchImpl=fetch,env=process.env}={}){
@@ -36,38 +42,35 @@ export function createTop25HistoryHandler({fetch:fetchImpl=fetch,env=process.env
       if(!supabaseUrl||!serviceRole) return json({ok:false,error:'Central history unavailable',fallback:'LOCAL'},503);
 
       const headers=supabaseHeaders(serviceRole);
-      const current=buildTop25Snapshot(niche,TOP25_EVIDENCE_REVIEWED_AT);
+      const seed=buildTop25Snapshot(niche,TOP25_EVIDENCE_REVIEWED_AT);
       const historyUrl=new URL(`${supabaseUrl}/rest/v1/top25_snapshots`);
       historyUrl.searchParams.set('select','niche_id,reviewed_at,products');
-      historyUrl.searchParams.set('niche_id',`eq.${current.nicheId}`);
+      historyUrl.searchParams.set('niche_id',`eq.${seed.nicheId}`);
       historyUrl.searchParams.set('order','reviewed_at.desc');
       historyUrl.searchParams.set('limit','2');
 
       const historyResponse=await fetchImpl(historyUrl,{headers});
       if(!historyResponse.ok) return json({ok:false,error:'Snapshot read failed',fallback:'LOCAL'},502);
       let snapshots=normalizeRows(await historyResponse.json());
-      const currentSnapshot=snapshots.find(row=>row.reviewedAt===current.reviewedAt)||null;
 
-      if(!currentSnapshot){
+      if(!snapshots.length){
         const insertUrl=`${supabaseUrl}/rest/v1/top25_snapshots?on_conflict=niche_id,reviewed_at`;
         const upsert=await fetchImpl(insertUrl,{
-          method:'POST',
-          headers:{...headers,Prefer:'resolution=merge-duplicates,return=minimal'},
-          body:JSON.stringify({niche_id:current.nicheId,reviewed_at:current.reviewedAt,products:current.products})
+          method:'POST',headers:{...headers,Prefer:'resolution=merge-duplicates,return=minimal'},
+          body:JSON.stringify({niche_id:seed.nicheId,reviewed_at:seed.reviewedAt,products:seed.products})
         });
         if(!upsert.ok) return json({ok:false,error:'Snapshot write failed',fallback:'LOCAL'},502);
-        snapshots=[current,...snapshots.filter(row=>row.reviewedAt!==current.reviewedAt)].slice(0,2);
+        snapshots=[seed];
       }
 
-      const resolvedCurrent=snapshots.find(row=>row.reviewedAt===current.reviewedAt)||current;
-      const previous=snapshots.find(row=>row.reviewedAt!==current.reviewedAt)||null;
+      const current=snapshots[0]||seed;
+      const previous=snapshots[1]||null;
+      const refresh=await latestRefresh(supabaseUrl,headers,fetchImpl);
 
       return json({
-        ok:true,
-        mode:'CENTRAL',
-        current:resolvedCurrent,
-        previous,
-        previousReviewedAt:previous?.reviewedAt||null
+        ok:true,mode:'CENTRAL',current,previous,previousReviewedAt:previous?.reviewedAt||null,
+        lastCheckedAt:refresh?.checkedAt||null,refreshStatus:refresh?.status||null,
+        refreshSources:refresh?{ok:refresh.sourcesOk,total:refresh.sourcesChecked}:null
       });
     }catch(error){
       return json({ok:false,error:String(error?.message||error),fallback:'LOCAL'},500);
