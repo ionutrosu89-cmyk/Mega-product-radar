@@ -2,7 +2,7 @@ import {getCurrentSession} from './supabase-client.js';
 import {roCategory,roProductName} from './product-ro.js';
 import {bestEvidence,evidenceClassOf,sortDiscoverProducts} from './discover-ranking.js';
 
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const safeUrl=u=>{try{const x=new URL(String(u||''),location.href);return['http:','https:'].includes(x.protocol)?x.href:'#';}catch{return'#';}};
 const num=v=>Number(v||0);
 let products=[],view='ALL',discoverFull=false,radarAccess=false,planCode='FREE';
