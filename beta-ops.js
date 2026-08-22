@@ -1,6 +1,6 @@
 import {getCurrentSession} from './supabase-client.js';
 
-const $=s=>document.querySelector(s);
+const $=s=>typeof document==='undefined'?null:document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 function status(label,type){return `<span class="status ${type}">${esc(label)}</span>`;}
 function gate(title,detail,label,type){return `<div class="gate"><div><b>${esc(title)}</b><small>${esc(detail)}</small></div>${status(label,type)}</div>`;}
@@ -32,5 +32,5 @@ function render(analytics,billing){
   $('#publicVerdict').textContent=view.publicBillingReady?'PUBLIC BILLING LIVE · gate-urile manuale rămân obligatorii':'PUBLIC LAUNCH BLOCKED · Stripe LIVE și gate-urile manuale nu sunt încă finalizate';
   $('#foot').textContent=`REAL EVENT DATA · ${analytics.days||30} zile · Stripe ${billing.stripeMode||'UNKNOWN'} · Public launch nu devine automat READY din acest dashboard; gate-urile manuale necesită verificare separată.`;
 }
-async function load(){const button=$('#refresh');button.disabled=true;try{const session=await getCurrentSession();if(!session){location.href='login.html?next=beta-ops.html';return;}const [analytics,billing]=await Promise.all([adminFetch('/api/internal/beta-analytics?days=30',session.access_token),adminFetch('/api/internal/billing-readiness',session.access_token)]);render(analytics,billing);}catch(error){$('#autoGates').innerHTML=`<div class="empty"><b>Beta Ops indisponibil.</b><br>${esc(error?.message||error)}</div>`;$('#betaVerdict').textContent='BETA STATUS NECUNOSCUT';$('#betaVerdict').className='verdict public';$('#publicVerdict').textContent='PUBLIC LAUNCH BLOCKED · diagnosticul admin nu este disponibil';}finally{button.disabled=false;}}
-$('#refresh')?.addEventListener('click',load);load();
+async function load(){const button=$('#refresh');if(!button)return;button.disabled=true;try{const session=await getCurrentSession();if(!session){location.href='login.html?next=beta-ops.html';return;}const [analytics,billing]=await Promise.all([adminFetch('/api/internal/beta-analytics?days=30',session.access_token),adminFetch('/api/internal/billing-readiness',session.access_token)]);render(analytics,billing);}catch(error){$('#autoGates').innerHTML=`<div class="empty"><b>Beta Ops indisponibil.</b><br>${esc(error?.message||error)}</div>`;$('#betaVerdict').textContent='BETA STATUS NECUNOSCUT';$('#betaVerdict').className='verdict public';$('#publicVerdict').textContent='PUBLIC LAUNCH BLOCKED · diagnosticul admin nu este disponibil';}finally{button.disabled=false;}}
+if(typeof document!=='undefined'){$('#refresh')?.addEventListener('click',load);load();}
