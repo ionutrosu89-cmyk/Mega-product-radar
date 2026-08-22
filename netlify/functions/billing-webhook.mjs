@@ -50,14 +50,22 @@ function grantedPlan(subscription){
   return ['DISCOVER','RADAR','LAUNCH'].includes(requested)?requested:'FREE';
 }
 
+function subscriptionPeriodEnd(subscription){
+  const direct=Number(subscription?.current_period_end);
+  if(Number.isFinite(direct)&&direct>0)return direct;
+  const ends=(subscription?.items?.data||[]).map(item=>Number(item?.current_period_end)).filter(value=>Number.isFinite(value)&&value>0);
+  return ends.length?Math.max(...ends):null;
+}
+
 async function applySubscription(subscription,{env,fetchImpl,eventType}){
   const metadata=subscription?.metadata||{};
   const workspaceId=metadata.workspace_id;
   if(!workspaceId)return;
   const status=String(subscription?.status||'unknown');
   const plan=grantedPlan(subscription);
+  const periodEnd=subscriptionPeriodEnd(subscription);
   await supabaseWrite(`workspaces?id=eq.${encodeURIComponent(workspaceId)}`,{method:'PATCH',body:{plan},env,fetchImpl});
-  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:subscription.current_period_end?new Date(subscription.current_period_end*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
+  await supabaseWrite('subscriptions?on_conflict=workspace_id',{method:'POST',body:{workspace_id:workspaceId,provider:'STRIPE',provider_customer_id:String(subscription.customer||''),provider_subscription_id:String(subscription.id||''),plan,status,current_period_end:periodEnd?new Date(periodEnd*1000).toISOString():null,cancel_at_period_end:Boolean(subscription.cancel_at_period_end),updated_at:new Date().toISOString()},env,fetchImpl});
   if(['active','trialing'].includes(status.toLowerCase()))await recordJourneyEvent(workspaceId,'SUBSCRIPTION_ACTIVATED',{eventType,providerSubscriptionId:String(subscription.id||''),status}, {env,fetchImpl,plan});
 }
 
@@ -87,6 +95,6 @@ export function createBillingWebhookHandler({fetch:fetchImpl=fetch,env=process.e
   };
 }
 
-export {verifySignature,grantedPlan,recordJourneyEvent};
+export {verifySignature,grantedPlan,subscriptionPeriodEnd,recordJourneyEvent};
 export default createBillingWebhookHandler();
 export const config={path:'/api/billing/webhook',method:'POST'};
