@@ -23,17 +23,14 @@ test('central endpoint fails closed to local fallback when service role is unava
   assert.equal(body.fallback,'LOCAL');
 });
 
-test('central endpoint upserts current review and returns previous global review',async()=>{
+test('central endpoint inserts current review once and returns previous global review',async()=>{
   const current=buildTop25Snapshot(niche,TOP25_EVIDENCE_REVIEWED_AT);
   const previous={...current,reviewedAt:'2026-08-21',products:current.products.map((p,index)=>({...p,internalRank:index===0?2:p.internalRank}))};
   const calls=[];
   const fetchImpl=async(url,options={})=>{
     calls.push({url:String(url),options});
     if(options.method==='POST') return new Response(null,{status:201});
-    return Response.json([
-      {niche_id:current.nicheId,reviewed_at:current.reviewedAt,products:current.products},
-      {niche_id:previous.nicheId,reviewed_at:previous.reviewedAt,products:previous.products}
-    ]);
+    return Response.json([{niche_id:previous.nicheId,reviewed_at:previous.reviewedAt,products:previous.products}]);
   };
   const handler=createTop25HistoryHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'service-secret'}});
   const response=await handler(new Request(`https://example.test/api/top25/history?niche=${encodeURIComponent(niche.id)}`));
@@ -42,8 +39,24 @@ test('central endpoint upserts current review and returns previous global review
   assert.equal(body.mode,'CENTRAL');
   assert.equal(body.previousReviewedAt,'2026-08-21');
   assert.equal(calls.length,2);
-  assert.match(calls[0].url,/top25_snapshots\?on_conflict=/);
-  assert.equal(calls[0].options.headers.authorization,'Bearer service-secret');
+  assert.match(calls[0].url,/top25_snapshots/);
+  assert.equal(calls[0].options.method,undefined);
+  assert.match(calls[1].url,/top25_snapshots\?on_conflict=/);
+  assert.equal(calls[1].options.method,'POST');
+  assert.equal(calls[1].options.headers.authorization,'Bearer service-secret');
+});
+
+test('central endpoint does not write again when current review already exists',async()=>{
+  const current=buildTop25Snapshot(niche,TOP25_EVIDENCE_REVIEWED_AT);
+  let writes=0;
+  const fetchImpl=async(url,options={})=>{
+    if(options.method==='POST')writes++;
+    return Response.json([{niche_id:current.nicheId,reviewed_at:current.reviewedAt,products:current.products}]);
+  };
+  const handler=createTop25HistoryHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'service-secret'}});
+  const response=await handler(new Request(`https://example.test/api/top25/history?niche=${encodeURIComponent(niche.id)}`));
+  assert.equal(response.status,200);
+  assert.equal(writes,0);
 });
 
 test('browser movement uses central previous snapshot when endpoint is available',async()=>{
