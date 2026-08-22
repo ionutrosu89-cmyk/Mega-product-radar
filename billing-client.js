@@ -41,3 +41,9 @@ export async function cancelSubscription(){
   if(!response.ok)throw new Error(data?.error||'Anularea abonamentului nu a reușit.');
   return data;
 }
+
+export async function resumeSubscription(){
+  const {response,data}=await billingFetch('/api/billing/resume',{method:'POST'});
+  if(!response.ok)throw new Error(data?.error||'Retragerea anulării nu a reușit.');
+  return data;
+}
