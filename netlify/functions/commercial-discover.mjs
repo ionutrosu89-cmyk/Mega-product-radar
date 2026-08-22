@@ -120,7 +120,7 @@ export function createCommercialDiscoverHandler({fetch:fetchImpl=fetch,env=proce
         limits:{products:limit},
         entitlements:{discoverFull:full,radar:hasFeature(access.plan.code,'RADAR'),launch:hasFeature(access.plan.code,'LAUNCH_PLAN')},
         integrity:{sales:'NOT_EXPOSED_WITHOUT_VERIFIABLE_PROVIDER',classification:'SOURCE_REQUIRED_FOR_COMMERCIAL_FEED',organicRising:'VERIFIED_LISTING_EVIDENCE_ONLY'},
-        sourceDiagnostics:{policy:'DIRECT_PUBLIC_SOURCE_REQUIRED',discoverySourceStatus:discoverySource.via,organicSourceStatus:organicSource.via,organicEligibleProducts:organicProducts.length,evidenceBackedProducts:evidenceBackedProducts.length,excludedWithoutDirectSource:Math.max(0,merged.length-evidenceBackedProducts.length),amazonEvidenceCount,risingCount},
+        sourceDiagnostics:{policy:'HTTP_OR_BUNDLED_FILE',evidencePolicy:'DIRECT_PUBLIC_SOURCE_REQUIRED',discoverySourceStatus:discoverySource.via,organicSourceStatus:organicSource.via,organicEligibleProducts:organicProducts.length,evidenceBackedProducts:evidenceBackedProducts.length,excludedWithoutDirectSource:Math.max(0,merged.length-evidenceBackedProducts.length),amazonEvidenceCount,risingCount},
         updatedAt:[source.updatedAt,organic.updatedAt].filter(Boolean).sort().at(-1)||null,
         products
       },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
