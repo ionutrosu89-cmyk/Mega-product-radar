@@ -40,6 +40,18 @@ test('Discover client loads commercial API instead of the raw discovery dataset'
   assert.match(js,/Vezi Discover · €17,90/);
 });
 
+test('Discover cards show verified images first and a clearly labeled representative fallback',async()=>{
+  const html=await fs.readFile(new URL('../discover.html',import.meta.url),'utf8');
+  const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
+  assert.match(js,/p\.imageUrl/);
+  assert.match(js,/representativeImageUrl/);
+  assert.match(js,/tse1\.mm\.bing\.net/);
+  assert.match(js,/Imagine reprezentativă/);
+  assert.match(js,/data-fallback/);
+  assert.match(html,/\.media-note/);
+  assert.match(html,/imagine reprezentativă, marcată explicit/i);
+});
+
 test('Discover prioritizes verified observed evidence over higher derived score',()=>{
   const derived={name:'Derived',discoveryAnalysis:{score:95},signals:{}};
   const verified={name:'Verified',discoveryAnalysis:{score:40},signals:{amazonDE:{present:true,evidenceClass:'VERIFIED',links:[{url:'https://example.com/product'}]}}};
