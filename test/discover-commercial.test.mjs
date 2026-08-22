@@ -67,6 +67,17 @@ test('Discover source block never invents a verified source',()=>{
   assert.equal(none.evidenceClass,'DERIVED');
 });
 
+test('commercial Discover excludes products without a direct public evidence URL',async()=>{
+  const fn=await fs.readFile(new URL('../netlify/functions/commercial-discover.mjs',import.meta.url),'utf8');
+  const js=await fs.readFile(new URL('../discover.js',import.meta.url),'utf8');
+  assert.match(fn,/function hasDirectObservedEvidence/);
+  assert.match(fn,/merged\.filter\(hasDirectObservedEvidence\)/);
+  assert.match(fn,/DIRECT_PUBLIC_SOURCE_REQUIRED/);
+  assert.match(fn,/excludedWithoutDirectSource/);
+  assert.doesNotMatch(js,/Caută sursa/);
+  assert.match(js,/Verifică sursa/);
+});
+
 test('commercial endpoint enforces server-side product limits and strips sourcing economics',async()=>{
   const fn=await fs.readFile(new URL('../netlify/functions/commercial-discover.mjs',import.meta.url),'utf8');
   assert.match(fn,/const limit=full\?20:3/);
