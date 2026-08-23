@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 
 test('Finalist Evidence Queue authorizes supplier work only after RO demand and high-confidence sales',async()=>{
   const src=await fs.readFile('scripts/finalist-evidence-queue.mjs','utf8');
-  assert.match(src,/stage\|\|'\)==='VALIDATE'/);
+  assert.match(src,/p\?\.stage\|\|''\)==='VALIDATE'/);
   assert.match(src,/PROVIDER_VERIFIED/);
   assert.match(src,/ESTIMATED_HIGH_CONFIDENCE/);
   assert.match(src,/salesEstimateConfidence/);
