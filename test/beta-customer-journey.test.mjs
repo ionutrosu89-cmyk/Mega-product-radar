@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs/promises';
 
-test('beta journey routes login through profile-aware home',async()=>{
+test('beta journey routes login through profile-aware home and plan recommendation',async()=>{
   const login=await fs.readFile(new URL('../login.js',import.meta.url),'utf8');
   const home=await fs.readFile(new URL('../home.js',import.meta.url),'utf8');
   const onboarding=await fs.readFile(new URL('../onboarding.js',import.meta.url),'utf8');
@@ -11,7 +11,9 @@ test('beta journey routes login through profile-aware home',async()=>{
   assert.match(home,/resolveCommercialAccess/);
   assert.match(home,/FREE:0,DISCOVER:1,RADAR:2,LAUNCH:3/);
   assert.match(onboarding,/ONBOARDING_COMPLETED/);
-  assert.match(onboarding,/location\.href='home\.html'/);
+  assert.match(onboarding,/PLAN_RECOMMENDED/);
+  assert.match(onboarding,/pricing\.html\?recommended=/);
+  assert.match(onboarding,/href=\"home\.html\"/);
 });
 
 test('journey tracking is workspace scoped and protected by RLS',async()=>{

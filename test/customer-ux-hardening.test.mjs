@@ -18,32 +18,46 @@ test('customer design system includes accessibility and mobile navigation guards
   assert.match(css,/prefers-reduced-motion/);
   assert.match(css,/safe-area-inset-bottom/);
   assert.match(css,/customer-bottom-nav/);
+  assert.match(css,/126px/);
 });
 
-test('customer shell exposes one consistent five-item mobile navigation',async()=>{
+test('customer shell exposes one consistent five-item mobile navigation without false active state',async()=>{
   const shell=await read('customer-shell.js');
   for(const label of ['Home','Discover','Radar','Watchlist','Cont'])assert.match(shell,new RegExp(`'${label}'`));
   assert.match(shell,/aria-current/);
   assert.match(shell,/aria-label','Navigație principală/);
+  assert.match(shell,/'commercial-launch\.html':''/);
+  assert.match(shell,/'onboarding\.html':''/);
 });
 
-test('onboarding is a real three-step accessible flow',async()=>{
+test('onboarding is a four-step accessible flow with plan finder',async()=>{
   const html=await read('onboarding.html');
   const js=await read('onboarding.js');
-  assert.match(html,/Pasul 1 din 3/);
-  assert.equal((html.match(/class="onboarding-step"/g)||[]).length,3);
+  assert.match(html,/Pasul 1 din 4/);
+  assert.equal((html.match(/class="onboarding-step"/g)||[]).length,4);
   assert.match(html,/aria-pressed="false"/);
-  assert.match(js,/function renderStep/);
-  assert.match(js,/ONBOARDING_STEP_VIEW/);
+  assert.match(html,/contact de încredere în China/);
+  assert.match(js,/function planRecommendation/);
+  assert.match(js,/PLAN_RECOMMENDED/);
+  assert.match(js,/mpr_plan_finder_v1/);
 });
 
 test('account hides infrastructure language from primary customer sections',async()=>{
   const html=await read('account.html');
+  const js=await read('account.js');
   assert.match(html,/Contul meu/);
   assert.match(html,/Setări avansate de sincronizare/);
   assert.doesNotMatch(html,/Account & Workspace 7\.0/);
   assert.doesNotMatch(html,/Supabase nu este conectat/);
   assert.doesNotMatch(html,/Cloud Sync<\/h2>/);
+  assert.doesNotMatch(js,/Workspace cloud activ, separat prin RLS/);
+});
+
+test('Home retries transient JWT clock skew instead of exposing raw auth errors',async()=>{
+  const js=await read('home.js');
+  assert.match(js,/JWT issued at future/);
+  assert.match(js,/refreshSession/);
+  assert.doesNotMatch(js,/\$\{esc\(error\?\.message\|\|error\)\}/);
 });
 
 test('Radar prioritizes one primary product action and progressive disclosure',async()=>{

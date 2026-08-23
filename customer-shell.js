@@ -1,5 +1,5 @@
 const pages={
-  'home.html':'home','top25.html':'discover','discover.html':'discover','commercial-radar.html':'radar','commercial-product.html':'radar','commercial-watchlist.html':'watchlist','commercial-launch.html':'account','account.html':'account','onboarding.html':'account'
+  'home.html':'home','top25.html':'discover','discover.html':'discover','commercial-radar.html':'radar','commercial-product.html':'radar','commercial-watchlist.html':'watchlist','commercial-launch.html':'','account.html':'account','onboarding.html':''
 };
 const file=(location.pathname.split('/').pop()||'home.html').toLowerCase();
 const active=pages[file]||'';
