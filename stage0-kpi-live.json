@@ -1,0 +1,40 @@
+{
+  "version": "1.1",
+  "updatedAt": "2026-08-23T18:37:46.889Z",
+  "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
+  "manualPromotionRequired": true,
+  "metrics": {
+    "pipelineProducts": 65,
+    "targetCount": 4,
+    "usefulEnrichments": 4,
+    "enrichmentSuccessPct": 100,
+    "runCostConservativeEur": 0.0099,
+    "costPerUsefulEnrichmentEur": 0.0025,
+    "cumulativeTestSpendConservativeEur": 1.6071
+  },
+  "criteria": {
+    "minEnrichmentSuccessPct": 50,
+    "maxCostPerUsefulEnrichmentEur": 0.5,
+    "maxStage0SpendEur": 10
+  },
+  "checks": {
+    "allowlistActive": true,
+    "pipelineDatasetAvailable": true,
+    "targetSetEvaluable": true,
+    "enrichmentSuccess": true,
+    "costEfficiency": true,
+    "stageBudgetSafe": true,
+    "noCostAnomaly": true
+  },
+  "blockers": [],
+  "evidence": {
+    "budgetBrainTargets": 4,
+    "romaniaDemandReady": 4,
+    "amazonEnriched": 3,
+    "salesHighConfidence": 3,
+    "providerPaidCalls": 3,
+    "providerRunCostUsd": 0.0099,
+    "costAnomalyCount": 0
+  },
+  "policy": "Bootstrap verdict from the verified 2026-08-23 Stage 0 run using the same thresholds as scripts/stage0-kpi-evaluator.mjs. Future verdicts are generated automatically after Radar Scan. The 100-candidate Stage 0 universe lives in Supabase; Stage 1 promotion remains manual and commercial TEST/BUY gates remain unchanged."
+}
