@@ -23,11 +23,25 @@ test('Stage 0 Supabase sync workflow is post-scan, OIDC-enabled and cannot execu
   assert.equal(workflow.includes('provider-intelligence-stage0.mjs'),false);
 });
 
-test('Stage 0 sync client caps payload to current allowlist and top 15 pipeline',async()=>{
+test('Stage 0 sync client caps paid evidence and full catalogue independently',async()=>{
   const script=await fs.readFile('scripts/stage0-supabase-sync.mjs','utf8');
   assert.match(script,/budgetAudit\.targets/);
   assert.match(script,/\.slice\(0,15\)/);
+  assert.match(script,/STAGE0_PRODUCT_CAP=100/);
+  assert.match(script,/catalogue\.length>=STAGE0_PRODUCT_CAP/);
   assert.match(script,/\['PROMISING','VALIDATE'\]/);
   assert.match(script,/providerVerified/);
   assert.match(script,/readyForTestDemandGate/);
+});
+
+test('Stage 0 V3 catalogue sync never creates FINALIST TEST or BUY states client-side',async()=>{
+  const script=await fs.readFile('scripts/stage0-supabase-sync.mjs','utf8');
+  assert.match(script,/function safeStage/);
+  assert.match(script,/\['PROMISING','VALIDATE'\]/);
+  assert.match(script,/'DISCOVERED'/);
+  assert.equal(script.includes("return 'FINALIST'"),false);
+  assert.equal(script.includes("return 'TEST_READY'"),false);
+  assert.equal(script.includes("return 'BUY_READY'"),false);
+  assert.match(script,/PIPELINE_SNAPSHOT/);
+  assert.match(script,/mpr_existing_pipeline/);
 });
