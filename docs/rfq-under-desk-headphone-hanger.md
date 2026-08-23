@@ -30,6 +30,6 @@ Please provide:
 
 ## Verification rule
 
-A quote may become `MANUALLY_VERIFIED_QUOTE` only after all commercially material fields are present, the exact product/source is identifiable, shipping terms to Romania are known, and a human records the verification timestamp. Missing data stays UNKNOWN; it is never inferred.
+A quote may become `MANUALLY_VERIFIED_QUOTE` only after all commercially material fields are present, the exact product/source is identifiable, shipping terms to Romania are known, and a human records the manual verification timestamp. Missing data stays UNKNOWN; it is never inferred.
 
 Confirmed landed cost remains blocked until at least one complete quote is manually verified. TEST and BUY remain governed by the normal MPR commercial gates.
