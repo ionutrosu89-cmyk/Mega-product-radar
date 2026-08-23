@@ -3,8 +3,12 @@
   command = "npm run build"
   publish = "_site"
 
-# Mega Product Radar 6.0 runs operationally from GitHub Pages + GitHub Actions.
-# Netlify builds are intentionally ignored so the app does not depend on Netlify credits.
+# Public root serves the commercial customer landing while legacy/internal pages remain addressable directly.
+[[redirects]]
+  from = "/"
+  to = "/beta.html"
+  status = 200
+  force = true
 
 [functions]
   directory = "netlify/functions"
