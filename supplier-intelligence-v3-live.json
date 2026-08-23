@@ -1,19 +1,68 @@
 {
   "version": "3.0",
-  "updatedAt": "2026-08-23T20:38:36.441Z",
+  "updatedAt": "2026-08-23T22:06:27.947Z",
   "source": "FINALIST_EVIDENCE_QUEUE",
   "status": "READY_FOR_REAL_SUPPLIER_COLLECTION",
   "stats": {
     "queueCandidates": 3,
-    "authorizedProducts": 2,
-    "openSupplierCases": 2,
-    "targetOffers": 10
+    "authorizedProducts": 3,
+    "openSupplierCases": 3,
+    "targetOffers": 15
   },
   "cases": [
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
       "category": "Casă",
+      "goldenRank": 5,
+      "status": "AWAITING_REAL_QUOTES",
+      "targetOfferCount": 5,
+      "minimumComparableOffers": 3,
+      "evidencePolicy": "Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.",
+      "requiredFields": [
+        "supplier_name",
+        "platform",
+        "direct_source_url",
+        "unit_price",
+        "currency",
+        "moq",
+        "sample_cost",
+        "lead_time_days",
+        "incoterm",
+        "shipping_quote_or_terms_to_romania",
+        "certifications_or_compliance_docs_when_applicable",
+        "quoted_at",
+        "manual_verification_at"
+      ],
+      "comparisonDimensions": [
+        "unit_price",
+        "moq",
+        "sample_cost",
+        "lead_time_days",
+        "shipping_to_romania",
+        "incoterm",
+        "supplier_history",
+        "trade_assurance_or_equivalent",
+        "certification_fit",
+        "communication_quality"
+      ],
+      "hardBlocks": [
+        "missing direct supplier source URL",
+        "missing quoted unit price/currency",
+        "missing MOQ",
+        "missing Romania shipping terms or quote",
+        "missing lead time",
+        "required compliance evidence missing where applicable",
+        "quote not manually verified"
+      ],
+      "landedCostEligible": false,
+      "testGateEligible": false,
+      "buyGateEligible": false
+    },
+    {
+      "canonicalKey": "car-headrest-hidden-hook-premium",
+      "title": "Car headrest hidden hook premium",
+      "category": "Auto",
       "goldenRank": 4,
       "status": "AWAITING_REAL_QUOTES",
       "targetOfferCount": 5,

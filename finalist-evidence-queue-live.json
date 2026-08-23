@@ -1,18 +1,46 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-23T20:38:36.394Z",
+  "updatedAt": "2026-08-23T22:06:27.904Z",
   "stats": {
     "validateProducts": 3,
     "queueSize": 3,
-    "supplierAuthorized": 2
+    "supplierAuthorized": 3
   },
   "candidates": [
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
       "category": "Casă",
-      "goldenRank": 4,
+      "goldenRank": 5,
       "opportunityScore": 35.6,
+      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
+      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
+      "salesEstimateConfidence": 100,
+      "nextGate": "SUPPLIER_QUOTE",
+      "supplierIntelligenceAuthorized": true,
+      "requiredSupplierEvidence": [
+        "supplier name and direct source URL",
+        "quoted unit price and currency",
+        "MOQ",
+        "sample cost",
+        "lead time",
+        "shipping quote/terms to Romania",
+        "relevant certifications/compliance documents where applicable",
+        "manual verification timestamp"
+      ],
+      "blockers": [
+        "ofertă furnizor completă și verificată",
+        "review evidence verificat",
+        "market evidence concret suficient",
+        "marjă ≥20%, ROI ≥45%, profit pozitiv"
+      ]
+    },
+    {
+      "canonicalKey": "car-headrest-hidden-hook-premium",
+      "title": "Car headrest hidden hook premium",
+      "category": "Auto",
+      "goldenRank": 4,
+      "opportunityScore": 35.5,
       "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
       "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
       "salesEstimateConfidence": 100,
@@ -57,26 +85,6 @@
         "manual verification timestamp"
       ],
       "blockers": [
-        "ofertă furnizor completă și verificată",
-        "review evidence verificat",
-        "market evidence concret suficient",
-        "marjă ≥20%, ROI ≥45%, profit pozitiv"
-      ]
-    },
-    {
-      "canonicalKey": "car-headrest-hidden-hook-premium",
-      "title": "Car headrest hidden hook premium",
-      "category": "Auto",
-      "goldenRank": 5,
-      "opportunityScore": 35.5,
-      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
-      "salesEstimateStatus": "INSUFFICIENT_DATA",
-      "salesEstimateConfidence": 20,
-      "nextGate": "SALES_EVIDENCE",
-      "supplierIntelligenceAuthorized": false,
-      "requiredSupplierEvidence": [],
-      "blockers": [
-        "sales estimate cu confidence ≥75 sau vânzări observate",
         "ofertă furnizor completă și verificată",
         "review evidence verificat",
         "market evidence concret suficient",

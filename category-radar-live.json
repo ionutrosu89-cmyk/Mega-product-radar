@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T20:38:36.517Z",
+  "updatedAt": "2026-08-23T22:06:28.015Z",
   "policy": "Category Radar separă oportunitățile pe categorie. categoryKey explicit și categoria sursă au prioritate față de cuvintele din numele produsului. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne strict.",
   "stats": {
     "categories": 24,
@@ -1058,6 +1058,7 @@
           "blockers": [
             "cerere România suficient validată pentru TEST",
             "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -1065,10 +1066,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 2,
+            "passed": 1,
             "total": 9
           },
-          "commercialScore": 235.4
+          "commercialScore": 135.4
         },
         {
           "rank": 2,
@@ -1213,6 +1214,34 @@
         },
         {
           "rank": 2,
+          "name": "Car headrest hidden hook premium",
+          "cat": "Auto",
+          "imageUrl": "",
+          "opportunityRank": 3,
+          "opportunityScore": 35.5,
+          "launchScore": 23.1,
+          "margin": 9.3,
+          "roi": 21.1,
+          "profit": 7.4,
+          "confidenceScore": 54.9,
+          "confidence": "MEDIE",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "ofertă furnizor completă și verificată",
+            "review evidence verificat",
+            "market evidence concret suficient",
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
+          ],
+          "gates": {
+            "passed": 5,
+            "total": 9
+          },
+          "commercialScore": 546.3
+        },
+        {
+          "rank": 3,
           "name": "Car cup holder expander adjustable",
           "cat": "Auto",
           "imageUrl": "",
@@ -1238,35 +1267,6 @@
             "total": 9
           },
           "commercialScore": 540.1
-        },
-        {
-          "rank": 3,
-          "name": "Car headrest hidden hook premium",
-          "cat": "Auto",
-          "imageUrl": "",
-          "opportunityRank": 3,
-          "opportunityScore": 35.5,
-          "launchScore": 23.1,
-          "margin": 9.3,
-          "roi": 21.1,
-          "profit": 7.4,
-          "confidenceScore": 54.9,
-          "confidence": "MEDIE",
-          "testStatus": "HOLD",
-          "verdict": "NU TESTA ÎNCĂ",
-          "quantity": 0,
-          "blockers": [
-            "sales estimate cu confidence ≥75 sau vânzări observate",
-            "ofertă furnizor completă și verificată",
-            "review evidence verificat",
-            "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv"
-          ],
-          "gates": {
-            "passed": 4,
-            "total": 9
-          },
-          "commercialScore": 446.3
         },
         {
           "rank": 4,
