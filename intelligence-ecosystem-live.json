@@ -1,31 +1,44 @@
 {
   "version": "2.5",
-  "updatedAt": "2026-08-23T18:16:33.534Z",
+  "updatedAt": "2026-08-23T18:37:02.402Z",
   "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
   "stats": {
     "products": 65,
     "salesHighConfidence": 0,
     "salesMediumConfidence": 1,
-    "romaniaDemandReady": 3,
-    "providerVerifiedRomaniaDemand": 3,
-    "reverseKeywordProviderReady": 3,
+    "romaniaDemandReady": 4,
+    "providerVerifiedRomaniaDemand": 4,
+    "reverseKeywordProviderReady": 4,
     "reviewOpportunityReady": 1,
     "historicalTrackable": 16,
     "niches": 17,
     "completedRealTests": 0
   },
   "niches": {
+    "Auto": {
+      "version": "1.0",
+      "products": 5,
+      "estimatedUnitsMedian": 12,
+      "medianPriceRon": 49.99,
+      "medianReviewSnippets": 0,
+      "medianRomaniaDemandScore": 10,
+      "top3EstimatedSalesConcentrationPct": 100,
+      "highConfidenceSalesModels": 0,
+      "providerVerifiedDemandProducts": 1,
+      "nicheScore": 14.5,
+      "status": "TRACKABLE"
+    },
     "Birou": {
       "version": "1.0",
       "products": 5,
       "estimatedUnitsMedian": 1,
       "medianPriceRon": 92.72,
       "medianReviewSnippets": 0,
-      "medianRomaniaDemandScore": 0,
+      "medianRomaniaDemandScore": 29.1,
       "top3EstimatedSalesConcentrationPct": 100,
       "highConfidenceSalesModels": 0,
-      "providerVerifiedDemandProducts": 1,
-      "nicheScore": 10,
+      "providerVerifiedDemandProducts": 3,
+      "nicheScore": 23.1,
       "status": "TRACKABLE"
     },
     "Casă": {
@@ -39,19 +52,6 @@
       "highConfidenceSalesModels": 0,
       "providerVerifiedDemandProducts": 0,
       "nicheScore": 7.5,
-      "status": "TRACKABLE"
-    },
-    "Auto": {
-      "version": "1.0",
-      "products": 5,
-      "estimatedUnitsMedian": 8.5,
-      "medianPriceRon": 49.99,
-      "medianReviewSnippets": 0,
-      "medianRomaniaDemandScore": 10,
-      "top3EstimatedSalesConcentrationPct": 100,
-      "highConfidenceSalesModels": 0,
-      "providerVerifiedDemandProducts": 2,
-      "nicheScore": 14.5,
       "status": "TRACKABLE"
     },
     "Laundry": {
@@ -239,15 +239,15 @@
   },
   "items": [
     {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
       "salesEstimation": {
         "version": "1.0",
         "status": "INSUFFICIENT_DATA",
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 12,
+        "confidence": 17,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -257,7 +257,7 @@
           "reviewSources": 0,
           "reviewSnippets": 0,
           "historicalSnapshots": 6,
-          "trend": "STABIL",
+          "trend": "COOLING",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -265,15 +265,15 @@
       "romaniaDemand": {
         "version": "1.0",
         "status": "INSUFFICIENT",
-        "score": 0,
+        "score": 10,
         "providerVerified": false,
         "marketEvidenceReady": false,
         "keywordVolume": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "romaniaResultProxy": 0,
-        "pricingVerified": false,
-        "pricingDomains": 0,
+        "pricingVerified": true,
+        "pricingDomains": 2,
         "evidenceReady": false,
         "readyForTestDemandGate": false,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
@@ -281,20 +281,20 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 1,
-        "medianPriceRon": 92.72,
+        "estimatedUnitsMedian": 12,
+        "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
+        "medianRomaniaDemandScore": 10,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
         "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "nicheScore": 14.5,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 6,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 85.7,
         "deltas": {
@@ -311,13 +311,113 @@
         "version": "1.0",
         "status": "PROXY_ONLY",
         "seedKeywords": [
-          "Desk drawer organizer modular trays",
-          "Birou"
+          "Car sunglasses magnetic visor holder",
+          "Auto"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
         "searchVolume": null,
         "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Desk drawer organizer modular trays",
+      "cat": "Birou",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "ESTIMATED_LOW_CONFIDENCE",
+        "estimatedUnits30d": 39,
+        "rangeLow": 16,
+        "rangeHigh": 62,
+        "confidence": 42,
+        "inputs": {
+          "keywordVolumeVerified": true,
+          "keywordVolume": 1300,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 7,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "PROVIDER_VERIFIED",
+        "score": 55,
+        "providerVerified": true,
+        "marketEvidenceReady": false,
+        "keywordVolume": 1300,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": false,
+        "pricingDomains": 0,
+        "evidenceReady": false,
+        "readyForTestDemandGate": true,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 5,
+        "estimatedUnitsMedian": 1,
+        "medianPriceRon": 92.72,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 29.1,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 23.1,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 7,
+        "observedDays": 7.9,
+        "direction": "STABLE",
+        "confidence": 85.7,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 2,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "SEED_PROVIDER_READY",
+        "seedKeywords": [
+          "Desk drawer organizer modular trays",
+          "Birou"
+        ],
+        "verifiedKeywordCount": 1,
+        "competitorEvidenceRows": 0,
+        "searchVolume": 1300,
+        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -356,7 +456,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -393,10 +493,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 4,
-        "observedDays": 7.8,
+        "snapshotCount": 5,
+        "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 55.7,
+        "confidence": 65.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -439,106 +539,6 @@
       }
     },
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 5,
-        "rangeLow": 2,
-        "rangeHigh": 8,
-        "confidence": 47,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 210,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 5,
-          "trend": "DECLINING",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 61.1,
-        "providerVerified": true,
-        "marketEvidenceReady": false,
-        "keywordVolume": 210,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": true,
-        "pricingDomains": 2,
-        "evidenceReady": false,
-        "readyForTestDemandGate": true,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 5,
-        "estimatedUnitsMedian": 8.5,
-        "medianPriceRon": 49.99,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 10,
-        "top3EstimatedSalesConcentrationPct": 100,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 2,
-        "nicheScore": 14.5,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 5,
-        "observedDays": 7.8,
-        "direction": "STABLE",
-        "confidence": 85.7,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 1,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
-        "seedKeywords": [
-          "Car sunglasses magnetic visor holder",
-          "Auto"
-        ],
-        "verifiedKeywordCount": 1,
-        "competitorEvidenceRows": 0,
-        "searchVolume": 210,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
       "salesEstimation": {
@@ -556,7 +556,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -581,22 +581,22 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 8.5,
+        "estimatedUnitsMedian": 12,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 10,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 2,
+        "providerVerifiedDemandProducts": 1,
         "nicheScore": 14.5,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 4,
-        "observedDays": 7.8,
+        "snapshotCount": 5,
+        "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 55.7,
+        "confidence": 65.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -618,6 +618,106 @@
         "competitorEvidenceRows": 0,
         "searchVolume": null,
         "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Magnetic cable organizer clips set",
+      "cat": "Birou",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "ESTIMATED_LOW_CONFIDENCE",
+        "estimatedUnits30d": 1,
+        "rangeLow": 1,
+        "rangeHigh": 2,
+        "confidence": 42,
+        "inputs": {
+          "keywordVolumeVerified": true,
+          "keywordVolume": 20,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 3,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "PROVIDER_VERIFIED",
+        "score": 29.1,
+        "providerVerified": true,
+        "marketEvidenceReady": false,
+        "keywordVolume": 20,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": false,
+        "pricingDomains": 0,
+        "evidenceReady": false,
+        "readyForTestDemandGate": true,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 5,
+        "estimatedUnitsMedian": 1,
+        "medianPriceRon": 92.72,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 29.1,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 23.1,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 3,
+        "observedDays": 0,
+        "direction": "STABLE",
+        "confidence": 50.1,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 2,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "SEED_PROVIDER_READY",
+        "seedKeywords": [
+          "Magnetic cable organizer clips set",
+          "Birou"
+        ],
+        "verifiedKeywordCount": 1,
+        "competitorEvidenceRows": 0,
+        "searchVolume": 20,
+        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -681,20 +781,20 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 8.5,
+        "estimatedUnitsMedian": 12,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 10,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 2,
+        "providerVerifiedDemandProducts": 1,
         "nicheScore": 14.5,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 3,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 45.7,
         "deltas": {
@@ -784,17 +884,17 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
+        "medianRomaniaDemandScore": 29.1,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 23.1,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 5,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 85.7,
         "deltas": {
@@ -900,7 +1000,7 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 5,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 65.7,
         "deltas": {
@@ -1087,20 +1187,20 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 8.5,
+        "estimatedUnitsMedian": 12,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 10,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 2,
+        "providerVerifiedDemandProducts": 1,
         "nicheScore": 14.5,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 5,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 85.7,
         "deltas": {
@@ -1200,7 +1300,7 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 5,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 65.7,
         "deltas": {
@@ -1300,7 +1400,7 @@
       "historicalIntelligence": {
         "version": "1.0",
         "snapshotCount": 5,
-        "observedDays": 7.8,
+        "observedDays": 7.9,
         "direction": "STABLE",
         "confidence": 65.7,
         "deltas": {
@@ -1319,106 +1419,6 @@
         "seedKeywords": [
           "Dog car door protector set",
           "Pet"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": null,
-        "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
-      "name": "Magnetic cable organizer clips set",
-      "cat": "Birou",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 6,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 2,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 0,
-        "providerVerified": false,
-        "marketEvidenceReady": false,
-        "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": false,
-        "pricingDomains": 0,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 5,
-        "estimatedUnitsMedian": 1,
-        "medianPriceRon": 92.72,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": 100,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 2,
-        "observedDays": 0,
-        "direction": "STABLE",
-        "confidence": 40,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 1,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "PROXY_ONLY",
-        "seedKeywords": [
-          "Magnetic cable organizer clips set",
-          "Birou"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
@@ -1502,7 +1502,7 @@
         "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 20,
+        "confidence": 20.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1602,7 +1602,7 @@
         "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 20,
+        "confidence": 20.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1702,7 +1702,7 @@
         "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 20,
+        "confidence": 20.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1802,7 +1802,7 @@
         "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 20,
+        "confidence": 20.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -3190,11 +3190,11 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
+        "medianRomaniaDemandScore": 29.1,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 23.1,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
@@ -3287,13 +3287,13 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 8.5,
+        "estimatedUnitsMedian": 12,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 10,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 2,
+        "providerVerifiedDemandProducts": 1,
         "nicheScore": 14.5,
         "status": "TRACKABLE"
       },
@@ -4690,11 +4690,11 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
+        "medianRomaniaDemandScore": 29.1,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 23.1,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {

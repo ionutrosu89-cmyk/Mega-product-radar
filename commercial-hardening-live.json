@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T18:16:33.437Z",
+  "updatedAt": "2026-08-23T18:37:02.316Z",
   "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.",
   "stats": {
     "products": 65,
@@ -20,6 +20,42 @@
   },
   "items": [
     {
+      "name": "Car sunglasses magnetic visor holder",
+      "cat": "Auto",
+      "goldenStage": "PROMISING",
+      "readiness": 25,
+      "gates": {
+        "pricingVerified": true,
+        "salesVerified": false,
+        "supplierVerified": false,
+        "reviewVerified": false
+      },
+      "pricingStatus": "VERIFIED",
+      "salesStatus": "MISSING",
+      "supplierStatus": "QUOTE_PARTIAL",
+      "reviewStatus": "MISSING",
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
+    },
+    {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
       "goldenStage": "PROMISING",
@@ -31,7 +67,7 @@
         "reviewVerified": false
       },
       "pricingStatus": "MISSING",
-      "salesStatus": "MISSING",
+      "salesStatus": "PROXY_ONLY",
       "supplierStatus": "MISSING",
       "reviewStatus": "MISSING",
       "feedbackStatus": "NO_REAL_TEST",
@@ -94,42 +130,6 @@
       }
     },
     {
-      "name": "Car sunglasses magnetic visor holder",
-      "cat": "Auto",
-      "goldenStage": "PROMISING",
-      "readiness": 25,
-      "gates": {
-        "pricingVerified": true,
-        "salesVerified": false,
-        "supplierVerified": false,
-        "reviewVerified": false
-      },
-      "pricingStatus": "VERIFIED",
-      "salesStatus": "PROXY_ONLY",
-      "supplierStatus": "QUOTE_PARTIAL",
-      "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST",
-      "missingEvidence": [
-        "salesVerified",
-        "supplierVerified",
-        "reviewVerified"
-      ],
-      "nextActions": [
-        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
-        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
-      ],
-      "proofSummary": {
-        "romaniaOffers": 2,
-        "romaniaDomains": 2,
-        "salesObservations": 0,
-        "supplierQuotes": 1,
-        "completeSupplierQuotes": 0,
-        "reviewSnippets": 0,
-        "reviewSources": 0
-      }
-    },
-    {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
       "goldenStage": "PROMISING",
@@ -160,6 +160,44 @@
         "romaniaDomains": 2,
         "salesObservations": 0,
         "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
+      }
+    },
+    {
+      "name": "Magnetic cable organizer clips set",
+      "cat": "Birou",
+      "goldenStage": "PROMISING",
+      "readiness": 0,
+      "gates": {
+        "pricingVerified": false,
+        "salesVerified": false,
+        "supplierVerified": false,
+        "reviewVerified": false
+      },
+      "pricingStatus": "MISSING",
+      "salesStatus": "PROXY_ONLY",
+      "supplierStatus": "MISSING",
+      "reviewStatus": "MISSING",
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "pricingVerified",
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Capture at least two dated Romanian offers from distinct domains.",
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 0,
+        "romaniaDomains": 0,
+        "salesObservations": 0,
+        "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
@@ -390,44 +428,6 @@
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
-      "goldenStage": "PROMISING",
-      "readiness": 0,
-      "gates": {
-        "pricingVerified": false,
-        "salesVerified": false,
-        "supplierVerified": false,
-        "reviewVerified": false
-      },
-      "pricingStatus": "MISSING",
-      "salesStatus": "MISSING",
-      "supplierStatus": "MISSING",
-      "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST",
-      "missingEvidence": [
-        "pricingVerified",
-        "salesVerified",
-        "supplierVerified",
-        "reviewVerified"
-      ],
-      "nextActions": [
-        "Capture at least two dated Romanian offers from distinct domains.",
-        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
-        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
-      ],
-      "proofSummary": {
-        "romaniaOffers": 0,
-        "romaniaDomains": 0,
-        "salesObservations": 0,
-        "supplierQuotes": 0,
-        "completeSupplierQuotes": 0,
-        "reviewSnippets": 0,
-        "reviewSources": 0
-      }
-    },
-    {
-      "name": "Magnetic cable organizer clips set",
-      "cat": "Birou",
       "goldenStage": "PROMISING",
       "readiness": 0,
       "gates": {

@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-08-23T18:37:00.556Z",
+  "status": "ACTIVE",
+  "targetCount": 4,
+  "eligibleCount": 4,
+  "blockedCount": 61,
+  "targets": [
+    {
+      "canonicalKey": "under-desk-headphone-hanger-clamp",
+      "title": "Under desk headphone hanger clamp",
+      "status": "VALIDATE",
+      "estimatedCostEur": 0.05,
+      "informationValue": 168.925,
+      "paidDataPriority": 1
+    },
+    {
+      "canonicalKey": "car-trunk-side-storage-net",
+      "title": "Car trunk side storage net",
+      "status": "VALIDATE",
+      "estimatedCostEur": 0.05,
+      "informationValue": 165.425,
+      "paidDataPriority": 2
+    },
+    {
+      "canonicalKey": "desk-drawer-organizer-modular-trays",
+      "title": "Desk drawer organizer modular trays",
+      "status": "VALIDATE",
+      "estimatedCostEur": 0.05,
+      "informationValue": 162.425,
+      "paidDataPriority": 3
+    },
+    {
+      "canonicalKey": "magnetic-cable-organizer-clips-set",
+      "title": "Magnetic cable organizer clips set",
+      "status": "VALIDATE",
+      "estimatedCostEur": 0.05,
+      "informationValue": 162.4,
+      "paidDataPriority": 4
+    }
+  ],
+  "error": null,
+  "policy": "Fail closed. Only PROMISING/VALIDATE products returned by Supabase stage0_paid_targets may retain goldenPipeline.paidDataEligible=true. Recent Romania cache hits are excluded by the RPC."
+}
