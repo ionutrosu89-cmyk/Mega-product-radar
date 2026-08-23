@@ -1,20 +1,33 @@
 {
   "version": "2.5",
-  "updatedAt": "2026-08-23T17:47:59.677Z",
+  "updatedAt": "2026-08-23T17:54:40.686Z",
   "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
   "stats": {
     "products": 65,
     "salesHighConfidence": 0,
     "salesMediumConfidence": 1,
-    "romaniaDemandReady": 5,
-    "providerVerifiedRomaniaDemand": 5,
-    "reverseKeywordProviderReady": 5,
+    "romaniaDemandReady": 3,
+    "providerVerifiedRomaniaDemand": 3,
+    "reverseKeywordProviderReady": 3,
     "reviewOpportunityReady": 1,
-    "historicalTrackable": 11,
+    "historicalTrackable": 16,
     "niches": 17,
     "completedRealTests": 0
   },
   "niches": {
+    "Birou": {
+      "version": "1.0",
+      "products": 5,
+      "estimatedUnitsMedian": 1,
+      "medianPriceRon": 92.72,
+      "medianReviewSnippets": 0,
+      "medianRomaniaDemandScore": 0,
+      "top3EstimatedSalesConcentrationPct": 100,
+      "highConfidenceSalesModels": 0,
+      "providerVerifiedDemandProducts": 1,
+      "nicheScore": 10,
+      "status": "TRACKABLE"
+    },
     "Casă": {
       "version": "1.0",
       "products": 5,
@@ -41,19 +54,6 @@
       "nicheScore": 14.5,
       "status": "TRACKABLE"
     },
-    "Birou": {
-      "version": "1.0",
-      "products": 5,
-      "estimatedUnitsMedian": 1,
-      "medianPriceRon": 92.72,
-      "medianReviewSnippets": 0,
-      "medianRomaniaDemandScore": 29.1,
-      "top3EstimatedSalesConcentrationPct": 100,
-      "highConfidenceSalesModels": 0,
-      "providerVerifiedDemandProducts": 3,
-      "nicheScore": 23.1,
-      "status": "TRACKABLE"
-    },
     "Laundry": {
       "version": "1.0",
       "products": 4,
@@ -66,6 +66,19 @@
       "providerVerifiedDemandProducts": 0,
       "nicheScore": 7.5,
       "status": "TRACKABLE"
+    },
+    "Kids 3–6 • Cameră": {
+      "version": "1.0",
+      "products": 1,
+      "estimatedUnitsMedian": null,
+      "medianPriceRon": 109.8,
+      "medianReviewSnippets": 0,
+      "medianRomaniaDemandScore": 0,
+      "top3EstimatedSalesConcentrationPct": null,
+      "highConfidenceSalesModels": 0,
+      "providerVerifiedDemandProducts": 0,
+      "nicheScore": 7.5,
+      "status": "THIN_SAMPLE"
     },
     "Baie": {
       "version": "1.0",
@@ -111,19 +124,6 @@
       "products": 1,
       "estimatedUnitsMedian": null,
       "medianPriceRon": 128.4,
-      "medianReviewSnippets": 0,
-      "medianRomaniaDemandScore": 0,
-      "top3EstimatedSalesConcentrationPct": null,
-      "highConfidenceSalesModels": 0,
-      "providerVerifiedDemandProducts": 0,
-      "nicheScore": 7.5,
-      "status": "THIN_SAMPLE"
-    },
-    "Kids 3–6 • Cameră": {
-      "version": "1.0",
-      "products": 1,
-      "estimatedUnitsMedian": null,
-      "medianPriceRon": 109.8,
       "medianReviewSnippets": 0,
       "medianRomaniaDemandScore": 0,
       "top3EstimatedSalesConcentrationPct": null,
@@ -239,6 +239,106 @@
   },
   "items": [
     {
+      "name": "Desk drawer organizer modular trays",
+      "cat": "Birou",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 6,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "marketEvidenceReady": false,
+        "keywordVolume": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": false,
+        "pricingDomains": 0,
+        "evidenceReady": false,
+        "readyForTestDemandGate": false,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 5,
+        "estimatedUnitsMedian": 1,
+        "medianPriceRon": 92.72,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 6,
+        "observedDays": 7.8,
+        "direction": "STABLE",
+        "confidence": 85.7,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 1,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Desk drawer organizer modular trays",
+          "Birou"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "salesEstimation": {
@@ -296,7 +396,7 @@
         "snapshotCount": 4,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 55.6,
+        "confidence": 55.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -396,7 +496,7 @@
         "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 85.6,
+        "confidence": 85.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -496,7 +596,7 @@
         "snapshotCount": 4,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 55.6,
+        "confidence": 55.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -596,7 +696,7 @@
         "snapshotCount": 3,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 45.6,
+        "confidence": 45.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -684,11 +784,11 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 23.1,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
@@ -696,7 +796,7 @@
         "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 85.6,
+        "confidence": 85.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -762,7 +862,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -799,10 +899,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 4,
+        "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 55.6,
+        "confidence": 65.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -819,6 +919,106 @@
         "seedKeywords": [
           "Shoe washing laundry bag structured",
           "Laundry"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Kids bed bedside organizer felt",
+      "cat": "Kids 3–6 • Cameră",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 3,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "marketEvidenceReady": false,
+        "keywordVolume": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "romaniaResultProxy": 0,
+        "pricingVerified": false,
+        "pricingDomains": 0,
+        "evidenceReady": false,
+        "readyForTestDemandGate": false,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 1,
+        "estimatedUnitsMedian": null,
+        "medianPriceRon": 109.8,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
+        "status": "THIN_SAMPLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 3,
+        "observedDays": 3.9,
+        "direction": "STABLE",
+        "confidence": 37.8,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 0,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Kids bed bedside organizer felt",
+          "Kids 3–6 • Cameră"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
@@ -902,7 +1102,7 @@
         "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 85.6,
+        "confidence": 85.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -945,106 +1145,6 @@
       }
     },
     {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 39,
-        "rangeLow": 16,
-        "rangeHigh": 62,
-        "confidence": 42,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 1300,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 5,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 55,
-        "providerVerified": true,
-        "marketEvidenceReady": false,
-        "keywordVolume": 1300,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": false,
-        "pricingDomains": 0,
-        "evidenceReady": false,
-        "readyForTestDemandGate": true,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 5,
-        "estimatedUnitsMedian": 1,
-        "medianPriceRon": 92.72,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
-        "top3EstimatedSalesConcentrationPct": 100,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 23.1,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 5,
-        "observedDays": 7.8,
-        "direction": "STABLE",
-        "confidence": 85.6,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 1,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
-        "seedKeywords": [
-          "Desk drawer organizer modular trays",
-          "Birou"
-        ],
-        "verifiedKeywordCount": 1,
-        "competitorEvidenceRows": 0,
-        "searchVolume": 1300,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
       "salesEstimation": {
@@ -1062,7 +1162,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -1099,10 +1199,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 4,
+        "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 55.6,
+        "confidence": 65.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1162,7 +1262,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -1199,10 +1299,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 4,
+        "snapshotCount": 5,
         "observedDays": 7.8,
         "direction": "STABLE",
-        "confidence": 55.6,
+        "confidence": 65.7,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1249,39 +1349,39 @@
       "cat": "Birou",
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 1,
-        "rangeLow": 1,
-        "rangeHigh": 2,
-        "confidence": 30,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 6,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 20,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 29.1,
-        "providerVerified": true,
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
         "marketEvidenceReady": false,
-        "keywordVolume": 20,
+        "keywordVolume": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "romaniaResultProxy": 0,
         "pricingVerified": false,
         "pricingDomains": 0,
         "evidenceReady": false,
-        "readyForTestDemandGate": true,
+        "readyForTestDemandGate": false,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "nicheIntelligence": {
@@ -1290,24 +1390,24 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 23.1,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 30,
+        "confidence": 40,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 1,
         "priceHistoryPoints": 0,
@@ -1315,15 +1415,15 @@
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
+        "status": "PROXY_ONLY",
         "seedKeywords": [
           "Magnetic cable organizer clips set",
           "Birou"
         ],
-        "verifiedKeywordCount": 1,
+        "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
-        "searchVolume": 20,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -1353,7 +1453,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -1362,8 +1462,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -1399,15 +1499,15 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 10,
+        "confidence": 20,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 0,
         "priceHistoryPoints": 0,
@@ -1453,7 +1553,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -1462,8 +1562,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -1499,15 +1599,15 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 10,
+        "confidence": 20,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 0,
         "priceHistoryPoints": 0,
@@ -1545,8 +1645,8 @@
       }
     },
     {
-      "name": "Kids bed bedside organizer felt",
-      "cat": "Kids 3–6 • Cameră",
+      "name": "Kids visual timer board non electronic",
+      "cat": "Kids 3–6 • Educațional",
       "salesEstimation": {
         "version": "1.0",
         "status": "INSUFFICIENT_DATA",
@@ -1586,106 +1686,6 @@
       },
       "nicheIntelligence": {
         "version": "1.0",
-        "products": 1,
-        "estimatedUnitsMedian": null,
-        "medianPriceRon": 109.8,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 0,
-        "nicheScore": 7.5,
-        "status": "THIN_SAMPLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 2,
-        "observedDays": 3.9,
-        "direction": "STABLE",
-        "confidence": 27.8,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 0,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "PROXY_ONLY",
-        "seedKeywords": [
-          "Kids bed bedside organizer felt",
-          "Kids 3–6 • Cameră"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": null,
-        "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
-      "name": "Kids visual timer board non electronic",
-      "cat": "Kids 3–6 • Educațional",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 0,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 0,
-        "providerVerified": false,
-        "marketEvidenceReady": false,
-        "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": false,
-        "pricingDomains": 0,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
         "products": 2,
         "estimatedUnitsMedian": null,
         "medianPriceRon": 99,
@@ -1699,15 +1699,15 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 10,
+        "confidence": 20,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 0,
         "priceHistoryPoints": 0,
@@ -1753,7 +1753,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -1762,8 +1762,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -1799,15 +1799,15 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 1,
+        "snapshotCount": 2,
         "observedDays": 0,
         "direction": "STABLE",
-        "confidence": 10,
+        "confidence": 20,
         "deltas": {
-          "demand": null,
-          "launch": null,
-          "marketGap": null,
-          "competitionPressure": null
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
         },
         "keywordHistoryPoints": 0,
         "priceHistoryPoints": 0,
@@ -3190,11 +3190,11 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 23.1,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {
@@ -4690,11 +4690,11 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 23.1,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10,
         "status": "TRACKABLE"
       },
       "historicalIntelligence": {

@@ -1,22 +1,22 @@
 {
   "version": "2.8",
-  "updatedAt": "2026-08-23T17:47:59.729Z",
+  "updatedAt": "2026-08-23T17:54:40.728Z",
   "stats": {
     "products": 65,
-    "deepProducts": 5,
+    "deepProducts": 3,
     "paidProviderEnabled": true,
     "credentialsConfigured": true,
     "providerStatus": "ACTIVE",
     "costStatus": "COST_REPORTED",
-    "paidCalls": 5,
-    "reportedCostUsd": 0.0411,
-    "accountedCostUsd": 0.0411,
-    "runCostUsd": 0.0411,
+    "paidCalls": 3,
+    "reportedCostUsd": 0.0099,
+    "accountedCostUsd": 0.0099,
+    "runCostUsd": 0.0099,
     "costAnomalyCount": 0,
     "amazonEnriched": 3,
-    "reverseKeywordEnriched": 2,
+    "reverseKeywordEnriched": 0,
     "salesHighConfidence": 3,
-    "romaniaDemandReady": 5,
+    "romaniaDemandReady": 3,
     "asinReady": 3,
     "reverseKeywordProviderReady": 2,
     "nicheTrackable": 55
@@ -25,6 +25,85 @@
   "costAnomalies": [],
   "nextAction": "Continue Golden Pipeline evaluation using provider-backed evidence.",
   "items": [
+    {
+      "name": "Desk drawer organizer modular trays",
+      "cat": "Birou",
+      "rank": 13,
+      "romaniaDemand": {
+        "version": "2.8",
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "readyForTestDemandGate": false,
+        "bestKeyword": null,
+        "bestKeywordVolume": null,
+        "totalVariantVolume": null,
+        "verifiedKeywordVariants": 0,
+        "observedKeywordVariants": 0,
+        "trend12mPct": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "pricingDomains": 0,
+        "keywords": [],
+        "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
+      },
+      "salesEstimation": {
+        "version": "2.8",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 6,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
+        "method": "LEGACY_EVIDENCE_MODEL"
+      },
+      "reverseKeywordIntelligence": {
+        "version": "2.8",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Desk drawer organizer modular trays",
+          "Birou"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
+        "competitorAsins": [],
+        "asinCount": 0,
+        "topRankedKeywords": [],
+        "providerPath": "NONE"
+      },
+      "nicheIntelligence": {
+        "version": "2.8",
+        "products": 5,
+        "estimatedUnitsMedian": 1,
+        "medianPriceRon": 92.72,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 1,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10.9,
+        "status": "TRACKABLE",
+        "romaniaDemandReadyProducts": 1
+      },
+      "amazonMarket": null,
+      "rankedKeywords": null
+    },
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
@@ -276,12 +355,12 @@
       "salesEstimation": {
         "version": "2.8",
         "status": "ESTIMATED_HIGH_CONFIDENCE",
-        "estimatedUnits30d": 1065,
-        "rangeLow": 799,
-        "rangeHigh": 1331,
+        "estimatedUnits30d": 1463,
+        "rangeLow": 1097,
+        "rangeHigh": 1828,
         "confidence": 100,
         "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
-        "observedPeerBoughtPastMonth": 21300,
+        "observedPeerBoughtPastMonth": 29250,
         "peerSample": 20,
         "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
@@ -301,9 +380,9 @@
         "competitorAsins": [
           "B0BBQ4DCPW",
           "B0B6ZZV8KP",
-          "B0C893YDNS",
-          "B0C5C882FW",
-          "B09SPMR3PH"
+          "B0C49JZ416",
+          "B0C5C7C26J",
+          "B0B6ZZVWQP"
         ],
         "asinCount": 10,
         "topRankedKeywords": [
@@ -507,147 +586,147 @@
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T17:47:59.729Z",
+        "checkedAt": "2026-08-23T17:54:40.728Z",
         "keyword": "Car sunglasses magnetic visor holder",
         "organicProducts": 20,
         "asins": [
           "B0BBQ4DCPW",
           "B0B6ZZV8KP",
+          "B0C49JZ416",
+          "B0C5C7C26J",
+          "B0B6ZZVWQP",
+          "B0C9DCTF8R",
           "B0C893YDNS",
           "B0C5C882FW",
           "B09SPMR3PH",
-          "B0F62THRL5",
-          "B0B6ZYZPKT",
-          "B0H6WMK2RX",
-          "B0BX3GNBGM",
-          "B0BBPVN41Z"
+          "B0F62THRL5"
         ],
         "productsWithBoughtPastMonth": 20,
-        "totalObservedBoughtPastMonth": 21300,
-        "medianBoughtPastMonth": 700,
-        "medianReviews": 2000,
-        "medianPriceUsd": 9,
+        "totalObservedBoughtPastMonth": 29250,
+        "medianBoughtPastMonth": 900,
+        "medianReviews": 4600,
+        "medianPriceUsd": 8,
         "confidence": 95,
         "items": [
           {
             "asin": "B0BBQ4DCPW",
             "title": "Yuoyar Magnetic Leather Sunglasses Holder for Car, 2 Packs (Black) | Magnetic Car Visor Accessories",
-            "rank": 1,
+            "rank": 5,
             "boughtPastMonth": 8000,
             "priceUsd": 7.99,
             "rating": 4.5,
             "reviews": 10800,
             "bestSeller": true,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Yuoyar-Packs-Sunglasses-Holders-Visor/dp/B0BBQ4DCPW/ref=sr_1_1?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-1"
+            "url": "https://www.amazon.com/Yuoyar-Packs-Sunglasses-Holders-Visor/dp/B0BBQ4DCPW/ref=sr_1_5?crid=C8CGAIRIMUMS&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.vkwqjfvgdO4QK0MG8tC4sAlnQZLJrOV043m1obcTq4c&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507695&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C292&sr=8-5"
           },
           {
             "asin": "B0B6ZZV8KP",
             "title": "Magnetic Leather Car Sunglass Holder, Visor Sunglasses Holder Clip, 1 Pack | Suitable for Different Size Eyeglasses, Easy Opreation, Car Organziation Accessories",
-            "rank": 2,
+            "rank": 6,
             "boughtPastMonth": 1000,
             "priceUsd": 7.99,
             "rating": 4.7,
             "reviews": 5900,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Ompellus-Magnetic-Sunglass-Different-Eyeglasses/dp/B0B6ZZV8KP/ref=sr_1_2?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-2"
+            "url": "https://www.amazon.com/Ompellus-Magnetic-Sunglass-Different-Eyeglasses/dp/B0B6ZZV8KP/ref=sr_1_6?crid=C8CGAIRIMUMS&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.vkwqjfvgdO4QK0MG8tC4sAlnQZLJrOV043m1obcTq4c&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507695&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C292&sr=8-6"
           },
           {
-            "asin": "B0C893YDNS",
-            "title": "KIWEN Sunglasses Holder for Car Visor, Magnetic Leather Sunglass Eyeglass Hanger Clip for Car Sun Visor Accessories (1, Black)",
-            "rank": 4,
-            "boughtPastMonth": 2000,
-            "priceUsd": 8.99,
+            "asin": "B0BBQ4DCPW",
+            "title": "Yuoyar Magnetic Leather Sunglasses Holder for Car, 2 Packs (Black) | Magnetic Car Visor Accessories",
+            "rank": 7,
+            "boughtPastMonth": 8000,
+            "priceUsd": 7.99,
             "rating": 4.5,
-            "reviews": 2000,
+            "reviews": 10800,
+            "bestSeller": true,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo1OTQxMzU2ODQzOTcyOTMwOjE3ODc1MDc2OTU6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA4Njk3OTY3NTU5ODo6MDo6&url=%2FYuoyar-Packs-Sunglasses-Holders-Visor%2Fdp%2FB0BBQ4DCPW%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DC8CGAIRIMUMS%26cv_ct_cx%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26keywords%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26pd_rd_i%3DB0BBQ4DCPW%26pd_rd_r%3Dfc24b292-950e-4acf-a59a-0317bf82dbbe%26pd_rd_w%3DS2vh9%26pd_rd_wg%3DveB0z%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DYM0DCSM2Q1NZSQMETNRZ%26qid%3D1787507695%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Bsunglasses%252Bmagnetic%252Bvisor%252Bholder%252Caps%252C292%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DoeD7UDE25k%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=oeD7UDE25k"
+          },
+          {
+            "asin": "B0C49JZ416",
+            "title": "Sunglass Holder for Car Sun Visor Sunglasses Clip Car accessories -Orange | sun visor organizer, ticket card clip, eyeglass sunglasses holder, one-handed magnetic, anti-scratch, car decor for truck SUV",
+            "rank": 8,
+            "boughtPastMonth": 200,
+            "priceUsd": 7.99,
+            "rating": 4.7,
+            "reviews": 4800,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/KIWEN-Sunglasses-Magnetic-Sunglass-Accessories/dp/B0C893YDNS/ref=sr_1_3?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-3"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo1OTQxMzU2ODQzOTcyOTMwOjE3ODc1MDc2OTU6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTM2MzAxNDQ0OTEwMjo6MTo6&url=%2FSunglass-Sunglasses-Magnetic-Accessories-Universal%2Fdp%2FB0C49JZ416%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DC8CGAIRIMUMS%26cv_ct_cx%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26keywords%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26pd_rd_i%3DB0C49JZ416%26pd_rd_r%3Dfc24b292-950e-4acf-a59a-0317bf82dbbe%26pd_rd_w%3DS2vh9%26pd_rd_wg%3DveB0z%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DYM0DCSM2Q1NZSQMETNRZ%26qid%3D1787507695%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Bsunglasses%252Bmagnetic%252Bvisor%252Bholder%252Caps%252C292%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DStJx9aduj8%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=StJx9aduj8"
           },
           {
-            "asin": "B0C5C882FW",
-            "title": "Yuoyar 2 Packs Magnetic Sunglass Holder for Car Visor (Black) | Magnetic Interior Car Accessories",
-            "rank": 5,
+            "asin": "B0C5C7C26J",
+            "title": "Yuoyar 2 Packs Magnetic Sunglass Holder for Car Visor (Grey) | Magnetic Interior Car Accessories",
+            "rank": 9,
             "boughtPastMonth": 1000,
             "priceUsd": 9.98,
             "rating": 4.6,
             "reviews": 2400,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Yuoyar-Packs-Magnetic-Sunglass-Holder/dp/B0C5C882FW/ref=sr_1_4?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-4"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo1OTQxMzU2ODQzOTcyOTMwOjE3ODc1MDc2OTU6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTE3OTM1NDE2MDMwMjo6Mjo6&url=%2FYuoyar-Packs-Magnetic-Sunglass-Holder%2Fdp%2FB0C5C7C26J%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DC8CGAIRIMUMS%26cv_ct_cx%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26keywords%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26pd_rd_i%3DB0C5C7C26J%26pd_rd_r%3Dfc24b292-950e-4acf-a59a-0317bf82dbbe%26pd_rd_w%3DS2vh9%26pd_rd_wg%3DveB0z%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DYM0DCSM2Q1NZSQMETNRZ%26qid%3D1787507695%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Bsunglasses%252Bmagnetic%252Bvisor%252Bholder%252Caps%252C292%26sr%3D1-3-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3D37o3O5fwgA%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=37o3O5fwgA"
           },
           {
-            "asin": "B09SPMR3PH",
-            "title": "KIWEN Sunglasses Holders for Car Visor, Magnetic Leather Glasses Eyeglass Clip for Car, Ticket Card Clip Sunglasses Mount, Car Visor Accessories Gadgets (1, Black)",
-            "rank": 6,
-            "boughtPastMonth": 2000,
-            "priceUsd": 7.99,
-            "rating": 4.6,
-            "reviews": 7300,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/KIWEN-Sunglasses-Magnetic-Eyeglasses-Accessories/dp/B09SPMR3PH/ref=sr_1_5?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-5"
-          },
-          {
-            "asin": "B0F62THRL5",
-            "title": "Teraves 2 Pack Sunglass Holder for Car Visor, Magnetic, Easy to Hold | Premium Leather Sunglasses Visor Clip, Auto Interior Accessories Universal for Different Size Glasses and Eyeglasses, Black",
-            "rank": 7,
-            "boughtPastMonth": 900,
-            "priceUsd": 5.99,
-            "rating": 4.7,
-            "reviews": 406,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/Teraves-Sunglass-Magnetic-Sunglasses-Eyeglasses/dp/B0F62THRL5/ref=sr_1_6?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-6"
-          },
-          {
-            "asin": "B0B6ZYZPKT",
+            "asin": "B0B6ZZVWQP",
             "title": "Magnetic Leather Car Sunglass Holder, Visor Sunglasses Holder Clip, 1 Pack | Suitable for Different Size Eyeglasses, Easy Opreation, Car Organziation Accessories",
-            "rank": 8,
+            "rank": 10,
             "boughtPastMonth": 200,
             "priceUsd": 7.99,
             "rating": 4.7,
             "reviews": 5900,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Ompellus-Magnetic-Sunglass-Different-Eyeglasses/dp/B0B6ZYZPKT/ref=sr_1_7?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-7"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo1OTQxMzU2ODQzOTcyOTMwOjE3ODc1MDc2OTU6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA4MzQ1MDI2Nzk5ODo6Mzo6&url=%2FOmpellus-Magnetic-Sunglass-Different-Eyeglasses%2Fdp%2FB0B6ZZVWQP%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DC8CGAIRIMUMS%26cv_ct_cx%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26keywords%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26pd_rd_i%3DB0B6ZZVWQP%26pd_rd_r%3Dfc24b292-950e-4acf-a59a-0317bf82dbbe%26pd_rd_w%3DS2vh9%26pd_rd_wg%3DveB0z%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DYM0DCSM2Q1NZSQMETNRZ%26qid%3D1787507695%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Bsunglasses%252Bmagnetic%252Bvisor%252Bholder%252Caps%252C292%26sr%3D1-4-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DuOLiaaMLB7%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=uOLiaaMLB7"
           },
           {
-            "asin": "B0H6WMK2RX",
-            "title": "Sunglass Holder for Car Visor, Glass Magnetic Leather Clip, 2 Pack Black",
-            "rank": 9,
-            "boughtPastMonth": 300,
-            "priceUsd": 5.49,
-            "rating": 4.6,
-            "reviews": 17,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/Coyuger-Sunglass-Holder-Magnetic-Leather/dp/B0H6WMK2RX/ref=sr_1_8?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-8"
-          },
-          {
-            "asin": "B0BX3GNBGM",
-            "title": "EldHus Sunglass Holder for Car Visor - 2 Pack Magnetic Car Glasses Holder Clip, Leather Eyeglass Holder for Car, Universal Vehicle Sunglasses Hanger Eyeglasses Mount, Black",
-            "rank": 10,
-            "boughtPastMonth": 200,
-            "priceUsd": 6.99,
-            "rating": 4.7,
-            "reviews": 469,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/EldHus-Sunglass-Holder-Car-Visor/dp/B0BX3GNBGM/ref=sr_1_9?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-9"
-          },
-          {
-            "asin": "B0BBPVN41Z",
-            "title": "Yuoyar Magnetic Leather Sunglasses Holder for Car, 2 Packs (Silver Grey) | Magnetic Car Visor Accessories",
+            "asin": "B0C9DCTF8R",
+            "title": "SINGARO 2PCS Sunglasses Holder for Car, Leather Magnetic Buckle Sun Visor Sunglass Clip, Ticket Card Storage Glasses Clip, Car Interior Accessories for Men and Women（Black）",
             "rank": 11,
-            "boughtPastMonth": 1000,
-            "priceUsd": 7.98,
+            "boughtPastMonth": 900,
+            "priceUsd": 5.39,
             "rating": 4.5,
-            "reviews": 10800,
-            "bestSeller": true,
+            "reviews": 1200,
+            "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Yuoyar-Packs-Sunglasses-Holders-Visor/dp/B0BBPVN41Z/ref=sr_1_10?crid=0K5N066G5NIH&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.hpQeTh6qEqEr-AdOE96ch9SvIM3X4cCGgQN-W_gZ92g&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507292&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C287&sr=8-10"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo1OTQxMzU2ODQzOTcyOTMwOjE3ODc1MDc2OTU6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTM0MjA4NTUxOTgwMjo6NDo6&url=%2FSINGARO-Sunglasses-Magnetic-Accessories-Women%25EF%25BC%25882PCS%2Fdp%2FB0C9DCTF8R%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DC8CGAIRIMUMS%26cv_ct_cx%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26keywords%3DCar%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%26pd_rd_i%3DB0C9DCTF8R%26pd_rd_r%3Dfc24b292-950e-4acf-a59a-0317bf82dbbe%26pd_rd_w%3DS2vh9%26pd_rd_wg%3DveB0z%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DYM0DCSM2Q1NZSQMETNRZ%26qid%3D1787507695%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Bsunglasses%252Bmagnetic%252Bvisor%252Bholder%252Caps%252C292%26sr%3D1-5-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3Dxy4ra3wNAO%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=xy4ra3wNAO"
+          },
+          {
+            "asin": "B0C893YDNS",
+            "title": "KIWEN Sunglasses Holder for Car Visor, Magnetic Leather Sunglass Eyeglass Hanger Clip for Car Sun Visor Accessories (1, Black)",
+            "rank": 12,
+            "boughtPastMonth": 2000,
+            "priceUsd": 8.99,
+            "rating": 4.5,
+            "reviews": 2000,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/KIWEN-Sunglasses-Magnetic-Sunglass-Accessories/dp/B0C893YDNS/ref=sr_1_7?crid=C8CGAIRIMUMS&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.vkwqjfvgdO4QK0MG8tC4sAlnQZLJrOV043m1obcTq4c&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507695&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C292&sr=8-7"
+          },
+          {
+            "asin": "B0C5C882FW",
+            "title": "Yuoyar 2 Packs Magnetic Sunglass Holder for Car Visor (Black) | Magnetic Interior Car Accessories",
+            "rank": 13,
+            "boughtPastMonth": 1000,
+            "priceUsd": 9.98,
+            "rating": 4.6,
+            "reviews": 2400,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Yuoyar-Packs-Magnetic-Sunglass-Holder/dp/B0C5C882FW/ref=sr_1_8?crid=C8CGAIRIMUMS&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.vkwqjfvgdO4QK0MG8tC4sAlnQZLJrOV043m1obcTq4c&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507695&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C292&sr=8-8"
+          },
+          {
+            "asin": "B09SPMR3PH",
+            "title": "KIWEN Sunglasses Holders for Car Visor, Magnetic Leather Glasses Eyeglass Clip for Car, Ticket Card Clip Sunglasses Mount, Car Visor Accessories Gadgets (1, Black)",
+            "rank": 14,
+            "boughtPastMonth": 2000,
+            "priceUsd": 7.99,
+            "rating": 4.6,
+            "reviews": 7300,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/KIWEN-Sunglasses-Magnetic-Eyeglasses-Accessories/dp/B09SPMR3PH/ref=sr_1_9?crid=C8CGAIRIMUMS&dib=eyJ2IjoiMSJ9.2wDQUeT3kMycwPbN8iPuW0nIabd2F7sJQJaPOOa_TQI0Ne2ylKccSDMBvFjirzPZZgXIIoUmMcNUyYEaW7FxQjmzl1KnYaPpFenVX0-9G9Rj8yhnySU0MDVSwUBqIMLwACxv_3-9ugMtvaLm8H-ls-8gVc-GoTfRjGPsEaM5I9gqKjG6pncOx4X5NGW2CpOhCGJ92jGlCD6xwHRPzGxjNYuUvNw6s-wSiZLRDzdcSuu6gMpYMEawnUwecc05S5k6YAyWdt_rJVrVCILryb7fMSOCCHCZXZc-ntxL5fHC9Js.vkwqjfvgdO4QK0MG8tC4sAlnQZLJrOV043m1obcTq4c&dib_tag=se&keywords=Car+sunglasses+magnetic+visor+holder&qid=1787507695&sprefix=Car%2Bsunglasses%2Bmagnetic%2Bvisor%2Bholder%2Caps%2C292&sr=8-9"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
@@ -1193,13 +1272,13 @@
       "salesEstimation": {
         "version": "2.8",
         "status": "ESTIMATED_HIGH_CONFIDENCE",
-        "estimatedUnits30d": 544,
-        "rangeLow": 408,
-        "rangeHigh": 680,
+        "estimatedUnits30d": 517,
+        "rangeLow": 388,
+        "rangeHigh": 646,
         "confidence": 100,
         "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
-        "observedPeerBoughtPastMonth": 9250,
-        "peerSample": 17,
+        "observedPeerBoughtPastMonth": 7750,
+        "peerSample": 15,
         "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
       "reverseKeywordIntelligence": {
@@ -1218,9 +1297,9 @@
         "competitorAsins": [
           "B07BVK2FQW",
           "B0C77YK94D",
-          "B00P31BMHG",
-          "B09TDG4T7G",
-          "B0GYRZ8VJX"
+          "B0DK3F36M9",
+          "B0F1D327BM",
+          "B0BYDC6BL1"
         ],
         "asinCount": 10,
         "topRankedKeywords": [
@@ -1413,158 +1492,158 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 1,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 26.2,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10.9,
         "status": "TRACKABLE",
-        "romaniaDemandReadyProducts": 3
+        "romaniaDemandReadyProducts": 1
       },
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T17:47:59.729Z",
+        "checkedAt": "2026-08-23T17:54:40.728Z",
         "keyword": "Under desk headphone hanger clamp",
         "organicProducts": 20,
         "asins": [
           "B07BVK2FQW",
           "B0C77YK94D",
-          "B00P31BMHG",
-          "B09TDG4T7G",
-          "B0GYRZ8VJX",
-          "B07PFV1NQX",
-          "B089WDYVP9",
           "B0DK3F36M9",
           "B0F1D327BM",
-          "B0BYDC6BL1"
+          "B0BYDC6BL1",
+          "B07PFV1NQX",
+          "B0DN1WK7JW",
+          "B0FC2L5S77",
+          "B08FQPT29Q",
+          "B0CT5RVQQ1"
         ],
-        "productsWithBoughtPastMonth": 17,
-        "totalObservedBoughtPastMonth": 9250,
+        "productsWithBoughtPastMonth": 15,
+        "totalObservedBoughtPastMonth": 7750,
         "medianBoughtPastMonth": 500,
-        "medianReviews": 483,
-        "medianPriceUsd": 15,
+        "medianReviews": 396,
+        "medianPriceUsd": 12,
         "confidence": 95,
         "items": [
           {
             "asin": "B07BVK2FQW",
             "title": "EURPMASK Rotating Headphone Stand,Adjustable Clamp-on Headset Holder Hanger | 360 Degree Swivel,Headset Hook Under Desk,No Residue,Cable Organizer,Soft Rubber Pads,Keep Headphones Secure&Desk Tidy,Black",
-            "rank": 3,
+            "rank": 1,
             "boughtPastMonth": 2000,
             "priceUsd": 11.99,
             "rating": 4.7,
             "reviews": 29200,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Headphone-Headphones-Adjustable-Universal-EURPMASK/dp/B07BVK2FQW/ref=sr_1_3?crid=1MPZUX2OPIKH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.hJ12WsJ4RvQwXgidI_EZZJBT49NDEvLCOgBFuRaQMcE&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507299&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C260&sr=8-3"
+            "url": "https://www.amazon.com/Headphone-Headphones-Adjustable-Universal-EURPMASK/dp/B07BVK2FQW/ref=sr_1_1?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-1"
           },
           {
             "asin": "B0C77YK94D",
             "title": "KDD 4 in 1 Desk Cup Holder - Clamp on Under Desk Headphone Hanger - Rotating Headphone Holder Detachable Pen Cup Holder Desktop Storage for Cup, Phone and Pen(Black)",
-            "rank": 4,
+            "rank": 2,
             "boughtPastMonth": 1000,
             "priceUsd": 21.95,
             "rating": 4.6,
             "reviews": 2500,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/KDD-Desk-Cup-Holder-Detachable/dp/B0C77YK94D/ref=sr_1_4?crid=1MPZUX2OPIKH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.hJ12WsJ4RvQwXgidI_EZZJBT49NDEvLCOgBFuRaQMcE&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507299&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C260&sr=8-4"
-          },
-          {
-            "asin": "B00P31BMHG",
-            "title": "Elevation Lab The Anchor™ - Under Desk Headphone Adhesive Mount",
-            "rank": 5,
-            "boughtPastMonth": 500,
-            "priceUsd": 14.99,
-            "rating": 4.6,
-            "reviews": 9000,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo3NDU3MDQyNTg2ODE4NDk5OjE3ODc1MDcyOTk6c3Bfc2VhcmNoX3RoZW1hdGljOjE1MDA4OTk4MjYwMDAxOjowOjo&url=%2FElevation-Lab-AnchorTM-Headphone-Adhesive%2Fdp%2FB00P31BMHG%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D1MPZUX2OPIKH%26cv_ct_cx%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26keywords%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26pd_rd_i%3DB00P31BMHG%26pd_rd_r%3Da7be9961-5872-41df-aee3-6432a6e9208c%26pd_rd_w%3DdZtUF%26pd_rd_wg%3DQYZPP%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D95SWPBNB7R245APH3CKS%26qid%3D1787507299%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DUnder%252Bdesk%252Bheadphone%252Bhanger%252Bclamp%252Caps%252C260%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DS2dTkC2QN4%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=S2dTkC2QN4"
-          },
-          {
-            "asin": "B09TDG4T7G",
-            "title": "Lamicall Headphone Stand, Sticky Headset Hanger, Adhesive Headphone Holder | Headset Hook Mount Clip Under Desk, Earphone Clamp for Airpods Max, HyperX, Sennheiser, Black",
-            "rank": 6,
-            "boughtPastMonth": 1000,
-            "priceUsd": 8.99,
-            "rating": 4.7,
-            "reviews": 3200,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo3NDU3MDQyNTg2ODE4NDk5OjE3ODc1MDcyOTk6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA1NDU2NjQzMzg5ODo6MTo6&url=%2FHeadphone-Stand-Sticky-Headset-Hanger%2Fdp%2FB09TDG4T7G%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D1MPZUX2OPIKH%26cv_ct_cx%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26keywords%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26pd_rd_i%3DB09TDG4T7G%26pd_rd_r%3Da7be9961-5872-41df-aee3-6432a6e9208c%26pd_rd_w%3DdZtUF%26pd_rd_wg%3DQYZPP%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D95SWPBNB7R245APH3CKS%26qid%3D1787507299%26sbo%3D9ZOMT9Jm0JH%252Ft%252BWi68iDSA%253D%253D%26sprefix%3DUnder%252Bdesk%252Bheadphone%252Bhanger%252Bclamp%252Caps%252C260%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DdlY7HQ3PTg%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=dlY7HQ3PTg"
-          },
-          {
-            "asin": "B0GYRZ8VJX",
-            "title": "2Pack Heavy Duty Under Desk Headphone Stand, No Drill Mount with strong Adhesive Holder for AirPods Max, Sony, Bose & Gaming Headphones, Home Office Studio Dorm Organizer (H02F-2P-black)",
-            "rank": 7,
-            "boughtPastMonth": null,
-            "priceUsd": 5.99,
-            "rating": 5,
-            "reviews": 26,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo3NDU3MDQyNTg2ODE4NDk5OjE3ODc1MDcyOTk6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTMzMjg5NTMxMDEwMjo6Mjo6&url=%2FYocice-Headphone-Headphones-Organizer-H02F-2P-black%2Fdp%2FB0GYRZ8VJX%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D1MPZUX2OPIKH%26cv_ct_cx%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26keywords%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26pd_rd_i%3DB0GYRZ8VJX%26pd_rd_r%3Da7be9961-5872-41df-aee3-6432a6e9208c%26pd_rd_w%3DdZtUF%26pd_rd_wg%3DQYZPP%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D95SWPBNB7R245APH3CKS%26qid%3D1787507299%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DUnder%252Bdesk%252Bheadphone%252Bhanger%252Bclamp%252Caps%252C260%26sr%3D1-3-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DmgC2rlZkPM%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=mgC2rlZkPM"
-          },
-          {
-            "asin": "B07PFV1NQX",
-            "title": "New Foldable Headphone Stand Hanger Holder Aluminum Headset Soundbar Stand Clamp Hook Under Desk Space Save Mount, Universal Fit Gaming Headphones, Black",
-            "rank": 8,
-            "boughtPastMonth": 500,
-            "priceUsd": 16.99,
-            "rating": 4.8,
-            "reviews": 8900,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo3NDU3MDQyNTg2ODE4NDk5OjE3ODc1MDcyOTk6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDE1NTI2NDkxODU5ODo6Mzo6&url=%2FAPPHOME-Hanger-Holder-Space-Saving-Accessories%2Fdp%2FB07PFV1NQX%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D1MPZUX2OPIKH%26cv_ct_cx%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26keywords%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26pd_rd_i%3DB07PFV1NQX%26pd_rd_r%3Da7be9961-5872-41df-aee3-6432a6e9208c%26pd_rd_w%3DdZtUF%26pd_rd_wg%3DQYZPP%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D95SWPBNB7R245APH3CKS%26qid%3D1787507299%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DUnder%252Bdesk%252Bheadphone%252Bhanger%252Bclamp%252Caps%252C260%26sr%3D1-4-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3Dx66fu1nmDP%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=x66fu1nmDP"
-          },
-          {
-            "asin": "B089WDYVP9",
-            "title": "6amLifestyle Dual Rotatable Headphone Stand Hanger Under Desk Clamp Headset Holder Aluminum Load up to 11lb Headset Stand Hanger Compatible with Universal Headphones, Black 6A-13BK",
-            "rank": 9,
-            "boughtPastMonth": null,
-            "priceUsd": 19.99,
-            "rating": 4.7,
-            "reviews": 774,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo3NDU3MDQyNTg2ODE4NDk5OjE3ODc1MDcyOTk6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg4NTc5NDM3OTQwMjo6NDo6&url=%2F6amLifestyle-Rotatable-Compatible-Headphones-6A-13BK%2Fdp%2FB089WDYVP9%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D1MPZUX2OPIKH%26cv_ct_cx%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26keywords%3DUnder%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%26pd_rd_i%3DB089WDYVP9%26pd_rd_r%3Da7be9961-5872-41df-aee3-6432a6e9208c%26pd_rd_w%3DdZtUF%26pd_rd_wg%3DQYZPP%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D95SWPBNB7R245APH3CKS%26qid%3D1787507299%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DUnder%252Bdesk%252Bheadphone%252Bhanger%252Bclamp%252Caps%252C260%26sr%3D1-5-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DV1U6ek5bSt%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=V1U6ek5bSt"
+            "url": "https://www.amazon.com/KDD-Desk-Cup-Holder-Detachable/dp/B0C77YK94D/ref=sr_1_2?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-2"
           },
           {
             "asin": "B0DK3F36M9",
             "title": "JAKO Headphone Stand - Aluminum Alloy Headphone Holder, Under Headset Stand for Desk Fit for PC Gaming Headset Hanger Hook Suitable for Office, Computer, Student Class Desk, Handmade Creator Table",
-            "rank": 10,
+            "rank": 4,
             "boughtPastMonth": 500,
             "priceUsd": 6.95,
             "rating": 4.6,
             "reviews": 434,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/JAKO-Headphone-Aluminum-Accessories-Suitable/dp/B0DK3F36M9/ref=sr_1_5?crid=1MPZUX2OPIKH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.hJ12WsJ4RvQwXgidI_EZZJBT49NDEvLCOgBFuRaQMcE&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507299&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C260&sr=8-5"
+            "url": "https://www.amazon.com/JAKO-Headphone-Aluminum-Accessories-Suitable/dp/B0DK3F36M9/ref=sr_1_3?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-3"
           },
           {
             "asin": "B0F1D327BM",
             "title": "Headphone Hook Under Desk Holder 360-Degree Adjustable Rotation, White | Fits 0.47-1.57 in desks as headset stand hanger, easy spring clamp, soft rubber pads, built-in loop for cable organizer",
-            "rank": 11,
+            "rank": 5,
             "boughtPastMonth": 200,
             "priceUsd": 9.99,
             "rating": 4.6,
             "reviews": 376,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Celerion-Headphone-Hook-360-Degree-Adjustable/dp/B0F1D327BM/ref=sr_1_6?crid=1MPZUX2OPIKH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.hJ12WsJ4RvQwXgidI_EZZJBT49NDEvLCOgBFuRaQMcE&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507299&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C260&sr=8-6"
+            "url": "https://www.amazon.com/Celerion-Headphone-Hook-360-Degree-Adjustable/dp/B0F1D327BM/ref=sr_1_4?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-4"
           },
           {
             "asin": "B0BYDC6BL1",
             "title": "Walnut Wood Headset Holder Universal Adjustable Clamp-on Headphone Stand | Headphone Holder with 6cm Wide Walnut Headrest,Headset Stand Aluminum Headphone Hook for Over Ear and Gaming",
-            "rank": 13,
+            "rank": 6,
             "boughtPastMonth": 100,
             "priceUsd": 16.98,
             "rating": 4.9,
             "reviews": 60,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Jcurycke-Headset-Headphone-Adjustable-Compatible/dp/B0BYDC6BL1/ref=sr_1_8?crid=1MPZUX2OPIKH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.hJ12WsJ4RvQwXgidI_EZZJBT49NDEvLCOgBFuRaQMcE&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507299&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C260&sr=8-8"
+            "url": "https://www.amazon.com/Jcurycke-Headset-Headphone-Adjustable-Compatible/dp/B0BYDC6BL1/ref=sr_1_5?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-5"
+          },
+          {
+            "asin": "B07PFV1NQX",
+            "title": "New Foldable Headphone Stand Hanger Holder Aluminum Headset Soundbar Stand Clamp Hook Under Desk Space Save Mount, Universal Fit Gaming Headphones, Black",
+            "rank": 7,
+            "boughtPastMonth": 500,
+            "priceUsd": 16.99,
+            "rating": 4.8,
+            "reviews": 8900,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/APPHOME-Hanger-Holder-Space-Saving-Accessories/dp/B07PFV1NQX/ref=sr_1_6?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-6"
+          },
+          {
+            "asin": "B0DN1WK7JW",
+            "title": "3 in 1 Under Desk Headphone Hanger with Adjustable Clamp Mount, 2 Controller Slots & 1 Headset Universal Holder Stand, Rotatable Hook Rack & Cable Organizer, for Home Gaming Xbox ps5 - Black",
+            "rank": 8,
+            "boughtPastMonth": 100,
+            "priceUsd": 7.98,
+            "rating": 4.4,
+            "reviews": 175,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Under-Desk-Headphone-Hanger-Adjustable/dp/B0DN1WK7JW/ref=sr_1_7?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-7"
+          },
+          {
+            "asin": "B0FC2L5S77",
+            "title": "JAKO Headphone Stand for Desk, Aluminum Alloy Foldable Headphone Holder - Headset Stand Hook Mount, PC Gaming Headset Holder Under Desk Clamp for Office, Computer, Student Class Table, Handmade Table",
+            "rank": 9,
+            "boughtPastMonth": 200,
+            "priceUsd": 7.5,
+            "rating": 4.6,
+            "reviews": 195,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/JAKO-Headphone-Aluminum-Foldable-Holder/dp/B0FC2L5S77/ref=sr_1_8?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-8"
+          },
+          {
+            "asin": "B08FQPT29Q",
+            "title": "NEETTO HS906 Headphone Stand & Hanger 2 in 1, Above & Under Desk | Gaming Headset Holder Mount Hook with Height Adjustable & Rotating Clamp, Earphone Rack with Cable Clip",
+            "rank": 10,
+            "boughtPastMonth": 500,
+            "priceUsd": 14.99,
+            "rating": 4.7,
+            "reviews": 4900,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Headphone-Headset-Adjustable-Rotating-Earphone/dp/B08FQPT29Q/ref=sr_1_9?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-9"
+          },
+          {
+            "asin": "B0CT5RVQQ1",
+            "title": "Headphone Hook Under Desk Holder 360-Degree Adjustable Rotation, Black | Fits 0.47-1.57 in desks as headset stand hanger, easy spring clamp, soft rubber pads, built-in loop for cable organizer",
+            "rank": 11,
+            "boughtPastMonth": 500,
+            "priceUsd": 9.99,
+            "rating": 4.6,
+            "reviews": 376,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Celerion-Headphone-Hook-360-Degree-Adjustable/dp/B0CT5RVQQ1/ref=sr_1_10?crid=9KDKSXYQUHOH&dib=eyJ2IjoiMSJ9.F0NWzL_zaV4tLRFAiPahmqwf6Joh3Ipo3-69iK98jcOv-U0uQY2_fiA6TKRQqegspvUXdWnVFhC2PdLGhEmDwYCBbPC_nYCMGD-OUkDfJC0lGh3iwXYk6zvJuHcbOZFtL2KmUDjksHGoVX6f2SJPlRru7IS_-6G-3L5DdgXWg6M4ow7jbWIjccVvIrIzqDIgj3ki5UWJOmLjJurjPkBFDb5rqkbewO1QvPJRVfH2aEw.AxfVXnGF-ZqHGi5TunA4paQPjaXV1trQSPm-DPlumMs&dib_tag=se&keywords=Under+desk+headphone+hanger+clamp&qid=1787507705&sprefix=Under%2Bdesk%2Bheadphone%2Bhanger%2Bclamp%2Caps%2C217&sr=8-10"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
@@ -1867,7 +1946,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -1890,7 +1969,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -1927,6 +2006,85 @@
         "providerVerifiedDemandProducts": 0,
         "nicheScore": 7.5,
         "status": "TRACKABLE",
+        "romaniaDemandReadyProducts": 0
+      },
+      "amazonMarket": null,
+      "rankedKeywords": null
+    },
+    {
+      "name": "Kids bed bedside organizer felt",
+      "cat": "Kids 3–6 • Cameră",
+      "rank": 10,
+      "romaniaDemand": {
+        "version": "2.8",
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "readyForTestDemandGate": false,
+        "bestKeyword": null,
+        "bestKeywordVolume": null,
+        "totalVariantVolume": null,
+        "verifiedKeywordVariants": 0,
+        "observedKeywordVariants": 0,
+        "trend12mPct": null,
+        "romaniaDomains": 0,
+        "romaniaObservedLinks": 0,
+        "pricingDomains": 0,
+        "keywords": [],
+        "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
+      },
+      "salesEstimation": {
+        "version": "2.8",
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
+        "inputs": {
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 3,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
+        "method": "LEGACY_EVIDENCE_MODEL"
+      },
+      "reverseKeywordIntelligence": {
+        "version": "2.8",
+        "status": "PROXY_ONLY",
+        "seedKeywords": [
+          "Kids bed bedside organizer felt",
+          "Kids 3–6 • Cameră"
+        ],
+        "verifiedKeywordCount": 0,
+        "competitorEvidenceRows": 0,
+        "searchVolume": null,
+        "provider": "NONE",
+        "needsAsinKeywordProvider": true,
+        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
+        "competitorAsins": [],
+        "asinCount": 0,
+        "topRankedKeywords": [],
+        "providerPath": "NONE"
+      },
+      "nicheIntelligence": {
+        "version": "2.8",
+        "products": 1,
+        "estimatedUnitsMedian": null,
+        "medianPriceRon": 109.8,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
+        "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
       "amazonMarket": null,
@@ -2031,12 +2189,12 @@
       "salesEstimation": {
         "version": "2.8",
         "status": "ESTIMATED_HIGH_CONFIDENCE",
-        "estimatedUnits30d": 159,
-        "rangeLow": 120,
-        "rangeHigh": 199,
+        "estimatedUnits30d": 144,
+        "rangeLow": 108,
+        "rangeHigh": 180,
         "confidence": 100,
         "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
-        "observedPeerBoughtPastMonth": 2550,
+        "observedPeerBoughtPastMonth": 2300,
         "peerSample": 16,
         "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
@@ -2055,7 +2213,7 @@
         "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [
           "B09JNQTHBL",
-          "B098KQJ3Q4",
+          "B09XHLLQF4",
           "B0D3V7S5BS",
           "B09GB3JH4K",
           "B0CQR8MKVV"
@@ -2081,26 +2239,26 @@
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T17:47:59.729Z",
+        "checkedAt": "2026-08-23T17:54:40.728Z",
         "keyword": "Car trunk side storage net",
         "organicProducts": 20,
         "asins": [
           "B09JNQTHBL",
-          "B098KQJ3Q4",
+          "B09XHLLQF4",
           "B0D3V7S5BS",
           "B09GB3JH4K",
           "B0CQR8MKVV",
-          "B0CQ1TF8SZ",
           "B09X2HT9GZ",
-          "B09XHLLQF4",
+          "B0741GNJ7K",
+          "B098KQJ3Q4",
           "B09FJG9WKF",
           "B09BC9CS49"
         ],
         "productsWithBoughtPastMonth": 16,
-        "totalObservedBoughtPastMonth": 2550,
+        "totalObservedBoughtPastMonth": 2300,
         "medianBoughtPastMonth": 100,
-        "medianReviews": 467,
-        "medianPriceUsd": 13,
+        "medianReviews": 497,
+        "medianPriceUsd": 13.8,
         "confidence": 95,
         "items": [
           {
@@ -2113,19 +2271,19 @@
             "reviews": 992,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Universal-Storage-Automotive-Organizer-Stickers/dp/B09JNQTHBL/ref=sr_1_5?crid=RXXH3M8LQA4H&dib=eyJ2IjoiMSJ9.ROV-DqX4n9JZwwNf67qPod_sSox576qeFk9BsgYevy0R_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JZ1zjioAshqm9NWPHv14k8P7u2oeiGaAAb2OQBGiX9XnzHv92e20oXaaZRHOBouoRDakRyh5QKd2BBiqutEZrApMH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.o-aFTJyx-emXfbKTb0xNDYifVye-QNi7ecz1DBXZX70&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507304&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C102&sr=8-5"
+            "url": "https://www.amazon.com/Universal-Storage-Automotive-Organizer-Stickers/dp/B09JNQTHBL/ref=sr_1_5?crid=UT4A3I4F1AVZ&dib=eyJ2IjoiMSJ9.8gZE6jCrNydVSCiPV8Q0P1ni44wHkk7k6ALndjP4kVwR_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JXfa9dJmQ2gpDb3gz5KYl24s6ZZi8VApwe8yUjfU1Bpg74I3xFM0qwoCWx1MfM1ZXlsyuK6zgAd2L7U7wUPDFi5MH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.Tp4Mz-IZ2t9knxIM10fkhG0mVG_GaxbXOOc8LdRlB7w&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507717&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C152&sr=8-5"
           },
           {
-            "asin": "B098KQJ3Q4",
-            "title": "Car Rear Cargo Net, Universal Adjustable Elastic Trunk Cargo Storage Organizer Net Compatible for SUV, Jeep, Truck, Storage Nylon Mesh Double-Layer with Hooks (35.4 x 15.7 Inch)",
+            "asin": "B09XHLLQF4",
+            "title": "Universal Mesh Cargo Net Storage Net Wall Sticker Organizer Pouch Bag Storage Mesh Net for Car Trunk Storage Add On Organizers for Car Truck (24\" x 9.5\"（2 Packs)",
             "rank": 6,
-            "boughtPastMonth": 100,
-            "priceUsd": 9.59,
-            "rating": 4.4,
-            "reviews": 612,
+            "boughtPastMonth": 50,
+            "priceUsd": 12.99,
+            "rating": 4.3,
+            "reviews": 147,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Universal-Adjustable-Organizer-Compatible-Double-Layer/dp/B098KQJ3Q4/ref=sr_1_6?crid=RXXH3M8LQA4H&dib=eyJ2IjoiMSJ9.ROV-DqX4n9JZwwNf67qPod_sSox576qeFk9BsgYevy0R_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JZ1zjioAshqm9NWPHv14k8P7u2oeiGaAAb2OQBGiX9XnzHv92e20oXaaZRHOBouoRDakRyh5QKd2BBiqutEZrApMH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.o-aFTJyx-emXfbKTb0xNDYifVye-QNi7ecz1DBXZX70&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507304&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C102&sr=8-6"
+            "url": "https://www.amazon.com/Universal-Storage-Sticker-Organizer-Organizers/dp/B09XHLLQF4/ref=sr_1_6?crid=UT4A3I4F1AVZ&dib=eyJ2IjoiMSJ9.8gZE6jCrNydVSCiPV8Q0P1ni44wHkk7k6ALndjP4kVwR_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JXfa9dJmQ2gpDb3gz5KYl24s6ZZi8VApwe8yUjfU1Bpg74I3xFM0qwoCWx1MfM1ZXlsyuK6zgAd2L7U7wUPDFi5MH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.Tp4Mz-IZ2t9knxIM10fkhG0mVG_GaxbXOOc8LdRlB7w&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507717&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C152&sr=8-6"
           },
           {
             "asin": "B0D3V7S5BS",
@@ -2137,7 +2295,7 @@
             "reviews": 497,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzcwNjc5OTQyNDY0NjA0OjE3ODc1MDczMDQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDQ5OTkxMjMzMjUwMjo6MDo6&url=%2FPieces-Plastic-Automotive-Storage-Organizer%2Fdp%2FB0D3V7S5BS%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DRXXH3M8LQA4H%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0D3V7S5BS%26pd_rd_r%3Df182baf1-b749-48c4-9090-81e01c4c0132%26pd_rd_w%3DPtT49%26pd_rd_wg%3DLlMOc%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DDD3MTY3AT5NKKB7B44VV%26qid%3D1787507304%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C102%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3D90xM2PIcil%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=90xM2PIcil"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MTMxODI3MDE4MTAzODY5OjE3ODc1MDc3MTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDQ5OTkxMjMzMjUwMjo6MDo6&url=%2FPieces-Plastic-Automotive-Storage-Organizer%2Fdp%2FB0D3V7S5BS%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DUT4A3I4F1AVZ%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0D3V7S5BS%26pd_rd_r%3D31ec18b8-4258-4ceb-854d-bf921c1be7b5%26pd_rd_w%3DhDxVC%26pd_rd_wg%3DtG0Ad%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D25TQG0XCZ3YB082EJYHS%26qid%3D1787507717%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C152%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3D90xM2PIcil%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=90xM2PIcil"
           },
           {
             "asin": "B09GB3JH4K",
@@ -2149,7 +2307,7 @@
             "reviews": 1800,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzcwNjc5OTQyNDY0NjA0OjE3ODc1MDczMDQ6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA5MTk4MTUzODY2MTo6MTo6&url=%2FFrienda-Bungee-Pocket-Framed-Mesh%2Fdp%2FB09GB3JH4K%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DRXXH3M8LQA4H%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB09GB3JH4K%26pd_rd_r%3Df182baf1-b749-48c4-9090-81e01c4c0132%26pd_rd_w%3DPtT49%26pd_rd_wg%3DLlMOc%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DDD3MTY3AT5NKKB7B44VV%26qid%3D1787507304%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C102%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DhQ8k0WCGur%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=hQ8k0WCGur"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MTMxODI3MDE4MTAzODY5OjE3ODc1MDc3MTg6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA5MTk4MTUzODY2MTo6MTo6&url=%2FFrienda-Bungee-Pocket-Framed-Mesh%2Fdp%2FB09GB3JH4K%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DUT4A3I4F1AVZ%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB09GB3JH4K%26pd_rd_r%3D31ec18b8-4258-4ceb-854d-bf921c1be7b5%26pd_rd_w%3DhDxVC%26pd_rd_wg%3DtG0Ad%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D25TQG0XCZ3YB082EJYHS%26qid%3D1787507717%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C152%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DhQ8k0WCGur%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=hQ8k0WCGur"
           },
           {
             "asin": "B0CQR8MKVV",
@@ -2161,43 +2319,43 @@
             "reviews": 453,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzcwNjc5OTQyNDY0NjA0OjE3ODc1MDczMDQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDEzMDE0NDEyNzgwMjo6Mjo6&url=%2FBAILALIBO-35-4x15-8-Automotive-Accessories-Organization%2Fdp%2FB0CQR8MKVV%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DRXXH3M8LQA4H%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0CQR8MKVV%26pd_rd_r%3Df182baf1-b749-48c4-9090-81e01c4c0132%26pd_rd_w%3DPtT49%26pd_rd_wg%3DLlMOc%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DDD3MTY3AT5NKKB7B44VV%26qid%3D1787507304%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C102%26sr%3D1-3-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3D7oUbZzjCnb%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7oUbZzjCnb"
-          },
-          {
-            "asin": "B0CQ1TF8SZ",
-            "title": "Cargo Net Car with Hooks Adjustable Highly Elastic Storage Organizer Net | Cargo Net for SUV, Pickup Trucks,Mesh Organizer 2.6'x2' Stretches to 5'x4',Road Trip Essentials Black",
-            "rank": 10,
-            "boughtPastMonth": 300,
-            "priceUsd": 12.93,
-            "rating": 4.7,
-            "reviews": 169,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzcwNjc5OTQyNDY0NjA0OjE3ODc1MDczMDQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTQwODE3NzgxMzIwMjo6Mzo6&url=%2FCargo-Net-Adjustable-Organizer-Essentials%2Fdp%2FB0CQ1TF8SZ%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DRXXH3M8LQA4H%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0CQ1TF8SZ%26pd_rd_r%3Df182baf1-b749-48c4-9090-81e01c4c0132%26pd_rd_w%3DPtT49%26pd_rd_wg%3DLlMOc%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DDD3MTY3AT5NKKB7B44VV%26qid%3D1787507304%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C102%26sr%3D1-4-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DIj0Jdue34p%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=Ij0Jdue34p"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MTMxODI3MDE4MTAzODY5OjE3ODc1MDc3MTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDEzMDE0NDEyNzgwMjo6Mjo6&url=%2FBAILALIBO-35-4x15-8-Automotive-Accessories-Organization%2Fdp%2FB0CQR8MKVV%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DUT4A3I4F1AVZ%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0CQR8MKVV%26pd_rd_r%3D31ec18b8-4258-4ceb-854d-bf921c1be7b5%26pd_rd_w%3DhDxVC%26pd_rd_wg%3DtG0Ad%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D25TQG0XCZ3YB082EJYHS%26qid%3D1787507717%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C152%26sr%3D1-3-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3D7oUbZzjCnb%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7oUbZzjCnb"
           },
           {
             "asin": "B09X2HT9GZ",
             "title": "3-Pocket Car Trunk Cargo Net with Carabiners | expandable mesh storage, fits compatible storage areas, car interior accessories",
-            "rank": 11,
+            "rank": 10,
             "boughtPastMonth": 200,
             "priceUsd": 14.99,
             "rating": 4.2,
             "reviews": 5400,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzcwNjc5OTQyNDY0NjA0OjE3ODc1MDczMDQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg3Nzg3MDUxNzkwMjo6NDo6&url=%2FHanemia-Car-Cargo-Net-Carabiners%2Fdp%2FB09X2HT9GZ%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DRXXH3M8LQA4H%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB09X2HT9GZ%26pd_rd_r%3Df182baf1-b749-48c4-9090-81e01c4c0132%26pd_rd_w%3DPtT49%26pd_rd_wg%3DLlMOc%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DDD3MTY3AT5NKKB7B44VV%26qid%3D1787507304%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C102%26sr%3D1-5-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DxUqkjPxztZ%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=xUqkjPxztZ"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MTMxODI3MDE4MTAzODY5OjE3ODc1MDc3MTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg3Nzg3MDUxNzkwMjo6Mzo6&url=%2FHanemia-Car-Cargo-Net-Carabiners%2Fdp%2FB09X2HT9GZ%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DUT4A3I4F1AVZ%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB09X2HT9GZ%26pd_rd_r%3D31ec18b8-4258-4ceb-854d-bf921c1be7b5%26pd_rd_w%3DhDxVC%26pd_rd_wg%3DtG0Ad%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D25TQG0XCZ3YB082EJYHS%26qid%3D1787507717%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C152%26sr%3D1-4-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DxUqkjPxztZ%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=xUqkjPxztZ"
           },
           {
-            "asin": "B09XHLLQF4",
-            "title": "Universal Mesh Cargo Net Storage Net Wall Sticker Organizer Pouch Bag Storage Mesh Net for Car Trunk Storage Add On Organizers for Car Truck (24\" x 9.5\"（2 Packs)",
-            "rank": 12,
-            "boughtPastMonth": 50,
-            "priceUsd": 12.99,
-            "rating": 4.3,
-            "reviews": 147,
+            "asin": "B0741GNJ7K",
+            "title": "Armor All Cargo Net Organizer, 12” x 31” Inch Expandable up to 47” Inches, Super-Durable Nylon Material, Attaches to Headrest Post, Stretchable Net Car Trunk Organizer with Mesh Pocket, Universal Fit",
+            "rank": 11,
+            "boughtPastMonth": null,
+            "priceUsd": 14.24,
+            "rating": 4,
+            "reviews": 12,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Universal-Storage-Sticker-Organizer-Organizers/dp/B09XHLLQF4/ref=sr_1_7?crid=RXXH3M8LQA4H&dib=eyJ2IjoiMSJ9.ROV-DqX4n9JZwwNf67qPod_sSox576qeFk9BsgYevy0R_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JZ1zjioAshqm9NWPHv14k8P7u2oeiGaAAb2OQBGiX9XnzHv92e20oXaaZRHOBouoRDakRyh5QKd2BBiqutEZrApMH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.o-aFTJyx-emXfbKTb0xNDYifVye-QNi7ecz1DBXZX70&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507304&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C102&sr=8-7"
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MTMxODI3MDE4MTAzODY5OjE3ODc1MDc3MTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTI3ODYyNjQ5NTQwMjo6NDo6&url=%2FArmor-All-Expandable-Super-Durable-Stretchable%2Fdp%2FB0741GNJ7K%2Fref%3Dsxin_17_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DUT4A3I4F1AVZ%26cv_ct_cx%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26keywords%3DCar%2Btrunk%2Bside%2Bstorage%2Bnet%26pd_rd_i%3DB0741GNJ7K%26pd_rd_r%3D31ec18b8-4258-4ceb-854d-bf921c1be7b5%26pd_rd_w%3DhDxVC%26pd_rd_wg%3DtG0Ad%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3D25TQG0XCZ3YB082EJYHS%26qid%3D1787507717%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DCar%252Btrunk%252Bside%252Bstorage%252Bnet%252Caps%252C152%26sr%3D1-5-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DBC6b9wWaxC%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=BC6b9wWaxC"
+          },
+          {
+            "asin": "B098KQJ3Q4",
+            "title": "Car Rear Cargo Net, Universal Adjustable Elastic Trunk Cargo Storage Organizer Net Compatible for SUV, Jeep, Truck, Storage Nylon Mesh Double-Layer with Hooks (35.4 x 15.7 Inch)",
+            "rank": 12,
+            "boughtPastMonth": 100,
+            "priceUsd": 9.59,
+            "rating": 4.4,
+            "reviews": 612,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Universal-Adjustable-Organizer-Compatible-Double-Layer/dp/B098KQJ3Q4/ref=sr_1_7?crid=UT4A3I4F1AVZ&dib=eyJ2IjoiMSJ9.8gZE6jCrNydVSCiPV8Q0P1ni44wHkk7k6ALndjP4kVwR_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JXfa9dJmQ2gpDb3gz5KYl24s6ZZi8VApwe8yUjfU1Bpg74I3xFM0qwoCWx1MfM1ZXlsyuK6zgAd2L7U7wUPDFi5MH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.Tp4Mz-IZ2t9knxIM10fkhG0mVG_GaxbXOOc8LdRlB7w&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507717&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C152&sr=8-7"
           },
           {
             "asin": "B09FJG9WKF",
@@ -2209,7 +2367,7 @@
             "reviews": 798,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Stretchable-Storage-Elastic-Automotive-Mounting/dp/B09FJG9WKF/ref=sr_1_8?crid=RXXH3M8LQA4H&dib=eyJ2IjoiMSJ9.ROV-DqX4n9JZwwNf67qPod_sSox576qeFk9BsgYevy0R_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JZ1zjioAshqm9NWPHv14k8P7u2oeiGaAAb2OQBGiX9XnzHv92e20oXaaZRHOBouoRDakRyh5QKd2BBiqutEZrApMH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.o-aFTJyx-emXfbKTb0xNDYifVye-QNi7ecz1DBXZX70&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507304&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C102&sr=8-8"
+            "url": "https://www.amazon.com/Stretchable-Storage-Elastic-Automotive-Mounting/dp/B09FJG9WKF/ref=sr_1_8?crid=UT4A3I4F1AVZ&dib=eyJ2IjoiMSJ9.8gZE6jCrNydVSCiPV8Q0P1ni44wHkk7k6ALndjP4kVwR_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JXfa9dJmQ2gpDb3gz5KYl24s6ZZi8VApwe8yUjfU1Bpg74I3xFM0qwoCWx1MfM1ZXlsyuK6zgAd2L7U7wUPDFi5MH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.Tp4Mz-IZ2t9knxIM10fkhG0mVG_GaxbXOOc8LdRlB7w&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507717&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C152&sr=8-8"
           },
           {
             "asin": "B09BC9CS49",
@@ -2221,237 +2379,11 @@
             "reviews": 8700,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Amiss-Stretchable-Accessories-Adjustable-35-4x15-8/dp/B09BC9CS49/ref=sr_1_9?crid=RXXH3M8LQA4H&dib=eyJ2IjoiMSJ9.ROV-DqX4n9JZwwNf67qPod_sSox576qeFk9BsgYevy0R_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JZ1zjioAshqm9NWPHv14k8P7u2oeiGaAAb2OQBGiX9XnzHv92e20oXaaZRHOBouoRDakRyh5QKd2BBiqutEZrApMH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.o-aFTJyx-emXfbKTb0xNDYifVye-QNi7ecz1DBXZX70&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507304&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C102&sr=8-9"
+            "url": "https://www.amazon.com/Amiss-Stretchable-Accessories-Adjustable-35-4x15-8/dp/B09BC9CS49/ref=sr_1_9?crid=UT4A3I4F1AVZ&dib=eyJ2IjoiMSJ9.8gZE6jCrNydVSCiPV8Q0P1ni44wHkk7k6ALndjP4kVwR_1_sQ6Te6pO50UPPTh1252LZXLLF6_OHJ6xTkV2Tu_plrxULWaNZ-mdcPPtADDN7H6ypMSdzc56oVRRxD0RaZT_SGLdAJwOBi0LHPWW-JXfa9dJmQ2gpDb3gz5KYl24s6ZZi8VApwe8yUjfU1Bpg74I3xFM0qwoCWx1MfM1ZXlsyuK6zgAd2L7U7wUPDFi5MH7UZqDjt_dOvKztEobPEZQUi25iLQjIODlmhXeNYGopkdOWQ7p_v_vMW69FM_ko.Tp4Mz-IZ2t9knxIM10fkhG0mVG_GaxbXOOc8LdRlB7w&dib_tag=se&keywords=Car+trunk+side+storage+net&qid=1787507717&sprefix=Car%2Btrunk%2Bside%2Bstorage%2Bnet%2Caps%2C152&sr=8-9"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
       },
-      "rankedKeywords": null
-    },
-    {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
-      "rank": 13,
-      "romaniaDemand": {
-        "version": "2.8",
-        "status": "PROVIDER_VERIFIED",
-        "score": 65,
-        "providerVerified": true,
-        "readyForTestDemandGate": true,
-        "bestKeyword": "organizator sertar",
-        "bestKeywordVolume": 1300,
-        "totalVariantVolume": 1370,
-        "verifiedKeywordVariants": 2,
-        "observedKeywordVariants": 5,
-        "trend12mPct": 37.5,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "pricingDomains": 0,
-        "keywords": [
-          {
-            "keyword": "organizator sertar",
-            "searchVolume": 1300,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.28,
-            "lowTopOfPageBid": 0.11,
-            "highTopOfPageBid": 0.31,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 1300
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 1000
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 880
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 1000
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 1300
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 1300
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 1600
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 1000
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 1300
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 1300
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 1600
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 1300
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-20T04:33:25.066Z"
-          },
-          {
-            "keyword": "organizator sertar birou",
-            "searchVolume": 70,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.32,
-            "lowTopOfPageBid": 0.08,
-            "highTopOfPageBid": 0.41,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 40
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 50
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 50
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 70
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 50
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 90
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 50
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 50
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 70
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 90
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 70
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-20T04:33:25.066Z"
-          }
-        ],
-        "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
-      },
-      "salesEstimation": {
-        "version": "2.8",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 39,
-        "rangeLow": 16,
-        "rangeHigh": 62,
-        "confidence": 42,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 1300,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 5,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
-        "method": "LEGACY_EVIDENCE_MODEL"
-      },
-      "reverseKeywordIntelligence": {
-        "version": "2.8",
-        "status": "SEED_PROVIDER_READY",
-        "seedKeywords": [
-          "Desk drawer organizer modular trays",
-          "Birou"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": 1300,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "needsAsinKeywordProvider": true,
-        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
-        "competitorAsins": [],
-        "asinCount": 0,
-        "topRankedKeywords": [],
-        "providerPath": "NONE"
-      },
-      "nicheIntelligence": {
-        "version": "2.8",
-        "products": 5,
-        "estimatedUnitsMedian": 1,
-        "medianPriceRon": 92.72,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
-        "top3EstimatedSalesConcentrationPct": 100,
-        "highConfidenceSalesModels": 1,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 26.2,
-        "status": "TRACKABLE",
-        "romaniaDemandReadyProducts": 3
-      },
-      "amazonMarket": null,
       "rankedKeywords": null
     },
     {
@@ -2468,7 +2400,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -2491,7 +2423,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -2547,7 +2479,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -2570,7 +2502,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 4,
+          "historicalSnapshots": 5,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -2618,113 +2550,39 @@
       "rank": 6,
       "romaniaDemand": {
         "version": "2.8",
-        "status": "PROVIDER_VERIFIED",
-        "score": 38.7,
-        "providerVerified": true,
-        "readyForTestDemandGate": true,
-        "bestKeyword": "clipsuri magnetice",
-        "bestKeywordVolume": 20,
-        "totalVariantVolume": 20,
-        "verifiedKeywordVariants": 1,
-        "observedKeywordVariants": 5,
-        "trend12mPct": 100,
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
+        "readyForTestDemandGate": false,
+        "bestKeyword": null,
+        "bestKeywordVolume": null,
+        "totalVariantVolume": null,
+        "verifiedKeywordVariants": 0,
+        "observedKeywordVariants": 0,
+        "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
-        "keywords": [
-          {
-            "keyword": "clipsuri magnetice",
-            "searchVolume": 20,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.14,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 10
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 20
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-20T04:33:25.066Z"
-          }
-        ],
+        "keywords": [],
         "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
       },
       "salesEstimation": {
         "version": "2.8",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 1,
-        "rangeLow": 1,
-        "rangeHigh": 2,
-        "confidence": 30,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 6,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 20,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
@@ -2732,15 +2590,15 @@
       },
       "reverseKeywordIntelligence": {
         "version": "2.8",
-        "status": "SEED_PROVIDER_READY",
+        "status": "PROXY_ONLY",
         "seedKeywords": [
           "Magnetic cable organizer clips set",
           "Birou"
         ],
         "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
-        "searchVolume": 20,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
         "competitorAsins": [],
@@ -2754,13 +2612,13 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 1,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 26.2,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10.9,
         "status": "TRACKABLE",
-        "romaniaDemandReadyProducts": 3
+        "romaniaDemandReadyProducts": 1
       },
       "amazonMarket": null,
       "rankedKeywords": null
@@ -2779,7 +2637,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 4,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -2793,7 +2651,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -2802,8 +2660,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
@@ -2858,7 +2716,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -2872,7 +2730,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -2881,8 +2739,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
@@ -2924,9 +2782,9 @@
       "rankedKeywords": null
     },
     {
-      "name": "Kids bed bedside organizer felt",
-      "cat": "Kids 3–6 • Cameră",
-      "rank": 10,
+      "name": "Kids visual timer board non electronic",
+      "cat": "Kids 3–6 • Educațional",
+      "rank": 11,
       "romaniaDemand": {
         "version": "2.8",
         "status": "INSUFFICIENT",
@@ -2937,7 +2795,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -2962,85 +2820,6 @@
           "reviewSnippets": 0,
           "historicalSnapshots": 2,
           "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
-        "method": "LEGACY_EVIDENCE_MODEL"
-      },
-      "reverseKeywordIntelligence": {
-        "version": "2.8",
-        "status": "PROXY_ONLY",
-        "seedKeywords": [
-          "Kids bed bedside organizer felt",
-          "Kids 3–6 • Cameră"
-        ],
-        "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
-        "searchVolume": null,
-        "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
-        "competitorAsins": [],
-        "asinCount": 0,
-        "topRankedKeywords": [],
-        "providerPath": "NONE"
-      },
-      "nicheIntelligence": {
-        "version": "2.8",
-        "products": 1,
-        "estimatedUnitsMedian": null,
-        "medianPriceRon": 109.8,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 0,
-        "nicheScore": 7.5,
-        "status": "THIN_SAMPLE",
-        "romaniaDemandReadyProducts": 0
-      },
-      "amazonMarket": null,
-      "rankedKeywords": null
-    },
-    {
-      "name": "Kids visual timer board non electronic",
-      "cat": "Kids 3–6 • Educațional",
-      "rank": 11,
-      "romaniaDemand": {
-        "version": "2.8",
-        "status": "INSUFFICIENT",
-        "score": 0,
-        "providerVerified": false,
-        "readyForTestDemandGate": false,
-        "bestKeyword": null,
-        "bestKeywordVolume": null,
-        "totalVariantVolume": null,
-        "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 4,
-        "trend12mPct": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "pricingDomains": 0,
-        "keywords": [],
-        "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
-      },
-      "salesEstimation": {
-        "version": "2.8",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 0,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
@@ -3095,7 +2874,7 @@
         "bestKeywordVolume": null,
         "totalVariantVolume": null,
         "verifiedKeywordVariants": 0,
-        "observedKeywordVariants": 5,
+        "observedKeywordVariants": 0,
         "trend12mPct": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
@@ -3109,7 +2888,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 0,
+        "confidence": 6,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -3118,8 +2897,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 1,
-          "trend": "INSUFICIENT",
+          "historicalSnapshots": 2,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
@@ -4255,13 +4034,13 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 1,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 26.2,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10.9,
         "status": "TRACKABLE",
-        "romaniaDemandReadyProducts": 3
+        "romaniaDemandReadyProducts": 1
       },
       "amazonMarket": null,
       "rankedKeywords": null
@@ -5440,13 +5219,13 @@
         "estimatedUnitsMedian": 1,
         "medianPriceRon": 92.72,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 29.1,
+        "medianRomaniaDemandScore": 0,
         "top3EstimatedSalesConcentrationPct": 100,
         "highConfidenceSalesModels": 1,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 26.2,
+        "providerVerifiedDemandProducts": 1,
+        "nicheScore": 10.9,
         "status": "TRACKABLE",
-        "romaniaDemandReadyProducts": 3
+        "romaniaDemandReadyProducts": 1
       },
       "amazonMarket": null,
       "rankedKeywords": null

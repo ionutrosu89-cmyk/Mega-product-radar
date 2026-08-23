@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-23T17:47:59.497Z",
+  "updatedAt": "2026-08-23T17:54:40.550Z",
   "policy": "Data Confidence măsoară completitudinea dovezilor, nu probabilitatea de succes.",
   "stats": {
     "total": 65,
@@ -12,27 +12,27 @@
   },
   "dimensionAverages": {
     "market": 0,
-    "demand": 43.8,
+    "demand": 34.6,
     "competition": 25,
     "reviews": 0,
     "sourcing": 0,
     "pricing": 43.5,
-    "history": 34
+    "history": 37
   },
   "missingCounts": {
     "market": 65,
-    "demand": 50,
+    "demand": 60,
     "competition": 65,
     "reviews": 65,
     "sourcing": 65,
     "pricing": 65,
-    "history": 54
+    "history": 49
   },
   "products": [
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
-      "rank": 1,
+      "rank": 2,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -46,7 +46,7 @@
     {
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
-      "rank": 2,
+      "rank": 3,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -60,7 +60,7 @@
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
-      "rank": 3,
+      "rank": 4,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -74,20 +74,6 @@
     {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
-      "rank": 5,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Shoe washing laundry bag structured",
-      "cat": "Laundry",
       "rank": 6,
       "score": 34.3,
       "level": "SCĂZUTĂ",
@@ -102,7 +88,7 @@
     {
       "name": "Car trunk side storage net",
       "cat": "Auto",
-      "rank": 7,
+      "rank": 9,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -116,11 +102,12 @@
     {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
-      "rank": 8,
-      "score": 34.3,
+      "rank": 1,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -128,13 +115,14 @@
       ]
     },
     {
-      "name": "Shower corner shelf adhesive no drill",
-      "cat": "Baie",
-      "rank": 9,
-      "score": 34.3,
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "rank": 5,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -142,13 +130,14 @@
       ]
     },
     {
-      "name": "Dog car door protector set",
-      "cat": "Pet",
-      "rank": 10,
-      "score": 34.3,
+      "name": "Shoe washing laundry bag structured",
+      "cat": "Laundry",
+      "rank": 7,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -158,11 +147,42 @@
     {
       "name": "Kids bed bedside organizer felt",
       "cat": "Kids 3–6 • Cameră",
-      "rank": 14,
-      "score": 31.4,
+      "rank": 8,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Shower corner shelf adhesive no drill",
+      "cat": "Baie",
+      "rank": 10,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Dog car door protector set",
+      "cat": "Pet",
+      "rank": 11,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
@@ -172,83 +192,68 @@
     {
       "name": "Magnetic cable organizer clips set",
       "cat": "Birou",
-      "rank": 11,
-      "score": 26.4,
+      "rank": 12,
+      "score": 22.9,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
-        "pricing",
-        "history"
+        "pricing"
       ]
     },
     {
       "name": "Kids car seat snack tray age 3 plus",
       "cat": "Kids 3–6 • Travel",
-      "rank": 12,
-      "score": 26.4,
+      "rank": 13,
+      "score": 22.9,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
-        "pricing",
-        "history"
+        "pricing"
       ]
     },
     {
       "name": "Kids portable drawing board storage bag",
       "cat": "Kids 3–6 • Organizare",
-      "rank": 13,
-      "score": 26.4,
+      "rank": 14,
+      "score": 22.9,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
-        "pricing",
-        "history"
+        "pricing"
       ]
     },
     {
       "name": "Kids visual timer board non electronic",
       "cat": "Kids 3–6 • Educațional",
       "rank": 15,
-      "score": 26.4,
+      "score": 22.9,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
-        "pricing",
-        "history"
+        "pricing"
       ]
     },
     {
       "name": "Kids reusable sticker activity book",
       "cat": "Kids 3–6 • Educațional",
       "rank": 16,
-      "score": 26.4,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing",
-        "history"
-      ]
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "rank": 4,
-      "score": 25.7,
+      "score": 22.9,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
