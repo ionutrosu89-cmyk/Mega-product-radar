@@ -1,16 +1,16 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:32:00.491Z",
+  "updatedAt": "2026-08-23T19:44:16.468Z",
   "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
-    "targetCount": 9,
-    "usefulEnrichments": 8,
-    "enrichmentSuccessPct": 88.9,
+    "targetCount": 5,
+    "usefulEnrichments": 4,
+    "enrichmentSuccessPct": 80,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": 0.0012,
-    "cumulativeTestSpendConservativeEur": 1.8366
+    "costPerUsefulEnrichmentEur": 0.0025,
+    "cumulativeTestSpendConservativeEur": 1.8465
   },
   "criteria": {
     "minEnrichmentSuccessPct": 50,
@@ -29,53 +29,17 @@
   "blockers": [],
   "evaluated": [
     {
-      "canonicalKey": "shoe-washing-laundry-bag-structured",
-      "title": "Shoe washing laundry bag structured",
-      "useful": true,
-      "romaniaDemandReady": false,
-      "keywordVolume": 0,
-      "hasAmazonEvidence": true,
-      "hasRankedKeywords": false
-    },
-    {
-      "canonicalKey": "shower-corner-shelf-adhesive-no-drill",
-      "title": "Shower corner shelf adhesive no drill",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 2400,
-      "hasAmazonEvidence": true,
-      "hasRankedKeywords": false
-    },
-    {
-      "canonicalKey": "kids-bed-bedside-organizer-felt",
-      "title": "Kids bed bedside organizer felt",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 30,
-      "hasAmazonEvidence": true,
-      "hasRankedKeywords": false
-    },
-    {
-      "canonicalKey": "kids-visual-timer-board-non-electronic",
-      "title": "Kids visual timer board non electronic",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 20,
-      "hasAmazonEvidence": false,
-      "hasRankedKeywords": false
-    },
-    {
-      "canonicalKey": "dog-car-door-protector-set",
-      "title": "Dog car door protector set",
-      "useful": false,
-      "romaniaDemandReady": false,
-      "keywordVolume": 0,
-      "hasAmazonEvidence": false,
-      "hasRankedKeywords": false
-    },
-    {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
+      "useful": true,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": true,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "shoe-washing-laundry-bag-structured",
+      "title": "Shoe washing laundry bag structured",
       "useful": true,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
@@ -101,11 +65,11 @@
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "car-cup-holder-expander-adjustable",
-      "title": "Car cup holder expander adjustable",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 390,
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
       "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     }
