@@ -1,6 +1,6 @@
 {
   "version": "2.8",
-  "updatedAt": "2026-08-23T19:23:59.755Z",
+  "updatedAt": "2026-08-23T19:31:11.703Z",
   "stats": {
     "products": 9,
     "deepProducts": 5,
@@ -15,9 +15,9 @@
     "costAnomalyCount": 0,
     "amazonEnriched": 3,
     "reverseKeywordEnriched": 0,
-    "salesHighConfidence": 3,
+    "salesHighConfidence": 6,
     "romaniaDemandReady": 4,
-    "asinReady": 3,
+    "asinReady": 6,
     "reverseKeywordProviderReady": 0,
     "nicheTrackable": 0
   },
@@ -49,29 +49,19 @@
       },
       "salesEstimation": {
         "version": "2.8",
-        "status": "INSUFFICIENT_DATA",
-        "estimatedUnits30d": null,
-        "rangeLow": null,
-        "rangeHigh": null,
-        "confidence": 12,
-        "inputs": {
-          "keywordVolumeVerified": false,
-          "keywordVolume": null,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 6,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
-        "method": "LEGACY_EVIDENCE_MODEL"
+        "status": "ESTIMATED_HIGH_CONFIDENCE",
+        "estimatedUnits30d": 1228,
+        "rangeLow": 921,
+        "rangeHigh": 1535,
+        "confidence": 100,
+        "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
+        "observedPeerBoughtPastMonth": 19650,
+        "peerSample": 16,
+        "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
       "reverseKeywordIntelligence": {
         "version": "2.8",
-        "status": "PROXY_ONLY",
+        "status": "ASIN_READY",
         "seedKeywords": [
           "Shoe washing laundry bag structured",
           "Laundry"
@@ -80,12 +70,18 @@
         "competitorEvidenceRows": 0,
         "searchVolume": null,
         "provider": "NONE",
-        "needsAsinKeywordProvider": true,
+        "needsAsinKeywordProvider": false,
         "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
-        "competitorAsins": [],
-        "asinCount": 0,
+        "competitorAsins": [
+          "B0GK8ZNMKB",
+          "B0F3CYS4X8",
+          "B0FD9JDVWY",
+          "B0G5PNK1HX",
+          "B0H41T9LRX"
+        ],
+        "asinCount": 10,
         "topRankedKeywords": [],
-        "providerPath": "NONE"
+        "providerPath": "DATAFORSEO_AMAZON_RANKED_KEYWORDS_READY"
       },
       "nicheIntelligence": {
         "version": "2.8",
@@ -94,14 +90,161 @@
         "medianPriceRon": 109.15,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 1,
         "providerVerifiedDemandProducts": 0,
-        "nicheScore": 7.5,
+        "nicheScore": 5,
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 0
       },
-      "amazonMarket": null,
+      "amazonMarket": {
+        "version": "2.8",
+        "provider": "DATAFORSEO_AMAZON_MERCHANT",
+        "checkedAt": "2026-08-23T19:31:11.703Z",
+        "keyword": "Shoe washing laundry bag structured",
+        "organicProducts": 20,
+        "asins": [
+          "B0GK8ZNMKB",
+          "B0F3CYS4X8",
+          "B0FD9JDVWY",
+          "B0G5PNK1HX",
+          "B0H41T9LRX",
+          "B0DSZYT6JY",
+          "B0CQTFWCHD",
+          "B0DHQQB6CC",
+          "B0BBVR6P1N",
+          "B0FTSM8KC8"
+        ],
+        "productsWithBoughtPastMonth": 16,
+        "totalObservedBoughtPastMonth": 19650,
+        "medianBoughtPastMonth": 400,
+        "medianReviews": 127,
+        "medianPriceUsd": 20,
+        "confidence": 95,
+        "items": [
+          {
+            "asin": "B0GK8ZNMKB",
+            "title": "Shoe Laundry Wash Bag For Washing Machine, Reusable Laundry Shoes Bag for Washer and Deep Cleaning and Durable, Suitable for All Shoes, Blue",
+            "rank": 5,
+            "boughtPastMonth": 50,
+            "priceUsd": 3.5,
+            "rating": 3.6,
+            "reviews": 22,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Laundry-Washing-Reusable-Cleaning-Suitable/dp/B0GK8ZNMKB/ref=sr_1_5_hul_core?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&s=bazaar&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-5"
+          },
+          {
+            "asin": "B0F3CYS4X8",
+            "title": "Shoe Washing Machine Bag,Laundry Shoe Bag for Washer and Dryer,Reusable Shoe Cleaning Bag for Sneakers,Tennis Shoes,With Self-locking Zipper, Microfiber Inside,Include Shoe Bag (Pro Yellow - 1 Pack)",
+            "rank": 6,
+            "boughtPastMonth": 7000,
+            "priceUsd": 9.99,
+            "rating": 4.3,
+            "reviews": 1000,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Reusable-Cleaning-Sneakers-Self-locking-Microfiber/dp/B0F3CYS4X8/ref=sr_1_6?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-6"
+          },
+          {
+            "asin": "B0FD9JDVWY",
+            "title": "2PCS XXL Shoe Washing Machine Bag with Adjustable Shoes Trees - Heavy Duty Reusable Shoe Laundry Bag for Washer and Dryer - 360° Deep Clean & Protect Chenille Microfiber Sneakers Wash Bags - White",
+            "rank": 7,
+            "boughtPastMonth": 300,
+            "priceUsd": 21.69,
+            "rating": 4.3,
+            "reviews": 153,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Washing-Machine-Adjustable-Shoes-Trees/dp/B0FD9JDVWY/ref=sr_1_7?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-7"
+          },
+          {
+            "asin": "B0G5PNK1HX",
+            "title": "VASSON Shoe Washing Machine Bag, 2 Pack XL Laundry Bags for Sneakers | Heavy-duty thick material for noise reduction. Fits large shoes up to Size 13 - Cool Grey/Blue",
+            "rank": 8,
+            "boughtPastMonth": 50,
+            "priceUsd": 19.99,
+            "rating": 4.7,
+            "reviews": 40,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/VASSON-Sneaker-Wash-Bonus-Storage/dp/B0G5PNK1HX/ref=sr_1_8?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-8"
+          },
+          {
+            "asin": "B0H41T9LRX",
+            "title": "Large Mesh Shoe Laundry Bag, Structured Sneaker Washing Pouch | Thick polyester mesh allows water flow while the structured dome shape helps reduce crushing during machine washing.",
+            "rank": 9,
+            "boughtPastMonth": null,
+            "priceUsd": 2.68,
+            "rating": null,
+            "reviews": null,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Large-Laundry-Structured-Sneaker-Washing/dp/B0H41T9LRX/ref=sr_1_9_hul_core?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&s=bazaar&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-9"
+          },
+          {
+            "asin": "B0DSZYT6JY",
+            "title": "2PCS Yellow Shoe Washing Machine Bags for All Shoe Types | Deep Cleaning,Reusable and Durable,Safeguarding Shoes from Scuffs and Deformation,Tear-Resistant Chenille Fabric",
+            "rank": 10,
+            "boughtPastMonth": 100,
+            "priceUsd": 7.99,
+            "rating": 4.5,
+            "reviews": 179,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Washing-Machine-Laundry-Reusable-Cleaning/dp/B0DSZYT6JY/ref=sr_1_10?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-10"
+          },
+          {
+            "asin": "B0CQTFWCHD",
+            "title": "Vivifying Shoe Washing Machine Bag, 2 Pack Honeycomb Mesh Laundry Bag with Zipper for Sneakers, Running Shoes, Sock, Bras, Delicates and Toys | 14 x 7.8 in Polyester Laundry Bag with Zipper for Sneakers, Running Shoes, Sock, Bras, Delicates and Toys (White)",
+            "rank": 15,
+            "boughtPastMonth": 3000,
+            "priceUsd": 8.98,
+            "rating": 4.5,
+            "reviews": 4700,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Vivifying-Washing-Machine-Honeycomb-Sneakers/dp/B0CQTFWCHD/ref=sr_1_15?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-15"
+          },
+          {
+            "asin": "B0DHQQB6CC",
+            "title": "Shoe Washing Machine Bag: Laundry Shoe Bag for Washer and Dryer - 2pc Reusable Shoe Cleaning Bag for Sneaker Tennis Shoes Unstain Cleaner Kit (Yellow 2pcs)",
+            "rank": 16,
+            "boughtPastMonth": 3000,
+            "priceUsd": 17.42,
+            "rating": 4.2,
+            "reviews": 1800,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Shoe-Washing-Machine-Bag-Reusable/dp/B0DHQQB6CC/ref=sr_1_16?crid=31G1KHN581VU&dib=eyJ2IjoiMSJ9.bnHxYvQ_nwsG_TrlVWDvFZONrQLs8pDGz1I-V9uzU7bkhPIV_b3bnhNw-ZqnT-UwPnfVB9L88gGZp7sgadRbLjm56UOOeNAMhiJwQP2NqOn7_Sw4He9eew56w4h0qSSTvmiubMVIgUhCtfacRjYeHu0J6rBD80up-utzGPxYiKMFGQRqvpIbvVhY69kWvZkAKypvxj1UDjC3heAl5cw63Xj3Et80upugaZ6Iiec1JsnfImvH2jY3su6PEOVwP_Vm1zLhO2PvS4SZFqKD3ZAi7GyjVgEvsXeolZuefbWOqGE.Job_xj-LZKD2CFSYm4jKOrnuxFnv57dxcLz4iOnE6EM&dib_tag=se&keywords=Shoe+washing+laundry+bag+structured&qid=1787513473&sprefix=Shoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%2Caps%2C188&sr=8-16"
+          },
+          {
+            "asin": "B0BBVR6P1N",
+            "title": "Sneaker Dryering &Washing Machine Bag, Dryer for Shoes, Clothing & Laundry - Elastic Strap Adjuster for Most Dryers Machines Door in Laundry Room (15.7x15.7 Inch)",
+            "rank": 17,
+            "boughtPastMonth": 400,
+            "priceUsd": 9.99,
+            "rating": 4.2,
+            "reviews": 895,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4NTgzMTU1ODQ1NTA3MDMxOjE3ODc1MTM0NzQ6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDA4NDk5MTk5NTA5ODo6MDo6&url=%2FSneaker-Dryering-Washing-Machine-Clothing%2Fdp%2FB0BBVR6P1N%2Fref%3Dsxin_28_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D31G1KHN581VU%26cv_ct_cx%3DShoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%26keywords%3DShoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%26pd_rd_i%3DB0BBVR6P1N%26pd_rd_r%3D282a2cf5-907b-4eb8-acf8-823897b2acbe%26pd_rd_w%3DGRAb2%26pd_rd_wg%3DOjnBA%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DF7SBDNK5NEXYXE5HDX54%26qid%3D1787513473%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShoe%252Bwashing%252Blaundry%252Bbag%252Bstructured%252Caps%252C188%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DCcji5jk48a%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=Ccji5jk48a"
+          },
+          {
+            "asin": "B0FTSM8KC8",
+            "title": "2 Pcs Reusable Shoe Washing Machine Bag, XXL with Zipper, Gray | Shoe Bag for Washing Machine & Dryer; Fluffy Fibers Clean Every Side; Protects Shoes; Fits Sneakers US 6 to 12; Hanging Loop",
+            "rank": 18,
+            "boughtPastMonth": 50,
+            "priceUsd": 19.98,
+            "rating": 4.6,
+            "reviews": 127,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4NTgzMTU1ODQ1NTA3MDMxOjE3ODc1MTM0NzQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTI3MjI4NzQxNjAwMjo6MTo6&url=%2FXXL-Shoe-Washing-Machine-Bag%2Fdp%2FB0FTSM8KC8%2Fref%3Dsxin_28_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D31G1KHN581VU%26cv_ct_cx%3DShoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%26keywords%3DShoe%2Bwashing%2Blaundry%2Bbag%2Bstructured%26pd_rd_i%3DB0FTSM8KC8%26pd_rd_r%3D282a2cf5-907b-4eb8-acf8-823897b2acbe%26pd_rd_w%3DGRAb2%26pd_rd_wg%3DOjnBA%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DF7SBDNK5NEXYXE5HDX54%26qid%3D1787513473%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShoe%252Bwashing%252Blaundry%252Bbag%252Bstructured%252Caps%252C188%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DM7yQWShW8S%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=M7yQWShW8S"
+          }
+        ],
+        "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
+      },
       "rankedKeywords": null
     },
     {
@@ -119,7 +262,7 @@
         "totalVariantVolume": 2510,
         "verifiedKeywordVariants": 2,
         "observedKeywordVariants": 3,
-        "trend12mPct": 52.8,
+        "trend12mPct": 13.2,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
@@ -133,6 +276,11 @@
             "lowTopOfPageBid": 0.08,
             "highTopOfPageBid": 0.26,
             "monthlySearches": [
+              {
+                "year": 2026,
+                "month": 7,
+                "searchVolume": 1900
+              },
               {
                 "year": 2026,
                 "month": 6,
@@ -190,7 +338,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           },
           {
             "keyword": "etajeră baie",
@@ -201,6 +349,11 @@
             "lowTopOfPageBid": 0.06,
             "highTopOfPageBid": 0.21,
             "monthlySearches": [
+              {
+                "year": 2026,
+                "month": 7,
+                "searchVolume": 140
+              },
               {
                 "year": 2026,
                 "month": 6,
@@ -258,36 +411,26 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           }
         ],
         "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
       },
       "salesEstimation": {
         "version": "2.8",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 72,
-        "rangeLow": 29,
-        "rangeHigh": 115,
-        "confidence": 42,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 2400,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 7,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
-        "method": "LEGACY_EVIDENCE_MODEL"
+        "status": "ESTIMATED_HIGH_CONFIDENCE",
+        "estimatedUnits30d": 2658,
+        "rangeLow": 1993,
+        "rangeHigh": 3322,
+        "confidence": 100,
+        "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
+        "observedPeerBoughtPastMonth": 34550,
+        "peerSample": 13,
+        "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
       "reverseKeywordIntelligence": {
         "version": "2.8",
-        "status": "SEED_PROVIDER_READY",
+        "status": "ASIN_READY",
         "seedKeywords": [
           "Shower corner shelf adhesive no drill",
           "Baie"
@@ -296,12 +439,18 @@
         "competitorEvidenceRows": 0,
         "searchVolume": 2400,
         "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "needsAsinKeywordProvider": true,
+        "needsAsinKeywordProvider": false,
         "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
-        "competitorAsins": [],
-        "asinCount": 0,
+        "competitorAsins": [
+          "B0GCN5SJY5",
+          "B09V17QVT6",
+          "B0CR85S69K",
+          "B092Z65SLJ",
+          "B0G5WBD621"
+        ],
+        "asinCount": 10,
         "topRankedKeywords": [],
-        "providerPath": "NONE"
+        "providerPath": "DATAFORSEO_AMAZON_RANKED_KEYWORDS_READY"
       },
       "nicheIntelligence": {
         "version": "2.8",
@@ -310,14 +459,161 @@
         "medianPriceRon": 128.55,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 1,
         "providerVerifiedDemandProducts": 1,
-        "nicheScore": 39.8,
+        "nicheScore": 37.3,
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 1
       },
-      "amazonMarket": null,
+      "amazonMarket": {
+        "version": "2.8",
+        "provider": "DATAFORSEO_AMAZON_MERCHANT",
+        "checkedAt": "2026-08-23T19:31:11.703Z",
+        "keyword": "Shower corner shelf adhesive no drill",
+        "organicProducts": 20,
+        "asins": [
+          "B0GCN5SJY5",
+          "B09V17QVT6",
+          "B0CR85S69K",
+          "B092Z65SLJ",
+          "B0G5WBD621",
+          "B0FG2VTFM7",
+          "B0BMT85WTH",
+          "B0DBZWJM5V",
+          "B09QCC6FZL",
+          "B0936JLD3B"
+        ],
+        "productsWithBoughtPastMonth": 13,
+        "totalObservedBoughtPastMonth": 34550,
+        "medianBoughtPastMonth": 900,
+        "medianReviews": 833,
+        "medianPriceUsd": 24,
+        "confidence": 95,
+        "items": [
+          {
+            "asin": "B0GCN5SJY5",
+            "title": "YASONIC Corner Shower Caddy Adhesive, 100% Rustproof Shower Organizer, No Drill Shower Shelf for Inside Shower, Wall-Mounted Shower Storage for Homes (2 Pack, Black)",
+            "rank": 1,
+            "boughtPastMonth": 9000,
+            "priceUsd": 14.99,
+            "rating": 4.4,
+            "reviews": 3700,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/YASONIC-Adhesive-Rustproof-Organizer-Wall-Mounted/dp/B0GCN5SJY5/ref=sr_1_1?crid=999WV4CG4COD&dib=eyJ2IjoiMSJ9.UXk1yNNOfH29agcsD3lrFyHGUkSYesrjNqrd9sjKgjXJ6aBoqM0zpIYgp8_PXkzZDQqHySfr3yfjZ0UKLlnPoiKB74HNU7p6qjndmUOhZMj5-icwP5tKkcmp5phS2qZFYC-4gv-zDt7Ad78IHRfJVoDVyvlabsuv5zLdycm87paI6H07cyLkg6cm42NMyuRCvz6_M4e_G5VlJjN13sdqOjk_Wm0ehu3sMaZD-kMTimXJbavwUNiZUcCs0JqOCFHSu2vfFP7H4_2IyNr3Xbrp2Jtzjii_EJuirtmjJqFDW34.E_RRfnF7zwbi2O2M0PwZC-iUl2W3zWLq9nK5FlE4yUY&dib_tag=se&keywords=Shower+corner+shelf+adhesive+no+drill&qid=1787513482&sprefix=Shower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%2Caps%2C265&sr=8-1"
+          },
+          {
+            "asin": "B09V17QVT6",
+            "title": "DUFU Adhesive Corner Shower Caddy with Hooks, Black, 2 Pack | Bathroom Shower Organizer, No Drilling, Rust Proof Aluminum Shower Shelf For Inside Shower",
+            "rank": 2,
+            "boughtPastMonth": 900,
+            "priceUsd": 24.99,
+            "rating": 4.6,
+            "reviews": 562,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/DUFU-Adhesive-Bathroom-Organizer-Drilling/dp/B09V17QVT6/ref=sr_1_2?crid=999WV4CG4COD&dib=eyJ2IjoiMSJ9.UXk1yNNOfH29agcsD3lrFyHGUkSYesrjNqrd9sjKgjXJ6aBoqM0zpIYgp8_PXkzZDQqHySfr3yfjZ0UKLlnPoiKB74HNU7p6qjndmUOhZMj5-icwP5tKkcmp5phS2qZFYC-4gv-zDt7Ad78IHRfJVoDVyvlabsuv5zLdycm87paI6H07cyLkg6cm42NMyuRCvz6_M4e_G5VlJjN13sdqOjk_Wm0ehu3sMaZD-kMTimXJbavwUNiZUcCs0JqOCFHSu2vfFP7H4_2IyNr3Xbrp2Jtzjii_EJuirtmjJqFDW34.E_RRfnF7zwbi2O2M0PwZC-iUl2W3zWLq9nK5FlE4yUY&dib_tag=se&keywords=Shower+corner+shelf+adhesive+no+drill&qid=1787513482&sprefix=Shower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%2Caps%2C265&sr=8-2"
+          },
+          {
+            "asin": "B0CR85S69K",
+            "title": "lives Shower Corner Shelf 2 Pack, 10-Inch 304 Stainless Steel, Matte Black | Star Pattern Grout-In Shelf for Inside Shower, Tiled Wall Corner Storage with Drainage, No Adhesive or Drilling",
+            "rank": 3,
+            "boughtPastMonth": 100,
+            "priceUsd": 29.99,
+            "rating": 4.4,
+            "reviews": 187,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2Mzk4NDIzNzk2OTE4MTg1OjE3ODc1MTM0ODI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDI1NjE0NzcyNTQwMjo6MDo6&url=%2Flives-Shower-Corner-10-Inch-Stainless%2Fdp%2FB0CR85S69K%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%253Aamzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%26crid%3D999WV4CG4COD%26cv_ct_cx%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26keywords%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26pd_rd_i%3DB0CR85S69K%26pd_rd_r%3De72ae177-0f23-4e0e-af7a-50598378056d%26pd_rd_w%3DQnBh3%26pd_rd_wg%3DmaLm1%26pf_rd_p%3D8f580787-d4c7-42df-832f-97da9b694989%26pf_rd_r%3DWH4ERNNY41KCZJRP972W%26qid%3D1787513482%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShower%252Bcorner%252Bshelf%252Badhesive%252Bno%252Bdrill%252Caps%252C265%26sr%3D1-1-7efdef4d-9875-47e1-927f-8c2c1c47ed49-spons%26aref%3D8RaIhlmQvN%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=8RaIhlmQvN"
+          },
+          {
+            "asin": "B092Z65SLJ",
+            "title": "JiePai Adhesive Acrylic Corner Shower Caddy 2 Pack, Rustproof Bath Shelf | Thick clear acrylic, rustproof & mildew resistant. No-drill adhesive mount for corner. For shower, kitchen or bathroom",
+            "rank": 4,
+            "boughtPastMonth": 1000,
+            "priceUsd": 26.99,
+            "rating": 4.4,
+            "reviews": 1000,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2Mzk4NDIzNzk2OTE4MTg1OjE3ODc1MTM0ODI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTEzNTcyMjc2MDUwMjo6MTo6&url=%2FJiePai-Adhesive-Bathroom-Organizer-Drilling%2Fdp%2FB092Z65SLJ%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%253Aamzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%26crid%3D999WV4CG4COD%26cv_ct_cx%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26keywords%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26pd_rd_i%3DB092Z65SLJ%26pd_rd_r%3De72ae177-0f23-4e0e-af7a-50598378056d%26pd_rd_w%3DQnBh3%26pd_rd_wg%3DmaLm1%26pf_rd_p%3D8f580787-d4c7-42df-832f-97da9b694989%26pf_rd_r%3DWH4ERNNY41KCZJRP972W%26qid%3D1787513482%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShower%252Bcorner%252Bshelf%252Badhesive%252Bno%252Bdrill%252Caps%252C265%26sr%3D1-2-7efdef4d-9875-47e1-927f-8c2c1c47ed49-spons%26aref%3DrnAo6Rk8Km%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=rnAo6Rk8Km"
+          },
+          {
+            "asin": "B0G5WBD621",
+            "title": "Veken Aluminum Corner Shower Caddy 4-Pack, Never Rust&Large Capacity, Grey | No Drilling Shelves, Rack with Soap Holder&Towel Bar, Super-Strong Adhesive for High Load, Bathroom Organizers and Storage",
+            "rank": 5,
+            "boughtPastMonth": 600,
+            "priceUsd": 26.99,
+            "rating": 4.5,
+            "reviews": 833,
+            "bestSeller": true,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2Mzk4NDIzNzk2OTE4MTg1OjE3ODc1MTM0ODI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTIwNzM2Nzc1MjUwMjo6Mjo6&url=%2FVeken-Aluminum-Stainless-Organizers-Wall-Mounted%2Fdp%2FB0G5WBD621%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%253Aamzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%26crid%3D999WV4CG4COD%26cv_ct_cx%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26keywords%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26pd_rd_i%3DB0G5WBD621%26pd_rd_r%3De72ae177-0f23-4e0e-af7a-50598378056d%26pd_rd_w%3DQnBh3%26pd_rd_wg%3DmaLm1%26pf_rd_p%3D8f580787-d4c7-42df-832f-97da9b694989%26pf_rd_r%3DWH4ERNNY41KCZJRP972W%26qid%3D1787513482%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShower%252Bcorner%252Bshelf%252Badhesive%252Bno%252Bdrill%252Caps%252C265%26sr%3D1-3-7efdef4d-9875-47e1-927f-8c2c1c47ed49-spons%26aref%3DqyKiCBfurU%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qyKiCBfurU"
+          },
+          {
+            "asin": "B0FG2VTFM7",
+            "title": "Wisfame Corner Shower Shelves Set of 2, Metal Shower Caddy No Drilling | Rustproof Aluminium, Drill & Adhesive, Hold Up to 20LB, Glossy White Bathroom Corner Shelf for Shampoo Toiletries",
+            "rank": 6,
+            "boughtPastMonth": null,
+            "priceUsd": 22.99,
+            "rating": 4.3,
+            "reviews": 535,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2Mzk4NDIzNzk2OTE4MTg1OjE3ODc1MTM0ODI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTE5Mzk4ODI4NzQwMjo6Mzo6&url=%2FWisfame-Aluminium-Shower-Corner-Shelves%2Fdp%2FB0FG2VTFM7%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%253Aamzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%26crid%3D999WV4CG4COD%26cv_ct_cx%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26keywords%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26pd_rd_i%3DB0FG2VTFM7%26pd_rd_r%3De72ae177-0f23-4e0e-af7a-50598378056d%26pd_rd_w%3DQnBh3%26pd_rd_wg%3DmaLm1%26pf_rd_p%3D8f580787-d4c7-42df-832f-97da9b694989%26pf_rd_r%3DWH4ERNNY41KCZJRP972W%26qid%3D1787513482%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShower%252Bcorner%252Bshelf%252Badhesive%252Bno%252Bdrill%252Caps%252C265%26sr%3D1-4-7efdef4d-9875-47e1-927f-8c2c1c47ed49-spons%26aref%3DLBlfDmroSn%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=LBlfDmroSn"
+          },
+          {
+            "asin": "B0BMT85WTH",
+            "title": "Bakzon Glass Corner Shower Shelf 2 Pack, 9.5\" Tempered Glass Shower Caddy, No-Drill Adhesive or Screw Mount, 22 LB Heavy Duty Bathroom Organizer with Rustproof Aluminum Brackets, Renter Friendly",
+            "rank": 7,
+            "boughtPastMonth": null,
+            "priceUsd": 39.99,
+            "rating": 4.6,
+            "reviews": 450,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2Mzk4NDIzNzk2OTE4MTg1OjE3ODc1MTM0ODI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTA5MTkzNjI3MzQwMjo6NDo6&url=%2FBakzon-Tempered-Adhesive-Organizer-Rustproof%2Fdp%2FB0BMT85WTH%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%253Aamzn1.sym.8f580787-d4c7-42df-832f-97da9b694989%26crid%3D999WV4CG4COD%26cv_ct_cx%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26keywords%3DShower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%26pd_rd_i%3DB0BMT85WTH%26pd_rd_r%3De72ae177-0f23-4e0e-af7a-50598378056d%26pd_rd_w%3DQnBh3%26pd_rd_wg%3DmaLm1%26pf_rd_p%3D8f580787-d4c7-42df-832f-97da9b694989%26pf_rd_r%3DWH4ERNNY41KCZJRP972W%26qid%3D1787513482%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DShower%252Bcorner%252Bshelf%252Badhesive%252Bno%252Bdrill%252Caps%252C265%26sr%3D1-5-7efdef4d-9875-47e1-927f-8c2c1c47ed49-spons%26aref%3DxsRcZnMClB%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=xsRcZnMClB"
+          },
+          {
+            "asin": "B0DBZWJM5V",
+            "title": "Acrylic Corner Shower Shelves, Adhesive Shower Caddy Organizer for Bathroom Storage Home Decor, Clear Rustproof No Drilling Wall Shelf, 2-Pack",
+            "rank": 8,
+            "boughtPastMonth": 500,
+            "priceUsd": 22.09,
+            "rating": 4.6,
+            "reviews": 2200,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/YAWSOUP-Corner-Adhesive-Organizer-RustProof/dp/B0DBZWJM5V/ref=sr_1_3?crid=999WV4CG4COD&dib=eyJ2IjoiMSJ9.UXk1yNNOfH29agcsD3lrFyHGUkSYesrjNqrd9sjKgjXJ6aBoqM0zpIYgp8_PXkzZDQqHySfr3yfjZ0UKLlnPoiKB74HNU7p6qjndmUOhZMj5-icwP5tKkcmp5phS2qZFYC-4gv-zDt7Ad78IHRfJVoDVyvlabsuv5zLdycm87paI6H07cyLkg6cm42NMyuRCvz6_M4e_G5VlJjN13sdqOjk_Wm0ehu3sMaZD-kMTimXJbavwUNiZUcCs0JqOCFHSu2vfFP7H4_2IyNr3Xbrp2Jtzjii_EJuirtmjJqFDW34.E_RRfnF7zwbi2O2M0PwZC-iUl2W3zWLq9nK5FlE4yUY&dib_tag=se&keywords=Shower+corner+shelf+adhesive+no+drill&qid=1787513482&sprefix=Shower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%2Caps%2C265&sr=8-3"
+          },
+          {
+            "asin": "B09QCC6FZL",
+            "title": "YASONIC Corner Adhesive Shower Caddy, with Soap Holder and 12 Hooks, Rustproof Stainless Steel Bathroom Organizer, No Drilling Wall Mounted Rack, Black, 3-Pack",
+            "rank": 9,
+            "boughtPastMonth": 9000,
+            "priceUsd": 18.58,
+            "rating": 4.5,
+            "reviews": 11500,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/YASONIC-Adhesive-Rustproof-Stainless-Organizer/dp/B09QCC6FZL/ref=sr_1_4?crid=999WV4CG4COD&dib=eyJ2IjoiMSJ9.UXk1yNNOfH29agcsD3lrFyHGUkSYesrjNqrd9sjKgjXJ6aBoqM0zpIYgp8_PXkzZDQqHySfr3yfjZ0UKLlnPoiKB74HNU7p6qjndmUOhZMj5-icwP5tKkcmp5phS2qZFYC-4gv-zDt7Ad78IHRfJVoDVyvlabsuv5zLdycm87paI6H07cyLkg6cm42NMyuRCvz6_M4e_G5VlJjN13sdqOjk_Wm0ehu3sMaZD-kMTimXJbavwUNiZUcCs0JqOCFHSu2vfFP7H4_2IyNr3Xbrp2Jtzjii_EJuirtmjJqFDW34.E_RRfnF7zwbi2O2M0PwZC-iUl2W3zWLq9nK5FlE4yUY&dib_tag=se&keywords=Shower+corner+shelf+adhesive+no+drill&qid=1787513482&sprefix=Shower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%2Caps%2C265&sr=8-4"
+          },
+          {
+            "asin": "B0936JLD3B",
+            "title": "NearMoon Bathroom Shower Caddy 2 Pack, 304 Stainless Steel Shower Organizer with 2 Hooks, No Drill (Corner Shelf, Brushed Nickel)",
+            "rank": 10,
+            "boughtPastMonth": null,
+            "priceUsd": 22.99,
+            "rating": 4.5,
+            "reviews": 1200,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/NearMoon-Bathroom-Corner-Stainless-Brushed/dp/B0936JLD3B/ref=sr_1_5?crid=999WV4CG4COD&dib=eyJ2IjoiMSJ9.UXk1yNNOfH29agcsD3lrFyHGUkSYesrjNqrd9sjKgjXJ6aBoqM0zpIYgp8_PXkzZDQqHySfr3yfjZ0UKLlnPoiKB74HNU7p6qjndmUOhZMj5-icwP5tKkcmp5phS2qZFYC-4gv-zDt7Ad78IHRfJVoDVyvlabsuv5zLdycm87paI6H07cyLkg6cm42NMyuRCvz6_M4e_G5VlJjN13sdqOjk_Wm0ehu3sMaZD-kMTimXJbavwUNiZUcCs0JqOCFHSu2vfFP7H4_2IyNr3Xbrp2Jtzjii_EJuirtmjJqFDW34.E_RRfnF7zwbi2O2M0PwZC-iUl2W3zWLq9nK5FlE4yUY&dib_tag=se&keywords=Shower+corner+shelf+adhesive+no+drill&qid=1787513482&sprefix=Shower%2Bcorner%2Bshelf%2Badhesive%2Bno%2Bdrill%2Caps%2C265&sr=8-5"
+          }
+        ],
+        "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
+      },
       "rankedKeywords": null
     },
     {
@@ -327,7 +623,7 @@
       "romaniaDemand": {
         "version": "2.8",
         "status": "PROVIDER_VERIFIED",
-        "score": 42.8,
+        "score": 27.8,
         "providerVerified": true,
         "readyForTestDemandGate": true,
         "bestKeyword": "organizator pat",
@@ -335,7 +631,7 @@
         "totalVariantVolume": 50,
         "verifiedKeywordVariants": 2,
         "observedKeywordVariants": 3,
-        "trend12mPct": 25,
+        "trend12mPct": -54.1,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
@@ -351,6 +647,11 @@
             "monthlySearches": [
               {
                 "year": 2026,
+                "month": 7,
+                "searchVolume": 30
+              },
+              {
+                "year": 2026,
                 "month": 6,
                 "searchVolume": 10
               },
@@ -406,7 +707,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           },
           {
             "keyword": "buzunar pat",
@@ -419,6 +720,11 @@
             "monthlySearches": [
               {
                 "year": 2026,
+                "month": 7,
+                "searchVolume": 40
+              },
+              {
+                "year": 2026,
                 "month": 6,
                 "searchVolume": 20
               },
@@ -474,36 +780,26 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           }
         ],
         "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
       },
       "salesEstimation": {
         "version": "2.8",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 1,
-        "rangeLow": 1,
-        "rangeHigh": 2,
-        "confidence": 42,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 30,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 5,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales remain model outputs. High confidence requires provider-grade marketplace evidence or actual observed sales; BUY still requires our own real test.",
-        "method": "LEGACY_EVIDENCE_MODEL"
+        "status": "ESTIMATED_HIGH_CONFIDENCE",
+        "estimatedUnits30d": 569,
+        "rangeLow": 427,
+        "rangeHigh": 712,
+        "confidence": 100,
+        "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
+        "observedPeerBoughtPastMonth": 7400,
+        "peerSample": 13,
+        "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
       "reverseKeywordIntelligence": {
         "version": "2.8",
-        "status": "SEED_PROVIDER_READY",
+        "status": "ASIN_READY",
         "seedKeywords": [
           "Kids bed bedside organizer felt",
           "Kids 3–6 • Cameră"
@@ -512,12 +808,18 @@
         "competitorEvidenceRows": 0,
         "searchVolume": 30,
         "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "needsAsinKeywordProvider": true,
+        "needsAsinKeywordProvider": false,
         "policy": "ASINs come from provider-observed Amazon results; ranked keywords are stored only when returned by the official provider endpoint.",
-        "competitorAsins": [],
-        "asinCount": 0,
+        "competitorAsins": [
+          "B07HN1KBWQ",
+          "B0F7H4SX78",
+          "B01BSH725O",
+          "B0851HCNKK",
+          "B0G4ZFC81T"
+        ],
+        "asinCount": 10,
         "topRankedKeywords": [],
-        "providerPath": "NONE"
+        "providerPath": "DATAFORSEO_AMAZON_RANKED_KEYWORDS_READY"
       },
       "nicheIntelligence": {
         "version": "2.8",
@@ -526,14 +828,161 @@
         "medianPriceRon": 109.8,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 32.8,
-        "top3EstimatedSalesConcentrationPct": null,
-        "highConfidenceSalesModels": 0,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 1,
         "providerVerifiedDemandProducts": 1,
-        "nicheScore": 29.8,
+        "nicheScore": 20.5,
         "status": "THIN_SAMPLE",
         "romaniaDemandReadyProducts": 1
       },
-      "amazonMarket": null,
+      "amazonMarket": {
+        "version": "2.8",
+        "provider": "DATAFORSEO_AMAZON_MERCHANT",
+        "checkedAt": "2026-08-23T19:31:11.703Z",
+        "keyword": "Kids bed bedside organizer felt",
+        "organicProducts": 20,
+        "asins": [
+          "B07HN1KBWQ",
+          "B0F7H4SX78",
+          "B01BSH725O",
+          "B0851HCNKK",
+          "B0G4ZFC81T",
+          "B08XZ25GF5",
+          "B09NNJ5QLS",
+          "B0CY1Z1RM7",
+          "B0CM955G1Z",
+          "B07B89LCBB"
+        ],
+        "productsWithBoughtPastMonth": 13,
+        "totalObservedBoughtPastMonth": 7400,
+        "medianBoughtPastMonth": 400,
+        "medianReviews": 714,
+        "medianPriceUsd": 15,
+        "confidence": 95,
+        "items": [
+          {
+            "asin": "B07HN1KBWQ",
+            "title": "Lib Bedside Caddy, Original Design | Large Size 9.5\" x 13.5\" | Laptop Holder | 100% Handmade | College Room, Kids Bunk Bed, Hospital Bed | Night Hanging Storage Organizer (Light Gray)",
+            "rank": 1,
+            "boughtPastMonth": 100,
+            "priceUsd": 14.99,
+            "rating": 4.4,
+            "reviews": 974,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Bedside-HANDMADE-College-Hospital-Organizer/dp/B07HN1KBWQ/ref=sr_1_1?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-1"
+          },
+          {
+            "asin": "B0F7H4SX78",
+            "title": "Bedside Caddy Organizer with Fixed Straps, Bunk Bed Caddy ideal for Home, Bunk Bed, Dorm, Hospital, Crib, Versatile Bedside Storage Solution (Beige)",
+            "rank": 2,
+            "boughtPastMonth": 600,
+            "priceUsd": 11.69,
+            "rating": 4.4,
+            "reviews": 127,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Chewlish-Organizer-Hospital-Versatile-Beige/dp/B0F7H4SX78/ref=sr_1_2?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-2"
+          },
+          {
+            "asin": "B01BSH725O",
+            "title": "Kikkerland Bedside Caddy",
+            "rank": 4,
+            "boughtPastMonth": null,
+            "priceUsd": 25,
+            "rating": 4.6,
+            "reviews": 2400,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Kikkerland-OR74-Bedside-Caddy/dp/B01BSH725O/ref=sr_1_3?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-3"
+          },
+          {
+            "asin": "B0851HCNKK",
+            "title": "Bedside Caddy, Felt Bed Storage Organizer Hanging Bag Holder with 5 Pockets, Magazine Book Phone Tablet iPad Cables Remote and Water Bottle Holder for Home Dorm Bed Sofa, Light Gray",
+            "rank": 5,
+            "boughtPastMonth": 100,
+            "priceUsd": 16.99,
+            "rating": 4.3,
+            "reviews": 1800,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Bedside-Storage-Organizer-Hanging-Magazine/dp/B0851HCNKK/ref=sr_1_4?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-4"
+          },
+          {
+            "asin": "B0G4ZFC81T",
+            "title": "Lifewit Bedside Caddy Storage Organizer, Hanging Storage Bag for Bunk Bed | Bed Caddy with Fixed Straps, Book Remotes Holder for Home, College, Dorm, Bunk, Hospital, Crib Bed Rails, White",
+            "rank": 6,
+            "boughtPastMonth": 1000,
+            "priceUsd": 10.99,
+            "rating": 3.8,
+            "reviews": 60,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Lifewit-Bedside-Storage-Organizer-Magazine/dp/B0G4ZFC81T/ref=sr_1_5?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-5"
+          },
+          {
+            "asin": "B08XZ25GF5",
+            "title": "Zafit Bedside Caddy, Large Size Storage Organizer with 8 Pockets - Perfect for Magazine, Remotes, Phone (13.4'' x 18.1'', Light Grey)",
+            "rank": 7,
+            "boughtPastMonth": 100,
+            "priceUsd": 21.99,
+            "rating": 4.6,
+            "reviews": 819,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Zafit-Large-Size-13-4-18-1/dp/B08XZ25GF5/ref=sr_1_6?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-6"
+          },
+          {
+            "asin": "B09NNJ5QLS",
+            "title": "Bseash Bunk Bed Organizer, Bedside Caddy Hanging Bed Organizer Storage Bag 8 Pockets, for College Dorm Rooms Bed, Hospital Bed, Baby Bed Rails, 600D Oxford Cloth (Light Green)",
+            "rank": 8,
+            "boughtPastMonth": 50,
+            "priceUsd": 14.99,
+            "rating": 4.4,
+            "reviews": 5800,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Bseash-Organizer-Bedside-Hanging-Hospital/dp/B09NNJ5QLS/ref=sr_1_7?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-7"
+          },
+          {
+            "asin": "B0CY1Z1RM7",
+            "title": "Bringsine 5 Pockets Bedside Caddy, Felt Bed Storage Organizer Hanging Bag Holder for Magazine Book Phone Tablet iPad Cables Remote and Glasses Holder Home Dorm Bed Sofa-Beige",
+            "rank": 9,
+            "boughtPastMonth": null,
+            "priceUsd": 13.99,
+            "rating": 2.8,
+            "reviews": 12,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Bringsine-Pockets-Organizer-Magazine-Sofa-Beige/dp/B0CY1Z1RM7/ref=sr_1_8?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-8"
+          },
+          {
+            "asin": "B0CM955G1Z",
+            "title": "Bedside Caddy, Felt Bedside Storage Organizer, Hanging Storage Bag, Chair Organizer Caddy, Remote, Magazine, Drink Bottle Holder for Hospital, Dorm Bed, Baby Stuff, Office (Light Grey Small)",
+            "rank": 10,
+            "boughtPastMonth": null,
+            "priceUsd": 14.99,
+            "rating": 3.9,
+            "reviews": 64,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/KAKKOII-Bedside-Organizer-Magazine-Hospital/dp/B0CM955G1Z/ref=sr_1_9?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-9"
+          },
+          {
+            "asin": "B07B89LCBB",
+            "title": "Fengtaike Useful Multi Grey Bed Storage Pockets Felt Bedside Hanging Storage Phone Remote Control Organizer Holder with 2 Inner Pockets for Bed Table Sofa",
+            "rank": 11,
+            "boughtPastMonth": null,
+            "priceUsd": 12.49,
+            "rating": 4,
+            "reviews": 48,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Storage-Pockets-Bedside-Hanging-Organizer/dp/B07B89LCBB/ref=sr_1_10?crid=Y7WJUAUGVK2K&dib=eyJ2IjoiMSJ9.szaQKsA1x2cL3mcEjl45S4pIbvNKTG9otOsvCeTuE92xSVgXkvtD7K63Vp6q_XSgMNSRZIMeC0_G2it3xfmmsFm17dWGGFyjhLODzGrkYzV3ZHVK0d-UlaYjkGtiGrftke4Fk5fXw4Yl9JL1rhcwYNiVHFWdIn8wmi6Csz3j7jX6i3TDOgWmqukiphjAHVdaaa2HPgzduyW356cB5FPeMrqVtHNxmHPfTO5PumpbMFzJW016Qa58125mq0SOrImAkmGPveL8--1sZkLMwnt34QFEmtkwzWyCWZR7D6JRUwc.h2Nqf9jLeIHz50bbx5jcKbV1aFEHxXGsI6JeJnhuJVw&dib_tag=se&keywords=Kids+bed+bedside+organizer+felt&qid=1787513499&sprefix=Kids%2Bbed%2Bbedside%2Borganizer%2Bfelt%2Caps%2C203&sr=8-10"
+          }
+        ],
+        "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
+      },
       "rankedKeywords": null
     },
     {
@@ -551,7 +1000,7 @@
         "totalVariantVolume": 30,
         "verifiedKeywordVariants": 2,
         "observedKeywordVariants": 3,
-        "trend12mPct": -75,
+        "trend12mPct": -50,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "pricingDomains": 0,
@@ -567,6 +1016,11 @@
             "monthlySearches": [
               {
                 "year": 2026,
+                "month": 7,
+                "searchVolume": 10
+              },
+              {
+                "year": 2026,
                 "month": 6,
                 "searchVolume": 20
               },
@@ -622,7 +1076,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           },
           {
             "keyword": "timer vizual copii",
@@ -635,6 +1089,11 @@
             "monthlySearches": [
               {
                 "year": 2026,
+                "month": 7,
+                "searchVolume": 20
+              },
+              {
+                "year": 2026,
                 "month": 6,
                 "searchVolume": 10
               },
@@ -690,7 +1149,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           }
         ],
         "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
@@ -856,13 +1315,13 @@
       "salesEstimation": {
         "version": "2.8",
         "status": "ESTIMATED_HIGH_CONFIDENCE",
-        "estimatedUnits30d": 2029,
-        "rangeLow": 1522,
-        "rangeHigh": 2537,
+        "estimatedUnits30d": 1961,
+        "rangeLow": 1471,
+        "rangeHigh": 2451,
         "confidence": 100,
         "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
-        "observedPeerBoughtPastMonth": 34500,
-        "peerSample": 17,
+        "observedPeerBoughtPastMonth": 35300,
+        "peerSample": 18,
         "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
       "reverseKeywordIntelligence": {
@@ -882,8 +1341,8 @@
           "B00ISS4ARU",
           "B093R5GS2C",
           "B07B8N1GH7",
-          "B0CCP4G4C9",
-          "B001W6Q4VU"
+          "B001W6Q4VU",
+          "B0CCP4G4C9"
         ],
         "asinCount": 10,
         "topRankedKeywords": [],
@@ -906,25 +1365,25 @@
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T19:23:59.755Z",
+        "checkedAt": "2026-08-23T19:17:51.917Z",
         "keyword": "Reusable furniture moving sliders kit",
         "organicProducts": 20,
         "asins": [
           "B00ISS4ARU",
           "B093R5GS2C",
           "B07B8N1GH7",
-          "B0CCP4G4C9",
           "B001W6Q4VU",
+          "B0CCP4G4C9",
           "B0DSZSL1VX",
           "B075CR94J3",
           "B07VPBGY8B",
           "B0DLGP72H6",
           "B0BYFBS2SF"
         ],
-        "productsWithBoughtPastMonth": 17,
-        "totalObservedBoughtPastMonth": 34500,
+        "productsWithBoughtPastMonth": 18,
+        "totalObservedBoughtPastMonth": 35300,
         "medianBoughtPastMonth": 1000,
-        "medianReviews": 3500,
+        "medianReviews": 4300,
         "medianPriceUsd": 15,
         "confidence": 95,
         "items": [
@@ -938,7 +1397,7 @@
             "reviews": 7000,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Supersliders-4912895N-Self-Stick-Furniture-Sliders/dp/B00ISS4ARU/ref=sr_1_1?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-1"
+            "url": "https://www.amazon.com/Supersliders-4912895N-Self-Stick-Furniture-Sliders/dp/B00ISS4ARU/ref=sr_1_1?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-1"
           },
           {
             "asin": "B093R5GS2C",
@@ -950,7 +1409,7 @@
             "reviews": 1200,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Slipstick-Furniture-Surfaces-Reusable-CB13-1-16/dp/B093R5GS2C/ref=sr_1_2?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-2"
+            "url": "https://www.amazon.com/Slipstick-Furniture-Surfaces-Reusable-CB13-1-16/dp/B093R5GS2C/ref=sr_1_2?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-2"
           },
           {
             "asin": "B07B8N1GH7",
@@ -962,31 +1421,31 @@
             "reviews": 7000,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Super-Sliders-4922895N-Assorted-Furniture/dp/B07B8N1GH7/ref=sr_1_3?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-3"
-          },
-          {
-            "asin": "B0CCP4G4C9",
-            "title": "X-Protector Felt Furniture Sliders Hardwood Floors - 4 PCS 6\" x 3 1/2\" | Premium Furniture Movers for Hard Floors - Heavy Duty Felt Sliders Hard Surfaces – Move Your Furniture Easily & Safely!",
-            "rank": 5,
-            "boughtPastMonth": 5000,
-            "priceUsd": 8.99,
-            "rating": 4.6,
-            "reviews": 26600,
-            "bestSeller": true,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/X-Protector-Furniture-Sliders-Hardwood-Floors/dp/B0CCP4G4C9/ref=sr_1_4?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-4"
+            "url": "https://www.amazon.com/Super-Sliders-4922895N-Assorted-Furniture/dp/B07B8N1GH7/ref=sr_1_3?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-3"
           },
           {
             "asin": "B001W6Q4VU",
             "title": "SuperSliders 4712595Z Reusable Felt Furniture Sliders- All-In-One Kit For Hard Floor Surfaces, Linen",
-            "rank": 6,
+            "rank": 5,
             "boughtPastMonth": null,
             "priceUsd": 18.75,
             "rating": 4.6,
             "reviews": 7000,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/SuperSliders-4712995NB-Reusable-Furniture-Sliders/dp/B001W6Q4VU/ref=sr_1_5?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-5"
+            "url": "https://www.amazon.com/SuperSliders-4712995NB-Reusable-Furniture-Sliders/dp/B001W6Q4VU/ref=sr_1_4?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-4"
+          },
+          {
+            "asin": "B0CCP4G4C9",
+            "title": "X-Protector Felt Furniture Sliders Hardwood Floors - 4 PCS 6\" x 3 1/2\" | Premium Furniture Movers for Hard Floors - Heavy Duty Felt Sliders Hard Surfaces – Move Your Furniture Easily & Safely!",
+            "rank": 6,
+            "boughtPastMonth": 5000,
+            "priceUsd": 8.99,
+            "rating": 4.6,
+            "reviews": 26600,
+            "bestSeller": true,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/X-Protector-Furniture-Sliders-Hardwood-Floors/dp/B0CCP4G4C9/ref=sr_1_5?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-5"
           },
           {
             "asin": "B0DSZSL1VX",
@@ -998,7 +1457,7 @@
             "reviews": 1600,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Kiss-Core-Furniture-Multi-Surface-Hardwood/dp/B0DSZSL1VX/ref=sr_1_6?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-6"
+            "url": "https://www.amazon.com/Kiss-Core-Furniture-Multi-Surface-Hardwood/dp/B0DSZSL1VX/ref=sr_1_6?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-6"
           },
           {
             "asin": "B075CR94J3",
@@ -1010,7 +1469,7 @@
             "reviews": 16300,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Furniture-Sliders-Carpet-X-PROTECTOR-Furniture/dp/B075CR94J3/ref=sr_1_7?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-7"
+            "url": "https://www.amazon.com/Furniture-Sliders-Carpet-X-PROTECTOR-Furniture/dp/B075CR94J3/ref=sr_1_7?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-7"
           },
           {
             "asin": "B07VPBGY8B",
@@ -1022,7 +1481,7 @@
             "reviews": 1600,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Furniture-Lifter-Moving-Rotatable-Adjustable/dp/B07VPBGY8B/ref=sr_1_8?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-8"
+            "url": "https://www.amazon.com/Furniture-Lifter-Moving-Rotatable-Adjustable/dp/B07VPBGY8B/ref=sr_1_8?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-8"
           },
           {
             "asin": "B0DLGP72H6",
@@ -1034,7 +1493,7 @@
             "reviews": 1400,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Furniture-Sliders-Hardwood-Reusable-Protectors/dp/B0DLGP72H6/ref=sr_1_9?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-9"
+            "url": "https://www.amazon.com/Furniture-Sliders-Hardwood-Reusable-Protectors/dp/B0DLGP72H6/ref=sr_1_9?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-9"
           },
           {
             "asin": "B0BYFBS2SF",
@@ -1046,7 +1505,7 @@
             "reviews": 26600,
             "bestSeller": true,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Furniture-Sliders-Hardwood-Floors-X-PROTECTOR/dp/B0BYFBS2SF/ref=sr_1_10?crid=UUMNFS41K2H3&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0_S5C-8VYvpb30OPuji4H12H-zMTgUyVP5VL-fNkeVJwKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lDBHguH9Ik1V-Na88D8nvUk.-wUhNKeryqlLzxgB8tdeMNastm1a3NMA5g2Y41NczA0&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787513047&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C156&sr=8-10"
+            "url": "https://www.amazon.com/Furniture-Sliders-Hardwood-Floors-X-PROTECTOR/dp/B0BYFBS2SF/ref=sr_1_10?crid=PI0S4CB8EXQ1&dib=eyJ2IjoiMSJ9.lsgo3g_EqqPSXRgEJUscy_Mmug5jEI5tnyIKaqEY9F0o4hRiUExt5bDMzZZCdXmKAtYG1GI_bz3O3h4WUkSQPgKYAMxHnG-D4TWzfOmnVJL_MevhjjRHLZ7F7WAd0JJWefyTXy7yHFcEIHE4v0G19VitAIWrZ70K7tSdrIFJNCDHjbWC4UzV-DKbBRUR6GT4aSEFusxmUcVHOTcudui1-isoiLUV2iJ7AX-D1WuyTiHgRjPqBslCFzm08HJT4HL96U6wtvBOJm4JqU5hFzV2lK8hAx-B1s-YtuFuoCR8aZU.w8CEMM-FjJPTqGsWS7j5UY6NT3q_Dky_ORN7Lb1c178&dib_tag=se&keywords=Reusable+furniture+moving+sliders+kit&qid=1787512692&sprefix=Reusable%2Bfurniture%2Bmoving%2Bsliders%2Bkit%2Caps%2C233&sr=8-10"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
@@ -1103,9 +1562,9 @@
         "competitorAsins": [
           "B0G7WSTB3Q",
           "B099XCWH22",
-          "B0H2FCSMNC",
-          "B0GGRPQCND",
-          "B09C2LC2W2"
+          "B0DK5V2K26",
+          "B0CMPYD91X",
+          "B0G7XQW1RC"
         ],
         "asinCount": 10,
         "topRankedKeywords": [],
@@ -1128,20 +1587,20 @@
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T19:23:59.755Z",
+        "checkedAt": "2026-08-23T19:17:51.917Z",
         "keyword": "Kids car seat snack tray age 3 plus",
         "organicProducts": 20,
         "asins": [
           "B0G7WSTB3Q",
           "B099XCWH22",
-          "B0H2FCSMNC",
-          "B0GGRPQCND",
-          "B09C2LC2W2",
-          "B0G3NR2FDX",
-          "B0C4KS322R",
           "B0DK5V2K26",
           "B0CMPYD91X",
-          "B0G7XQW1RC"
+          "B0G7XQW1RC",
+          "B0G7XXYMNY",
+          "B0DDHV3KKF",
+          "B0GGRPQCND",
+          "B0H2FCSMNC",
+          "B09C2LC2W2"
         ],
         "productsWithBoughtPastMonth": 18,
         "totalObservedBoughtPastMonth": 9550,
@@ -1160,7 +1619,7 @@
             "reviews": 210,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Toddlers-Travel-3-Inch-Cup-Holder/dp/B0G7WSTB3Q/ref=sr_1_5?crid=GTHO8LSI2S3A&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90.Kv5EmoPXaMuY5YqXpz_FYKPUtn2uR4MoNp0JoIckUmo&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787513052&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C129&sr=8-5"
+            "url": "https://www.amazon.com/Toddlers-Travel-3-Inch-Cup-Holder/dp/B0G7WSTB3Q/ref=sr_1_5?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-5"
           },
           {
             "asin": "B099XCWH22",
@@ -1172,103 +1631,103 @@
             "reviews": 4800,
             "bestSeller": true,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Pillani-Kids-Travel-Tray-Car-Airplane-Essentials/dp/B099XCWH22/ref=sr_1_6?crid=GTHO8LSI2S3A&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90.Kv5EmoPXaMuY5YqXpz_FYKPUtn2uR4MoNp0JoIckUmo&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787513052&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C129&sr=8-6"
-          },
-          {
-            "asin": "B0H2FCSMNC",
-            "title": "Hoovy Plastic Cup Holder Tray for Car Seat, Booster Seat, Stroller - Carseat Cup Holder Snack Tray - Car Seat Tray for Kids Travel - Toddler Car Seat Accessories - Sharkskin 1 Pack",
-            "rank": 7,
-            "boughtPastMonth": 50,
-            "priceUsd": 14.99,
-            "rating": 4,
-            "reviews": 10,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MTIxOTM2MzYwODc5MjM5OjE3ODc1MTMwNTI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTI5OTcyMzUzMDYwMjo6MDo6&url=%2FHoovy-Plastic-Holder-Booster-Stroller%2Fdp%2FB0H2FCSMNC%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DGTHO8LSI2S3A%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0H2FCSMNC%26pd_rd_r%3Dcc9da08b-1eab-41c1-9ff5-6fe8f77e1d69%26pd_rd_w%3D1zeJR%26pd_rd_wg%3DDD2gY%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DCZWGF5CCFBTNDP0DRH4N%26qid%3D1787513052%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C129%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DfGEz6uXV9u%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=fGEz6uXV9u"
-          },
-          {
-            "asin": "B0GGRPQCND",
-            "title": "1-Pack Square Car Seat Cup Holder Snack Tray for Kids, Dark Gray | Built-in condiment dish, extra cup holder base and silicone ring, holds food, drinks and toys, helps reduce travel mess",
-            "rank": 8,
-            "boughtPastMonth": 50,
-            "priceUsd": 17.99,
-            "rating": 4.2,
-            "reviews": 41,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MTIxOTM2MzYwODc5MjM5OjE3ODc1MTMwNTI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTIyMjcxOTAzOTYwMjo6MTo6&url=%2FBBSDA-Cup-Tray-Detachable-Essentials-Dark%2Fdp%2FB0GGRPQCND%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DGTHO8LSI2S3A%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0GGRPQCND%26pd_rd_r%3Dcc9da08b-1eab-41c1-9ff5-6fe8f77e1d69%26pd_rd_w%3D1zeJR%26pd_rd_wg%3DDD2gY%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DCZWGF5CCFBTNDP0DRH4N%26qid%3D1787513052%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C129%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DsYmG9z4L3I%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=sYmG9z4L3I"
-          },
-          {
-            "asin": "B09C2LC2W2",
-            "title": "PILLANI Kids Travel Tray for Car - Car Seat Tray for Kids Travel, Road Trip Essentials, Carseat Table for Roadtrip Activities - Must Haves Toddler Lap Desk Organizer for Airplane - Car Accessories",
-            "rank": 9,
-            "boughtPastMonth": 1000,
-            "priceUsd": 21.99,
-            "rating": 4.5,
-            "reviews": 4800,
-            "bestSeller": true,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MTIxOTM2MzYwODc5MjM5OjE3ODc1MTMwNTI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTA5MjY0NzUxNzgwMjo6Mjo6&url=%2FPillani-Kids-Travel-Tray-Car-Airplane-Essentials%2Fdp%2FB09C2LC2W2%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DGTHO8LSI2S3A%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB09C2LC2W2%26pd_rd_r%3Dcc9da08b-1eab-41c1-9ff5-6fe8f77e1d69%26pd_rd_w%3D1zeJR%26pd_rd_wg%3DDD2gY%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DCZWGF5CCFBTNDP0DRH4N%26qid%3D1787513052%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C129%26sr%3D1-3-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DHDTVpV5LkW%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=HDTVpV5LkW"
-          },
-          {
-            "asin": "B0G3NR2FDX",
-            "title": "Car Seat Tray Pillow Stand, Laptop Lap Desk with Mouse Pad, Portable Food Tray with Tablet/Kindle Mount Holder, Front/Rear Seat Table for Office/Eating/Reading, Travel Essentials Accessories",
-            "rank": 10,
-            "boughtPastMonth": null,
-            "priceUsd": 49.99,
-            "rating": 4.3,
-            "reviews": 38,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MTIxOTM2MzYwODc5MjM5OjE3ODc1MTMwNTI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTIxNDExMzEzNjgwMjo6Mzo6&url=%2FDICMKY-Portable-Reading-Essentials-Accessories%2Fdp%2FB0G3NR2FDX%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DGTHO8LSI2S3A%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0G3NR2FDX%26pd_rd_r%3Dcc9da08b-1eab-41c1-9ff5-6fe8f77e1d69%26pd_rd_w%3D1zeJR%26pd_rd_wg%3DDD2gY%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DCZWGF5CCFBTNDP0DRH4N%26qid%3D1787513052%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C129%26sr%3D1-4-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DReH0Bgyhzl%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=ReH0Bgyhzl"
-          },
-          {
-            "asin": "B0C4KS322R",
-            "title": "COOLBEBE Kids Travel Tray for Toddler Car Seat, Black | Lap Tray, Carseat Table Tray for Kids, Travel Tray for Airplane",
-            "rank": 11,
-            "boughtPastMonth": 400,
-            "priceUsd": 17.99,
-            "rating": 4.2,
-            "reviews": 1200,
-            "bestSeller": false,
-            "amazonChoice": false,
-            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MTIxOTM2MzYwODc5MjM5OjE3ODc1MTMwNTI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDAxOTQyNTYwOTUwMjo6NDo6&url=%2FCOOLBEBE-Kids-Travel-Tray-Activities%2Fdp%2FB0C4KS322R%2Fref%3Dsxin_18_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3DGTHO8LSI2S3A%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0C4KS322R%26pd_rd_r%3Dcc9da08b-1eab-41c1-9ff5-6fe8f77e1d69%26pd_rd_w%3D1zeJR%26pd_rd_wg%3DDD2gY%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DCZWGF5CCFBTNDP0DRH4N%26qid%3D1787513052%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C129%26sr%3D1-5-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DrsnQSUUidf%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=rsnQSUUidf"
+            "url": "https://www.amazon.com/Pillani-Kids-Travel-Tray-Car-Airplane-Essentials/dp/B099XCWH22/ref=sr_1_6?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-6"
           },
           {
             "asin": "B0DK5V2K26",
             "title": "Munchkin® Carseat Tray, Grey",
-            "rank": 12,
+            "rank": 7,
             "boughtPastMonth": 900,
             "priceUsd": 9.93,
             "rating": 4.4,
             "reviews": 588,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Munchkin%C2%AE-Carseat-Tray-Accessory-Mess-Free/dp/B0DK5V2K26/ref=sr_1_7?crid=GTHO8LSI2S3A&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90.Kv5EmoPXaMuY5YqXpz_FYKPUtn2uR4MoNp0JoIckUmo&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787513052&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C129&sr=8-7"
+            "url": "https://www.amazon.com/Munchkin%C2%AE-Carseat-Tray-Accessory-Mess-Free/dp/B0DK5V2K26/ref=sr_1_7?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-7"
           },
           {
             "asin": "B0CMPYD91X",
             "title": "SEVEN SPARTA Car Seat Tray for Kids Toddler Travel with Soft Rubber Base | 360° Rotatable and Removable Cup Holder Snack Tray for Food Color and Play for Family Road Trip Essentials, 1, Standard Base",
-            "rank": 13,
+            "rank": 8,
             "boughtPastMonth": 600,
             "priceUsd": 19.99,
             "rating": 4.2,
             "reviews": 626,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/SEVEN-SPARTA-Travel-Entertainment-Essentials/dp/B0CMPYD91X/ref=sr_1_8?crid=GTHO8LSI2S3A&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90.Kv5EmoPXaMuY5YqXpz_FYKPUtn2uR4MoNp0JoIckUmo&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787513052&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C129&sr=8-8"
+            "url": "https://www.amazon.com/SEVEN-SPARTA-Travel-Entertainment-Essentials/dp/B0CMPYD91X/ref=sr_1_8?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-8"
           },
           {
             "asin": "B0G7XQW1RC",
             "title": "Car Seat Snack Tray for Toddlers, Reduces Mess Square Travel Tray Cup Holder Snack Tray, Durable Car Food Tray for Kids, Universal Fit Kids Travel Road Trip Essentials (Black)",
-            "rank": 14,
+            "rank": 9,
             "boughtPastMonth": 50,
             "priceUsd": 17.99,
             "rating": 4.3,
             "reviews": 52,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Tray-Toddlers-Cup-Universal-Essentials/dp/B0G7XQW1RC/ref=sr_1_9?crid=GTHO8LSI2S3A&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90.Kv5EmoPXaMuY5YqXpz_FYKPUtn2uR4MoNp0JoIckUmo&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787513052&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C129&sr=8-9"
+            "url": "https://www.amazon.com/Tray-Toddlers-Cup-Universal-Essentials/dp/B0G7XQW1RC/ref=sr_1_9?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-9"
+          },
+          {
+            "asin": "B0G7XXYMNY",
+            "title": "Car Seat Tray for Kids Travel, Carseat Table Tray for Food Toddler | Car Seat Cup Holder Snack Tray for Graco, Evenflo, Chicco, Rotatable Removable Family Road Trip Essentials - Black",
+            "rank": 10,
+            "boughtPastMonth": 100,
+            "priceUsd": 14.99,
+            "rating": 3.9,
+            "reviews": 62,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Carseat-Toddler-Rotatable-Removable-Essentials/dp/B0G7XXYMNY/ref=sr_1_10?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-10"
+          },
+          {
+            "asin": "B0DDHV3KKF",
+            "title": "Car Seat Tray, Adjustable Base and Silicone-Supported Anti-Shake Cup Holder, Car Seat Tray for Kids Travel, Car Seat Snack Tray, Car Tray for Toddler, Family Road Trip Essentials for Kids",
+            "rank": 15,
+            "boughtPastMonth": 300,
+            "priceUsd": 25.99,
+            "rating": 4.4,
+            "reviews": 253,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/Adjustable-Holder-Travel-Snacks-Toddler/dp/B0DDHV3KKF/ref=sr_1_15?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-15"
+          },
+          {
+            "asin": "B0GGRPQCND",
+            "title": "1-Pack Square Car Seat Cup Holder Snack Tray for Kids, Dark Gray | Built-in condiment dish, extra cup holder base and silicone ring, holds food, drinks and toys, helps reduce travel mess",
+            "rank": 16,
+            "boughtPastMonth": 50,
+            "priceUsd": 17.99,
+            "rating": 4.2,
+            "reviews": 41,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/BBSDA-Cup-Tray-Detachable-Essentials-Dark/dp/B0GGRPQCND/ref=sr_1_16?crid=91QLFSRHV2FA&dib=eyJ2IjoiMSJ9.AhgSQSNjULwUbYKMJ5KKdkLVfiBuDpUaV5FIcfpDmcpVclkrBKfh0Dnw8cj1rkyJ6YbbooCkVEXesCH9OQ_OAAoMpXm5gIFvYBKPKgZwQtRFrurjTMiQ9233PiGfjiTiixE9HW3gOjkQkvtHmBxsVToP-vcKxzAMkGpLnXqq7gp3zEHF4JFHpTn9Usvw8j_XehMwJ6KgtA7L0zDFHL876yT2kG7eELRwKsZyplqH9ZE4NP3xLoVSNINCqVwTLbkDUMrmXSInuhxiIrITCTOKUEFqD_s4eugeUHkKnAmqj90._HyT_UV93CcU5GyFlVBD4SifP8Dwf9ZEK8TXsTC6NTM&dib_tag=se&keywords=Kids+car+seat+snack+tray+age+3+plus&nsdOptOutParam=true&qid=1787512698&sprefix=Kids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%2Caps%2C105&sr=8-16"
+          },
+          {
+            "asin": "B0H2FCSMNC",
+            "title": "Hoovy Plastic Cup Holder Tray for Car Seat, Booster Seat, Stroller - Carseat Cup Holder Snack Tray - Car Seat Tray for Kids Travel - Toddler Car Seat Accessories - Sharkskin 1 Pack",
+            "rank": 17,
+            "boughtPastMonth": 50,
+            "priceUsd": 14.99,
+            "rating": 4,
+            "reviews": 10,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4MjMzNzY1MjU1MjgyMDY0OjE3ODc1MTI2OTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTI5OTcyMzUzMDYwMjo6MDo6&url=%2FHoovy-Plastic-Holder-Booster-Stroller%2Fdp%2FB0H2FCSMNC%2Fref%3Dsxin_28_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D91QLFSRHV2FA%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0H2FCSMNC%26pd_rd_r%3Dff420fe4-cd40-4935-8e59-0bf63fcbe26a%26pd_rd_w%3DuuoBX%26pd_rd_wg%3D9RPTk%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DB8VHJAHZYCCQKEGQCWY6%26qid%3D1787512698%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C105%26sr%3D1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DfGEz6uXV9u%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=fGEz6uXV9u"
+          },
+          {
+            "asin": "B0GGRPQCND",
+            "title": "1-Pack Square Car Seat Cup Holder Snack Tray for Kids, Dark Gray | Built-in condiment dish, extra cup holder base and silicone ring, holds food, drinks and toys, helps reduce travel mess",
+            "rank": 18,
+            "boughtPastMonth": 50,
+            "priceUsd": 17.99,
+            "rating": 4.2,
+            "reviews": 41,
+            "bestSeller": false,
+            "amazonChoice": false,
+            "url": "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4MjMzNzY1MjU1MjgyMDY0OjE3ODc1MTI2OTg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMTIyMjcxOTAzOTYwMjo6MTo6&url=%2FBBSDA-Cup-Tray-Detachable-Essentials-Dark%2Fdp%2FB0GGRPQCND%2Fref%3Dsxin_28_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%253Aamzn1.sym.8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26crid%3D91QLFSRHV2FA%26cv_ct_cx%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26keywords%3DKids%2Bcar%2Bseat%2Bsnack%2Btray%2Bage%2B3%2Bplus%26nsdOptOutParam%3Dtrue%26pd_rd_i%3DB0GGRPQCND%26pd_rd_r%3Dff420fe4-cd40-4935-8e59-0bf63fcbe26a%26pd_rd_w%3DuuoBX%26pd_rd_wg%3D9RPTk%26pf_rd_p%3D8eb671a2-a903-4c3a-b962-ebb867a4f8f8%26pf_rd_r%3DB8VHJAHZYCCQKEGQCWY6%26qid%3D1787512698%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3DKids%252Bcar%252Bseat%252Bsnack%252Btray%252Bage%252B3%252Bplus%252Caps%252C105%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26aref%3DsYmG9z4L3I%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=sYmG9z4L3I"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
@@ -1300,12 +1759,12 @@
       "salesEstimation": {
         "version": "2.8",
         "status": "ESTIMATED_HIGH_CONFIDENCE",
-        "estimatedUnits30d": 400,
-        "rangeLow": 300,
-        "rangeHigh": 500,
+        "estimatedUnits30d": 338,
+        "rangeLow": 253,
+        "rangeHigh": 422,
         "confidence": 100,
         "method": "AMAZON_BOUGHT_PAST_MONTH_PEER_MEDIAN",
-        "observedPeerBoughtPastMonth": 3150,
+        "observedPeerBoughtPastMonth": 2700,
         "peerSample": 8,
         "policy": "Estimate is derived from provider-observed Amazon peer bought_past_month fields and is never labelled verified competitor sales."
       },
@@ -1350,7 +1809,7 @@
       "amazonMarket": {
         "version": "2.8",
         "provider": "DATAFORSEO_AMAZON_MERCHANT",
-        "checkedAt": "2026-08-23T19:23:59.755Z",
+        "checkedAt": "2026-08-23T19:17:51.917Z",
         "keyword": "Kids portable drawing board storage bag",
         "organicProducts": 20,
         "asins": [
@@ -1366,8 +1825,8 @@
           "B0G3TQX7H4"
         ],
         "productsWithBoughtPastMonth": 8,
-        "totalObservedBoughtPastMonth": 3150,
-        "medianBoughtPastMonth": 400,
+        "totalObservedBoughtPastMonth": 2700,
+        "medianBoughtPastMonth": 300,
         "medianReviews": 115,
         "medianPriceUsd": 20,
         "confidence": 95,
@@ -1382,7 +1841,7 @@
             "reviews": 2,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/DODXIAOBEUL-Portable-Drawing-Supplies-Storage/dp/B0FWKFDHZD/ref=sr_1_1?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-1"
+            "url": "https://www.amazon.com/DODXIAOBEUL-Portable-Drawing-Supplies-Storage/dp/B0FWKFDHZD/ref=sr_1_1?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-1"
           },
           {
             "asin": "B07N8TCDXZ",
@@ -1394,7 +1853,7 @@
             "reviews": 416,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/ArtBin-6838AG-Sketch-Board-Grey/dp/B07N8TCDXZ/ref=sr_1_2?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-2"
+            "url": "https://www.amazon.com/ArtBin-6838AG-Sketch-Board-Grey/dp/B07N8TCDXZ/ref=sr_1_2?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-2"
           },
           {
             "asin": "B08HJ5GCJG",
@@ -1406,7 +1865,7 @@
             "reviews": 599,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Protective-IMAGE-Carrying-Coloring-Notebook/dp/B08HJ5GCJG/ref=sr_1_3?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-3"
+            "url": "https://www.amazon.com/Protective-IMAGE-Carrying-Coloring-Notebook/dp/B08HJ5GCJG/ref=sr_1_3?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-3"
           },
           {
             "asin": "B09YQX8PCD",
@@ -1418,7 +1877,7 @@
             "reviews": 299,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/TreochtFUN-Art-Portfolio-Kids-Artwork/dp/B09YQX8PCD/ref=sr_1_4?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-4"
+            "url": "https://www.amazon.com/TreochtFUN-Art-Portfolio-Kids-Artwork/dp/B09YQX8PCD/ref=sr_1_4?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-4"
           },
           {
             "asin": "B0DL783HRL",
@@ -1430,7 +1889,7 @@
             "reviews": 83,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/11x17-Kids-Art-Portfolio-Translucent/dp/B0DL783HRL/ref=sr_1_5?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-5"
+            "url": "https://www.amazon.com/11x17-Kids-Art-Portfolio-Translucent/dp/B0DL783HRL/ref=sr_1_5?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-5"
           },
           {
             "asin": "B08B18P4L7",
@@ -1442,7 +1901,7 @@
             "reviews": 1600,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Portfolio-Opret-Organizer-Transparent-Bulletin/dp/B08B18P4L7/ref=sr_1_6?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-6"
+            "url": "https://www.amazon.com/Portfolio-Opret-Organizer-Transparent-Bulletin/dp/B08B18P4L7/ref=sr_1_6?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-6"
           },
           {
             "asin": "B09WYJDS1X",
@@ -1454,7 +1913,7 @@
             "reviews": 109,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Students-Water-Resistant-Portfolio-Supplies-Shoulder/dp/B09WYJDS1X/ref=sr_1_7?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-7"
+            "url": "https://www.amazon.com/Students-Water-Resistant-Portfolio-Supplies-Shoulder/dp/B09WYJDS1X/ref=sr_1_7?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-7"
           },
           {
             "asin": "B0DPV6L139",
@@ -1466,7 +1925,7 @@
             "reviews": 29,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/6uGooes-Portfolio-Clipboard-Creation-Blue/dp/B0DPV6L139/ref=sr_1_8?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-8"
+            "url": "https://www.amazon.com/6uGooes-Portfolio-Clipboard-Creation-Blue/dp/B0DPV6L139/ref=sr_1_8?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-8"
           },
           {
             "asin": "B08BKN5RKS",
@@ -1478,7 +1937,7 @@
             "reviews": 115,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Portfolio-Backpack-Drawboard-Handheld-Portable/dp/B08BKN5RKS/ref=sr_1_9?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-9"
+            "url": "https://www.amazon.com/Portfolio-Backpack-Drawboard-Handheld-Portable/dp/B08BKN5RKS/ref=sr_1_9?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-9"
           },
           {
             "asin": "B0G3TQX7H4",
@@ -1490,7 +1949,7 @@
             "reviews": 17,
             "bestSeller": false,
             "amazonChoice": false,
-            "url": "https://www.amazon.com/Protection-Water-Resistant-Portfolios-Days-Play/dp/B0G3TQX7H4/ref=sr_1_10?crid=L02IR2N4IUZN&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSJ__NahDp4ETUvZ-WXt10HE.UURUXTpFacVR2SKdyZwp9jNObEy-dlOqgFdtkVx0pgE&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787513063&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C184&sr=8-10"
+            "url": "https://www.amazon.com/Protection-Water-Resistant-Portfolios-Days-Play/dp/B0G3TQX7H4/ref=sr_1_10?crid=8BU7642N7TAI&dib=eyJ2IjoiMSJ9.-CquS1ESnqBTMQ6TT5MvFCpMaNp14MDEisnC5KRjjZkf3tKrcowbGIrtck6U61r-DHJbVRPINDHzYRIT_WZcnw5U73C7d7GLSYGcBPERcFYdOIJx2eaYR2niebjShlCxei5BFPzR0CvnbCQQq8p47z0jlOmhPvHBOZLEZSg0hsQjc3chplMLY7e4ybaTxgBq2G-_WPLddGUQ-JwAm1sfQ747p0BX3vQKDpvyzbcs_JcNIkGrz3dfX8-T6XJy4uRovQ7zO--kpPfxl3bdkBKOSMLe-8qDUb00vfV_abZjvbs.kytbCXIdZBGzeabrlaJdG4btNTVBYpa-u-GWZTrKWCs&dib_tag=se&keywords=Kids+portable+drawing+board+storage+bag&qid=1787512723&sprefix=Kids%2Bportable%2Bdrawing%2Bboard%2Bstorage%2Bbag%2Caps%2C139&sr=8-10"
           }
         ],
         "policy": "bought_past_month is an observed Amazon SERP field from the provider, not our estimate. Absence remains unknown."
@@ -1512,7 +1971,7 @@
         "totalVariantVolume": 600,
         "verifiedKeywordVariants": 2,
         "observedKeywordVariants": 3,
-        "trend12mPct": 51.5,
+        "trend12mPct": 23.5,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "pricingDomains": 2,
@@ -1526,6 +1985,11 @@
             "lowTopOfPageBid": 0.06,
             "highTopOfPageBid": 0.23,
             "monthlySearches": [
+              {
+                "year": 2026,
+                "month": 7,
+                "searchVolume": 390
+              },
               {
                 "year": 2026,
                 "month": 6,
@@ -1583,7 +2047,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           },
           {
             "keyword": "suport pahare auto",
@@ -1594,6 +2058,11 @@
             "lowTopOfPageBid": 0.05,
             "highTopOfPageBid": 0.24,
             "monthlySearches": [
+              {
+                "year": 2026,
+                "month": 7,
+                "searchVolume": 210
+              },
               {
                 "year": 2026,
                 "month": 6,
@@ -1651,7 +2120,7 @@
               }
             ],
             "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:13:27.314Z"
+            "checkedAt": "2026-08-23T19:17:48.112Z"
           }
         ],
         "policy": "Romania demand combines multiple provider-observed Romanian keyword variants, 12-month trend and concrete Romanian market evidence. Zero-volume variants remain observed but do not verify demand; result counts remain proxies."
@@ -1755,5 +2224,5 @@
       "paidDataPriority": 9
     }
   ],
-  "policy": "Paid deep provider enrichment is executed only against the current Supabase Stage 0 Budget Brain allowlist, ordered by paidDataPriority before limited paid calls are allocated."
+  "policy": "Paid deep provider enrichment is executed only against the current Supabase Stage 0 Budget Brain allowlist. Limited provider calls follow paidDataPriority in an isolated scope; original Golden Pipeline ranks are restored before results are persisted."
 }

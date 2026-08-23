@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:24:26.227Z",
+  "updatedAt": "2026-08-23T19:31:43.103Z",
   "policy": "Category Radar separă oportunitățile pe categorie. categoryKey explicit și categoria sursă au prioritate față de cuvintele din numele produsului. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne strict.",
   "stats": {
     "categories": 24,
@@ -63,7 +63,6 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
-            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -71,10 +70,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 2,
+            "passed": 3,
             "total": 9
           },
-          "commercialScore": 235.2
+          "commercialScore": 335.2
         },
         {
           "rank": 2,
@@ -768,7 +767,6 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
-            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -776,10 +774,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 2,
+            "passed": 3,
             "total": 9
           },
-          "commercialScore": 232.1
+          "commercialScore": 332.1
         },
         {
           "rank": 2,
@@ -1060,7 +1058,6 @@
           "blockers": [
             "cerere România suficient validată pentru TEST",
             "pricing România verificat",
-            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -1068,10 +1065,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 1,
+            "passed": 2,
             "total": 9
           },
-          "commercialScore": 135.4
+          "commercialScore": 235.4
         },
         {
           "rank": 2,
