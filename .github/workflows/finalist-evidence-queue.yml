@@ -1,0 +1,48 @@
+name: Finalist Evidence Queue
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'golden-pipeline-live.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: finalist-evidence-queue
+  cancel-in-progress: true
+
+jobs:
+  build-queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build Finalist Evidence Queue
+        run: node scripts/finalist-evidence-queue.mjs
+      - name: Persist queue
+        run: |
+          set -e
+          cp finalist-evidence-queue-live.json /tmp/finalist-evidence-queue-live.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/finalist-evidence-queue-live.json finalist-evidence-queue-live.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add finalist-evidence-queue-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Finalist Evidence Queue"
+            git push origin main
+          else
+            echo "Finalist Evidence Queue unchanged."
+          fi
