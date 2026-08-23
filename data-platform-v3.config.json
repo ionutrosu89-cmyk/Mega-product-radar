@@ -1,0 +1,36 @@
+{
+  "version": "3.0",
+  "currency": "EUR",
+  "budget": {
+    "monthlyHardCap": 100,
+    "softStop": 80,
+    "reserve": 20,
+    "maxSingleDeepValidation": 3,
+    "rule": "No paid enrichment starts if projected monthly spend would exceed the soft stop unless explicitly approved; never exceed the hard cap."
+  },
+  "allocationTarget": {
+    "marketData": 40,
+    "infrastructure": 20,
+    "premiumValidation": 15,
+    "aiClassification": 5,
+    "reserve": 20
+  },
+  "freshness": {
+    "HOT": {"maxAgeHours": 1, "examples": ["FINALIST", "TEST_READY", "watchlist-high-priority"]},
+    "ACTIVE": {"maxAgeHours": 12, "examples": ["PROMISING", "VALIDATE"]},
+    "DISCOVERY": {"maxAgeHours": 72, "examples": ["DISCOVERED"]},
+    "LONG_TAIL": {"maxAgeHours": 720, "examples": ["low-score", "archived-candidate"]}
+  },
+  "paidEnrichment": {
+    "minimumInformationValue": 55,
+    "minimumOpportunityScore": 25,
+    "deepValidationMinimumScore": 45,
+    "batchFirst": true,
+    "cacheFirst": true,
+    "neverInventMissingEvidence": true
+  },
+  "sources": {
+    "priority": ["official-api", "licensed-provider", "user-authorized", "terms-permitted-public"],
+    "requiredMetadata": ["collection_method", "allowed_use", "redistribution_right", "retention_rule"]
+  }
+}
