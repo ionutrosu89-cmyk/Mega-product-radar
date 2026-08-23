@@ -25,20 +25,18 @@ for(const file of [
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
-
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js']){
-  await fs.access(path.join(out,required));
-}
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js'])await fs.access(path.join(out,required));
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
+const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','account.html']);
 for(const entry of await fs.readdir(out)){
   if(!entry.endsWith('.html'))continue;
-  const target=path.join(out,entry);
-  let html=await fs.readFile(target,'utf8');
+  const target=path.join(out,entry);let html=await fs.readFile(target,'utf8');
   if(lightBodyPattern.test(html))html=html.replace(/<body(\s[^>]*)?>/i,(match,attrs='')=>/\bclass\s*=/.test(attrs)?match.replace(/class=(['"])(.*?)\1/i,(_,q,classes)=>`class=${q}${classes} app-light${q}`):`<body${attrs} class="app-light">`);
   if(!/contrast-fix\.css/i.test(html))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="contrast-fix.css"></head>');
+  if(customerPages.has(entry)&&!/customer-ui\.css/i.test(html))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="customer-ui.css"></head>');
+  if(customerPages.has(entry)&&!/customer-shell\.js/i.test(html))html=html.replace(/<\/body>/i,'<script type="module" src="customer-shell.js"></script></body>');
   await fs.writeFile(target,html);
 }
-
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar static site built: commercial SaaS + customer UX hardening + evidence-safe decision engine.');
+console.log('Mega Product Radar static site built: commercial SaaS + unified customer UX + evidence-safe decision engine.');
