@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-23T17:55:37.495Z",
-  "completedAt": "2026-08-23T18:02:21.309Z",
-  "updatedAt": "2026-08-23T17:55:50.672Z",
+  "startedAt": "2026-08-23T18:10:47.047Z",
+  "completedAt": "2026-08-23T18:16:26.633Z",
+  "updatedAt": "2026-08-23T18:11:00.024Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-23T17:55:50.722Z",
+    "updatedAt": "2026-08-23T18:11:00.077Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-23T18:02:21.281Z",
+    "updatedAt": "2026-08-23T18:16:26.605Z",
     "candidates": 65,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-23T18:00:21.252Z",
+      "updatedAt": "2026-08-23T18:14:26.577Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-23T17:58:38.149Z",
-    "category": "Fitness & recuperare",
+    "updatedAt": "2026-08-23T18:13:37.548Z",
+    "category": "Casă & organizare",
     "successfulPages": 18,
-    "totalObserved": 175,
-    "totalClusters": 121,
-    "feedCount": 3,
+    "totalObserved": 193,
+    "totalClusters": 123,
+    "feedCount": 7,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -194,7 +194,7 @@
         "label": "Amazon US",
         "attempted": 6,
         "successful": 6,
-        "items": 69,
+        "items": 73,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 3,
-        "items": 35,
+        "successful": 4,
+        "items": 42,
         "statuses": [
           200,
           200,
@@ -231,29 +231,29 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT"
         ]
       },
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 5,
-        "items": 47,
+        "successful": 4,
+        "items": 54,
         "statuses": [
           200,
           200,
           200,
           200,
-          200,
+          503,
           200
         ],
         "sources": [
-          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT"
+          "DIRECT+FALLBACKS_FAILED",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "ebayUS": {
@@ -264,18 +264,18 @@
         "statuses": [
           403,
           403,
-          403,
-          403,
-          403,
-          403
+          200,
+          200,
+          200,
+          200
         ],
         "sources": [
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT"
         ]
       },
       "emagRO": {
@@ -303,14 +303,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-23T18:00:21.231Z",
-      "attempted": 14,
+      "at": "2026-08-23T18:14:26.555Z",
+      "attempted": 9,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-23T18:00:21.242Z",
+      "at": "2026-08-23T18:14:26.565Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
