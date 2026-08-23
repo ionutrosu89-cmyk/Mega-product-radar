@@ -90,6 +90,9 @@ jobs:
           DATAFORSEO_MAX_DAILY_COST_USD: '0.20'
           DATAFORSEO_MAX_MONTHLY_COST_USD: '5.00'
         run: node scripts/dataforseo-keywords.mjs
+      - name: Replay fresh Romania keyword cache at zero cost
+        if: always()
+        run: node scripts/replay-romania-keyword-cache.mjs
       - name: Update Market Intelligence history
         if: always()
         run: node scripts/market-intelligence-history.mjs
