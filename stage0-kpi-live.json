@@ -1,16 +1,16 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:59:00.721Z",
-  "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
+  "updatedAt": "2026-08-23T20:38:58.231Z",
+  "verdict": "HOLD_STAGE0",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
-    "targetCount": 5,
-    "usefulEnrichments": 4,
-    "enrichmentSuccessPct": 80,
+    "targetCount": 6,
+    "usefulEnrichments": 2,
+    "enrichmentSuccessPct": 33.3,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": 0.0025,
-    "cumulativeTestSpendConservativeEur": 1.8564
+    "costPerUsefulEnrichmentEur": 0.005,
+    "cumulativeTestSpendConservativeEur": 1.8663
   },
   "criteria": {
     "minEnrichmentSuccessPct": 50,
@@ -21,18 +21,20 @@
     "allowlistActive": true,
     "pipelineDatasetAvailable": true,
     "targetSetEvaluable": true,
-    "enrichmentSuccess": true,
+    "enrichmentSuccess": false,
     "costEfficiency": true,
     "stageBudgetSafe": true,
     "noCostAnomaly": true
   },
-  "blockers": [],
+  "blockers": [
+    "enrichmentSuccess"
+  ],
   "evaluated": [
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
       "useful": true,
-      "romaniaDemandReady": false,
+      "romaniaDemandReady": true,
       "keywordVolume": 0,
       "hasAmazonEvidence": true,
       "hasRankedKeywords": false
@@ -47,26 +49,35 @@
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "kids-car-seat-snack-tray-age-3-plus",
-      "title": "Kids car seat snack tray age 3 plus",
-      "useful": true,
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
+      "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
-      "hasAmazonEvidence": true,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-car-seat-snack-tray-age-3-plus",
+      "title": "Kids car seat snack tray age 3 plus",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     },
     {
       "canonicalKey": "kids-portable-drawing-board-storage-bag",
       "title": "Kids portable drawing board storage bag",
-      "useful": true,
+      "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
-      "hasAmazonEvidence": true,
+      "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "dog-car-door-protector-set",
-      "title": "Dog car door protector set",
+      "canonicalKey": "kids-reusable-sticker-activity-book",
+      "title": "Kids reusable sticker activity book",
       "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
