@@ -1,15 +1,15 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T18:43:31.373Z",
-  "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
+  "updatedAt": "2026-08-23T18:46:37.882Z",
+  "verdict": "HOLD_STAGE0",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
-    "targetCount": 4,
-    "usefulEnrichments": 4,
-    "enrichmentSuccessPct": 100,
+    "targetCount": 9,
+    "usefulEnrichments": 3,
+    "enrichmentSuccessPct": 33.3,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": 0.0025,
+    "costPerUsefulEnrichmentEur": 0.0033,
     "cumulativeTestSpendConservativeEur": 1.617
   },
   "criteria": {
@@ -21,47 +21,94 @@
     "allowlistActive": true,
     "pipelineDatasetAvailable": true,
     "targetSetEvaluable": true,
-    "enrichmentSuccess": true,
+    "enrichmentSuccess": false,
     "costEfficiency": true,
     "stageBudgetSafe": true,
     "noCostAnomaly": true
   },
-  "blockers": [],
+  "blockers": [
+    "enrichmentSuccess"
+  ],
   "evaluated": [
     {
-      "canonicalKey": "under-desk-headphone-hanger-clamp",
-      "title": "Under desk headphone hanger clamp",
+      "canonicalKey": "reusable-furniture-moving-sliders-kit",
+      "title": "Reusable furniture moving sliders kit",
       "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 20,
-      "hasAmazonEvidence": true,
-      "hasRankedKeywords": true
-    },
-    {
-      "canonicalKey": "car-trunk-side-storage-net",
-      "title": "Car trunk side storage net",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 480,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
       "hasAmazonEvidence": true,
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "desk-drawer-organizer-modular-trays",
-      "title": "Desk drawer organizer modular trays",
-      "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 1300,
+      "canonicalKey": "shoe-washing-laundry-bag-structured",
+      "title": "Shoe washing laundry bag structured",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
       "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "magnetic-cable-organizer-clips-set",
-      "title": "Magnetic cable organizer clips set",
+      "canonicalKey": "kids-bed-bedside-organizer-felt",
+      "title": "Kids bed bedside organizer felt",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "shower-corner-shelf-adhesive-no-drill",
+      "title": "Shower corner shelf adhesive no drill",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-car-seat-snack-tray-age-3-plus",
+      "title": "Kids car seat snack tray age 3 plus",
       "useful": true,
-      "romaniaDemandReady": true,
-      "keywordVolume": 20,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
       "hasAmazonEvidence": true,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-portable-drawing-board-storage-bag",
+      "title": "Kids portable drawing board storage bag",
+      "useful": true,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": true,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-visual-timer-board-non-electronic",
+      "title": "Kids visual timer board non electronic",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "car-cup-holder-expander-adjustable",
+      "title": "Car cup holder expander adjustable",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     }
   ],
