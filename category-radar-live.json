@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T18:55:19.226Z",
+  "updatedAt": "2026-08-23T19:02:32.630Z",
   "policy": "Category Radar separă oportunitățile pe categorie. categoryKey explicit și categoria sursă au prioritate față de cuvintele din numele produsului. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne strict.",
   "stats": {
     "categories": 24,
@@ -47,6 +47,37 @@
       "products": [
         {
           "rank": 1,
+          "name": "Kids portable drawing board storage bag",
+          "cat": "Kids 3–6 • Organizare",
+          "imageUrl": "",
+          "opportunityRank": 12,
+          "opportunityScore": 28.6,
+          "launchScore": 22.8,
+          "margin": 8.1,
+          "roi": 17.7,
+          "profit": 10.4,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România suficient validată pentru TEST",
+            "pricing România verificat",
+            "ofertă furnizor completă și verificată",
+            "review evidence verificat",
+            "market evidence concret suficient",
+            "marjă ≥20%, ROI ≥45%, profit pozitiv",
+            "Data Confidence ≥50"
+          ],
+          "gates": {
+            "passed": 2,
+            "total": 9
+          },
+          "commercialScore": 234.9
+        },
+        {
+          "rank": 2,
           "name": "Kids car seat snack tray age 3 plus",
           "cat": "Kids 3–6 • Travel",
           "imageUrl": "",
@@ -75,37 +106,6 @@
             "total": 9
           },
           "commercialScore": 234.4
-        },
-        {
-          "rank": 2,
-          "name": "Kids portable drawing board storage bag",
-          "cat": "Kids 3–6 • Organizare",
-          "imageUrl": "",
-          "opportunityRank": 14,
-          "opportunityScore": 27.3,
-          "launchScore": 22.8,
-          "margin": 8.1,
-          "roi": 17.7,
-          "profit": 10.4,
-          "confidenceScore": 22.9,
-          "confidence": "SCĂZUTĂ",
-          "testStatus": "HOLD",
-          "verdict": "NU TESTA ÎNCĂ",
-          "quantity": 0,
-          "blockers": [
-            "cerere România suficient validată pentru TEST",
-            "pricing România verificat",
-            "ofertă furnizor completă și verificată",
-            "review evidence verificat",
-            "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
-          ],
-          "gates": {
-            "passed": 2,
-            "total": 9
-          },
-          "commercialScore": 230.7
         },
         {
           "rank": 3,
@@ -141,6 +141,38 @@
         },
         {
           "rank": 4,
+          "name": "Kids visual timer board non electronic",
+          "cat": "Kids 3–6 • Educațional",
+          "imageUrl": "",
+          "opportunityRank": 14,
+          "opportunityScore": 28.5,
+          "launchScore": 22.7,
+          "margin": 8.2,
+          "roi": 18.1,
+          "profit": 9,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România suficient validată pentru TEST",
+            "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
+            "ofertă furnizor completă și verificată",
+            "review evidence verificat",
+            "market evidence concret suficient",
+            "marjă ≥20%, ROI ≥45%, profit pozitiv",
+            "Data Confidence ≥50"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 9
+          },
+          "commercialScore": 135.2
+        },
+        {
+          "rank": 5,
           "name": "Kids reusable sticker activity book",
           "cat": "Kids 3–6 • Educațional",
           "imageUrl": "",
@@ -170,38 +202,6 @@
             "total": 9
           },
           "commercialScore": 131.7
-        },
-        {
-          "rank": 5,
-          "name": "Kids visual timer board non electronic",
-          "cat": "Kids 3–6 • Educațional",
-          "imageUrl": "",
-          "opportunityRank": 15,
-          "opportunityScore": 27.2,
-          "launchScore": 22.7,
-          "margin": 8.2,
-          "roi": 18.1,
-          "profit": 9,
-          "confidenceScore": 22.9,
-          "confidence": "SCĂZUTĂ",
-          "testStatus": "HOLD",
-          "verdict": "NU TESTA ÎNCĂ",
-          "quantity": 0,
-          "blockers": [
-            "cerere România suficient validată pentru TEST",
-            "pricing România verificat",
-            "sales estimate cu confidence ≥75 sau vânzări observate",
-            "ofertă furnizor completă și verificată",
-            "review evidence verificat",
-            "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
-          ],
-          "gates": {
-            "passed": 1,
-            "total": 9
-          },
-          "commercialScore": 131
         },
         {
           "rank": 6,
@@ -1257,13 +1257,13 @@
           "name": "Car cup holder expander adjustable",
           "cat": "Auto",
           "imageUrl": "",
-          "opportunityRank": 12,
-          "opportunityScore": 28.7,
+          "opportunityRank": 15,
+          "opportunityScore": 28.1,
           "launchScore": 22,
           "margin": 6.9,
           "roi": 14.7,
           "profit": 9.6,
-          "confidenceScore": 25.7,
+          "confidenceScore": 34.3,
           "confidence": "SCĂZUTĂ",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
@@ -1281,7 +1281,7 @@
             "passed": 2,
             "total": 9
           },
-          "commercialScore": 228.9
+          "commercialScore": 231.9
         },
         {
           "rank": 4,
