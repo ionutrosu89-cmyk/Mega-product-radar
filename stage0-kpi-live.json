@@ -1,15 +1,15 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:24:46.961Z",
+  "updatedAt": "2026-08-23T19:32:00.491Z",
   "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
     "targetCount": 9,
-    "usefulEnrichments": 7,
-    "enrichmentSuccessPct": 77.8,
+    "usefulEnrichments": 8,
+    "enrichmentSuccessPct": 88.9,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": 0.0014,
+    "costPerUsefulEnrichmentEur": 0.0012,
     "cumulativeTestSpendConservativeEur": 1.8366
   },
   "criteria": {
@@ -31,10 +31,10 @@
     {
       "canonicalKey": "shoe-washing-laundry-bag-structured",
       "title": "Shoe washing laundry bag structured",
-      "useful": false,
+      "useful": true,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
-      "hasAmazonEvidence": false,
+      "hasAmazonEvidence": true,
       "hasRankedKeywords": false
     },
     {
@@ -43,7 +43,7 @@
       "useful": true,
       "romaniaDemandReady": true,
       "keywordVolume": 2400,
-      "hasAmazonEvidence": false,
+      "hasAmazonEvidence": true,
       "hasRankedKeywords": false
     },
     {
@@ -52,7 +52,7 @@
       "useful": true,
       "romaniaDemandReady": true,
       "keywordVolume": 30,
-      "hasAmazonEvidence": false,
+      "hasAmazonEvidence": true,
       "hasRankedKeywords": false
     },
     {
