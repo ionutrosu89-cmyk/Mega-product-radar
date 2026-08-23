@@ -17,28 +17,26 @@ for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
   'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','organic-rising-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','premium-ui.css','contrast-fix.css','login.html','login.js','account.html','account.js',
+  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-shell.js','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js',
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js',
-  'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','privacy.html','terms.html',
+  'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
-
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js']){
-  await fs.access(path.join(out,required));
-}
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js'])await fs.access(path.join(out,required));
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
+const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','account.html']);
 for(const entry of await fs.readdir(out)){
   if(!entry.endsWith('.html'))continue;
-  const target=path.join(out,entry);
-  let html=await fs.readFile(target,'utf8');
+  const target=path.join(out,entry);let html=await fs.readFile(target,'utf8');
   if(lightBodyPattern.test(html))html=html.replace(/<body(\s[^>]*)?>/i,(match,attrs='')=>/\bclass\s*=/.test(attrs)?match.replace(/class=(['"])(.*?)\1/i,(_,q,classes)=>`class=${q}${classes} app-light${q}`):`<body${attrs} class="app-light">`);
   if(!/contrast-fix\.css/i.test(html))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="contrast-fix.css"></head>');
+  if(customerPages.has(entry)&&!/customer-ui\.css/i.test(html))html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="customer-ui.css"></head>');
+  if(customerPages.has(entry)&&!/customer-shell\.js/i.test(html))html=html.replace(/<\/body>/i,'<script type="module" src="customer-shell.js"></script></body>');
   await fs.writeFile(target,html);
 }
-
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar 7.0 static site built: Radar 6 engine + SaaS Foundation 7.0 + Golden Pipeline + Commercial Hardening + Commercial SaaS pages + Free Top 25 niche hub + global contrast guard.');
+console.log('Mega Product Radar static site built: commercial SaaS + unified customer UX + evidence-safe decision engine.');
