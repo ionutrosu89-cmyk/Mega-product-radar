@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-23T19:57:59.423Z",
+  "updatedAt": "2026-08-23T20:37:52.208Z",
   "policy": "Alertele prioritizează atenția; nu reprezintă recomandare de cumpărare.",
   "stats": {
     "products": 10,
-    "high": 3
+    "high": 4
   },
   "items": [
     {
@@ -12,23 +12,28 @@
       "cat": "Auto",
       "imageUrl": "",
       "rank": 1,
-      "opportunityScore": 30,
+      "opportunityScore": 38.5,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 1"
+        },
+        {
+          "type": "LAUNCH_UP",
+          "severity": "HIGH",
+          "message": "Launch Score +6"
         }
       ],
-      "confidence": "SCĂZUTĂ"
+      "confidence": "MEDIE"
     },
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "imageUrl": "",
       "rank": 2,
-      "opportunityScore": 30,
+      "opportunityScore": 35.6,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -37,14 +42,14 @@
           "message": "A intrat/este în Top 2"
         }
       ],
-      "confidence": "SCĂZUTĂ"
+      "confidence": "MEDIE"
     },
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
       "imageUrl": "",
       "rank": 3,
-      "opportunityScore": 29.9,
+      "opportunityScore": 35.5,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -53,30 +58,35 @@
           "message": "A intrat/este în Top 3"
         }
       ],
-      "confidence": "SCĂZUTĂ"
+      "confidence": "MEDIE"
     },
     {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "imageUrl": "",
       "rank": 4,
-      "opportunityScore": 29.8,
+      "opportunityScore": 35.4,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
           "type": "TOP10",
           "severity": "MEDIUM",
           "message": "A intrat/este în Top 4"
+        },
+        {
+          "type": "LAUNCH_UP",
+          "severity": "HIGH",
+          "message": "Launch Score +6"
         }
       ],
-      "confidence": "SCĂZUTĂ"
+      "confidence": "MEDIE"
     },
     {
-      "name": "Shoe washing laundry bag structured",
-      "cat": "Laundry",
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
       "imageUrl": "",
       "rank": 5,
-      "opportunityScore": 29.7,
+      "opportunityScore": 34.7,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -85,11 +95,11 @@
           "message": "A intrat/este în Top 5"
         }
       ],
-      "confidence": "SCĂZUTĂ"
+      "confidence": "MEDIE"
     },
     {
-      "name": "Kids bed bedside organizer felt",
-      "cat": "Kids 3–6 • Cameră",
+      "name": "Shoe washing laundry bag structured",
+      "cat": "Laundry",
       "imageUrl": "",
       "rank": 6,
       "opportunityScore": 29.7,
@@ -104,8 +114,8 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Kids visual timer board non electronic",
-      "cat": "Kids 3–6 • Educațional",
+      "name": "Kids bed bedside organizer felt",
+      "cat": "Kids 3–6 • Cameră",
       "imageUrl": "",
       "rank": 7,
       "opportunityScore": 29.7,
@@ -120,11 +130,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
+      "name": "Kids visual timer board non electronic",
+      "cat": "Kids 3–6 • Educațional",
       "imageUrl": "",
       "rank": 8,
-      "opportunityScore": 29.6,
+      "opportunityScore": 29.7,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -136,11 +146,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
       "imageUrl": "",
       "rank": 9,
-      "opportunityScore": 29.4,
+      "opportunityScore": 29.6,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -152,11 +162,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Shower corner shelf adhesive no drill",
-      "cat": "Baie",
+      "name": "Desk drawer organizer modular trays",
+      "cat": "Birou",
       "imageUrl": "",
       "rank": 10,
-      "opportunityScore": 29.3,
+      "opportunityScore": 29.4,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {

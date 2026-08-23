@@ -1,13 +1,13 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:57:59.506Z",
+  "updatedAt": "2026-08-23T20:37:52.300Z",
   "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.",
   "stats": {
     "products": 65,
     "pricingVerified": 5,
     "salesVerified": 0,
     "supplierVerified": 0,
-    "reviewVerified": 1,
+    "reviewVerified": 2,
     "fullyVerified": 0,
     "withSupplierPartial": 5,
     "withPublicPricing": 5
@@ -23,36 +23,34 @@
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
       "goldenStage": "PROMISING",
-      "readiness": 25,
+      "readiness": 50,
       "gates": {
         "pricingVerified": true,
         "salesVerified": false,
         "supplierVerified": false,
-        "reviewVerified": false
+        "reviewVerified": true
       },
       "pricingStatus": "VERIFIED",
       "salesStatus": "PROXY_ONLY",
       "supplierStatus": "QUOTE_PARTIAL",
-      "reviewStatus": "MISSING",
+      "reviewStatus": "EVIDENCE_READY",
       "feedbackStatus": "NO_REAL_TEST",
       "missingEvidence": [
         "salesVerified",
-        "supplierVerified",
-        "reviewVerified"
+        "supplierVerified"
       ],
       "nextActions": [
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
-        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
       ],
       "proofSummary": {
-        "romaniaOffers": 2,
-        "romaniaDomains": 2,
+        "romaniaOffers": 3,
+        "romaniaDomains": 3,
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
-        "reviewSnippets": 0,
-        "reviewSources": 0
+        "reviewSnippets": 6,
+        "reviewSources": 2
       }
     },
     {
@@ -67,7 +65,7 @@
         "reviewVerified": false
       },
       "pricingStatus": "VERIFIED",
-      "salesStatus": "MISSING",
+      "salesStatus": "PROXY_ONLY",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
       "feedbackStatus": "NO_REAL_TEST",
@@ -103,7 +101,7 @@
         "reviewVerified": false
       },
       "pricingStatus": "VERIFIED",
-      "salesStatus": "MISSING",
+      "salesStatus": "PROXY_ONLY",
       "supplierStatus": "QUOTE_PARTIAL",
       "reviewStatus": "MISSING",
       "feedbackStatus": "NO_REAL_TEST",
@@ -157,8 +155,44 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
-        "reviewSnippets": 2,
-        "reviewSources": 1
+        "reviewSnippets": 4,
+        "reviewSources": 2
+      }
+    },
+    {
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "goldenStage": "PROMISING",
+      "readiness": 25,
+      "gates": {
+        "pricingVerified": true,
+        "salesVerified": false,
+        "supplierVerified": false,
+        "reviewVerified": false
+      },
+      "pricingStatus": "VERIFIED",
+      "salesStatus": "PROXY_ONLY",
+      "supplierStatus": "QUOTE_PARTIAL",
+      "reviewStatus": "MISSING",
+      "feedbackStatus": "NO_REAL_TEST",
+      "missingEvidence": [
+        "salesVerified",
+        "supplierVerified",
+        "reviewVerified"
+      ],
+      "nextActions": [
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
+        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
+      ],
+      "proofSummary": {
+        "romaniaOffers": 2,
+        "romaniaDomains": 2,
+        "salesObservations": 0,
+        "supplierQuotes": 1,
+        "completeSupplierQuotes": 0,
+        "reviewSnippets": 0,
+        "reviewSources": 0
       }
     },
     {
@@ -392,7 +426,7 @@
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
-      "goldenStage": "PROMISING",
+      "goldenStage": "DISCOVERED",
       "readiness": 0,
       "gates": {
         "pricingVerified": false,
@@ -422,42 +456,6 @@
         "romaniaDomains": 0,
         "salesObservations": 0,
         "supplierQuotes": 0,
-        "completeSupplierQuotes": 0,
-        "reviewSnippets": 0,
-        "reviewSources": 0
-      }
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "goldenStage": "DISCOVERED",
-      "readiness": 25,
-      "gates": {
-        "pricingVerified": true,
-        "salesVerified": false,
-        "supplierVerified": false,
-        "reviewVerified": false
-      },
-      "pricingStatus": "VERIFIED",
-      "salesStatus": "PROXY_ONLY",
-      "supplierStatus": "QUOTE_PARTIAL",
-      "reviewStatus": "MISSING",
-      "feedbackStatus": "NO_REAL_TEST",
-      "missingEvidence": [
-        "salesVerified",
-        "supplierVerified",
-        "reviewVerified"
-      ],
-      "nextActions": [
-        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
-        "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
-      ],
-      "proofSummary": {
-        "romaniaOffers": 2,
-        "romaniaDomains": 2,
-        "salesObservations": 0,
-        "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
         "reviewSnippets": 0,
         "reviewSources": 0

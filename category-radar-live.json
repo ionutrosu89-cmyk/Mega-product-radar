@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T19:58:41.898Z",
+  "updatedAt": "2026-08-23T20:38:36.517Z",
   "policy": "Category Radar separă oportunitățile pe categorie. categoryKey explicit și categoria sursă au prioritate față de cuvintele din numele produsului. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne strict.",
   "stats": {
     "categories": 24,
@@ -50,7 +50,7 @@
           "name": "Kids bed bedside organizer felt",
           "cat": "Kids 3–6 • Cameră",
           "imageUrl": "",
-          "opportunityRank": 6,
+          "opportunityRank": 7,
           "opportunityScore": 29.7,
           "launchScore": 22.7,
           "margin": 8.2,
@@ -80,7 +80,7 @@
           "name": "Kids visual timer board non electronic",
           "cat": "Kids 3–6 • Educațional",
           "imageUrl": "",
-          "opportunityRank": 7,
+          "opportunityRank": 8,
           "opportunityScore": 29.7,
           "launchScore": 22.7,
           "margin": 8.2,
@@ -108,68 +108,6 @@
         },
         {
           "rank": 3,
-          "name": "Kids portable drawing board storage bag",
-          "cat": "Kids 3–6 • Organizare",
-          "imageUrl": "",
-          "opportunityRank": 15,
-          "opportunityScore": 28.6,
-          "launchScore": 22.8,
-          "margin": 8.1,
-          "roi": 17.7,
-          "profit": 10.4,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
-          "testStatus": "HOLD",
-          "verdict": "NU TESTA ÎNCĂ",
-          "quantity": 0,
-          "blockers": [
-            "cerere România suficient validată pentru TEST",
-            "pricing România verificat",
-            "ofertă furnizor completă și verificată",
-            "review evidence verificat",
-            "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
-          ],
-          "gates": {
-            "passed": 2,
-            "total": 9
-          },
-          "commercialScore": 234.9
-        },
-        {
-          "rank": 4,
-          "name": "Kids car seat snack tray age 3 plus",
-          "cat": "Kids 3–6 • Travel",
-          "imageUrl": "",
-          "opportunityRank": 14,
-          "opportunityScore": 28.7,
-          "launchScore": 23,
-          "margin": 7.9,
-          "roi": 17.2,
-          "profit": 12.5,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
-          "testStatus": "HOLD",
-          "verdict": "NU TESTA ÎNCĂ",
-          "quantity": 0,
-          "blockers": [
-            "cerere România suficient validată pentru TEST",
-            "pricing România verificat",
-            "ofertă furnizor completă și verificată",
-            "review evidence verificat",
-            "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
-          ],
-          "gates": {
-            "passed": 2,
-            "total": 9
-          },
-          "commercialScore": 234.4
-        },
-        {
-          "rank": 5,
           "name": "Kids reusable sticker activity book",
           "cat": "Kids 3–6 • Educațional",
           "imageUrl": "",
@@ -199,6 +137,70 @@
             "total": 9
           },
           "commercialScore": 135.9
+        },
+        {
+          "rank": 4,
+          "name": "Kids portable drawing board storage bag",
+          "cat": "Kids 3–6 • Organizare",
+          "imageUrl": "",
+          "opportunityRank": 15,
+          "opportunityScore": 28.6,
+          "launchScore": 22.8,
+          "margin": 8.1,
+          "roi": 17.7,
+          "profit": 10.4,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România suficient validată pentru TEST",
+            "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
+            "ofertă furnizor completă și verificată",
+            "review evidence verificat",
+            "market evidence concret suficient",
+            "marjă ≥20%, ROI ≥45%, profit pozitiv",
+            "Data Confidence ≥50"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 9
+          },
+          "commercialScore": 134.9
+        },
+        {
+          "rank": 5,
+          "name": "Kids car seat snack tray age 3 plus",
+          "cat": "Kids 3–6 • Travel",
+          "imageUrl": "",
+          "opportunityRank": 14,
+          "opportunityScore": 28.7,
+          "launchScore": 23,
+          "margin": 7.9,
+          "roi": 17.2,
+          "profit": 12.5,
+          "confidenceScore": 34.3,
+          "confidence": "SCĂZUTĂ",
+          "testStatus": "HOLD",
+          "verdict": "NU TESTA ÎNCĂ",
+          "quantity": 0,
+          "blockers": [
+            "cerere România suficient validată pentru TEST",
+            "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
+            "ofertă furnizor completă și verificată",
+            "review evidence verificat",
+            "market evidence concret suficient",
+            "marjă ≥20%, ROI ≥45%, profit pozitiv",
+            "Data Confidence ≥50"
+          ],
+          "gates": {
+            "passed": 1,
+            "total": 9
+          },
+          "commercialScore": 134.4
         },
         {
           "rank": 6,
@@ -273,29 +275,27 @@
           "cat": "Casă",
           "imageUrl": "",
           "opportunityRank": 2,
-          "opportunityScore": 30,
+          "opportunityScore": 35.6,
           "launchScore": 23.2,
           "margin": 8.8,
           "roi": 19.6,
           "profit": 10.5,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
+          "confidenceScore": 54.9,
+          "confidence": "MEDIE",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
-            "cerere România suficient validată pentru TEST",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 3,
+            "passed": 5,
             "total": 9
           },
-          "commercialScore": 336.9
+          "commercialScore": 544.9
         },
         {
           "rank": 2,
@@ -754,7 +754,7 @@
           "name": "Shower corner shelf adhesive no drill",
           "cat": "Baie",
           "imageUrl": "",
-          "opportunityRank": 10,
+          "opportunityRank": 11,
           "opportunityScore": 29.3,
           "launchScore": 22.1,
           "margin": 6.9,
@@ -1044,7 +1044,7 @@
           "name": "Shoe washing laundry bag structured",
           "cat": "Laundry",
           "imageUrl": "",
-          "opportunityRank": 5,
+          "opportunityRank": 6,
           "opportunityScore": 29.7,
           "launchScore": 22.7,
           "margin": 8.2,
@@ -1190,42 +1190,40 @@
           "cat": "Auto",
           "imageUrl": "",
           "opportunityRank": 1,
-          "opportunityScore": 30,
-          "launchScore": 23.9,
+          "opportunityScore": 38.5,
+          "launchScore": 29.9,
           "margin": 10.2,
           "roi": 23.5,
           "profit": 9.1,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
+          "confidenceScore": 64.4,
+          "confidence": "MEDIE",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
             "ofertă furnizor completă și verificată",
-            "review evidence verificat",
             "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 4,
+            "passed": 6,
             "total": 9
           },
-          "commercialScore": 440.5
+          "commercialScore": 652.3
         },
         {
           "rank": 2,
           "name": "Car cup holder expander adjustable",
           "cat": "Auto",
           "imageUrl": "",
-          "opportunityRank": 12,
-          "opportunityScore": 29.1,
+          "opportunityRank": 5,
+          "opportunityScore": 34.7,
           "launchScore": 22,
           "margin": 6.9,
           "roi": 14.7,
           "profit": 9.6,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
+          "confidenceScore": 54.9,
+          "confidence": "MEDIE",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
@@ -1233,14 +1231,13 @@
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 4,
+            "passed": 5,
             "total": 9
           },
-          "commercialScore": 432
+          "commercialScore": 540.1
         },
         {
           "rank": 3,
@@ -1248,37 +1245,35 @@
           "cat": "Auto",
           "imageUrl": "",
           "opportunityRank": 3,
-          "opportunityScore": 29.9,
+          "opportunityScore": 35.5,
           "launchScore": 23.1,
           "margin": 9.3,
           "roi": 21.1,
           "profit": 7.4,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
+          "confidenceScore": 54.9,
+          "confidence": "MEDIE",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
-            "cerere România suficient validată pentru TEST",
             "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 2,
+            "passed": 4,
             "total": 9
           },
-          "commercialScore": 238.2
+          "commercialScore": 446.3
         },
         {
           "rank": 4,
           "name": "Car trunk side storage net",
           "cat": "Auto",
           "imageUrl": "",
-          "opportunityRank": 8,
+          "opportunityRank": 9,
           "opportunityScore": 29.6,
           "launchScore": 23.2,
           "margin": 8.8,
@@ -1291,7 +1286,6 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
-            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -1299,10 +1293,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 2,
+            "passed": 3,
             "total": 9
           },
-          "commercialScore": 236.8
+          "commercialScore": 336.8
         },
         {
           "rank": 5,
@@ -1537,7 +1531,7 @@
           "name": "Dog car door protector set",
           "cat": "Pet",
           "imageUrl": "",
-          "opportunityRank": 11,
+          "opportunityRank": 12,
           "opportunityScore": 29.2,
           "launchScore": 22,
           "margin": 6.9,
@@ -1716,34 +1710,33 @@
           "cat": "Birou",
           "imageUrl": "",
           "opportunityRank": 4,
-          "opportunityScore": 29.8,
-          "launchScore": 23.3,
+          "opportunityScore": 35.4,
+          "launchScore": 29.3,
           "margin": 9.4,
           "roi": 21.1,
           "profit": 8.3,
-          "confidenceScore": 34.3,
-          "confidence": "SCĂZUTĂ",
+          "confidenceScore": 59.9,
+          "confidence": "MEDIE",
           "testStatus": "HOLD",
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
             "ofertă furnizor completă și verificată",
             "market evidence concret suficient",
-            "marjă ≥20%, ROI ≥45%, profit pozitiv",
-            "Data Confidence ≥50"
+            "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 5,
+            "passed": 6,
             "total": 9
           },
-          "commercialScore": 538.3
+          "commercialScore": 648.1
         },
         {
           "rank": 2,
           "name": "Desk drawer organizer modular trays",
           "cat": "Birou",
           "imageUrl": "",
-          "opportunityRank": 9,
+          "opportunityRank": 10,
           "opportunityScore": 29.4,
           "launchScore": 22.2,
           "margin": 7.5,

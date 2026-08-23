@@ -1,118 +1,69 @@
 {
   "version": "3.0",
-  "updatedAt": "2026-08-23T19:58:41.828Z",
+  "updatedAt": "2026-08-23T20:38:36.441Z",
   "source": "FINALIST_EVIDENCE_QUEUE",
   "status": "READY_FOR_REAL_SUPPLIER_COLLECTION",
   "stats": {
     "queueCandidates": 3,
-    "authorizedProducts": 3,
-    "openSupplierCases": 3,
-    "targetOffers": 15
+    "authorizedProducts": 2,
+    "openSupplierCases": 2,
+    "targetOffers": 10
   },
   "cases": [
     {
-      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
-      "title": "Car sunglasses magnetic visor holder",
+      "canonicalKey": "reusable-furniture-moving-sliders-kit",
+      "title": "Reusable furniture moving sliders kit",
+      "category": "Casă",
+      "goldenRank": 4,
+      "status": "AWAITING_REAL_QUOTES",
+      "targetOfferCount": 5,
+      "minimumComparableOffers": 3,
+      "evidencePolicy": "Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.",
+      "requiredFields": [
+        "supplier_name",
+        "platform",
+        "direct_source_url",
+        "unit_price",
+        "currency",
+        "moq",
+        "sample_cost",
+        "lead_time_days",
+        "incoterm",
+        "shipping_quote_or_terms_to_romania",
+        "certifications_or_compliance_docs_when_applicable",
+        "quoted_at",
+        "manual_verification_at"
+      ],
+      "comparisonDimensions": [
+        "unit_price",
+        "moq",
+        "sample_cost",
+        "lead_time_days",
+        "shipping_to_romania",
+        "incoterm",
+        "supplier_history",
+        "trade_assurance_or_equivalent",
+        "certification_fit",
+        "communication_quality"
+      ],
+      "hardBlocks": [
+        "missing direct supplier source URL",
+        "missing quoted unit price/currency",
+        "missing MOQ",
+        "missing Romania shipping terms or quote",
+        "missing lead time",
+        "required compliance evidence missing where applicable",
+        "quote not manually verified"
+      ],
+      "landedCostEligible": false,
+      "testGateEligible": false,
+      "buyGateEligible": false
+    },
+    {
+      "canonicalKey": "car-cup-holder-expander-adjustable",
+      "title": "Car cup holder expander adjustable",
       "category": "Auto",
-      "goldenRank": 2,
-      "status": "AWAITING_REAL_QUOTES",
-      "targetOfferCount": 5,
-      "minimumComparableOffers": 3,
-      "evidencePolicy": "Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.",
-      "requiredFields": [
-        "supplier_name",
-        "platform",
-        "direct_source_url",
-        "unit_price",
-        "currency",
-        "moq",
-        "sample_cost",
-        "lead_time_days",
-        "incoterm",
-        "shipping_quote_or_terms_to_romania",
-        "certifications_or_compliance_docs_when_applicable",
-        "quoted_at",
-        "manual_verification_at"
-      ],
-      "comparisonDimensions": [
-        "unit_price",
-        "moq",
-        "sample_cost",
-        "lead_time_days",
-        "shipping_to_romania",
-        "incoterm",
-        "supplier_history",
-        "trade_assurance_or_equivalent",
-        "certification_fit",
-        "communication_quality"
-      ],
-      "hardBlocks": [
-        "missing direct supplier source URL",
-        "missing quoted unit price/currency",
-        "missing MOQ",
-        "missing Romania shipping terms or quote",
-        "missing lead time",
-        "required compliance evidence missing where applicable",
-        "quote not manually verified"
-      ],
-      "landedCostEligible": false,
-      "testGateEligible": false,
-      "buyGateEligible": false
-    },
-    {
-      "canonicalKey": "under-desk-headphone-hanger-clamp",
-      "title": "Under desk headphone hanger clamp",
-      "category": "Birou",
-      "goldenRank": 1,
-      "status": "AWAITING_REAL_QUOTES",
-      "targetOfferCount": 5,
-      "minimumComparableOffers": 3,
-      "evidencePolicy": "Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.",
-      "requiredFields": [
-        "supplier_name",
-        "platform",
-        "direct_source_url",
-        "unit_price",
-        "currency",
-        "moq",
-        "sample_cost",
-        "lead_time_days",
-        "incoterm",
-        "shipping_quote_or_terms_to_romania",
-        "certifications_or_compliance_docs_when_applicable",
-        "quoted_at",
-        "manual_verification_at"
-      ],
-      "comparisonDimensions": [
-        "unit_price",
-        "moq",
-        "sample_cost",
-        "lead_time_days",
-        "shipping_to_romania",
-        "incoterm",
-        "supplier_history",
-        "trade_assurance_or_equivalent",
-        "certification_fit",
-        "communication_quality"
-      ],
-      "hardBlocks": [
-        "missing direct supplier source URL",
-        "missing quoted unit price/currency",
-        "missing MOQ",
-        "missing Romania shipping terms or quote",
-        "missing lead time",
-        "required compliance evidence missing where applicable",
-        "quote not manually verified"
-      ],
-      "landedCostEligible": false,
-      "testGateEligible": false,
-      "buyGateEligible": false
-    },
-    {
-      "canonicalKey": "kids-bed-bedside-organizer-felt",
-      "title": "Kids bed bedside organizer felt",
-      "category": "Kids 3–6 • Cameră",
-      "goldenRank": 5,
+      "goldenRank": 3,
       "status": "AWAITING_REAL_QUOTES",
       "targetOfferCount": 5,
       "minimumComparableOffers": 3,
@@ -158,6 +109,6 @@
       "buyGateEligible": false
     }
   ],
-  "nextAction": "Collect 3–5 real comparable supplier quotes for Car sunglasses magnetic visor holder; do not calculate confirmed landed cost until at least one complete quote is manually verified.",
+  "nextAction": "Collect 3–5 real comparable supplier quotes for Reusable furniture moving sliders kit; do not calculate confirmed landed cost until at least one complete quote is manually verified.",
   "policy": "Supplier Intelligence V3 never fabricates suppliers, quotes, certifications, shipping or landed cost. It cannot promote TEST or BUY. Confirmed landed cost remains blocked until a complete real supplier quote is manually verified."
 }

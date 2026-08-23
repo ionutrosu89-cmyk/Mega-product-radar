@@ -1,15 +1,15 @@
 {
   "version": "2.5",
-  "updatedAt": "2026-08-23T19:57:59.588Z",
+  "updatedAt": "2026-08-23T20:37:52.392Z",
   "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
   "stats": {
     "products": 65,
     "salesHighConfidence": 0,
-    "salesMediumConfidence": 1,
-    "romaniaDemandReady": 8,
+    "salesMediumConfidence": 2,
+    "romaniaDemandReady": 10,
     "providerVerifiedRomaniaDemand": 8,
     "reverseKeywordProviderReady": 8,
-    "reviewOpportunityReady": 1,
+    "reviewOpportunityReady": 2,
     "historicalTrackable": 16,
     "niches": 17,
     "completedRealTests": 0
@@ -243,21 +243,21 @@
       "cat": "Auto",
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
+        "status": "ESTIMATED_MEDIUM_CONFIDENCE",
         "estimatedUnits30d": 6,
-        "rangeLow": 2,
-        "rangeHigh": 10,
-        "confidence": 47,
+        "rangeLow": 3,
+        "rangeHigh": 9,
+        "confidence": 60,
         "inputs": {
           "keywordVolumeVerified": true,
           "keywordVolume": 210,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 7,
-          "trend": "COOLING",
+          "reviewSources": 2,
+          "reviewSnippets": 6,
+          "historicalSnapshots": 8,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -265,16 +265,16 @@
       "romaniaDemand": {
         "version": "1.0",
         "status": "PROVIDER_VERIFIED",
-        "score": 61.1,
+        "score": 85.1,
         "providerVerified": true,
         "marketEvidenceReady": false,
         "keywordVolume": 210,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
+        "romaniaDomains": 3,
+        "romaniaObservedLinks": 3,
         "romaniaResultProxy": 0,
         "pricingVerified": true,
-        "pricingDomains": 2,
-        "evidenceReady": false,
+        "pricingDomains": 3,
+        "evidenceReady": true,
         "readyForTestDemandGate": true,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
@@ -293,17 +293,17 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 7,
+        "snapshotCount": 8,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 85.8,
+        "confidence": 85.9,
         "deltas": {
           "demand": 0,
-          "launch": 0,
+          "launch": 6,
           "marketGap": 0,
           "competitionPressure": 0
         },
-        "keywordHistoryPoints": 2,
+        "keywordHistoryPoints": 3,
         "priceHistoryPoints": 0,
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
@@ -315,7 +315,7 @@
           "Auto"
         ],
         "verifiedKeywordCount": 1,
-        "competitorEvidenceRows": 0,
+        "competitorEvidenceRows": 3,
         "searchVolume": 210,
         "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
         "needsAsinKeywordProvider": true,
@@ -323,12 +323,24 @@
       },
       "reviewOpportunity": {
         "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
+        "status": "EVIDENCE_READY",
+        "opportunityScore": 100,
+        "sourceCount": 2,
+        "snippetCount": 6,
+        "negativeThemes": [
+          "retention on bumps",
+          "magnet strength",
+          "frame retention",
+          "vehicle compatibility",
+          "camera obstruction"
+        ],
+        "topImprovementThemes": [
+          "retention on bumps",
+          "magnet strength",
+          "frame retention",
+          "vehicle compatibility",
+          "camera obstruction"
+        ],
         "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
       },
       "calibrationEngine": {
@@ -347,7 +359,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 12,
+        "confidence": 20,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -356,7 +368,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 6,
+          "historicalSnapshots": 7,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -364,18 +376,18 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 10,
+        "status": "MARKET_EVIDENCE_READY",
+        "score": 26,
         "providerVerified": false,
-        "marketEvidenceReady": false,
+        "marketEvidenceReady": true,
         "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
+        "romaniaDomains": 2,
+        "romaniaObservedLinks": 2,
         "romaniaResultProxy": 0,
         "pricingVerified": true,
         "pricingDomains": 2,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
+        "evidenceReady": true,
+        "readyForTestDemandGate": true,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "nicheIntelligence": {
@@ -393,10 +405,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 6,
+        "snapshotCount": 7,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 65.8,
+        "confidence": 65.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -409,13 +421,13 @@
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "PROXY_ONLY",
+        "status": "COMPETITOR_EVIDENCE_READY",
         "seedKeywords": [
           "Reusable furniture moving sliders kit",
           "Casă"
         ],
         "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
+        "competitorEvidenceRows": 2,
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
@@ -447,7 +459,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 12,
+        "confidence": 20,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -456,7 +468,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 6,
+          "historicalSnapshots": 7,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -464,18 +476,18 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "INSUFFICIENT",
-        "score": 10,
+        "status": "MARKET_EVIDENCE_READY",
+        "score": 26,
         "providerVerified": false,
-        "marketEvidenceReady": false,
+        "marketEvidenceReady": true,
         "keywordVolume": null,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
+        "romaniaDomains": 2,
+        "romaniaObservedLinks": 2,
         "romaniaResultProxy": 0,
         "pricingVerified": true,
         "pricingDomains": 2,
-        "evidenceReady": false,
-        "readyForTestDemandGate": false,
+        "evidenceReady": true,
+        "readyForTestDemandGate": true,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "nicheIntelligence": {
@@ -493,10 +505,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 6,
+        "snapshotCount": 7,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 65.8,
+        "confidence": 65.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -509,13 +521,13 @@
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "PROXY_ONLY",
+        "status": "COMPETITOR_EVIDENCE_READY",
         "seedKeywords": [
           "Car headrest hidden hook premium",
           "Auto"
         ],
         "verifiedKeywordCount": 0,
-        "competitorEvidenceRows": 0,
+        "competitorEvidenceRows": 2,
         "searchVolume": null,
         "provider": "NONE",
         "needsAsinKeywordProvider": true,
@@ -547,17 +559,17 @@
         "estimatedUnits30d": 1,
         "rangeLow": 1,
         "rangeHigh": 1,
-        "confidence": 57,
+        "confidence": 60,
         "inputs": {
           "keywordVolumeVerified": true,
           "keywordVolume": 20,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
-          "reviewSources": 1,
-          "reviewSnippets": 2,
-          "historicalSnapshots": 7,
-          "trend": "COOLING",
+          "reviewSources": 2,
+          "reviewSnippets": 4,
+          "historicalSnapshots": 8,
+          "trend": "STABIL",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -565,16 +577,16 @@
       "romaniaDemand": {
         "version": "1.0",
         "status": "PROVIDER_VERIFIED",
-        "score": 39.1,
+        "score": 55.1,
         "providerVerified": true,
         "marketEvidenceReady": false,
         "keywordVolume": 20,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
+        "romaniaDomains": 2,
+        "romaniaObservedLinks": 2,
         "romaniaResultProxy": 0,
         "pricingVerified": true,
         "pricingDomains": 2,
-        "evidenceReady": false,
+        "evidenceReady": true,
         "readyForTestDemandGate": true,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
@@ -593,17 +605,17 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 7,
+        "snapshotCount": 8,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 85.8,
+        "confidence": 85.9,
         "deltas": {
           "demand": 0,
-          "launch": 0,
+          "launch": 6,
           "marketGap": 0,
           "competitionPressure": 0
         },
-        "keywordHistoryPoints": 2,
+        "keywordHistoryPoints": 3,
         "priceHistoryPoints": 0,
         "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
       },
@@ -615,7 +627,7 @@
           "Birou"
         ],
         "verifiedKeywordCount": 1,
-        "competitorEvidenceRows": 0,
+        "competitorEvidenceRows": 2,
         "searchVolume": 20,
         "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
         "needsAsinKeywordProvider": true,
@@ -624,9 +636,9 @@
       "reviewOpportunity": {
         "version": "1.0",
         "status": "EVIDENCE_READY",
-        "opportunityScore": 73,
-        "sourceCount": 1,
-        "snippetCount": 2,
+        "opportunityScore": 92,
+        "sourceCount": 2,
+        "snippetCount": 4,
         "negativeThemes": [
           "robustness",
           "desk grip"
@@ -635,6 +647,106 @@
           "robustness",
           "desk grip"
         ],
+        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
+      },
+      "calibrationEngine": {
+        "version": "1.0",
+        "status": "NO_REAL_TEST",
+        "completedTests": 0,
+        "predictionError": null
+      }
+    },
+    {
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "salesEstimation": {
+        "version": "1.0",
+        "status": "ESTIMATED_LOW_CONFIDENCE",
+        "estimatedUnits30d": 12,
+        "rangeLow": 7,
+        "rangeHigh": 17,
+        "confidence": 50,
+        "inputs": {
+          "keywordVolumeVerified": true,
+          "keywordVolume": 390,
+          "foreignDomains": 0,
+          "foreignLinks": 0,
+          "demandScore": 0,
+          "reviewSources": 0,
+          "reviewSnippets": 0,
+          "historicalSnapshots": 8,
+          "trend": "STABIL",
+          "actualSalesObserved": false
+        },
+        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
+      },
+      "romaniaDemand": {
+        "version": "1.0",
+        "status": "PROVIDER_VERIFIED",
+        "score": 81,
+        "providerVerified": true,
+        "marketEvidenceReady": false,
+        "keywordVolume": 390,
+        "romaniaDomains": 2,
+        "romaniaObservedLinks": 2,
+        "romaniaResultProxy": 0,
+        "pricingVerified": true,
+        "pricingDomains": 2,
+        "evidenceReady": true,
+        "readyForTestDemandGate": true,
+        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
+      },
+      "nicheIntelligence": {
+        "version": "1.0",
+        "products": 5,
+        "estimatedUnitsMedian": 12,
+        "medianPriceRon": 49.99,
+        "medianReviewSnippets": 0,
+        "medianRomaniaDemandScore": 55,
+        "top3EstimatedSalesConcentrationPct": 100,
+        "highConfidenceSalesModels": 0,
+        "providerVerifiedDemandProducts": 3,
+        "nicheScore": 34.8,
+        "status": "TRACKABLE"
+      },
+      "historicalIntelligence": {
+        "version": "1.0",
+        "snapshotCount": 8,
+        "observedDays": 7.9,
+        "direction": "STABLE",
+        "confidence": 85.9,
+        "deltas": {
+          "demand": 0,
+          "launch": 0,
+          "marketGap": 0,
+          "competitionPressure": 0
+        },
+        "keywordHistoryPoints": 3,
+        "priceHistoryPoints": 0,
+        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
+      },
+      "reverseKeywordIntelligence": {
+        "version": "1.0",
+        "status": "SEED_PROVIDER_READY",
+        "seedKeywords": [
+          "Car cup holder expander adjustable",
+          "Auto"
+        ],
+        "verifiedKeywordCount": 1,
+        "competitorEvidenceRows": 2,
+        "searchVolume": 390,
+        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "needsAsinKeywordProvider": true,
+        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
+      },
+      "reviewOpportunity": {
+        "version": "1.0",
+        "status": "MISSING",
+        "opportunityScore": 0,
+        "sourceCount": 0,
+        "snippetCount": 0,
+        "negativeThemes": [],
+        "topImprovementThemes": [],
         "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
       },
       "calibrationEngine": {
@@ -702,7 +814,7 @@
         "snapshotCount": 6,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 65.8,
+        "confidence": 65.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -802,7 +914,7 @@
         "snapshotCount": 7,
         "observedDays": 4,
         "direction": "STABLE",
-        "confidence": 77.9,
+        "confidence": 78,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1002,7 +1114,7 @@
         "snapshotCount": 7,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 85.8,
+        "confidence": 85.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1102,7 +1214,7 @@
         "snapshotCount": 9,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 85.8,
+        "confidence": 85.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1202,7 +1314,7 @@
         "snapshotCount": 9,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 85.8,
+        "confidence": 85.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1302,7 +1414,7 @@
         "snapshotCount": 6,
         "observedDays": 7.9,
         "direction": "STABLE",
-        "confidence": 65.8,
+        "confidence": 65.9,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -1324,106 +1436,6 @@
         "competitorEvidenceRows": 0,
         "searchVolume": null,
         "provider": "NONE",
-        "needsAsinKeywordProvider": true,
-        "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
-      },
-      "reviewOpportunity": {
-        "version": "1.0",
-        "status": "MISSING",
-        "opportunityScore": 0,
-        "sourceCount": 0,
-        "snippetCount": 0,
-        "negativeThemes": [],
-        "topImprovementThemes": [],
-        "policy": "Review opportunity is based only on concrete review evidence. Theme frequency is not invented when snippet-level counts are unavailable."
-      },
-      "calibrationEngine": {
-        "version": "1.0",
-        "status": "NO_REAL_TEST",
-        "completedTests": 0,
-        "predictionError": null
-      }
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "salesEstimation": {
-        "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 12,
-        "rangeLow": 5,
-        "rangeHigh": 19,
-        "confidence": 42,
-        "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 390,
-          "foreignDomains": 0,
-          "foreignLinks": 0,
-          "demandScore": 0,
-          "reviewSources": 0,
-          "reviewSnippets": 0,
-          "historicalSnapshots": 7,
-          "trend": "STABIL",
-          "actualSalesObserved": false
-        },
-        "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
-      },
-      "romaniaDemand": {
-        "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 65,
-        "providerVerified": true,
-        "marketEvidenceReady": false,
-        "keywordVolume": 390,
-        "romaniaDomains": 0,
-        "romaniaObservedLinks": 0,
-        "romaniaResultProxy": 0,
-        "pricingVerified": true,
-        "pricingDomains": 2,
-        "evidenceReady": false,
-        "readyForTestDemandGate": true,
-        "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
-      },
-      "nicheIntelligence": {
-        "version": "1.0",
-        "products": 5,
-        "estimatedUnitsMedian": 12,
-        "medianPriceRon": 49.99,
-        "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 55,
-        "top3EstimatedSalesConcentrationPct": 100,
-        "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 3,
-        "nicheScore": 34.8,
-        "status": "TRACKABLE"
-      },
-      "historicalIntelligence": {
-        "version": "1.0",
-        "snapshotCount": 7,
-        "observedDays": 7.9,
-        "direction": "STABLE",
-        "confidence": 85.8,
-        "deltas": {
-          "demand": 0,
-          "launch": 0,
-          "marketGap": 0,
-          "competitionPressure": 0
-        },
-        "keywordHistoryPoints": 2,
-        "priceHistoryPoints": 0,
-        "policy": "Historical intelligence uses stored snapshots only. Missing history remains unknown; no synthetic historical points are created."
-      },
-      "reverseKeywordIntelligence": {
-        "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
-        "seedKeywords": [
-          "Car cup holder expander adjustable",
-          "Auto"
-        ],
-        "verifiedKeywordCount": 1,
-        "competitorEvidenceRows": 0,
-        "searchVolume": 390,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
