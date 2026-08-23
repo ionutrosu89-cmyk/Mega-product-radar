@@ -23,7 +23,19 @@ if(!eligible.length){
   process.exit(0);
 }
 
-const scoped={...original,products:eligible};
+const originalByKey=new Map(allProducts.map(p=>[normalizeProductKey(p?.name),p]));
+// provider-intelligence-v26 currently allocates limited Amazon calls by goldenPipeline.rank.
+// In the isolated Stage 0 scope only, map Budget Brain paidDataPriority to that rank so
+// scarce paid calls follow the authorized order. The original Golden Pipeline rank is
+// restored before any result is merged back into the full market dataset.
+const scopedProducts=eligible.map((p,index)=>({
+  ...p,
+  goldenPipeline:{
+    ...(p?.goldenPipeline||{}),
+    rank:Number(p?.goldenPipeline?.paidDataPriority||index+1)
+  }
+}));
+const scoped={...original,products:scopedProducts};
 await fs.writeFile(MARKET,JSON.stringify(scoped,null,2)+'\n');
 
 function runProvider(){
@@ -41,7 +53,11 @@ try{
   await runProvider();
   const enriched=JSON.parse(await fs.readFile(MARKET,'utf8'));
   const byKey=new Map((Array.isArray(enriched.products)?enriched.products:[]).map(p=>[normalizeProductKey(p?.name),p]));
-  const merged=allProducts.map(p=>byKey.get(normalizeProductKey(p?.name))||p);
+  const merged=allProducts.map(p=>{
+    const enrichedProduct=byKey.get(normalizeProductKey(p?.name));
+    if(!enrichedProduct)return p;
+    return {...enrichedProduct,goldenPipeline:p?.goldenPipeline};
+  });
   const finalData={...original,...enriched,products:merged};
   await fs.writeFile(MARKET,JSON.stringify(finalData,null,2)+'\n');
 
@@ -54,7 +70,11 @@ try{
       name:p?.name||'',
       paidDataPriority:Number(p?.goldenPipeline?.paidDataPriority||999999)
     }));
-    out.policy='Paid deep provider enrichment is executed only against the current Supabase Stage 0 Budget Brain allowlist, ordered by paidDataPriority before limited paid calls are allocated.';
+    out.items=(Array.isArray(out.items)?out.items:[]).map(item=>{
+      const source=originalByKey.get(normalizeProductKey(item?.name));
+      return {...item,rank:source?.goldenPipeline?.rank??item?.rank??null};
+    });
+    out.policy='Paid deep provider enrichment is executed only against the current Supabase Stage 0 Budget Brain allowlist. Limited provider calls follow paidDataPriority in an isolated scope; original Golden Pipeline ranks are restored before results are persisted.';
     await fs.writeFile(PROVIDER_OUT,JSON.stringify(out,null,2)+'\n');
   }catch{}
 
