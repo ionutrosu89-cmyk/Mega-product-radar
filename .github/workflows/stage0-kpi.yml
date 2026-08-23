@@ -1,0 +1,44 @@
+name: Stage 0 KPI Gate
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Mega Product Radar Scan"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage0-kpi-gate
+  cancel-in-progress: true
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Evaluate Stage 0 cost and enrichment quality
+        run: node scripts/stage0-kpi-evaluator.mjs
+      - name: Persist KPI verdict
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stage0-kpi-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Stage 0 KPI verdict"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "No Stage 0 KPI changes to commit."
+          fi
