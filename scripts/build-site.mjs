@@ -21,14 +21,14 @@ for(const file of [
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','seller-preferences.js','journey-events.js',
   'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js',
-  'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js',
+  'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js','academy.html','academy.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js'])await fs.access(path.join(out,required));
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js','academy.html','academy.js'])await fs.access(path.join(out,required));
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
-const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','account.html']);
+const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','academy.html','account.html']);
 for(const entry of await fs.readdir(out)){
   if(!entry.endsWith('.html'))continue;
   const target=path.join(out,entry);let html=await fs.readFile(target,'utf8');
