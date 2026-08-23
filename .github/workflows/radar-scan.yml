@@ -137,6 +137,12 @@ jobs:
       - name: Finalize Golden Product Pipeline
         if: always()
         run: node scripts/golden-product-pipeline.mjs --phase=final
+      - name: Build Finalist Evidence Queue
+        if: always()
+        run: node scripts/finalist-evidence-queue.mjs
+      - name: Build Supplier Intelligence V3 readiness
+        if: always()
+        run: node scripts/supplier-intelligence-v3.mjs
       - name: Build Category Radar
         if: always()
         run: node scripts/category-radar-postprocess.mjs
@@ -154,7 +160,7 @@ jobs:
         run: |
           set -e
           mkdir -p /tmp/radar-output
-          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json provider-intelligence-live.json provider-intelligence-cache.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json dataforseo-cache.json paid-budget-live.json paid-budget-cap.json stage0-budget-brain-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
+          for f in radar-live.json radar-history.json discovery-live.json discovery-history.json organic-rising-live.json organic-rising-history.json market-intelligence-live.json market-intelligence-history.json intelligence-ecosystem-live.json provider-intelligence-live.json provider-intelligence-cache.json watchlist-live.json alerts-live.json validation-queue-live.json data-confidence-live.json category-radar-live.json free-readiness-live.json golden-pipeline-live.json finalist-evidence-queue-live.json supplier-intelligence-v3-live.json dataforseo-cache.json paid-budget-live.json paid-budget-cap.json stage0-budget-brain-live.json commercial-hardening-live.json commercial-observations.json scan-status.json; do
             if [ -f "$f" ]; then cp "$f" "/tmp/radar-output/$f"; fi
           done
           git fetch origin main
