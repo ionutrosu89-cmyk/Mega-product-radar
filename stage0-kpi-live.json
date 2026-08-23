@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T18:37:46.889Z",
+  "updatedAt": "2026-08-23T18:43:31.373Z",
   "verdict": "STAGE0_HEALTHY_MANUAL_REVIEW",
   "manualPromotionRequired": true,
   "metrics": {
@@ -10,7 +10,7 @@
     "enrichmentSuccessPct": 100,
     "runCostConservativeEur": 0.0099,
     "costPerUsefulEnrichmentEur": 0.0025,
-    "cumulativeTestSpendConservativeEur": 1.6071
+    "cumulativeTestSpendConservativeEur": 1.617
   },
   "criteria": {
     "minEnrichmentSuccessPct": 50,
@@ -27,14 +27,43 @@
     "noCostAnomaly": true
   },
   "blockers": [],
-  "evidence": {
-    "budgetBrainTargets": 4,
-    "romaniaDemandReady": 4,
-    "amazonEnriched": 3,
-    "salesHighConfidence": 3,
-    "providerPaidCalls": 3,
-    "providerRunCostUsd": 0.0099,
-    "costAnomalyCount": 0
-  },
-  "policy": "Bootstrap verdict from the verified 2026-08-23 Stage 0 run using the same thresholds as scripts/stage0-kpi-evaluator.mjs. Future verdicts are generated automatically after Radar Scan. The 100-candidate Stage 0 universe lives in Supabase; Stage 1 promotion remains manual and commercial TEST/BUY gates remain unchanged."
+  "evaluated": [
+    {
+      "canonicalKey": "under-desk-headphone-hanger-clamp",
+      "title": "Under desk headphone hanger clamp",
+      "useful": true,
+      "romaniaDemandReady": true,
+      "keywordVolume": 20,
+      "hasAmazonEvidence": true,
+      "hasRankedKeywords": true
+    },
+    {
+      "canonicalKey": "car-trunk-side-storage-net",
+      "title": "Car trunk side storage net",
+      "useful": true,
+      "romaniaDemandReady": true,
+      "keywordVolume": 480,
+      "hasAmazonEvidence": true,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "desk-drawer-organizer-modular-trays",
+      "title": "Desk drawer organizer modular trays",
+      "useful": true,
+      "romaniaDemandReady": true,
+      "keywordVolume": 1300,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "magnetic-cable-organizer-clips-set",
+      "title": "Magnetic cable organizer clips set",
+      "useful": true,
+      "romaniaDemandReady": true,
+      "keywordVolume": 20,
+      "hasAmazonEvidence": true,
+      "hasRankedKeywords": false
+    }
+  ],
+  "policy": "The 100-candidate Stage 0 universe lives in Supabase and is not inferred from the smaller market-intelligence execution dataset. Stage 1 is never enabled automatically. This evaluator only reports whether the current paid batch meets quality and cost thresholds; commercial TEST/BUY gates remain unchanged."
 }
