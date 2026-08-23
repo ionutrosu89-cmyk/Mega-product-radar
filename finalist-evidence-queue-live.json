@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-08-23T19:58:41.782Z",
+  "stats": {
+    "validateProducts": 5,
+    "queueSize": 3,
+    "supplierAuthorized": 3
+  },
+  "candidates": [
+    {
+      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
+      "title": "Car sunglasses magnetic visor holder",
+      "category": "Auto",
+      "goldenRank": 2,
+      "opportunityScore": 30,
+      "romaniaDemandStatus": "PROVIDER_VERIFIED",
+      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
+      "salesEstimateConfidence": 100,
+      "nextGate": "SUPPLIER_QUOTE",
+      "supplierIntelligenceAuthorized": true,
+      "requiredSupplierEvidence": [
+        "supplier name and direct source URL",
+        "quoted unit price and currency",
+        "MOQ",
+        "sample cost",
+        "lead time",
+        "shipping quote/terms to Romania",
+        "relevant certifications/compliance documents where applicable",
+        "manual verification timestamp"
+      ],
+      "blockers": [
+        "ofertă furnizor completă și verificată",
+        "review evidence verificat",
+        "market evidence concret suficient",
+        "marjă ≥20%, ROI ≥45%, profit pozitiv",
+        "Data Confidence ≥50"
+      ]
+    },
+    {
+      "canonicalKey": "under-desk-headphone-hanger-clamp",
+      "title": "Under desk headphone hanger clamp",
+      "category": "Birou",
+      "goldenRank": 1,
+      "opportunityScore": 29.8,
+      "romaniaDemandStatus": "PROVIDER_VERIFIED",
+      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
+      "salesEstimateConfidence": 100,
+      "nextGate": "SUPPLIER_QUOTE",
+      "supplierIntelligenceAuthorized": true,
+      "requiredSupplierEvidence": [
+        "supplier name and direct source URL",
+        "quoted unit price and currency",
+        "MOQ",
+        "sample cost",
+        "lead time",
+        "shipping quote/terms to Romania",
+        "relevant certifications/compliance documents where applicable",
+        "manual verification timestamp"
+      ],
+      "blockers": [
+        "ofertă furnizor completă și verificată",
+        "market evidence concret suficient",
+        "marjă ≥20%, ROI ≥45%, profit pozitiv",
+        "Data Confidence ≥50"
+      ]
+    },
+    {
+      "canonicalKey": "kids-bed-bedside-organizer-felt",
+      "title": "Kids bed bedside organizer felt",
+      "category": "Kids 3–6 • Cameră",
+      "goldenRank": 5,
+      "opportunityScore": 29.7,
+      "romaniaDemandStatus": "PROVIDER_VERIFIED",
+      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
+      "salesEstimateConfidence": 100,
+      "nextGate": "SUPPLIER_QUOTE",
+      "supplierIntelligenceAuthorized": true,
+      "requiredSupplierEvidence": [
+        "supplier name and direct source URL",
+        "quoted unit price and currency",
+        "MOQ",
+        "sample cost",
+        "lead time",
+        "shipping quote/terms to Romania",
+        "relevant certifications/compliance documents where applicable",
+        "manual verification timestamp"
+      ],
+      "blockers": [
+        "pricing România verificat",
+        "ofertă furnizor completă și verificată",
+        "review evidence verificat",
+        "market evidence concret suficient",
+        "marjă ≥20%, ROI ≥45%, profit pozitiv"
+      ]
+    }
+  ],
+  "nextAction": "Start verified supplier quote collection for Car sunglasses magnetic visor holder.",
+  "policy": "Supplier Intelligence is authorized only for VALIDATE products that have Romania demand ready and sales confidence >=75 (or actual observed sales). This queue never promotes TEST/BUY, never invents supplier quotes, and never confirms landed cost."
+}
