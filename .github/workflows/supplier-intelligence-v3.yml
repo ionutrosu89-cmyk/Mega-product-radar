@@ -1,0 +1,40 @@
+name: Supplier Intelligence V3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'finalist-evidence-queue-live.json'
+      - 'scripts/supplier-intelligence-v3.mjs'
+      - '.github/workflows/supplier-intelligence-v3.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: supplier-intelligence-v3
+  cancel-in-progress: true
+
+jobs:
+  build-supplier-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build gated Supplier Intelligence V3 readiness
+        run: node scripts/supplier-intelligence-v3.mjs
+      - name: Persist Supplier Intelligence V3 readiness
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supplier-intelligence-v3-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Supplier Intelligence V3 readiness"
+            git push origin main
+          fi
