@@ -8,7 +8,7 @@ function mockFetch(plan='RADAR'){
     const u=String(url);
     if(u.includes('/auth/v1/user'))return Response.json({id:'u1'});
     if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1',name:'Radar',plan}]);
-    if(u.includes('/market-intelligence-live.json'))return Response.json({updatedAt:'2026-08-20T00:00:00Z',products:[{name:'Test product',cat:'Home',score:82,sourcing:[{url:'secret-supplier'}],landedEstimate:12,sellTarget:79,romaniaDemand:{readyForTestDemandGate:true},salesEstimation:{status:'ESTIMATED_HIGH_CONFIDENCE',confidence:80,estimatedUnits30d:100},dataConfidence:{overall:60},trendIntelligence:{status:'RISING'}}]});
+    if(u.includes('/radar-live.json'))return Response.json({updatedAt:'2026-08-20T00:00:00Z',products:[{name:'Test product',cat:'Home',score:82,sourcing:[{url:'secret-supplier'}],landedEstimate:12,sellTarget:79,romaniaDemand:{readyForTestDemandGate:true},salesEstimation:{status:'ESTIMATED_HIGH_CONFIDENCE',confidence:80,estimatedUnits30d:100},dataConfidence:{overall:60},trendIntelligence:{status:'RISING'}}]});
     return new Response(null,{status:404});
   };
 }
@@ -32,6 +32,15 @@ test('Radar plan gets decision inputs without supplier sourcing payload',async()
   assert.equal('sourcing' in body.products[0],false);
   assert.equal('landedEstimate' in body.products[0],false);
   assert.equal(body.integrity.moneyGate,'CONFIRMED_LANDED_COST_REQUIRED');
+});
+
+test('commercial Radar live source exists in the Netlify static build',async()=>{
+  const fn=await fs.readFile(new URL('../netlify/functions/commercial-radar.mjs',import.meta.url),'utf8');
+  const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
+  assert.match(fn,/new URL\('\/radar-live\.json'/);
+  assert.doesNotMatch(fn,/market-intelligence-live\.json/);
+  assert.match(build,/'radar-live\.json'/);
+  await fs.access(new URL('../radar-live.json',import.meta.url));
 });
 
 test('commercial Radar UI uses private nine-gate decision engine',async()=>{
