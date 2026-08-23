@@ -23,3 +23,5 @@ test('missing confirmed landed cost blocks money recommendation even when static
 test('incomplete supplier data never passes supplier gate',()=>{const s=state();const key=normalizeProductKey(product().name);delete s.supplierRecords[key].shippingRon;const d=evaluateCommercialDecision(product(),s);assert.equal(d.gates.supplierVerified,false);assert.equal(d.status,'HOLD');});
 
 test('high-confidence sales estimate satisfies sales gate without pretending it is actual sales',()=>{const d=evaluateCommercialDecision(product(),state());assert.equal(d.gates.estimatedSalesReady,true);assert.equal(d.estimationEvidence.actualCompetitorSalesObserved,false);assert.equal(d.estimationEvidence.salesEstimateStatus,'ESTIMATED_HIGH_CONFIDENCE');});
+
+test('missing trend evidence fails closed instead of passing Trend by default',()=>{const p=product();delete p.trendIntelligence;const d=evaluateCommercialDecision(p,state());assert.equal(d.gates.trendSafe,false);assert.equal(d.status,'HOLD');assert.match(d.blockers.join(' '),/trend verificat/i);});
