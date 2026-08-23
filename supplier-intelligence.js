@@ -1,13 +1,131 @@
 import {installCloudAutosync} from './cloud-sync.js';
 await installCloudAutosync();
 import {V6_STORAGE,rankSuppliers} from './v6-core.js';
+import {verifySupplierQuote} from './supplier-quote-verifier.js';
+
 const SUPPLIER_KEY='megaRadarSupplierRecordsV1';
 const premium=document.createElement('link');premium.rel='stylesheet';premium.href='premium-ui.css';document.head.appendChild(premium);
 const nav=document.createElement('nav');nav.className='bottom-nav';nav.innerHTML='<a href="index.html"><b>⌂</b>Acasă</a><a href="todays-opportunities.html"><b>◆</b>Astăzi</a><a href="discovery-inbox.html"><b>⌕</b>Descoperă</a><a class="active" href="supplier-intelligence.html"><b>▦</b>Furnizori</a><a href="strict-audit.html"><b>✓</b>Audit</a>';document.body.appendChild(nav);
-const $=s=>document.querySelector(s),read=()=>{try{return JSON.parse(localStorage.getItem(V6_STORAGE.supplierMatrix)||'[]')}catch{return[]}},write=v=>localStorage.setItem(V6_STORAGE.supplierMatrix,JSON.stringify(v));
+const $=s=>document.querySelector(s);
+const read=()=>{try{return JSON.parse(localStorage.getItem(V6_STORAGE.supplierMatrix)||'[]')}catch{return[]}};
+const write=v=>localStorage.setItem(V6_STORAGE.supplierMatrix,JSON.stringify(v));
 const keyOf=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+const value=id=>$(id)?.value?.trim?.()??'';
+const numOrRaw=id=>value(id)===''?'':Number(value(id));
+const splitLines=id=>value(id).split(/\n|,/).map(x=>x.trim()).filter(Boolean);
+const boolSelect=id=>value(id)===''?null:value(id)==='true';
+const iso=id=>value(id)?new Date(value(id)).toISOString():'';
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
 function readSupplierRecords(){try{return JSON.parse(localStorage.getItem(SUPPLIER_KEY)||'{}')||{};}catch{return{};}}
-function syncDecisionSupplier(product,offer){const all=readSupplierRecords(),key=keyOf(product);if(offer.commercialVerified){all[key]={productName:product,supplierName:offer.supplierName,platform:offer.platform,url:offer.url,quotedPrice:offer.quotedPrice,moq:offer.moq,sampleCost:offer.sampleCost,shippingRon:offer.shippingRon,leadTimeDays:offer.leadTimeDays,rating:offer.rating,years:offer.years,tradeAssurance:offer.tradeAssurance,certifications:offer.certifications,verified:true,commercialVerified:true,notes:`Ofertă comercială completă: transport ${offer.shippingRon} lei, lead time ${offer.leadTimeDays} zile.`,verifiedAt:offer.verifiedAt};}else delete all[key];localStorage.setItem(SUPPLIER_KEY,JSON.stringify(all));}
-function commercialGate(x){return x?.commercialVerified===true?'COMPLET':'INCOMPLET';}
-function render(){const filter=$('#filter').value.trim().toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter)),ranked=rankSuppliers(rows,{targetQty:Number($('#qty').value),targetUnitCost:Number($('#target').value)});$('#results').innerHTML=ranked.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport</th><th>Lead</th><th>Gate</th><th>Risc</th><th>Scor V6</th></tr></thead><tbody>${ranked.map(x=>`<tr><td>${x.product}</td><td>${x.supplierName}</td><td>${Number(x.quotedPrice||0).toFixed(2)}</td><td>${x.moq||0}</td><td>${Number(x.shippingRon||0).toFixed(2)}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified?'good':'warn'}">${commercialGate(x)}</td><td class="${x.risk<=35?'good':x.risk>=65?'bad':''}">${x.risk}</td><td><b>${Math.round(x.score)}</b></td></tr>`).join('')}</tbody></table>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';}
-$('#save').onclick=()=>{const product=$('#product').value.trim(),supplierName=$('#name').value.trim();if(!product||!supplierName)return;const priceRaw=$('#price').value.trim(),moqRaw=$('#moq').value.trim(),sampleRaw=$('#sample').value.trim(),shippingRaw=$('#shipping').value.trim(),leadRaw=$('#lead').value.trim(),url=$('#url').value.trim();const offer={product,supplierName,platform:$('#platform').value,url,quotedPrice:Number(priceRaw),moq:Number(moqRaw),rating:Number($('#rating').value),years:Number($('#years').value),sampleCost:Number(sampleRaw),shippingRon:Number(shippingRaw),leadTimeDays:Number(leadRaw),tradeAssurance:$('#ta').value==='true',certifications:$('#cert').value.split(',').map(x=>x.trim()).filter(Boolean),verifiedAt:new Date().toISOString()};offer.commercialVerified=Boolean(url&&priceRaw&&Number(priceRaw)>0&&moqRaw&&Number(moqRaw)>0&&sampleRaw&&Number(sampleRaw)>=0&&shippingRaw&&Number(shippingRaw)>=0&&leadRaw&&Number(leadRaw)>0);const rows=read();rows.push(offer);write(rows);syncDecisionSupplier(product,offer);render();};$('#rank').onclick=render;render();
+function syncDecisionSupplier(product,row){
+  const all=readSupplierRecords(),key=keyOf(product);
+  if(row.commercialVerified===true){
+    all[key]={
+      productName:product,
+      supplierName:row.supplierName,
+      platform:row.platform,
+      url:row.url,
+      commercialVerified:true,
+      verified:true,
+      strictQuote:row.strictQuote,
+      verification:row.verification,
+      verifiedAt:row.strictQuote.manualVerifiedAt,
+      notes:'Ofertă verificată strict în moneda originală. Landed cost și conversia valutară rămân gate separat.'
+    };
+  }else delete all[key];
+  localStorage.setItem(SUPPLIER_KEY,JSON.stringify(all));
+}
+
+function collectQuote({recordManualTimestamp=false}={}){
+  const product=value('#product');
+  const manualChecked=$('#manualConfirm')?.checked===true;
+  const quote={
+    productCanonicalKey:keyOf(product),
+    supplierName:value('#name'),
+    platform:value('#platform'),
+    sourceUrl:value('#url'),
+    supplierSkuOrModel:value('#sku'),
+    exactProductConfirmed:$('#exact')?.checked===true,
+    unitPrice:numOrRaw('#price'),
+    currency:value('#currency'),
+    quoteQuantity:numOrRaw('#quoteQty'),
+    moq:numOrRaw('#moq'),
+    sampleCost:numOrRaw('#sample'),
+    sampleShippingToRomania:numOrRaw('#sampleShipping'),
+    leadTimeDays:numOrRaw('#lead'),
+    incoterm:value('#incoterm'),
+    bulkShippingToRomania:numOrRaw('#bulkShipping'),
+    shippingCurrency:value('#shippingCurrency'),
+    cartonQuantity:numOrRaw('#cartonQty'),
+    cartonGrossWeightKg:numOrRaw('#cartonWeight'),
+    cartonLengthCm:numOrRaw('#cartonL'),
+    cartonWidthCm:numOrRaw('#cartonW'),
+    cartonHeightCm:numOrRaw('#cartonH'),
+    paymentTerms:value('#payment'),
+    tradeAssuranceOrEquivalent:boolSelect('#ta'),
+    inspectionAccepted:$('#inspection')?.checked===true,
+    complianceStatus:value('#compliance'),
+    complianceEvidence:splitLines('#complianceEvidence'),
+    quotedAt:iso('#quotedAt'),
+    quoteValidUntil:iso('#validUntil'),
+    manualVerifiedAt:manualChecked&&recordManualTimestamp?new Date().toISOString():'',
+    manualVerifiedBy:value('#verifiedBy')
+  };
+  return{product,quote,manualChecked};
+}
+
+function previewQuote(recordManualTimestamp=false){
+  const {quote,manualChecked}=collectQuote({recordManualTimestamp});
+  const verification=verifySupplierQuote(quote);
+  const box=$('#quoteStatus');
+  if(!box)return{quote,verification};
+  if(verification.verified){
+    box.innerHTML='<b class="good">MANUALLY_VERIFIED_QUOTE</b> · Oferta poate satisface Supplier Gate. <b>Landed Cost rămâne separat și neconfirmat.</b>';
+  }else{
+    const blockers=verification.blockers.map(esc).join(' · ');
+    const manualNote=manualChecked&&!recordManualTimestamp?' · La salvare se va înregistra timestamp-ul verificării manuale.':'';
+    box.innerHTML=`<b class="warn">QUOTE_INCOMPLETE</b> · Lipsesc/nu sunt valide: ${blockers||'—'}${manualNote}`;
+  }
+  return{quote,verification};
+}
+
+function commercialGate(x){return x?.commercialVerified===true?'VERIFICAT STRICT':'INCOMPLET';}
+function render(){
+  const filter=value('#filter').toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter));
+  const ranked=rankSuppliers(rows,{targetQty:Number(value('#qty')),targetUnitCost:Number(value('#target'))});
+  $('#results').innerHTML=ranked.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport RO</th><th>Lead</th><th>Gate</th><th>Blocaje</th><th>Scor V6*</th></tr></thead><tbody>${ranked.map(x=>`<tr><td>${esc(x.product)}</td><td>${esc(x.supplierName)}</td><td>${Number(x.quotedPrice||0).toFixed(2)} ${esc(x.currency||'')}</td><td>${x.moq||0}</td><td>${x.bulkShippingToRomania===''?'—':`${Number(x.bulkShippingToRomania||0).toFixed(2)} ${esc(x.shippingCurrency||'')}`}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified?'good':'warn'}">${commercialGate(x)}</td><td>${esc((x.verification?.blockers||[]).slice(0,3).join(', ')||'—')}</td><td><b>${Math.round(x.score||0)}</b></td></tr>`).join('')}</tbody></table><p class="note">* Scorul V6 este orientativ; nu convertește monede și nu înlocuiește Target Cost Envelope sau Landed Cost.</p>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';
+}
+
+$('#preview')?.addEventListener('click',()=>previewQuote(false));
+$('#save')?.addEventListener('click',()=>{
+  const first=collectQuote({recordManualTimestamp:false});
+  if(!first.product||!first.quote.supplierName){$('#quoteStatus').innerHTML='<b class="bad">Completează produsul și furnizorul.</b>';return;}
+  const {quote}=collectQuote({recordManualTimestamp:first.manualChecked});
+  const verification=verifySupplierQuote(quote);
+  const row={
+    product:first.product,
+    supplierName:quote.supplierName,
+    platform:quote.platform,
+    url:quote.sourceUrl,
+    quotedPrice:quote.unitPrice,
+    currency:quote.currency,
+    moq:quote.moq,
+    sampleCost:quote.sampleCost,
+    sampleShippingToRomania:quote.sampleShippingToRomania,
+    bulkShippingToRomania:quote.bulkShippingToRomania,
+    shippingCurrency:quote.shippingCurrency,
+    leadTimeDays:quote.leadTimeDays,
+    tradeAssurance:quote.tradeAssuranceOrEquivalent===true,
+    certifications:quote.complianceEvidence,
+    strictQuote:quote,
+    verification,
+    commercialVerified:verification.verified===true,
+    savedAt:new Date().toISOString()
+  };
+  const rows=read();rows.push(row);write(rows);syncDecisionSupplier(first.product,row);render();
+  if(verification.verified)$('#quoteStatus').innerHTML='<b class="good">Salvat: MANUALLY_VERIFIED_QUOTE.</b> Supplier Gate poate folosi această ofertă; Landed Cost rămâne separat.';
+  else $('#quoteStatus').innerHTML=`<b class="warn">Salvat ca QUOTE_INCOMPLETE.</b> Blocaje: ${esc(verification.blockers.join(' · '))}`;
+});
+$('#rank')?.addEventListener('click',render);
+render();

@@ -1,4 +1,5 @@
 import {profitEngineV2} from './profit-engine-v2.js';
+import {verifySupplierQuote} from './supplier-quote-verifier.js';
 
 const n=v=>Number.isFinite(Number(v))?Number(v):0;
 const arr=v=>Array.isArray(v)?v:[];
@@ -7,13 +8,13 @@ const explicitNumber=(o,k)=>hasOwn(o,k)&&o[k]!==''&&o[k]!==null&&Number.isFinite
 
 export const normalizeProductKey=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 
-function sameProduct(record,name){return normalizeProductKey(record?.productName||record?.product||record?.name||record?.__radarKey)===normalizeProductKey(name);}
+function sameProduct(record,name){return normalizeProductKey(record?.productName||record?.product||record?.name||record?.productCanonicalKey||record?.__radarKey)===normalizeProductKey(name);}
 function sourceUrl(x){return String(x?.sourceUrl||x?.url||x?.payload?.sourceUrl||x?.payload?.url||'').trim();}
 function domainOf(url){try{return new URL(url).hostname.replace(/^www\./,'').toLowerCase();}catch{return'';}}
 function payloadOf(x){return x?.payload&&typeof x.payload==='object'?x.payload:x||{};}
 function verifiedObservation(x){return x?.verified===true;}
 
-function completeSupplier(x){
+function completeSupplierLegacy(x){
   const p=payloadOf(x);
   const supplier=String(p.supplier||p.supplierName||x?.supplierName||'').trim();
   const platform=String(p.platform||x?.platform||'').trim();
@@ -26,11 +27,18 @@ function completeSupplier(x){
   return Boolean(supplier&&platform&&url&&unitPrice>0&&moq>0&&Number.isFinite(shipping)&&shipping>=0&&Number.isFinite(sample)&&sample>=0&&Number.isFinite(lead)&&lead>0);
 }
 
+function strictSupplierReady(x){
+  const quote=x?.strictQuote&&typeof x.strictQuote==='object'?x.strictQuote:(x?.quote&&typeof x.quote==='object'?x.quote:null);
+  if(!quote)return false;
+  const v=verifySupplierQuote(quote);
+  return v.verified===true&&v.evidenceStatus==='MANUALLY_VERIFIED_QUOTE';
+}
+
 function privateSupplierReady(name,state){
   const records=Object.entries(state?.supplierRecords||{}).map(([key,value])=>({...((value&&typeof value==='object')?value:{}),__radarKey:key})).filter(x=>sameProduct(x,name));
   const offers=arr(state?.supplierOffers).filter(x=>sameProduct(x,name));
   const observations=arr(state?.observations).filter(x=>sameProduct(x,name)&&x.kind==='SUPPLIER_QUOTE'&&verifiedObservation(x));
-  return [...records,...offers,...observations].some(x=>(x?.commercialVerified===true||x?.verified===true||x?.manualVerified===true||verifiedObservation(x))&&completeSupplier(x));
+  return [...records,...offers,...observations].some(x=>strictSupplierReady(x)||((x?.commercialVerified===true||x?.verified===true||x?.manualVerified===true||verifiedObservation(x))&&completeSupplierLegacy(x)));
 }
 
 function privatePricingReady(name,state){
@@ -93,5 +101,5 @@ export function evaluateCommercialDecision(p={},state={}){
   const commercialAction=buyReady?'BUY':testReady?'TEST':'HOLD';
   const status=buyReady?'BUY':testReady?'TEST_BUY':'HOLD';
   const verdict=buyReady?'BUY — TEST REAL VALIDAT':testReady?`TEST — CUMPĂRĂ ${quantity} BUCĂȚI`:'NU TESTA ÎNCĂ';
-  return {version:'3.0-private',status,commercialAction,verdict,quantity,gates,gateCount:9,passedGates:Object.values(gates).filter(Boolean).length,blockers,commercialReadiness:Math.round(Object.values(gates).filter(Boolean).length/9*100),unitLandedCost:landed?.landedPerUnit??null,landedCostConfirmed:Boolean(landed),targetSalePrice:sell||null,testBudget:testReady?quantity*n(landed?.landedPerUnit):null,expectedRevenue:testReady?quantity*sell:null,expectedGrossProfit:testReady?quantity*n(economics?.profit):null,confidenceScore:n(p?.dataConfidence?.overall),economics:economics?{profit:economics.profit,margin:economics.margin,roi:economics.roi,breakEvenSell:economics.breakEvenSell}:null,estimationEvidence:{salesEstimateStatus:salesModel.status||'UNKNOWN',estimatedUnits30d:salesModel.estimatedUnits30d??null,salesEstimateConfidence:salesModel.confidence??null,actualCompetitorSalesObserved:actualSalesObserved},buyGate:{completedRealTest:Boolean(feedback),sellThroughPct:feedback?.sellThroughPct??null,actualMarginPct:feedback?.actualMarginPct??null,actualUnitProfitRon:feedback?.actualUnitProfitRon??null},nextAction:buyReady?'Planifică reaprovizionarea controlată folosind rezultatele reale ale testului.':blockers[0]||'Comandă lotul de test și înregistrează rezultatul real în Feedback Loop.',policy:'Private money gate: TEST requires the same nine evidence gates plus economics recalculated from a confirmed private landed cost. Missing private cost data never inherits an estimated landed cost as confirmed.'};
+  return {version:'3.0-private',status,commercialAction,verdict,quantity,gates,gateCount:9,passedGates:Object.values(gates).filter(Boolean).length,blockers,commercialReadiness:Math.round(Object.values(gates).filter(Boolean).length/9*100),unitLandedCost:landed?.landedPerUnit??null,landedCostConfirmed:Boolean(landed),targetSalePrice:sell||null,testBudget:testReady?quantity*n(landed?.landedPerUnit):null,expectedRevenue:testReady?quantity*sell:null,expectedGrossProfit:testReady?quantity*n(economics?.profit):null,confidenceScore:n(p?.dataConfidence?.overall),economics:economics?{profit:economics.profit,margin:economics.margin,roi:economics.roi,breakEvenSell:economics.breakEvenSell}:null,estimationEvidence:{salesEstimateStatus:salesModel.status||'UNKNOWN',estimatedUnits30d:salesModel.estimatedUnits30d??null,salesEstimateConfidence:salesModel.confidence??null,actualCompetitorSalesObserved:actualSalesObserved},buyGate:{completedRealTest:Boolean(feedback),sellThroughPct:feedback?.sellThroughPct??null,actualMarginPct:feedback?.actualMarginPct??null,actualUnitProfitRon:feedback?.actualUnitProfitRon??null},nextAction:buyReady?'Planifică reaprovizionarea controlată folosind rezultatele reale ale testului.':blockers[0]||'Comandă lotul de test și înregistrează rezultatul real în Feedback Loop.',policy:'Private money gate: a strict verified supplier quote may satisfy Supplier Gate in its original currency, but TEST still requires independently confirmed landed cost and economics. Missing private cost data never inherits an estimated landed cost as confirmed.'};
 }

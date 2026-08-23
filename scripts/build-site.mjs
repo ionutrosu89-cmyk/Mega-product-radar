@@ -15,7 +15,7 @@ await writePatched('app.js','app.js',text=>text
   .replace('<small>MEGA 4.2</small>','<small>MEGA 7.0</small>'));
 for(const file of [
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
-  'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js',
+  'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js','supplier-quote-verifier.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','organic-rising-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
   'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-shell.js','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','paid-budget-live.json',
@@ -25,7 +25,7 @@ for(const file of [
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','customer-ui.css','customer-shell.js','academy.html','academy.js'])await fs.access(path.join(out,required));
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','supplier-quote-verifier.js','customer-ui.css','customer-shell.js','academy.html','academy.js'])await fs.access(path.join(out,required));
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
 const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','academy.html','account.html']);
