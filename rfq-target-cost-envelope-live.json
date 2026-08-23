@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-08-23T20:35:00Z",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "title": "Car sunglasses magnetic visor holder",
+  "status": "NEGOTIATION_GUIDE_ONLY",
+  "thresholds": {
+    "minMarginPct": 20,
+    "minRoiPct": 45
+  },
+  "scenarios": [
+    {
+      "source": "Chilipirul-Zilei.ro",
+      "observedSellPriceRon": 10.5,
+      "matchQuality": "HIGH",
+      "maxLandedCostRon": 0,
+      "feasible": false,
+      "note": "Promo/set normalized unit price is not commercially feasible under current MPR marketplace reserves."
+    },
+    {
+      "source": "Macvi.ro",
+      "observedSellPriceRon": 39,
+      "matchQuality": "MEDIUM",
+      "maxLandedCostRon": 1.76,
+      "feasible": true,
+      "bindingConstraint": "MARGIN"
+    },
+    {
+      "source": "Bondstore.ro",
+      "observedSellPriceRon": 44.74,
+      "matchQuality": "MEDIUM",
+      "maxLandedCostRon": 3.57,
+      "feasible": true,
+      "bindingConstraint": "MARGIN"
+    }
+  ],
+  "negotiationRule": "Do not reveal the internal ceiling in the first RFQ. Ask each supplier for their best 20/50/100/300-piece quote and Romania shipping terms, then compare the verified landed simulation against this envelope.",
+  "policy": "This file is an internal negotiation guide derived from observed public sale-price scenarios and the current Profit Engine V2 defaults. It is not a verified supplier quote, not confirmed landed cost, and cannot authorize TEST or BUY."
+}
