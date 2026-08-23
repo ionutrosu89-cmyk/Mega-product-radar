@@ -80,9 +80,10 @@ export function evaluateCommercialDecision(p={},state={}){
   const economics=landed&&sell>0?profitEngineV2({sellTarget:sell,confirmedLanded:landed.landedPerUnit}):null;
   const economicsHealthy=Boolean(landed&&economics?.priceComplete&&n(economics.margin)>=20&&n(economics.roi)>=45&&n(economics.profit)>0);
   const confidenceReady=n(p?.dataConfidence?.overall)>=50;
-  const trendSafe=String(p?.trendIntelligence?.status||'').toUpperCase()!=='DECLINING';
+  const trendStatus=String(p?.trendIntelligence?.status||'').trim().toUpperCase();
+  const trendSafe=Boolean(trendStatus)&&trendStatus!=='DECLINING';
   const gates={demandReady,pricingVerified,estimatedSalesReady,supplierVerified,reviewVerified,marketEvidence,economicsHealthy,confidenceReady,trendSafe};
-  const labels={demandReady:'cerere România suficient validată pentru TEST',pricingVerified:'pricing România verificat',estimatedSalesReady:'sales estimate cu confidence ≥75 sau vânzări observate',supplierVerified:'ofertă furnizor completă și verificată',reviewVerified:'review evidence verificat',marketEvidence:'market evidence concret suficient',economicsHealthy:landed?'economics reale: marjă ≥20%, ROI ≥45%, profit pozitiv':'landed cost confirmat din costurile reale de import',confidenceReady:'Data Confidence ≥50',trendSafe:'trendul nu este declining'};
+  const labels={demandReady:'cerere România suficient validată pentru TEST',pricingVerified:'pricing România verificat',estimatedSalesReady:'sales estimate cu confidence ≥75 sau vânzări observate',supplierVerified:'ofertă furnizor completă și verificată',reviewVerified:'review evidence verificat',marketEvidence:'market evidence concret suficient',economicsHealthy:landed?'economics reale: marjă ≥20%, ROI ≥45%, profit pozitiv':'landed cost confirmat din costurile reale de import',confidenceReady:'Data Confidence ≥50',trendSafe:'trend verificat și non-declining'};
   const blockers=Object.entries(gates).filter(([,ok])=>!ok).map(([k])=>labels[k]);
   const testReady=blockers.length===0;
   const feedback=completedCommercialTest(p.name,state);

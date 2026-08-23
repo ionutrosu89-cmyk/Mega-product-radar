@@ -22,10 +22,14 @@ async function resolveAccess(request,{fetchImpl,env}){
 }
 
 function cleanDecisionInputs(p={}){
+  const derivedGap=n(p?.megaAnalysis?.components?.romaniaGap||p.gap);
   return {
     name:s(p.name),
     cat:s(p.cat||p.category),
     imageUrl:s(p.imageUrl),
+    score:n(p.score||p.megaScore||p?.megaAnalysis?.score)||null,
+    derivedRomaniaGap:derivedGap>0?{score:derivedGap,evidence:'DERIVED_PROXY'}:null,
+    sourceStatus:s(p.sourceStatus||p.status),
     sellTarget:n(p.sellTarget||p.sell||p?.economics?.sell||p?.economics?.salePrice)||null,
     launchScore:p.launchScore||null,
     opportunityRanking:p.opportunityRanking||p.opportunityRankingV2||null,
@@ -74,7 +78,9 @@ export function createCommercialRadarHandler({fetch:fetchImpl=fetch,env=process.
         integrity:{
           verdict:'PRIVATE_DECISION_ENGINE',
           moneyGate:'CONFIRMED_LANDED_COST_REQUIRED',
-          sales:'ACTUAL_OR_HIGH_CONFIDENCE_ESTIMATE_EXPLICITLY_LABELED'
+          sales:'ACTUAL_OR_HIGH_CONFIDENCE_ESTIMATE_EXPLICITLY_LABELED',
+          legacyScore:'DERIVED_DISPLAY_ONLY',
+          legacyRomaniaGap:'DERIVED_PROXY_DISPLAY_ONLY'
         },
         products
       },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
