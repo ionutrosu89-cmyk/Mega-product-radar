@@ -5,10 +5,12 @@ const MARKET='market-intelligence-live.json';
 const GOLDEN='golden-pipeline-live.json';
 const PROVIDER='provider-intelligence-live.json';
 const PAID='paid-budget-live.json';
+const DISCOVERY='discovery-live.json';
 const OUT='stage0-supabase-sync-live.json';
 const ENDPOINT='https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/stage0-sync';
 const AUDIENCE='mega-product-radar-supabase';
 const STAGE0_PRODUCT_CAP=100;
+const RAW_CANDIDATE_BATCH_CAP=500;
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
 const finiteOrNull=v=>Number.isFinite(Number(v))?Number(v):null;
 const arr=v=>Array.isArray(v)?v:[];
@@ -19,13 +21,22 @@ function firstUrl(p={}){
   const hit=candidates.find(v=>/^https:\/\//i.test(String(v||'')));
   return hit?String(hit):null;
 }
+function firstDiscoveryDirectSource(p={}){
+  for(const signal of Object.values(p?.signals||{})){
+    for(const link of arr(signal?.links)){
+      const url=String(link?.url||link?.href||link||'');
+      if(/^https:\/\//i.test(url))return {url,label:String(signal?.label||'').slice(0,80)||null};
+    }
+  }
+  return {url:null,label:null};
+}
 function imageUrl(p={}){
   const candidates=[p?.imageUrl,p?.image,p?.image_url,p?.thumbnail,p?.bestEvidence?.imageUrl];
   const hit=candidates.find(v=>/^https:\/\//i.test(String(v||'')));
   return hit?String(hit):null;
 }
 function safeStage(v){return ['PROMISING','VALIDATE'].includes(String(v||''))?String(v):'DISCOVERED';}
-async function audit(status,extra={}){await fs.writeFile(OUT,JSON.stringify({version:'1.1',updatedAt:new Date().toISOString(),status,...extra},null,2)+'\n');}
+async function audit(status,extra={}){await fs.writeFile(OUT,JSON.stringify({version:'1.2',updatedAt:new Date().toISOString(),status,...extra},null,2)+'\n');}
 
 const reqUrl=String(process.env.ACTIONS_ID_TOKEN_REQUEST_URL||'');
 const reqToken=String(process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN||'');
@@ -35,6 +46,7 @@ const market=await read(MARKET,{products:[]});
 const golden=await read(GOLDEN,{items:[]});
 const provider=await read(PROVIDER,{});
 const paid=await read(PAID,{events:[]});
+const discovery=await read(DISCOVERY,{products:[]});
 const budgetAudit=await read(AUDIT,{targets:[]});
 const products=arr(market.products);
 const goldenItems=arr(golden.items);
@@ -84,6 +96,36 @@ for(const p of products){
   if(catalogue.length>=STAGE0_PRODUCT_CAP)break;
 }
 
+const rawSeen=new Set();
+const rawCandidates=[];
+for(const p of arr(discovery.products)){
+  const title=String(p?.name||p?.title||'').trim();
+  const category=String(p?.cat||p?.category||'').trim();
+  const fingerprint=norm(`${title}--${category}`);
+  if(!title||!fingerprint||rawSeen.has(fingerprint))continue;
+  rawSeen.add(fingerprint);
+  const direct=firstDiscoveryDirectSource(p);
+  rawCandidates.push({
+    fingerprint,
+    title:title.slice(0,240),
+    category:category.slice(0,160)||null,
+    checkedAt:p?.checkedAt||discovery?.updatedAt||null,
+    foreignPresence:num(p?.foreignPresence),
+    romaniaPresence:num(p?.romaniaPresence),
+    chinaPresence:num(p?.chinaPresence),
+    socialPresence:num(p?.socialPresence),
+    foreignResults:num(p?.foreignResults),
+    romaniaResults:num(p?.romaniaResults),
+    chinaResults:num(p?.chinaResults),
+    socialResults:num(p?.socialResults),
+    sourceUrl:direct.url,
+    sourceLabel:direct.label,
+    imageUrl:imageUrl(p),
+    payload:{engine:discovery?.engine||null,version:discovery?.version||null,validation:discovery?.validation||null,checks:num(p?.checks)}
+  });
+  if(rawCandidates.length>=RAW_CANDIDATE_BATCH_CAP)break;
+}
+
 const runAt=String(provider?.updatedAt||budgetAudit?.updatedAt||new Date().toISOString());
 const providerCost=num(provider?.stats?.accountedCostUsd??provider?.stats?.runCostUsd);
 const auditAt=new Date(budgetAudit?.updatedAt||0).getTime();
@@ -95,13 +137,13 @@ try{
   const oidcResp=await fetch(`${reqUrl}${reqUrl.includes('?')?'&':'?'}audience=${encodeURIComponent(AUDIENCE)}`,{headers:{authorization:`Bearer ${reqToken}`}});
   if(!oidcResp.ok)throw new Error(`OIDC HTTP ${oidcResp.status}`);
   const oidc=await oidcResp.json(); const token=String(oidc?.value||''); if(!token)throw new Error('OIDC token missing');
-  const response=await fetch(ENDPOINT,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({runAt,providerCostEur,products:targetProducts,pipeline,catalogue})});
+  const response=await fetch(ENDPOINT,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({runAt,providerCostEur,products:targetProducts,pipeline,catalogue,rawCandidates})});
   const body=await response.json().catch(()=>({}));
   if(!response.ok)throw new Error(`Supabase sync HTTP ${response.status}: ${body?.error||body?.message||'unknown'}`);
-  await audit('SUCCESS',{runAt,providerCostEur,targetProducts:targetProducts.length,pipelineProducts:pipeline.length,catalogueProducts:catalogue.length,response:body});
-  console.log(`Stage 0 Supabase sync: success, catalogue=${catalogue.length}, pipeline=${pipeline.length}, targets=${targetProducts.length}, observations=${body?.insertedObservations||0}, snapshots=${body?.insertedSnapshots||0}, costLogged=${Boolean(body?.costLogged)}.`);
+  await audit('SUCCESS',{runAt,providerCostEur,targetProducts:targetProducts.length,pipelineProducts:pipeline.length,catalogueProducts:catalogue.length,rawCandidates:rawCandidates.length,response:body});
+  console.log(`Stage 0 Supabase sync: success, raw=${rawCandidates.length}, catalogue=${catalogue.length}, pipeline=${pipeline.length}, targets=${targetProducts.length}, observations=${body?.insertedObservations||0}, snapshots=${body?.insertedSnapshots||0}, costLogged=${Boolean(body?.costLogged)}.`);
 }catch(error){
-  await audit('FAILED',{runAt,providerCostEur,targetProducts:targetProducts.length,pipelineProducts:pipeline.length,catalogueProducts:catalogue.length,error:String(error?.message||error)});
+  await audit('FAILED',{runAt,providerCostEur,targetProducts:targetProducts.length,pipelineProducts:pipeline.length,catalogueProducts:catalogue.length,rawCandidates:rawCandidates.length,error:String(error?.message||error)});
   console.error(`Stage 0 Supabase sync failed: ${String(error?.message||error)}`);
   process.exitCode=1;
 }
