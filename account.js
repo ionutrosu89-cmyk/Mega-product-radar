@@ -7,13 +7,14 @@ const $=s=>document.querySelector(s);
 function refreshLocalCount(){const total=localCloudSummary().reduce((s,x)=>s+x.count,0);$('#localCount').textContent=String(total);return total;}
 function syncMessage(text,state='Pregătit'){ $('#syncMessage').textContent=text; $('#syncState').textContent=state; }
 function fmtDate(value){if(!value)return '—';const d=new Date(value);return Number.isNaN(d.getTime())?'—':d.toLocaleDateString('ro-RO');}
+function billingStateLabel(status){const s=String(status||'').toLowerCase();return ({active:'ACTIV',trialing:'PERIOADĂ DE TEST',past_due:'PLATĂ RESTANTĂ',canceled:'ANULAT',cancelled:'ANULAT',incomplete:'INCOMPLET',unpaid:'NEPLĂTIT'})[s]||String(status||'—').toUpperCase();}
 async function refreshBilling({retry=false}={}){
   const message=$('#billingMessage');
   try{
     let data=await getBillingStatus();
     if(retry){for(let i=0;i<5&&['FREE','STARTER'].includes(String(data.workspace?.plan||'').toUpperCase());i++){await new Promise(r=>setTimeout(r,1200));data=await getBillingStatus();}}
     const sub=data.subscription;
-    $('#billingState').textContent=sub?String(sub.status||'—').toUpperCase():'FREE';
+    $('#billingState').textContent=sub?billingStateLabel(sub.status):'FREE';
     $('#billingEnd').textContent=fmtDate(sub?.currentPeriodEnd);
     $('#plan').textContent=data.workspace?.plan||$('#plan').textContent;
     const managed=Boolean(sub?.managedByStripe),pending=Boolean(sub?.cancelAtPeriodEnd);
