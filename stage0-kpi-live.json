@@ -1,16 +1,16 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-23T20:38:58.231Z",
+  "updatedAt": "2026-08-23T22:11:43.352Z",
   "verdict": "HOLD_STAGE0",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
     "targetCount": 6,
-    "usefulEnrichments": 2,
-    "enrichmentSuccessPct": 33.3,
+    "usefulEnrichments": 1,
+    "enrichmentSuccessPct": 16.7,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": 0.005,
-    "cumulativeTestSpendConservativeEur": 1.8663
+    "costPerUsefulEnrichmentEur": 0.0099,
+    "cumulativeTestSpendConservativeEur": 1.8762
   },
   "criteria": {
     "minEnrichmentSuccessPct": 50,
@@ -42,15 +42,15 @@
     {
       "canonicalKey": "shoe-washing-laundry-bag-structured",
       "title": "Shoe washing laundry bag structured",
-      "useful": true,
+      "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
-      "hasAmazonEvidence": true,
+      "hasAmazonEvidence": false,
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "dog-car-door-protector-set",
-      "title": "Dog car door protector set",
+      "canonicalKey": "kids-reusable-sticker-activity-book",
+      "title": "Kids reusable sticker activity book",
       "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
@@ -76,8 +76,8 @@
       "hasRankedKeywords": false
     },
     {
-      "canonicalKey": "kids-reusable-sticker-activity-book",
-      "title": "Kids reusable sticker activity book",
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
       "useful": false,
       "romaniaDemandReady": false,
       "keywordVolume": 0,
