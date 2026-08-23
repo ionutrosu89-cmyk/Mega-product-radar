@@ -2,8 +2,9 @@ import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 
 function text(v){return String(v??'').trim();}
-function positive(v){return Number.isFinite(Number(v))&&Number(v)>0;}
-function nonNegative(v){return Number.isFinite(Number(v))&&Number(v)>=0;}
+function hasNumericValue(v){return v!==null&&v!==undefined&&!(typeof v==='string'&&v.trim()==='')&&Number.isFinite(Number(v));}
+function positive(v){return hasNumericValue(v)&&Number(v)>0;}
+function nonNegative(v){return hasNumericValue(v)&&Number(v)>=0;}
 function isoDate(v){const d=new Date(v);return Boolean(v)&&Number.isFinite(d.getTime());}
 
 export function verifySupplierQuote(input={}){
