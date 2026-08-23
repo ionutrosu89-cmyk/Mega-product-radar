@@ -1,0 +1,50 @@
+name: Stage 0 Supabase Sync
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Mega Product Radar Scan"]
+    types: [completed]
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: stage0-supabase-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Sync verified Stage 0 evidence to Supabase via GitHub OIDC
+        run: node scripts/stage0-supabase-sync.mjs
+      - name: Persist sync audit
+        if: always()
+        run: |
+          set -e
+          if [ ! -f stage0-supabase-sync-live.json ]; then
+            echo '{"version":"1.0","status":"AUDIT_MISSING"}' > stage0-supabase-sync-live.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stage0-supabase-sync-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Stage 0 Supabase sync audit"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "No Stage 0 Supabase sync changes to commit."
+          fi
