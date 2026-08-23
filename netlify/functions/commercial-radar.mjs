@@ -54,7 +54,9 @@ export function createCommercialRadarHandler({fetch:fetchImpl=fetch,env=process.
     try{
       const access=await resolveAccess(request,{fetchImpl,env});
       if(access.error) return Response.json({ok:false,error:access.error,plan:access.plan||'FREE'},{status:access.status,headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
-      const sourceUrl=new URL('/market-intelligence-live.json',request.url);
+      // radar-live.json is the static, sanitized live Radar snapshot shipped in the Netlify build.
+      // Premium/private supplier and landed-cost state is hydrated separately in the authenticated browser workspace.
+      const sourceUrl=new URL('/radar-live.json',request.url);
       const sourceResponse=await fetchImpl(sourceUrl,{headers:{accept:'application/json'}});
       if(!sourceResponse.ok) return Response.json({ok:false,error:'Radar intelligence unavailable'},{status:503,headers:{'Cache-Control':'private, no-store'}});
       const source=await sourceResponse.json();
