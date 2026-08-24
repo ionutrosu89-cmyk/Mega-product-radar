@@ -6,7 +6,7 @@ import {evaluateQuoteNegotiation} from './supplier-negotiation-engine.js';
 
 const SUPPLIER_KEY='megaRadarSupplierRecordsV1';
 const premium=document.createElement('link');premium.rel='stylesheet';premium.href='premium-ui.css';document.head.appendChild(premium);
-const nav=document.createElement('nav');nav.className='bottom-nav';nav.innerHTML='<a href="index.html"><b>⌂</b>Acasă</a><a href="todays-opportunities.html"><b>◆</b>Astăzi</a><a href="discovery-inbox.html"><b>⌕</b>Descoperă</a><a class="active" href="supplier-intelligence.html"><b>▦</b>Furnizori</a><a href="strict-audit.html"><b>✓</b>Audit</a>';document.body.appendChild(nav);
+const nav=document.createElement('nav');nav.className='bottom-nav';nav.innerHTML='<a href="index.html"><b>⌂</b>Acasă</a><a href="todays-opportunities.html"><b>◆</b>Astăzi</a><a href="discovery-inbox.html"><b>⌕</b>Descoperă</a><a class="active" href="supplier-intelligence.html"><b>▦</b>Furnizori</a><a href="sourcing-ops.html"><b>↗</b>Sourcing Ops</a><a href="strict-audit.html"><b>✓</b>Audit</a>';document.body.appendChild(nav);
 const $=s=>document.querySelector(s);
 const read=()=>{try{return JSON.parse(localStorage.getItem(V6_STORAGE.supplierMatrix)||'[]')}catch{return[]}};
 const write=v=>localStorage.setItem(V6_STORAGE.supplierMatrix,JSON.stringify(v));
@@ -17,6 +17,24 @@ const splitLines=id=>value(id).split(/\n|,/).map(x=>x.trim()).filter(Boolean);
 const boolSelect=id=>value(id)===''?null:value(id)==='true';
 const iso=id=>value(id)?new Date(value(id)).toISOString():'';
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function inboundQuoteContext(){
+  const params=new URLSearchParams(location.search);
+  const product=String(params.get('product')||'').trim().slice(0,180);
+  const supplier=String(params.get('supplier')||'').trim().slice(0,180);
+  const platform=String(params.get('platform')||'').trim().slice(0,60);
+  return{product,supplier,platform};
+}
+function applyInboundQuoteContext(){
+  const ctx=inboundQuoteContext();
+  if(ctx.product&&$('#product'))$('#product').value=ctx.product;
+  if(ctx.supplier&&$('#name'))$('#name').value=ctx.supplier;
+  if(ctx.platform&&$('#platform')){
+    const allowed=[...$('#platform').options].map(x=>x.value);
+    if(allowed.includes(ctx.platform))$('#platform').value=ctx.platform;
+  }
+  if((ctx.product||ctx.supplier)&&$('#quoteStatus'))$('#quoteStatus').innerHTML='<b>Context preluat din Sourcing Ops.</b> Produsul/furnizorul sunt doar precompletate pentru lucru. Prețul, MOQ, transportul, linkul exact, documentele și verificarea manuală rămân obligatorii.';
+}
 
 function readSupplierRecords(){try{return JSON.parse(localStorage.getItem(SUPPLIER_KEY)||'{}')||{};}catch{return{};}}
 function syncDecisionSupplier(product,row){
@@ -146,4 +164,5 @@ $('#save')?.addEventListener('click',()=>{
   else $('#quoteStatus').innerHTML=`<b class="warn">Salvat ca QUOTE_INCOMPLETE.</b> Blocaje: ${esc(verification.blockers.join(' · '))}`;
 });
 for(const id of ['#rank','#sellPriceRon','#fxUsd','#fxEur','#fxCny'])$(id)?.addEventListener(id==='#rank'?'click':'change',render);
+applyInboundQuoteContext();
 render();
