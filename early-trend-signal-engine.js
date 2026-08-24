@@ -16,14 +16,16 @@ export function earlyTrendSignal(metrics={}){
   const depthScore=scoreObservationDepth(metrics.observationCount);
   const score=Number((rankScore*0.45+reviewScore*0.25+persistenceScore*0.15+depthScore*0.15).toFixed(1));
   const days=n(metrics.daysObserved)||0;
+  const rankVelocity=n(metrics.rankVelocityPerDay);
   const isNew=days<=14;
-  const risingFast=(n(metrics.rankVelocityPerDay)||0)>=1;
+  const risingFast=(rankVelocity||0)>=1;
+  const cooling=rankVelocity!==null&&rankVelocity<0;
   const strongPersistence=(n(metrics.top100PersistencePct)||0)>=75;
   let signal='WATCH';
-  if(isNew&&risingFast&&score>=65)signal='NEW_AND_ACCELERATING';
+  if(cooling)signal='COOLING';
+  else if(isNew&&risingFast&&score>=65)signal='NEW_AND_ACCELERATING';
   else if(risingFast&&score>=70)signal='RISING_FAST';
   else if(strongPersistence&&(n(metrics.top10PersistencePct)||0)>=50)signal='PERSISTENT_BESTSELLER';
-  else if((n(metrics.rankVelocityPerDay)||0)<0)signal='COOLING';
   const confidence=Number(clamp(depthScore*0.6+Math.min(100,days/30*100)*0.4).toFixed(1));
   return{eligible:true,signal,score,confidence,components:{rankVelocity:rankScore,reviewVelocity:reviewScore,persistence:persistenceScore,observationDepth:depthScore},salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false};
 }
