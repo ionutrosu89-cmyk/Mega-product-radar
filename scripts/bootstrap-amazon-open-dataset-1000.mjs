@@ -34,12 +34,8 @@ function parseCsv(text){
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const key=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 const num=v=>{const s=clean(v).replace(/[^0-9.,-]/g,'').replace(/,/g,'');if(!s)return null;const n=Number(s);return Number.isFinite(n)?n:null;};
-const amazonUrl=(url,asin)=>{
-  const a=clean(asin).toUpperCase();
-  const raw=clean(url);
-  if(/^https:\/\//i.test(raw)){try{const u=new URL(raw);if(/(^|\.)amazon\./i.test(u.hostname))return raw;}catch{}}
-  return /^[A-Z0-9]{10}$/.test(a)?`https://www.amazon.com/dp/${a}`:null;
-};
+const canonicalAmazonUrl=asin=>`https://www.amazon.com/dp/${clean(asin).toUpperCase()}`;
+const sourceUrlAsin=url=>clean(url).match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})(?:[/?]|$)/i)?.[1]?.toUpperCase()||null;
 
 const res=await fetch(SOURCE_URL,{headers:{'user-agent':'MegaProductRadar/1.0 open-dataset-bootstrap'},signal:AbortSignal.timeout(30000)});
 if(!res.ok)throw new Error(`SOURCE_HTTP_${res.status}`);
@@ -57,35 +53,37 @@ const aliases={
   category:['category','categories','category_name','product_category'],
   brand:['brand','brand_name'],
   rating:['rating','ratings','stars','rating_value','average_rating'],
-  reviews:['reviews_count','review_count','reviews','ratings_count','number_of_ratings','reviews_count'],
+  reviews:['reviews_count','review_count','reviews','ratings_count','number_of_ratings'],
   price:['price','final_price','initial_price','price_value'],
   currency:['currency','currency_code'],
   timestamp:['timestamp','collected_at','date','datetime','last_updated']
 };
 const pick=(r,names)=>{for(const n of names)if(clean(r[n]))return clean(r[n]);return null;};
 
-const observations=[];const rejected=[];const seen=new Set();
+const observations=[];const rejected=[];const seen=new Set();let sourceUrlIdentityMismatchCount=0;
 for(let index=0;index<records.length&&observations.length<target;index++){
   const r=records[index];
-  let asin=pick(r,aliases.asin)?.toUpperCase()||null;
   const rawUrl=pick(r,aliases.url);
-  if(!asin&&rawUrl){const m=rawUrl.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})(?:[/?]|$)/i);asin=m?.[1]?.toUpperCase()||null;}
+  let asin=pick(r,aliases.asin)?.toUpperCase()||null;
+  if(!asin&&rawUrl)asin=sourceUrlAsin(rawUrl);
   const title=pick(r,aliases.title);
-  const url=amazonUrl(rawUrl,asin);
   if(!asin||!/^([A-Z0-9]{10})$/.test(asin)){rejected.push({row:index+2,error:'ASIN_INVALID'});continue;}
   if(!title){rejected.push({row:index+2,asin,error:'TITLE_MISSING'});continue;}
-  if(!url){rejected.push({row:index+2,asin,error:'AMAZON_URL_MISSING'});continue;}
   if(seen.has(asin)){rejected.push({row:index+2,asin,error:'DUPLICATE_ASIN'});continue;}
+  const originalUrlAsin=rawUrl?sourceUrlAsin(rawUrl):null;
+  const sourceUrlIdentityMatch=originalUrlAsin?originalUrlAsin===asin:null;
+  if(sourceUrlIdentityMatch===false)sourceUrlIdentityMismatchCount++;
   seen.add(asin);
   observations.push({
-    sourceKey:'AMAZON_OPEN_DATASET_BOOTSTRAP',platform:'AMAZON',surface:'CATALOGUE_BOOTSTRAP',externalId:asin,url,title,
+    sourceKey:'AMAZON_OPEN_DATASET_BOOTSTRAP',platform:'AMAZON',surface:'CATALOGUE_BOOTSTRAP',externalId:asin,
+    url:canonicalAmazonUrl(asin),title,
     brand:pick(r,aliases.brand),categoryLabel:pick(r,aliases.category),sourceCategoryId:null,sourceRank:null,
     price:num(pick(r,aliases.price)),currency:(pick(r,aliases.currency)||null)?.toUpperCase()||null,
     rating:num(pick(r,aliases.rating)),reviewCount:num(pick(r,aliases.reviews)),
     observedAt:pick(r,aliases.timestamp),
     evidenceClass:'OPEN_PUBLIC_DATASET_PRODUCT',identityEvidence:'AMAZON_NATIVE_ASIN',
     freshnessClass:'BOOTSTRAP_SNAPSHOT_NOT_LIVE',salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false,
-    provenance:{sourceRepo:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceBlob:SOURCE_BLOB,sourceFile:'amazon-products.csv',sourceRow:index+2,userApproval:USER_APPROVAL,providerSpendEur:0}
+    provenance:{sourceRepo:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceBlob:SOURCE_BLOB,sourceFile:'amazon-products.csv',sourceRow:index+2,sourceOriginalUrl:rawUrl,sourceOriginalUrlAsin:originalUrlAsin,sourceUrlIdentityMatch,userApproval:USER_APPROVAL,providerSpendEur:0}
   });
 }
 
@@ -93,13 +91,15 @@ const withRating=observations.filter(x=>x.rating!==null).length;
 const withReviews=observations.filter(x=>x.reviewCount!==null).length;
 const withPrice=observations.filter(x=>x.price!==null).length;
 const withCategory=observations.filter(x=>x.categoryLabel).length;
+const canonicalUrlMismatchCount=observations.filter(x=>x.url!==canonicalAmazonUrl(x.externalId)).length;
 const payload={
-  schemaVersion:'REAL_PUBLIC_SEED_1000_OPEN_DATASET_V1',generatedAt,userApproval:USER_APPROVAL,target,
+  schemaVersion:'REAL_PUBLIC_SEED_1000_OPEN_DATASET_V2',generatedAt,userApproval:USER_APPROVAL,target,
   source:{repo:SOURCE_REPO,commit:SOURCE_COMMIT,blob:SOURCE_BLOB,file:'amazon-products.csv',public:true,declaredSampleSize:1001},
   sourceHeaders:headers,sourceRowCount:records.length,uniqueProductCount:observations.length,rejectedCount:rejected.length,
-  coverage:{withRating,withReviews,withPrice,withCategory},rejected,observations,
+  coverage:{withRating,withReviews,withPrice,withCategory},integrity:{sourceUrlIdentityMismatchCount,canonicalUrlMismatchCount},rejected,observations,
   policy:{providerSpendEur:0,paidCallsTriggered:0,externalExecutionTriggered:true,executionReason:'EXPLICIT_USER_APPROVAL_TO_REACH_1000_REAL_PRODUCTS',bootstrapDataIsNotLive:true,catalogueBootstrapIsNotRanking:true,salesEvidenceClass:'NOT_VERIFIED_SALES',crossPlatformAutoMerge:false,purchaseAuthorized:false}
 };
 await fs.mkdir(path.dirname(out),{recursive:true});await fs.writeFile(out,JSON.stringify(payload,null,2));
-console.log(JSON.stringify({sourceRowCount:payload.sourceRowCount,uniqueProductCount:payload.uniqueProductCount,rejectedCount:payload.rejectedCount,coverage:payload.coverage,sourceHeaders:headers},null,2));
+console.log(JSON.stringify({sourceRowCount:payload.sourceRowCount,uniqueProductCount:payload.uniqueProductCount,rejectedCount:payload.rejectedCount,coverage:payload.coverage,integrity:payload.integrity,sourceHeaders:headers},null,2));
 if(payload.uniqueProductCount<1000){console.error(`REAL_PRODUCT_TARGET_NOT_REACHED ${payload.uniqueProductCount}/1000`);process.exitCode=2;}
+if(payload.integrity.canonicalUrlMismatchCount!==0){console.error('CANONICAL_URL_IDENTITY_MISMATCH');process.exitCode=3;}
