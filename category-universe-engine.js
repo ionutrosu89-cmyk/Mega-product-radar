@@ -22,7 +22,7 @@ export function validateCategoryUniverse(universe={}){
   const seen=new Set();
   for(const row of rows){
     if(!keyPattern.test(row.key))errors.push(`invalid key ${row.key}`);
-    const compound=`${row.level}:${row.key}`;
+    const compound=`${row.parentKey||'ROOT'}:${row.level}:${row.key}`;
     if(seen.has(compound))errors.push(`duplicate ${compound}`);
     seen.add(compound);
   }
@@ -35,15 +35,14 @@ export function validateCategoryUniverse(universe={}){
   return {valid:errors.length===0,errors,stats:{departmentCount,categoryCount,nicheCount,totalNodes:rows.length}};
 }
 
-export function categoryBreadcrumb(universe,key){
+export function categoryBreadcrumb(universe,key,parentKey=null){
   const rows=flattenCategoryUniverse(universe);
-  const byKey=new Map(rows.map(r=>[`${r.level}:${r.key}`,r]));
-  const target=rows.find(r=>r.key===key);
+  const target=rows.find(r=>r.key===key&&(parentKey===null||r.parentKey===parentKey));
   if(!target)return [];
   const out=[target];
   let current=target;
   while(current.parentKey){
-    const parent=[...byKey.values()].find(r=>r.key===current.parentKey);
+    const parent=rows.find(r=>r.key===current.parentKey);
     if(!parent)break;
     out.unshift(parent);
     current=parent;
