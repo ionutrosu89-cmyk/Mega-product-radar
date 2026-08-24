@@ -10,8 +10,9 @@ test('Supplier UI exposes explicit sell-price scenario and blank FX inputs',()=>
   for(const id of ['sellPriceRon','fxUsd','fxEur','fxCny'])assert.match(html,new RegExp(`id="${id}"`));
   assert.match(html,/id="fxUsd"[^>]*placeholder="introdu manual"/);
   assert.doesNotMatch(html,/id="fxUsd"[^>]*value="[0-9]/);
-  assert.match(html,/POTENȚIAL/);
-  assert.match(html,/nu înseamnă landed cost confirmat/i);
+  assert.match(html,/POTENȚIAL.*înseamnă numai/i);
+  assert.match(html,/Landed Cost rămâne separat/i);
+  assert.match(html,/confirmat cu costuri reale/i);
 });
 
 test('Supplier UI uses negotiation engine without bypassing strict verifier',()=>{
