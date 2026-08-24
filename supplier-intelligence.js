@@ -2,6 +2,7 @@ import {installCloudAutosync} from './cloud-sync.js';
 await installCloudAutosync();
 import {V6_STORAGE,rankSuppliers} from './v6-core.js';
 import {verifySupplierQuote} from './supplier-quote-verifier.js';
+import {evaluateQuoteNegotiation} from './supplier-negotiation-engine.js';
 
 const SUPPLIER_KEY='megaRadarSupplierRecordsV1';
 const premium=document.createElement('link');premium.rel='stylesheet';premium.href='premium-ui.css';document.head.appendChild(premium);
@@ -90,11 +91,28 @@ function previewQuote(recordManualTimestamp=false){
   return{quote,verification};
 }
 
+function negotiationOptions(){
+  return{
+    sellPriceRon:Number(value('#sellPriceRon')),
+    fxToRon:{USD:Number(value('#fxUsd')),EUR:Number(value('#fxEur')),CNY:Number(value('#fxCny'))}
+  };
+}
+function negotiationClass(status){return status==='POTENTIALLY_FEASIBLE_PENDING_LANDED_COST'?'good':status==='NEGOTIATE_DOWN'||status==='FX_REQUIRED'?'warn':'bad';}
+function negotiationLabel(x){
+  if(x.status==='POTENTIALLY_FEASIBLE_PENDING_LANDED_COST')return`POTENȚIAL · buffer ${Number(x.screening?.headroomRon||0).toFixed(2)} lei`;
+  if(x.status==='NEGOTIATE_DOWN')return`NEGOCIAZĂ · max ${Number(x.screening?.maxUnitPriceInQuoteCurrency||0).toFixed(2)} ${esc(x.quoted?.currency||'')}`;
+  if(x.status==='REJECT_ECONOMICS')return'RESPINGE ECONOMIC';
+  if(x.status==='FX_REQUIRED')return'CURS FX NECESAR';
+  if(x.status==='QUOTE_INCOMPLETE')return'OFERTĂ INCOMPLETĂ';
+  return esc(x.status||'NECALCULAT');
+}
 function commercialGate(x){return x?.commercialVerified===true?'VERIFICAT STRICT':'INCOMPLET';}
 function render(){
   const filter=value('#filter').toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter));
   const ranked=rankSuppliers(rows,{targetQty:Number(value('#qty')),targetUnitCost:Number(value('#target'))});
-  $('#results').innerHTML=ranked.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport RO</th><th>Lead</th><th>Gate</th><th>Blocaje</th><th>Scor V6*</th></tr></thead><tbody>${ranked.map(x=>`<tr><td>${esc(x.product)}</td><td>${esc(x.supplierName)}</td><td>${Number(x.quotedPrice||0).toFixed(2)} ${esc(x.currency||'')}</td><td>${x.moq||0}</td><td>${x.bulkShippingToRomania===''?'—':`${Number(x.bulkShippingToRomania||0).toFixed(2)} ${esc(x.shippingCurrency||'')}`}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified?'good':'warn'}">${commercialGate(x)}</td><td>${esc((x.verification?.blockers||[]).slice(0,3).join(', ')||'—')}</td><td><b>${Math.round(x.score||0)}</b></td></tr>`).join('')}</tbody></table><p class="note">* Scorul V6 este orientativ; nu convertește monede și nu înlocuiește Target Cost Envelope sau Landed Cost.</p>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';
+  const opts=negotiationOptions();
+  const evaluated=ranked.map(x=>({...x,negotiation:evaluateQuoteNegotiation(x.strictQuote||{},opts)}));
+  $('#results').innerHTML=evaluated.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport RO</th><th>Lead</th><th>Supplier Gate</th><th>Negociere</th><th>Scor V6*</th></tr></thead><tbody>${evaluated.map(x=>`<tr><td>${esc(x.product)}</td><td>${esc(x.supplierName)}</td><td>${Number(x.quotedPrice||0).toFixed(2)} ${esc(x.currency||'')}</td><td>${x.moq||0}</td><td>${x.bulkShippingToRomania===''?'—':`${Number(x.bulkShippingToRomania||0).toFixed(2)} ${esc(x.shippingCurrency||'')}`}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified?'good':'warn'}">${commercialGate(x)}</td><td class="${negotiationClass(x.negotiation.status)}"><b>${negotiationLabel(x.negotiation)}</b><br><span class="note">${esc(x.negotiation.action||'')}</span></td><td><b>${Math.round(x.score||0)}</b></td></tr>`).join('')}</tbody></table><p class="note">* Scorul V6 este orientativ. Verdictul de negociere folosește doar ofertă strict verificată + curs FX introdus explicit + Target Cost Envelope. „Potențial” nu înseamnă landed cost confirmat și nu permite TEST.</p>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';
 }
 
 $('#preview')?.addEventListener('click',()=>previewQuote(false));
@@ -127,5 +145,5 @@ $('#save')?.addEventListener('click',()=>{
   if(verification.verified)$('#quoteStatus').innerHTML='<b class="good">Salvat: MANUALLY_VERIFIED_QUOTE.</b> Supplier Gate poate folosi această ofertă; Landed Cost rămâne separat.';
   else $('#quoteStatus').innerHTML=`<b class="warn">Salvat ca QUOTE_INCOMPLETE.</b> Blocaje: ${esc(verification.blockers.join(' · '))}`;
 });
-$('#rank')?.addEventListener('click',render);
+for(const id of ['#rank','#sellPriceRon','#fxUsd','#fxEur','#fxCny'])$(id)?.addEventListener(id==='#rank'?'click':'change',render);
 render();
