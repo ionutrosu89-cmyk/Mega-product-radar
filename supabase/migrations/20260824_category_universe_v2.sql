@@ -12,8 +12,9 @@ create table if not exists public.category_nodes (
   metadata jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  unique(level, category_key)
+  unique(parent_id, level, category_key)
 );
+create unique index if not exists category_nodes_root_unique_idx on public.category_nodes(level, category_key) where parent_id is null;
 create index if not exists category_nodes_parent_idx on public.category_nodes(parent_id, level);
 
 create table if not exists public.product_category_memberships (
