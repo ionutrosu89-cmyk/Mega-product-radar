@@ -5,7 +5,6 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/radar-scan.yml'
       - 'v6-core.js'
       - 'discovery-catalogue.json'
       - 'discovery-themes.json'
@@ -34,6 +33,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 concurrency:
   group: radar-scan
@@ -67,7 +67,7 @@ jobs:
       - name: Build Golden Product Pipeline pre-paid funnel
         if: always()
         run: node scripts/golden-product-pipeline.mjs --phase=prepaid
-      - name: Sync Stage 0 Budget Brain paid allowlist
+      - name: Sync Stage 0 Budget Brain paid allowlist through GitHub OIDC
         if: always()
         run: node scripts/stage0-budget-brain-sync.mjs
       - name: Check cumulative DataForSEO test budget
