@@ -1,0 +1,50 @@
+name: Real Public Seed 1000
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/collect-alibaba-public-1000.mjs'
+      - '.github/workflows/real-public-seed-1000.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect-real-public-seed:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/real-public-seed-1000-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect user-approved public Alibaba products
+        id: collect
+        continue-on-error: true
+        run: node scripts/collect-alibaba-public-1000.mjs --target=1200 --out=artifacts/real-public-seed-1000.json
+      - name: Summarize result
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/real-public-seed-1000.json';
+          if(!fs.existsSync(p)){console.log('No artifact file produced');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`uniqueProductCount=${x.uniqueProductCount}`);
+          console.log(`sourcePagesSucceeded=${x.sourcePagesSucceeded}`);
+          console.log(`sourcePagesFailed=${x.sourcePagesFailed}`);
+          console.log(`providerSpendEur=${x.policy.providerSpendEur}`);
+          console.log(`paidCallsTriggered=${x.policy.paidCallsTriggered}`);
+          if(x.uniqueProductCount<1000)process.exitCode=2;
+          NODE
+      - name: Upload real seed artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-public-seed-1000
+          path: artifacts/real-public-seed-1000.json
+          if-no-files-found: error
+          retention-days: 7
