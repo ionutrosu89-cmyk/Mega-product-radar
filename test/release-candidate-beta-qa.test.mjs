@@ -20,13 +20,14 @@ test('signup preserves validated next destination like login does',async()=>{
   assert.doesNotMatch(source,/if\(data\.session\)location\.href='home\.html'/);
 });
 
-test('pricing Free copy matches the Top 25 entitlement while dynamic Discover stays server limited',async()=>{
+test('pricing Free reflects roadmap market intelligence while legacy Top 25 remains available',async()=>{
   const pricing=await readFile('pricing.html','utf8');
   const discoverFn=await readFile('netlify/functions/commercial-discover.mjs','utf8');
-  assert.match(pricing,/Top 25 pe nișă/);
-  assert.match(pricing,/8 nișe documentate/);
-  assert.match(pricing,/Vezi Top 25 gratuit/);
+  assert.match(pricing,/Category Universe \+ Top Products/);
+  assert.match(pricing,/Top Sellers și Top Brands/);
+  assert.match(pricing,/Vezi topurile gratuite/);
   assert.doesNotMatch(pricing,/3 vizualizări\/credite/);
+  assert.equal(await exists('top25.html'),true);
   assert.match(discoverFn,/const limit=full\?20:3/);
   assert.match(discoverFn,/slice\(0,limit\)/);
 });
