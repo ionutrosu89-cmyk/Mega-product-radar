@@ -1,4 +1,9 @@
-const n=v=>Number.isFinite(Number(v))?Number(v):null;
+const n=v=>{
+  if(v===null||v===undefined)return null;
+  if(typeof v==='string'&&v.trim()==='')return null;
+  const x=Number(v);
+  return Number.isFinite(x)?x:null;
+};
 const clean=arr=>arr.map(n).filter(v=>v!==null);
 const round=(v,d=4)=>Number.isFinite(Number(v))?Number(Number(v).toFixed(d)):null;
 const median=values=>{const a=clean(values).sort((x,y)=>x-y);if(!a.length)return null;const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;};
@@ -20,7 +25,7 @@ export function benchmarkSupplierQuotes(records=[]){
     const ddpTotals=complete.map(r=>r.ddpTotal);
     const shippingShares=complete.map(r=>{
       const s=n(r.ddpShipping),t=n(r.ddpTotal);
-      return s!==null&&t>0?s/t*100:null;
+      return s!==null&&t!==null&&t>0?s/t*100:null;
     });
     const documentary=rows.filter(r=>['DOCUMENTED','MANUALLY_VERIFIED'].includes(r.evidenceLevel)).length;
     const customsReady=rows.filter(r=>r.mrnPromised===true&&r.vatProofPromised===true).length;
@@ -31,15 +36,16 @@ export function benchmarkSupplierQuotes(records=[]){
     const scored=complete.map(r=>({
       supplierKey:r.supplierKey,
       ddpUnit:round(r.ddpUnit),
-      varianceVsMedianPct:med&&med>0?round((Number(r.ddpUnit)-med)/med*100,1):null,
+      varianceVsMedianPct:med!==null&&med>0?round((Number(r.ddpUnit)-med)/med*100,1):null,
       evidenceLevel:r.evidenceLevel||'UNVERIFIED'
     })).sort((a,b)=>a.ddpUnit-b.ddpUnit);
 
+    const unitPriceValues=clean(unitPrices);
     return {
       productKey,
       quoteCount:rows.length,
       completeDdpQuoteCount:complete.length,
-      unitPrice:{min:clean(unitPrices).length?Math.min(...clean(unitPrices)):null,median:round(median(unitPrices))},
+      unitPrice:{min:unitPriceValues.length?Math.min(...unitPriceValues):null,median:round(median(unitPrices))},
       ddpUnit:{min:ddpUnits.length?round(Math.min(...ddpUnits)):null,median:round(med),max:ddpUnits.length?round(Math.max(...ddpUnits)):null},
       ddpTotal:{median:round(median(ddpTotals))},
       shippingSharePct:{median:round(median(shippingShares),1)},
