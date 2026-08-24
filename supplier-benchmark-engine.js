@@ -5,7 +5,10 @@ const n=v=>{
   return Number.isFinite(x)?x:null;
 };
 const clean=arr=>arr.map(n).filter(v=>v!==null);
-const round=(v,d=4)=>Number.isFinite(Number(v))?Number(Number(v).toFixed(d)):null;
+const round=(v,d=4)=>{
+  const x=n(v);
+  return x===null?null:Number(x.toFixed(d));
+};
 const median=values=>{const a=clean(values).sort((x,y)=>x-y);if(!a.length)return null;const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;};
 const pct=(part,total)=>total>0?round(part/total*100,1):null;
 
