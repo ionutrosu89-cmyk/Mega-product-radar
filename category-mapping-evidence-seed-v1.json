@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-08-24T21:57:00+03:00",
+  "policy": "ONLY_VERIFIED_PUBLIC_CATEGORY_EVIDENCE_CAN_BE_APPROVED",
+  "mappings": [
+    {
+      "mprCategory": "office:cable-management",
+      "approved": true,
+      "amazon": null,
+      "alibaba": {
+        "categorySlug": "cable-management",
+        "evidenceUrl": "https://www.alibaba.com/showroom/cable-management.html",
+        "evidenceLabel": "Cable Management"
+      },
+      "ebay": {
+        "categoryId": "67858",
+        "marketplaceId": "EBAY_US",
+        "evidenceUrl": "https://www.ebay.com/b/Wire-Management/67858/bn_7023255961",
+        "evidenceLabel": "Wire Management"
+      },
+      "approvalEvidence": "Alibaba public showroom Cable Management + eBay public category Wire Management (67858); Amazon niche path intentionally left unapproved until independently verified.",
+      "reviewedBy": "MPR_PUBLIC_EVIDENCE_REVIEW",
+      "reviewedAt": "2026-08-24T21:57:00+03:00"
+    },
+    {
+      "mprCategory": "office:laptop-accessories",
+      "approved": false,
+      "amazon": null,
+      "alibaba": null,
+      "ebay": {
+        "categoryId": "116346",
+        "marketplaceId": "EBAY_US",
+        "evidenceUrl": "https://www.ebay.com/b/Computer-Laptop-Stands-Risers/116346/bn_2791976",
+        "evidenceLabel": "Computer Laptop Stands/Risers"
+      },
+      "approvalEvidence": "Evidence is narrower than the MPR niche laptop-accessories, so mapping remains NEEDS_REVIEW.",
+      "reviewedBy": "MPR_PUBLIC_EVIDENCE_REVIEW",
+      "reviewedAt": "2026-08-24T21:57:00+03:00"
+    }
+  ]
+}
