@@ -1,6 +1,6 @@
 const n=v=>Number(v);
-const finite=v=>Number.isFinite(n(v));
 const text=v=>String(v??'').trim();
+const finite=v=>text(v)!==''&&Number.isFinite(n(v));
 const nowIso=()=>new Date().toISOString();
 
 export const TEST_THRESHOLDS=Object.freeze({minSellThroughPct:60,minNetMarginPct:15,maxReturnRatePct:10,minUnitsSold:10});
