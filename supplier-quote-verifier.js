@@ -38,6 +38,7 @@ export function verifySupplierQuote(input={}){
   const compliance=text(input.complianceStatus).toUpperCase();
   if(!['PROVIDED','NOT_APPLICABLE'].includes(compliance))blockers.push('compliance status/evidence');
   if(compliance==='PROVIDED'&&(!Array.isArray(input.complianceEvidence)||input.complianceEvidence.length===0))blockers.push('compliance evidence files/references');
+  if(compliance==='NOT_APPLICABLE'&&!text(input.complianceNotApplicableBasis))blockers.push('explicit compliance not-applicable basis');
 
   if(!isoDate(input.quotedAt))blockers.push('quote timestamp');
   if(!isoDate(input.quoteValidUntil))blockers.push('quote validity');
@@ -46,11 +47,11 @@ export function verifySupplierQuote(input={}){
 
   const verified=blockers.length===0;
   return {
-    version:'1.0',
+    version:'1.1',
     verified,
     evidenceStatus:verified?'MANUALLY_VERIFIED_QUOTE':'QUOTE_INCOMPLETE',
     landedCostEligible:verified,
     blockers,
-    policy:'Fail closed. Only a complete, directly sourced, manually verified commercial quote may become landed-cost eligible. Missing fields remain unknown and are never inferred from public listing data.'
+    policy:'Fail closed. Only a complete, directly sourced, manually verified commercial quote may become landed-cost eligible. Missing fields remain unknown and are never inferred from public listing data. NOT_APPLICABLE compliance requires an explicit reviewed basis; a dropdown selection alone is never evidence.'
   };
 }
