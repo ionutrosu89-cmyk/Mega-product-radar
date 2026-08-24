@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   collect-real-public-seed:
@@ -18,6 +18,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -45,6 +47,36 @@ jobs:
           if(x.policy.bootstrapDataIsNotLive!==true)process.exitCode=4;
           if(x.integrity?.canonicalUrlMismatchCount!==0)process.exitCode=5;
           NODE
+      - name: Persist compact verified bootstrap on approved branch
+        if: github.event_name == 'pull_request' && github.head_ref == 'feat/real-public-seed-1000-v1'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const crypto=require('crypto');
+          const x=JSON.parse(fs.readFileSync('artifacts/real-public-seed-1000.json','utf8'));
+          const rows=x.observations.map(o=>[
+            o.externalId,o.title,o.brand,o.categoryLabel,o.price,o.currency,o.rating,o.reviewCount,o.observedAt,o.provenance.sourceUrlIdentityMatch
+          ]);
+          const compact={
+            schemaVersion:'MPR_REAL_PRODUCT_BOOTSTRAP_1000_V1',
+            source:x.source,
+            generatedFromArtifactSha256:crypto.createHash('sha256').update(fs.readFileSync('artifacts/real-public-seed-1000.json')).digest('hex'),
+            uniqueProductCount:x.uniqueProductCount,
+            fields:['asin','title','brand','categoryLabel','price','currency','rating','reviewCount','observedAt','sourceUrlIdentityMatch'],
+            coverage:x.coverage,integrity:x.integrity,policy:x.policy,products:rows
+          };
+          fs.mkdirSync('data',{recursive:true});
+          fs.writeFileSync('data/real-products-1000.compact.json',JSON.stringify(compact));
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/real-products-1000.compact.json
+          if git diff --cached --quiet; then
+            echo 'Bootstrap dataset already persisted'
+          else
+            git commit -m 'Persist 1000 verified real product bootstrap records'
+            git push origin HEAD:${GITHUB_HEAD_REF}
+          fi
       - name: Upload real seed artifact
         if: always()
         uses: actions/upload-artifact@v4
