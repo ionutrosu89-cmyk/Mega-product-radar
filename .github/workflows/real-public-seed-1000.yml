@@ -1,0 +1,88 @@
+name: Real Public Seed 1000
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/bootstrap-amazon-open-dataset-1000.mjs'
+      - '.github/workflows/real-public-seed-1000.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect-real-public-seed:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/real-public-seed-1000-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Bootstrap 1000 real Amazon products from pinned public dataset
+        id: collect
+        continue-on-error: true
+        run: node scripts/bootstrap-amazon-open-dataset-1000.mjs --target=1000 --out=artifacts/real-public-seed-1000.json
+      - name: Summarize and enforce real-product gate
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/real-public-seed-1000.json';
+          if(!fs.existsSync(p)){console.log('No artifact file produced');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`uniqueProductCount=${x.uniqueProductCount}`);
+          console.log(`sourceRowCount=${x.sourceRowCount}`);
+          console.log(`rejectedCount=${x.rejectedCount}`);
+          console.log(`providerSpendEur=${x.policy.providerSpendEur}`);
+          console.log(`bootstrapDataIsNotLive=${x.policy.bootstrapDataIsNotLive}`);
+          console.log(`coverage=${JSON.stringify(x.coverage)}`);
+          console.log(`integrity=${JSON.stringify(x.integrity)}`);
+          if(x.uniqueProductCount<1000)process.exitCode=2;
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.policy.bootstrapDataIsNotLive!==true)process.exitCode=4;
+          if(x.integrity?.canonicalUrlMismatchCount!==0)process.exitCode=5;
+          NODE
+      - name: Persist compact verified bootstrap on approved branch
+        if: github.event_name == 'pull_request' && github.head_ref == 'feat/real-public-seed-1000-v1'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const crypto=require('crypto');
+          const x=JSON.parse(fs.readFileSync('artifacts/real-public-seed-1000.json','utf8'));
+          const rows=x.observations.map(o=>[
+            o.externalId,o.title,o.brand,o.categoryLabel,o.price,o.currency,o.rating,o.reviewCount,o.observedAt,o.provenance.sourceUrlIdentityMatch
+          ]);
+          const productSetSha256=crypto.createHash('sha256').update(JSON.stringify(rows)).digest('hex');
+          const compact={
+            schemaVersion:'MPR_REAL_PRODUCT_BOOTSTRAP_1000_V1',
+            source:x.source,
+            productSetSha256,
+            uniqueProductCount:x.uniqueProductCount,
+            fields:['asin','title','brand','categoryLabel','price','currency','rating','reviewCount','observedAt','sourceUrlIdentityMatch'],
+            coverage:x.coverage,integrity:x.integrity,policy:x.policy,products:rows
+          };
+          fs.mkdirSync('data',{recursive:true});
+          fs.writeFileSync('data/real-products-1000.compact.json',JSON.stringify(compact));
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/real-products-1000.compact.json
+          if git diff --cached --quiet; then
+            echo 'Bootstrap dataset already persisted and unchanged'
+          else
+            git commit -m 'Persist deterministic 1000 real product bootstrap records'
+            git push origin HEAD:${GITHUB_HEAD_REF}
+          fi
+      - name: Upload real seed artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-public-seed-1000
+          path: artifacts/real-public-seed-1000.json
+          if-no-files-found: error
+          retention-days: 7
