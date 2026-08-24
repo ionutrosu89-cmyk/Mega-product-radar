@@ -8,7 +8,7 @@ const completeQuote={
   productCanonicalKey:'car-sunglasses-magnetic-visor-holder',supplierName:'Example Supplier',platform:'Alibaba',sourceUrl:'https://example.com/direct-item',supplierSkuOrModel:'VISOR-MAG-01',exactProductConfirmed:true,
   unitPrice:0.72,currency:'USD',quoteQuantity:100,moq:20,sampleCost:2,sampleShippingToRomania:15,leadTimeDays:12,incoterm:'EXW',bulkShippingToRomania:35,shippingCurrency:'USD',
   cartonQuantity:100,cartonGrossWeightKg:8,cartonLengthCm:45,cartonWidthCm:30,cartonHeightCm:25,paymentTerms:'30/70',tradeAssuranceOrEquivalent:true,inspectionAccepted:true,
-  complianceStatus:'NOT_APPLICABLE',complianceEvidence:[],quotedAt:'2026-08-24T06:00:00Z',quoteValidUntil:'2026-09-24T06:00:00Z',manualVerifiedAt:'2026-08-24T06:05:00Z',manualVerifiedBy:'operator'
+  complianceStatus:'NOT_APPLICABLE',complianceEvidence:[],complianceNotApplicableBasis:'Reviewed product scope and applicable EU requirements; no product-specific conformity marking requirement identified. Basis recorded by verifier.',quotedAt:'2026-08-24T06:00:00Z',quoteValidUntil:'2026-09-24T06:00:00Z',manualVerifiedAt:'2026-08-24T06:05:00Z',manualVerifiedBy:'operator'
 };
 
 test('shared quote verifier stays fail-closed and accepts only complete manually verified evidence',()=>{
@@ -37,6 +37,6 @@ test('Supplier Intelligence UI uses the shared strict verifier and Netlify ships
   assert.match(ui,/supplier-quote-verifier\.js/);
   assert.match(ui,/verifySupplierQuote\(quote\)/);
   assert.doesNotMatch(ui,/commercialVerified=Boolean\(url/);
-  for(const id of ['sku','quoteQty','sampleShipping','incoterm','bulkShipping','shippingCurrency','cartonQty','cartonWeight','payment','inspection','compliance','quotedAt','validUntil','verifiedBy','manualConfirm'])assert.match(html,new RegExp(`id="${id}"`));
+  for(const id of ['sku','quoteQty','sampleShipping','incoterm','bulkShipping','shippingCurrency','cartonQty','cartonWeight','payment','inspection','compliance','complianceBasis','quotedAt','validUntil','verifiedBy','manualConfirm'])assert.match(html,new RegExp(`id="${id}"`));
   assert.match(build,/supplier-quote-verifier\.js/);
 });
