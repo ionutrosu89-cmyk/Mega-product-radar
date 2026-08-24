@@ -4,6 +4,7 @@ const positive=v=>finite(v)&&Number(v)>0;
 const nonNegative=v=>finite(v)&&Number(v)>=0;
 const text=v=>String(v??'').trim();
 const validDate=v=>{const d=new Date(v);return Boolean(v)&&Number.isFinite(d.getTime());};
+const explicitlyProvided=(input,field)=>input?.provided?.[field]===true;
 
 const EXPLICIT_COST_FIELDS=[
   ['internationalFreight','transport internațional'],
@@ -19,14 +20,14 @@ const EXPLICIT_COST_FIELDS=[
 export function evaluateLandedCostEvidence(input={}){
   const blockers=[];
   if(!text(input.currency))blockers.push('monedă ofertă');
-  if(!positive(input.unitPriceForeign))blockers.push('preț furnizor / bucată');
-  if(!positive(input.quantity))blockers.push('cantitate lot');
-  if(!positive(input.fxRate))blockers.push('curs valutar explicit');
+  if(!explicitlyProvided(input,'unitPriceForeign')||!positive(input.unitPriceForeign))blockers.push('preț furnizor / bucată');
+  if(!explicitlyProvided(input,'quantity')||!positive(input.quantity))blockers.push('cantitate lot');
+  if(!explicitlyProvided(input,'fxRate')||!positive(input.fxRate))blockers.push('curs valutar explicit');
   if(!text(input.fxSource))blockers.push('sursa cursului valutar');
   if(!validDate(input.fxVerifiedAt))blockers.push('data verificării cursului valutar');
 
   for(const [field,label] of EXPLICIT_COST_FIELDS){
-    if(!nonNegative(input[field]))blockers.push(`${label} explicit (0 dacă este verificat că nu se aplică)`);
+    if(!explicitlyProvided(input,field)||!nonNegative(input[field]))blockers.push(`${label} explicit (0 dacă este verificat că nu se aplică)`);
   }
 
   const customsStatus=text(input.customsStatus).toUpperCase();
@@ -45,11 +46,11 @@ export function evaluateLandedCostEvidence(input={}){
 
   const ready=blockers.length===0;
   return{
-    version:'1.0',
+    version:'1.1',
     readyForManualConfirmation:ready,
     status:ready?'EVIDENCE_COMPLETE':'EVIDENCE_INCOMPLETE',
     blockers,
-    explicitZeroPolicy:'Zero counts only when the field was explicitly entered. Blank or missing cost fields remain blockers and are never silently converted into verified zero cost.',
+    explicitZeroPolicy:'Zero counts only when the field was explicitly entered. Blank, missing, or legacy zero-normalized fields remain blockers until explicitly confirmed.',
     policy:'This checklist validates completeness of landed-cost evidence only. It does not decide customs/tax applicability and never confirms a cost automatically.'
   };
 }
