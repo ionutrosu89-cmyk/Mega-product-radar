@@ -3,7 +3,8 @@ import {buildTestPlan,startRealTest,measureRealTest} from './test-execution-engi
 import {listTestExecutions,saveTestExecution} from './test-execution-client.js';
 import {roProductName} from './product-ro.js';
 
-const $=s=>document.querySelector(s);
+const hasDom=typeof document!=='undefined';
+const $=s=>hasDom?document.querySelector(s):null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
 let products=[],runs=[];
@@ -51,11 +52,13 @@ async function measureRun(card,key){
   await saveTestExecution(result.record);runs=runs.map(x=>x.runKey===key?result.record:x);render();
 }
 
-document.addEventListener('click',e=>{const plan=e.target.closest('[data-plan]');if(plan)createPlan(plan.dataset.plan).catch(err=>alert(err?.message||err));const start=e.target.closest('[data-start]');if(start)startRun(start.closest('[data-run]'),start.dataset.start).catch(err=>alert(err?.message||err));const measure=e.target.closest('[data-measure]');if(measure)measureRun(measure.closest('[data-run]'),measure.dataset.measure).catch(err=>alert(err?.message||err));});
-
 async function boot(){
   const d=await fetch('./market-intelligence-live.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(new Error('Market intelligence indisponibil.')));
   products=await applyPrivateCommercialDecisions(d.products||[]);
   runs=await listTestExecutions();render();
 }
-boot().catch(e=>{$('#summary').innerHTML=`<span class="bad">Test Execution indisponibil: ${esc(e?.message||e)}</span>`;});
+
+if(hasDom){
+  document.addEventListener('click',e=>{const plan=e.target.closest('[data-plan]');if(plan)createPlan(plan.dataset.plan).catch(err=>alert(err?.message||err));const start=e.target.closest('[data-start]');if(start)startRun(start.closest('[data-run]'),start.dataset.start).catch(err=>alert(err?.message||err));const measure=e.target.closest('[data-measure]');if(measure)measureRun(measure.closest('[data-run]'),measure.dataset.measure).catch(err=>alert(err?.message||err));});
+  boot().catch(e=>{$('#summary').innerHTML=`<span class="bad">Test Execution indisponibil: ${esc(e?.message||e)}</span>`;});
+}
