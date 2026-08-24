@@ -46,7 +46,7 @@ jobs:
           if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
           if(x.policy.bootstrapDataIsNotLive!==true)process.exitCode=4;
           if(x.integrity?.canonicalUrlMismatchCount!==0)process.exitCode=5;
-          if(x.integrity?.sourceUrlIdentityMismatchCount!==0)process.exitCode=6;
+          if(!Number.isInteger(x.integrity?.sourceUrlIdentityMismatchCount)||x.integrity.sourceUrlIdentityMismatchCount<0)process.exitCode=6;
           NODE
       - name: Persist compact verified bootstrap on approved branch
         if: github.event_name == 'pull_request' && github.head_ref == 'feat/real-public-seed-1000-v1'
