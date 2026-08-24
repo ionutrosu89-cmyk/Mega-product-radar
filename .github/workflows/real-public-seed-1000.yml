@@ -39,9 +39,11 @@ jobs:
           console.log(`providerSpendEur=${x.policy.providerSpendEur}`);
           console.log(`bootstrapDataIsNotLive=${x.policy.bootstrapDataIsNotLive}`);
           console.log(`coverage=${JSON.stringify(x.coverage)}`);
+          console.log(`integrity=${JSON.stringify(x.integrity)}`);
           if(x.uniqueProductCount<1000)process.exitCode=2;
           if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
           if(x.policy.bootstrapDataIsNotLive!==true)process.exitCode=4;
+          if(x.integrity?.canonicalUrlMismatchCount!==0)process.exitCode=5;
           NODE
       - name: Upload real seed artifact
         if: always()
