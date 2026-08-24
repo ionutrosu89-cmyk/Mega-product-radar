@@ -1,0 +1,59 @@
+{
+  "version": "2.0",
+  "purpose": "Canonical category taxonomy for FREE market intelligence. This is a taxonomy seed, not a claim of complete market coverage.",
+  "targetArchitectureProducts": 100000,
+  "rankingTargets": {"defaultTop": 100, "minimumUsefulPerNiche": 25},
+  "departments": [
+    {"key":"home-kitchen","label":"Casă & Bucătărie","children":[
+      {"key":"home-organization","label":"Organizare casă","niches":["space-saving-storage","drawer-organization","closet-organization","entryway-organization"]},
+      {"key":"kitchen","label":"Bucătărie","niches":["kitchen-organization","food-prep-tools","sink-organization","pantry-storage"]},
+      {"key":"bathroom","label":"Baie","niches":["no-drill-storage","shower-organization","sink-organization","toiletry-storage"]},
+      {"key":"cleaning-laundry","label":"Curățenie & Laundry","niches":["laundry-organization","cleaning-tools","cleaning-storage","clothes-care"]}
+    ]},
+    {"key":"electronics-office","label":"Electronice & Birou","children":[
+      {"key":"office","label":"Birou & Work from Home","niches":["desk-organization","headphone-accessories","cable-management","laptop-accessories"]},
+      {"key":"phone-tech","label":"Telefon & Accesorii Tech","niches":["phone-holders","tablet-stands","charging-organization","tech-travel-organization"]}
+    ]},
+    {"key":"automotive","label":"Auto","children":[
+      {"key":"car-interior","label":"Interior auto","niches":["visor-accessories","seat-organization","cup-holder-accessories","car-storage"]},
+      {"key":"car-travel","label":"Confort & călătorie auto","niches":["headrest-accessories","trunk-organization","travel-comfort","car-cleanliness"]}
+    ]},
+    {"key":"baby-kids-toys","label":"Bebeluși, Copii & Jucării","children":[
+      {"key":"baby","label":"Bebeluși 0–2 ani","niches":["feeding-accessories","stroller-accessories","nursery-organization","baby-travel"]},
+      {"key":"kids","label":"Copii 3–6 ani","niches":["kids-room-organization","preschool-activities","kids-travel","daily-routines"]},
+      {"key":"toys-education","label":"Jucării & Educațional","niches":["montessori","fine-motor","reusable-learning","creative-play"]}
+    ]},
+    {"key":"pet","label":"Pet","children":[
+      {"key":"dog","label":"Câini","niches":["dog-travel","feeding-organization","walking-accessories","home-organization"]},
+      {"key":"cat","label":"Pisici","niches":["cat-home","feeding-accessories","litter-organization","travel-accessories"]}
+    ]},
+    {"key":"travel","label":"Travel & Bagaje","children":[
+      {"key":"packing","label":"Organizare bagaje","niches":["packing-cubes","toiletry-organization","document-organization","luggage-accessories"]},
+      {"key":"travel-comfort","label":"Confort călătorie","niches":["airplane-accessories","sleep-comfort","portable-organization","travel-security"]}
+    ]},
+    {"key":"beauty-fashion","label":"Beauty & Fashion","children":[
+      {"key":"beauty","label":"Beauty & Îngrijire","niches":["makeup-organization","hair-tool-organization","cosmetic-travel","personal-care-accessories"]},
+      {"key":"fashion-accessories","label":"Fashion & Accesorii","niches":["jewelry-organization","shoe-accessories","hat-storage","wardrobe-accessories"]}
+    ]},
+    {"key":"sports-fitness-outdoor","label":"Sport, Fitness & Outdoor","children":[
+      {"key":"fitness","label":"Fitness & Recovery","niches":["home-fitness-accessories","resistance-training","recovery-accessories","fitness-organization"]},
+      {"key":"sports","label":"Sport","niches":["sports-organization","ball-accessories","medal-display","sports-travel"]},
+      {"key":"outdoor","label":"Outdoor & Camping","niches":["camping-organization","hiking-accessories","picnic-accessories","outdoor-storage"]}
+    ]},
+    {"key":"garden-diy","label":"Grădină, Balcon & DIY","children":[
+      {"key":"garden","label":"Grădină & Balcon","niches":["plant-support","plant-care","balcony-organization","garden-tools-small"]},
+      {"key":"diy","label":"DIY & Home Improvement","niches":["tool-organization","drill-free-mounting","small-repair-accessories","workshop-organization"]}
+    ]},
+    {"key":"party-hobby","label":"Party, Hobby & Craft","children":[
+      {"key":"party","label":"Party & Evenimente","niches":["reusable-decor","serving-accessories","party-organization","birthday-accessories"]},
+      {"key":"hobby-craft","label":"Hobby & Craft","niches":["craft-organization","painting-accessories","puzzle-accessories","hobby-storage"]}
+    ]},
+    {"key":"seasonal-gifts","label":"Sezon & Cadouri","children":[
+      {"key":"seasonal","label":"Produse sezoniere","niches":["holiday-organization","seasonal-home","summer-accessories","winter-accessories"]},
+      {"key":"gifts","label":"Cadouri utile","niches":["giftable-problem-solvers","small-useful-gifts","desk-gifts","home-gifts"]}
+    ]},
+    {"key":"daily-living","label":"Confort & Daily Living","children":[
+      {"key":"senior-comfort","label":"Confort & Seniori","niches":["easy-grip-household","daily-living-aids-non-medical","home-convenience","accessibility-organization"]}
+    ]}
+  ]
+}
