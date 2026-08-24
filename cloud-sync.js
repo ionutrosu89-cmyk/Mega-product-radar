@@ -4,6 +4,7 @@ import {ensurePersonalWorkspace} from './workspace-client.js';
 export const CLOUD_DATASETS=Object.freeze([
   {key:'megaRadarSupplierRecordsV1',table:'suppliers',shape:'map',toRow:(x,w)=>({workspace_id:w,product_name:String(x.productName||x.name||x.__radarKey||'Produs'),supplier_name:x.supplierName||null,platform:x.platform||null,url:x.url||null,verified:Boolean(x.manualVerified||x.verified),payload:x})},
   {key:'megaRadarSupplierMatrixV6',table:'supplier_offers',shape:'array',toRow:(x,w)=>({workspace_id:w,product_name:String(x.product||x.productName||x.name||'Produs'),supplier_name:x.supplierName||null,platform:x.platform||null,url:x.url||null,quoted_price:Number(x.quotedPrice||0)||null,moq:Number(x.moq||0)||null,rating:Number(x.rating||0)||null,years:Number(x.years||0)||null,sample_cost:Number(x.sampleCost||0)||null,trade_assurance:Boolean(x.tradeAssurance),certifications:Array.isArray(x.certifications)?x.certifications:[],payload:x})},
+  {key:'megaRadarRfqDispatchV1',table:'rfq_dispatch_states',shape:'array',toRow:(x,w)=>({workspace_id:w,product_key:String(x.productKey||x.productCanonicalKey||'').trim(),product_name:String(x.productName||'Produs'),supplier_name:String(x.supplierName||'Furnizor'),platform:x.platform||null,status:x.status||'NOT_SENT',sent_at:x.sentAt||null,sent_by:x.sentBy||null,channel:x.channel||null,response_received_at:x.responseReceivedAt||null,response_reference:x.responseReference||null,payload:x})},
   {key:'megaRadarLandedCostRecordsV1',table:'landed_costs',shape:'map',toRow:(x,w)=>({workspace_id:w,product_name:String(x.productName||x.name||x.__radarKey||'Produs'),landed_per_unit:Number(x.landedPerUnit||x.landedCost||x.unitLanded||0)||null,confirmed:Boolean(x.confirmed),payload:x})},
   {key:'megaRadarPurchaseRecordsV1',table:'purchases',shape:'map',toRow:(x,w)=>({workspace_id:w,product_name:String(x.productName||x.name||x.__radarKey||'Produs'),status:x.status||null,quantity:Number(x.quantity||x.qty||0)||null,capital:Number(x.capital||x.totalCost||0)||null,payload:x})},
   {key:'megaRadarPortfolioV6',legacyKey:'megaRadarPortfolioV1',table:'portfolio_items',shape:'array',toRow:(x,w)=>({workspace_id:w,product_name:String(x.productName||x.name||'Produs'),stock:Number(x.stock||0)||0,sales_30d:Number(x.sold30||x.sold30d||x.sales30d||0)||0,revenue_30d:Number(x.revenue30d||0)||0,payload:x})},
@@ -41,7 +42,7 @@ function localCount(d){const raw=parseLocalDataset(d);return d.shape==='map'?Obj
 function stripMeta(record){if(!record||typeof record!=='object')return record;const {__radarKey,...clean}=record;return clean;}
 function recordTime(record){
   if(!record||typeof record!=='object')return 0;
-  for(const key of ['updatedAt','verifiedAt','orderedAt','at']){const t=Date.parse(record[key]||'');if(Number.isFinite(t))return t;}
+  for(const key of ['updatedAt','responseReceivedAt','sentAt','verifiedAt','orderedAt','at']){const t=Date.parse(record[key]||'');if(Number.isFinite(t))return t;}
   return 0;
 }
 function latestTime(records=[]){return records.reduce((m,r)=>Math.max(m,recordTime(r)),0);}
