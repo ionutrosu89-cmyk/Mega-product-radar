@@ -16,7 +16,7 @@ const numOrRaw=id=>value(id)===''?'':Number(value(id));
 const splitLines=id=>value(id).split(/\n|,/).map(x=>x.trim()).filter(Boolean);
 const boolSelect=id=>value(id)===''?null:value(id)==='true';
 const iso=id=>value(id)?new Date(value(id)).toISOString():'';
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
 
 function inboundQuoteContext(){
   const params=new URLSearchParams(location.search);
@@ -86,6 +86,7 @@ function collectQuote({recordManualTimestamp=false}={}){
     inspectionAccepted:$('#inspection')?.checked===true,
     complianceStatus:value('#compliance'),
     complianceEvidence:splitLines('#complianceEvidence'),
+    complianceNotApplicableBasis:value('#complianceBasis'),
     quotedAt:iso('#quotedAt'),
     quoteValidUntil:iso('#validUntil'),
     manualVerifiedAt:manualChecked&&recordManualTimestamp?new Date().toISOString():'',
