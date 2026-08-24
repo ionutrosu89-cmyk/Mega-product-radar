@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import {buildUniverseMilestoneStatus} from './global-product-universe-seeder.js';
 
 const text=v=>String(v??'').replace(/\s+/g,' ').trim();
@@ -19,8 +20,11 @@ export function loadRealProductBootstrap(compact={}){
   for(const name of required)if(!fields.includes(name))errors.push(`FIELD_MISSING:${name}`);
   const index=Object.fromEntries(fields.map((x,i)=>[x,i]));
   const rawRows=Array.isArray(compact?.products)?compact.products:[];
-  const products=[];const rejected=[];const seen=new Set();
+  const productSetSha256=crypto.createHash('sha256').update(JSON.stringify(rawRows)).digest('hex');
+  if(!text(compact?.productSetSha256))errors.push('PRODUCT_SET_HASH_REQUIRED');
+  else if(productSetSha256!==text(compact.productSetSha256))errors.push('PRODUCT_SET_HASH_MISMATCH');
 
+  const products=[];const rejected=[];const seen=new Set();
   for(let i=0;i<rawRows.length;i++){
     const row=rawRows[i]||[];
     const asin=text(row[index.asin]).toUpperCase();
@@ -39,7 +43,7 @@ export function loadRealProductBootstrap(compact={}){
       evidenceClass:'OPEN_PUBLIC_DATASET_PRODUCT',identityEvidence:'AMAZON_NATIVE_ASIN',
       freshnessClass:'BOOTSTRAP_SNAPSHOT_NOT_LIVE',salesEvidenceClass:'NOT_VERIFIED_SALES',
       rankEvidenceClass:'NOT_A_RANKING_OBSERVATION',purchaseAuthorized:false,
-      provenance:{source:compact.source||null,generatedFromArtifactSha256:text(compact.generatedFromArtifactSha256)||null}
+      provenance:{source:compact.source||null,productSetSha256}
     });
   }
 
@@ -47,7 +51,7 @@ export function loadRealProductBootstrap(compact={}){
   if(rejected.length)errors.push('BOOTSTRAP_ROWS_REJECTED');
   const seedResult={uniqueProductObservationCount:products.length};
   return{
-    ok:errors.length===0,errors,rejected,products,
+    ok:errors.length===0,errors,rejected,products,productSetSha256,
     uniqueProductCount:products.length,
     milestone:buildUniverseMilestoneStatus(seedResult,[1000,5000,10000]),
     coverage:compact?.coverage||null,integrity:compact?.integrity||null,source:compact?.source||null,
@@ -59,7 +63,7 @@ export function loadRealProductBootstrap(compact={}){
 export function realProductBootstrapSummary(compact={}){
   const loaded=loadRealProductBootstrap(compact);
   return{
-    ok:loaded.ok,uniqueProductCount:loaded.uniqueProductCount,
+    ok:loaded.ok,uniqueProductCount:loaded.uniqueProductCount,productSetSha256:loaded.productSetSha256,
     milestone:loaded.milestone,coverage:loaded.coverage,integrity:loaded.integrity,source:loaded.source,
     freshnessClass:'BOOTSTRAP_SNAPSHOT_NOT_LIVE',salesEvidenceClass:'NOT_VERIFIED_SALES',
     rankingEvidence:false,paidCallsTriggered:0,purchaseAuthorized:false
