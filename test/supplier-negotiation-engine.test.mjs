@@ -31,7 +31,7 @@ test('quote below direct-cost ceiling is only potentially feasible, never confir
 });
 
 test('slightly over ceiling generates negotiate-down target',()=>{
-  const q={...baseQuote,unitPrice:0.75,bulkShippingToRomania:30};
+  const q={...baseQuote,unitPrice:0.65,bulkShippingToRomania:20};
   const x=evaluateQuoteNegotiation(q,{sellPriceRon:44.74,fxToRon:{USD:4.6}});
   assert.equal(x.status,'NEGOTIATE_DOWN');
   assert.ok(x.screening.maxUnitPriceInQuoteCurrency>=0);
