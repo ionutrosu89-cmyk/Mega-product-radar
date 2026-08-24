@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "updatedAt": "2026-08-23T22:05:36.544Z",
+  "version": "1.1-oidc",
+  "updatedAt": "2026-08-24T05:32:44.475Z",
   "status": "ACTIVE",
   "targetCount": 6,
   "eligibleCount": 6,
@@ -11,23 +11,23 @@
       "title": "Reusable furniture moving sliders kit",
       "status": "VALIDATE",
       "estimatedCostEur": 0.05,
-      "informationValue": 200.775,
+      "informationValue": 200.275,
       "paidDataPriority": 1
-    },
-    {
-      "canonicalKey": "shoe-washing-laundry-bag-structured",
-      "title": "Shoe washing laundry bag structured",
-      "status": "PROMISING",
-      "estimatedCostEur": 0.05,
-      "informationValue": 162.425,
-      "paidDataPriority": 2
     },
     {
       "canonicalKey": "kids-reusable-sticker-activity-book",
       "title": "Kids reusable sticker activity book",
       "status": "PROMISING",
       "estimatedCostEur": 0.05,
-      "informationValue": 161.925,
+      "informationValue": 162.425,
+      "paidDataPriority": 2
+    },
+    {
+      "canonicalKey": "shoe-washing-laundry-bag-structured",
+      "title": "Shoe washing laundry bag structured",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 161.425,
       "paidDataPriority": 3
     },
     {
@@ -56,5 +56,6 @@
     }
   ],
   "error": null,
-  "policy": "Fail closed. Only PROMISING/VALIDATE products returned by Supabase stage0_paid_targets may retain goldenPipeline.paidDataEligible=true. Recent Romania cache hits are excluded by the RPC."
+  "authorization": "GITHUB_OIDC_EDGE",
+  "policy": "Fail closed. Only PROMISING/VALIDATE products returned by the server-side Stage 0 RO queue may retain goldenPipeline.paidDataEligible=true. Browser/public RPC access is not used."
 }
