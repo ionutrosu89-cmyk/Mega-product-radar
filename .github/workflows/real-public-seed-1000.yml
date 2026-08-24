@@ -57,10 +57,11 @@ jobs:
           const rows=x.observations.map(o=>[
             o.externalId,o.title,o.brand,o.categoryLabel,o.price,o.currency,o.rating,o.reviewCount,o.observedAt,o.provenance.sourceUrlIdentityMatch
           ]);
+          const productSetSha256=crypto.createHash('sha256').update(JSON.stringify(rows)).digest('hex');
           const compact={
             schemaVersion:'MPR_REAL_PRODUCT_BOOTSTRAP_1000_V1',
             source:x.source,
-            generatedFromArtifactSha256:crypto.createHash('sha256').update(fs.readFileSync('artifacts/real-public-seed-1000.json')).digest('hex'),
+            productSetSha256,
             uniqueProductCount:x.uniqueProductCount,
             fields:['asin','title','brand','categoryLabel','price','currency','rating','reviewCount','observedAt','sourceUrlIdentityMatch'],
             coverage:x.coverage,integrity:x.integrity,policy:x.policy,products:rows
@@ -72,9 +73,9 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/real-products-1000.compact.json
           if git diff --cached --quiet; then
-            echo 'Bootstrap dataset already persisted'
+            echo 'Bootstrap dataset already persisted and unchanged'
           else
-            git commit -m 'Persist 1000 verified real product bootstrap records'
+            git commit -m 'Persist deterministic 1000 real product bootstrap records'
             git push origin HEAD:${GITHUB_HEAD_REF}
           fi
       - name: Upload real seed artifact
