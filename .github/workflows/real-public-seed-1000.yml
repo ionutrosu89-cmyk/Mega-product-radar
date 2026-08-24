@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'scripts/collect-alibaba-public-1000.mjs'
+      - 'scripts/bootstrap-amazon-open-dataset-1000.mjs'
       - '.github/workflows/real-public-seed-1000.yml'
   workflow_dispatch:
 
@@ -15,17 +15,17 @@ jobs:
   collect-real-public-seed:
     if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/real-public-seed-1000-v1'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collect user-approved public Alibaba products
+      - name: Bootstrap 1000 real Amazon products from pinned public dataset
         id: collect
         continue-on-error: true
-        run: node scripts/collect-alibaba-public-1000.mjs --target=1200 --out=artifacts/real-public-seed-1000.json
-      - name: Summarize result
+        run: node scripts/bootstrap-amazon-open-dataset-1000.mjs --target=1000 --out=artifacts/real-public-seed-1000.json
+      - name: Summarize and enforce real-product gate
         if: always()
         run: |
           node - <<'NODE'
@@ -34,11 +34,14 @@ jobs:
           if(!fs.existsSync(p)){console.log('No artifact file produced');process.exit(1)}
           const x=JSON.parse(fs.readFileSync(p,'utf8'));
           console.log(`uniqueProductCount=${x.uniqueProductCount}`);
-          console.log(`sourcePagesSucceeded=${x.sourcePagesSucceeded}`);
-          console.log(`sourcePagesFailed=${x.sourcePagesFailed}`);
+          console.log(`sourceRowCount=${x.sourceRowCount}`);
+          console.log(`rejectedCount=${x.rejectedCount}`);
           console.log(`providerSpendEur=${x.policy.providerSpendEur}`);
-          console.log(`paidCallsTriggered=${x.policy.paidCallsTriggered}`);
+          console.log(`bootstrapDataIsNotLive=${x.policy.bootstrapDataIsNotLive}`);
+          console.log(`coverage=${JSON.stringify(x.coverage)}`);
           if(x.uniqueProductCount<1000)process.exitCode=2;
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.policy.bootstrapDataIsNotLive!==true)process.exitCode=4;
           NODE
       - name: Upload real seed artifact
         if: always()
