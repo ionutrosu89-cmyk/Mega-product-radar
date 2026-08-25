@@ -1,0 +1,13 @@
+{
+  "version":"1.1",
+  "purpose":"Semantic cleanup marker for Romania public market evidence. Canonical competition counts remain unknown where marketplace surfaces are contaminated.",
+  "policy":"SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; FAIL_CLOSED; NO_VERIFIED_SALES; NO_PURCHASE_AUTHORITY",
+  "corrections":[
+    {"nicheKey":"travel:packing-cubes","platform":"TRENDYOL","surfaceItemCountLowerBound":656,"listingCountLowerBound":null,"listingCount":null,"comparableScopeConfirmed":false,"reason":"VISIBLE_SURFACE_CONTAINS_NON_CANONICAL_TRAVEL_ITEMS"},
+    {"nicheKey":"automotive:trunk-organization","platform":"TRENDYOL","surfaceItemCountLowerBound":512,"listingCountLowerBound":null,"listingCount":null,"comparableScopeConfirmed":false,"reason":"VISIBLE_SURFACE_CONTAINS_NETS_COVERS_AND_GENERIC_BAGS"},
+    {"nicheKey":"office:laptop-accessories","platform":"TRENDYOL","surfaceItemCountLowerBound":1636,"listingCountLowerBound":null,"listingCount":null,"comparableScopeConfirmed":false,"reason":"VISIBLE_SURFACE_CONTAINS_ADJACENT_LAPTOP_PRODUCTS"}
+  ],
+  "paidCallsTriggered":0,
+  "approvedSpendEur":0,
+  "purchaseAuthorized":false
+}
