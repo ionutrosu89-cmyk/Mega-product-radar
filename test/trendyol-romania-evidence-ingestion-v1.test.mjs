@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {
   extractTrendyolSnapshotsFromReviewedBatch,
   ingestTrendyolReviewedEvidence,
+  buildRomaniaLocalEvidenceByNiche,
   validateRomaniaQueueAgainstUnifiedLedger
 } from '../trendyol-romania-evidence-ingestion-v1.js';
 
@@ -26,7 +27,7 @@ test('extracts reviewed Trendyol observations but downgrades contaminated counts
 });
 
 test('ingestion is append-only and duplicate safe',()=>{
-  const first=ingestTrendyolReviewedEvidence({ledger:{version:'1.0',observations:[]},batch});
+  const first=ingestTrendyolReviewedEvidence({ledger:{version:'1.3',observations:[]},batch});
   assert.equal(first.appended,3);
   assert.equal(first.ledger.observations.length,3);
   const second=ingestTrendyolReviewedEvidence({ledger:first.ledger,batch});
@@ -37,9 +38,23 @@ test('ingestion is append-only and duplicate safe',()=>{
   assert.equal(second.purchaseAuthorized,false);
 });
 
+test('both EMAG and TRENDYOL local evidence are derived from the same unified ledger',()=>{
+  const item=queue.items.find(x=>x.nicheKey==='travel:packing-cubes');
+  const ledger={version:'1.3',observations:[
+    {nicheKey:item.nicheKey,platform:'EMAG',market:'RO',comparabilityKey:item.comparabilityKey,observedAt:'2026-08-25T10:00:00Z',sourceUrl:'https://example.test/emag',scope:'MARKET_WIDE',manualReviewed:true,comparableScopeConfirmed:true,listingCount:12},
+    {nicheKey:item.nicheKey,platform:'TRENDYOL',market:'RO',comparabilityKey:item.comparabilityKey,observedAt:'2026-08-25T10:01:00Z',sourceUrl:'https://example.test/trendyol',scope:'MARKET_WIDE',manualReviewed:true,comparableScopeConfirmed:true,listingCount:15}
+  ]};
+  const evidence=buildRomaniaLocalEvidenceByNiche({ledger,queueItems:[item],emagEvidenceByNiche:{[item.nicheKey]:{listingCount:999}}});
+  assert.equal(evidence[item.nicheKey].EMAG.listingCount,12);
+  assert.equal(evidence[item.nicheKey].TRENDYOL.listingCount,15);
+  const result=validateRomaniaQueueAgainstUnifiedLedger({ledger,queueItems:[item],emagEvidenceByNiche:{[item.nicheKey]:{listingCount:999}}});
+  assert.equal(result.promotable,1);
+  assert.equal(result.policy.includes('NO_SIDE_CHANNEL_EVIDENCE'),true);
+});
+
 test('contaminated Trendyol surfaces remain blocked in unified promotion validation',()=>{
-  const ingested=ingestTrendyolReviewedEvidence({ledger:{version:'1.0',observations:[]},batch});
-  const result=validateRomaniaQueueAgainstUnifiedLedger({ledger:ingested.ledger,queueItems:queue.items,emagEvidenceByNiche:{}});
+  const ingested=ingestTrendyolReviewedEvidence({ledger:{version:'1.3',observations:[]},batch});
+  const result=validateRomaniaQueueAgainstUnifiedLedger({ledger:ingested.ledger,queueItems:queue.items});
   assert.equal(result.total,3);
   assert.equal(result.promotable,0);
   const packing=result.rows.find(x=>x.nicheKey==='travel:packing-cubes');
@@ -51,7 +66,7 @@ test('contaminated Trendyol surfaces remain blocked in unified promotion validat
 test('no Trendyol reviewed evidence may claim verified sales or authorize purchase',()=>{
   const rows=extractTrendyolSnapshotsFromReviewedBatch(batch);
   assert.ok(rows.every(x=>x.salesEvidenceClass==='NOT_VERIFIED_SALES'));
-  const ingested=ingestTrendyolReviewedEvidence({ledger:{version:'1.0',observations:[]},batch});
+  const ingested=ingestTrendyolReviewedEvidence({ledger:{version:'1.3',observations:[]},batch});
   assert.equal(ingested.approvedSpendEur,0);
   assert.equal(ingested.purchaseAuthorized,false);
 });
