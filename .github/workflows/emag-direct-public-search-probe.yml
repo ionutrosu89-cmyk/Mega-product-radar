@@ -1,0 +1,51 @@
+name: eMAG Direct Public Search Probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe public eMAG search pages
+        id: collect
+        continue-on-error: true
+        run: node scripts/emag-direct-public-search-probe.mjs --out=artifacts/emag-direct-public-search-probe.json
+      - name: Enforce probe safety gate
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/emag-direct-public-search-probe.json';
+          if(!fs.existsSync(p)){console.error('EMAG_PROBE_ARTIFACT_MISSING');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`requestedTargets=${x.requestedTargets}`);
+          console.log(`usableTargets=${x.usableTargets}`);
+          console.log(`blockedTargets=${JSON.stringify(x.gate.blockedTargets)}`);
+          for(const o of x.observations){
+            console.log(`${o.nicheKey}: usable=${o.usable} lowerBound=${o.productLinkLowerBound} declaredCandidate=${o.declaredResultCountCandidate}`);
+          }
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=2;
+          if(x.policy.credentialsUsed!==false||x.policy.sellerApiUsed!==false)process.exitCode=3;
+          if(x.policy.purchaseAuthorized!==false||x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES')process.exitCode=4;
+          if(x.policy.automaticPersistenceToMainData!==false)process.exitCode=5;
+          if(x.gate.romaniaGapCompetitionReady!==false)process.exitCode=6;
+          if(x.observations.some(o=>o.declaredResultCountTrusted!==false||o.marketWideCompetitionReady!==false||o.purchaseAuthorized!==false||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'))process.exitCode=7;
+          if(x.usableTargets===0)process.exitCode=8;
+          NODE
+      - name: Upload eMAG probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emag-direct-public-search-probe
+          path: artifacts/emag-direct-public-search-probe.json
+          if-no-files-found: error
+          retention-days: 7
