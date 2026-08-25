@@ -1,0 +1,1 @@
+This follow-up exists only to make the source-data semantics explicit after the Romania Scope Count Semantics hardening. It does not add market evidence, does not create canonical listing counts, and does not change purchase authority.
