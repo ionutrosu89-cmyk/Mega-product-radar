@@ -7,9 +7,11 @@ const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,v));
 export const DEFAULT_10K_TARGET=10000;
 export const DEFAULT_FREE_FIRST_BUDGET_EUR=0;
 
+// The 10K Product Universe is demand/catalogue breadth. Alibaba is intentionally
+// excluded from this allocation because it is SUPPLY_DISCOVERY, not demand ranking.
+// Alibaba remains available to Supplier Intelligence through the source registry.
 const SOURCE_WEIGHTS=Object.freeze({
-  AMAZON_PUBLIC_RANKINGS:35,
-  ALIBABA_TOP_RANKING:20,
+  AMAZON_PUBLIC_RANKINGS:55,
   EBAY_BEST_SELLING:15,
   ETSY_OPEN_API:15,
   WALMART_CATALOG_SEARCH:15
@@ -79,6 +81,8 @@ export function build10kAcquisitionPlan({
     readySources:allocation.filter(x=>x.ready).map(x=>x.sourceKey),
     blockedSources:allocation.filter(x=>!x.ready).map(x=>({sourceKey:x.sourceKey,reason:x.blockedReason})),
     acquisitionMix:sourcePlan.allocation,
+    supplyDiscoverySources:['ALIBABA_TOP_RANKING'],
+    supplyDiscoveryCountsTowardDemandTarget:false,
     freeFirstBudgetEur:DEFAULT_FREE_FIRST_BUDGET_EUR,
     approvedSpendEur:budget,
     freeFirst,
