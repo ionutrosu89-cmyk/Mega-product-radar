@@ -1,0 +1,38 @@
+name: Amazon Live Refresh Missing Round1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-missing-round1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Slowly collect first live snapshots for currently missing ASINs only
+        run: node scripts/amazon-live-refresh-missing-round1.mjs --max=846 --out=artifacts/amazon-live-refresh-missing-round1.json
+      - name: Validate missing-only artifact
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('artifacts/amazon-live-refresh-missing-round1.json','utf8'));
+          if(x.overlapWithAlreadyCaptured!==0) process.exitCode=3;
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0) process.exitCode=4;
+          if(x.policy?.trendAuthorized!==false||x.policy?.minObservationHoursBeforeTrend!==24) process.exitCode=5;
+          const ids=new Set(x.observations.map(o=>o.externalId));
+          if(ids.size!==x.observations.length) process.exitCode=6;
+          console.log(JSON.stringify({baselineCapturedCount:x.baselineCapturedCount,missingBeforeRun:x.missingBeforeRun,requested:x.requested,validObservations:x.validObservations,successRatePct:x.successRatePct,coverage:x.coverage,overlap:x.overlapWithAlreadyCaptured},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amazon-live-refresh-missing-round1
+          path: artifacts/amazon-live-refresh-missing-round1.json
+          retention-days: 7
+          if-no-files-found: error
