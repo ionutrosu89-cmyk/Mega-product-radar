@@ -1,6 +1,7 @@
 import {canonicalRomaniaComparabilityKey} from './romania-comparability-key-registry-v1.js';
 import {ingestEmagProbeArtifact} from './romania-evidence-ingestion-bridge-v1.js';
-import {ingestTrendyolReviewedEvidence,buildRomaniaLocalEvidenceByNiche} from './trendyol-romania-evidence-ingestion-v1.js';
+import {ingestTrendyolReviewedEvidence} from './trendyol-romania-evidence-ingestion-v1.js';
+import {latestRomaniaMarketSnapshots} from './romania-market-snapshot-ledger-v1.js';
 import {validateRomaniaEvidencePromotion} from './romania-evidence-promotion-validator-v1.js';
 
 const priority=v=>Number.isFinite(Number(v))?Number(v):999;
@@ -11,6 +12,20 @@ function reportState({emag={},trendyol={},validation={}}={}){
   const bothObserved=Boolean(emag.observedAt&&trendyol.observedAt);
   const needsHuman=validation.blockers?.some(x=>/MANUAL_REVIEW|SCOPE_NOT_CONFIRMED|NOT_MARKET_WIDE/.test(x));
   return bothObserved&&needsHuman?'REVIEW_READY':'BLOCKED';
+}
+
+function buildEvidenceFromUnifiedLedger({ledger={observations:[]},queueItems=[]}={}){
+  const latest=latestRomaniaMarketSnapshots(ledger);
+  const out={};
+  for(const item of queueItems||[]){
+    const expectedKey=canonicalRomaniaComparabilityKey(item.comparabilityKey);
+    const matching=latest.filter(x=>x.nicheKey===item.nicheKey&&canonicalRomaniaComparabilityKey(x.comparabilityKey)===expectedKey);
+    out[item.nicheKey]={
+      EMAG:matching.find(x=>x.platform==='EMAG')||{},
+      TRENDYOL:matching.find(x=>x.platform==='TRENDYOL')||{}
+    };
+  }
+  return out;
 }
 
 export function buildRomaniaEvidencePromotionReport({
@@ -24,7 +39,7 @@ export function buildRomaniaEvidencePromotionReport({
     ?ingestEmagProbeArtifact({artifact:emagArtifact,ledger:existingLedger})
     :{ledger:existingLedger,appended:0,duplicates:0,diagnosticsSkipped:0};
   const trendyolIngest=ingestTrendyolReviewedEvidence({ledger:emagIngest.ledger,batch:reviewedBatch});
-  const evidenceByNiche=buildRomaniaLocalEvidenceByNiche({ledger:trendyolIngest.ledger,queueItems});
+  const evidenceByNiche=buildEvidenceFromUnifiedLedger({ledger:trendyolIngest.ledger,queueItems});
 
   const rows=(queueItems||[]).map(item=>{
     const evidence=evidenceByNiche[item.nicheKey]||{};
@@ -70,7 +85,7 @@ export function buildRomaniaEvidencePromotionReport({
       trendyol:{appended:trendyolIngest.appended||0,duplicates:trendyolIngest.duplicates||0,rejected:trendyolIngest.rejected||0}
     },
     rows,
-    policy:'OFFLINE_REVIEW_REPORT_ONLY; NO_NETWORK; NO_AUTO_PROMOTION; LOWER_BOUND_IS_NOT_EXACT; FAIL_CLOSED',
+    policy:'OFFLINE_REVIEW_REPORT_ONLY; UNIFIED_LOCAL_LEDGER; NO_NETWORK; NO_AUTO_PROMOTION; LOWER_BOUND_IS_NOT_EXACT; FAIL_CLOSED',
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     paidCallsTriggered:0,
     approvedSpendEur:0,
