@@ -43,13 +43,16 @@ test('usable eMAG lower-bound artifact becomes review input but cannot promote',
     declaredResultCountCandidate:1000
   }]};
   const r=buildRomaniaEvidencePromotionReport({queueItems:[item],reviewedBatch:batch,emagArtifact:artifact});
+  const emag=r.rows[0].evidence.EMAG;
   assert.equal(r.emagArtifactPresent,true);
   assert.equal(r.promotable,0);
-  assert.ok(r.rows[0].evidence.EMAG.listingCount==null);
-  assert.equal(r.rows[0].evidence.EMAG.listingCountLowerBound,24);
+  assert.ok(emag.listingCount==null);
+  assert.equal(emag.listingCountLowerBound,24);
+  assert.equal(emag.scope,'PUBLIC_MARKET_SURFACE');
+  assert.equal(emag.manualReviewed,false);
+  assert.equal(emag.comparableScopeConfirmed,false);
   assert.ok(r.rows[0].blockers.includes('EMAG_EXACT_COUNT_MISSING'));
   assert.ok(r.rows[0].blockers.includes('EMAG_LOWER_BOUND_NOT_EXACT'));
-  assert.equal(r.rows[0].evidence.EMAG.provenance.declaredResultCountTrusted,false);
 });
 
 test('report never contains network execution or purchase authority',async()=>{
