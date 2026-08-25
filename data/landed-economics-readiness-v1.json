@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "observedAt": "2026-08-25T18:08:00Z",
+  "policy": "MANUALLY_VERIFIED_SUPPLIER_REQUIRED; UNKNOWN_NEVER_ZERO; CONFIRMED_ECONOMICS_DOES_NOT_AUTHORIZE_PURCHASE",
+  "status": "BLOCKED",
+  "productsEvaluated": 2,
+  "productsWithManuallyVerifiedSupplier": 0,
+  "productsWithConfirmedLandedEconomics": 0,
+  "blockers": [
+    {"productKey":"under-desk-headphone-hanger","primaryBlocker":"SUPPLIER_NOT_MANUALLY_VERIFIED","upstreamEvidence":"supplier-evidence/manual-verification-packets-v1.json"},
+    {"productKey":"car-sunglasses-magnetic-visor-holder","primaryBlocker":"SUPPLIER_NOT_MANUALLY_VERIFIED","upstreamEvidence":"supplier-evidence/manual-verification-packets-v1.json"}
+  ],
+  "nextRequiredEvidence": ["first MANUALLY_VERIFIED supplier quote", "confirmed landed unit cost evidence", "observable sell-price evidence", "marketplace commission/VAT/ads/returns/fulfilment assumptions with explicit basis", "FX source/rate when currencies differ"],
+  "purchaseAuthorized": false,
+  "paidCallsTriggered": 0
+}
