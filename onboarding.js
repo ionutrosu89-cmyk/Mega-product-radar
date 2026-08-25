@@ -1,6 +1,7 @@
 import {getCurrentSession} from './supabase-client.js';
 import {loadSellerPreferences,saveSellerPreferences} from './seller-preferences.js';
 import {trackJourneyEvent} from './journey-events.js';
+import {recommendMprPlan} from './plan-recommendation-v1.js';
 
 const $=s=>document.querySelector(s);
 let step=1;
@@ -8,12 +9,6 @@ function selected(container){return [...container.querySelectorAll('.chip.active
 function setSelected(container,values=[]){const set=new Set(values);container.querySelectorAll('.chip').forEach(x=>{const active=set.has(x.dataset.value);x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));});}
 function installChips(container){container.querySelectorAll('.chip').forEach(x=>x.addEventListener('click',()=>{const active=!x.classList.contains('active');x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));}));}
 function renderStep(){document.querySelectorAll('.onboarding-step').forEach(x=>x.hidden=Number(x.dataset.step)!==step);$('#stepLabel').textContent=`Pasul ${step} din 4`;$('#stepBar').style.width=`${step/4*100}%`;$('#back').hidden=step===1;$('#next').hidden=step===4;$('#save').hidden=step!==4;document.querySelector(`[data-step="${step}"]`)?.querySelector('select,input,button')?.focus({preventScroll:true});}
-function planRecommendation(profile,decisionNeed,chinaAgent){
-  if(chinaAgent==='YES'||decisionNeed==='EXECUTE')return {code:'LAUNCH',price:'€89/lună',title:'Launch',reasons:['Vrei un plan concret de test și execuție, nu doar semnale.','Ai acces la shortlist, buget și traseu de lansare.','Launch include acces la un agent China testat/verificat de noi; serviciile efective ale agentului se contractează separat.']};
-  if(decisionNeed==='VALIDATE')return {code:'RADAR',price:'€29/lună',title:'Radar',reasons:['Vrei să validezi oportunități pentru România înainte să blochezi capital.','Ai nevoie de România Gap, furnizor, landed cost, profit, ROI și gate-uri comerciale.']};
-  if(decisionNeed==='TRENDS')return {code:'DISCOVER',price:'€17,90/lună',title:'Discover',reasons:['Vrei trenduri, produse Rising/New, istoric, filtre și alerte.','Nu ai cerut încă validare comercială completă sau plan de execuție.']};
-  return {code:'FREE',price:'€0',title:'Free',reasons:['Vrei să explorezi produse și nișe înainte să plătești pentru analiză mai profundă.','Poți începe gratuit și face upgrade doar când apare o nevoie reală.']};
-}
 function showRecommendation(rec){
   const box=$('#recommendation');
   box.hidden=false;
@@ -51,7 +46,7 @@ $('#form').addEventListener('submit',async e=>{
     const profile={experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))};
     const decisionNeed=$('#decisionNeed').value,chinaAgent=$('#chinaAgent').value;
     await saveSellerPreferences(profile);
-    const rec=planRecommendation(profile,decisionNeed,chinaAgent);
+    const rec=recommendMprPlan({decisionNeed,chinaAgent});
     localStorage.setItem('mpr_plan_finder_v1',JSON.stringify({decisionNeed,chinaAgent,recommendedPlan:rec.code,updatedAt:new Date().toISOString()}));
     await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length});
     await trackJourneyEvent('PLAN_RECOMMENDED',{plan:rec.code,decisionNeed,chinaAgent:chinaAgent==='YES',budget:profile.monthly_budget_ron});
