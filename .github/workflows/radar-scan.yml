@@ -2,6 +2,17 @@ name: Mega Product Radar Scan
 
 on:
   workflow_dispatch:
+    inputs:
+      allow_paid:
+        description: 'Explicitly authorize paid provider execution for this one manual run'
+        required: true
+        default: false
+        type: boolean
+      approval_note:
+        description: 'Human approval reference / reason for the paid run'
+        required: false
+        default: ''
+        type: string
   push:
     branches: [main]
     paths:
@@ -53,6 +64,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Resolve explicit paid-provider approval
+        id: paid_approval
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.allow_paid }}" = "true" ]; then
+            echo "approved=true" >> "$GITHUB_OUTPUT"
+            echo "Paid provider execution explicitly approved for this manual run only."
+            echo "Approval note: ${{ inputs.approval_note }}"
+          else
+            echo "approved=false" >> "$GITHUB_OUTPUT"
+            echo "Paid providers disabled: push/schedule and default manual runs are zero-paid."
+          fi
       - name: Run Radar V2 + Wide Product Discovery + Organic Rising scan
         id: scan
         continue-on-error: true
@@ -77,8 +100,8 @@ jobs:
           DATAFORSEO_TOTAL_TEST_CAP_USD: '10.00'
           DATAFORSEO_MAX_NEXT_CYCLE_USD: '0.35'
         run: node scripts/dataforseo-total-budget.mjs pre
-      - name: Enrich Romania keyword demand with DataForSEO when configured
-        if: always() && steps.total_budget.outputs.allow_paid == 'true'
+      - name: Enrich Romania keyword demand with DataForSEO when explicitly approved
+        if: always() && steps.paid_approval.outputs.approved == 'true' && steps.total_budget.outputs.allow_paid == 'true'
         continue-on-error: true
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
@@ -111,8 +134,8 @@ jobs:
       - name: Build V2.5 intelligence ecosystem
         if: always()
         run: node scripts/intelligence-ecosystem-v25.mjs
-      - name: Build V2.7 Romania Demand Sales and Reverse Keyword intelligence
-        if: always() && steps.total_budget.outputs.allow_paid == 'true'
+      - name: Build V2.7 Romania Demand Sales and Reverse Keyword intelligence when explicitly approved
+        if: always() && steps.paid_approval.outputs.approved == 'true' && steps.total_budget.outputs.allow_paid == 'true'
         continue-on-error: true
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
