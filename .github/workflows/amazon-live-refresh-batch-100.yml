@@ -1,45 +1,50 @@
-name: Amazon Live Refresh Batch 100
+name: Amazon Live Refresh Batch
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'scripts/amazon-live-refresh-batch.mjs'
-      - '.github/workflows/amazon-live-refresh-batch-100.yml'
   workflow_dispatch:
+    inputs:
+      offset:
+        description: 'Zero-based product offset in the 1K bootstrap'
+        required: true
+        default: '0'
+      limit:
+        description: 'Products to attempt in this batch (10-250)'
+        required: true
+        default: '100'
 
 permissions:
   contents: read
 
 jobs:
-  refresh-batch-100:
-    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/amazon-live-refresh-batch-100-v1'
+  refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collect first 100 live Amazon snapshots
+      - name: Collect live Amazon snapshots
         id: collect
         continue-on-error: true
-        run: node scripts/amazon-live-refresh-batch.mjs --offset=0 --limit=100 --out=artifacts/amazon-live-refresh-batch-000.json
+        run: node scripts/amazon-live-refresh-batch.mjs --offset=${{ inputs.offset }} --limit=${{ inputs.limit }} --out=artifacts/amazon-live-refresh.json
       - name: Enforce live snapshot batch gate
         if: always()
         run: |
           node - <<'NODE'
           const fs=require('fs');
-          const p='artifacts/amazon-live-refresh-batch-000.json';
+          const p='artifacts/amazon-live-refresh.json';
           if(!fs.existsSync(p)){console.error('LIVE_BATCH_ARTIFACT_MISSING');process.exit(1)}
           const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`offset=${x.offset}`);
           console.log(`requested=${x.requested}`);
           console.log(`validObservations=${x.validObservations}`);
           console.log(`successRatePct=${x.successRatePct}`);
           console.log(`coverage=${JSON.stringify(x.coverage)}`);
           console.log(`blocked=${x.diagnostics.filter(d=>d.blocked).length}`);
           console.log(`httpFailures=${x.diagnostics.filter(d=>d.statusCode&&d.statusCode>=400).length}`);
-          if(x.validObservations<80)process.exitCode=2;
+          const minValid=Math.ceil(x.requested*0.8);
+          if(x.validObservations<minValid)process.exitCode=2;
           if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
           if(x.observations.some(o=>o.freshnessClass!=='LIVE_PUBLIC_PAGE'||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false))process.exitCode=4;
           const ids=new Set(x.observations.map(o=>o.externalId));
@@ -49,7 +54,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: amazon-live-refresh-batch-000
-          path: artifacts/amazon-live-refresh-batch-000.json
+          name: amazon-live-refresh-${{ inputs.offset }}-${{ inputs.limit }}
+          path: artifacts/amazon-live-refresh.json
           if-no-files-found: error
           retention-days: 7
