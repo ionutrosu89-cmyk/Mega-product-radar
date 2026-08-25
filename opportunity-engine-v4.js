@@ -30,19 +30,19 @@ function trendEvidenceState(input={}){
   const fusion=input.amazonTrendFusion||input.trendFusion||input.trendEvidence||{};
   const signal=up(fusion.signal||fusion.status||fusion.trendSignal);
   const evidenceClass=up(fusion.evidenceClass||fusion.trendEvidenceClass);
-  const rankLongitudinal=fusion.rankLongitudinal===true||fusion.rankEvidenceEligible===true||evidenceClass.includes('RANK_REVIEW_FUSION');
-  const reviewLongitudinal=fusion.reviewLongitudinal===true||fusion.reviewEvidenceEligible===true||evidenceClass.includes('RANK_REVIEW_FUSION');
-  const intervalEligible=fusion.intervalEligible===true||fusion.minimumIntervalHours>=24||fusion.elapsedHours>=24||evidenceClass.includes('LONGITUDINAL');
-  const confirmedAcceleration=signal==='CONFIRMED_ACCELERATION'&&rankLongitudinal&&reviewLongitudinal&&intervalEligible;
-  const preliminary=signal.length>0||fusion.rankLongitudinal===true||fusion.reviewLongitudinal===true||fusion.rankEvidenceEligible===true||fusion.reviewEvidenceEligible===true;
+  const evidenceLevel=up(fusion.trendEvidenceLevel||fusion.evidenceLevel);
+  const fusedContract=evidenceClass==='FUSED_LONGITUDINAL_PUBLIC_TREND'&&evidenceLevel==='RANK_PLUS_REVIEW_LONGITUDINAL';
+  const confirmedAcceleration=signal==='CONFIRMED_ACCELERATION'&&fusedContract&&fusion.demandEvidenceConfirmed===true&&fusion.salesEvidenceClass==='NOT_VERIFIED_SALES'&&fusion.purchaseAuthorized===false;
+  const preliminary=Boolean(signal&&signal!=='UNKNOWN')||evidenceClass.includes('LONGITUDINAL')||evidenceLevel.includes('LONGITUDINAL');
   return {
     confirmedAcceleration,
     preliminary,
     signal:signal||'UNKNOWN',
     evidenceClass:evidenceClass||'UNKNOWN',
-    rankLongitudinal,
-    reviewLongitudinal,
-    intervalEligible,
+    evidenceLevel:evidenceLevel||'UNKNOWN',
+    rankLongitudinal:fusedContract,
+    reviewLongitudinal:fusedContract,
+    intervalEligible:fusedContract,
     maxFunnelStage:confirmedAcceleration?'TEST_READY':preliminary?'PROMISING':'DISCOVERED'
   };
 }
