@@ -14,6 +14,14 @@ test('clean query-scoped sample can become comparable count candidate but never 
   assert.equal(r.purchaseAuthorized,false);
 });
 
+test('unknown declared count remains unknown and never becomes zero',()=>{
+  const r=qualifyRomaniaComparableQuery({platform:'EMAG',query:'organizator portbagaj pliabil',declaredCount:null,countScope:'UNKNOWN',sampleResults:clean});
+  assert.equal(r.declaredCount,null);
+  assert.equal(r.canonicalListingCountLowerBoundCandidate,null);
+  assert.equal(r.qualifiedForComparableCountCandidate,false);
+  assert.ok(r.blockers.includes('DECLARED_COUNT_MISSING_OR_INVALID'));
+});
+
 test('category total is rejected even with a clean visible sample',()=>{
   const r=qualifyRomaniaComparableQuery({platform:'EMAG',query:'organizator portbagaj pliabil',declaredCount:4194,countScope:'CATEGORY_TOTAL',sampleResults:clean});
   assert.equal(r.qualifiedForComparableCountCandidate,false);
@@ -40,4 +48,5 @@ test('qualification report remains zero-cost and non-purchasing',()=>{
   assert.equal(r.approvedSpendEur,0);
   assert.equal(r.purchaseAuthorized,false);
   assert.match(r.policy,/NO_VERIFIED_SALES/);
+  assert.match(r.policy,/UNKNOWN_IS_NOT_ZERO/);
 });
