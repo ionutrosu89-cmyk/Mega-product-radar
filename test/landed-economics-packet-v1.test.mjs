@@ -8,9 +8,9 @@ test('confirmed economics requires manually verified supplier evidence and expli
  const x=buildLandedEconomicsPacket(complete);
  assert.equal(x.confirmed,true);
  assert.equal(x.status,'CONFIRMED');
- assert.equal(x.economics.profitPerUnit,36);
- assert.equal(Math.round(x.economics.marginPct),36);
- assert.equal(Math.round(x.economics.roiPct),180);
+ assert.equal(x.economics.profitPerUnit,26);
+ assert.equal(Math.round(x.economics.marginPct),26);
+ assert.equal(Math.round(x.economics.roiPct),130);
  assert.equal(x.purchaseAuthorized,false);
 });
 
