@@ -43,7 +43,9 @@ export function appendProductSnapshots(existing=[],incoming=[]){
 const daysBetween=(a,b)=>(new Date(b)-new Date(a))/86400000;
 const rate=(before,after,days)=>before===null||after===null||!Number.isFinite(days)||days<=0?null:(after-before)/days;
 
-export function buildProductHistoryMetrics(snapshots=[]){
+export function buildProductHistoryMetrics(snapshots=[],{minObservationHours=24}={}){
+  const minimumHours=Math.max(1,Math.min(24*30,Number(minObservationHours)||24));
+  const minimumDays=minimumHours/24;
   const rows=(snapshots||[]).map(x=>normalizeProductSnapshot(x)).filter(x=>x.ok).map(x=>x.snapshot).sort((a,b)=>a.observedAt.localeCompare(b.observedAt));
   const byProduct=new Map();
   for(const row of rows){const k=`${row.platform}:${row.externalId}`;if(!byProduct.has(k))byProduct.set(k,[]);byProduct.get(k).push(row);}
@@ -52,23 +54,25 @@ export function buildProductHistoryMetrics(snapshots=[]){
     const live=history.filter(x=>x.liveEvidence);
     const baseline=history.filter(x=>!x.liveEvidence);
     if(live.length<2){
-      products.push({identity,status:'INSUFFICIENT_FRESH_HISTORY',totalSnapshots:history.length,liveSnapshots:live.length,baselineSnapshots:baseline.length,rankVelocityPerDay:null,reviewVelocityPerDay:null,priceMovementPerDay:null,eligibleForTrend:false,salesEvidenceClass:'NOT_VERIFIED_SALES'});
+      products.push({identity,status:'INSUFFICIENT_FRESH_HISTORY',totalSnapshots:history.length,liveSnapshots:live.length,baselineSnapshots:baseline.length,observationHours:null,minObservationHours:minimumHours,rankVelocityPerDay:null,reviewVelocityPerDay:null,priceMovementPerDay:null,eligibleForTrend:false,salesEvidenceClass:'NOT_VERIFIED_SALES'});
       continue;
     }
     const first=live[0],last=live.at(-1),days=daysBetween(first.observedAt,last.observedAt);
-    const rankVelocity=first.sourceRank!==null&&last.sourceRank!==null&&days>0?(first.sourceRank-last.sourceRank)/days:null;
+    const observationHours=Number.isFinite(days)?days*24:null;
+    const intervalReady=Number.isFinite(days)&&days>=minimumDays;
+    const rankVelocity=intervalReady&&first.sourceRank!==null&&last.sourceRank!==null?(first.sourceRank-last.sourceRank)/days:null;
     products.push({
-      identity,status:days>0?'FRESH_HISTORY_READY':'INSUFFICIENT_TIME_SEPARATION',
+      identity,status:intervalReady?'FRESH_HISTORY_READY':'INSUFFICIENT_OBSERVATION_INTERVAL',
       totalSnapshots:history.length,liveSnapshots:live.length,baselineSnapshots:baseline.length,
-      observationDays:days>0?days:null,
-      rankVelocityPerDay:days>0?rankVelocity:null,
-      reviewVelocityPerDay:days>0?rate(first.reviewCount,last.reviewCount,days):null,
-      priceMovementPerDay:days>0?rate(first.price,last.price,days):null,
-      eligibleForTrend:days>0,
+      observationDays:intervalReady?days:null,observationHours:observationHours!==null?observationHours:null,minObservationHours:minimumHours,
+      rankVelocityPerDay:intervalReady?rankVelocity:null,
+      reviewVelocityPerDay:intervalReady?rate(first.reviewCount,last.reviewCount,days):null,
+      priceMovementPerDay:intervalReady?rate(first.price,last.price,days):null,
+      eligibleForTrend:intervalReady,
       salesEvidenceClass:'NOT_VERIFIED_SALES'
     });
   }
-  return{productCount:products.length,trendReadyCount:products.filter(x=>x.eligibleForTrend).length,products,rule:'TREND_REQUIRES_AT_LEAST_TWO_LIVE_SNAPSHOTS_AT_DISTINCT_TIMES',paidCallsTriggered:0,purchaseAuthorized:false};
+  return{productCount:products.length,trendReadyCount:products.filter(x=>x.eligibleForTrend).length,products,minObservationHours:minimumHours,rule:'TREND_REQUIRES_AT_LEAST_TWO_LIVE_SNAPSHOTS_SEPARATED_BY_MINIMUM_OBSERVATION_INTERVAL',paidCallsTriggered:0,purchaseAuthorized:false};
 }
 
 export function buildSnapshotRefreshPlan(products=[],{batchSize=100,maxProducts=1000}={}){
