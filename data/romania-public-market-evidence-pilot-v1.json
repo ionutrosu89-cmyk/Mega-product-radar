@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "reviewedAt": "2026-08-25T04:37:00Z",
+  "nicheKey": "office:cable-management",
+  "subscope": "UNDER_DESK_CABLE_ORGANIZERS",
+  "evidenceClass": "REVIEWED_PUBLIC_MARKET_EVIDENCE",
+  "salesEvidenceClass": "NOT_VERIFIED_SALES",
+  "purchaseAuthorized": false,
+  "paidCallsTriggered": 0,
+  "approvedSpendEur": 0,
+  "observations": [
+    {
+      "platform": "TRENDYOL",
+      "market": "RO",
+      "sourceUrl": "https://www.trendyol.com/ro/organizator-cabluri-sub-birou-y-s879069",
+      "scope": "MARKET_WIDE",
+      "evidenceType": "PUBLIC_MARKET_SIGNAL",
+      "manualReviewed": true,
+      "observedAt": "2026-07-29T12:45:00Z",
+      "listingCountLowerBound": 12,
+      "listingCount": null,
+      "sellerCount": null,
+      "comparabilityKey": "UNDER_DESK_CABLE_ORGANIZERS",
+      "comparableScopeConfirmed": true,
+      "freshnessClass": "SOURCE_PAGE_EXPLICIT_LAST_UPDATED",
+      "notes": "Romanian Trendyol landing page states 12+ items. Lower bound only; exact listing count is not claimed."
+    },
+    {
+      "platform": "EMAG",
+      "market": "RO",
+      "sourceUrl": "https://www.emag.ro/set-40-organizator-cabluri-autoadezive-organizator-de-cabluri-sub-birou-suport-imbunatatit-pentru-cabluri-cleme-reglabile-cu-carlig-si-bucla-accesorii-esentiale-pentru-biroul-de-acasa-cleme-pentru-asc/pd/DBVSKY2BM/",
+      "scope": "MARKET_WIDE",
+      "evidenceType": "PUBLIC_CATALOGUE",
+      "manualReviewed": true,
+      "observedAt": null,
+      "listingCountLowerBound": 1,
+      "listingCount": null,
+      "sellerCount": null,
+      "comparabilityKey": "UNDER_DESK_CABLE_ORGANIZERS",
+      "comparableScopeConfirmed": false,
+      "freshnessClass": "SEARCH_INDEX_CRAWL_WITHOUT_EXACT_SOURCE_TIMESTAMP",
+      "notes": "Public eMAG product presence is confirmed, but this product page cannot establish category-wide listing count or exact observation timestamp."
+    }
+  ],
+  "gate": {
+    "status": "PARTIAL_LOCAL_EVIDENCE",
+    "romaniaGapCompetitionReady": false,
+    "blockers": [
+      "EMAG_COMPARABLE_MARKET_COUNT_MISSING",
+      "EMAG_EXACT_OBSERVED_AT_MISSING",
+      "EXACT_CROSS_MARKET_SCOPE_NOT_YET_CONFIRMED"
+    ],
+    "policy": "PRESENCE_IS_NOT_SATURATION; LOWER_BOUND_IS_NOT_EXACT_COUNT; NON_COMPARABLE_SCOPES_MUST_NOT_BE_SUMMED"
+  }
+}
