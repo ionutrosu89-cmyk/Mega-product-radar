@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "observedAt": "2026-08-25T18:28:00Z",
+  "policy": "LEGAL_IDENTITY_CORROBORATION_DOES_NOT_EQUAL_SERVICE_VERIFICATION; IMPORTER_MODEL_FIRST_PARTY_CLAIMS_REQUIRE_WRITTEN_CONTRACT_REVIEW",
+  "records": [
+    {
+      "partnerKey": "M3CARGO",
+      "entity": "M3EUROPE S.R.L.",
+      "cui": "47734607",
+      "registrationNumber": "J2023005911232",
+      "foundedDate": "2023-03-02",
+      "statusObserved": "ACTIVE",
+      "vatObserved": true,
+      "primaryActivityObserved": "transport/logistics ancillary activities",
+      "2025TurnoverRonObserved": 4697071,
+      "2025NetProfitRonObserved": 126943,
+      "2025EmployeesObserved": 5,
+      "evidenceClass": "INDEPENDENT_PUBLIC_REGISTRY_AGGREGATOR_CORROBORATION",
+      "sources": [
+        "https://www.firme.srl/firma/m3europe-srl-47734607",
+        "https://termene.ro/firma/47734607-M3EUROPE-SRL",
+        "https://listafirme.ro/m3europe-srl-47734607/"
+      ],
+      "legalIdentityCorroborated": true,
+      "serviceQualityVerified": false,
+      "chinaPresenceVerified": false,
+      "mprVerified": false,
+      "testedByMpr": false,
+      "remainingChecks": ["China presence evidence", "1688 capability", "written fee model", "supplier payment flow", "importer-of-record/MRN model", "insurance/claims terms", "references", "real service interaction", "test service", "manual MPR approval"]
+    },
+    {
+      "partnerKey": "ROMASIA",
+      "entity": null,
+      "evidenceClass": "FIRST_PARTY_IMPORTER_MODEL_CLAIM",
+      "source": "https://www.romasia.ro/cod-eori-2025-ce-este-cum-il-obtii-si-cum-poti-importa-fara-eori-prin-romasia/",
+      "importerModelClaim": "ROMASIA states that some imports can be performed on its company and the customer receives Romanian invoices.",
+      "legalIdentityCorroborated": false,
+      "importerModelVerifiedContractually": false,
+      "mprVerified": false,
+      "testedByMpr": false,
+      "remainingChecks": ["Romanian legal entity", "China legal entity", "written importer-of-record terms", "MRN/customs-document availability to client", "VAT treatment", "liability allocation", "1688 capability", "insurance/claims terms", "references", "real service interaction", "test service", "manual MPR approval"]
+    }
+  ],
+  "summary": {
+    "independentLegalIdentitiesCorroborated": 1,
+    "serviceQualityVerified": 0,
+    "mprVerified": 0,
+    "testedByMpr": 0,
+    "externalMessagesSent": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
