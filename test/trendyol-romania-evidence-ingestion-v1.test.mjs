@@ -10,7 +10,7 @@ import {
 const batch=JSON.parse(fs.readFileSync(new URL('../data/romania-public-market-evidence-batch-v1.json',import.meta.url),'utf8'));
 const queue=JSON.parse(fs.readFileSync(new URL('../data/romania-comparable-evidence-review-queue-v1.json',import.meta.url),'utf8'));
 
-test('extracts only reviewed Trendyol public-market observations with canonical keys',()=>{
+test('extracts reviewed Trendyol observations but downgrades contaminated counts to surface-only evidence',()=>{
   const rows=extractTrendyolSnapshotsFromReviewedBatch(batch);
   assert.equal(rows.length,3);
   assert.equal(rows[0].platform,'TRENDYOL');
@@ -18,7 +18,11 @@ test('extracts only reviewed Trendyol public-market observations with canonical 
   assert.equal(rows[1].comparabilityKey,'CAR_TRUNK_ORGANIZERS');
   assert.equal(rows[2].comparabilityKey,'ADJUSTABLE_LAPTOP_STANDS');
   assert.equal(rows[0].listingCount,null);
-  assert.equal(rows[0].listingCountLowerBound,656);
+  assert.equal(rows[0].listingCountLowerBound,null);
+  assert.equal(rows[0].surfaceItemCountLowerBound,656);
+  assert.equal(rows[0].comparableScopeConfirmed,false);
+  assert.equal(rows[1].surfaceItemCountLowerBound,512);
+  assert.equal(rows[2].surfaceItemCountLowerBound,1636);
 });
 
 test('ingestion is append-only and duplicate safe',()=>{
@@ -33,13 +37,14 @@ test('ingestion is append-only and duplicate safe',()=>{
   assert.equal(second.purchaseAuthorized,false);
 });
 
-test('known Trendyol lower bounds remain blocked in unified promotion validation',()=>{
+test('contaminated Trendyol surfaces remain blocked in unified promotion validation',()=>{
   const ingested=ingestTrendyolReviewedEvidence({ledger:{version:'1.0',observations:[]},batch});
   const result=validateRomaniaQueueAgainstUnifiedLedger({ledger:ingested.ledger,queueItems:queue.items,emagEvidenceByNiche:{}});
   assert.equal(result.total,3);
   assert.equal(result.promotable,0);
   const packing=result.rows.find(x=>x.nicheKey==='travel:packing-cubes');
-  assert.ok(packing.blockers.includes('TRENDYOL_LOWER_BOUND_NOT_EXACT'));
+  assert.ok(packing.blockers.includes('TRENDYOL_EXACT_COUNT_MISSING'));
+  assert.ok(packing.blockers.includes('TRENDYOL_SCOPE_NOT_CONFIRMED'));
   assert.ok(packing.blockers.includes('EMAG_EXACT_COUNT_MISSING'));
 });
 
