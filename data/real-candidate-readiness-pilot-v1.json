@@ -1,0 +1,31 @@
+{
+  "version":"1.0",
+  "observedAt":"2026-08-25T11:55:00Z",
+  "purpose":"Run current real Romania pilots through Opportunity V4 without fabricating longitudinal trend evidence.",
+  "candidates":[
+    {
+      "productKey":"romania-pilot:foldable-trunk-organizer",
+      "title":"Foldable trunk organizer",
+      "trend":{},
+      "romaniaGap":{"status":"INCOMPLETE","score":null,"romaniaGapExactGateSatisfied":false,"evidenceClass":"UNKNOWN"},
+      "romaniaSampledCompetition":{"status":"SINGLE_PLATFORM_ESTIMATE","eligibleForSampledSignal":true,"evidenceClass":"DERIVED_FROM_REVIEWED_PUBLIC_SAMPLE","platforms":["TRENDYOL"],"estimatedCanonicalListings":128,"sampleSize":20,"samplePurity":0.25},
+      "supplier":{},
+      "economics":{}
+    },
+    {
+      "productKey":"romania-pilot:packing-cubes-6-piece",
+      "title":"Packing cubes 6-piece set",
+      "trend":{},
+      "romaniaGap":{"status":"INCOMPLETE","score":null,"romaniaGapExactGateSatisfied":false,"evidenceClass":"UNKNOWN"},
+      "romaniaSampledCompetition":{"status":"SINGLE_PLATFORM_ESTIMATE","eligibleForSampledSignal":true,"evidenceClass":"DERIVED_FROM_REVIEWED_PUBLIC_SAMPLE","platforms":["TRENDYOL"],"estimatedCanonicalListings":394,"sampleSize":20,"samplePurity":0.6},
+      "supplier":{},
+      "economics":{}
+    }
+  ],
+  "expectedCurrentStage":"DISCOVERED",
+  "blockingEvidence":["LONGITUDINAL_TREND_EVIDENCE","EXACT_ROMANIA_COMPARABLE_EVIDENCE"],
+  "salesEvidenceClass":"NOT_VERIFIED_SALES",
+  "paidCallsTriggered":0,
+  "approvedSpendEur":0,
+  "purchaseAuthorized":false
+}
