@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-08-25T18:35:00Z",
+  "policy": "REQUEST_PACK_ONLY; NO_EXTERNAL_SEND; NO_VERIFIED_LABEL; NO_PURCHASE_AUTHORITY",
+  "targets": [
+    {
+      "priority": 1,
+      "partnerKey": "M3CARGO",
+      "name": "M3Cargo",
+      "objective": "Move from PUBLIC_CANDIDATE toward DOCUMENTS_VERIFIED by validating legal entity, China presence, 1688 capability, commercial terms and importer/customs responsibility.",
+      "requestItems": [
+        "Current Romanian company registration extract for M3EUROPE S.R.L. / CUI 47734607",
+        "Documents or business registration evidence for the China operating entity/entities used for sourcing, warehousing or payments",
+        "Addresses and legal names of China warehouses/operations used for Shenzhen, Ningbo and Yiwu flows",
+        "Written confirmation that the team can source directly from 1688 and whether buyer-side account access is required",
+        "Written fee model: sourcing fee, commission, inspection fee, consolidation fee, payment-transfer fee and logistics margin where applicable",
+        "Supplier payment model: who receives customer funds, who pays supplier, payment currency, refund/dispute procedure and transaction documents supplied to client",
+        "Importer-of-record model for Romania/EU and when the client appears on customs documents",
+        "MRN/customs declaration and VAT evidence made available to the client for each importer model",
+        "Written responsibility matrix for customs classification, duty, VAT, compliance documents and product restrictions",
+        "Cargo insurance coverage, exclusions and claims procedure",
+        "Sample ordering, QC and consolidation workflow for small test batches",
+        "Typical air and sea options for a 20–30 unit test shipment and minimum charge structure",
+        "Two recent client references, ideally Romanian e-commerce/import clients",
+        "Example anonymized inspection/QC report",
+        "Example anonymized landed-cost/transport quote showing line-item charges"
+      ],
+      "requiredWrittenAnswers": [
+        "Can you source and negotiate directly on 1688?",
+        "Can MPR/client select the exact supplier and receive supplier identity before payment?",
+        "Do you accept independent pre-shipment inspection or provide your own documented QC?",
+        "Who is importer of record under each service option?",
+        "Can the client receive MRN and import VAT/customs evidence when legally applicable?",
+        "What happens if supplier quality fails before shipment?",
+        "What happens if goods are lost/damaged in transit?",
+        "Are there minimum order values or minimum shipment charges?",
+        "Can you support a small 20–30 unit commercial test?"
+      ],
+      "realServiceTestBeforeApproval": {
+        "required": true,
+        "scope": "One small sourcing/quote/QC/logistics case using a real MPR candidate after internal gates permit it",
+        "purchaseAuthorized": false
+      },
+      "externalMessageSent": false
+    },
+    {
+      "priority": 2,
+      "partnerKey": "ROMASIA",
+      "name": "ROMASIA",
+      "objective": "Validate Romanian/China legal entities, published Yiwu/Guangzhou presence, 1688 capability and the claimed importer-on-ROMASIA Romanian-invoice model.",
+      "requestItems": [
+        "Current Romanian company registration extract and CUI for the contracting Romanian entity",
+        "China/Hong Kong company registration documents for the entities used in sourcing/trading",
+        "Evidence linking the published Yiwu and Guangzhou offices/warehouse to the operating company",
+        "Written confirmation of direct 1688 sourcing capability",
+        "Written fee model for sourcing/trading, inspection, consolidation, payment handling and transport",
+        "Written explanation of the service where import is performed on ROMASIA's company and the customer receives Romanian invoices",
+        "For the ROMASIA-importer model: contract party, importer of record, ownership transfer point, VAT treatment, customs liability and documents supplied to client",
+        "For direct-import model if available: MRN/customs declaration and VAT evidence supplied to client",
+        "Supplier identity disclosure and payment flow before customer funds are committed",
+        "Cargo insurance and claims terms",
+        "Sample/QC/consolidation workflow for small test batches",
+        "Two recent Romanian client references",
+        "Example anonymized supplier-audit or goods-inspection report",
+        "Example anonymized quote showing sourcing/logistics cost breakdown"
+      ],
+      "requiredWrittenAnswers": [
+        "Can you source directly on 1688 and negotiate with factories there?",
+        "Can the client know the exact supplier identity and ex-factory price?",
+        "Under which model is ROMASIA the importer of record?",
+        "Under that model, which customs/import documents can the client legally receive?",
+        "How are product compliance responsibilities allocated between ROMASIA and the client?",
+        "What happens if QC fails before shipment?",
+        "What is the insurance/claims process?",
+        "Can you support a 20–30 unit test or do minimum fees make that impractical?"
+      ],
+      "realServiceTestBeforeApproval": {
+        "required": true,
+        "scope": "One small sourcing/quote/QC/logistics case using a real MPR candidate after internal gates permit it",
+        "purchaseAuthorized": false
+      },
+      "externalMessageSent": false
+    }
+  ],
+  "acceptanceRules": {
+    "DOCUMENTS_VERIFIED": [
+      "legal entity documents reviewed",
+      "China presence evidence reviewed",
+      "written commercial terms reviewed",
+      "1688 capability confirmed in writing",
+      "supplier payment model confirmed",
+      "customs/importer-of-record responsibility confirmed",
+      "insurance/claims process confirmed",
+      "sample/QC/consolidation process confirmed"
+    ],
+    "MPR_VERIFIED": [
+      "all document gates passed",
+      "references checked",
+      "real service interaction completed",
+      "test service completed",
+      "manual MPR approval"
+    ]
+  },
+  "externalMessagesSent": 0,
+  "paidCallsTriggered": 0,
+  "purchaseAuthorized": false
+}
