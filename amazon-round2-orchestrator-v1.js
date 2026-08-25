@@ -6,14 +6,15 @@ export function parseCompactAmazonSnapshots(payload={}){
   const fields=Array.isArray(payload.fields)?payload.fields:[];
   const rows=Array.isArray(payload.snapshots)?payload.snapshots:[];
   const index=Object.fromEntries(fields.map((name,i)=>[name,i]));
+  const idIndex=Number.isInteger(index.asin)?index.asin:index.externalId;
   return rows.map(row=>({
-    asin:clean(row[index.asin]).toUpperCase(),
-    title:clean(row[index.title])||null,
-    price:num(row[index.price]),
-    currency:clean(row[index.currency])||null,
-    rating:num(row[index.rating]),
-    reviewCount:num(row[index.reviewCount]),
-    observedAt:iso(row[index.observedAt]),
+    asin:clean(Number.isInteger(idIndex)?row[idIndex]:null).toUpperCase(),
+    title:clean(Number.isInteger(index.title)?row[index.title]:null)||null,
+    price:num(Number.isInteger(index.price)?row[index.price]:null),
+    currency:clean(Number.isInteger(index.currency)?row[index.currency]:null)||null,
+    rating:num(Number.isInteger(index.rating)?row[index.rating]:null),
+    reviewCount:num(Number.isInteger(index.reviewCount)?row[index.reviewCount]:null),
+    observedAt:iso(Number.isInteger(index.observedAt)?row[index.observedAt]:null),
     sourceRank:null,
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     purchaseAuthorized:false
