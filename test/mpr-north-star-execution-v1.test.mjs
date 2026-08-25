@@ -4,6 +4,8 @@ import {recommendMprPlan} from '../plan-recommendation-v1.js';
 import {calculateOpportunityV4,buildOpportunityShortlistV4} from '../opportunity-engine-v4.js';
 import {evaluateNorthStarExecution,nextScaleMilestone,MPR_NORTH_STAR_TASKS} from '../mpr-north-star-execution-v1.js';
 
+const confirmedFusion={signal:'CONFIRMED_ACCELERATION',evidenceClass:'FUSED_LONGITUDINAL_PUBLIC_TREND',trendEvidenceLevel:'RANK_PLUS_REVIEW_LONGITUDINAL',demandEvidenceConfirmed:true,salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false};
+
 test('plan finder maps each user job to the agreed commercial tier',()=>{
   assert.equal(recommendMprPlan({decisionNeed:'EXPLORE'}).code,'FREE');
   assert.equal(recommendMprPlan({decisionNeed:'VALIDATE'}).code,'DISCOVER');
@@ -13,8 +15,8 @@ test('plan finder maps each user job to the agreed commercial tier',()=>{
   assert.match(recommendMprPlan({chinaAgent:'YES'}).reasons.join(' '),/agent China testat\/verificat/i);
 });
 
-test('Opportunity V4 follows funnel and never turns TEST_READY into purchase authority',()=>{
-  const base={trend:{score:82,confidence:80},romaniaGap:{status:'READY',score:78},dataConfidence:75};
+test('Opportunity V4 follows strict funnel and never turns TEST_READY into purchase authority',()=>{
+  const base={trend:{score:82,confidence:80},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',score:78},dataConfidence:75};
   assert.equal(calculateOpportunityV4(base).funnelStage,'VALIDATE');
   const finalist=calculateOpportunityV4({...base,supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:30,roiPct:80,profitPerUnit:20}});
   assert.equal(finalist.funnelStage,'FINALIST');
@@ -24,7 +26,7 @@ test('Opportunity V4 follows funnel and never turns TEST_READY into purchase aut
 });
 
 test('Opportunity V4 shortlist hard caps finalists at three',()=>{
-  const rows=Array.from({length:7},(_,i)=>({productKey:`p${i}`,trend:{score:90-i,confidence:90},romaniaGap:{status:'READY',score:85},supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:35,roiPct:90,profitPerUnit:22},dataConfidence:80}));
+  const rows=Array.from({length:7},(_,i)=>({productKey:`p${i}`,trend:{score:90-i,confidence:90},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',score:85},supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:35,roiPct:90,profitPerUnit:22},dataConfidence:80}));
   const out=buildOpportunityShortlistV4(rows,3);
   assert.equal(out.finalists,3);
   assert.equal(out.rows.filter(x=>x.blockers.includes('FINALIST_CAP_REACHED')).length,4);
