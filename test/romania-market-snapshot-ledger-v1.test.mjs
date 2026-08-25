@@ -15,6 +15,18 @@ test('normalization forces safety semantics and requires provenance',()=>{
   assert.equal(bad.valid,false);
 });
 
+test('seller/store scoped safety flags survive normalization and history views',()=>{
+  const x=normalizeRomaniaMarketSnapshot({...base,observedAt:'2026-08-25T05:00:00Z',listingCount:10,sellerScoped:true,storeScoped:true});
+  assert.equal(x.sellerScoped,true);
+  assert.equal(x.storeScoped,true);
+  const history=buildRomaniaMarketSnapshotHistory({observations:[x]});
+  assert.equal(history.histories[0].sellerScoped,true);
+  assert.equal(history.histories[0].storeScoped,true);
+  const latest=latestRomaniaMarketSnapshots({observations:[x]});
+  assert.equal(latest[0].sellerScoped,true);
+  assert.equal(latest[0].storeScoped,true);
+});
+
 test('ledger is append-only and exact duplicate is skipped',()=>{
   let ledger={version:'1.0',observations:[]};
   const row={...base,observedAt:'2026-08-25T05:00:00Z',listingCountLowerBound:656};
