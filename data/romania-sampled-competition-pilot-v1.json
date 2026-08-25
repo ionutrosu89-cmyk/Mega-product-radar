@@ -1,0 +1,41 @@
+{
+  "version":"1.0",
+  "observedAt":"2026-08-25T11:45:00Z",
+  "policy":"PUBLIC_VISIBLE_SAMPLE; DERIVED_ESTIMATE_ONLY; NEVER_EXACT; DISCOVERED_OR_PROMISING_ONLY; NOT_VERIFIED_SALES; NO_PURCHASE_AUTHORITY",
+  "rows":[
+    {
+      "nicheKey":"automotive:trunk-organization",
+      "candidateId":"FOLDABLE_TRUNK_ORGANIZER_V1",
+      "platform":"TRENDYOL",
+      "sourceUrl":"https://www.trendyol.com/ro/organizatori-de-portbagaj-auto-x-c103894",
+      "surfaceItemCountLowerBound":512,
+      "sampleSize":20,
+      "canonicalMatches":5,
+      "sourceScope":"PUBLIC_MARKET_SURFACE",
+      "manualReviewed":true,
+      "observedAt":"2026-08-25T11:34:00Z"
+    },
+    {
+      "nicheKey":"travel:packing-cubes",
+      "candidateId":"PACKING_CUBES_6_PIECE_SET_V1",
+      "platform":"TRENDYOL",
+      "sourceUrl":"https://www.trendyol.com/ro/organizatoare-pentru-valiza-x-c163720",
+      "surfaceItemCountLowerBound":656,
+      "sampleSize":20,
+      "canonicalMatches":12,
+      "sourceScope":"PUBLIC_MARKET_SURFACE",
+      "manualReviewed":true,
+      "observedAt":"2026-08-25T11:45:00Z"
+    }
+  ],
+  "limitations":[
+    "SINGLE_LOCAL_PLATFORM_ONLY",
+    "SURFACE_COUNTS_ARE_LOWER_BOUNDS",
+    "CANONICAL_COUNTS_ARE_STATISTICAL_ESTIMATES_NOT_OBSERVATIONS",
+    "EMAG_QUERY_SCOPED_SURFACE_COUNT_NOT_AVAILABLE"
+  ],
+  "salesEvidenceClass":"NOT_VERIFIED_SALES",
+  "paidCallsTriggered":0,
+  "approvedSpendEur":0,
+  "purchaseAuthorized":false
+}
