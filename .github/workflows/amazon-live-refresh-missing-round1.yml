@@ -1,0 +1,68 @@
+name: Amazon Live Refresh Missing Round1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/amazon-live-refresh-missing-round1.mjs'
+      - '.github/workflows/amazon-live-refresh-missing-round1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-missing-round1:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/amazon-live-refresh-missing-round1-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Slowly collect first live snapshots for missing ASINs only
+        run: node scripts/amazon-live-refresh-missing-round1.mjs --max=846 --out=artifacts/amazon-live-refresh-missing-round1.json
+      - name: Validate missing-only artifact
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('artifacts/amazon-live-refresh-missing-round1.json','utf8'));
+          console.log(JSON.stringify({baselineCapturedCount:x.baselineCapturedCount,missingBeforeRun:x.missingBeforeRun,requested:x.requested,validObservations:x.validObservations,successRatePct:x.successRatePct,coverage:x.coverage,overlap:x.overlapWithAlreadyCaptured},null,2));
+          if(x.baselineCapturedCount!==154||x.missingBeforeRun!==846||x.requested!==846) process.exitCode=2;
+          if(x.overlapWithAlreadyCaptured!==0) process.exitCode=3;
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0) process.exitCode=4;
+          if(x.policy?.trendAuthorized!==false||x.policy?.minObservationHoursBeforeTrend!==24) process.exitCode=5;
+          const ids=new Set(x.observations.map(o=>o.externalId));
+          if(ids.size!==x.observations.length) process.exitCode=6;
+          NODE
+      - name: Persist compact missing-only snapshot
+        if: github.event_name == 'pull_request' && github.head_ref == 'feat/amazon-live-refresh-missing-round1-v1'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');const crypto=require('crypto');
+          const x=JSON.parse(fs.readFileSync('artifacts/amazon-live-refresh-missing-round1.json','utf8'));
+          const rows=x.observations.map(o=>[o.externalId,o.title,o.price,o.currency,o.rating,o.reviewCount,o.observedAt,o.provenance.statusCode,o.provenance.htmlBytes,o.provenance.retryAttempt]);
+          const snapshotSetSha256=crypto.createHash('sha256').update(JSON.stringify(rows)).digest('hex');
+          const compact={schemaVersion:'MPR_AMAZON_LIVE_MISSING_ROUND1_V1',generatedAt:x.generatedAt,baselineCapturedCount:x.baselineCapturedCount,missingBeforeRun:x.missingBeforeRun,requested:x.requested,validObservations:x.validObservations,successRatePct:x.successRatePct,coverage:x.coverage,snapshotSetSha256,fields:['asin','title','price','currency','rating','reviewCount','observedAt','statusCode','htmlBytes','retryAttempt'],snapshots:rows,policy:x.policy};
+          fs.mkdirSync('data/live-snapshots',{recursive:true});
+          fs.writeFileSync('data/live-snapshots/amazon-round1-missing-retry.compact.json',JSON.stringify(compact));
+          NODE
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/live-snapshots/amazon-round1-missing-retry.compact.json
+          if git diff --cached --quiet; then
+            echo 'No new snapshot file changes'
+          else
+            git commit -m 'Persist slow retry Amazon round1 live snapshots'
+            git push origin HEAD:${GITHUB_HEAD_REF}
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amazon-live-refresh-missing-round1
+          path: artifacts/amazon-live-refresh-missing-round1.json
+          retention-days: 7
+          if-no-files-found: error
