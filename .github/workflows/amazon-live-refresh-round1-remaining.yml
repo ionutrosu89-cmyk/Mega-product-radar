@@ -1,0 +1,84 @@
+name: Amazon Live Refresh Round1 Remaining
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        offset: [100,200,300,400,500,600,700,800,900]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect live Amazon batch manually
+        continue-on-error: true
+        run: node scripts/amazon-live-refresh-batch.mjs --offset=${{ matrix.offset }} --limit=100 --out=artifacts/amazon-live-refresh-batch-${{ matrix.offset }}.json
+      - name: Validate artifact contract
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=`artifacts/amazon-live-refresh-batch-${{ matrix.offset }}.json`;
+          if(!fs.existsSync(p)) throw new Error('BATCH_ARTIFACT_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.offset!==${{ matrix.offset }}||x.requested!==100) throw new Error('BATCH_SCOPE_MISMATCH');
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0) throw new Error('PAID_CALL_POLICY_VIOLATION');
+          if(x.observations.some(o=>o.freshnessClass!=='LIVE_PUBLIC_PAGE'||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false)) throw new Error('EVIDENCE_POLICY_VIOLATION');
+          const ids=new Set(x.observations.map(o=>o.externalId));
+          if(ids.size!==x.observations.length) throw new Error('DUPLICATE_ASIN_WITHIN_BATCH');
+          console.log(JSON.stringify({offset:x.offset,valid:x.validObservations,rate:x.successRatePct,coverage:x.coverage}));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amazon-live-round1-${{ matrix.offset }}
+          path: artifacts/amazon-live-refresh-batch-${{ matrix.offset }}.json
+          retention-days: 7
+          if-no-files-found: error
+
+  consolidate:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: amazon-live-round1-*
+          path: artifacts/round1
+          merge-multiple: true
+      - name: Consolidate valid live observations
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');const crypto=require('crypto');
+          const dir='artifacts/round1';
+          const files=fs.readdirSync(dir).filter(x=>x.endsWith('.json'));
+          const batches=files.map(f=>JSON.parse(fs.readFileSync(`${dir}/${f}`,'utf8')));
+          const byId=new Map();
+          for(const b of batches) for(const o of b.observations){if(!byId.has(o.externalId))byId.set(o.externalId,o);}
+          const observations=[...byId.values()].sort((a,b)=>a.externalId.localeCompare(b.externalId));
+          const coverage={withPrice:observations.filter(x=>x.price!==null).length,withRating:observations.filter(x=>x.rating!==null).length,withReviews:observations.filter(x=>x.reviewCount!==null).length};
+          const batchSummary=batches.map(b=>({offset:b.offset,requested:b.requested,validObservations:b.validObservations,successRatePct:b.successRatePct,coverage:b.coverage,httpFailures:b.diagnostics.filter(d=>d.statusCode&&d.statusCode>=400).length,blocked:b.diagnostics.filter(d=>d.blocked).length})).sort((a,b)=>a.offset-b.offset);
+          const rows=observations.map(o=>[o.externalId,o.title,o.price,o.currency,o.rating,o.reviewCount,o.observedAt,o.provenance.statusCode,o.provenance.htmlBytes]);
+          const productSetSha256=crypto.createHash('sha256').update(JSON.stringify(rows)).digest('hex');
+          const out={schemaVersion:'MPR_AMAZON_LIVE_ROUND1_REMAINING_V1',generatedAt:new Date().toISOString(),scope:{offsetStart:100,offsetEnd:999,requested:900,batchCount:9},uniqueLiveSnapshots:observations.length,coverage,batchSummary,productSetSha256,fields:['asin','title','price','currency','rating','reviewCount','observedAt','statusCode','htmlBytes'],products:rows,policy:{freshnessClass:'LIVE_PUBLIC_PAGE',salesEvidenceClass:'NOT_VERIFIED_SALES',providerSpendEur:0,paidCallsTriggered:0,purchaseAuthorized:false,trendAuthorized:false,minObservationHoursBeforeTrend:24}};
+          fs.mkdirSync('artifacts/consolidated',{recursive:true});
+          fs.writeFileSync('artifacts/consolidated/amazon-round1-remaining.compact.json',JSON.stringify(out));
+          console.log(JSON.stringify({files:files.length,uniqueLiveSnapshots:out.uniqueLiveSnapshots,coverage,batchSummary},null,2));
+          if(files.length!==9) process.exitCode=2;
+          if(new Set(rows.map(r=>r[0])).size!==rows.length) process.exitCode=3;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amazon-live-round1-consolidated
+          path: artifacts/consolidated/amazon-round1-remaining.compact.json
+          retention-days: 7
+          if-no-files-found: error
