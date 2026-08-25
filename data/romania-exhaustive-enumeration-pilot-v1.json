@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "observedAt": "2026-08-25T18:23:00Z",
+  "purpose": "First real candidate for exhaustive manual enumeration. This file does not claim exact Romania competition.",
+  "pilots": [
+    {
+      "platform": "TRENDYOL",
+      "canonicalNicheCandidate": "UNDER_DESK_CABLE_MANAGEMENT_TRAY",
+      "query": "organizator cabluri sub birou",
+      "sourceUrl": "https://www.trendyol.com/ro/organizator-cabluri-sub-birou-y-s879069",
+      "declaredSurfaceItemCountLowerBound": 12,
+      "declaredCountSemantics": "PUBLIC_SURFACE_LOWER_BOUND",
+      "visibleCanonicalExamples": [
+        "Organizator metalic pentru cabluri, multifuncțional pentru birou"
+      ],
+      "visibleContaminants": [
+        "raft suport router",
+        "geantă depozitare cabluri/electronice",
+        "lampă solară",
+        "birou gaming cu management cabluri"
+      ],
+      "currentStatus": "ENUMERATION_CANDIDATE",
+      "surfaceExact": false,
+      "marketComparableExact": false,
+      "nextAction": "ENUMERATE_ALL_PAGES_DEDUPE_AND_MANUALLY_CLASSIFY_CANONICAL_LISTINGS",
+      "verifiedSales": false,
+      "purchaseAuthorized": false,
+      "paidCallsTriggered": 0
+    }
+  ],
+  "policy": "DECLARED_12_PLUS_IS_NOT_CANONICAL_COUNT; EXHAUSTIVE_ENUMERATION_MAY_CREATE_SURFACE_EXACT_ONLY; MARKET_COMPARABLE_EXACT_REQUIRES_CONFIRMED_QUERY_SCOPE_AND_COMPLETE_ALIAS_COVERAGE"
+}
