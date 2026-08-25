@@ -1,14 +1,30 @@
 import {calculateOpportunityV3} from './opportunity-engine-v3.js';
 
-const n=v=>{const x=Number(v);return Number.isFinite(x)?x:null;};
+const n=v=>{if(v===null||v===undefined||v==='')return null;const x=Number(v);return Number.isFinite(x)?x:null;};
 const bool=v=>v===true;
+const up=v=>String(v??'').trim().toUpperCase();
 
 function supplierVerified(s={}){
-  return bool(s.verifiedQuote)||String(s.evidenceClass||'').toUpperCase()==='MANUALLY_VERIFIED'||String(s.verificationStatus||'').toUpperCase()==='SUPPLIER_OK';
+  return bool(s.verifiedQuote)||up(s.evidenceClass)==='MANUALLY_VERIFIED'||up(s.verificationStatus)==='SUPPLIER_OK';
 }
 function economicsConfirmed(e={}){
   const margin=n(e.marginPct),roi=n(e.roiPct),profit=n(e.profitPerUnit);
   return bool(e.landedCostConfirmed)&&margin!==null&&roi!==null&&profit!==null&&margin>0&&roi>0&&profit>0;
+}
+function romaniaEvidenceState(input={}){
+  const gap=input.romaniaGap||{};
+  const sampled=input.romaniaSampledCompetition||input.sampledRomaniaCompetition||{};
+  const sampledEligible=sampled.eligibleForSampledSignal===true||['SINGLE_PLATFORM_ESTIMATE','MULTI_PLATFORM_ESTIMATE'].includes(up(sampled.status))||up(sampled.evidenceClass).includes('DERIVED');
+  const explicitlyNonExact=gap.romaniaGapExactGateSatisfied===false||gap.exactComparableCount===false||['DERIVED_ESTIMATE','DERIVED_FROM_REVIEWED_PUBLIC_SAMPLE','SAMPLED_ESTIMATE'].includes(up(gap.evidenceClass));
+  const explicitlyExact=gap.romaniaGapExactGateSatisfied===true||gap.exactComparableCount===true;
+  const legacyReadyWithoutEstimateMarkers=gap.status==='READY'&&!sampledEligible&&!explicitlyNonExact;
+  const exactReady=gap.status==='READY'&&(explicitlyExact||legacyReadyWithoutEstimateMarkers);
+  return {
+    exactReady,
+    sampledEligible,
+    evidenceClass:exactReady?'EXACT_COMPARABLE_LOCAL_EVIDENCE':sampledEligible?'DERIVED_SAMPLED_LOCAL_EVIDENCE':'UNKNOWN',
+    maxFunnelStage:exactReady?'TEST_READY':sampledEligible?'PROMISING':'DISCOVERED'
+  };
 }
 
 export function calculateOpportunityV4(input={}){
@@ -17,6 +33,7 @@ export function calculateOpportunityV4(input={}){
   const supplierReady=supplierVerified(input.supplier);
   const economicsReady=economicsConfirmed(input.economics);
   const evidenceConfidence=n(input.dataConfidence??input.confidence);
+  const romaniaEvidence=romaniaEvidenceState(input);
   const blockers=[...(base.blockers||[])];
 
   let funnelStage='DISCOVERED';
@@ -25,6 +42,12 @@ export function calculateOpportunityV4(input={}){
   if(marketReady&&base.marketOpportunityScore>=65&&supplierReady&&economicsReady&&(evidenceConfidence===null||evidenceConfidence>=60))funnelStage='FINALIST';
   if(funnelStage==='FINALIST'&&bool(input.testGateReady)&&bool(input.complianceGateReady))funnelStage='TEST_READY';
 
+  if(!romaniaEvidence.exactReady&&['VALIDATE','FINALIST','TEST_READY'].includes(funnelStage)){
+    funnelStage=romaniaEvidence.sampledEligible?'PROMISING':'DISCOVERED';
+    blockers.push('ROMANIA_EXACT_EVIDENCE_REQUIRED_FOR_VALIDATION');
+  }
+  if(romaniaEvidence.sampledEligible&&!romaniaEvidence.exactReady)blockers.push('ROMANIA_SAMPLED_EVIDENCE_PRELIMINARY_ONLY');
+
   if(['FINALIST','TEST_READY'].includes(funnelStage)&&!supplierReady)blockers.push('VERIFIED_SUPPLIER_MISSING');
   if(['FINALIST','TEST_READY'].includes(funnelStage)&&!economicsReady)blockers.push('CONFIRMED_ECONOMICS_MISSING');
   if(funnelStage==='TEST_READY'&&!bool(input.testGateReady))blockers.push('TEST_GATE_MISSING');
@@ -32,14 +55,15 @@ export function calculateOpportunityV4(input={}){
 
   return {
     ...base,
-    version:'4.0',
+    version:'4.1',
     funnelStage,
     supplierReady,
     economicsReady,
     dataConfidence:evidenceConfidence,
+    romaniaEvidence,
     blockers:[...new Set(blockers)],
-    nextAction:funnelStage==='DISCOVERED'?'COLLECT_MARKET_EVIDENCE':funnelStage==='PROMISING'?'VALIDATE_ROMANIA_AND_SUPPLIER':funnelStage==='VALIDATE'?'VERIFY_SUPPLIER_AND_ECONOMICS':funnelStage==='FINALIST'?'PREPARE_MEASURED_TEST':'RUN_MEASURED_TEST_ONLY_AFTER_EXPLICIT_USER_ACTION',
-    policy:'DATA_TO_INTELLIGENCE_TO_DECISION; FINALIST_MAX_3; TEST_READY_IS_NOT_BUY_READY; NO_AUTO_PURCHASE',
+    nextAction:funnelStage==='DISCOVERED'?'COLLECT_MARKET_EVIDENCE':funnelStage==='PROMISING'?'VALIDATE_ROMANIA_EXACT_EVIDENCE_AND_SUPPLIER':funnelStage==='VALIDATE'?'VERIFY_SUPPLIER_AND_ECONOMICS':funnelStage==='FINALIST'?'PREPARE_MEASURED_TEST':'RUN_MEASURED_TEST_ONLY_AFTER_EXPLICIT_USER_ACTION',
+    policy:'DATA_TO_INTELLIGENCE_TO_DECISION; SAMPLED_ROMANIA_MAX_PROMISING; EXACT_ROMANIA_REQUIRED_FROM_VALIDATE; FINALIST_MAX_3; TEST_READY_IS_NOT_BUY_READY; UNKNOWN_IS_NOT_ZERO; NO_AUTO_PURCHASE',
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     purchaseAuthorized:false
   };
