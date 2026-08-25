@@ -1,0 +1,64 @@
+name: Amazon Public Ranking Snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      category_key:
+        description: 'Canonical ranking surface key'
+        required: false
+        default: 'amazon:office-products:best-sellers'
+      category_label:
+        description: 'Human-readable category label'
+        required: false
+        default: 'Office Products'
+      source_url:
+        description: 'Amazon public Best Sellers URL'
+        required: false
+        default: 'https://www.amazon.com/gp/bestsellers/office-products?language=en_US'
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Collect explicit Amazon public ranking evidence
+        id: collect
+        continue-on-error: true
+        run: >-
+          node scripts/amazon-public-ranking-snapshot.mjs
+          --categoryKey='${{ inputs.category_key }}'
+          --categoryLabel='${{ inputs.category_label }}'
+          --url='${{ inputs.source_url }}'
+          --out=artifacts/amazon-public-ranking-snapshot.json
+      - name: Enforce fail-closed evidence policy
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/amazon-public-ranking-snapshot.json';
+          if(!fs.existsSync(p)){console.error('AMAZON_RANKING_ARTIFACT_MISSING');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`status=${x.status}`);
+          console.log(`rankEvidenceCount=${x.rankEvidenceCount}`);
+          console.log(`diagnostics=${JSON.stringify(x.diagnostics||[])}`);
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.policy?.purchaseAuthorized!==false)process.exitCode=4;
+          if(x.policy?.explicitRankOnly!==true||x.policy?.htmlPositionIsNotRank!==true)process.exitCode=5;
+          if((x.observations||[]).some(o=>o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.rankEvidenceClass!=='EXPLICIT_PUBLIC_RANK_BADGE'||o.purchaseAuthorized!==false))process.exitCode=6;
+          if(x.status!=='RANKING_EVIDENCE_CAPTURED'||Number(x.rankEvidenceCount)<5)process.exitCode=2;
+          NODE
+      - name: Upload ranking artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-public-ranking-snapshot
+          path: artifacts/amazon-public-ranking-snapshot.json
+          if-no-files-found: error
+          retention-days: 7
