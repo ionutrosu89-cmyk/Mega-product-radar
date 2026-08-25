@@ -1,0 +1,52 @@
+name: Amazon Live Refresh Pilot
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/amazon-live-refresh-pilot.mjs'
+      - '.github/workflows/amazon-live-refresh-pilot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'feat/amazon-live-refresh-pilot-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run free public Amazon live refresh pilot
+        id: pilot
+        continue-on-error: true
+        run: node scripts/amazon-live-refresh-pilot.mjs --limit=20 --out=artifacts/amazon-live-refresh-pilot.json
+      - name: Enforce pilot integrity gate
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/amazon-live-refresh-pilot.json';
+          if(!fs.existsSync(p)){console.error('PILOT_ARTIFACT_MISSING');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`requested=${x.requested}`);
+          console.log(`validObservations=${x.validObservations}`);
+          console.log(`successRatePct=${x.successRatePct}`);
+          console.log(`blocked=${x.diagnostics.filter(d=>d.blocked).length}`);
+          console.log(`httpFailures=${x.diagnostics.filter(d=>d.statusCode&&d.statusCode>=400).length}`);
+          if(x.validObservations<5)process.exitCode=2;
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.observations.some(o=>o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false))process.exitCode=4;
+          NODE
+      - name: Upload pilot artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-live-refresh-pilot
+          path: artifacts/amazon-live-refresh-pilot.json
+          if-no-files-found: error
+          retention-days: 7
