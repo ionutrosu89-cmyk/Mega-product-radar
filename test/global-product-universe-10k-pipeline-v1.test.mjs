@@ -13,22 +13,25 @@ test('10k plan is free-first and never auto executes',()=>{
   assert.equal(plan.purchaseAuthorized,false);
 });
 
-test('credentialed free sources are separated from public no-credential sources',()=>{
+test('credentialed demand/catalogue sources are separated from supply discovery',()=>{
   const plan=build10kAcquisitionPlan({currentUniqueProducts:0,credentials:{EBAY_BEST_SELLING:true}});
   assert.ok(plan.readySources.includes('AMAZON_PUBLIC_RANKINGS'));
-  assert.ok(plan.readySources.includes('ALIBABA_TOP_RANKING'));
   assert.ok(plan.readySources.includes('EBAY_BEST_SELLING'));
+  assert.ok(!plan.readySources.includes('ALIBABA_TOP_RANKING'));
+  assert.deepEqual(plan.supplyDiscoverySources,['ALIBABA_TOP_RANKING']);
+  assert.equal(plan.supplyDiscoveryCountsTowardDemandTarget,false);
   assert.ok(plan.blockedSources.some(x=>x.sourceKey==='ETSY_OPEN_API'&&x.reason==='CREDENTIALS_REQUIRED'));
   assert.ok(plan.blockedSources.some(x=>x.sourceKey==='WALMART_CATALOG_SEARCH'&&x.reason==='CREDENTIALS_REQUIRED'));
 });
 
-test('allocation preserves 70 percent ranking seed and 30 percent catalogue breadth intent',()=>{
+test('allocation preserves 70 percent true ranking seed and 30 percent catalogue breadth intent',()=>{
   const plan=build10kAcquisitionPlan({currentUniqueProducts:0});
   const ranking=plan.allocation.filter(x=>x.role==='RANKING_SEED').reduce((a,b)=>a+b.targetNewUniqueProducts,0);
   const catalogue=plan.allocation.filter(x=>x.role==='CATALOGUE_DISCOVERY').reduce((a,b)=>a+b.targetNewUniqueProducts,0);
   assert.equal(ranking,7000);
   assert.equal(catalogue,3000);
   assert.equal(plan.acquisitionMix.rankingSeedPct,70);
+  assert.equal(plan.supplyDiscoveryCountsTowardDemandTarget,false);
 });
 
 test('batch evaluation reports observed unique yield without claiming sales',()=>{
