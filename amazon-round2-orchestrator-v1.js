@@ -4,7 +4,7 @@ const iso=v=>{const ms=Date.parse(String(v??''));return Number.isFinite(ms)?new 
 
 export function parseCompactAmazonSnapshots(payload={}){
   const fields=Array.isArray(payload.fields)?payload.fields:[];
-  const rows=Array.isArray(payload.snapshots)?payload.snapshots:[];
+  const rows=Array.isArray(payload.snapshots)?payload.snapshots:Array.isArray(payload.products)?payload.products:[];
   const index=Object.fromEntries(fields.map((name,i)=>[name,i]));
   const idIndex=Number.isInteger(index.asin)?index.asin:index.externalId;
   return rows.map(row=>({
