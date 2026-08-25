@@ -1,0 +1,58 @@
+name: Amazon Round 2 Refresh
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_items:
+        description: 'Maximum already-captured eligible ASINs to refresh (1-255)'
+        required: true
+        default: '255'
+
+permissions:
+  contents: read
+
+jobs:
+  round2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Collect eligible Amazon Round 2 observations
+        id: collect
+        continue-on-error: true
+        run: node scripts/amazon-round2-refresh.mjs --maxItems=${{ inputs.max_items }} --out=artifacts/amazon-round2-refresh.json
+      - name: Enforce Round 2 truth and interval gates
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/amazon-round2-refresh.json';
+          if(!fs.existsSync(p)){console.error('ROUND2_ARTIFACT_MISSING');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`captured=${x.plan.capturedCount}`);
+          console.log(`eligible=${x.plan.eligibleCount}`);
+          console.log(`blocked=${x.plan.blockedCount}`);
+          console.log(`allEligibleAt=${x.plan.allEligibleAt}`);
+          console.log(`requested=${x.requested}`);
+          console.log(`valid=${x.validObservations}`);
+          console.log(`movement=${JSON.stringify(x.movementSummary)}`);
+          if(x.plan.capturedCount!==255)process.exitCode=2;
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.policy.purchaseAuthorized!==false||x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES')process.exitCode=4;
+          if(x.policy.minimumObservationIntervalHours<24)process.exitCode=5;
+          if(x.movements.some(m=>!m.intervalEligible||m.elapsedHours<24))process.exitCode=6;
+          if(x.movements.some(m=>m.rankVelocity!==null))process.exitCode=7;
+          if(x.observations.some(o=>o.sourceRank!==null||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false))process.exitCode=8;
+          if(x.requested===0)process.exitCode=9;
+          NODE
+      - name: Upload Round 2 artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-round2-refresh
+          path: artifacts/amazon-round2-refresh.json
+          if-no-files-found: error
+          retention-days: 7
