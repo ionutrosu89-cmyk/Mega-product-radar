@@ -29,16 +29,20 @@ export function normalizeMarketEvidence(row={}){
   const saturationScore=n(row.saturationScore);
   const trendScore=n(row.trendScore??row.score);
   const confidence=n(row.confidence);
+  const comparabilityKey=String(row.comparabilityKey??'').trim();
+  const comparableScopeConfirmed=row.comparableScopeConfirmed===true;
 
   const marketEvidenceEligible=Boolean(platform&&observedAt&&marketWide&&!sellerScoped&&!storeScoped&&publicObserved&&manualReviewed);
   const globalDemandEligible=marketEvidenceEligible&&GLOBAL_MARKET_PLATFORMS.has(platform)&&rankingObserved;
   const localMarketEligible=marketEvidenceEligible&&LOCAL_PUBLIC_PLATFORMS.has(platform);
+  const localComparableEligible=localMarketEligible&&Boolean(comparabilityKey)&&comparableScopeConfirmed;
   const hybridConfirmationEligible=marketEvidenceEligible&&HYBRID_CONFIRMATION_PLATFORMS.has(platform);
 
   return {
     platform,observedAt,scope,evidenceType,manualReviewed,sellerScoped,storeScoped,marketWide,
     rank:n(row.rank),listingCount,sellerCount,saturationScore,trendScore,confidence,
-    marketEvidenceEligible,globalDemandEligible,localMarketEligible,hybridConfirmationEligible,
+    comparabilityKey,comparableScopeConfirmed,
+    marketEvidenceEligible,globalDemandEligible,localMarketEligible,localComparableEligible,hybridConfirmationEligible,
     salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false
   };
 }
@@ -72,15 +76,34 @@ function deriveGlobalTrend(rows=[]){
 }
 
 function deriveRomaniaCompetition(rows=[]){
-  const evidence=latestPerPlatform(rows).filter(x=>x.localMarketEligible);
-  if(!evidence.length)return {sellerCount:null,listingCount:null,saturationScore:null,competitionVerified:false,platforms:[],blockers:['ROMANIA_PUBLIC_MARKET_EVIDENCE_MISSING']};
-  const sumKnown=key=>{const vals=evidence.map(x=>n(x[key])).filter(x=>x!==null);return vals.length?vals.reduce((a,b)=>a+b,0):null;};
-  const avgKnown=key=>{const vals=evidence.map(x=>n(x[key])).filter(x=>x!==null);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;};
-  return {
-    sellerCount:sumKnown('sellerCount'),listingCount:sumKnown('listingCount'),
-    saturationScore:avgKnown('saturationScore'),competitionVerified:evidence.length>=2,
-    platforms:evidence.map(x=>x.platform),blockers:[]
-  };
+  const local=latestPerPlatform(rows).filter(x=>x.localMarketEligible);
+  if(!local.length)return {sellerCount:null,listingCount:null,saturationScore:null,competitionVerified:false,platforms:[],comparabilityKey:null,blockers:['ROMANIA_PUBLIC_MARKET_EVIDENCE_MISSING']};
+
+  const comparable=local.filter(x=>x.localComparableEligible);
+  if(!comparable.length)return {sellerCount:null,listingCount:null,saturationScore:null,competitionVerified:false,platforms:local.map(x=>x.platform),comparabilityKey:null,blockers:['ROMANIA_COMPARABLE_SCOPE_MISSING']};
+
+  const groups=new Map();
+  for(const row of comparable){
+    const arr=groups.get(row.comparabilityKey)||[];
+    arr.push(row);
+    groups.set(row.comparabilityKey,arr);
+  }
+  const ranked=[...groups.entries()].sort((a,b)=>b[1].length-a[1].length);
+  const [comparabilityKey,evidence]=ranked[0]||[null,[]];
+  const platforms=[...new Set(evidence.map(x=>x.platform))];
+  if(platforms.length<2){
+    return {sellerCount:null,listingCount:null,saturationScore:null,competitionVerified:false,platforms,comparabilityKey,blockers:['ROMANIA_COMPARABLE_PLATFORM_PAIR_MISSING']};
+  }
+
+  const sumComplete=key=>{const vals=evidence.map(x=>n(x[key]));return vals.every(x=>x!==null)?vals.reduce((a,b)=>a+b,0):null;};
+  const avgComplete=key=>{const vals=evidence.map(x=>n(x[key]));return vals.every(x=>x!==null)?vals.reduce((a,b)=>a+b,0)/vals.length:null;};
+  const listingCount=sumComplete('listingCount');
+  const sellerCount=sumComplete('sellerCount');
+  const saturationScore=avgComplete('saturationScore');
+  if(listingCount===null&&sellerCount===null&&saturationScore===null){
+    return {sellerCount:null,listingCount:null,saturationScore:null,competitionVerified:false,platforms,comparabilityKey,blockers:['ROMANIA_COMPARABLE_EXACT_COMPETITION_VALUES_MISSING']};
+  }
+  return {sellerCount,listingCount,saturationScore,competitionVerified:true,platforms,comparabilityKey,blockers:[]};
 }
 
 export function calculateRomaniaMarketGapV2({marketEvidence=[],romaniaDemand={}}={}){
@@ -93,18 +116,22 @@ export function calculateRomaniaMarketGapV2({marketEvidence=[],romaniaDemand={}}
   const localPlatforms=romaniaCompetition.platforms||[];
   const globalPlatforms=globalTrend.platforms||[];
   const independentPlatformCount=new Set([...localPlatforms,...globalPlatforms,...hybridConfirmations]).size;
+  const blockers=[...new Set([...(base.blockers||[]),...(romaniaCompetition.blockers||[])])];
+  const forcedIncomplete=Boolean(romaniaCompetition.blockers?.length);
 
   return {
-    version:'2.0',...base,
+    version:'2.1',...base,
+    ...(forcedIncomplete?{status:'INCOMPLETE',score:null,band:'UNKNOWN',blockers}:{blockers}),
     provenance:{
       globalDemandPlatforms:globalPlatforms,
       romaniaPublicPlatforms:localPlatforms,
       hybridConfirmationPlatforms:hybridConfirmations,
       rejectedScopedPlatforms:rejectedScoped,
-      independentPlatformCount
+      independentPlatformCount,
+      romaniaComparabilityKey:romaniaCompetition.comparabilityKey||null
     },
-    confidenceClass:base.status!=='READY'?'INSUFFICIENT':globalPlatforms.length>=2&&localPlatforms.length>=2?'MULTI_MARKET_STRONG':globalPlatforms.length>=1&&localPlatforms.length>=1?'MULTI_MARKET_PARTIAL':'INSUFFICIENT',
-    policy:'ONLY_MANUALLY_REVIEWED_MARKET_WIDE_PUBLIC_EVIDENCE_CAN_FEED_ROMANIA_GAP; SELLER_OR_STORE_SCOPED_DATA_IS_EXCLUDED; NO_VERIFIED_SALES_CLAIM',
+    confidenceClass:forcedIncomplete||base.status!=='READY'?'INSUFFICIENT':globalPlatforms.length>=2&&localPlatforms.length>=2?'MULTI_MARKET_STRONG':globalPlatforms.length>=1&&localPlatforms.length>=2?'MULTI_MARKET_PARTIAL':'INSUFFICIENT',
+    policy:'ONLY_MANUALLY_REVIEWED_MARKET_WIDE_PUBLIC_EVIDENCE_WITH_CONFIRMED_SHARED_COMPARABILITY_SCOPE_CAN_FEED_ROMANIA_COMPETITION; SELLER_OR_STORE_SCOPED_DATA_IS_EXCLUDED; LOWER_BOUNDS_ARE_NOT_EXACT_COUNTS; NO_VERIFIED_SALES_CLAIM',
     salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false,paidCallsTriggered:0
   };
 }
@@ -113,5 +140,5 @@ export function buildRomaniaGapMultiMarketRadar(rows=[]){
   const out=(rows||[]).map(row=>({productKey:row.productKey||row.identity||null,title:row.title||row.name||null,...calculateRomaniaMarketGapV2(row)}));
   const ready=out.filter(x=>x.status==='READY').sort((a,b)=>b.score-a.score);
   const incomplete=out.filter(x=>x.status!=='READY');
-  return {version:'2.0',total:out.length,ready:ready.length,incomplete:incomplete.length,strongMultiMarket:ready.filter(x=>x.confidenceClass==='MULTI_MARKET_STRONG').length,rows:[...ready,...incomplete],policy:'RADAR_ONLY_NO_PURCHASE_AUTHORIZATION',paidCallsTriggered:0,purchaseAuthorized:false};
+  return {version:'2.1',total:out.length,ready:ready.length,incomplete:incomplete.length,strongMultiMarket:ready.filter(x=>x.confidenceClass==='MULTI_MARKET_STRONG').length,rows:[...ready,...incomplete],policy:'RADAR_ONLY_NO_PURCHASE_AUTHORIZATION',paidCallsTriggered:0,purchaseAuthorized:false};
 }
