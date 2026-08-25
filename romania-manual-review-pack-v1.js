@@ -1,5 +1,6 @@
 import {canonicalRomaniaComparabilityKey} from './romania-comparability-key-registry-v1.js';
 import {normalizeRomaniaMarketSnapshot} from './romania-market-snapshot-ledger-v1.js';
+import {romanianScopeAuditFor} from './romania-scope-count-semantics-v1.js';
 
 const txt=v=>String(v??'').trim();
 const up=v=>txt(v).toUpperCase();
@@ -23,6 +24,9 @@ export function buildRomaniaManualReviewPack({queueItems=[]}={}){
     const comparabilityKey=canonicalRomaniaComparabilityKey(item.comparabilityKey);
     for(const platform of ['EMAG','TRENDYOL']){
       const known=item.knownEvidence?.[platform]||{};
+      const audit=romanianScopeAuditFor({nicheKey:item.nicheKey,platform,comparabilityKey});
+      const surfaceLower=audit?.surfaceItemCountLowerBound??num(known.listingCountLowerBound);
+      const canonicalLower=audit?.canonicalScopeConfirmed===false?null:num(known.listingCountLowerBound);
       tasks.push({
         priority:Number(item.priority)||999,
         nicheKey:txt(item.nicheKey),
@@ -31,15 +35,18 @@ export function buildRomaniaManualReviewPack({queueItems=[]}={}){
         canonicalDefinition:txt(item.canonicalDefinition),
         query:txt(item.queries?.[platform]),
         searchUrl:searchUrl(platform,txt(item.queries?.[platform])),
-        knownListingCountLowerBound:num(known.listingCountLowerBound),
+        knownListingCountLowerBound:canonicalLower,
+        knownSurfaceItemCountLowerBound:surfaceLower,
         knownExactListingCount:num(known.listingCount),
         knownStatus:txt(known.status)||'UNKNOWN',
+        scopeAuditStatus:audit?.scopeStatus||null,
         review:{
           observedAt:null,
           sourceUrl:null,
           scope:null,
           listingCount:null,
-          listingCountLowerBound:num(known.listingCountLowerBound),
+          listingCountLowerBound:canonicalLower,
+          surfaceItemCountLowerBound:surfaceLower,
           manualReviewed:false,
           comparableScopeConfirmed:false,
           reviewerNote:null
@@ -50,7 +57,7 @@ export function buildRomaniaManualReviewPack({queueItems=[]}={}){
           'EXCLUDE_CONTAMINANTS',
           'RECORD_OBSERVED_AT',
           'RECORD_DIRECT_SOURCE_URL',
-          'DO_NOT_CONVERT_LOWER_BOUND_TO_EXACT_COUNT',
+          'DO_NOT_CONVERT_SURFACE_COUNT_TO_CANONICAL_COUNT',
           'CONFIRM_SCOPE_ONLY_AFTER_HUMAN_REVIEW'
         ],
         salesEvidenceClass:'NOT_VERIFIED_SALES',
@@ -59,11 +66,11 @@ export function buildRomaniaManualReviewPack({queueItems=[]}={}){
     }
   }
   return {
-    version:'1.0',
+    version:'1.1',
     generatedAt:null,
     totalTasks:tasks.length,
     tasks,
-    policy:'MANUAL_REVIEW_ONLY; DIRECT_MARKETPLACE_SURFACE_REQUIRED; LOWER_BOUND_IS_NOT_EXACT; NO_VERIFIED_SALES; NO_AUTO_PROMOTION; NO_PURCHASE_AUTHORIZATION',
+    policy:'MANUAL_REVIEW_ONLY; DIRECT_MARKETPLACE_SURFACE_REQUIRED; SURFACE_COUNT_IS_NOT_CANONICAL_COUNT; LOWER_BOUND_IS_NOT_EXACT; NO_VERIFIED_SALES; NO_AUTO_PROMOTION; NO_PURCHASE_AUTHORIZATION',
     paidCallsTriggered:0,
     approvedSpendEur:0,
     purchaseAuthorized:false
@@ -111,6 +118,7 @@ export function reviewedRomaniaRowToSnapshot(row={}){
     comparableScopeConfirmed:row.comparableScopeConfirmed===true,
     listingCount:row.listingCount,
     listingCountLowerBound:row.listingCountLowerBound,
+    surfaceItemCountLowerBound:row.surfaceItemCountLowerBound,
     sellerCount:row.sellerCount
   });
   return {

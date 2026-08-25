@@ -19,16 +19,19 @@ test('current Romania evidence report fails closed without eMAG artifact',()=>{
   assert.ok(r.rows.every(x=>x.blockers.includes('EMAG_PROBE_ARTIFACT_MISSING')));
 });
 
-test('known Trendyol lower bounds remain non-exact in report',()=>{
+test('known Trendyol broad counts remain surface-only in report',()=>{
   const r=buildRomaniaEvidencePromotionReport({queueItems,reviewedBatch:batch});
   const packing=r.rows.find(x=>x.nicheKey==='travel:packing-cubes');
   const trunk=r.rows.find(x=>x.nicheKey==='automotive:trunk-organization');
   assert.ok(packing);
   assert.ok(trunk);
-  assert.ok(packing.evidence.TRENDYOL.listingCount==null);
-  assert.ok(Number(packing.evidence.TRENDYOL.listingCountLowerBound)>0);
+  assert.equal(packing.evidence.TRENDYOL.listingCount,null);
+  assert.equal(packing.evidence.TRENDYOL.listingCountLowerBound,null);
+  assert.equal(packing.evidence.TRENDYOL.surfaceItemCountLowerBound,656);
+  assert.equal(packing.evidence.TRENDYOL.comparableScopeConfirmed,false);
   assert.ok(packing.blockers.includes('TRENDYOL_EXACT_COUNT_MISSING'));
-  assert.ok(trunk.evidence.TRENDYOL.listingCount==null);
+  assert.ok(packing.blockers.includes('TRENDYOL_SCOPE_NOT_CONFIRMED'));
+  assert.equal(trunk.evidence.TRENDYOL.surfaceItemCountLowerBound,512);
   assert.ok(trunk.blockers.includes('TRENDYOL_EXACT_COUNT_MISSING'));
 });
 

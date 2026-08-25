@@ -1,6 +1,7 @@
 import { appendRomaniaMarketSnapshot, latestRomaniaMarketSnapshots } from './romania-market-snapshot-ledger-v1.js';
 import { validateRomaniaEvidencePromotion } from './romania-evidence-promotion-validator-v1.js';
 import { canonicalRomaniaComparabilityKey } from './romania-comparability-key-registry-v1.js';
+import {applyRomaniaScopeCountSemantics} from './romania-scope-count-semantics-v1.js';
 
 export function extractTrendyolSnapshotsFromReviewedBatch(batch={}){
   const rows=[];
@@ -8,7 +9,7 @@ export function extractTrendyolSnapshotsFromReviewedBatch(batch={}){
     for(const obs of niche.observations||[]){
       if(String(obs.platform||'').toUpperCase()!=='TRENDYOL') continue;
       if(!obs.sourceUrl || !obs.observedAt) continue;
-      rows.push({
+      const raw={
         nicheKey:niche.nicheKey,
         platform:'TRENDYOL',
         market:obs.market||'RO',
@@ -23,7 +24,8 @@ export function extractTrendyolSnapshotsFromReviewedBatch(batch={}){
         listingCountLowerBound:obs.listingCountLowerBound,
         sellerCount:obs.sellerCount,
         salesEvidenceClass:'NOT_VERIFIED_SALES'
-      });
+      };
+      rows.push(applyRomaniaScopeCountSemantics(raw));
     }
   }
   return rows;
@@ -76,7 +78,7 @@ export function validateRomaniaQueueAgainstUnifiedLedger({ledger={observations:[
     promotable:rows.filter(x=>x.promotable).length,
     blocked:rows.filter(x=>!x.promotable).length,
     rows,
-    policy:'UNIFIED_LOCAL_LEDGER; FAIL_CLOSED; LOWER_BOUNDS_ARE_NOT_EXACT; NO_VERIFIED_SALES_CLAIM',
+    policy:'UNIFIED_LOCAL_LEDGER; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; FAIL_CLOSED; LOWER_BOUNDS_ARE_NOT_EXACT; NO_VERIFIED_SALES_CLAIM',
     paidCallsTriggered:0,
     purchaseAuthorized:false
   };

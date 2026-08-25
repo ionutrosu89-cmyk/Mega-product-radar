@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "reviewedAt": "2026-08-25T11:05:00Z",
+  "purpose": "Prevent broad marketplace surface counts from being misused as canonical niche lower bounds.",
+  "policy": "SURFACE_COUNT_IS_NOT_CANONICAL_COUNT_WHEN_VISIBLE_SCOPE_CONTAINS_NON_CANONICAL_PRODUCTS; PRESERVE_SURFACE_COUNT_SEPARATELY; FAIL_CLOSED; NOT_VERIFIED_SALES; NO_PURCHASE_AUTHORIZATION",
+  "items": [
+    {
+      "nicheKey": "travel:packing-cubes",
+      "platform": "TRENDYOL",
+      "comparabilityKey": "PACKING_CUBES_SET",
+      "sourceUrl": "https://www.trendyol.com/ro/organizatoare-pentru-valiza-x-c163720",
+      "surfaceItemCountLowerBound": 656,
+      "canonicalListingCountLowerBound": null,
+      "scopeStatus": "CONTAMINATED_BROAD_SURFACE",
+      "canonicalScopeConfirmed": false,
+      "visibleContaminantExamples": ["zipper storage bags", "refillable perfume bottle", "travel shampoo containers", "hanger products"],
+      "reason": "The category surface includes adjacent travel-organization products outside the canonical packing-cubes definition, so 656+ cannot be treated as a lower bound for canonical packing-cube sets."
+    },
+    {
+      "nicheKey": "automotive:trunk-organization",
+      "platform": "TRENDYOL",
+      "comparabilityKey": "CAR_TRUNK_ORGANIZERS",
+      "sourceUrl": "https://www.trendyol.com/ro/organizatori-de-portbagaj-auto-x-c103894",
+      "surfaceItemCountLowerBound": 512,
+      "canonicalListingCountLowerBound": null,
+      "scopeStatus": "CONTAMINATED_BROAD_SURFACE",
+      "canonicalScopeConfirmed": false,
+      "visibleContaminantExamples": ["trunk nets", "trunk protection covers", "shopping bag hooks", "safety-kit storage bags"],
+      "reason": "The category surface includes nets, covers and adjacent car-storage accessories excluded by the canonical trunk-organizer definition, so 512+ cannot be used as a canonical niche lower bound."
+    },
+    {
+      "nicheKey": "office:laptop-accessories",
+      "platform": "TRENDYOL",
+      "comparabilityKey": "ADJUSTABLE_LAPTOP_STANDS",
+      "sourceUrl": "https://www.trendyol.com/ro/suport-laptop-y-s424508",
+      "surfaceItemCountLowerBound": 1636,
+      "canonicalListingCountLowerBound": null,
+      "scopeStatus": "CONTAMINATED_BROAD_SURFACE",
+      "canonicalScopeConfirmed": false,
+      "visibleContaminantExamples": ["backpacks", "docking stations", "monitor stands", "cooling pads", "laptop screens"],
+      "reason": "The visible surface is materially broader than adjustable laptop stands; 1636+ is only a broad surface count signal."
+    }
+  ],
+  "salesEvidenceClass": "NOT_VERIFIED_SALES",
+  "paidCallsTriggered": 0,
+  "approvedSpendEur": 0,
+  "purchaseAuthorized": false
+}

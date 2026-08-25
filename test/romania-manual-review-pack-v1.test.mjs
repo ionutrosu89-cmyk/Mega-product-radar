@@ -15,14 +15,16 @@ test('review pack creates exactly two direct marketplace tasks per priority nich
   assert.equal(pack.purchaseAuthorized,false);
 });
 
-test('known Trendyol quantities remain lower bounds and exact fields stay unknown',()=>{
+test('known contaminated Trendyol quantities remain surface-only and canonical lower bounds stay unknown',()=>{
   const pack=buildRomaniaManualReviewPack({queueItems:items});
   const packing=pack.tasks.find(x=>x.nicheKey==='travel:packing-cubes'&&x.platform==='TRENDYOL');
   const trunk=pack.tasks.find(x=>x.nicheKey==='automotive:trunk-organization'&&x.platform==='TRENDYOL');
-  assert.equal(packing.knownListingCountLowerBound,656);
+  assert.equal(packing.knownSurfaceItemCountLowerBound,656);
+  assert.equal(packing.knownListingCountLowerBound,null);
   assert.equal(packing.knownExactListingCount,null);
-  assert.equal(packing.review.listingCount,null);
-  assert.equal(trunk.knownListingCountLowerBound,512);
+  assert.equal(packing.review.listingCountLowerBound,null);
+  assert.equal(trunk.knownSurfaceItemCountLowerBound,512);
+  assert.equal(trunk.knownListingCountLowerBound,null);
   assert.equal(trunk.review.listingCount,null);
 });
 
@@ -50,11 +52,11 @@ test('third party source cannot become direct marketplace evidence',()=>{
   assert.ok(r.blockers.includes('DIRECT_MARKETPLACE_SOURCE_REQUIRED'));
 });
 
-test('exact count cannot be lower than an observed lower bound',()=>{
+test('explicit canonical lower bound still constrains an exact reviewed count',()=>{
   const r=validateRomaniaManualReviewRow({
     nicheKey:'travel:packing-cubes',platform:'TRENDYOL',comparabilityKey:'PACKING_CUBES_SET',
     observedAt:'2026-08-25T12:00:00Z',sourceUrl:'https://www.trendyol.com/ro/organizatoare-pentru-valiza-x-c163720',
-    scope:'MARKET_WIDE',listingCount:600,listingCountLowerBound:656,manualReviewed:true,comparableScopeConfirmed:true
+    scope:'MARKET_WIDE',listingCount:20,listingCountLowerBound:25,manualReviewed:true,comparableScopeConfirmed:true
   });
   assert.equal(r.validForExactComparableEvidence,false);
   assert.ok(r.blockers.includes('EXACT_COUNT_BELOW_OBSERVED_LOWER_BOUND'));
@@ -64,11 +66,12 @@ test('fully reviewed direct exact row becomes snapshot but never purchase author
   const out=reviewedRomaniaRowToSnapshot({
     nicheKey:'automotive:trunk-organization',platform:'TRENDYOL',comparabilityKey:'AUTO_TRUNK_ORGANIZERS',
     observedAt:'2026-08-25T12:00:00Z',sourceUrl:'https://www.trendyol.com/ro/organizatori-de-portbagaj-auto-x-c103894',
-    scope:'MARKET_WIDE',listingCount:520,listingCountLowerBound:512,manualReviewed:true,comparableScopeConfirmed:true
+    scope:'MARKET_WIDE',listingCount:120,listingCountLowerBound:null,surfaceItemCountLowerBound:512,manualReviewed:true,comparableScopeConfirmed:true
   });
   assert.equal(out.promotableAsExactComparableEvidence,true);
   assert.equal(out.snapshot.comparabilityKey,'CAR_TRUNK_ORGANIZERS');
-  assert.equal(out.snapshot.listingCount,520);
+  assert.equal(out.snapshot.listingCount,120);
+  assert.equal(out.snapshot.surfaceItemCountLowerBound,512);
   assert.equal(out.snapshot.salesEvidenceClass,'NOT_VERIFIED_SALES');
   assert.equal(out.purchaseAuthorized,false);
   assert.equal(out.paidCallsTriggered,0);
