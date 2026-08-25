@@ -39,6 +39,31 @@ export function buildEmagPublicReviewDescriptor({url}={}){
   return {...out,url:u,access:'REVIEWED_PUBLIC_PAGE',requiresManualReview:true,rankingEvidence:false,salesEvidenceClass:'NOT_VERIFIED_SALES'};
 }
 
+export function buildTrendyolSellerDescriptor({resource='products',env={}}={}){
+  const out=baseResult('TRENDYOL_MARKETPLACE_SELLER_API',env); if(!out.ok)return out;
+  const sellerId=String(env.TRENDYOL_SELLER_ID??'').trim();
+  return {...out,access:'OFFICIAL_API_V2',resource:String(resource||'products'),sellerIdEnv:'TRENDYOL_SELLER_ID',apiBase:'https://apigw.trendyol.com',productPath:`/integration/product/sellers/${sellerId}/v2/products`,scope:'AUTHORIZED_TRENDYOL_SELLER_ONLY',marketWideEvidence:false,rankingEvidence:false,warning:'SELLER_ACCOUNT_DATA_IS_NOT_WHOLE_TRENDYOL_MARKET'};
+}
+
+export function buildTrendyolPublicReviewDescriptor({url}={}){
+  const out=baseResult('TRENDYOL_PUBLIC_MARKET',{});
+  const u=String(url??'').trim();
+  if(!/^https:\/\/(www\.)?trendyol\.com\//i.test(u))return {...out,ok:false,error:'REVIEWED_TRENDYOL_URL_REQUIRED'};
+  return {...out,url:u,access:'REVIEWED_PUBLIC_PAGE',requiresManualReview:true,rankingEvidence:false,salesEvidenceClass:'NOT_VERIFIED_SALES'};
+}
+
+export function buildSheinSellerDescriptor({operation='PRODUCT_MANAGEMENT',env={}}={}){
+  const out=baseResult('SHEIN_MARKETPLACE_SELLER_API',env); if(!out.ok)return out;
+  return {...out,access:'OFFICIAL_OPEN_PLATFORM',operation:String(operation||'PRODUCT_MANAGEMENT'),scope:'AUTHORIZED_SHEIN_SELLER_ONLY',marketWideEvidence:false,rankingEvidence:false,authorizationModel:'APP_PLUS_SELLER_AUTHORIZATION',warning:'SELLER_ACCOUNT_DATA_IS_NOT_WHOLE_SHEIN_MARKET'};
+}
+
+export function buildSheinPublicReviewDescriptor({url}={}){
+  const out=baseResult('SHEIN_PUBLIC_MARKET',{});
+  const u=String(url??'').trim();
+  if(!/^https:\/\/(?:[a-z]{2}\.)?shein\.com\//i.test(u)&&!/^https:\/\/www\.shein\.com\//i.test(u))return {...out,ok:false,error:'REVIEWED_SHEIN_URL_REQUIRED'};
+  return {...out,url:u,access:'REVIEWED_PUBLIC_PAGE',requiresManualReview:true,rankingEvidence:false,salesEvidenceClass:'NOT_VERIFIED_SALES'};
+}
+
 export function buildAliExpressDescriptor({query,env={}}={}){
   const out=baseResult('ALIEXPRESS_OFFICIAL_API',env); if(!out.ok)return out;
   const q=String(query??'').trim(); if(!q)return {...out,ok:false,error:'QUERY_REQUIRED'};
@@ -63,6 +88,8 @@ export function multiMarketplaceReadiness({env={},shopDomain=null}={}){
   const builders={
     EBAY:buildEbayBestSellingDescriptor({categoryId:'1',env}),
     EMAG:buildEmagSellerDescriptor({env}),
+    TRENDYOL:buildTrendyolSellerDescriptor({env}),
+    SHEIN:buildSheinSellerDescriptor({env}),
     ALIEXPRESS:buildAliExpressDescriptor({query:'probe',env}),
     ALIBABA:buildAlibabaSupplyDescriptor({categorySlug:'probe'}),
     SHOPIFY:buildShopifyStorefrontDescriptor({shopDomain:shopDomain||'example.myshopify.com',env})
