@@ -1,0 +1,82 @@
+{
+  "version": "1.1",
+  "observedAt": "2026-08-25T17:22:00Z",
+  "verificationIssue": 221,
+  "customerFacingVerifiedLabelBlocked": true,
+  "evidencePolicy": "PUBLIC_SELF_CLAIM_CANDIDATE_ONLY; NOT_MPR_VERIFIED; NOT_TESTED_BY_US; CUSTOMER_VERIFIED_LABEL_BLOCKED_UNTIL_MANUAL_TEST_AND_APPROVAL",
+  "candidates": [
+    {
+      "partnerKey": "ROMASIA",
+      "name": "ROMASIA",
+      "countryContext": "Romania/China",
+      "sourceUrl": "https://ro.linkedin.com/company/romasia",
+      "publicClaims": ["China offices", "sourcing", "storage", "quality inspection", "supplier audit"],
+      "evidenceClass": "PUBLIC_SELF_CLAIM",
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "partnerKey": "M3CARGO",
+      "name": "M3Cargo",
+      "countryContext": "Romania/China",
+      "sourceUrl": "https://m3cargo.ro/livrare-la-cheie/",
+      "publicClaims": ["supplier contact/negotiation", "China warehousing", "packaging inspection", "consolidation", "customs", "Romania delivery"],
+      "evidenceClass": "PUBLIC_SELF_CLAIM",
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "partnerKey": "TRADEFY",
+      "name": "Tradefy",
+      "countryContext": "Romania/China",
+      "sourceUrl": "https://tradefy.ro/",
+      "publicClaims": ["China offices/warehouses", "Romanian and Chinese team", "sourcing", "quality control", "transport", "customs"],
+      "evidenceClass": "PUBLIC_SELF_CLAIM",
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "partnerKey": "CONNECTEXIMP",
+      "name": "Connect Export Import SRL",
+      "countryContext": "Romania/China",
+      "sourceUrl": "https://www.connecteximp.com/",
+      "publicClaims": ["supplier selection", "samples", "quality control", "transport", "customs", "Romanian invoicing"],
+      "evidenceClass": "PUBLIC_SELF_CLAIM",
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "partnerKey": "CHINA_CONTROL_GROUP",
+      "name": "China Control Group",
+      "countryContext": "EU/China",
+      "sourceUrl": "https://chinacontrolgroup.com/",
+      "publicClaims": ["Shanghai operations", "EU-registered Estonia entity", "supplier due diligence", "factory inspection", "quality inspection", "logistics"],
+      "evidenceClass": "PUBLIC_SELF_CLAIM",
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    }
+  ],
+  "requiredManualVerification": [
+    "LEGAL_ENTITY_VERIFIED",
+    "CHINA_PRESENCE_VERIFIED",
+    "WRITTEN_COMMERCIAL_TERMS",
+    "1688_CAPABILITY_CONFIRMED",
+    "SUPPLIER_PAYMENT_MODEL_CONFIRMED",
+    "QC_METHOD_CONFIRMED",
+    "DDP_CUSTOMS_RESPONSIBILITY_CONFIRMED",
+    "INSURANCE_CLAIMS_PROCESS_CONFIRMED",
+    "SAMPLE_AND_CONSOLIDATION_PROCESS_CONFIRMED",
+    "ROMANIA_OR_EU_DELIVERY_CONFIRMED",
+    "REFERENCES_CHECKED",
+    "REAL_SERVICE_INTERACTION_COMPLETED",
+    "TEST_SERVICE_COMPLETED",
+    "MANUAL_MPR_APPROVAL"
+  ],
+  "purchaseAuthorized": false,
+  "paidCallsTriggered": 0
+}
