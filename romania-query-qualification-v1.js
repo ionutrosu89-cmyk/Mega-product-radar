@@ -1,6 +1,6 @@
 const txt=v=>String(v??'').trim();
 const up=v=>txt(v).toUpperCase();
-const num=v=>{const n=Number(v);return Number.isFinite(n)?n:null;};
+const num=v=>{if(v===null||v===undefined||v==='')return null;const n=Number(v);return Number.isFinite(n)?n:null;};
 
 export function qualifyRomaniaComparableQuery({
   platform,
@@ -63,7 +63,7 @@ export function buildRomaniaQueryQualificationReport({candidates=[]}={}){
     qualified:rows.filter(r=>r.qualifiedForComparableCountCandidate).length,
     blocked:rows.filter(r=>!r.qualifiedForComparableCountCandidate).length,
     rows,
-    policy:'QUERY_PURITY_REQUIRED_BEFORE_CANONICAL_COUNT_CANDIDATE; CATEGORY_OR_SURFACE_TOTALS_ARE_NOT_QUERY_COUNTS; EXACT_COUNT_REQUIRES_MANUAL_REVIEW; NO_VERIFIED_SALES; NO_PURCHASE_AUTHORITY',
+    policy:'QUERY_PURITY_REQUIRED_BEFORE_CANONICAL_COUNT_CANDIDATE; CATEGORY_OR_SURFACE_TOTALS_ARE_NOT_QUERY_COUNTS; EXACT_COUNT_REQUIRES_MANUAL_REVIEW; UNKNOWN_IS_NOT_ZERO; NO_VERIFIED_SALES; NO_PURCHASE_AUTHORITY',
     paidCallsTriggered:0,
     approvedSpendEur:0,
     purchaseAuthorized:false
