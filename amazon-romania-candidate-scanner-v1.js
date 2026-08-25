@@ -7,17 +7,32 @@ export const CANONICAL_RULES=[
   {nicheKey:'ADJUSTABLE_LAPTOP_STANDS',test:t=>/\b(adjustable )?laptop stand\b/.test(t)||/\bnotebook stand\b/.test(t)}
 ];
 
-function rowsFromSnapshot(doc,sourceFile){
+export function titleMapFromCatalogue(doc={}){
   const fields=doc.fields||[];
-  const list=doc.products||doc.snapshots||[];
-  const ix={asin:fields.indexOf('asin'),title:fields.indexOf('title'),observedAt:fields.indexOf('observedAt')};
-  if(ix.asin<0||ix.title<0||ix.observedAt<0) throw new Error(`snapshot missing identity fields: ${sourceFile}`);
-  return list.map(r=>({asin:r[ix.asin],title:r[ix.title],observedAt:r[ix.observedAt],sourceFile}));
+  const ia=fields.indexOf('asin'), it=fields.indexOf('title');
+  if(ia<0||it<0) throw new Error('catalogue missing asin/title fields');
+  return new Map((doc.products||[]).map(r=>[r[ia],r[it]]));
 }
 
-export function scanAmazonRomaniaCandidates(snapshotDocs=[]){
+function rowsFromSnapshot(doc,sourceFile,titleMap){
+  const fields=doc.fields||[];
+  const list=doc.products||doc.snapshots||[];
+  const asinIx=fields.indexOf('asin')>=0?fields.indexOf('asin'):fields.indexOf('externalId');
+  const titleIx=fields.indexOf('title');
+  const observedAtIx=fields.indexOf('observedAt');
+  if(asinIx<0||observedAtIx<0) throw new Error(`snapshot missing identity fields: ${sourceFile}`);
+  return list.map(r=>{
+    const asin=r[asinIx];
+    const title=titleIx>=0?r[titleIx]:titleMap.get(asin);
+    if(!title) throw new Error(`catalogue title missing for live ASIN ${asin}`);
+    return {asin,title,observedAt:r[observedAtIx],sourceFile,titleSource:titleIx>=0?'LIVE_PRODUCT_PAGE':'BOOTSTRAP_IDENTITY_CATALOGUE'};
+  });
+}
+
+export function scanAmazonRomaniaCandidates(snapshotDocs=[],catalogueDoc={}){
+  const titleMap=titleMapFromCatalogue(catalogueDoc);
   const all=[];
-  for(const x of snapshotDocs) all.push(...rowsFromSnapshot(x.doc,x.sourceFile));
+  for(const x of snapshotDocs) all.push(...rowsFromSnapshot(x.doc,x.sourceFile,titleMap));
   const byAsin=new Map();
   for(const r of all){
     const prev=byAsin.get(r.asin);
@@ -27,11 +42,11 @@ export function scanAmazonRomaniaCandidates(snapshotDocs=[]){
   for(const row of byAsin.values()){
     const t=norm(row.title);
     for(const rule of CANONICAL_RULES){
-      if(rule.test(t)) matches.push({asin:row.asin,title:row.title,firstObservedAt:row.observedAt,sourceSnapshotFile:row.sourceFile,canonicalNicheKey:rule.nicheKey,canonicalMatch:true,matchReason:'STRICT_TITLE_RULE'});
+      if(rule.test(t)) matches.push({asin:row.asin,title:row.title,firstObservedAt:row.observedAt,sourceSnapshotFile:row.sourceFile,titleSource:row.titleSource,canonicalNicheKey:rule.nicheKey,canonicalMatch:true,matchReason:'STRICT_TITLE_RULE'});
     }
   }
   return {
-    version:'1.0',
+    version:'1.1',
     scannedUniqueLiveAsins:byAsin.size,
     matchCount:matches.length,
     matches:matches.sort((a,b)=>a.canonicalNicheKey.localeCompare(b.canonicalNicheKey)||a.asin.localeCompare(b.asin)),
@@ -40,6 +55,6 @@ export function scanAmazonRomaniaCandidates(snapshotDocs=[]){
     paidCallsTriggered:0,
     providerSpend:0,
     purchaseAuthorized:false,
-    policy:'STRICT_TITLE_MATCH_ONLY; LIVE_PRODUCT_PAGE_EVIDENCE_IS_NOT_RANK_OR_VERIFIED_SALES; ZERO_MATCH_IS_VALID; NO_PURCHASE_AUTHORITY'
+    policy:'STRICT_TITLE_MATCH_ONLY; BOOTSTRAP_TITLE_MAY_ENRICH_IDENTITY_BUT_NOT_LIVE_OR_RANK_EVIDENCE; LIVE_PRODUCT_PAGE_EVIDENCE_IS_NOT_RANK_OR_VERIFIED_SALES; ZERO_MATCH_IS_VALID; NO_PURCHASE_AUTHORITY'
   };
 }
