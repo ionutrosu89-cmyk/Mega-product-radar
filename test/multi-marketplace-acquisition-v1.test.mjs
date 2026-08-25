@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {buildEbayBestSellingDescriptor,buildEmagSellerDescriptor,buildEmagPublicReviewDescriptor,buildAliExpressDescriptor,buildAlibabaSupplyDescriptor,buildShopifyStorefrontDescriptor,multiMarketplaceReadiness} from '../multi-marketplace-acquisition-v1.js';
+import {buildEbayBestSellingDescriptor,buildEmagSellerDescriptor,buildEmagPublicReviewDescriptor,buildTrendyolSellerDescriptor,buildTrendyolPublicReviewDescriptor,buildSheinSellerDescriptor,buildSheinPublicReviewDescriptor,buildAliExpressDescriptor,buildAlibabaSupplyDescriptor,buildShopifyStorefrontDescriptor,multiMarketplaceReadiness} from '../multi-marketplace-acquisition-v1.js';
 
 test('credentialed official APIs fail closed when secrets are absent',()=>{
   for(const x of [
     buildEbayBestSellingDescriptor({categoryId:'67858'}),
     buildEmagSellerDescriptor({}),
+    buildTrendyolSellerDescriptor({}),
+    buildSheinSellerDescriptor({}),
     buildAliExpressDescriptor({query:'cable organizer'}),
     buildShopifyStorefrontDescriptor({shopDomain:'example.myshopify.com'})
   ]){
@@ -39,6 +41,35 @@ test('eMAG seller API never authorizes whole-market claims',()=>{
   assert.equal(pub.salesEvidenceClass,'NOT_VERIFIED_SALES');
 });
 
+test('Trendyol uses V2 seller scope and never whole-market claims',()=>{
+  const env={TRENDYOL_SELLER_ID:'12345',TRENDYOL_API_KEY:'k',TRENDYOL_API_SECRET:'s'};
+  const x=buildTrendyolSellerDescriptor({env});
+  assert.equal(x.ok,true);
+  assert.equal(x.access,'OFFICIAL_API_V2');
+  assert.equal(x.sellerScoped,true);
+  assert.equal(x.marketWideEvidence,false);
+  assert.match(x.productPath,/\/v2\/products$/);
+  assert.equal(x.scope,'AUTHORIZED_TRENDYOL_SELLER_ONLY');
+  const pub=buildTrendyolPublicReviewDescriptor({url:'https://www.trendyol.com/sr?q=organizer'});
+  assert.equal(pub.ok,true);
+  assert.equal(pub.requiresManualReview,true);
+  assert.equal(pub.salesEvidenceClass,'NOT_VERIFIED_SALES');
+});
+
+test('SHEIN Open Platform stays seller-authorized and public pages stay unverified',()=>{
+  const env={SHEIN_APP_ID:'id',SHEIN_APP_SECRET:'secret',SHEIN_SELLER_AUTH_TOKEN:'token'};
+  const x=buildSheinSellerDescriptor({env});
+  assert.equal(x.ok,true);
+  assert.equal(x.access,'OFFICIAL_OPEN_PLATFORM');
+  assert.equal(x.sellerScoped,true);
+  assert.equal(x.marketWideEvidence,false);
+  assert.equal(x.authorizationModel,'APP_PLUS_SELLER_AUTHORIZATION');
+  const pub=buildSheinPublicReviewDescriptor({url:'https://www.shein.com/pdsearch/organizer/'});
+  assert.equal(pub.ok,true);
+  assert.equal(pub.requiresManualReview,true);
+  assert.equal(pub.salesEvidenceClass,'NOT_VERIFIED_SALES');
+});
+
 test('AliExpress official mode is hybrid but not ranking or verified sales',()=>{
   const x=buildAliExpressDescriptor({query:'desk organizer',env:{ALIEXPRESS_APP_KEY:'k',ALIEXPRESS_APP_SECRET:'s'}});
   assert.equal(x.ok,true);
@@ -63,10 +94,7 @@ test('Alibaba is supply-only and Shopify is one-store-only',()=>{
 test('readiness performs zero calls and zero spend',()=>{
   const r=multiMarketplaceReadiness({});
   assert.ok(r.ready.includes('ALIBABA'));
-  assert.ok(r.blocked.some(x=>x.platform==='EBAY'&&x.error==='CREDENTIALS_REQUIRED'));
-  assert.ok(r.blocked.some(x=>x.platform==='EMAG'&&x.error==='CREDENTIALS_REQUIRED'));
-  assert.ok(r.blocked.some(x=>x.platform==='ALIEXPRESS'&&x.error==='CREDENTIALS_REQUIRED'));
-  assert.ok(r.blocked.some(x=>x.platform==='SHOPIFY'&&x.error==='CREDENTIALS_REQUIRED'));
+  for(const p of ['EBAY','EMAG','TRENDYOL','SHEIN','ALIEXPRESS','SHOPIFY'])assert.ok(r.blocked.some(x=>x.platform===p&&x.error==='CREDENTIALS_REQUIRED'));
   assert.equal(r.executeAutomatically,false);
   assert.equal(r.paidCallsTriggered,0);
   assert.equal(r.approvedSpendEur,0);
