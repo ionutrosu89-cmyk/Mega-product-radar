@@ -1,8 +1,6 @@
 import { appendRomaniaMarketSnapshot, latestRomaniaMarketSnapshots } from './romania-market-snapshot-ledger-v1.js';
 import { validateRomaniaEvidencePromotion } from './romania-evidence-promotion-validator-v1.js';
-import { canonicalComparabilityKey } from './romania-comparability-key-registry-v1.js';
-
-const txt=v=>String(v??'').trim();
+import { canonicalRomaniaComparabilityKey } from './romania-comparability-key-registry-v1.js';
 
 export function extractTrendyolSnapshotsFromReviewedBatch(batch={}){
   const rows=[];
@@ -14,7 +12,7 @@ export function extractTrendyolSnapshotsFromReviewedBatch(batch={}){
         nicheKey:niche.nicheKey,
         platform:'TRENDYOL',
         market:obs.market||'RO',
-        comparabilityKey:canonicalComparabilityKey(niche.comparabilityKey),
+        comparabilityKey:canonicalRomaniaComparabilityKey(niche.comparabilityKey),
         observedAt:obs.observedAt,
         sourceUrl:obs.sourceUrl,
         scope:obs.scope,
@@ -56,8 +54,8 @@ export function buildRomaniaLocalEvidenceByNiche({ledger={observations:[]},queue
   const latest=latestRomaniaMarketSnapshots(ledger);
   const out={};
   for(const item of queueItems||[]){
-    const key=canonicalComparabilityKey(item.comparabilityKey);
-    const trendyol=latest.find(x=>x.nicheKey===item.nicheKey&&x.platform==='TRENDYOL'&&canonicalComparabilityKey(x.comparabilityKey)===key);
+    const key=canonicalRomaniaComparabilityKey(item.comparabilityKey);
+    const trendyol=latest.find(x=>x.nicheKey===item.nicheKey&&x.platform==='TRENDYOL'&&canonicalRomaniaComparabilityKey(x.comparabilityKey)===key);
     out[item.nicheKey]={
       EMAG:emagEvidenceByNiche[item.nicheKey]||{},
       TRENDYOL:trendyol||{}
