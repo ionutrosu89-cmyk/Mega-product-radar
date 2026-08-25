@@ -59,6 +59,7 @@ export function calculateOpportunityV4(input={}){
 
   let funnelStage='DISCOVERED';
   if(marketReady&&base.marketOpportunityScore>=50)funnelStage='PROMISING';
+  if(funnelStage==='DISCOVERED'&&romaniaEvidence.sampledEligible&&base.marketOpportunityScore>=50)funnelStage='PROMISING';
   if(marketReady&&base.marketOpportunityScore>=65&&(evidenceConfidence===null||evidenceConfidence>=50))funnelStage='VALIDATE';
   if(marketReady&&base.marketOpportunityScore>=65&&supplierReady&&economicsReady&&(evidenceConfidence===null||evidenceConfidence>=60))funnelStage='FINALIST';
   if(funnelStage==='FINALIST'&&bool(input.testGateReady)&&bool(input.complianceGateReady))funnelStage='TEST_READY';
