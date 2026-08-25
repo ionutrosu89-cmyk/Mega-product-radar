@@ -31,14 +31,15 @@ test('two exact manually reviewed local observations can promote one canonical n
   assert.equal(r.report.rows[0].evidence.EMAG.listingCount,700);
   assert.equal(r.report.rows[0].evidence.TRENDYOL.listingCount,700);
   assert.equal(r.report.rows[0].evidence.TRENDYOL.comparabilityKey,'PACKING_CUBES_SET');
+  assert.equal(r.report.rows[0].evidenceSource,'CANONICAL_ROMANIA_MARKET_SNAPSHOT_LEDGER');
   assert.equal(r.purchaseAuthorized,false);
 });
 
-test('reviewed eMAG ledger evidence removes artifact-only blocker',()=>{
+test('reviewed eMAG ledger evidence removes missing-ledger blocker but cannot promote alone',()=>{
   const r=runRomaniaReviewedEvidencePipeline({queueItems:[queueItems[0]],reviewedBatch:batch,manualRows:[packingEmag]});
-  assert.equal(r.report.emagArtifactPresent,false);
   assert.equal(r.report.promotable,0);
-  assert.equal(r.report.rows[0].blockers.includes('EMAG_PROBE_ARTIFACT_MISSING'),false);
+  assert.equal(r.report.rows[0].blockers.includes('EMAG_LEDGER_OBSERVATION_MISSING'),false);
+  assert.equal(r.report.rows[0].blockers.includes('TRENDYOL_LEDGER_OBSERVATION_MISSING'),true);
   assert.equal(r.report.rows[0].evidence.EMAG.listingCount,700);
 });
 
@@ -75,6 +76,7 @@ test('pipeline contains no network execution and never claims verified sales',as
   const js=await fs.readFile(new URL('../romania-reviewed-input-pipeline-v1.js',import.meta.url),'utf8');
   assert.doesNotMatch(js,/\bfetch\s*\(/);
   const r=runRomaniaReviewedEvidencePipeline({queueItems,reviewedBatch:batch,manualRows:[]});
+  assert.equal(r.policy.includes('NO_SIDE_CHANNEL_EVIDENCE'),true);
   assert.equal(r.paidCallsTriggered,0);
   assert.equal(r.salesEvidenceClass,'NOT_VERIFIED_SALES');
   assert.equal(r.purchaseAuthorized,false);
