@@ -9,6 +9,7 @@ function selected(container){return [...container.querySelectorAll('.chip.active
 function setSelected(container,values=[]){const set=new Set(values);container.querySelectorAll('.chip').forEach(x=>{const active=set.has(x.dataset.value);x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));});}
 function installChips(container){container.querySelectorAll('.chip').forEach(x=>x.addEventListener('click',()=>{const active=!x.classList.contains('active');x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));}));}
 function renderStep(){document.querySelectorAll('.onboarding-step').forEach(x=>x.hidden=Number(x.dataset.step)!==step);$('#stepLabel').textContent=`Pasul ${step} din 4`;$('#stepBar').style.width=`${step/4*100}%`;$('#back').hidden=step===1;$('#next').hidden=step===4;$('#save').hidden=step!==4;document.querySelector(`[data-step="${step}"]`)?.querySelector('select,input,button')?.focus({preventScroll:true});}
+function planRecommendation(profile,decisionNeed,chinaAgent){return recommendMprPlan({decisionNeed,chinaAgent});}
 function showRecommendation(rec){
   const box=$('#recommendation');
   box.hidden=false;
@@ -46,7 +47,7 @@ $('#form').addEventListener('submit',async e=>{
     const profile={experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))};
     const decisionNeed=$('#decisionNeed').value,chinaAgent=$('#chinaAgent').value;
     await saveSellerPreferences(profile);
-    const rec=recommendMprPlan({decisionNeed,chinaAgent});
+    const rec=planRecommendation(profile,decisionNeed,chinaAgent);
     localStorage.setItem('mpr_plan_finder_v1',JSON.stringify({decisionNeed,chinaAgent,recommendedPlan:rec.code,updatedAt:new Date().toISOString()}));
     await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length});
     await trackJourneyEvent('PLAN_RECOMMENDED',{plan:rec.code,decisionNeed,chinaAgent:chinaAgent==='YES',budget:profile.monthly_budget_ron});
