@@ -44,7 +44,7 @@ test('FINALIST requires confirmed trend, exact Romania, verified supplier and co
 });
 
 test('sampled Romania still caps confirmed trend at PROMISING',()=>{
-  const out=calculateOpportunityV4({trend:{score:90,confidence:90},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',romaniaGapExactGateSatisfied:false,evidenceClass:'SAMPLED_ESTIMATE'},romaniaSampledCompetition:{eligibleForSampledSignal:true,status:'SINGLE_PLATFORM_ESTIMATE'},dataConfidence:85});
+  const out=calculateOpportunityV4({trend:{score:90,confidence:90},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',score:90,romaniaGapExactGateSatisfied:false,evidenceClass:'SAMPLED_ESTIMATE'},romaniaSampledCompetition:{eligibleForSampledSignal:true,status:'SINGLE_PLATFORM_ESTIMATE'},dataConfidence:85});
   assert.equal(out.funnelStage,'PROMISING');
   assert.ok(out.blockers.includes('ROMANIA_EXACT_EVIDENCE_REQUIRED_FOR_VALIDATION'));
 });
