@@ -1,14 +1,16 @@
+import {canonicalRomaniaComparabilityKey} from './romania-comparability-key-registry-v1.js';
+
 const n=v=>{if(v===null||v===undefined||v==='')return null;const x=Number(v);return Number.isFinite(x)?x:null;};
 const t=v=>String(v??'').trim().toUpperCase();
 const iso=v=>{const ms=Date.parse(String(v??''));return Number.isFinite(ms)?new Date(ms).toISOString():null;};
 
 export function validateRomaniaEvidencePromotion({queueItem={},emagProbe={},trendyolEvidence={}}={}){
   const blockers=[];
-  const expectedKey=t(queueItem.comparabilityKey);
+  const expectedKey=canonicalRomaniaComparabilityKey(queueItem.comparabilityKey);
   const nicheKey=queueItem.nicheKey||null;
 
-  const emagKey=t(emagProbe.comparabilityKey);
-  const trendyolKey=t(trendyolEvidence.comparabilityKey);
+  const emagKey=canonicalRomaniaComparabilityKey(emagProbe.comparabilityKey);
+  const trendyolKey=canonicalRomaniaComparabilityKey(trendyolEvidence.comparabilityKey);
   if(!expectedKey)blockers.push('QUEUE_COMPARABILITY_KEY_MISSING');
   if(emagKey!==expectedKey)blockers.push('EMAG_COMPARABILITY_KEY_MISMATCH');
   if(trendyolKey!==expectedKey)blockers.push('TRENDYOL_COMPARABILITY_KEY_MISMATCH');
@@ -42,12 +44,12 @@ export function validateRomaniaEvidencePromotion({queueItem={},emagProbe={},tren
 
   const promotable=blockers.length===0;
   return {
-    version:'1.0',nicheKey,comparabilityKey:expectedKey||null,
+    version:'1.1',nicheKey,comparabilityKey:expectedKey||null,
     status:promotable?'PROMOTABLE_TO_COMPARABLE_LOCAL_EVIDENCE':'BLOCKED',
     promotable,blockers,
     exactCompetition:promotable?{EMAG:emagExact,TRENDYOL:trendyolExact}:null,
     observedAt:promotable?{EMAG:emagObservedAt,TRENDYOL:trendyolObservedAt}:null,
-    policy:'FAIL_CLOSED; LOWER_BOUNDS_ARE_NOT_EXACT; SAME_SCOPE_AND_SHARED_COMPARABILITY_KEY_REQUIRED; NO_VERIFIED_SALES_CLAIM',
+    policy:'FAIL_CLOSED; CANONICAL_COMPARABILITY_KEYS; LOWER_BOUNDS_ARE_NOT_EXACT; SAME_SCOPE_REQUIRED; NO_VERIFIED_SALES_CLAIM',
     salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false,paidCallsTriggered:0,approvedSpendEur:0
   };
 }
@@ -57,5 +59,5 @@ export function validateRomaniaEvidenceBatch({queueItems=[],evidenceByNiche={}}=
     const e=evidenceByNiche[item.nicheKey]||{};
     return validateRomaniaEvidencePromotion({queueItem:item,emagProbe:e.EMAG||{},trendyolEvidence:e.TRENDYOL||{}});
   });
-  return {version:'1.0',total:rows.length,promotable:rows.filter(x=>x.promotable).length,blocked:rows.filter(x=>!x.promotable).length,rows,paidCallsTriggered:0,purchaseAuthorized:false};
+  return {version:'1.1',total:rows.length,promotable:rows.filter(x=>x.promotable).length,blocked:rows.filter(x=>!x.promotable).length,rows,paidCallsTriggered:0,purchaseAuthorized:false};
 }
