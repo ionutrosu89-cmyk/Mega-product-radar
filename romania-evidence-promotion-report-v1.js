@@ -1,10 +1,8 @@
 import {canonicalRomaniaComparabilityKey} from './romania-comparability-key-registry-v1.js';
-import {ingestEmagProbeArtifact} from './romania-evidence-ingestion-bridge-v1.js';
-import {ingestTrendyolReviewedEvidence} from './trendyol-romania-evidence-ingestion-v1.js';
 import {latestRomaniaMarketSnapshots} from './romania-market-snapshot-ledger-v1.js';
 import {validateRomaniaEvidencePromotion} from './romania-evidence-promotion-validator-v1.js';
 
-const priority=v=>Number.isFinite(Number(v))?Number(v):999;
+const priority=v=>{if(v===null||v===undefined||v==='')return 999;const x=Number(v);return Number.isFinite(x)?x:999;};
 const blockerSet=rows=>[...new Set(rows.filter(Boolean))];
 
 function reportState({emag={},trendyol={},validation={}}={}){
@@ -14,7 +12,7 @@ function reportState({emag={},trendyol={},validation={}}={}){
   return bothObserved&&needsHuman?'REVIEW_READY':'BLOCKED';
 }
 
-function buildEvidenceFromUnifiedLedger({ledger={observations:[]},queueItems=[]}={}){
+export function buildEvidenceFromUnifiedLedger({ledger={observations:[]},queueItems=[]}={}){
   const latest=latestRomaniaMarketSnapshots(ledger);
   const out={};
   for(const item of queueItems||[]){
@@ -28,31 +26,18 @@ function buildEvidenceFromUnifiedLedger({ledger={observations:[]},queueItems=[]}
   return out;
 }
 
-export function buildRomaniaEvidencePromotionReport({
-  queueItems=[],
-  reviewedBatch={},
-  emagArtifact=null,
-  existingLedger={version:'1.0',observations:[]}
-}={}){
-  const emagArtifactPresent=Boolean(emagArtifact&&Array.isArray(emagArtifact.observations));
-  const emagIngest=emagArtifactPresent
-    ?ingestEmagProbeArtifact({artifact:emagArtifact,ledger:existingLedger})
-    :{ledger:existingLedger,appended:0,duplicates:0,diagnosticsSkipped:0};
-  const trendyolIngest=ingestTrendyolReviewedEvidence({ledger:emagIngest.ledger,batch:reviewedBatch});
-  const evidenceByNiche=buildEvidenceFromUnifiedLedger({ledger:trendyolIngest.ledger,queueItems});
-
+export function buildRomaniaPromotionReportFromLedger({queueItems=[],ledger={version:'1.2',observations:[]}}={}){
+  const evidenceByNiche=buildEvidenceFromUnifiedLedger({ledger,queueItems});
   const rows=(queueItems||[]).map(item=>{
     const evidence=evidenceByNiche[item.nicheKey]||{};
     const emag=evidence.EMAG||{};
     const trendyol=evidence.TRENDYOL||{};
-    const emagEvidencePresent=Boolean(emag.observedAt);
     const validation=validateRomaniaEvidencePromotion({queueItem:item,emagProbe:emag,trendyolEvidence:trendyol});
     const operationalBlockers=[];
-    if(!emagArtifactPresent&&!emagEvidencePresent)operationalBlockers.push('EMAG_PROBE_ARTIFACT_MISSING');
-    if(emagArtifactPresent&&!emagEvidencePresent)operationalBlockers.push('EMAG_USABLE_OBSERVATION_MISSING');
-    if(!trendyol.observedAt)operationalBlockers.push('TRENDYOL_REVIEWED_OBSERVATION_MISSING');
-    if(trendyol.listingCount==null&&trendyol.listingCountLowerBound!=null)operationalBlockers.push('TRENDYOL_EXACT_COUNT_MISSING');
-    if(emag.listingCount==null&&emag.listingCountLowerBound!=null)operationalBlockers.push('EMAG_EXACT_COUNT_MISSING');
+    if(!emag.observedAt)operationalBlockers.push('EMAG_LEDGER_OBSERVATION_MISSING');
+    if(!trendyol.observedAt)operationalBlockers.push('TRENDYOL_LEDGER_OBSERVATION_MISSING');
+    if(trendyol.listingCount==null)operationalBlockers.push('TRENDYOL_EXACT_COUNT_MISSING');
+    if(emag.listingCount==null)operationalBlockers.push('EMAG_EXACT_COUNT_MISSING');
     const blockers=blockerSet([...operationalBlockers,...(validation.blockers||[])]);
     return {
       priority:priority(item.priority),
@@ -66,30 +51,33 @@ export function buildRomaniaEvidencePromotionReport({
       exactCompetition:validation.exactCompetition,
       nextAction:validation.promotable===true
         ?'PROMOTE_TO_COMPARABLE_LOCAL_EVIDENCE'
-        :!emagEvidencePresent
-          ?'RUN_ZERO_COST_EMAG_PUBLIC_PROBE_OR_MANUAL_DIRECT_REVIEW'
-          :'MANUALLY_REVIEW_SCOPE_AND_CONFIRM_EXACT_COMPARABLE_COUNTS',
+        :!emag.observedAt
+          ?'INGEST_EMAG_EVIDENCE_INTO_CANONICAL_LEDGER'
+          :!trendyol.observedAt
+            ?'INGEST_TRENDYOL_EVIDENCE_INTO_CANONICAL_LEDGER'
+            :'MANUALLY_REVIEW_SCOPE_AND_CONFIRM_EXACT_COMPARABLE_COUNTS',
+      evidenceSource:'CANONICAL_ROMANIA_MARKET_SNAPSHOT_LEDGER',
       salesEvidenceClass:'NOT_VERIFIED_SALES',
       purchaseAuthorized:false
     };
   }).sort((a,b)=>a.priority-b.priority||String(a.nicheKey).localeCompare(String(b.nicheKey)));
 
   return {
-    version:'1.1',
+    version:'1.2',
     total:rows.length,
     promotable:rows.filter(x=>x.status==='PROMOTABLE').length,
     reviewReady:rows.filter(x=>x.status==='REVIEW_READY').length,
     blocked:rows.filter(x=>x.status==='BLOCKED').length,
-    emagArtifactPresent,
-    ingestion:{
-      emag:{appended:emagIngest.appended||0,duplicates:emagIngest.duplicates||0,diagnosticsSkipped:emagIngest.diagnosticsSkipped||0},
-      trendyol:{appended:trendyolIngest.appended||0,duplicates:trendyolIngest.duplicates||0,rejected:trendyolIngest.rejected||0}
-    },
+    ledgerObservationCount:Array.isArray(ledger.observations)?ledger.observations.length:0,
     rows,
-    policy:'OFFLINE_REVIEW_REPORT_ONLY; UNIFIED_LOCAL_LEDGER; REVIEWED_LEDGER_EVIDENCE_ALLOWED; NO_NETWORK; NO_AUTO_PROMOTION; LOWER_BOUND_IS_NOT_EXACT; FAIL_CLOSED',
+    policy:'OFFLINE_REVIEW_REPORT_ONLY; LEDGER_ONLY_PROMOTION_INPUT; LATEST_CANONICAL_SNAPSHOT_PER_PLATFORM; NO_SIDE_CHANNEL_EVIDENCE; NO_NETWORK; NO_AUTO_PROMOTION; LOWER_BOUND_IS_NOT_EXACT; FAIL_CLOSED',
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     paidCallsTriggered:0,
     approvedSpendEur:0,
     purchaseAuthorized:false
   };
+}
+
+export function buildRomaniaEvidencePromotionReport({queueItems=[],ledger={version:'1.2',observations:[]}}={}){
+  return buildRomaniaPromotionReportFromLedger({queueItems,ledger});
 }

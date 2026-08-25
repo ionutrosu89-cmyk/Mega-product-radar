@@ -27,6 +27,8 @@ export function normalizeRomaniaMarketSnapshot(row={}){
     scopeAuditStatus:up(row.scopeAuditStatus),
     scopeAuditReason:txt(row.scopeAuditReason),
     sellerCount:num(row.sellerCount),
+    sellerScoped:row.sellerScoped===true,
+    storeScoped:row.storeScoped===true,
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     purchaseAuthorized:false,
     paidCallsTriggered:0,
@@ -37,14 +39,14 @@ export function normalizeRomaniaMarketSnapshot(row={}){
   return normalized;
 }
 
-export function appendRomaniaMarketSnapshot(ledger={version:'1.2',observations:[]},raw={}){
+export function appendRomaniaMarketSnapshot(ledger={version:'1.3',observations:[]},raw={}){
   const row=normalizeRomaniaMarketSnapshot(raw);
   const current=Array.isArray(ledger.observations)?ledger.observations.map(normalizeRomaniaMarketSnapshot):[];
   if(!row.valid)return {...ledger,observations:current,append:{status:'REJECTED_INVALID_OBSERVATION',id:row.id}};
   if(current.some(x=>x.id===row.id))return {...ledger,observations:current,append:{status:'DUPLICATE_SKIPPED',id:row.id}};
   return {
-    version:'1.2',
-    policy:'APPEND_ONLY; CANONICAL_COMPARABILITY_KEYS; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; NO_OVERWRITE; LOWER_BOUND_IS_NOT_EXACT_COUNT; NOT_VERIFIED_SALES; NO_PURCHASE_AUTHORIZATION',
+    version:'1.3',
+    policy:'APPEND_ONLY; CANONICAL_COMPARABILITY_KEYS; PRESERVE_SELLER_STORE_SCOPE_FLAGS; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; NO_OVERWRITE; LOWER_BOUND_IS_NOT_EXACT_COUNT; NOT_VERIFIED_SALES; NO_PURCHASE_AUTHORIZATION',
     observations:[...current,row],
     append:{status:'APPENDED',id:row.id}
   };
@@ -73,14 +75,16 @@ export function buildRomaniaMarketSnapshotHistory(ledger={observations:[]}){
       latestSurfaceItemCountLowerBound:latest.surfaceItemCountLowerBound,
       exactCountObservations:exact.length,
       exactCountDelta:exact.length>=2?exact.at(-1).listingCount-exact.at(-2).listingCount:null,
-      comparableScopeConfirmed:latest.comparableScopeConfirmed
+      comparableScopeConfirmed:latest.comparableScopeConfirmed,
+      sellerScoped:latest.sellerScoped,
+      storeScoped:latest.storeScoped
     };
   });
   return {
-    version:'1.2',
+    version:'1.3',
     totalObservations:rows.length,
     histories,
-    policy:'HISTORY_ONLY; CANONICAL_COMPARABILITY_KEYS; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; NO_TREND_CLAIM_FROM_SINGLE_OBSERVATION; LOWER_BOUND_IS_NOT_EXACT_COUNT',
+    policy:'HISTORY_ONLY; CANONICAL_COMPARABILITY_KEYS; PRESERVE_SELLER_STORE_SCOPE_FLAGS; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; NO_TREND_CLAIM_FROM_SINGLE_OBSERVATION; LOWER_BOUND_IS_NOT_EXACT_COUNT',
     purchaseAuthorized:false,
     paidCallsTriggered:0
   };

@@ -1,8 +1,8 @@
 import {appendRomaniaMarketSnapshot} from './romania-market-snapshot-ledger-v1.js';
 import {reviewedRomaniaRowToSnapshot} from './romania-manual-review-pack-v1.js';
-import {buildRomaniaEvidencePromotionReport} from './romania-evidence-promotion-report-v1.js';
+import {buildRomaniaPromotionReportFromLedger} from './romania-evidence-promotion-report-v1.js';
 
-export function ingestReviewedRomaniaRows({rows=[],existingLedger={version:'1.1',observations:[]}}={}){
+export function ingestReviewedRomaniaRows({rows=[],existingLedger={version:'1.3',observations:[]}}={}){
   let ledger=existingLedger;
   const results=[];
   let appended=0,duplicates=0,rejected=0;
@@ -36,7 +36,7 @@ export function ingestReviewedRomaniaRows({rows=[],existingLedger={version:'1.1'
   }
 
   return {
-    version:'1.0',
+    version:'1.1',
     ledger,
     appended,
     duplicates,
@@ -54,17 +54,13 @@ export function runRomaniaReviewedEvidencePipeline({
   queueItems=[],
   reviewedBatch={},
   manualRows=[],
-  existingLedger={version:'1.1',observations:[]}
+  existingLedger={version:'1.3',observations:[]}
 }={}){
+  void reviewedBatch;
   const ingestion=ingestReviewedRomaniaRows({rows:manualRows,existingLedger});
-  const report=buildRomaniaEvidencePromotionReport({
-    queueItems,
-    reviewedBatch,
-    existingLedger:ingestion.ledger,
-    emagArtifact:null
-  });
+  const report=buildRomaniaPromotionReportFromLedger({queueItems,ledger:ingestion.ledger});
   return {
-    version:'1.0',
+    version:'1.1',
     ingestion:{
       appended:ingestion.appended,
       duplicates:ingestion.duplicates,
@@ -74,7 +70,7 @@ export function runRomaniaReviewedEvidencePipeline({
     ledger:ingestion.ledger,
     report,
     promotableNiches:report.rows.filter(x=>x.promotable===true).map(x=>x.nicheKey),
-    policy:'OFFLINE_REVIEW_TO_LEDGER_TO_PROMOTION; NO_NETWORK; NO_AUTO_PURCHASE; FAIL_CLOSED',
+    policy:'OFFLINE_REVIEW_TO_CANONICAL_LEDGER_TO_LEDGER_ONLY_PROMOTION; NO_SIDE_CHANNEL_EVIDENCE; NO_NETWORK; NO_AUTO_PURCHASE; FAIL_CLOSED',
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     paidCallsTriggered:0,
     approvedSpendEur:0,
