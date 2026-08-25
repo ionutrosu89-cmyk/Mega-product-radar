@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-08-25T05:48:00Z",
+  "purpose": "Exact review queue for converting Romania local evidence from PARTIAL to comparable market evidence without inflating counts.",
+  "policy": {
+    "requiredLocalPlatforms": ["EMAG", "TRENDYOL"],
+    "requiredComparableScopeConfirmed": true,
+    "requiredSharedComparabilityKey": true,
+    "lowerBoundIsExactCount": false,
+    "sellerOrStoreScopedAllowed": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "purchaseAuthorized": false,
+    "paidCallsTriggered": 0,
+    "approvedSpendEur": 0
+  },
+  "items": [
+    {
+      "priority": 1,
+      "nicheKey": "travel:packing-cubes",
+      "comparabilityKey": "PACKING_CUBES_SET",
+      "canonicalDefinition": "Seturi de organizatoare textile tip packing cubes pentru organizarea bagajului/valizei; exclude genti de voiaj, valize, huse individuale si organizatoare cosmetice.",
+      "queries": {
+        "EMAG": "organizator valiza set",
+        "TRENDYOL": "set organizatoare valiza"
+      },
+      "knownEvidence": {
+        "TRENDYOL": {"listingCountLowerBound": 656, "listingCount": null, "status": "LOWER_BOUND_ONLY"},
+        "EMAG": {"listingCountLowerBound": null, "listingCount": null, "status": "DIRECT_PROBE_REQUIRED"}
+      },
+      "promotionStatus": "BLOCKED_AWAITING_COMPARABLE_EXACT_COUNTS",
+      "requiredBeforePromotion": [
+        "DIRECT_EMAG_PUBLIC_SEARCH_EVIDENCE",
+        "DIRECT_TRENDYOL_SCOPE_REVIEW",
+        "SAME_CANONICAL_DEFINITION_CONFIRMED",
+        "EXACT_LISTING_COUNT_OR_EQUIVALENT_COMPETITION_VALUE_ON_BOTH_PLATFORMS",
+        "OBSERVED_AT_ON_BOTH_PLATFORMS"
+      ]
+    },
+    {
+      "priority": 2,
+      "nicheKey": "automotive:trunk-organization",
+      "comparabilityKey": "CAR_TRUNK_ORGANIZERS",
+      "canonicalDefinition": "Organizatoare dedicate portbagajului auto; exclude plase simple, cutii universale de casa si accesorii de curatare auto.",
+      "queries": {
+        "EMAG": "organizator portbagaj auto",
+        "TRENDYOL": "organizator portbagaj auto"
+      },
+      "knownEvidence": {
+        "TRENDYOL": {"listingCountLowerBound": 512, "listingCount": null, "status": "LOWER_BOUND_ONLY"},
+        "EMAG": {"listingCountLowerBound": null, "listingCount": null, "status": "DIRECT_PROBE_REQUIRED"}
+      },
+      "promotionStatus": "BLOCKED_AWAITING_COMPARABLE_EXACT_COUNTS",
+      "requiredBeforePromotion": [
+        "DIRECT_EMAG_PUBLIC_SEARCH_EVIDENCE",
+        "DIRECT_TRENDYOL_SCOPE_REVIEW",
+        "SAME_CANONICAL_DEFINITION_CONFIRMED",
+        "EXACT_LISTING_COUNT_OR_EQUIVALENT_COMPETITION_VALUE_ON_BOTH_PLATFORMS",
+        "OBSERVED_AT_ON_BOTH_PLATFORMS"
+      ]
+    },
+    {
+      "priority": 3,
+      "nicheKey": "office:laptop-accessories",
+      "comparabilityKey": "ADJUSTABLE_LAPTOP_STANDS",
+      "canonicalDefinition": "Suporturi reglabile pentru laptop destinate biroului; exclude mese de laptop, standuri de telefon/tableta, docking stations si cooling pads daca nu sunt vandute explicit ca suport reglabil.",
+      "queries": {
+        "EMAG": "suport laptop reglabil",
+        "TRENDYOL": "suport laptop reglabil"
+      },
+      "knownEvidence": {
+        "TRENDYOL": {"listingCountLowerBound": 1636, "listingCount": null, "status": "BROAD_SCOPE_REVIEW_REQUIRED"},
+        "EMAG": {"listingCountLowerBound": null, "listingCount": null, "status": "DIRECT_PROBE_REQUIRED"}
+      },
+      "promotionStatus": "BLOCKED_SCOPE_TOO_BROAD",
+      "requiredBeforePromotion": [
+        "DIRECT_EMAG_PUBLIC_SEARCH_EVIDENCE",
+        "NARROW_TRENDYOL_SCOPE_TO_ADJUSTABLE_LAPTOP_STANDS",
+        "SAME_CANONICAL_DEFINITION_CONFIRMED",
+        "EXACT_LISTING_COUNT_OR_EQUIVALENT_COMPETITION_VALUE_ON_BOTH_PLATFORMS",
+        "OBSERVED_AT_ON_BOTH_PLATFORMS"
+      ]
+    }
+  ]
+}
