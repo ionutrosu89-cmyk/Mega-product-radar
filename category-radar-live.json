@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-08-25T17:22:18.074Z",
+  "updatedAt": "2026-08-25T23:02:53.046Z",
   "policy": "Category Radar separă oportunitățile pe categorie. categoryKey explicit și categoria sursă au prioritate față de cuvintele din numele produsului. 10–20 reprezintă ținta de acoperire, nu produse garantat recomandate la cumpărare. TEST rămâne strict.",
   "stats": {
     "categories": 24,
@@ -63,6 +63,7 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -70,10 +71,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 3,
+            "passed": 2,
             "total": 9
           },
-          "commercialScore": 335.3
+          "commercialScore": 235.4
         },
         {
           "rank": 2,
@@ -286,16 +287,17 @@
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
             "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 5,
+            "passed": 4,
             "total": 9
           },
-          "commercialScore": 544.9
+          "commercialScore": 444.9
         },
         {
           "rank": 2,
@@ -767,6 +769,7 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -774,10 +777,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 3,
+            "passed": 2,
             "total": 9
           },
-          "commercialScore": 332.1
+          "commercialScore": 232.1
         },
         {
           "rank": 2,
@@ -1202,15 +1205,16 @@
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "market evidence concret suficient",
             "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 6,
+            "passed": 5,
             "total": 9
           },
-          "commercialScore": 652.3
+          "commercialScore": 552.3
         },
         {
           "rank": 2,
@@ -1229,16 +1233,17 @@
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
             "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 5,
+            "passed": 4,
             "total": 9
           },
-          "commercialScore": 546.3
+          "commercialScore": 446.3
         },
         {
           "rank": 3,
@@ -1257,16 +1262,17 @@
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
             "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 5,
+            "passed": 4,
             "total": 9
           },
-          "commercialScore": 540.1
+          "commercialScore": 440.1
         },
         {
           "rank": 4,
@@ -1286,6 +1292,7 @@
           "quantity": 0,
           "blockers": [
             "pricing România verificat",
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "review evidence verificat",
             "market evidence concret suficient",
@@ -1293,10 +1300,10 @@
             "Data Confidence ≥50"
           ],
           "gates": {
-            "passed": 3,
+            "passed": 2,
             "total": 9
           },
-          "commercialScore": 336.8
+          "commercialScore": 236.8
         },
         {
           "rank": 5,
@@ -1721,15 +1728,16 @@
           "verdict": "NU TESTA ÎNCĂ",
           "quantity": 0,
           "blockers": [
+            "sales estimate cu confidence ≥75 sau vânzări observate",
             "ofertă furnizor completă și verificată",
             "market evidence concret suficient",
             "marjă ≥20%, ROI ≥45%, profit pozitiv"
           ],
           "gates": {
-            "passed": 6,
+            "passed": 5,
             "total": 9
           },
-          "commercialScore": 648.1
+          "commercialScore": 548.1
         },
         {
           "rank": 2,

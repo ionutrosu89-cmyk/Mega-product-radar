@@ -1,12 +1,31 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-25T17:22:17.988Z",
+  "updatedAt": "2026-08-25T23:02:52.929Z",
   "stats": {
-    "validateProducts": 3,
+    "validateProducts": 5,
     "queueSize": 3,
-    "supplierAuthorized": 3
+    "supplierAuthorized": 0
   },
   "candidates": [
+    {
+      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
+      "title": "Car sunglasses magnetic visor holder",
+      "category": "Auto",
+      "goldenRank": 1,
+      "opportunityScore": 38.5,
+      "romaniaDemandStatus": "PROVIDER_VERIFIED",
+      "salesEstimateStatus": "ESTIMATED_MEDIUM_CONFIDENCE",
+      "salesEstimateConfidence": 60,
+      "nextGate": "SALES_EVIDENCE",
+      "supplierIntelligenceAuthorized": false,
+      "requiredSupplierEvidence": [],
+      "blockers": [
+        "sales estimate cu confidence ≥75 sau vânzări observate",
+        "ofertă furnizor completă și verificată",
+        "market evidence concret suficient",
+        "marjă ≥20%, ROI ≥45%, profit pozitiv"
+      ]
+    },
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
@@ -14,21 +33,13 @@
       "goldenRank": 5,
       "opportunityScore": 35.6,
       "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
-      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
-      "salesEstimateConfidence": 100,
-      "nextGate": "SUPPLIER_QUOTE",
-      "supplierIntelligenceAuthorized": true,
-      "requiredSupplierEvidence": [
-        "supplier name and direct source URL",
-        "quoted unit price and currency",
-        "MOQ",
-        "sample cost",
-        "lead time",
-        "shipping quote/terms to Romania",
-        "relevant certifications/compliance documents where applicable",
-        "manual verification timestamp"
-      ],
+      "salesEstimateStatus": "INSUFFICIENT_DATA",
+      "salesEstimateConfidence": 20,
+      "nextGate": "SALES_EVIDENCE",
+      "supplierIntelligenceAuthorized": false,
+      "requiredSupplierEvidence": [],
       "blockers": [
+        "sales estimate cu confidence ≥75 sau vânzări observate",
         "ofertă furnizor completă și verificată",
         "review evidence verificat",
         "market evidence concret suficient",
@@ -42,49 +53,13 @@
       "goldenRank": 4,
       "opportunityScore": 35.5,
       "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
-      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
-      "salesEstimateConfidence": 100,
-      "nextGate": "SUPPLIER_QUOTE",
-      "supplierIntelligenceAuthorized": true,
-      "requiredSupplierEvidence": [
-        "supplier name and direct source URL",
-        "quoted unit price and currency",
-        "MOQ",
-        "sample cost",
-        "lead time",
-        "shipping quote/terms to Romania",
-        "relevant certifications/compliance documents where applicable",
-        "manual verification timestamp"
-      ],
+      "salesEstimateStatus": "INSUFFICIENT_DATA",
+      "salesEstimateConfidence": 20,
+      "nextGate": "SALES_EVIDENCE",
+      "supplierIntelligenceAuthorized": false,
+      "requiredSupplierEvidence": [],
       "blockers": [
-        "ofertă furnizor completă și verificată",
-        "review evidence verificat",
-        "market evidence concret suficient",
-        "marjă ≥20%, ROI ≥45%, profit pozitiv"
-      ]
-    },
-    {
-      "canonicalKey": "car-cup-holder-expander-adjustable",
-      "title": "Car cup holder expander adjustable",
-      "category": "Auto",
-      "goldenRank": 3,
-      "opportunityScore": 34.7,
-      "romaniaDemandStatus": "PROVIDER_VERIFIED",
-      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
-      "salesEstimateConfidence": 100,
-      "nextGate": "SUPPLIER_QUOTE",
-      "supplierIntelligenceAuthorized": true,
-      "requiredSupplierEvidence": [
-        "supplier name and direct source URL",
-        "quoted unit price and currency",
-        "MOQ",
-        "sample cost",
-        "lead time",
-        "shipping quote/terms to Romania",
-        "relevant certifications/compliance documents where applicable",
-        "manual verification timestamp"
-      ],
-      "blockers": [
+        "sales estimate cu confidence ≥75 sau vânzări observate",
         "ofertă furnizor completă și verificată",
         "review evidence verificat",
         "market evidence concret suficient",
@@ -92,6 +67,6 @@
       ]
     }
   ],
-  "nextAction": "Start verified supplier quote collection for Reusable furniture moving sliders kit.",
+  "nextAction": "Do not spend on supplier sourcing yet. Resolve the highest-value RO demand or sales-evidence blocker first.",
   "policy": "Supplier Intelligence is authorized only for VALIDATE products that have Romania demand ready and sales confidence >=75 (or actual observed sales). This queue never promotes TEST/BUY, never invents supplier quotes, and never confirms landed cost."
 }
