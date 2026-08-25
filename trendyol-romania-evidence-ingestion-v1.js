@@ -52,22 +52,22 @@ export function ingestTrendyolReviewedEvidence({ledger={version:'1.0',observatio
   };
 }
 
-export function buildRomaniaLocalEvidenceByNiche({ledger={observations:[]},queueItems=[],emagEvidenceByNiche={}}={}){
+export function buildRomaniaLocalEvidenceByNiche({ledger={observations:[]},queueItems=[]}={}){
   const latest=latestRomaniaMarketSnapshots(ledger);
   const out={};
   for(const item of queueItems||[]){
     const key=canonicalRomaniaComparabilityKey(item.comparabilityKey);
-    const trendyol=latest.find(x=>x.nicheKey===item.nicheKey&&x.platform==='TRENDYOL'&&canonicalRomaniaComparabilityKey(x.comparabilityKey)===key);
+    const matching=latest.filter(x=>x.nicheKey===item.nicheKey&&canonicalRomaniaComparabilityKey(x.comparabilityKey)===key);
     out[item.nicheKey]={
-      EMAG:emagEvidenceByNiche[item.nicheKey]||{},
-      TRENDYOL:trendyol||{}
+      EMAG:matching.find(x=>x.platform==='EMAG')||{},
+      TRENDYOL:matching.find(x=>x.platform==='TRENDYOL')||{}
     };
   }
   return out;
 }
 
-export function validateRomaniaQueueAgainstUnifiedLedger({ledger={observations:[]},queueItems=[],emagEvidenceByNiche={}}={}){
-  const evidenceByNiche=buildRomaniaLocalEvidenceByNiche({ledger,queueItems,emagEvidenceByNiche});
+export function validateRomaniaQueueAgainstUnifiedLedger({ledger={observations:[]},queueItems=[]}={}){
+  const evidenceByNiche=buildRomaniaLocalEvidenceByNiche({ledger,queueItems});
   const rows=(queueItems||[]).map(queueItem=>validateRomaniaEvidencePromotion({
     queueItem,
     emagProbe:evidenceByNiche[queueItem.nicheKey]?.EMAG||{},
@@ -78,8 +78,9 @@ export function validateRomaniaQueueAgainstUnifiedLedger({ledger={observations:[
     promotable:rows.filter(x=>x.promotable).length,
     blocked:rows.filter(x=>!x.promotable).length,
     rows,
-    policy:'UNIFIED_LOCAL_LEDGER; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; FAIL_CLOSED; LOWER_BOUNDS_ARE_NOT_EXACT; NO_VERIFIED_SALES_CLAIM',
+    policy:'UNIFIED_LOCAL_LEDGER_ONLY; BOTH_EMAG_AND_TRENDYOL_FROM_LATEST_CANONICAL_SNAPSHOTS; NO_SIDE_CHANNEL_EVIDENCE; SURFACE_COUNT_SEPARATE_FROM_CANONICAL_COUNT; FAIL_CLOSED; LOWER_BOUNDS_ARE_NOT_EXACT; NO_VERIFIED_SALES_CLAIM',
     paidCallsTriggered:0,
+    approvedSpendEur:0,
     purchaseAuthorized:false
   };
 }
