@@ -1,0 +1,158 @@
+{
+  "version": "1.0",
+  "observedAt": "2026-08-25T18:20:00Z",
+  "policy": "PUBLIC_EVIDENCE_ONLY; FIRST_PARTY_CLAIMS_ARE_NOT_INDEPENDENT_VERIFICATION; NO_PUBLIC_EVIDENCE_CAN_SET_MPR_VERIFIED_OR_TESTED_BY_MPR",
+  "summary": {
+    "candidateCount": 5,
+    "mprVerifiedCount": 0,
+    "testedByMprCount": 0,
+    "independentLegalIdentityObservedCount": 1,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  },
+  "candidates": [
+    {
+      "priority": 1,
+      "partnerKey": "M3CARGO",
+      "name": "M3Cargo",
+      "publicEvidenceStrength": "STRONG_FIRST_PARTY",
+      "legalIdentity": {
+        "status": "FIRST_PARTY_DISCLOSED",
+        "entity": "M3EUROPE S.R.L",
+        "identifierType": "CUI",
+        "identifier": "47734607",
+        "sourceUrl": "https://m3cargo.ro/confidentiality/",
+        "independentlyVerified": false
+      },
+      "chinaPresence": {
+        "status": "FIRST_PARTY_CLAIM_WITH_SPECIFIC_LOCATIONS",
+        "locationsClaimed": ["Shenzhen", "Ningbo", "Yiwu"],
+        "sourceUrl": "https://m3cargo.ro/livrare-la-cheie/",
+        "independentlyVerified": false
+      },
+      "servicesObserved": ["supplier search", "supplier negotiation", "goods inspection", "consolidation", "customs", "Romania delivery"],
+      "strengthsForMpr": ["Romanian legal operator disclosed", "small/medium business positioning", "China warehousing workflow described", "end-to-end customs/logistics claims"],
+      "openChecks": ["independent Romanian registry check", "1688 sourcing capability", "written fee and commission model", "supplier payment model", "MRN/importer-of-record model", "insurance and claims terms", "real service interaction", "test service", "references"],
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "priority": 2,
+      "partnerKey": "ROMASIA",
+      "name": "ROMASIA",
+      "publicEvidenceStrength": "STRONG_FIRST_PARTY",
+      "legalIdentity": {
+        "status": "FIRST_PARTY_CHINA_COMPANY_CLAIM",
+        "entity": null,
+        "identifierType": null,
+        "identifier": null,
+        "sourceUrl": "https://www.romasia.ro/servicii/",
+        "independentlyVerified": false
+      },
+      "chinaPresence": {
+        "status": "FIRST_PARTY_CLAIM_WITH_PHYSICAL_ADDRESS",
+        "locationsClaimed": ["Yiwu", "Guangzhou"],
+        "physicalAddressObserved": "International Wealth Mansion, Chouzhou North Rd., Yiwu, Zhejiang, China",
+        "sourceUrl": "https://www.romasia.ro/contact/",
+        "independentlyVerified": false
+      },
+      "servicesObserved": ["China sourcing/trading", "supplier verification", "supplier audit", "goods inspection", "consolidation", "logistics"],
+      "strengthsForMpr": ["specific Yiwu address published", "company states operations since 2008", "inspection/audit scope described", "Romania contact footprint"],
+      "openChecks": ["Romanian and China legal registration documents", "1688 capability", "written commercial fee model", "supplier payment flow", "DDP/customs responsibility", "insurance terms", "real service interaction", "test service", "references"],
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "priority": 3,
+      "partnerKey": "TRADEFY",
+      "name": "Tradefy",
+      "publicEvidenceStrength": "MEDIUM_FIRST_PARTY",
+      "legalIdentity": {
+        "status": "NOT_YET_IDENTIFIED_FROM_INDEXED_PUBLIC_EVIDENCE",
+        "entity": null,
+        "identifierType": null,
+        "identifier": null,
+        "sourceUrl": "https://tradefy.ro/",
+        "independentlyVerified": false
+      },
+      "chinaPresence": {
+        "status": "FIRST_PARTY_CLAIM_WITH_CITY_NAMES",
+        "locationsClaimed": ["Foshan", "Guangzhou", "Yiwu"],
+        "sourceUrl": "https://tradefy.ro/",
+        "independentlyVerified": false
+      },
+      "servicesObserved": ["supplier sourcing", "negotiation", "quality control", "transport", "customs", "China visits"],
+      "commercialClaimsObserved": ["30% advance procedure described", "larger advance claimed to improve product price"],
+      "strengthsForMpr": ["Romanian-language operator positioning", "multiple China locations claimed", "full import workflow described"],
+      "openChecks": ["legal entity and CUI", "China office/warehouse documents", "1688 capability", "fee/commission transparency", "advance custody and refund terms", "supplier payment model", "insurance terms", "real service interaction", "test service", "references"],
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "priority": 4,
+      "partnerKey": "CONNECTEXIMP",
+      "name": "Connect Export Import SRL",
+      "publicEvidenceStrength": "MIXED_FIRST_PARTY_PLUS_THIRD_PARTY_LEGAL_IDENTITY",
+      "legalIdentity": {
+        "status": "THIRD_PARTY_REGISTRY_AGGREGATOR_OBSERVED",
+        "entity": "CONNECT EXPORT IMPORT SRL",
+        "identifierType": "CUI",
+        "identifier": "54674389",
+        "foundedDateObserved": "2026-05-12",
+        "sourceUrl": "https://listafirme.ro/connect-export-import-srl-54674389/",
+        "independentlyVerified": true,
+        "verificationScope": "LEGAL_IDENTITY_ONLY"
+      },
+      "chinaPresence": {
+        "status": "FIRST_PARTY_NETWORK_AND_ROUTE_CLAIMS",
+        "locationsClaimed": ["China/Asia supplier network"],
+        "sourceUrl": "https://www.connecteximp.com/",
+        "independentlyVerified": false
+      },
+      "servicesObserved": ["supplier selection", "samples", "quality control", "consolidation", "transport", "customs", "Romanian RON+VAT invoicing"],
+      "riskFlags": ["ROMANIAN_ENTITY_NEWLY_FOUNDED_2026-05-12; operating history and references require stronger validation"],
+      "strengthsForMpr": ["Romanian CUI independently observable", "Romanian invoicing model described", "e-commerce seller positioning", "supplier/sample/QC workflow described"],
+      "openChecks": ["operating track record and references", "actual China physical presence/partners", "1688 capability", "written commercial terms", "supplier payment model", "DDP/customs responsibility", "insurance terms", "real service interaction", "test service"],
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    },
+    {
+      "priority": 5,
+      "partnerKey": "CHINA_CONTROL_GROUP",
+      "name": "China Control Group",
+      "publicEvidenceStrength": "MEDIUM_FIRST_PARTY",
+      "legalIdentity": {
+        "status": "FIRST_PARTY_ESTONIA_ENTITY_CLAIM_NO_REGISTRY_NUMBER_OBSERVED",
+        "entity": null,
+        "identifierType": null,
+        "identifier": null,
+        "sourceUrl": "https://chinacontrolgroup.com/",
+        "independentlyVerified": false
+      },
+      "chinaPresence": {
+        "status": "FIRST_PARTY_SHANGHAI_TEAM_CLAIM",
+        "locationsClaimed": ["Shanghai"],
+        "sourceUrl": "https://chinacontrolgroup.com/",
+        "independentlyVerified": false
+      },
+      "servicesObserved": ["supplier sourcing", "due diligence", "factory inspection", "quality inspection", "logistics", "OEM/ODM"],
+      "commercialClaimsObserved": ["orders starting from EUR 5000", "inspection from EUR 300/man-day", "fixed pricing claimed", "SEPA/EU VAT invoice claimed"],
+      "fitFlags": ["EUR_5000_MINIMUM_CLAIM_MAY_NOT_FIT_SMALL_20_30_UNIT_TESTS"],
+      "strengthsForMpr": ["due-diligence method publicly described", "inspection pricing disclosed", "China-side representation offered"],
+      "openChecks": ["Estonian registry entity and number", "Shanghai legal/operating proof", "1688 capability", "written commercial terms", "payment handling authorization", "insurance terms", "small-test feasibility", "real service interaction", "test service", "references"],
+      "reviewStatus": "PUBLIC_CANDIDATE",
+      "mprVerified": false,
+      "testedByMpr": false
+    }
+  ],
+  "nextManualAction": {
+    "type": "REQUEST_DOCUMENTS_AND_WRITTEN_TERMS",
+    "priorityOrder": ["M3CARGO", "ROMASIA", "TRADEFY", "CONNECTEXIMP", "CHINA_CONTROL_GROUP"],
+    "requiredBeforeServiceTest": ["legal registration evidence", "China presence evidence", "written fees/commissions", "1688 sourcing confirmation", "supplier payment flow", "customs/importer-of-record responsibility", "insurance/claims procedure", "sample/consolidation procedure", "two client references where possible"],
+    "externalMessagesSent": 0
+  }
+}
