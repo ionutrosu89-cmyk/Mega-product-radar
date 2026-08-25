@@ -2,8 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {calculateOpportunityV4,buildOpportunityShortlistV4} from '../opportunity-engine-v4.js';
 
+const confirmedFusion={signal:'CONFIRMED_ACCELERATION',evidenceClass:'FUSED_LONGITUDINAL_PUBLIC_TREND',trendEvidenceLevel:'RANK_PLUS_REVIEW_LONGITUDINAL',demandEvidenceConfirmed:true,salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false};
 const strongBase={
   trend:{score:90,confidence:90},
+  amazonTrendFusion:confirmedFusion,
   supplier:{verifiedQuote:true,evidenceClass:'MANUALLY_VERIFIED',quoteCount:3,benchmarkConfidence:85,documentationCoveragePct:90},
   economics:{landedCostConfirmed:true,marginPct:32,roiPct:110,profitPerUnit:28},
   dataConfidence:90,
@@ -27,7 +29,7 @@ test('sampled Romania evidence can support PROMISING but cannot unlock VALIDATE 
   assert.equal(r.purchaseAuthorized,false);
 });
 
-test('exact comparable Romania evidence preserves advanced funnel progression',()=>{
+test('exact comparable Romania evidence preserves advanced funnel progression when trend is confirmed',()=>{
   const r=calculateOpportunityV4({
     ...strongBase,
     romaniaGap:{status:'READY',score:90,romaniaGapExactGateSatisfied:true,exactComparableCount:true,evidenceClass:'VERIFIED'}
@@ -39,7 +41,7 @@ test('exact comparable Romania evidence preserves advanced funnel progression',(
   assert.equal(r.purchaseAuthorized,false);
 });
 
-test('legacy READY Romania Gap without sampled or non-exact markers remains backward compatible',()=>{
+test('legacy READY Romania Gap remains exact-compatible but still uses confirmed trend gate',()=>{
   const r=calculateOpportunityV4({
     ...strongBase,
     romaniaGap:{status:'READY',score:90}

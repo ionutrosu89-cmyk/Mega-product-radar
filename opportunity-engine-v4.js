@@ -26,6 +26,26 @@ function romaniaEvidenceState(input={}){
     maxFunnelStage:exactReady?'TEST_READY':sampledEligible?'PROMISING':'DISCOVERED'
   };
 }
+function trendEvidenceState(input={}){
+  const fusion=input.amazonTrendFusion||input.trendFusion||input.trendEvidence||{};
+  const signal=up(fusion.signal||fusion.status||fusion.trendSignal);
+  const evidenceClass=up(fusion.evidenceClass||fusion.trendEvidenceClass);
+  const evidenceLevel=up(fusion.trendEvidenceLevel||fusion.evidenceLevel);
+  const fusedContract=evidenceClass==='FUSED_LONGITUDINAL_PUBLIC_TREND'&&evidenceLevel==='RANK_PLUS_REVIEW_LONGITUDINAL';
+  const confirmedAcceleration=signal==='CONFIRMED_ACCELERATION'&&fusedContract&&fusion.demandEvidenceConfirmed===true&&fusion.salesEvidenceClass==='NOT_VERIFIED_SALES'&&fusion.purchaseAuthorized===false;
+  const preliminary=Boolean(signal&&signal!=='UNKNOWN')||evidenceClass.includes('LONGITUDINAL')||evidenceLevel.includes('LONGITUDINAL');
+  return {
+    confirmedAcceleration,
+    preliminary,
+    signal:signal||'UNKNOWN',
+    evidenceClass:evidenceClass||'UNKNOWN',
+    evidenceLevel:evidenceLevel||'UNKNOWN',
+    rankLongitudinal:fusedContract,
+    reviewLongitudinal:fusedContract,
+    intervalEligible:fusedContract,
+    maxFunnelStage:confirmedAcceleration?'TEST_READY':preliminary?'PROMISING':'DISCOVERED'
+  };
+}
 
 export function calculateOpportunityV4(input={}){
   const base=calculateOpportunityV3(input);
@@ -34,13 +54,21 @@ export function calculateOpportunityV4(input={}){
   const economicsReady=economicsConfirmed(input.economics);
   const evidenceConfidence=n(input.dataConfidence??input.confidence);
   const romaniaEvidence=romaniaEvidenceState(input);
+  const trendEvidence=trendEvidenceState(input);
   const blockers=[...(base.blockers||[])];
 
   let funnelStage='DISCOVERED';
   if(marketReady&&base.marketOpportunityScore>=50)funnelStage='PROMISING';
+  if(funnelStage==='DISCOVERED'&&romaniaEvidence.sampledEligible&&base.marketOpportunityScore>=50)funnelStage='PROMISING';
   if(marketReady&&base.marketOpportunityScore>=65&&(evidenceConfidence===null||evidenceConfidence>=50))funnelStage='VALIDATE';
   if(marketReady&&base.marketOpportunityScore>=65&&supplierReady&&economicsReady&&(evidenceConfidence===null||evidenceConfidence>=60))funnelStage='FINALIST';
   if(funnelStage==='FINALIST'&&bool(input.testGateReady)&&bool(input.complianceGateReady))funnelStage='TEST_READY';
+
+  if(!trendEvidence.confirmedAcceleration&&['VALIDATE','FINALIST','TEST_READY'].includes(funnelStage)){
+    funnelStage=marketReady&&base.marketOpportunityScore>=50?'PROMISING':'DISCOVERED';
+    blockers.push('CONFIRMED_LONGITUDINAL_TREND_REQUIRED_FOR_VALIDATION');
+  }
+  if(trendEvidence.preliminary&&!trendEvidence.confirmedAcceleration)blockers.push('PRELIMINARY_TREND_EVIDENCE_MAX_PROMISING');
 
   if(!romaniaEvidence.exactReady&&['VALIDATE','FINALIST','TEST_READY'].includes(funnelStage)){
     funnelStage=romaniaEvidence.sampledEligible?'PROMISING':'DISCOVERED';
@@ -55,15 +83,16 @@ export function calculateOpportunityV4(input={}){
 
   return {
     ...base,
-    version:'4.1',
+    version:'4.2',
     funnelStage,
     supplierReady,
     economicsReady,
     dataConfidence:evidenceConfidence,
     romaniaEvidence,
+    trendEvidence,
     blockers:[...new Set(blockers)],
-    nextAction:funnelStage==='DISCOVERED'?'COLLECT_MARKET_EVIDENCE':funnelStage==='PROMISING'?'VALIDATE_ROMANIA_EXACT_EVIDENCE_AND_SUPPLIER':funnelStage==='VALIDATE'?'VERIFY_SUPPLIER_AND_ECONOMICS':funnelStage==='FINALIST'?'PREPARE_MEASURED_TEST':'RUN_MEASURED_TEST_ONLY_AFTER_EXPLICIT_USER_ACTION',
-    policy:'DATA_TO_INTELLIGENCE_TO_DECISION; SAMPLED_ROMANIA_MAX_PROMISING; EXACT_ROMANIA_REQUIRED_FROM_VALIDATE; FINALIST_MAX_3; TEST_READY_IS_NOT_BUY_READY; UNKNOWN_IS_NOT_ZERO; NO_AUTO_PURCHASE',
+    nextAction:funnelStage==='DISCOVERED'?'COLLECT_MARKET_AND_LONGITUDINAL_TREND_EVIDENCE':funnelStage==='PROMISING'?'CONFIRM_RANK_REVIEW_TREND_AND_ROMANIA_EXACT_EVIDENCE':funnelStage==='VALIDATE'?'VERIFY_SUPPLIER_AND_ECONOMICS':funnelStage==='FINALIST'?'PREPARE_MEASURED_TEST':'RUN_MEASURED_TEST_ONLY_AFTER_EXPLICIT_USER_ACTION',
+    policy:'DATA_TO_INTELLIGENCE_TO_DECISION; REVIEW_ONLY_OR_RANK_ONLY_MAX_PROMISING; CONFIRMED_RANK_REVIEW_LONGITUDINAL_TREND_REQUIRED_FROM_VALIDATE; SAMPLED_ROMANIA_MAX_PROMISING; EXACT_ROMANIA_REQUIRED_FROM_VALIDATE; FINALIST_REQUIRES_CONFIRMED_TREND_PLUS_EXACT_ROMANIA_PLUS_VERIFIED_SUPPLIER_PLUS_CONFIRMED_ECONOMICS; FINALIST_MAX_3; TEST_READY_IS_NOT_BUY_READY; UNKNOWN_IS_NOT_ZERO; NO_AUTO_PURCHASE',
     salesEvidenceClass:'NOT_VERIFIED_SALES',
     purchaseAuthorized:false
   };
