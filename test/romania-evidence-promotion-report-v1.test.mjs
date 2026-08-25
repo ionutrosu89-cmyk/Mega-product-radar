@@ -25,10 +25,10 @@ test('known Trendyol lower bounds remain non-exact in report',()=>{
   const trunk=r.rows.find(x=>x.nicheKey==='automotive:trunk-organization');
   assert.ok(packing);
   assert.ok(trunk);
-  assert.equal(packing.evidence.TRENDYOL.listingCount,null);
+  assert.ok(packing.evidence.TRENDYOL.listingCount==null);
   assert.ok(Number(packing.evidence.TRENDYOL.listingCountLowerBound)>0);
   assert.ok(packing.blockers.includes('TRENDYOL_EXACT_COUNT_MISSING'));
-  assert.equal(trunk.evidence.TRENDYOL.listingCount,null);
+  assert.ok(trunk.evidence.TRENDYOL.listingCount==null);
   assert.ok(trunk.blockers.includes('TRENDYOL_EXACT_COUNT_MISSING'));
 });
 
@@ -45,7 +45,7 @@ test('usable eMAG lower-bound artifact becomes review input but cannot promote',
   const r=buildRomaniaEvidencePromotionReport({queueItems:[item],reviewedBatch:batch,emagArtifact:artifact});
   assert.equal(r.emagArtifactPresent,true);
   assert.equal(r.promotable,0);
-  assert.equal(r.rows[0].evidence.EMAG.listingCount,null);
+  assert.ok(r.rows[0].evidence.EMAG.listingCount==null);
   assert.equal(r.rows[0].evidence.EMAG.listingCountLowerBound,24);
   assert.ok(r.rows[0].blockers.includes('EMAG_EXACT_COUNT_MISSING'));
   assert.ok(r.rows[0].blockers.includes('EMAG_LOWER_BOUND_NOT_EXACT'));
