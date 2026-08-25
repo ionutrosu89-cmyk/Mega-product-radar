@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-08-25T18:00:00Z",
+  "sourceFile": "supplier-evidence/seed-manual-quotes-2026-08-24.json",
+  "policy": "SUPPLIER_STATED_NEVER_EQUALS_VERIFIED; DOCUMENTS_AND_HUMAN_REVIEW_REQUIRED; NO_PURCHASE_AUTHORITY",
+  "stats": {"total": 3, "documentedReady": 0, "manuallyVerified": 0, "economicsEligible": 0},
+  "packets": [
+    {
+      "productKey": "under-desk-headphone-hanger",
+      "supplierKey": "shenzhen-vazio-technology",
+      "currentEvidenceLevel": "SUPPLIER_STATED",
+      "targetEvidenceLevel": "SUPPLIER_STATED",
+      "documentedReady": false,
+      "manuallyVerified": false,
+      "economicsEligible": false,
+      "priority": 1,
+      "blockers": [
+        "QUOTE_CAPTURE_TIMESTAMP_AND_DOCUMENT_REFERENCE_MISSING",
+        "COMPLIANCE_CONFLICT_UNRESOLVED",
+        "LEGAL_IDENTITY_NOT_MANUALLY_VERIFIED",
+        "PRODUCT_SPEC_NOT_MANUALLY_MATCHED",
+        "DDP_RESPONSIBILITY_NOT_MANUALLY_VERIFIED",
+        "COMPLIANCE_DOCUMENTS_NOT_REVIEWED",
+        "HUMAN_REVIEW_NOT_COMPLETED"
+      ],
+      "nextEvidence": ["capture original quote/chat reference and timestamp", "request applicable compliance declaration/document basis", "reconfirm DDP VAT/duty/clearance/importer responsibility in writing", "verify legal supplier identity", "human review"],
+      "purchaseAuthorized": false
+    },
+    {
+      "productKey": "under-desk-headphone-hanger",
+      "supplierKey": "yinyu-yinwu-msa240",
+      "currentEvidenceLevel": "SUPPLIER_STATED_INCOMPLETE",
+      "targetEvidenceLevel": "SUPPLIER_STATED",
+      "documentedReady": false,
+      "manuallyVerified": false,
+      "economicsEligible": false,
+      "priority": 3,
+      "blockers": ["UNIT_PRICE_MISSING", "DDP_TOTAL_MISSING", "QUOTE_PROVENANCE_MISSING", "PACKAGE_DATA_MISSING", "SAMPLE_TERMS_MISSING", "COMPLIANCE_BASIS_MISSING", "MANUAL_REVIEW_NOT_COMPLETED"],
+      "purchaseAuthorized": false
+    },
+    {
+      "productKey": "car-sunglasses-magnetic-visor-holder",
+      "supplierKey": "manual-alibaba-supplier-1",
+      "currentEvidenceLevel": "SUPPLIER_STATED_PARTIAL",
+      "targetEvidenceLevel": "SUPPLIER_STATED",
+      "documentedReady": false,
+      "manuallyVerified": false,
+      "economicsEligible": false,
+      "priority": 2,
+      "blockers": ["SUPPLIER_IDENTITY_INCOMPLETE", "PRODUCT_MODEL_SPEC_REFERENCE_MISSING", "QUOTE_PROVENANCE_MISSING", "DDP_SCOPE_UNCONFIRMED", "PACKAGE_DATA_MISSING", "SAMPLE_TERMS_MISSING", "COMPLIANCE_BASIS_MISSING", "MANUAL_REVIEW_NOT_COMPLETED"],
+      "purchaseAuthorized": false
+    }
+  ],
+  "purchaseAuthorized": false,
+  "paidCallsTriggered": 0
+}
