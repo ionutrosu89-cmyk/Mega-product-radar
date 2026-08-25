@@ -1,0 +1,171 @@
+{
+  "version": "1.0",
+  "reviewedAt": "2026-08-25T04:55:00Z",
+  "purpose": "Expand Romania public-market evidence with real, provenance-aware observations while keeping Romania Gap fail-closed until cross-market scopes are genuinely comparable.",
+  "evidenceClass": "REVIEWED_PUBLIC_MARKET_EVIDENCE",
+  "salesEvidenceClass": "NOT_VERIFIED_SALES",
+  "purchaseAuthorized": false,
+  "paidCallsTriggered": 0,
+  "approvedSpendEur": 0,
+  "policy": "DIRECT_MARKET_WIDE_EVIDENCE_MAY_ESTABLISH_LOWER_BOUNDS; THIRD_PARTY_INDEXED_OFFERS_ONLY_ESTABLISH_PRESENCE; NON_COMPARABLE_SCOPES_MUST_NOT_BE_SUMMED",
+  "niches": [
+    {
+      "nicheKey": "travel:packing-cubes",
+      "comparabilityKey": "TRAVEL_PACKING_CUBES_AND_SUITCASE_ORGANIZERS",
+      "priority": 1,
+      "scopeConfidence": "HIGH",
+      "observations": [
+        {
+          "platform": "TRENDYOL",
+          "market": "RO",
+          "sourceUrl": "https://www.trendyol.com/ro/organizatoare-pentru-valiza-x-c163720",
+          "evidenceSource": "DIRECT_MARKETPLACE_PAGE",
+          "scope": "MARKET_WIDE",
+          "evidenceType": "PUBLIC_MARKET_SIGNAL",
+          "manualReviewed": true,
+          "observedAt": "2026-08-05T23:15:00Z",
+          "listingCountLowerBound": 656,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": true,
+          "freshnessClass": "SOURCE_PAGE_EXPLICIT_LAST_UPDATED",
+          "notes": "Trendyol Romania category page states 656+ items. Stored as lower bound only. Page scope closely matches packing-cubes / suitcase-organizer intent."
+        },
+        {
+          "platform": "EMAG",
+          "market": "RO",
+          "sourceUrl": null,
+          "evidenceUrl": "https://www.pricy.ro/ProductUrlId/set-6-huse-organizare-bagaj--quasar---co----organizator-valiza-troler--negru-E3FC978E3CDDDA0C1A422186ABF71C27",
+          "evidenceSource": "THIRD_PARTY_INDEXER",
+          "scope": "PRODUCT_PRESENCE_ONLY",
+          "evidenceType": "INDEXED_MARKETPLACE_OFFER",
+          "manualReviewed": true,
+          "retrievedAt": "2026-08-25T04:55:00Z",
+          "indexedRecencyDays": 18,
+          "listingCountLowerBound": 1,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": false,
+          "freshnessClass": "INDEXER_RELATIVE_RECENCY",
+          "notes": "Current index evidence confirms at least one eMAG offer for a 6-piece suitcase-organizer set, but does not establish market-wide eMAG saturation."
+        }
+      ],
+      "gate": {
+        "status": "PARTIAL_LOCAL_EVIDENCE",
+        "romaniaGapCompetitionReady": false,
+        "blockers": ["EMAG_DIRECT_MARKET_WIDE_SCOPE_MISSING", "EMAG_COMPARABLE_LISTING_LOWER_BOUND_MISSING"],
+        "nextAction": "Acquire direct eMAG search/category evidence using the same packing-cubes scope."
+      }
+    },
+    {
+      "nicheKey": "automotive:trunk-organization",
+      "comparabilityKey": "AUTO_TRUNK_ORGANIZERS",
+      "priority": 2,
+      "scopeConfidence": "HIGH",
+      "observations": [
+        {
+          "platform": "TRENDYOL",
+          "market": "RO",
+          "sourceUrl": "https://www.trendyol.com/ro/organizatori-de-portbagaj-auto-x-c103894",
+          "evidenceSource": "DIRECT_MARKETPLACE_PAGE",
+          "scope": "MARKET_WIDE",
+          "evidenceType": "PUBLIC_MARKET_SIGNAL",
+          "manualReviewed": true,
+          "observedAt": "2026-08-09T13:45:00Z",
+          "listingCountLowerBound": 512,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": true,
+          "freshnessClass": "SOURCE_PAGE_EXPLICIT_LAST_UPDATED",
+          "notes": "Trendyol Romania category page states 512+ items for trunk organizers. Lower bound only. Scope is a strong match for MPR trunk-organization."
+        },
+        {
+          "platform": "EMAG",
+          "market": "RO",
+          "sourceUrl": null,
+          "evidenceUrl": "https://www.pricy.ro/ProductUrlId/organizator-portbagaj-auto-nextwave-cu-chingi-de-ancorare--multifunctional--pliabil--9-compartimente--capacitate-60l--material-oxford-1680d--58x43x27-cm--negru-A619E6894468198C0A9480D9E89E66E6",
+          "evidenceSource": "THIRD_PARTY_INDEXER",
+          "scope": "PRODUCT_PRESENCE_ONLY",
+          "evidenceType": "INDEXED_MARKETPLACE_OFFER",
+          "manualReviewed": true,
+          "retrievedAt": "2026-08-25T04:55:00Z",
+          "indexedRecencyDays": 3,
+          "listingCountLowerBound": 1,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": false,
+          "freshnessClass": "INDEXER_RELATIVE_RECENCY",
+          "notes": "Current index evidence confirms an eMAG offer for a pliable 9-compartment trunk organizer. Presence only; not a category count."
+        }
+      ],
+      "gate": {
+        "status": "PARTIAL_LOCAL_EVIDENCE",
+        "romaniaGapCompetitionReady": false,
+        "blockers": ["EMAG_DIRECT_MARKET_WIDE_SCOPE_MISSING", "EMAG_COMPARABLE_LISTING_LOWER_BOUND_MISSING"],
+        "nextAction": "Acquire direct eMAG search/category evidence using the same trunk-organizer scope."
+      }
+    },
+    {
+      "nicheKey": "office:laptop-accessories",
+      "comparabilityKey": "ADJUSTABLE_LAPTOP_STANDS",
+      "priority": 3,
+      "scopeConfidence": "MEDIUM",
+      "observations": [
+        {
+          "platform": "TRENDYOL",
+          "market": "RO",
+          "sourceUrl": "https://www.trendyol.com/ro/suport-laptop-y-s424508",
+          "evidenceSource": "DIRECT_MARKETPLACE_PAGE",
+          "scope": "MARKET_WIDE_BUT_CATEGORY_NOISY",
+          "evidenceType": "PUBLIC_MARKET_SIGNAL",
+          "manualReviewed": true,
+          "observedAt": "2026-08-05T01:50:00Z",
+          "listingCountLowerBound": 1636,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": false,
+          "freshnessClass": "SOURCE_PAGE_EXPLICIT_LAST_UPDATED",
+          "notes": "Trendyol Romania page states 1636+ items but visible results include adjacent monitor and laptop-related products. The count is retained as a broad category signal, not a comparable adjustable-laptop-stand count."
+        },
+        {
+          "platform": "EMAG",
+          "market": "RO",
+          "sourceUrl": null,
+          "evidenceUrl": "https://www.pricy.ro/ProductUrlId/suport-reglabil-laptop--aluminiu-17-3----argintiu-BC315DD337D6DDDA4A4990941CB27834",
+          "evidenceSource": "THIRD_PARTY_INDEXER",
+          "scope": "PRODUCT_PRESENCE_ONLY",
+          "evidenceType": "INDEXED_MARKETPLACE_OFFER",
+          "manualReviewed": true,
+          "retrievedAt": "2026-08-25T04:55:00Z",
+          "indexedRecencyDays": 30,
+          "listingCountLowerBound": 1,
+          "listingCount": null,
+          "sellerCount": null,
+          "comparableScopeConfirmed": false,
+          "freshnessClass": "INDEXER_RELATIVE_RECENCY",
+          "notes": "Indexer evidence confirms eMAG presence for an adjustable aluminium laptop stand. It cannot establish eMAG market-wide competition."
+        }
+      ],
+      "gate": {
+        "status": "REVIEW_REQUIRED",
+        "romaniaGapCompetitionReady": false,
+        "blockers": ["TRENDYOL_CATEGORY_SCOPE_NOISY", "EMAG_DIRECT_MARKET_WIDE_SCOPE_MISSING", "EXACT_CROSS_MARKET_SCOPE_NOT_CONFIRMED"],
+        "nextAction": "Narrow both marketplaces to adjustable/portable laptop stands before any competition score is allowed."
+      }
+    }
+  ],
+  "batchGate": {
+    "nichesReviewed": 3,
+    "readyForRomaniaGapCompetition": 0,
+    "partialLocalEvidence": 2,
+    "reviewRequired": 1,
+    "rejectedCandidateScopes": [
+      {
+        "nicheKey": "home-organization:drawer-organization",
+        "reason": "TRENDYOL_VISIBLE_SCOPE_CONTAMINATED_WITH_DRAWER_FURNITURE_AND_CABINETS"
+      }
+    ],
+    "nextPriority": ["travel:packing-cubes", "automotive:trunk-organization", "office:laptop-accessories"],
+    "policy": "NO_ROMANIA_GAP_COMPETITION_SCORE_UNTIL_DIRECT_COMPARABLE_MARKET_EVIDENCE_EXISTS_ON_BOTH_LOCAL_MARKETPLACES"
+  }
+}
