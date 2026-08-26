@@ -15,9 +15,19 @@ on:
         description: 'Amazon public Best Sellers URL'
         required: false
         default: 'https://www.amazon.com/gp/bestsellers/office-products?language=en_US'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-office-ranking-trigger-2026-08-26.json'
 
 permissions:
   contents: read
+
+env:
+  RANKING_CATEGORY_KEY: ${{ github.event_name == 'workflow_dispatch' && inputs.category_key || 'amazon:office-products:best-sellers' }}
+  RANKING_CATEGORY_LABEL: ${{ github.event_name == 'workflow_dispatch' && inputs.category_label || 'Office Products' }}
+  RANKING_SOURCE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.source_url || 'https://www.amazon.com/gp/bestsellers/office-products?language=en_US' }}
 
 jobs:
   collect:
@@ -28,14 +38,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Validate one-time ranking trigger policy
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-office-ranking-trigger-2026-08-26.json';
+          if(!fs.existsSync(p)) throw new Error('RANKING_TRIGGER_MARKER_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_OFFICE_PRODUCTS_RANKING_2026_08_26') throw new Error('RANKING_TRIGGER_ID_INVALID');
+          if(x.categoryKey!=='amazon:office-products:best-sellers') throw new Error('RANKING_TRIGGER_CATEGORY_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('RANKING_TRIGGER_POLICY_INVALID');
+          NODE
       - name: Collect explicit Amazon public ranking evidence
         id: collect
         continue-on-error: true
         run: >-
           node scripts/amazon-public-ranking-snapshot.mjs
-          --categoryKey='${{ inputs.category_key }}'
-          --categoryLabel='${{ inputs.category_label }}'
-          --url='${{ inputs.source_url }}'
+          --categoryKey="${RANKING_CATEGORY_KEY}"
+          --categoryLabel="${RANKING_CATEGORY_LABEL}"
+          --url="${RANKING_SOURCE_URL}"
           --out=artifacts/amazon-public-ranking-snapshot.json
       - name: Enforce fail-closed evidence policy
         if: always()
