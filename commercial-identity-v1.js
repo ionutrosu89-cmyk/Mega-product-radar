@@ -19,7 +19,8 @@ export function normalizeCommercialIdentity({canonicalProductId=null,productName
 
 export function attachCanonicalCommercialIdentity(record={},identity={}){
   const normalized=normalizeCommercialIdentity(identity);
-  return Object.freeze({...record,canonicalProductId:normalized.canonicalProductId,productName:normalized.productName??text(record.productName)||null,identityStatus:normalized.identityStatus,decisionEligible:normalized.decisionEligible});
+  const productName=normalized.productName ?? (text(record.productName)||null);
+  return Object.freeze({...record,canonicalProductId:normalized.canonicalProductId,productName,identityStatus:normalized.identityStatus,decisionEligible:normalized.decisionEligible});
 }
 
 export function readCommercialRecord(records={},identity={}){
