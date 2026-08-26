@@ -7,9 +7,17 @@ on:
         description: 'Maximum already-captured eligible ASINs to refresh (1-255)'
         required: true
         default: '255'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-round2-trigger-2026-08-26.json'
 
 permissions:
   contents: read
+
+env:
+  ROUND2_MAX_ITEMS: ${{ github.event_name == 'workflow_dispatch' && inputs.max_items || '255' }}
 
 jobs:
   round2:
@@ -20,10 +28,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Validate one-time trigger policy
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-round2-trigger-2026-08-26.json';
+          if(!fs.existsSync(p)) throw new Error('ROUND2_TRIGGER_MARKER_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_ROUND2_2026_08_26') throw new Error('ROUND2_TRIGGER_ID_INVALID');
+          if(x.maxItems!==255) throw new Error('ROUND2_TRIGGER_MAX_ITEMS_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('ROUND2_TRIGGER_POLICY_INVALID');
+          const notBefore=Date.parse(x.notBefore||'');
+          if(!Number.isFinite(notBefore)||Date.now()<notBefore) throw new Error('ROUND2_TRIGGER_TOO_EARLY');
+          NODE
       - name: Collect eligible Amazon Round 2 observations
         id: collect
         continue-on-error: true
-        run: node scripts/amazon-round2-refresh.mjs --maxItems=${{ inputs.max_items }} --out=artifacts/amazon-round2-refresh.json
+        run: node scripts/amazon-round2-refresh.mjs --maxItems=${ROUND2_MAX_ITEMS} --out=artifacts/amazon-round2-refresh.json
       - name: Enforce Round 2 truth and interval gates
         if: always()
         run: |
