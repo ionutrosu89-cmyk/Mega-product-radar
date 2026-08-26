@@ -19,6 +19,11 @@ test('spike never passes trend gate even with score 100',()=>{
  assert.equal(r.gateStatus,'REVIEW');assert.ok(r.reasons.includes('SPIKE_IS_NOT_PERSISTENT_TREND'));
 });
 
+test('conflicting product surfaces never pass trend gate',()=>{
+ const r=buildTrendDecisionEvidence({canonicalProductId:A,decisionEligible:true,status:'MIXED_OR_CONFLICTED',trendScore:95,confidence:85});
+ assert.equal(r.gateStatus,'REVIEW');assert.equal(r.maximumContribution,'PROMISING_SUPPORT_ONLY');assert.equal(r.canPromoteToFinalist,false);
+});
+
 test('unbound trend evidence cannot become decision eligible',()=>{
  const r=buildTrendDecisionEvidence({canonicalProductId:null,decisionEligible:false,status:'PERSISTENT_TREND',trendScore:100,confidence:100});
  assert.equal(r.gateStatus,'UNKNOWN');assert.equal(r.decisionEligible,false);assert.ok(r.reasons.includes('CANONICAL_PRODUCT_ID_REQUIRED'));
