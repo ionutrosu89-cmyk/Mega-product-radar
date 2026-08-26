@@ -1,0 +1,64 @@
+name: Amazon Leader BSR Round 2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect-and-compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Enforce minimum 24h eligibility before network collection
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const b=JSON.parse(fs.readFileSync('data/amazon-leader-bsr-baseline-2026-08-26-v1.json','utf8'));
+          const first=Date.parse(b.observedAt),now=Date.now();
+          const elapsed=(now-first)/36e5;
+          console.log(`baselineObservedAt=${b.observedAt}`);
+          console.log(`elapsedHours=${elapsed.toFixed(4)}`);
+          if(!Number.isFinite(first)||elapsed<24) throw new Error('MINIMUM_24H_INTERVAL_NOT_MET');
+          if(b.policy?.providerSpendEur!==0||b.policy?.paidCallsTriggered!==0||b.policy?.purchaseAuthorized!==false) throw new Error('BASELINE_POLICY_INVALID');
+          NODE
+      - name: Collect second explicit product BSR snapshot
+        run: node scripts/amazon-leader-bsr-snapshot.mjs --out=artifacts/amazon-leader-bsr-snapshot-round2.json
+      - name: Build same-category longitudinal rank history
+        run: >-
+          node scripts/amazon-leader-bsr-round2-history.mjs
+          --baseline=data/amazon-leader-bsr-baseline-2026-08-26-v1.json
+          --current=artifacts/amazon-leader-bsr-snapshot-round2.json
+          --out=artifacts/amazon-leader-bsr-history-round2.json
+      - name: Enforce longitudinal BSR truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/amazon-leader-bsr-snapshot-round2.json','utf8'));
+          const h=JSON.parse(fs.readFileSync('artifacts/amazon-leader-bsr-history-round2.json','utf8'));
+          console.log(`productsWithExplicitBsr=${s.productsWithExplicitBsr}`);
+          console.log(`eligibleProductCount=${h.eligibleProductCount||0}`);
+          console.log(`conflictProductCount=${h.conflictProductCount||0}`);
+          console.log(`comparableCategoryCount=${h.comparableCategoryCount||0}`);
+          if(h.ok!==true||Number(h.elapsedHours)<24)process.exitCode=2;
+          if(h.salesEvidenceClass!=='NOT_VERIFIED_SALES'||h.verifiedSalesRows!==0||h.paidCallsTriggered!==0||h.purchaseAuthorized!==false)process.exitCode=3;
+          if((h.rows||[]).some(r=>r.categorySignalsConflict===true&&r.rankVelocityPerDay!==null))process.exitCode=4;
+          if((h.categoryRows||[]).some(r=>r.evidenceClass!=='LONGITUDINAL_EXPLICIT_PRODUCT_BSR_CATEGORY'||r.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.purchaseAuthorized!==false))process.exitCode=5;
+          NODE
+      - name: Run BSR longitudinal unit tests
+        run: node --test test/amazon-leader-bsr-history-v1.test.js
+      - name: Upload Round 2 BSR evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-leader-bsr-round2-evidence
+          path: |
+            artifacts/amazon-leader-bsr-snapshot-round2.json
+            artifacts/amazon-leader-bsr-history-round2.json
+          if-no-files-found: error
+          retention-days: 7
