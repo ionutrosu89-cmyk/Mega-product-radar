@@ -16,6 +16,7 @@ let muted=false;
 let installed=false;
 const timers=new Map();
 const chains=new Map();
+let batchSequence=0;
 
 function parseValue(raw,shape){
   try{
@@ -65,6 +66,29 @@ async function context(){
   return {client,workspace};
 }
 function datasetFor(key){return CLOUD_DATASETS.find(d=>d.key===key||d.legacyKey===key);}
+function nextBatch(){
+  const now=Date.now();
+  batchSequence=(batchSequence+1)%1000000;
+  const suffix=typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():`${now}-${batchSequence}`;
+  return {id:suffix,at:new Date(now).toISOString()};
+}
+
+export function selectLatestSyncBatchRows(rows=[]){
+  const modern=(rows||[]).filter(row=>row?.sync_batch_id&&Date.parse(row?.sync_batch_at||'')>0);
+  if(!modern.length)return (rows||[]).filter(row=>row?.payload).map(row=>row.payload);
+  let latest=modern[0];
+  for(const row of modern){
+    const rt=Date.parse(row.sync_batch_at),lt=Date.parse(latest.sync_batch_at);
+    if(rt>lt||(rt===lt&&String(row.sync_batch_id)>String(latest.sync_batch_id)))latest=row;
+  }
+  return modern.filter(row=>row.sync_batch_id===latest.sync_batch_id&&row.sync_batch_at===latest.sync_batch_at).map(row=>row.payload).filter(Boolean);
+}
+
+async function cloudRows(client,d,workspaceId){
+  const {data,error}=await client.from(d.table).select('payload,sync_batch_id,sync_batch_at').eq('workspace_id',workspaceId).order('created_at',{ascending:true});
+  if(error)throw error;
+  return selectLatestSyncBatchRows(data||[]);
+}
 
 export function localCloudSummary(){return CLOUD_DATASETS.map(d=>({key:d.key,table:d.table,count:localCount(d)}));}
 
@@ -72,16 +96,26 @@ export async function pushDatasetToCloud(key){
   const d=datasetFor(key);if(!d) return null;
   const {client,workspace}=await context();
   const records=localRecords(d);
-  const {error:delError}=await client.from(d.table).delete().eq('workspace_id',workspace.id);if(delError)throw delError;
-  if(records.length){const {error}=await client.from(d.table).insert(records.map(x=>d.toRow(x,workspace.id)));if(error)throw error;}
-  return {workspaceId:workspace.id,table:d.table,count:records.length};
+  const batch=nextBatch();
+  if(records.length){
+    const rows=records.map(x=>({...d.toRow(x,workspace.id),sync_batch_id:batch.id,sync_batch_at:batch.at}));
+    const {error:insertError}=await client.from(d.table).insert(rows);
+    if(insertError)throw insertError;
+  }
+  // Destructive cleanup happens only after the replacement batch is safely persisted.
+  // Older concurrent writers cannot delete a newer batch because cleanup is timestamp-bounded.
+  const old=client.from(d.table).delete().eq('workspace_id',workspace.id).lt('sync_batch_at',batch.at);
+  const {error:oldError}=await old;if(oldError)throw oldError;
+  const legacy=client.from(d.table).delete().eq('workspace_id',workspace.id).is('sync_batch_at',null);
+  const {error:legacyError}=await legacy;if(legacyError)throw legacyError;
+  return {workspaceId:workspace.id,table:d.table,count:records.length,batchId:batch.id,batchAt:batch.at,mode:'INSERT_THEN_CLEAN'};
 }
 
 export async function pullDatasetFromCloud(key){
   const d=datasetFor(key);if(!d) return null;
   const {client,workspace}=await context();
-  const {data,error}=await client.from(d.table).select('payload').eq('workspace_id',workspace.id).order('created_at',{ascending:true});if(error)throw error;
-  const records=(data||[]).map(x=>x.payload).filter(Boolean);writeDatasetLocal(d,records);
+  const records=await cloudRows(client,d,workspace.id);
+  writeDatasetLocal(d,records);
   return {workspaceId:workspace.id,table:d.table,count:records.length};
 }
 
@@ -90,8 +124,7 @@ export async function pullCloudToLocal(){const details=[];for(const d of CLOUD_D
 
 async function reconcileDataset(d){
   const {client,workspace}=await context();
-  const {data,error}=await client.from(d.table).select('payload').eq('workspace_id',workspace.id).order('created_at',{ascending:true});if(error)throw error;
-  const cloud=(data||[]).map(x=>x.payload).filter(Boolean),local=localRecords(d);
+  const cloud=await cloudRows(client,d,workspace.id),local=localRecords(d);
   if(!cloud.length&&!local.length)return 'EMPTY';
   if(!cloud.length&&local.length){await pushDatasetToCloud(d.key);return 'PUSHED';}
   if(cloud.length&&!local.length){writeDatasetLocal(d,cloud);return 'PULLED';}
