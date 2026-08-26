@@ -1,3 +1,5 @@
+import {isCanonicalProductId} from './domain-contracts-v1.js';
+
 const text=v=>String(v??'').trim();
 const dateOk=v=>{const d=new Date(v);return Boolean(v)&&Number.isFinite(d.getTime());};
 const allowed=new Set(['NOT_SENT','SENT','REPLIED','CLOSED']);
@@ -6,12 +8,13 @@ const validFollowUp=x=>x&&dateOk(x.sentAt)&&text(x.sentBy)&&text(x.channel);
 export function normalizeRfqRecord(v={}){
   const status=allowed.has(String(v.status||''))?String(v.status):'NOT_SENT';
   const followUps=Array.isArray(v.followUps)?v.followUps.filter(validFollowUp).slice(0,2).map(x=>({sentAt:String(x.sentAt),sentBy:text(x.sentBy),channel:text(x.channel),note:text(x.note)||null})):[];
-  return{productKey:text(v.productKey||v.productCanonicalKey),productName:text(v.productName),supplierName:text(v.supplierName),platform:text(v.platform),sourceUrl:text(v.sourceUrl),priority:Number.isFinite(Number(v.priority))?Number(v.priority):999,status,sentAt:dateOk(v.sentAt)?String(v.sentAt):null,sentBy:text(v.sentBy)||null,channel:text(v.channel)||null,responseReceivedAt:dateOk(v.responseReceivedAt)?String(v.responseReceivedAt):null,responseReference:text(v.responseReference)||null,followUps,updatedAt:dateOk(v.updatedAt)?String(v.updatedAt):null};
+  const rawCanonical=text(v.canonicalProductId||v.canonical_product_id),canonicalProductId=isCanonicalProductId(rawCanonical)?rawCanonical.toLowerCase():null;
+  return{canonicalProductId,identityStatus:canonicalProductId?'CANONICAL':'LEGACY_LABEL_ONLY',decisionHandoffEligible:Boolean(canonicalProductId),productKey:text(v.productKey||v.productCanonicalKey),productName:text(v.productName),supplierName:text(v.supplierName),platform:text(v.platform),sourceUrl:text(v.sourceUrl),priority:Number.isFinite(Number(v.priority))?Number(v.priority):999,status,sentAt:dateOk(v.sentAt)?String(v.sentAt):null,sentBy:text(v.sentBy)||null,channel:text(v.channel)||null,responseReceivedAt:dateOk(v.responseReceivedAt)?String(v.responseReceivedAt):null,responseReference:text(v.responseReference)||null,followUps,updatedAt:dateOk(v.updatedAt)?String(v.updatedAt):null};
 }
 
 export function validateRfqRecord(v={}){
   const r=normalizeRfqRecord(v),blockers=[];
-  if(!r.productKey)blockers.push('product key');if(!r.productName)blockers.push('product name');if(!r.supplierName)blockers.push('supplier name');if(!r.platform)blockers.push('platform');
+  if(!r.productKey&&!r.canonicalProductId)blockers.push('product identity');if(!r.productName)blockers.push('product name');if(!r.supplierName)blockers.push('supplier name');if(!r.platform)blockers.push('platform');
   if(r.status==='NOT_SENT'&&(r.sentAt||r.sentBy||r.responseReceivedAt||r.responseReference||r.followUps.length))blockers.push('NOT_SENT cannot contain dispatch, follow-up or reply evidence');
   if(['SENT','REPLIED','CLOSED'].includes(r.status)){if(!r.sentAt)blockers.push('real sent timestamp');if(!r.sentBy)blockers.push('sender identity');if(!r.channel)blockers.push('dispatch channel');}
   if(r.status==='REPLIED'){if(!r.responseReceivedAt)blockers.push('response timestamp');if(!r.responseReference)blockers.push('response reference');}
@@ -25,7 +28,7 @@ export function followUpStatus(v={},now=new Date().toISOString()){
   if(r.status==='NOT_SENT')return{status:'NOT_SENT',due:false,hoursSinceSent:null,nextAction:'Trimite RFQ-ul real înainte de follow-up.'};
   if(r.status==='REPLIED'){
     const responseHours=r.sentAt&&r.responseReceivedAt?(new Date(r.responseReceivedAt).getTime()-new Date(r.sentAt).getTime())/3600000:null;
-    return{status:'REPLIED',due:false,hoursSinceSent:r.sentAt?(nowMs-new Date(r.sentAt).getTime())/3600000:null,responseHours,nextAction:'Deschide Quote Intake și verifică răspunsul.'};
+    return{status:'REPLIED',due:false,hoursSinceSent:r.sentAt?(nowMs-new Date(r.sentAt).getTime())/3600000:null,responseHours,nextAction:r.decisionHandoffEligible?'Deschide Quote Intake și verifică răspunsul.':'Răspuns primit, dar Quote Intake rămâne identity-blocked până la canonicalProductId.'};
   }
   if(r.status==='CLOSED')return{status:'CLOSED',due:false,hoursSinceSent:r.sentAt?(nowMs-new Date(r.sentAt).getTime())/3600000:null,nextAction:'Candidat închis manual.'};
   const hours=Math.max(0,(nowMs-new Date(r.sentAt).getTime())/3600000),count=r.followUps.length;
@@ -58,4 +61,4 @@ export function markRfqReplied(v={},input={}){
   const next={...current,status:'REPLIED',responseReceivedAt:String(responseReceivedAt),responseReference,updatedAt:new Date().toISOString()};const check=validateRfqRecord(next);return{ok:check.valid,record:check.record,blockers:check.blockers};
 }
 
-export function seedRfqRecords(queue={},candidates={}){const bySupplier=new Map((candidates?.candidates||[]).map(x=>[text(x.supplierName),x]));return(queue?.entries||[]).map(entry=>normalizeRfqRecord({productKey:queue.productCanonicalKey,productName:queue.productTitle,supplierName:entry.supplierName,platform:entry.platform,priority:entry.priority,sourceUrl:bySupplier.get(text(entry.supplierName))?.sourceUrl||'',status:'NOT_SENT'}));}
+export function seedRfqRecords(queue={},candidates={}){const bySupplier=new Map((candidates?.candidates||[]).map(x=>[text(x.supplierName),x]));return(queue?.entries||[]).map(entry=>normalizeRfqRecord({canonicalProductId:queue.canonicalProductId||queue.canonical_product_id||null,productKey:queue.productCanonicalKey,productName:queue.productTitle,supplierName:entry.supplierName,platform:entry.platform,priority:entry.priority,sourceUrl:bySupplier.get(text(entry.supplierName))?.sourceUrl||'',status:'NOT_SENT'}));}
