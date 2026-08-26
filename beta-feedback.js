@@ -3,6 +3,7 @@ import {ensurePersonalWorkspace} from './workspace-client.js';
 import {trackJourneyEvent} from './journey-events.js';
 
 const $=s=>document.querySelector(s);
+const tri=value=>value==='YES'?true:value==='NO'?false:null;
 
 async function load(){
   const session=await getCurrentSession();
@@ -23,21 +24,22 @@ $('#feedbackForm').addEventListener('submit',async event=>{
     if(message.length<10)throw new Error('Scrie minimum 10 caractere ca să putem folosi feedback-ul.');
     const client=await getSupabaseClient();
     const ws=await ensurePersonalWorkspace('My Radar');
+    const wouldPay=tri($('#wouldPay').value),wouldPay29=tri($('#wouldPay29').value);
     const row={
       workspace_id:ws.id,
       user_id:session.user.id,
       rating:Number($('#rating').value),
       area:$('#area').value,
       message,
-      would_pay:$('#wouldPay').value==='YES'?true:$('#wouldPay').value==='NO'?false:null,
+      would_pay:wouldPay,
       requested_feature:$('#requestedFeature').value.trim().slice(0,500)||null,
-      metadata:{plan:String(ws.plan||'FREE'),source:'beta-feedback.html'}
+      metadata:{plan:String(ws.plan||'FREE'),source:'beta-feedback.html',wouldPay29,pricePointEur:29}
     };
     const {error}=await client.from('beta_feedback').insert(row);
     if(error)throw error;
-    await trackJourneyEvent('BETA_FEEDBACK_SUBMITTED',{rating:row.rating,area:row.area,wouldPay:row.would_pay});
+    await trackJourneyEvent('BETA_FEEDBACK_SUBMITTED',{rating:row.rating,area:row.area,wouldPay,wouldPay29,pricePointEur:29});
     $('#feedbackForm').reset();
-    status.textContent='Mulțumim. Feedback-ul a fost salvat și va intra în prioritizarea beta.';
+    status.textContent='Mulțumim. Feedback-ul a fost salvat și va intra în scorecard-ul beta.';
   }catch(error){status.textContent=`Eroare: ${error.message||error}`;}
   finally{button.disabled=false;}
 });
