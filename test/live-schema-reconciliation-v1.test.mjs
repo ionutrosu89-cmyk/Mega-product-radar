@@ -28,7 +28,7 @@ test('global supplier entity namespace cannot overwrite workspace suppliers',()=
 test('canonical bootstrap resolver is service-role only and exact alias driven',()=>{
   const sql=read('supabase/migrations/20260826_canonical_bootstrap_rpc_v1.sql');
   assert.match(sql,/where pa\.platform = v_platform and pa\.external_id = v_external_id/);
-  assert.match(sql,/revoke execute .* anon,authenticated/);
+  assert.match(sql,/revoke execute .* (?:public,)?anon,authenticated/);
   assert.match(sql,/grant execute .* service_role/);
   assert.doesNotMatch(sql,/where .*title.*=/i);
 });
