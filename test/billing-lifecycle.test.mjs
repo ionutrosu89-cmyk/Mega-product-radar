@@ -36,21 +36,23 @@ test('plan change, cancellation and resume remain disabled until Stripe is confi
   assert.equal((await resume(new Request('https://radar.example/api/billing/resume',{method:'POST'}))).status,503);
 });
 
-test('resume cancellation calls Stripe only for a scheduled active subscription',async()=>{
+test('resume cancellation calls Stripe only for a scheduled active owner subscription',async()=>{
   const calls=[];
   const fetchImpl=async (url,options={})=>{
     const u=String(url);calls.push({u,options});
     if(u.includes('/auth/v1/user'))return Response.json({id:'u1'});
-    if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1'}]);
-    if(u.includes('/rest/v1/subscriptions'))return Response.json([{status:'active',cancel_at_period_end:true,provider_subscription_id:'sub_1'}]);
+    if(u.includes('/rest/v1/workspace_members'))return Response.json([{workspace_id:'w1',user_id:'u1',role:'OWNER'}]);
+    if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1',name:'Workspace',plan:'RADAR'}]);
+    if(u.includes('/rest/v1/subscriptions'))return Response.json([{workspace_id:'w1',plan:'RADAR',status:'active',cancel_at_period_end:true,provider_subscription_id:'sub_1'}]);
     if(u.includes('api.stripe.com/v1/subscriptions/sub_1'))return Response.json({id:'sub_1',status:'active',cancel_at_period_end:false,items:{data:[{current_period_end:1782000000}]}});
     return new Response(null,{status:404});
   };
   const resume=createBillingResumeHandler({fetch:fetchImpl,env:{STRIPE_SECRET_KEY:'sk_test',SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
-  const response=await resume(new Request('https://radar.example/api/billing/resume',{method:'POST',headers:{authorization:'Bearer token'}}));
+  const response=await resume(new Request('https://radar.example/api/billing/resume',{method:'POST',headers:{authorization:'Bearer token','x-mpr-workspace-id':'w1'}}));
   assert.equal(response.status,200);
   const body=await response.json();
   assert.equal(body.cancelAtPeriodEnd,false);
+  assert.equal(body.workspaceId,'w1');
   const stripeCall=calls.find(x=>x.u.includes('api.stripe.com'));
   assert.ok(stripeCall);
   assert.match(String(stripeCall.options.body),/cancel_at_period_end=false/);
@@ -62,6 +64,7 @@ test('checkout prevents duplicate active Stripe subscriptions and client routes 
   assert.match(checkout,/ACTIVE_SUBSCRIPTION_EXISTS/);
   assert.match(checkout,/provider_subscription_id/);
   assert.match(client,/\/api\/billing\/change-plan/);
+  assert.match(client,/x-mpr-workspace-id/);
 });
 
 test('account exposes cancellation and cancellation-resume controls',async()=>{
