@@ -50,9 +50,27 @@ jobs:
           if((h.rows||[]).some(r=>r.categorySignalsConflict===true&&r.rankVelocityPerDay!==null))process.exitCode=4;
           if((h.categoryRows||[]).some(r=>r.evidenceClass!=='LONGITUDINAL_EXPLICIT_PRODUCT_BSR_CATEGORY'||r.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.purchaseAuthorized!==false))process.exitCode=5;
           NODE
-      - name: Run BSR longitudinal unit tests
-        run: node --test test/amazon-leader-bsr-history-v1.test.js
-      - name: Upload Round 2 BSR evidence
+      - name: Fuse clean review and rank evidence
+        run: >-
+          node scripts/amazon-strict-trend-fusion.mjs
+          --leaders=data/amazon-round2-preliminary-leaders-v1.json
+          --rank=artifacts/amazon-leader-bsr-history-round2.json
+          --out=artifacts/amazon-strict-trend-fusion-round2.json
+      - name: Enforce trend fusion truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const f=JSON.parse(fs.readFileSync('artifacts/amazon-strict-trend-fusion-round2.json','utf8'));
+          console.log(`fusionStatus=${f.status}`);
+          console.log(`confirmedAccelerationCount=${f.confirmedAccelerationCount||0}`);
+          console.log(`confirmedAsins=${JSON.stringify(f.confirmedAsins||[])}`);
+          if(f.ok!==true)process.exitCode=2;
+          if(f.salesEvidenceClass!=='NOT_VERIFIED_SALES'||f.verifiedSalesRows!==0||f.paidCallsTriggered!==0||f.providerSpendEur!==0||f.purchaseAuthorized!==false)process.exitCode=3;
+          if((f.rows||[]).some(r=>r.confirmedAcceleration===true&&(r.rankSignal?.rankVelocityPerDay<=0||r.reviewSignal?.reviewDelta<=0)))process.exitCode=4;
+          NODE
+      - name: Run BSR and fusion unit tests
+        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs
+      - name: Upload Round 2 BSR and fusion evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -60,5 +78,6 @@ jobs:
           path: |
             artifacts/amazon-leader-bsr-snapshot-round2.json
             artifacts/amazon-leader-bsr-history-round2.json
+            artifacts/amazon-strict-trend-fusion-round2.json
           if-no-files-found: error
           retention-days: 7
