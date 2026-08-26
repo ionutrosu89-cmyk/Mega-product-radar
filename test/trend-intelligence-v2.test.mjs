@@ -17,7 +17,7 @@ test('24h positive movement is an early signal, not a persistent trend',()=>{
 
 test('strong recent spike with weak seven-day behavior is classified as spike or reversal',()=>{
  const r=analyzeTrendSeries([
-  obs('2026-08-18T00:00:00Z',{sourceRank:100,reviewCount:100}),
+  obs('2026-08-18T00:00:00Z',{sourceRank:70,reviewCount:130}),
   obs('2026-08-25T00:00:00Z',{sourceRank:120,reviewCount:100}),
   obs('2026-08-26T00:00:00Z',{sourceRank:80,reviewCount:120})
  ],{now:'2026-08-26T01:00:00Z'});
