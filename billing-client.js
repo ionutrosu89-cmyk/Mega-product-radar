@@ -1,4 +1,5 @@
 import {getCurrentSession} from './supabase-client.js';
+import {ensurePersonalWorkspace} from './workspace-client.js';
 
 async function authSession(){
   const session=await getCurrentSession();
@@ -8,7 +9,9 @@ async function authSession(){
 
 async function billingFetch(path,options={}){
   const session=await authSession();
-  const response=await fetch(path,{...options,headers:{...(options.headers||{}),authorization:`Bearer ${session.access_token}`}});
+  const workspace=await ensurePersonalWorkspace('My Radar');
+  if(!workspace?.id)throw new Error('Workspace-ul de billing nu este disponibil.');
+  const response=await fetch(path,{...options,headers:{...(options.headers||{}),authorization:`Bearer ${session.access_token}`,'x-mpr-workspace-id':workspace.id}});
   const data=await response.json().catch(()=>({}));
   return {response,data};
 }
