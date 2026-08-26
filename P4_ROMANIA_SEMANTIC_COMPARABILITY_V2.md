@@ -26,6 +26,10 @@ Classification states remain:
 
 `THREE_RING_ROUND_RING_BINDERS` requires an explicit ring count of 3 and a binder/biblioraft/dosar product-type signal. Two-ring results and standalone mechanisms are excluded. This formalizes the false-positive pattern already observed in the manual Romania binder review.
 
+## Integration verification
+
+This stacked PR is retargeted to `main` only after Romania Gap V2 is merged and green. Integration must preserve fail-closed comparability, exact canonical product binding, and the rule that semantic cleanup cannot upgrade evidence coverage or create market-wide claims.
+
 ## Next step
 
 Extend profiles only where product-defining attributes can be expressed conservatively and tested. Ambiguous categories should remain manual-review-first rather than receiving speculative semantic auto-classification.
