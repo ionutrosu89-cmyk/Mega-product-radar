@@ -34,7 +34,7 @@ A high score never bypasses the pre-test gates. FINALIST requires all of the fol
 - Supplier
 - Economics
 
-It also requires sufficient aggregate confidence and opportunity score. Importability BLOCKED and any other unresolved/review gate prevent FINALIST regardless of score.
+It also requires sufficient aggregate confidence and opportunity score. Importability BLOCKED and any other unresolved/review gate prevent FINALIST regardless of score. Low aggregate confidence remains `VALIDATE` even when the Opportunity Score is high.
 
 ## Funnel authority
 
@@ -45,6 +45,10 @@ Opportunity V5 may recommend:
 It cannot produce TEST_READY, TEST_RUNNING, TEST_VALIDATED or BUY_READY. Those require measured test evidence and the canonical Decision Authority.
 
 Legacy score/BUY recommendations are explicitly non-authoritative.
+
+## Integration verification
+
+This stacked PR is retargeted to `main` only after Economics V3 is merged and green. Integration must preserve canonical identity, score/confidence separation, gate precedence, fail-closed low-confidence behavior, and the single Decision Authority boundary.
 
 ## Safety
 
