@@ -7,7 +7,8 @@ test('commercial modules emit real page-view journey events',async()=>{
   const radar=await readFile(new URL('../commercial-radar.js',import.meta.url),'utf8');
   const launch=await readFile(new URL('../commercial-launch.js',import.meta.url),'utf8');
   assert.match(discover,/trackJourneyEvent\('DISCOVER_VIEW'/);
-  assert.match(radar,/trackJourneyEvent\('RADAR_VIEW'/);
+  assert.match(radar,/trackJourneyEvent\('OPPORTUNITIES_VIEW'/);
+  assert.match(radar,/trackJourneyEvent\('OPPORTUNITY_WORK_ACTION'/);
   assert.match(launch,/trackJourneyEvent\('LAUNCH_VIEW'/);
 });
 
