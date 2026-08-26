@@ -1,0 +1,28 @@
+name: P0 Lockfile Generator
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - package.json
+      - .github/workflows/p0-lockfile-generator.yml
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p0-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 1
