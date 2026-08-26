@@ -63,14 +63,14 @@ export function analyzeOpportunityV5({canonicalProductId=null,globalDemand={},tr
   if(id&&(missingComponents.length||identityMismatches.length||!allPretestPass))recommendation='VALIDATE';
   if(allPretestPass&&confidence>=60&&score!==null&&score>=60)recommendation='FINALIST';
   if(components.importability.status==='BLOCKED')recommendation='VALIDATE';
-  if(confidence<50&&recommendation==='FINALIST')recommendation='VALIDATE';
+  if(id&&confidence<50&&recommendation!=='DISCOVERED')recommendation='VALIDATE';
 
   return Object.freeze({
     schemaVersion:'MPR_OPPORTUNITY_V5',canonicalProductId:id,opportunityScore:score,confidence,recommendation,
     components:Object.freeze(components),weightedComponents:Object.freeze(weighted),knownWeight,missingComponents:Object.freeze(missingComponents),identityMismatches:Object.freeze(identityMismatches),pretestGateStatuses:Object.freeze(statuses),blockers:Object.freeze([...new Set(blockers)]),
     finalistEligible:recommendation==='FINALIST',testReadyEligible:false,buyReadyEligible:false,legacyRecommendationAuthoritative:false,verifiedSales:null,salesEvidenceClass:'NOT_INFERRED_BY_OPPORTUNITY_ENGINE',
     purchaseAuthorized:false,automaticPurchaseAllowed:false,paidCallsTriggered:0,providerSpendEur:0,
-    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
+    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; LOW_CONFIDENCE_REMAINS_VALIDATE; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
   });
 }
 
