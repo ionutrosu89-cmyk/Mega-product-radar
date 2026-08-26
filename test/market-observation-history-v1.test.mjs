@@ -26,7 +26,13 @@ test('sub-24h history fails closed for trend',()=>{
 test('same canonical product on different platforms stays in separate metric series',()=>{
   const h=appendMarketObservationHistory([],[obs(),obs({observedAt:'2026-08-27T10:00:00Z'}),obs({platform:'EBAY',externalId:'E1'}),obs({platform:'EBAY',externalId:'E1',observedAt:'2026-08-27T10:00:00Z'})]).history;
   const report=buildObservationHistoryMetrics(h);
-  assert.equal(report.seriesCount,2);assert.equal(report.longitudinalReady,2);assert.match(report.policy,/NO_CROSS_PLATFORM_RANK_FUSION/);
+  assert.equal(report.seriesCount,2);assert.equal(report.longitudinalReady,2);assert.match(report.policy,/NO_CROSS_PLATFORM/);
+});
+
+test('same ASIN can preserve multiple explicit ranking surfaces at one timestamp',()=>{
+  const h=appendMarketObservationHistory([],[obs({surface:'BSR_CATEGORY::OFFICE PRODUCTS',sourceRank:143}),obs({surface:'BSR_CATEGORY::ROUND RING BINDERS',sourceRank:2})]);
+  assert.equal(h.history.length,2);assert.equal(h.rejected.length,0);
+  const report=buildObservationHistoryMetrics(h.history);assert.equal(report.seriesCount,2);assert.notEqual(report.metrics[0].seriesKey,report.metrics[1].seriesKey);
 });
 
 test('title changes never split a canonical source history',()=>{
