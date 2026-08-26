@@ -1,52 +1,9 @@
 import {getCurrentSession} from './supabase-client.js';
-import {ensurePersonalWorkspace} from './workspace-client.js';
+import {getActiveWorkspace,ensurePersonalWorkspace} from './workspace-client.js';
 
-async function authSession(){
-  const session=await getCurrentSession();
-  if(!session?.access_token)throw new Error('Autentificare necesară.');
-  return session;
-}
-
-async function billingFetch(path,options={}){
-  const session=await authSession();
-  const workspace=await ensurePersonalWorkspace('My Radar');
-  if(!workspace?.id)throw new Error('Workspace-ul de billing nu este disponibil.');
-  const response=await fetch(path,{...options,headers:{...(options.headers||{}),authorization:`Bearer ${session.access_token}`,'x-mpr-workspace-id':workspace.id}});
-  const data=await response.json().catch(()=>({}));
-  return {response,data};
-}
-
-export async function startSubscriptionCheckout(plan){
-  const code=String(plan||'').toUpperCase();
-  if(!['DISCOVER','RADAR','LAUNCH'].includes(code))throw new Error('Plan de abonament invalid.');
-  const session=await getCurrentSession();
-  if(!session?.access_token){location.href=`login.html?next=${encodeURIComponent('pricing.html?plan='+code)}`;return null;}
-  const first=await billingFetch('/api/billing/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({plan:code})});
-  if(first.response.ok&&first.data?.url){location.href=first.data.url;return first.data;}
-  if(first.response.status===409&&first.data?.code==='ALREADY_ON_PLAN'){location.href='account.html?billing=already';return first.data;}
-  if(first.response.status===409&&first.data?.code==='ACTIVE_SUBSCRIPTION_EXISTS'){
-    const changed=await billingFetch('/api/billing/change-plan',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({plan:code})});
-    if(!changed.response.ok)throw new Error(changed.data?.error||'Schimbarea planului nu a reușit.');
-    location.href=`account.html?billing=changed&plan=${encodeURIComponent(code)}`;
-    return changed.data;
-  }
-  throw new Error(first.data?.error||'Checkout indisponibil momentan.');
-}
-
-export async function getBillingStatus(){
-  const {response,data}=await billingFetch('/api/billing/status',{cache:'no-store'});
-  if(!response.ok)throw new Error(data?.error||'Statusul abonamentului nu este disponibil.');
-  return data;
-}
-
-export async function cancelSubscription(){
-  const {response,data}=await billingFetch('/api/billing/cancel',{method:'POST'});
-  if(!response.ok)throw new Error(data?.error||'Anularea abonamentului nu a reușit.');
-  return data;
-}
-
-export async function resumeSubscription(){
-  const {response,data}=await billingFetch('/api/billing/resume',{method:'POST'});
-  if(!response.ok)throw new Error(data?.error||'Retragerea anulării nu a reușit.');
-  return data;
-}
+async function authSession(){const session=await getCurrentSession();if(!session?.access_token)throw new Error('Autentificare necesară.');return session;}
+async function billingFetch(path,options={}){const session=await authSession();const workspace=await getActiveWorkspace()||await ensurePersonalWorkspace('My Radar');if(!workspace?.id)throw new Error('Workspace-ul de billing nu este disponibil.');const response=await fetch(path,{...options,headers:{...(options.headers||{}),authorization:`Bearer ${session.access_token}`,'x-mpr-workspace-id':workspace.id}});const data=await response.json().catch(()=>({}));return {response,data};}
+export async function startSubscriptionCheckout(plan){const code=String(plan||'').toUpperCase();if(!['DISCOVER','RADAR','LAUNCH'].includes(code))throw new Error('Plan de abonament invalid.');const session=await getCurrentSession();if(!session?.access_token){location.href=`login.html?next=${encodeURIComponent('pricing.html?plan='+code)}`;return null;}const first=await billingFetch('/api/billing/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({plan:code})});if(first.response.ok&&first.data?.url){location.href=first.data.url;return first.data;}if(first.response.status===409&&first.data?.code==='ALREADY_ON_PLAN'){location.href='account.html?billing=already';return first.data;}if(first.response.status===409&&first.data?.code==='ACTIVE_SUBSCRIPTION_EXISTS'){const changed=await billingFetch('/api/billing/change-plan',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({plan:code})});if(!changed.response.ok)throw new Error(changed.data?.error||'Schimbarea planului nu a reușit.');location.href=`account.html?billing=changed&plan=${encodeURIComponent(code)}`;return changed.data;}throw new Error(first.data?.error||'Checkout indisponibil momentan.');}
+export async function getBillingStatus(){const {response,data}=await billingFetch('/api/billing/status',{cache:'no-store'});if(!response.ok)throw new Error(data?.error||'Statusul abonamentului nu este disponibil.');return data;}
+export async function cancelSubscription(){const {response,data}=await billingFetch('/api/billing/cancel',{method:'POST'});if(!response.ok)throw new Error(data?.error||'Anularea abonamentului nu a reușit.');return data;}
+export async function resumeSubscription(){const {response,data}=await billingFetch('/api/billing/resume',{method:'POST'});if(!response.ok)throw new Error(data?.error||'Retragerea anulării nu a reușit.');return data;}
