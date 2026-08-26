@@ -31,3 +31,7 @@ The customer-facing decision surface is deliberately narrower than the underlyin
 `opportunity-ux-v1.js` is a truth-preserving presentation adapter over the canonical Opportunity V5 envelope. It does not reconstruct missing evidence from legacy fields.
 
 Both `commercial-radar.html` and `commercial-product.html` now consume this model as the primary customer experience while keeping their existing authenticated URLs.
+
+## Integration verification
+
+This final stacked UX PR is retargeted to `main` only after Opportunity V5 is merged and green. The final integration must keep Opportunity V5 as primary authority, preserve the stricter Economics evidence rule, retain canonical identity and low-confidence fail-closed behavior, and pass the complete npm audit, test and Netlify build pipeline before merge.
