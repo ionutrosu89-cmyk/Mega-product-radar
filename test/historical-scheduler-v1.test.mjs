@@ -17,6 +17,13 @@ test('24h window is satisfied after a second observation at least 24h later',()=
   assert.equal(s.items.find(x=>x.window==='7D').status,'WAITING');
 });
 
+test('7d milestone stays anchored to first observation even when daily observations exist',()=>{
+  const h=[obs('2026-08-26T10:00:00Z'),obs('2026-08-27T10:05:00Z'),obs('2026-08-28T10:05:00Z')];
+  const before=buildHistoricalSchedule(h,{now:'2026-09-02T09:59:00Z'}).items.find(x=>x.window==='7D');
+  const due=buildHistoricalSchedule(h,{now:'2026-09-02T10:01:00Z'}).items.find(x=>x.window==='7D');
+  assert.equal(before.dueAt,'2026-09-02T10:00:00.000Z');assert.equal(before.status,'WAITING');assert.equal(due.status,'DUE');
+});
+
 test('same ASIN on different rank surfaces is scheduled independently',()=>{
   const h=[obs('2026-08-26T10:00:00Z'),obs('2026-08-26T10:00:00Z',{surface:'ROUND_RING_BINDERS'})];
   const s=buildHistoricalSchedule(h,{now:'2026-08-27T10:01:00Z'});
