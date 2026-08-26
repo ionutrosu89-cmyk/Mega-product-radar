@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { highestAllowedStatus, normalizePurchaseRecord, promotedDiscoveryProducts, purchaseBlockers, purchaseEconomics, supplierReady } from '../purchase-manager.js';
 
+const canonicalProductId='123e4567-e89b-42d3-a456-426614174000';
 const supplied={fxRate:true,unitPriceForeign:true,quantity:true,internationalFreight:true,customsDutyRate:true,customsFixed:true,brokerage:true,domesticFreight:true,inspection:true,labelsPackaging:true,otherFixed:true};
-const confirmedLanded=(overrides={})=>({currency:'USD',fxRate:5,unitPriceForeign:10,quantity:10,internationalFreight:100,customsDutyRate:0,customsFixed:0,brokerage:0,domesticFreight:0,inspection:0,labelsPackaging:0,otherFixed:0,provided:supplied,fxSource:'bank statement',fxVerifiedAt:'2026-08-24T06:00:00Z',customsStatus:'NOT_APPLICABLE',importVatTreatment:'DEDUCTIBLE_EXCLUDED_FROM_COST',freightEvidenceRef:'freight quote F-1',supplierQuoteRef:'supplier quote Q-1',manualVerifiedBy:'operator',manualVerifiedAt:'2026-08-24T06:05:00Z',confirmationRequested:true,...overrides});
+const confirmedLanded=(overrides={})=>({canonicalProductId,productName:'Canonical test product',decisionEligible:true,currency:'USD',fxRate:5,unitPriceForeign:10,quantity:10,internationalFreight:100,customsDutyRate:0,customsFixed:0,brokerage:0,domesticFreight:0,inspection:0,labelsPackaging:0,otherFixed:0,provided:supplied,fxSource:'bank statement',fxVerifiedAt:'2026-08-24T06:00:00Z',customsStatus:'NOT_APPLICABLE',importVatTreatment:'DEDUCTIBLE_EXCLUDED_FROM_COST',freightEvidenceRef:'freight quote F-1',supplierQuoteRef:'supplier quote Q-1',manualVerifiedBy:'operator',manualVerifiedAt:'2026-08-24T06:05:00Z',confirmationRequested:true,...overrides});
 
 test('purchase record normalizes numeric and boolean fields',()=>{
   const r=normalizePurchaseRecord({status:'READY TO ORDER',quantity:'12.7',targetUnitCost:'44.5',sampleOrdered:1,sampleApproved:true});
@@ -32,7 +33,7 @@ test('legacy manual landed checkbox cannot reach READY TO ORDER without evidence
   assert.ok(purchaseBlockers(ready,s).some(x=>x.includes('Landed cost')));
 });
 
-test('evidence-confirmed Landed Cost satisfies landed checklist automatically',()=>{
+test('evidence-confirmed canonical Landed Cost satisfies landed checklist automatically',()=>{
   const s={supplierName:'A',moq:20,rating:4.7,years:4,tradeAssurance:true};
   const ready={quantity:20,sampleOrdered:true,sampleApproved:true,complianceDocs:true,packagingConfirmed:true,paymentTermsConfirmed:true};
   const landed=confirmedLanded({quantity:20,internationalFreight:200});
@@ -41,12 +42,19 @@ test('evidence-confirmed Landed Cost satisfies landed checklist automatically',(
   assert.equal(highestAllowedStatus({...ready,orderNumber:'PO-123'},s,landed),'COMANDAT');
 });
 
-test('purchase economics prefers evidence-confirmed Landed Cost over manual target',()=>{
+test('purchase economics prefers evidence-confirmed canonical Landed Cost over manual target',()=>{
   const landed=confirmedLanded();
   const e=purchaseEconomics({landed:70,sell:200},{quantity:10,targetUnitCost:55},{},landed);
   assert.equal(e.unitCost,60);
   assert.equal(e.orderValue,600);
   assert.equal(e.costSource,'CONFIRMAT 4.5');
+});
+
+test('legacy complete-looking landed evidence cannot satisfy purchase gate without canonical identity',()=>{
+  const s={supplierName:'A',moq:20,rating:4.7,years:4,tradeAssurance:true};
+  const ready={quantity:20,sampleOrdered:true,sampleApproved:true,complianceDocs:true,packagingConfirmed:true,paymentTermsConfirmed:true};
+  const {canonicalProductId:_,...legacy}=confirmedLanded({quantity:20});
+  assert.notEqual(highestAllowedStatus(ready,s,legacy),'READY TO ORDER');
 });
 
 test('only validated BUY CANDIDATE discovery products enter Purchase Manager',()=>{
