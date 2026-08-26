@@ -70,6 +70,7 @@ export function analyzeRomaniaGapV2({canonicalProductId=null,queryEvidence={},li
   const observedAt=text(queryEvidence.observedAt)||null;
   const source=text(queryEvidence.source)||null;
   const sourceUrl=text(queryEvidence.sourceUrl)||null;
+  const platform=upper(queryEvidence.platform)||'UNKNOWN';
   const scope=text(queryEvidence.scope)||'QUERY_SURFACE';
   const input=Array.isArray(listings)?listings:[];
   const comparable=dedupeComparableListings(input);
@@ -93,10 +94,11 @@ export function analyzeRomaniaGapV2({canonicalProductId=null,queryEvidence={},li
   if(!coverageClass)reasons.push('VALID_COVERAGE_CLASS_REQUIRED');
   if(!source)reasons.push('SOURCE_REQUIRED');
   if(!observedAt)reasons.push('OBSERVED_AT_REQUIRED');
+  if(platform==='UNKNOWN')reasons.push('PLATFORM_REQUIRED');
   if(unknownComparabilityCount>0)reasons.push('UNKNOWN_LISTING_COMPARABILITY_REMAINS');
   if(!localDemandEvidence||upper(localDemandEvidence.evidenceClass||'UNKNOWN')==='UNKNOWN')reasons.push('LOCAL_DEMAND_EVIDENCE_MISSING');
 
-  const decisionEligible=Boolean(id&&coverageClass&&source&&observedAt);
+  const decisionEligible=Boolean(id&&coverageClass&&source&&observedAt&&platform!=='UNKNOWN');
   if(decisionEligible){
     if(coverageClass==='ESTIMATED'){gateStatus='REVIEW';reasons.push('ESTIMATED_COVERAGE_CANNOT_PROVE_GAP');}
     else if(unknownComparabilityCount>0){gateStatus='REVIEW';}
@@ -108,7 +110,7 @@ export function analyzeRomaniaGapV2({canonicalProductId=null,queryEvidence={},li
   const marketWideClaimAllowed=Boolean(coverageClass==='EXHAUSTIVE_QUERY'&&upper(scope)==='MARKET_WIDE'&&queryEvidence.marketWideVerified===true);
 
   return Object.freeze({
-    schemaVersion:'MPR_ROMANIA_GAP_V2',canonicalProductId:id,decisionEligible,gateStatus,gapScore,confidence,coverageClass:coverageClass||'UNKNOWN',scope,
+    schemaVersion:'MPR_ROMANIA_GAP_V2',canonicalProductId:id,decisionEligible,gateStatus,gapScore,confidence,coverageClass:coverageClass||'UNKNOWN',platform,scope,
     comparableListingCount:comparable.length,sellerCount:sellers.size,brandCount:brands.size,medianPriceRon,reviewBarrier,priceSpreadPct,sellerConcentrationPct,
     localDemandScore,unknownComparabilityCount,source,sourceUrl,observedAt,marketWideClaimAllowed,
     comparableListings:Object.freeze(comparable),reasons:Object.freeze([...new Set(reasons)]),evidenceClass:'DERIVED',
