@@ -4,10 +4,8 @@ import {adaptAmazonExplicitBsrSnapshot,adaptAmazonPublicRankingSnapshot,adaptAbs
 import {buildDataQualityReport} from './data-quality-report-v1.js';
 import {buildHistoricalSchedule} from './historical-scheduler-v1.js';
 
-const asArray=v=>Array.isArray(v)?v:[];
-
 export function runDataFoundationV1({products=[],aliases=[],existingHistory=[],datasets=[],now=new Date().toISOString()}={}){
-  const adapted=[],rejected=[];
+  const adapted=[],rejected=[],incoming=[];
   for(const item of datasets||[]){
     const type=String(item?.type||'').toUpperCase();
     let result;
@@ -17,9 +15,8 @@ export function runDataFoundationV1({products=[],aliases=[],existingHistory=[],d
     else {rejected.push({type,errors:['DATASET_ADAPTER_NOT_SUPPORTED']});continue;}
     adapted.push({type,adapter:result.adapter,accepted:result.observations.length,rejected:result.rejected.length,boundCount:result.boundCount,unboundCount:result.unboundCount});
     rejected.push(...result.rejected.map(x=>({type,errors:x.errors,input:x.input})));
-    item.__observations=result.observations;
+    incoming.push(...result.observations);
   }
-  const incoming=datasets.flatMap(x=>asArray(x.__observations));
   const appended=appendMarketObservationHistory(existingHistory,incoming);
   const historyReport=buildObservationHistoryMetrics(appended.history);
   const universe=buildProductUniverse({products,aliases,observations:appended.history});
