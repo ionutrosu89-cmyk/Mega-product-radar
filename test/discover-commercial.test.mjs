@@ -81,8 +81,9 @@ test('commercial Discover excludes products without a direct public evidence URL
 test('commercial endpoint enforces server-side product limits and strips sourcing economics',async()=>{
   const fn=await fs.readFile(new URL('../netlify/functions/commercial-discover.mjs',import.meta.url),'utf8');
   assert.match(fn,/const limit=full\?20:3/);
-  assert.match(fn,/\/auth\/v1\/user/);
-  assert.match(fn,/\/rest\/v1\/workspaces/);
+  assert.match(fn,/resolveWorkspaceAccess/);
+  assert.match(fn,/EXPLICIT_MEMBERSHIP_BOUND/);
+  assert.match(fn,/X-MPR-Workspace-Id/);
   assert.match(fn,/Vary':'Authorization/);
   assert.doesNotMatch(fn,/sourcing:/);
   assert.doesNotMatch(fn,/landedEstimate:/);
