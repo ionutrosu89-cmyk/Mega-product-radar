@@ -55,22 +55,23 @@ export function analyzeOpportunityV5({canonicalProductId=null,globalDemand={},tr
   if(missingComponents.length)blockers.push('OPPORTUNITY_COMPONENTS_INCOMPLETE');
   const statuses=Object.fromEntries(OPPORTUNITY_PRETEST_GATES_V5.map(k=>[k,components[k]?.status||'UNKNOWN']));
   if(statuses.importability==='BLOCKED')blockers.push('IMPORTABILITY_BLOCKED');
-  for(const k of OPPORTUNITY_PRETEST_GATES_V5){if(!['PASS'].includes(statuses[k]))blockers.push(`${k.toUpperCase()}_NOT_PASS`);}
+  for(const k of OPPORTUNITY_PRETEST_GATES_V5){if(statuses[k]!=='PASS')blockers.push(`${k.toUpperCase()}_NOT_PASS`);}
 
-  const allPretestPass=id&&identityMismatches.length===0&&missingComponents.length===0&&OPPORTUNITY_PRETEST_GATES_V5.every(k=>statuses[k]==='PASS');
+  const allPretestPass=Boolean(id&&identityMismatches.length===0&&missingComponents.length===0&&OPPORTUNITY_PRETEST_GATES_V5.every(k=>statuses[k]==='PASS'));
   let recommendation='DISCOVERED';
   if(id&&score!==null)recommendation='PROMISING';
   if(id&&(missingComponents.length||identityMismatches.length||!allPretestPass))recommendation='VALIDATE';
-  if(allPretestPass&&confidence>=60&&score!==null&&score>=60)recommendation='FINALIST';
+  // A complete, high-scoring candidate with weak evidence remains work-in-validation;
+  // low confidence must never regress it to PROMISING or promote it to FINALIST.
+  if(allPretestPass&&score!==null&&score>=60)recommendation=confidence>=60?'FINALIST':'VALIDATE';
   if(components.importability.status==='BLOCKED')recommendation='VALIDATE';
-  if(confidence<50&&recommendation==='FINALIST')recommendation='VALIDATE';
 
   return Object.freeze({
     schemaVersion:'MPR_OPPORTUNITY_V5',canonicalProductId:id,opportunityScore:score,confidence,recommendation,
     components:Object.freeze(components),weightedComponents:Object.freeze(weighted),knownWeight,missingComponents:Object.freeze(missingComponents),identityMismatches:Object.freeze(identityMismatches),pretestGateStatuses:Object.freeze(statuses),blockers:Object.freeze([...new Set(blockers)]),
     finalistEligible:recommendation==='FINALIST',testReadyEligible:false,buyReadyEligible:false,legacyRecommendationAuthoritative:false,verifiedSales:null,salesEvidenceClass:'NOT_INFERRED_BY_OPPORTUNITY_ENGINE',
     purchaseAuthorized:false,automaticPurchaseAllowed:false,paidCallsTriggered:0,providerSpendEur:0,
-    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
+    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; LOW_CONFIDENCE_HIGH_OPPORTUNITY_REMAINS_VALIDATE; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
   });
 }
 
