@@ -5,7 +5,6 @@ await fs.rm(out,{recursive:true,force:true});
 await fs.mkdir(out,{recursive:true});
 const copy=async(source,target=source)=>fs.copyFile(path.join(root,source),path.join(out,target));
 const copyIfExists=async source=>{try{await copy(source);}catch(e){if(e?.code!=='ENOENT')throw e;}};
-const copyNested=async(source,target=source)=>{await fs.mkdir(path.dirname(path.join(out,target)),{recursive:true});await copy(source,target);};
 const writePatched=async(source,target,patcher)=>{const text=await fs.readFile(path.join(root,source),'utf8');await fs.writeFile(path.join(out,target),patcher(text));};
 await copy('index.html');
 await copy('radar.html');
@@ -27,12 +26,13 @@ for(const file of [
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ]) await copyIfExists(file);
-for(const file of [
-  'supplier-rfq-dispatch/car-sunglasses-magnetic-visor-holder.json',
-  'supplier-candidates/car-sunglasses-magnetic-visor-holder.json',
-  'docs/rfq-car-sunglasses-magnetic-visor-holder.md'
-]) await copyNested(file);
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','landed-cost-evidence.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js','test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js','supplier-rfq-dispatch/car-sunglasses-magnetic-visor-holder.json','supplier-candidates/car-sunglasses-magnetic-visor-holder.json','docs/rfq-car-sunglasses-magnetic-visor-holder.md','customer-ui.css','customer-shell.js','academy.html','academy.js','plan-recommendation-v1.js'])await fs.access(path.join(out,required));
+
+// P0 policy: supplier candidates, RFQ dispatch payloads, manual evidence and negotiation dossiers are private server-side data.
+// Never copy supplier-candidates/, supplier-rfq-dispatch/, supplier-evidence/ or docs/rfq-* into the customer static bundle.
+for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','landed-cost-evidence.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js','test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js','customer-ui.css','customer-shell.js','academy.html','academy.js','plan-recommendation-v1.js'])await fs.access(path.join(out,required));
+for(const forbidden of ['supplier-candidates','supplier-rfq-dispatch','supplier-evidence']){
+  try{await fs.access(path.join(out,forbidden));throw new Error(`PRIVATE_STATIC_ARTIFACT_EXPOSED:${forbidden}`);}catch(error){if(error?.code!=='ENOENT')throw error;}
+}
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
 const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','academy.html','account.html']);
@@ -46,4 +46,4 @@ for(const entry of await fs.readdir(out)){
   await fs.writeFile(target,html);
 }
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-console.log('Mega Product Radar static site built: commercial SaaS + unified customer UX + evidence-safe decision engine.');
+console.log('Mega Product Radar static site built: Netlify production bundle with private commercial artifacts excluded.');
