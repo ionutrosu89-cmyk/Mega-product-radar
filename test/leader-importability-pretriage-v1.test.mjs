@@ -22,3 +22,9 @@ test('ingestible title is regulatory review only',()=>{
   assert.equal(r.purchaseAuthorized,false);
   assert.equal(r.paidCallsTriggered,0);
 });
+
+test('cream horn molds does not become a liquid false positive',()=>{
+  const r=buildLeaderImportabilityPretriage({leaders:[{asin:'D',title:'Stainless Steel Cream Horn Molds Pack of 12'}]});
+  assert.equal(r.rows[0].flags.includes('TITLE_SUGGESTS_LIQUID_OR_CHEMICAL_REVIEW'),false);
+  assert.ok(r.rows[0].flags.includes('TITLE_SUGGESTS_WEIGHT_REVIEW'));
+});
