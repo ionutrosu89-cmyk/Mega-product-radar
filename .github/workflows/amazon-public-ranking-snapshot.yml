@@ -20,6 +20,7 @@ on:
       - main
     paths:
       - 'data/amazon-office-ranking-trigger-2026-08-26.json'
+      - 'data/amazon-office-ranking-page2-trigger-2026-08-26.json'
 
 permissions:
   contents: read
@@ -27,7 +28,7 @@ permissions:
 env:
   RANKING_CATEGORY_KEY: ${{ github.event_name == 'workflow_dispatch' && inputs.category_key || 'amazon:office-products:best-sellers' }}
   RANKING_CATEGORY_LABEL: ${{ github.event_name == 'workflow_dispatch' && inputs.category_label || 'Office Products' }}
-  RANKING_SOURCE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.source_url || 'https://www.amazon.com/gp/bestsellers/office-products?language=en_US' }}
+  RANKING_SOURCE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.source_url || 'https://www.amazon.com/gp/bestsellers/office-products?pg=2&language=en_US' }}
 
 jobs:
   collect:
@@ -43,11 +44,12 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs');
-          const p='data/amazon-office-ranking-trigger-2026-08-26.json';
-          if(!fs.existsSync(p)) throw new Error('RANKING_TRIGGER_MARKER_MISSING');
+          const p='data/amazon-office-ranking-page2-trigger-2026-08-26.json';
+          if(!fs.existsSync(p)) throw new Error('RANKING_PAGE2_TRIGGER_MARKER_MISSING');
           const x=JSON.parse(fs.readFileSync(p,'utf8'));
-          if(x.triggerId!=='AMAZON_OFFICE_PRODUCTS_RANKING_2026_08_26') throw new Error('RANKING_TRIGGER_ID_INVALID');
+          if(x.triggerId!=='AMAZON_OFFICE_PRODUCTS_RANKING_PAGE2_2026_08_26') throw new Error('RANKING_PAGE2_TRIGGER_ID_INVALID');
           if(x.categoryKey!=='amazon:office-products:best-sellers') throw new Error('RANKING_TRIGGER_CATEGORY_INVALID');
+          if(x.page!==2) throw new Error('RANKING_TRIGGER_PAGE_INVALID');
           if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('RANKING_TRIGGER_POLICY_INVALID');
           NODE
       - name: Collect explicit Amazon public ranking evidence
