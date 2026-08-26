@@ -45,10 +45,6 @@ export function analyzeEconomicsV3({canonicalProductId=null,supplierQuote=null,c
   const supplierQuoteMatches=Boolean(id&&quoteProductId&&id===quoteProductId);
   const base={};
   for(const key of ECONOMICS_COST_KEYS_V3)base[key]=evidence(costEvidence[key],key);
-  if(base.supplierUnitCost.value===null&&supplierQuote?.unitPrice!==undefined){
-    const qp=num(supplierQuote.unitPrice),qc=upper(supplierQuote.evidenceClass)||'UNKNOWN';
-    base.supplierUnitCost={key:'supplierUnitCost',value:qp,evidenceClass:qc,source:text(supplierQuote.source)||'SUPPLIER_QUOTE',sourceUrl:text(supplierQuote.sourceUrl)||null,observedAt:text(supplierQuote.observedAt)||null,strong:STRONG.has(qc),known:qp!==null};
-  }
   const unknownCosts=ECONOMICS_COST_KEYS_V3.filter(k=>!base[k].known);
   const weakCritical=ECONOMICS_COST_KEYS_V3.filter(k=>base[k].known&&!base[k].strong);
   const invalidCosts=ECONOMICS_COST_KEYS_V3.filter(k=>base[k].known&&base[k].value<0);
@@ -83,6 +79,6 @@ export function analyzeEconomicsV3({canonicalProductId=null,supplierQuote=null,c
     evidence:Object.freeze(base),unknownCosts:Object.freeze(unknownCosts),weakCriticalEvidence:Object.freeze(weakCritical),invalidCosts:Object.freeze(invalidCosts),blockers:Object.freeze([...new Set(blockers)]),
     targets:Object.freeze({minBaseMarginPct:minBaseMargin,minWorstMarginPct:minWorstMargin}),scenarios:Object.freeze(scenarios),breakEvenSupplierUnitCost:breakEvenSupplierUnitCost===null?null:Number(breakEvenSupplierUnitCost.toFixed(4)),
     decisionEligible:inputsComplete,evidenceClass:inputsComplete?'DERIVED':'UNKNOWN',canPromoteToFinalist:false,canPromoteToTestReady:false,canPromoteToBuyReady:false,purchaseAuthorized:false,paidCallsTriggered:0,providerSpendEur:0,
-    policy:'CANONICAL_SUPPLIER_QUOTE_MATCH_REQUIRED; ALL_CRITICAL_COSTS_REQUIRE_STRONG_EVIDENCE; UNKNOWN_COSTS_STAY_UNKNOWN; BEST_BASE_WORST_EXPLICIT; BREAK_EVEN_IS_DERIVED_NOT_VERIFIED_SALES; ECONOMICS_NEVER_AUTHORIZES_PURCHASE'
+    policy:'CANONICAL_SUPPLIER_QUOTE_MATCH_REQUIRED; ALL_CRITICAL_COSTS_REQUIRE_STRONG_EVIDENCE; SUPPLIER_UNIT_COST_REQUIRES_EXPLICIT_COST_EVIDENCE; UNKNOWN_COSTS_STAY_UNKNOWN; BEST_BASE_WORST_EXPLICIT; BREAK_EVEN_IS_DERIVED_NOT_VERIFIED_SALES; ECONOMICS_NEVER_AUTHORIZES_PURCHASE'
   });
 }
