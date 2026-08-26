@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "MPR_P2_LIVE_CANONICAL_BASELINE_V1",
+  "observedAt": "2026-08-26T16:22:50.125702Z",
+  "source": "PRODUCTION_SUPABASE_AGGREGATE_MEASUREMENT",
+  "canonicalRegistry": {
+    "canonicalProducts": 100,
+    "productAliases": 167,
+    "amazonExactAliases": 0,
+    "aliasesWithoutCanonicalProductId": 0,
+    "aliasesWithoutPlatform": 0,
+    "productsWithoutIdentityStatus": 0
+  },
+  "longitudinalHistory": {
+    "productObservationRows": 598,
+    "productsWithOnePlusObservations": 100,
+    "productsWithTwoPlusObservations": 62,
+    "productsWithThreePlusObservations": 62,
+    "maxObservationsPerProduct": 10,
+    "averageObservationsPerObservedProduct": 5.98,
+    "observationTypes": [
+      {"type":"PIPELINE_SNAPSHOT","rows":558,"products":62},
+      {"type":"INTERNAL_TOP25_RANK","rows":38,"products":38},
+      {"type":"ro_search_volume","rows":2,"products":2}
+    ]
+  },
+  "bootstrapSource": {
+    "committedAmazonProducts": 1000,
+    "exactAmazonAliasesResolvedToCanonicalRegistry": 0,
+    "status": "SOURCE_DATA_PRESENT_CANONICAL_RESOLUTION_PENDING"
+  },
+  "scaleReadiness": {
+    "status": "HOLD_SCALE",
+    "entryBlockers": [
+      "CANONICAL_BASELINE_BELOW_1000",
+      "EXACT_AMAZON_ALIAS_RESOLUTION_PENDING"
+    ],
+    "tenKMilestoneReached": false
+  },
+  "schemaReconciliation": {
+    "canonicalIdentityMigrationApplied": true,
+    "legacyAliasesBackfilledWithoutLoss": true,
+    "globalSupplierNamespaceSeparated": true,
+    "supplierQuotesRepointedToSupplierEntitiesV3": true
+  },
+  "truthPolicy": {
+    "internalPipelineObservationsAreNotPublicMarketplaceProof": true,
+    "rawBootstrapCoverageIsNotCanonicalCoverage": true,
+    "verifiedSalesInferred": false,
+    "paidCallsTriggered": 0,
+    "providerSpendEur": 0,
+    "purchaseAuthorized": false
+  }
+}
