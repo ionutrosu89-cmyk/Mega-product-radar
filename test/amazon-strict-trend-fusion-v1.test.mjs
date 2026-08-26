@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { buildAmazonStrictTrendFusion } from '../amazon-strict-trend-fusion-v1.js';
+
+const leaders=()=>({schemaVersion:'MPR_AMAZON_ROUND2_PRELIMINARY_LEADERS_V1',generatedAt:'2026-08-26T04:01:05.223Z',leaders:[{asin:'B00INKVS82',title:'Binder',reviewDelta:14,reviewVelocityPerDay:13.903}],policy:{salesEvidenceClass:'NOT_VERIFIED_SALES',paidCallsTriggered:0,purchaseAuthorized:false}});
+const history=()=>({ok:true,status:'RANK_HISTORY_READY',salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,paidCallsTriggered:0,purchaseAuthorized:false,rows:[{externalId:'B00INKVS82',latestObservedAt:'2026-08-27T06:35:00.000Z',intervalEligible:true,categorySignalsConflict:false,trendEvidenceClass:'LONGITUDINAL_PUBLIC_RANKING',rankVelocityPerDay:12,comparableCategoryCount:2,categories:[]}]});
+
+test('confirms only positive review plus improving eligible rank',()=>{const r=buildAmazonStrictTrendFusion({leaders:leaders(),rankHistory:history()});assert.equal(r.ok,true);assert.equal(r.confirmedAccelerationCount,1);assert.equal(r.rows[0].status,'CONFIRMED_ACCELERATION');assert.equal(r.verifiedSalesRows,0);assert.equal(r.purchaseAuthorized,false);});
+test('flat rank does not confirm acceleration',()=>{const h=history();h.rows[0].rankVelocityPerDay=0;const r=buildAmazonStrictTrendFusion({leaders:leaders(),rankHistory:h});assert.equal(r.confirmedAccelerationCount,0);assert.equal(r.rows[0].status,'RANK_FLAT');});
+test('mixed category direction fails closed for product',()=>{const h=history();h.rows[0].categorySignalsConflict=true;h.rows[0].rankVelocityPerDay=null;const r=buildAmazonStrictTrendFusion({leaders:leaders(),rankHistory:h});assert.equal(r.confirmedAccelerationCount,0);assert.equal(r.rows[0].status,'BLOCKED_RANK_CATEGORY_CONFLICT');});
+test('temporal mismatch blocks fusion',()=>{const h=history();h.rows[0].latestObservedAt='2026-08-30T06:35:00.000Z';const r=buildAmazonStrictTrendFusion({leaders:leaders(),rankHistory:h});assert.equal(r.ok,false);assert.equal(r.status,'BLOCKED');assert.equal(r.confirmedAccelerationCount,0);});
+test('non-positive review movement blocks confirmation',()=>{const l=leaders();l.leaders[0].reviewDelta=0;l.leaders[0].reviewVelocityPerDay=0;const r=buildAmazonStrictTrendFusion({leaders:l,rankHistory:history()});assert.equal(r.confirmedAccelerationCount,0);assert.equal(r.rows[0].status,'NO_POSITIVE_REVIEW_SIGNAL');});
