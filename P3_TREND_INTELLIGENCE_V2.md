@@ -42,7 +42,7 @@ Signals that are not yet present as direct evidence remain unknown. Search momen
 
 ## Status contract
 
-Possible classifications:
+Possible series classifications:
 
 - `INSUFFICIENT_HISTORY`
 - `EARLY_SIGNAL`
@@ -56,6 +56,20 @@ Possible classifications:
 
 `SPIKE_OR_REVERSAL` explicitly captures cases where recent 24h movement looks strong but longer-window behavior does not support it.
 
+## Product-level aggregation
+
+`MPR_PRODUCT_TREND_AGGREGATE_V2` creates one conservative trend view per exact `canonicalProductId` after series-level analysis.
+
+Important rules:
+
+- only canonically bound series can enter a decision aggregate;
+- multiple surfaces are corroboration, not independent sales observations;
+- the product score is a confidence-weighted mean and cannot be inflated simply by adding more BSR surfaces;
+- conflicting positive and negative surfaces produce `MIXED_OR_CONFLICTED` and reduce confidence;
+- an isolated spike is never upgraded to persistent trend by aggregation;
+- unbound series are counted separately and never enter product decision evidence;
+- cross-market momentum is not inferred merely because multiple surfaces exist.
+
 ## Decision authority
 
 Trend Intelligence is evidence, not purchase authority.
@@ -66,6 +80,8 @@ Trend Intelligence is evidence, not purchase authority.
 - verified sales remain `null`
 - `salesEvidenceClass = NOT_VERIFIED_SALES`
 - automatic purchase is forbidden
+
+Trend evidence can support at most `VALIDATE`. `FINALIST`, `TEST_READY`, `TEST_VALIDATED` and `BUY_READY` remain under the canonical Decision Authority and require their independent gates.
 
 ## Initial scoring contract
 
