@@ -18,7 +18,7 @@ Purpose: calculate landed and selling economics for one canonical product using 
 - payment fee %
 - warranty %
 
-Each required input must carry strong evidence: VERIFIED, DIRECT_OBSERVED, PROVIDER_VERIFIED or MANUALLY_VERIFIED.
+Each required input must carry strong evidence: VERIFIED, DIRECT_OBSERVED, PROVIDER_VERIFIED or MANUALLY_VERIFIED. The supplier quote does not silently substitute for the dedicated `supplierUnitCost` evidence input.
 
 ## Product identity
 
@@ -48,3 +48,7 @@ Complete economics below configured margin thresholds => `REVIEW`.
 Only complete, strong-evidence economics meeting base and worst-case margin thresholds => `PASS`.
 
 Economics never authorizes purchase and cannot independently promote FINALIST / TEST_READY / BUY_READY.
+
+## Integration verification
+
+This stacked PR is retargeted to `main` only after Supplier Intelligence V2 is merged and green. Integration must preserve explicit cost evidence, canonical quote binding, fail-closed unknowns, and zero purchase authority.
