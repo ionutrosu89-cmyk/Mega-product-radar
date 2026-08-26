@@ -1,9 +1,12 @@
 {
-  "observedAt": "2026-08-25T17:15:00Z",
+  "observedAt": "2026-08-26T04:01:05.223Z",
   "productUniverse": 1000,
   "productsWithFirstLiveSnapshot": 255,
-  "productsWithTwoLiveSnapshots": 0,
+  "productsWithTwoLiveSnapshots": 52,
   "productsWithConfirmedTrendFusion": 0,
+  "productsWithPreliminaryReviewPriceTrend": 52,
+  "productsWithReviewGrowthAfterSanity": 13,
+  "reviewComparabilityAnomalies": 2,
   "nichesWithExactRomaniaGap": 0,
   "productsWithVerifiedSupplierPackage": 0,
   "productsWithConfirmedLandedEconomics": 0,
@@ -14,5 +17,6 @@
   "paidCallsTriggered": 0,
   "approvedSpendEur": 0,
   "sourcePolicy": "CURRENT_REAL_EVIDENCE_ONLY",
-  "note": "Baseline before Amazon Round 2 eligibility. Legacy V2.5 finalists are not counted as legitimate Opportunity V4 finalists."
+  "nextBlocker": "Collect explicit Amazon Best Sellers ranking snapshots at >=24h and fuse rank + review evidence; review-only evidence remains preliminary support.",
+  "note": "Amazon Round 2 produced 54 raw valid movements; the review-count comparability sanity gate excluded 2 anomalies (B07PX6QSH2 and B09S6R2M8V), leaving 52 clean longitudinal comparisons and 13 clean review-growth leaders. No rank trend, verified sales, supplier, economics, FINALIST or TEST_READY promotion is inferred."
 }
