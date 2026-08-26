@@ -1,0 +1,62 @@
+name: Amazon Round2 Leader BSR Snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-leader-bsr-trigger-2026-08-26.json'
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate one-time BSR trigger policy
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-leader-bsr-trigger-2026-08-26.json';
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_ROUND2_LEADER_BSR_2026_08_26') throw new Error('BSR_TRIGGER_ID_INVALID');
+          if(x.targetCount!==13||x.explicitBsrOnly!==true||x.preserveAllCategoryRanks!==true||x.choosePrimaryRank!==false||x.htmlPositionIsNotRank!==true) throw new Error('BSR_TRIGGER_EVIDENCE_POLICY_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false||x.salesEvidenceClass!=='NOT_VERIFIED_SALES') throw new Error('BSR_TRIGGER_SAFETY_POLICY_INVALID');
+          NODE
+      - name: Collect explicit product BSR evidence
+        continue-on-error: true
+        run: node scripts/amazon-leader-bsr-snapshot.mjs --out=artifacts/amazon-leader-bsr-snapshot.json
+      - name: Enforce BSR truth gates
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/amazon-leader-bsr-snapshot.json';
+          if(!fs.existsSync(p)) throw new Error('BSR_ARTIFACT_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`targets=${x.targetCount}`);
+          console.log(`validPages=${x.validPageCount}`);
+          console.log(`productsWithExplicitBsr=${x.productsWithExplicitBsr}`);
+          console.log(`explicitBsrEntries=${x.explicitBsrEntryCount}`);
+          if(x.targetCount!==13)process.exitCode=2;
+          if(x.policy?.explicitBsrOnly!==true||x.policy?.preserveAllCategoryRanks!==true||x.policy?.choosePrimaryRank!==false||x.policy?.htmlPositionIsNotRank!==true)process.exitCode=3;
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0||x.policy?.purchaseAuthorized!==false||x.policy?.verifiedSalesRows!==0)process.exitCode=4;
+          if((x.observations||[]).some(o=>o.sourceRank!==null||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false))process.exitCode=5;
+          if((x.observations||[]).some(o=>(o.bsrEntries||[]).some(e=>e.rankEvidenceClass!=='EXPLICIT_PRODUCT_BEST_SELLERS_RANK'||e.salesEvidenceClass!=='NOT_VERIFIED_SALES')))process.exitCode=6;
+          NODE
+      - name: Upload BSR artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-leader-bsr-snapshot
+          path: artifacts/amazon-leader-bsr-snapshot.json
+          if-no-files-found: error
+          retention-days: 7
