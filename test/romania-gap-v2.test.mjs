@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {analyzeRomaniaGapV2} from '../romania-gap-v2.js';
 
 const A='11111111-1111-4111-8111-111111111111';
-const baseQuery={coverageClass:'EXHAUSTIVE_QUERY',observedAt:'2026-08-26T10:00:00Z',source:'TRENDYOL_MANUAL_REVIEW',sourceUrl:'https://example.test/search',scope:'QUERY_SURFACE'};
+const baseQuery={platform:'TRENDYOL',coverageClass:'EXHAUSTIVE_QUERY',observedAt:'2026-08-26T10:00:00Z',source:'TRENDYOL_MANUAL_REVIEW',sourceUrl:'https://example.test/search',scope:'QUERY_SURFACE'};
 const demand={score:72,evidenceClass:'DIRECT_OBSERVED'};
 
 test('zero exact comparables on one reviewed query surface is not market-wide zero',()=>{
@@ -66,6 +66,12 @@ test('missing canonical identity fails closed',()=>{
  assert.equal(r.gateStatus,'UNKNOWN');
  assert.equal(r.decisionEligible,false);
  assert.ok(r.reasons.includes('CANONICAL_PRODUCT_ID_REQUIRED'));
+});
+
+test('missing platform fails closed',()=>{
+ const r=analyzeRomaniaGapV2({canonicalProductId:A,queryEvidence:{...baseQuery,platform:null},listings:[],localDemandEvidence:demand});
+ assert.equal(r.gateStatus,'UNKNOWN');
+ assert.ok(r.reasons.includes('PLATFORM_REQUIRED'));
 });
 
 test('market-wide claim requires exhaustive query plus explicit market-wide verification',()=>{
