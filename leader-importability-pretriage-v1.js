@@ -4,7 +4,7 @@ const lower=v=>text(v).toLowerCase();
 export function buildLeaderImportabilityPretriage({leaders=[]}={}){
   const rows=(Array.isArray(leaders)?leaders:[]).map((r,index)=>{
     const title=text(r.title); const t=lower(title); const flags=[];
-    if(/liquid|dye|clarifier|flocculant|oil|spray|gel|cream/.test(t)) flags.push('TITLE_SUGGESTS_LIQUID_OR_CHEMICAL_REVIEW');
+    if(/liquid|dye|clarifier|flocculant|oil|spray|gel/.test(t)) flags.push('TITLE_SUGGESTS_LIQUID_OR_CHEMICAL_REVIEW');
     if(/litter box|shade sail|chair|towel|towels|binder|3 ring binder|bakeware set/.test(t)) flags.push('TITLE_SUGGESTS_VOLUME_OR_DIMENSION_REVIEW');
     if(/torque wrench|stainless steel/.test(t)) flags.push('TITLE_SUGGESTS_WEIGHT_REVIEW');
     if(/meter|multimeter/.test(t)) flags.push('TITLE_SUGGESTS_ELECTRICAL_COMPLIANCE_REVIEW');
