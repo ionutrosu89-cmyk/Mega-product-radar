@@ -3,23 +3,24 @@
   "candidateAsin": "B00INKVS82",
   "nicheKey": "office:three-ring-binders",
   "comparabilityKey": "THREE_RING_ROUND_RING_BINDERS",
-  "canonicalDefinition": "Biblioraft/dosar tip binder cu trei inele rotunde pentru coli perforate; exclude bibliorafturile clasice cu mecanism cu levier, dosarele simple fara inele, mapele si sistemele cu 2 sau 4 inele.",
+  "canonicalDefinition": "Biblioraft/dosar tip binder cu trei inele rotunde pentru coli perforate; exclude bibliorafturile clasice cu mecanism cu levier, dosarele simple fara inele, mapele, sistemele cu 2 sau 4 inele, mecanismele vandute separat si organizatoarele speciale cu fermoar.",
   "definitionConfirmed": true,
   "observations": [
     {
       "platform": "EMAG",
       "market": "RO",
-      "query": "biblioraft 3 inele",
-      "sourceUrl": "https://www.emag.ro/search/biblioraft%203%20inele",
-      "observedAt": "2026-08-26T10:44:00+03:00",
-      "manualReviewer": "USER_BROWSER_SCREENSHOT",
+      "queriesReviewed": ["biblioraft 3 inele", "dosar 3 inele", "binder 3 inele", "biblioraft cu 3 inele"],
+      "sourceUrl": "https://www.emag.ro/search/biblioraft%20cu%203%20inele",
+      "observedAt": "2026-08-26T10:53:00+03:00",
+      "manualReviewer": "USER_BROWSER_SCREENSHOT_MULTI_QUERY",
       "marketWideReviewed": false,
-      "comparabilityConfirmed": false,
+      "comparabilityConfirmed": true,
       "exactListingCount": null,
       "excludedFalsePositiveCount": null,
-      "scope": "SEARCH_CATEGORY_BROAD",
-      "evidenceNote": "eMAG shows category Bibliorafturi with 1312 products, but visible results mix a true 3-ring mechanism listing with ordinary lever-arch and explicit 2-ring binders. 1312 is not exact canonical competition. Exact eMAG count remains unresolved.",
-      "evidenceAttachmentRef": "CHAT_UPLOAD:IMG_5060.jpeg;CHAT_UPLOAD:IMG_5061.png"
+      "scope": "MULTI_QUERY_SEARCH_SURFACE",
+      "competitionState": "PRESENT_EXACT_COUNT_UNRESOLVED",
+      "evidenceNote": "Manual multi-query review confirms eMAG search/category counts are broad and cannot be treated as canonical competition counts. 'biblioraft cu 3 inele' shows 547 products in Bibliorafturi, but visible results include a set of 10 standalone 3-ring metal mechanisms (component, excluded), a lever-arch binder (excluded), a zippered 3-ring organizer (special organizer, excluded by canonical definition), and an explicit 2-ring binder lower on the surface (excluded). Earlier 'dosar 3 inele' showed at least one complete 3-ring kraft binder-like result, so canonical competition cannot be asserted as zero. Final eMAG state is competition present, exact canonical listing count unresolved; 547/1312/1417 category counts MUST NOT be used as competitor counts.",
+      "evidenceAttachmentRef": "CHAT_UPLOAD:IMG_5060.jpeg;CHAT_UPLOAD:IMG_5061.png;CHAT_UPLOAD:DOSAR_3_INELE_SCREENSHOT;CHAT_UPLOAD:IMG_5069.jpeg;CHAT_UPLOAD:IMG_5070.png;CHAT_UPLOAD:IMG_5071.png;CHAT_UPLOAD:IMG_5072.png;CHAT_UPLOAD:IMG_5073.png;CHAT_UPLOAD:IMG_5074.png;CHAT_UPLOAD:IMG_5075.png;CHAT_UPLOAD:IMG_5085.png;CHAT_UPLOAD:IMG_5086.png;CHAT_UPLOAD:IMG_5087.png;CHAT_UPLOAD:IMG_5088.jpeg"
     },
     {
       "platform": "TRENDYOL",
@@ -33,14 +34,15 @@
       "exactListingCount": 0,
       "excludedFalsePositiveCount": 3,
       "scope": "MARKET_WIDE",
-      "evidenceNote": "Search surface states 'Binder 3 inele (3 produse)'. User supplied product-level screenshots for all three visible results. Each full title explicitly states '2 Inele' (same 2K presentation/firma A4 PVC binder family in black, blue and white variants). All 3 are excluded by the canonical THREE_RING_ROUND_RING_BINDERS definition. Therefore the reviewed Trendyol query surface contains 0 comparable 3-ring round-ring binder listings and 3 false positives.",
+      "competitionState": "ZERO_COMPARABLE_ON_REVIEWED_SURFACE",
+      "evidenceNote": "Search surface states 'Binder 3 inele (3 produse)'. Product-level screenshots for all three results show titles explicitly stating '2 Inele'. All three are excluded by THREE_RING_ROUND_RING_BINDERS, leaving 0 comparable listings on the reviewed Trendyol surface.",
       "evidenceAttachmentRef": "CHAT_UPLOAD:IMG_5062.png;CHAT_UPLOAD:IMG_5065.png;CHAT_UPLOAD:IMG_5064.jpeg;CHAT_UPLOAD:IMG_5063.png"
     }
   ],
   "promotion": {
     "exactRomaniaGapConfirmed": false,
     "promotionEligible": false,
-    "reason": "TRENDYOL_EXACT_CANONICAL_COUNT_CONFIRMED_ZERO; EMAG_EXACT_CANONICAL_COUNT_STILL_UNRESOLVED"
+    "reason": "TRENDYOL_ZERO_COMPARABLE_CONFIRMED; EMAG_COMPETITION_PRESENT_BUT_EXACT_COUNT_UNRESOLVED"
   },
   "policy": {
     "unknownIsZero": false,
