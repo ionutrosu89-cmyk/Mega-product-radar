@@ -3,6 +3,8 @@ await installCloudAutosync();
 import {V6_STORAGE,rankSuppliers} from './v6-core.js';
 import {verifySupplierQuote} from './supplier-quote-verifier.js';
 import {evaluateQuoteNegotiation} from './supplier-negotiation-engine.js';
+import {isCanonicalProductId} from './domain-contracts-v1.js';
+import {attachCanonicalCommercialIdentity,writeCanonicalCommercialRecord} from './commercial-identity-v1.js';
 
 const SUPPLIER_KEY='megaRadarSupplierRecordsV1';
 const premium=document.createElement('link');premium.rel='stylesheet';premium.href='premium-ui.css';document.head.appendChild(premium);
@@ -23,7 +25,9 @@ function inboundQuoteContext(){
   const product=String(params.get('product')||'').trim().slice(0,180);
   const supplier=String(params.get('supplier')||'').trim().slice(0,180);
   const platform=String(params.get('platform')||'').trim().slice(0,60);
-  return{product,supplier,platform};
+  const rawCanonicalProductId=String(params.get('canonicalProductId')||'').trim();
+  const canonicalProductId=isCanonicalProductId(rawCanonicalProductId)?rawCanonicalProductId.toLowerCase():null;
+  return{product,supplier,platform,canonicalProductId};
 }
 function applyInboundQuoteContext(){
   const ctx=inboundQuoteContext();
@@ -33,33 +37,38 @@ function applyInboundQuoteContext(){
     const allowed=[...$('#platform').options].map(x=>x.value);
     if(allowed.includes(ctx.platform))$('#platform').value=ctx.platform;
   }
-  if((ctx.product||ctx.supplier)&&$('#quoteStatus'))$('#quoteStatus').innerHTML='<b>Context preluat din Sourcing Ops.</b> Produsul/furnizorul sunt doar precompletate pentru lucru. Prețul, MOQ, transportul, linkul exact, documentele și verificarea manuală rămân obligatorii.';
+  if((ctx.product||ctx.supplier)&&$('#quoteStatus')){
+    const identity=ctx.canonicalProductId?'Identitate canonică legată.':'Fără canonicalProductId: oferta poate fi salvată pentru lucru, dar nu poate satisface Supplier Gate.';
+    $('#quoteStatus').innerHTML=`<b>Context preluat din Sourcing Ops.</b> ${identity} Prețul, MOQ, transportul, linkul exact, documentele și verificarea manuală rămân obligatorii.`;
+  }
 }
 
 function readSupplierRecords(){try{return JSON.parse(localStorage.getItem(SUPPLIER_KEY)||'{}')||{};}catch{return{};}}
 function syncDecisionSupplier(product,row){
-  const all=readSupplierRecords(),key=keyOf(product);
-  if(row.commercialVerified===true){
-    all[key]={
-      productName:product,
-      supplierName:row.supplierName,
-      platform:row.platform,
-      url:row.url,
-      commercialVerified:true,
-      verified:true,
-      strictQuote:row.strictQuote,
-      verification:row.verification,
-      verifiedAt:row.strictQuote.manualVerifiedAt,
-      notes:'Ofertă verificată strict în moneda originală. Landed cost și conversia valutară rămân gate separat.'
-    };
-  }else delete all[key];
-  localStorage.setItem(SUPPLIER_KEY,JSON.stringify(all));
+  if(row.commercialVerified!==true||!isCanonicalProductId(row.canonicalProductId))return false;
+  const all=readSupplierRecords();
+  const decisionRecord={
+    supplierName:row.supplierName,
+    platform:row.platform,
+    url:row.url,
+    commercialVerified:true,
+    verified:true,
+    strictQuote:row.strictQuote,
+    verification:row.verification,
+    verifiedAt:row.strictQuote.manualVerifiedAt,
+    notes:'Ofertă verificată strict în moneda originală. Landed cost și conversia valutară rămân gate separat.'
+  };
+  const next=writeCanonicalCommercialRecord(all,{canonicalProductId:row.canonicalProductId,productName:product},decisionRecord);
+  localStorage.setItem(SUPPLIER_KEY,JSON.stringify(next));
+  return true;
 }
 
 function collectQuote({recordManualTimestamp=false}={}){
   const product=value('#product');
   const manualChecked=$('#manualConfirm')?.checked===true;
+  const canonicalProductId=inboundQuoteContext().canonicalProductId;
   const quote={
+    canonicalProductId,
     productCanonicalKey:keyOf(product),
     supplierName:value('#name'),
     platform:value('#platform'),
@@ -92,16 +101,18 @@ function collectQuote({recordManualTimestamp=false}={}){
     manualVerifiedAt:manualChecked&&recordManualTimestamp?new Date().toISOString():'',
     manualVerifiedBy:value('#verifiedBy')
   };
-  return{product,quote,manualChecked};
+  return{product,canonicalProductId,quote,manualChecked};
 }
 
 function previewQuote(recordManualTimestamp=false){
-  const {quote,manualChecked}=collectQuote({recordManualTimestamp});
+  const {quote,manualChecked,canonicalProductId}=collectQuote({recordManualTimestamp});
   const verification=verifySupplierQuote(quote);
   const box=$('#quoteStatus');
   if(!box)return{quote,verification};
-  if(verification.verified){
+  if(verification.verified&&canonicalProductId){
     box.innerHTML='<b class="good">MANUALLY_VERIFIED_QUOTE</b> · Oferta poate satisface Supplier Gate. <b>Landed Cost rămâne separat și neconfirmat.</b>';
+  }else if(verification.verified){
+    box.innerHTML='<b class="warn">MANUALLY_VERIFIED_QUOTE · IDENTITY BLOCKED</b> · Oferta este verificată, dar lipsește canonicalProductId și nu poate satisface Supplier Gate.';
   }else{
     const blockers=verification.blockers.map(esc).join(' · ');
     const manualNote=manualChecked&&!recordManualTimestamp?' · La salvare se va înregistra timestamp-ul verificării manuale.':'';
@@ -125,22 +136,22 @@ function negotiationLabel(x){
   if(x.status==='QUOTE_INCOMPLETE')return'OFERTĂ INCOMPLETĂ';
   return esc(x.status||'NECALCULAT');
 }
-function commercialGate(x){return x?.commercialVerified===true?'VERIFICAT STRICT':'INCOMPLET';}
+function commercialGate(x){return x?.commercialVerified===true&&x?.decisionEligible===true?'VERIFICAT STRICT':x?.commercialVerified===true?'IDENTITATE NECANONICĂ':'INCOMPLET';}
 function render(){
   const filter=value('#filter').toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter));
   const ranked=rankSuppliers(rows,{targetQty:Number(value('#qty')),targetUnitCost:Number(value('#target'))});
   const opts=negotiationOptions();
   const evaluated=ranked.map(x=>({...x,negotiation:evaluateQuoteNegotiation(x.strictQuote||{},opts)}));
-  $('#results').innerHTML=evaluated.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport RO</th><th>Lead</th><th>Supplier Gate</th><th>Negociere</th><th>Scor V6*</th></tr></thead><tbody>${evaluated.map(x=>`<tr><td>${esc(x.product)}</td><td>${esc(x.supplierName)}</td><td>${Number(x.quotedPrice||0).toFixed(2)} ${esc(x.currency||'')}</td><td>${x.moq||0}</td><td>${x.bulkShippingToRomania===''?'—':`${Number(x.bulkShippingToRomania||0).toFixed(2)} ${esc(x.shippingCurrency||'')}`}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified?'good':'warn'}">${commercialGate(x)}</td><td class="${negotiationClass(x.negotiation.status)}"><b>${negotiationLabel(x.negotiation)}</b><br><span class="note">${esc(x.negotiation.action||'')}</span></td><td><b>${Math.round(x.score||0)}</b></td></tr>`).join('')}</tbody></table><p class="note">* Scorul V6 este orientativ. Verdictul de negociere folosește doar ofertă strict verificată + curs FX introdus explicit + Target Cost Envelope. „Potențial” nu înseamnă landed cost confirmat și nu permite TEST.</p>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';
+  $('#results').innerHTML=evaluated.length?`<table class="table"><thead><tr><th>Produs</th><th>Furnizor</th><th>Preț</th><th>MOQ</th><th>Transport RO</th><th>Lead</th><th>Supplier Gate</th><th>Negociere</th><th>Scor V6*</th></tr></thead><tbody>${evaluated.map(x=>`<tr><td>${esc(x.product)}</td><td>${esc(x.supplierName)}</td><td>${Number(x.quotedPrice||0).toFixed(2)} ${esc(x.currency||'')}</td><td>${x.moq||0}</td><td>${x.bulkShippingToRomania===''?'—':`${Number(x.bulkShippingToRomania||0).toFixed(2)} ${esc(x.shippingCurrency||'')}`}</td><td>${x.leadTimeDays||'—'} zile</td><td class="${x.commercialVerified&&x.decisionEligible?'good':'warn'}">${commercialGate(x)}</td><td class="${negotiationClass(x.negotiation.status)}"><b>${negotiationLabel(x.negotiation)}</b><br><span class="note">${esc(x.negotiation.action||'')}</span></td><td><b>${Math.round(x.score||0)}</b></td></tr>`).join('')}</tbody></table><p class="note">* Scorul V6 este orientativ. Verdictul de negociere folosește doar ofertă strict verificată + curs FX introdus explicit + Target Cost Envelope. Supplier Gate cere și canonicalProductId. „Potențial” nu înseamnă landed cost confirmat și nu permite TEST.</p>`:'<p class="note">Nu există oferte salvate pentru filtrul curent.</p>';
 }
 
 $('#preview')?.addEventListener('click',()=>previewQuote(false));
 $('#save')?.addEventListener('click',()=>{
   const first=collectQuote({recordManualTimestamp:false});
   if(!first.product||!first.quote.supplierName){$('#quoteStatus').innerHTML='<b class="bad">Completează produsul și furnizorul.</b>';return;}
-  const {quote}=collectQuote({recordManualTimestamp:first.manualChecked});
+  const {quote,canonicalProductId}=collectQuote({recordManualTimestamp:first.manualChecked});
   const verification=verifySupplierQuote(quote);
-  const row={
+  const row=attachCanonicalCommercialIdentity({
     product:first.product,
     supplierName:quote.supplierName,
     platform:quote.platform,
@@ -159,9 +170,10 @@ $('#save')?.addEventListener('click',()=>{
     verification,
     commercialVerified:verification.verified===true,
     savedAt:new Date().toISOString()
-  };
-  const rows=read();rows.push(row);write(rows);syncDecisionSupplier(first.product,row);render();
-  if(verification.verified)$('#quoteStatus').innerHTML='<b class="good">Salvat: MANUALLY_VERIFIED_QUOTE.</b> Supplier Gate poate folosi această ofertă; Landed Cost rămâne separat.';
+  },{canonicalProductId,productName:first.product});
+  const rows=read();rows.push(row);write(rows);const synced=syncDecisionSupplier(first.product,row);render();
+  if(verification.verified&&synced)$('#quoteStatus').innerHTML='<b class="good">Salvat: MANUALLY_VERIFIED_QUOTE.</b> Supplier Gate poate folosi această ofertă canonic legată; Landed Cost rămâne separat.';
+  else if(verification.verified)$('#quoteStatus').innerHTML='<b class="warn">Salvat: ofertă verificată, dar IDENTITY BLOCKED.</b> Lipsește canonicalProductId; Supplier Gate nu este satisfăcut.';
   else $('#quoteStatus').innerHTML=`<b class="warn">Salvat ca QUOTE_INCOMPLETE.</b> Blocaje: ${esc(verification.blockers.join(' · '))}`;
 });
 for(const id of ['#rank','#sellPriceRon','#fxUsd','#fxEur','#fxCny'])$(id)?.addEventListener(id==='#rank'?'click':'change',render);
