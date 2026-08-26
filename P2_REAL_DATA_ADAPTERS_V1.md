@@ -46,6 +46,21 @@ P2 deliberately separates two questions that must not be confused:
 
 The longitudinal 3K/1K targets therefore measure success at the 10K milestone; they do not create an impossible prerequisite before scaling can start.
 
+## Measured repository bootstrap baseline
+
+The committed `data/real-products-1000.compact.json` provides a real 1,000-product **catalogue bootstrap**, not live market history. Its committed metadata supports the following raw-source baseline:
+
+- 1,000 unique Amazon products
+- price present for 997 / 1,000 = 99.7%
+- reviews present for 1,000 / 1,000 = 100%
+- rating present for 1,000 / 1,000 = 100%
+- category present for 1,000 / 1,000 = 100%
+- source URL identity match for 788 / 1,000 = 78.8%; 212 URL mismatches are preserved as integrity metadata
+
+These values are persisted in `data/p2-source-baseline-2026-08-26-v1.json`.
+
+This is **not** yet canonical coverage. The public bootstrap file does not contain the server-side canonical registry or resolved canonical UUIDs, so canonical product count, bound alias count and 2+/3+ canonical history remain unknown rather than being invented. `planCanonicalBootstrapResolution()` produces an exact-ASIN server-resolution plan and explicitly does not generate canonical UUIDs client-side.
+
 ## P2 sequence
 
 1. Reuse adapters for existing datasets. ✅
@@ -53,5 +68,6 @@ The longitudinal 3K/1K targets therefore measure success at the 10K milestone; t
 3. Add generic 24h/7d/30d/90d historical scheduling without automatic execution. ✅
 4. Produce one canonical Data Foundation measurement run. ✅
 5. Separate controlled-scale entry gates from 10K milestone targets. ✅
-6. Measure current repository coverage with real committed datasets and exact aliases.
-7. Permit controlled scale only when entry gates pass; continue until the 10K milestone gates pass.
+6. Measure the committed 1,000-product raw-source baseline without overstating canonical coverage. ✅
+7. Resolve exact Amazon aliases against the server canonical registry and measure canonical coverage.
+8. Permit controlled scale only when entry gates pass; continue until the 10K milestone gates pass.
