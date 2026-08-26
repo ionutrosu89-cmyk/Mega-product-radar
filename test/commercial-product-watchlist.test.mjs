@@ -3,14 +3,16 @@ import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {productKey,watchlistChanges} from '../commercial-watchlist.js';
 
-test('commercial product case uses protected Radar data and strict money language',async()=>{
+test('Opportunity Detail uses protected workspace Radar data and strict money language',async()=>{
   const html=await readFile(new URL('../commercial-product.html',import.meta.url),'utf8');
   const js=await readFile(new URL('../commercial-product.js',import.meta.url),'utf8');
   assert.match(js,/\/api\/commercial\/radar/);
-  assert.match(js,/applyPrivateCommercialDecisions/);
-  assert.match(js,/landedCostConfirmed/);
-  assert.match(js,/NU RECOMANDĂM BANI/);
-  assert.match(html,/Dosar comercial/);
+  assert.match(js,/x-mpr-workspace-id/);
+  assert.match(js,/normalizeOpportunityUxV1/);
+  assert.match(js,/Datele lipsă nu sunt transformate în cost zero/);
+  assert.match(js,/nu autorizează achiziția/);
+  assert.match(html,/Opportunity Detail/);
+  assert.doesNotMatch(js,/applyPrivateCommercialDecisions/);
   assert.doesNotMatch(js,/landedEstimate/);
 });
 
@@ -37,7 +39,7 @@ test('watchlist migration is workspace scoped with RLS and unique product key',a
   assert.match(sql,/unique\(workspace_id, product_key\)/);
 });
 
-test('Netlify build includes commercial product case and watchlist runtime dependencies',async()=>{
+test('Netlify build includes Opportunity Detail and watchlist runtime dependencies',async()=>{
   const build=await readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
-  for(const file of ['commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  for(const file of ['commercial-product.html','commercial-product.js','opportunity-v5.js','opportunity-ux-v1.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
 });

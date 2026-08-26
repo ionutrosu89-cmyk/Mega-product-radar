@@ -60,12 +60,16 @@ test('Home retries transient JWT clock skew instead of exposing raw auth errors'
   assert.doesNotMatch(js,/\$\{esc\(error\?\.message\|\|error\)\}/);
 });
 
-test('Radar prioritizes one primary product action and progressive disclosure',async()=>{
+test('Opportunities prioritizes one primary detail action and canonical progressive disclosure',async()=>{
   const radar=await read('commercial-radar.js');
-  assert.match(radar,/Vezi dosarul comercial/);
-  assert.match(radar,/Vezi toate dovezile și gate-urile/);
-  assert.match(radar,/Grad de validare/);
+  assert.match(radar,/Opportunity Detail/);
+  assert.match(radar,/nextValidationStepV1/);
+  assert.match(radar,/Confidence/);
+  assert.match(radar,/IGNORE/);
+  assert.match(radar,/WATCH/);
+  assert.match(radar,/VALIDATE/);
   assert.doesNotMatch(radar,/>Sales status</);
+  assert.doesNotMatch(radar,/applyPrivateCommercialDecisions/);
 });
 
 test('build ships and injects customer UX assets across commercial pages',async()=>{
@@ -73,5 +77,7 @@ test('build ships and injects customer UX assets across commercial pages',async(
   assert.match(build,/customer-ui\.css/);
   assert.match(build,/customer-shell\.js/);
   assert.match(build,/customerPages=new Set/);
+  assert.match(build,/opportunity-v5\.js/);
+  assert.match(build,/opportunity-ux-v1\.js/);
   for(const page of ['home.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','account.html'])assert.match(build,new RegExp(page.replace('.','\\.')));
 });
