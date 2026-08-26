@@ -1,31 +1,13 @@
-import {SAAS_CONFIG} from '../../saas-config.js';
+import {resolveBillingWorkspaceAccess} from './_billing-workspace-access.mjs';
 
 const PRICE_ENV={DISCOVER:'STRIPE_PRICE_DISCOVER',RADAR:'STRIPE_PRICE_RADAR',LAUNCH:'STRIPE_PRICE_LAUNCH'};
-
-async function resolveUserWorkspace(request,{fetchImpl,env}){
-  const auth=request.headers.get('authorization')||'';
-  if(!/^Bearer\s+\S+/i.test(auth)) return {error:'Authentication required',status:401};
-  const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
-  const apiKey=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
-  const headers={apikey:apiKey,authorization:auth};
-  const userResponse=await fetchImpl(`${supabaseUrl}/auth/v1/user`,{headers});
-  if(!userResponse.ok)return {error:'Invalid or expired session',status:401};
-  const user=await userResponse.json();
-  const workspaceResponse=await fetchImpl(`${supabaseUrl}/rest/v1/workspaces?select=id,name,plan&limit=1`,{headers:{...headers,accept:'application/json'}});
-  if(!workspaceResponse.ok)return {error:'Workspace lookup failed',status:502};
-  const workspaces=await workspaceResponse.json();
-  const workspace=Array.isArray(workspaces)?workspaces[0]:null;
-  if(!workspace)return {error:'Workspace required',status:409};
-  const subscriptionResponse=await fetchImpl(`${supabaseUrl}/rest/v1/subscriptions?select=workspace_id,plan,status,provider_subscription_id&workspace_id=eq.${encodeURIComponent(workspace.id)}&limit=1`,{headers:{...headers,accept:'application/json'}});
-  const subscription=subscriptionResponse.ok?(await subscriptionResponse.json())?.[0]||null:null;
-  return {user,workspace,subscription};
-}
 
 async function recordJourneyEvent({workspaceId,userId,plan,eventName,metadata},{fetchImpl,env}){
   const service=env.SUPABASE_SERVICE_ROLE_KEY;
   if(!service||!workspaceId||!userId)return false;
   try{
-    const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
+    const supabaseUrl=env.SUPABASE_URL;
+    if(!supabaseUrl)return false;
     const response=await fetchImpl(`${supabaseUrl}/rest/v1/journey_events`,{method:'POST',headers:{apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'return=minimal'},body:JSON.stringify({workspace_id:workspaceId,user_id:userId,event_name:eventName,plan:String(plan||'FREE').toUpperCase(),page:'/api/billing/checkout',metadata:metadata||{}})});
     return response.ok;
   }catch{return false;}
@@ -35,8 +17,8 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
   return async request=>{
     try{
       if(!env.STRIPE_SECRET_KEY)return Response.json({ok:false,error:'Stripe billing is not configured'},{status:503,headers:{'Cache-Control':'no-store'}});
-      const access=await resolveUserWorkspace(request,{fetchImpl,env});
-      if(access.error)return Response.json({ok:false,error:access.error},{status:access.status,headers:{'Cache-Control':'no-store'}});
+      const access=await resolveBillingWorkspaceAccess(request,{fetchImpl,env,mode:'OWNER'});
+      if(access.error)return Response.json({ok:false,error:access.error,code:access.code},{status:access.status,headers:{'Cache-Control':'no-store'}});
       const body=await request.json().catch(()=>({}));
       const plan=String(body.plan||'').toUpperCase();
       if(!PRICE_ENV[plan])return Response.json({ok:false,error:'Unsupported billing plan'},{status:400,headers:{'Cache-Control':'no-store'}});
@@ -66,7 +48,7 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
       const stripe=await stripeResponse.json();
       if(!stripeResponse.ok||!stripe?.url)return Response.json({ok:false,error:'Stripe checkout creation failed'},{status:502,headers:{'Cache-Control':'no-store'}});
       await recordJourneyEvent({workspaceId:access.workspace.id,userId:access.user?.id,plan:access.workspace.plan,eventName:'CHECKOUT_STARTED',metadata:{requestedPlan:plan,stripeSessionId:String(stripe.id||'')}},{fetchImpl,env});
-      return Response.json({ok:true,url:stripe.url,plan,mode:'NEW_SUBSCRIPTION'},{headers:{'Cache-Control':'private, no-store'}});
+      return Response.json({ok:true,url:stripe.url,plan,mode:'NEW_SUBSCRIPTION',workspaceId:access.workspace.id},{headers:{'Cache-Control':'private, no-store'}});
     }catch(error){
       return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
     }
