@@ -29,4 +29,17 @@ test('Radar plan gets decision inputs without supplier sourcing payload',async()
 
 test('commercial Radar live source exists in the Netlify static build',async()=>{const fn=await fs.readFile(new URL('../netlify/functions/commercial-radar.mjs',import.meta.url),'utf8');const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');assert.match(fn,/new URL\('\/radar-live\.json'/);assert.doesNotMatch(fn,/market-intelligence-live\.json/);assert.match(build,/'radar-live\.json'/);await fs.access(new URL('../radar-live.json',import.meta.url));});
 
-test('commercial Radar UI uses private nine-gate decision engine',async()=>{const html=await fs.readFile(new URL('../commercial-radar.html',import.meta.url),'utf8');const js=await fs.readFile(new URL('../commercial-radar.js',import.meta.url),'utf8');assert.match(html,/toate cele 9 gate-uri/);assert.match(html,/landed cost confirmat/i);assert.match(js,/applyPrivateCommercialDecisions/);assert.match(js,/\/api\/commercial\/radar/);assert.match(js,/x-mpr-workspace-id/);assert.match(js,/commercialReadiness/);assert.match(js,/(?:DERIVED SCORE|SCOR DERIVAT)/);assert.match(js,/DERIVED /);assert.doesNotMatch(js,/landedEstimate/);});
+test('Opportunities UI uses canonical Opportunity V5 rather than legacy nine-gate authority',async()=>{
+  const html=await fs.readFile(new URL('../commercial-radar.html',import.meta.url),'utf8');
+  const js=await fs.readFile(new URL('../commercial-radar.js',import.meta.url),'utf8');
+  assert.match(html,/Today → Opportunities → Opportunity Detail/);
+  assert.match(html,/Opportunity Score și Confidence/);
+  assert.match(html,/UNKNOWN rămâne UNKNOWN/);
+  assert.match(html,/IGNORE \/ WATCH \/ VALIDATE/);
+  assert.match(js,/normalizeOpportunityUxV1/);
+  assert.match(js,/OPPORTUNITY SCORE/);
+  assert.match(js,/\/api\/commercial\/radar/);
+  assert.match(js,/x-mpr-workspace-id/);
+  assert.doesNotMatch(js,/applyPrivateCommercialDecisions/);
+  assert.doesNotMatch(js,/landedEstimate/);
+});
