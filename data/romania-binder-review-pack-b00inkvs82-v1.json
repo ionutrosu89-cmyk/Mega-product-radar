@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "MPR_ROMANIA_COMPARABLE_REVIEW_PACK_V1",
+  "generatedAt": "2026-08-26T07:18:00Z",
+  "candidate": {
+    "platform": "AMAZON",
+    "externalId": "B00INKVS82",
+    "nicheKey": "office:three-ring-binders",
+    "comparabilityKey": "THREE_RING_ROUND_RING_BINDERS"
+  },
+  "canonicalDefinitionCandidate": "Biblioraft/dosar tip binder cu trei inele rotunde pentru coli perforate; exclude bibliorafturile clasice cu mecanism cu levier, dosarele simple fara inele, mapele si sistemele cu 2 sau 4 inele.",
+  "definitionConfirmed": false,
+  "tasks": [
+    {
+      "priority": 1,
+      "platform": "EMAG",
+      "market": "RO",
+      "query": "biblioraft 3 inele",
+      "sourceType": "DIRECT_PUBLIC_SEARCH",
+      "sourceUrl": "https://www.emag.ro/search/biblioraft%203%20inele",
+      "observedAt": null,
+      "listingCountLowerBound": null,
+      "listingCount": null,
+      "scope": "UNKNOWN",
+      "marketWideReviewed": false,
+      "comparabilityConfirmed": false,
+      "status": "READY_FOR_DIRECT_PUBLIC_PROBE_AND_MANUAL_REVIEW"
+    },
+    {
+      "priority": 2,
+      "platform": "TRENDYOL",
+      "market": "RO",
+      "query": "binder 3 inele",
+      "sourceType": "DIRECT_PUBLIC_SEARCH",
+      "sourceUrl": "https://www.trendyol.com/sr?q=binder%203%20inele",
+      "observedAt": null,
+      "listingCountLowerBound": null,
+      "listingCount": null,
+      "scope": "UNKNOWN",
+      "marketWideReviewed": false,
+      "comparabilityConfirmed": false,
+      "status": "READY_FOR_DIRECT_PUBLIC_PROBE_AND_MANUAL_REVIEW"
+    }
+  ],
+  "reviewChecklist": [
+    "CONFIRM_SAME_CANONICAL_PRODUCT_DEFINITION_ON_EMAG_AND_TRENDYOL",
+    "REJECT_LEVER_ARCH_2_RING_4_RING_AND_NON_RING_FALSE_POSITIVES",
+    "RECORD_DIRECT_PLATFORM_URL_AND_OBSERVED_AT",
+    "KEEP_VISIBLE_PRODUCT_LINK_COUNT_AS_LOWER_BOUND_ONLY",
+    "DO_NOT_TRUST_DECLARED_RESULT_COUNT_WITHOUT_MANUAL_SCOPE_REVIEW",
+    "CONFIRM_MARKET_WIDE_SCOPE_BEFORE_EXACT_COMPETITION",
+    "REQUIRE_EXACT_COUNT_OR_EQUIVALENT_EXACT_COMPETITION_VALUE_ON_BOTH_PLATFORMS",
+    "APPEND_APPROVED_ROWS_TO_CANONICAL_ROMANIA_SNAPSHOT_LEDGER"
+  ],
+  "promotion": {
+    "exactRomaniaGapConfirmed": false,
+    "promotionEligible": false,
+    "maximumFunnelContributionNow": "DISCOVERED_SUPPORT_ONLY",
+    "reason": "REVIEW_PACK_ONLY; ZERO REVIEWED EXACT LOCAL COMPETITION ROWS"
+  },
+  "policy": {
+    "networkExecutionIncluded": false,
+    "unknownIsZero": false,
+    "lowerBoundIsExactCount": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "paidCallsTriggered": 0,
+    "providerSpendEur": 0,
+    "purchaseAuthorized": false
+  }
+}
