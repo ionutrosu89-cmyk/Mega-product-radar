@@ -20,14 +20,14 @@ Purpose: route existing committed/public marketplace datasets into `MPR_MARKET_O
 
 ## Generic longitudinal schedule
 
-Legacy one-off labels such as Round 1 / Round 2 are no longer the target architecture. `MPR_HISTORICAL_SCHEDULER_V1` creates deterministic observation windows for each exact source series:
+Legacy one-off labels such as Round 1 / Round 2 are no longer the target architecture. `MPR_HISTORICAL_SCHEDULER_V1` creates deterministic observation milestones for each exact source series:
 
 - 24h
 - 7d
 - 30d
 - 90d
 
-Series identity remains `(platform, externalId, surface)`, so two BSR categories for the same ASIN are scheduled independently. A schedule item only says `WAITING`, `DUE` or `WINDOW_SATISFIED`; it never executes a provider call and never authorizes spend.
+Windows are anchored to the first observation, so repeated daily snapshots cannot push 7d/30d/90d milestones forward. Series identity remains `(platform, externalId, surface)`, so two BSR categories for the same ASIN are scheduled independently. A schedule item only says `WAITING`, `DUE` or `WINDOW_SATISFIED`; it never executes a provider call and never authorizes spend.
 
 ## Canonical measurement run
 
@@ -37,11 +37,21 @@ Series identity remains `(platform, externalId, surface)`, so two BSR categories
 
 Unsupported dataset types fail closed. Existing raw datasets are not mutated. Quality targets are management gates, not claims of achieved coverage.
 
+## Scale entry versus 10K milestone
+
+P2 deliberately separates two questions that must not be confused:
+
+1. **May we begin controlled scaling?** Entry gates require at least 1,000 canonical products plus minimum source-identity, price, review and category coverage and an acceptable unbound-observation share.
+2. **Have we reached the first serious 10K milestone?** This requires 10,000 canonical products, at least 3,000 products with two or more observations and at least 1,000 products with three or more observations.
+
+The longitudinal 3K/1K targets therefore measure success at the 10K milestone; they do not create an impossible prerequisite before scaling can start.
+
 ## P2 sequence
 
 1. Reuse adapters for existing datasets. ✅
 2. Build a coverage/data-quality report over canonical products + aliases + adapted history. ✅
 3. Add generic 24h/7d/30d/90d historical scheduling without automatic execution. ✅
 4. Produce one canonical Data Foundation measurement run. ✅
-5. Measure current repository coverage with real committed datasets and exact aliases.
-6. Gate 1K→10K expansion on duplicate/collision and coverage thresholds.
+5. Separate controlled-scale entry gates from 10K milestone targets. ✅
+6. Measure current repository coverage with real committed datasets and exact aliases.
+7. Permit controlled scale only when entry gates pass; continue until the 10K milestone gates pass.
