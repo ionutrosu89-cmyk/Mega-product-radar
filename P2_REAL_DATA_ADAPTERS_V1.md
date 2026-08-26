@@ -18,8 +18,30 @@ Purpose: route existing committed/public marketplace datasets into `MPR_MARKET_O
 6. Unbound source observations may enter history but remain non-decision-eligible until exact canonical binding exists.
 7. Adapters perform no network requests, paid calls or purchase actions.
 
+## Generic longitudinal schedule
+
+Legacy one-off labels such as Round 1 / Round 2 are no longer the target architecture. `MPR_HISTORICAL_SCHEDULER_V1` creates deterministic observation windows for each exact source series:
+
+- 24h
+- 7d
+- 30d
+- 90d
+
+Series identity remains `(platform, externalId, surface)`, so two BSR categories for the same ASIN are scheduled independently. A schedule item only says `WAITING`, `DUE` or `WINDOW_SATISFIED`; it never executes a provider call and never authorizes spend.
+
+## Canonical measurement run
+
+`MPR_DATA_FOUNDATION_RUN_V1` composes the entire P2 path in one place:
+
+`raw public dataset → exact adapter → MarketObservation → append-only history → Product Universe → history metrics → quality gate → historical schedule`
+
+Unsupported dataset types fail closed. Existing raw datasets are not mutated. Quality targets are management gates, not claims of achieved coverage.
+
 ## P2 sequence
 
-1. Reuse adapters for existing datasets.
-2. Build a coverage/data-quality report over canonical products + aliases + adapted history.
-3. Gate 1K→10K expansion on duplicate/collision and coverage thresholds.
+1. Reuse adapters for existing datasets. ✅
+2. Build a coverage/data-quality report over canonical products + aliases + adapted history. ✅
+3. Add generic 24h/7d/30d/90d historical scheduling without automatic execution. ✅
+4. Produce one canonical Data Foundation measurement run. ✅
+5. Measure current repository coverage with real committed datasets and exact aliases.
+6. Gate 1K→10K expansion on duplicate/collision and coverage thresholds.
