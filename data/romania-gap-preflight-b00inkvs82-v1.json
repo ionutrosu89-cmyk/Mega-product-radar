@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "MPR_ROMANIA_GAP_PREFLIGHT_V1",
+  "generatedAt": "2026-08-26T07:11:00Z",
+  "candidate": {
+    "platform": "AMAZON",
+    "externalId": "B00INKVS82",
+    "evidenceBasis": {
+      "reviewDelta": 14,
+      "amazonBsrEntries": [
+        {"rank": 143, "category": "Office Products"},
+        {"rank": 2, "category": "Round Ring Binders"}
+      ],
+      "rankTrendReady": false,
+      "confirmedTrendFusion": false
+    }
+  },
+  "candidateNiche": {
+    "nicheKey": "office:three-ring-binders",
+    "comparabilityKey": "THREE_RING_ROUND_RING_BINDERS",
+    "status": "PREFLIGHT_REQUIRES_MANUAL_COMPARABILITY_REVIEW",
+    "sourceConcept": "3-ring round-ring binder",
+    "canonicalDefinitionCandidate": "Biblioraft/dosar tip binder cu trei inele rotunde pentru coli perforate; exclude bibliorafturile clasice cu mecanism cu levier, dosarele simple fara inele, mapele si sistemele cu 2 sau 4 inele.",
+    "definitionConfirmed": false
+  },
+  "queriesToReview": {
+    "EMAG": ["biblioraft 3 inele", "dosar 3 inele", "binder 3 inele"],
+    "TRENDYOL": ["biblioraft 3 inele", "dosar 3 inele", "binder 3 inele"]
+  },
+  "knownEvidence": {
+    "EMAG": {
+      "sourceUrl": null,
+      "observedAt": null,
+      "listingCountLowerBound": null,
+      "listingCount": null,
+      "scope": "UNKNOWN",
+      "marketWideReviewed": false,
+      "status": "DIRECT_PUBLIC_PROBE_AND_MANUAL_SCOPE_REVIEW_REQUIRED"
+    },
+    "TRENDYOL": {
+      "sourceUrl": null,
+      "observedAt": null,
+      "listingCountLowerBound": null,
+      "listingCount": null,
+      "scope": "UNKNOWN",
+      "marketWideReviewed": false,
+      "status": "DIRECT_PUBLIC_EVIDENCE_AND_MANUAL_SCOPE_REVIEW_REQUIRED"
+    }
+  },
+  "promotion": {
+    "exactRomaniaGapConfirmed": false,
+    "promotionEligible": false,
+    "maximumFunnelContributionNow": "DISCOVERED_SUPPORT_ONLY",
+    "reason": "PREFLIGHT_ONLY; NO_EXACT_COMPARABLE_EMAG_PLUS_TRENDYOL_EVIDENCE"
+  },
+  "requiredBeforeExactRomaniaPromotion": [
+    "SAME_CANONICAL_DEFINITION_MANUALLY_CONFIRMED",
+    "DIRECT_EMAG_PUBLIC_SEARCH_EVIDENCE",
+    "DIRECT_TRENDYOL_PUBLIC_EVIDENCE",
+    "MARKET_WIDE_SCOPE_CONFIRMED_ON_BOTH_PLATFORMS",
+    "SAME_COMPARABILITY_KEY_ON_BOTH_PLATFORMS",
+    "EXACT_LISTING_COUNT_OR_EQUIVALENT_EXACT_COMPETITION_VALUE_ON_BOTH_PLATFORMS",
+    "OBSERVED_AT_ON_BOTH_PLATFORMS",
+    "CANONICAL_ROMANIA_SNAPSHOT_LEDGER_ENTRY_ON_BOTH_PLATFORMS"
+  ],
+  "policy": {
+    "unknownIsZero": false,
+    "lowerBoundIsExactCount": false,
+    "sampledEvidenceCanReachValidate": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
