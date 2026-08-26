@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { EMAG_PUBLIC_SEARCH_TARGETS, buildEmagSearchUrl, parseEmagSearchHtml } from '../emag-public-search-probe.js';
 
-test('probe targets only the three prioritized canonical Romania niches', () => {
+test('probe targets only the prioritized canonical Romania niches', () => {
   assert.deepEqual(
     EMAG_PUBLIC_SEARCH_TARGETS.map(x => x.nicheKey),
-    ['travel:packing-cubes', 'automotive:trunk-organization', 'office:laptop-accessories']
+    ['travel:packing-cubes', 'automotive:trunk-organization', 'office:laptop-accessories', 'office:three-ring-binders']
   );
   for (const target of EMAG_PUBLIC_SEARCH_TARGETS) {
     assert.match(buildEmagSearchUrl(target.query), /^https:\/\/www\.emag\.ro\/search\//);

@@ -15,6 +15,11 @@ export const EMAG_PUBLIC_SEARCH_TARGETS = Object.freeze([
     nicheKey: 'office:laptop-accessories',
     comparabilityKey: 'ADJUSTABLE_LAPTOP_STANDS',
     query: 'suport laptop reglabil'
+  },
+  {
+    nicheKey: 'office:three-ring-binders',
+    comparabilityKey: 'THREE_RING_ROUND_RING_BINDERS',
+    query: 'biblioraft 3 inele'
   }
 ]);
 
