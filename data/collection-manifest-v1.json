@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "MPR_COLLECTION_MANIFEST_V1",
+  "generatedFromMainSha": "929ffe78c20013c36e8b58274ccdd5cb3f58601d",
+  "priorityFirstLive": [
+    {
+      "source": "AMAZON_PUBLIC_PRODUCT_PAGE",
+      "externalId": "B0CHYDX91L",
+      "canonicalNicheKey": "ADJUSTABLE_LAPTOP_STANDS",
+      "reason": "ONLY_STRICT_TARGET_NICHE_MATCH_IN_1000_BOOTSTRAP_AND_MISSING_FIRST_LIVE",
+      "hasFirstLiveObservation": false,
+      "eligibleNow": true,
+      "evidenceUse": "FIRST_LIVE_PRODUCT_PAGE_OBSERVATION_ONLY"
+    }
+  ],
+  "round2": {
+    "source": "AMAZON_PUBLIC_PRODUCT_PAGE",
+    "expectedIdentityCount": 255,
+    "minimumEligibleAtUtc": "2026-08-26T03:56:23.583Z",
+    "minimumEligibleAtEuropeBucharest": "2026-08-26T06:56:23.583+03:00",
+    "executionBeforeThreshold": false,
+    "eligibleEvidenceAfterThreshold": [
+      "PRICE_MOVEMENT",
+      "REVIEW_COUNT_MOVEMENT"
+    ],
+    "rankVelocityAllowedWithoutExplicitRankEvidence": false,
+    "verifiedSalesAllowed": false
+  },
+  "policy": {
+    "paidCallsTriggered": 0,
+    "providerSpend": 0,
+    "purchaseAuthorized": false,
+    "autoExecutionAuthorized": false,
+    "unknownIsNotZero": true,
+    "bootstrapTitleIsIdentityHintOnly": true,
+    "firstLiveObservationDoesNotCreateTrend": true
+  }
+}
