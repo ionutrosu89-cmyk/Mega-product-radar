@@ -29,6 +29,21 @@ function metric({key,label,value,target,comparison,samples=0,eligible=true}){
 
 function eventMeta(event){return event?.metadata&&typeof event.metadata==='object'?event.metadata:{};}
 function linkedParticipants(participants=[]){return participants.filter(p=>p?.workspace_id&&p?.user_id&&['ACTIVATED','COMPLETED'].includes(upper(p.status)));}
+function participantJourney(p,{events,usefulEvents,feedback,nowMs}){
+  const workspaceId=p?.workspace_id||null;const start=ts(p?.activated_at);const linked=Boolean(p?.user_id&&workspaceId);
+  const ownEvents=workspaceId?events.filter(e=>e?.workspace_id===workspaceId&&ts(e.created_at)!==null):[];
+  const ownFeedback=workspaceId?feedback.filter(f=>f?.workspace_id===workspaceId):[];
+  const firstUseful=linked&&start!==null?usefulEvents.filter(e=>e.workspace_id===workspaceId&&ts(e.created_at)>=start).sort((a,b)=>ts(a.created_at)-ts(b.created_at))[0]:null;
+  const firstUsefulMinutes=firstUseful?(ts(firstUseful.created_at)-start)/60000:null;
+  const active7d=linked&&ownEvents.some(e=>ts(e.created_at)>=nowMs-7*86400000&&ts(e.created_at)<=nowMs);
+  const week4Eligible=linked&&start!==null&&nowMs-start>=28*86400000;
+  const week4Retained=week4Eligible&&ownEvents.some(e=>ts(e.created_at)>=start+21*86400000&&ts(e.created_at)<=start+28*86400000);
+  const opportunityRatings=ownEvents.filter(e=>upper(e.event_name)==='BETA_OPPORTUNITY_RATED'&&typeof eventMeta(e).useful==='boolean').length;
+  const romaniaGapFeedback=ownFeedback.filter(f=>upper(f?.area)==='ROMANIA_GAP'&&finite(f?.rating)!==null).length;
+  const price29Feedback=ownFeedback.filter(f=>typeof f?.metadata?.wouldPay29==='boolean').length;
+  const nextAction=!linked?'LINK_IDENTITY':!['ACTIVATED','COMPLETED'].includes(upper(p.status))?'ACTIVATE':firstUsefulMinutes===null?'GET_FIRST_USEFUL_RATING':!active7d?'REENGAGE':week4Eligible&&!week4Retained?'WEEK4_REENGAGE':romaniaGapFeedback===0?'COLLECT_ROMANIA_GAP_FEEDBACK':price29Feedback===0?'COLLECT_PRICE29_FEEDBACK':'MONITOR';
+  return Object.freeze({participantId:p?.id||null,workspaceId,linked,status:upper(p?.status)||'UNKNOWN',firstUsefulMinutes,active7d,week4Eligible,week4Retained,opportunityRatings,romaniaGapFeedback,price29Feedback,nextAction});
+}
 
 export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[],now=new Date().toISOString()}={}){
   const nowMs=ts(now)??Date.now();
@@ -40,12 +55,12 @@ export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[
   const activationRate=pct(activated.length,cohort.length);
   const cohortSize=cohort.length;
 
-  const usefulEvents=events.filter(e=>upper(e?.event_name)==='BETA_OPPORTUNITY_RATED'&&eventMeta(e).useful===true&&e?.workspace_id);
+  const usefulEvents=events.filter(e=>upper(e?.event_name)==='BETA_OPPORTUNITY_RATED'&&eventMeta(e).useful===true&&e?.workspace_id&&ts(e.created_at)!==null);
   const firstUsefulMinutes=[];
   for(const p of linked){
     const start=ts(p.activated_at);
     if(start===null)continue;
-    const first=usefulEvents.filter(e=>e.workspace_id===p.workspace_id&&ts(e.created_at)!==null&&ts(e.created_at)>=start).sort((a,b)=>ts(a.created_at)-ts(b.created_at))[0];
+    const first=usefulEvents.filter(e=>e.workspace_id===p.workspace_id&&ts(e.created_at)>=start).sort((a,b)=>ts(a.created_at)-ts(b.created_at))[0];
     if(first)firstUsefulMinutes.push((ts(first.created_at)-start)/60000);
   }
 
@@ -83,11 +98,13 @@ export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[
     week4RetentionRate:metric({key:'week4RetentionRate',label:'Week-4 retention',value:week4RetentionRate,target:CLOSED_BETA_TARGETS.week4RetentionRatePct,comparison:'GT',samples:eligibleWeek4.length,eligible:eligibleWeek4.length>0})
   });
 
+  const participantProgress=Object.freeze(cohort.map(p=>participantJourney(p,{events,usefulEvents,feedback,nowMs})));
+  const diagnostics=Object.freeze({linked:linked.length,unlinked:Math.max(0,cohortSize-linked.length),active7d:participantProgress.filter(p=>p.active7d).length,withUsefulRating:participantProgress.filter(p=>p.firstUsefulMinutes!==null).length,withRomaniaGapFeedback:participantProgress.filter(p=>p.romaniaGapFeedback>0).length,withPrice29Feedback:participantProgress.filter(p=>p.price29Feedback>0).length,week4Eligible:participantProgress.filter(p=>p.week4Eligible).length,week4Retained:participantProgress.filter(p=>p.week4Retained).length});
   const required=Object.values(metrics).filter(m=>m.key!=='cohortSize');
   const unknown=required.filter(m=>m.status==='UNKNOWN').map(m=>m.key);
   const failed=required.filter(m=>m.status==='FAIL').map(m=>m.key);
   const cohortReady=metrics.cohortSize.status==='PASS';
   const status=!cohortReady?'BUILD_COHORT':unknown.length?'MEASURING':failed.length?'CALIBRATE':'BETA_TARGETS_MET';
 
-  return Object.freeze({schemaVersion:'MPR_CLOSED_BETA_SCORECARD_V1',status,cohortReady,participantCount:cohortSize,linkedParticipantCount:linked.length,metrics,unknown:Object.freeze(unknown),failed:Object.freeze(failed),automaticLaunchAllowed:false,purchaseAuthorized:false,generatedAt:new Date(nowMs).toISOString()});
+  return Object.freeze({schemaVersion:'MPR_CLOSED_BETA_SCORECARD_V1',status,cohortReady,participantCount:cohortSize,linkedParticipantCount:linked.length,metrics,diagnostics,participantProgress,unknown:Object.freeze(unknown),failed:Object.freeze(failed),automaticLaunchAllowed:false,purchaseAuthorized:false,generatedAt:new Date(nowMs).toISOString()});
 }

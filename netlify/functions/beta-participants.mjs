@@ -1,4 +1,5 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
+import {isAnalyticsAdmin} from './beta-analytics.mjs';
 
 async function jsonFetch(url,options,fetchImpl){const r=await fetchImpl(url,options);let body={};try{body=await r.json();}catch{}return {ok:r.ok,status:r.status,body};}
 async function adminState(request,{fetchImpl,env}){
@@ -8,8 +9,7 @@ async function adminState(request,{fetchImpl,env}){
   if(!service)return {error:'Supabase service role is not configured',status:503};
   const user=await jsonFetch(`${supabaseUrl}/auth/v1/user`,{headers:{apikey:anon,authorization:auth}},fetchImpl);
   if(!user.ok)return {error:'Invalid or expired session',status:401};
-  const allowed=String(env.BETA_ANALYTICS_ADMIN_EMAILS||'').split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);
-  if(!allowed.includes(String(user.body?.email||'').toLowerCase()))return {error:'Admin access required',status:403};
+  if(!await isAnalyticsAdmin(user.body,{supabaseUrl,service,fetchImpl,env}))return {error:'Admin access required',status:403};
   return {supabaseUrl,service,user:user.body,headers:{apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',accept:'application/json'}};
 }
 const validStatus=new Set(['INVITED','ACTIVATED','COMPLETED','PAUSED']);
@@ -75,6 +75,6 @@ export function createBetaParticipantsHandler({fetch:fetchImpl=fetch,env=process
   }
   return new Response(null,{status:405});
 }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500});}};}
-export {aggregate,resolveParticipantBinding};
+export {aggregate,resolveParticipantBinding,adminState};
 export default createBetaParticipantsHandler();
 export const config={path:'/api/internal/beta-participants'};

@@ -14,6 +14,13 @@ test('beta participant admin endpoint rejects anonymous access',async()=>{
   assert.equal(response.status,401);
 });
 
+test('beta participant admin endpoint accepts shared server-side analytics admin registry',async()=>{
+  const fetchImpl=async url=>{const s=String(url);if(s.includes('/auth/v1/user'))return Response.json({id:'admin-1',email:'admin@example.com'});if(s.includes('/beta_analytics_admins?'))return Response.json([{user_id:'admin-1'}]);if(s.includes('/beta_participants?'))return Response.json([]);if(s.includes('/beta_feedback?'))return Response.json([]);return new Response(null,{status:404});};
+  const handler=createBetaParticipantsHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service'}});
+  const response=await handler(new Request('https://radar.example/api/internal/beta-participants',{headers:{authorization:'Bearer token'}}));
+  assert.equal(response.status,200);const body=await response.json();assert.equal(body.ok,true);assert.equal(body.summary.participants,0);
+});
+
 test('participant identity binding requires exact auth email and one real workspace membership',async()=>{
   const fetchImpl=async url=>{
     const s=String(url);
@@ -41,9 +48,9 @@ test('beta participant registry and identity binding remain service-role only be
   assert.match(bindingSql,/user_id uuid references auth\.users/i);assert.match(bindingSql,/workspace_id uuid references public\.workspaces/i);
 });
 
-test('beta operations UI exposes live scorecard and states that users are not fabricated',async()=>{
+test('beta operations UI exposes live scorecard, journey next action and states that users are not fabricated',async()=>{
   const html=await readFile(new URL('../beta-participants.html',import.meta.url),'utf8');
   const js=await readFile(new URL('../beta-participants.js',import.meta.url),'utf8');
-  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Closed Beta Scorecard/i);assert.match(html,/cele 8 KPI-uri canonice P10/i);
-  assert.match(js,/Leagă contul real/i);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/automaticLaunchAllowed=false/);assert.match(js,/purchaseAuthorized=false/);
+  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Closed Beta Scorecard/i);assert.match(html,/cele 8 KPI-uri canonice P10/i);assert.match(html,/Registru beta \+ next action/i);assert.match(html,/Journey coverage indisponibil/i);
+  assert.match(js,/Leagă contul real/i);assert.match(js,/COLLECT_ROMANIA_GAP_FEEDBACK/);assert.match(js,/WEEK4_REENGAGE/);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/automaticLaunchAllowed=false/);assert.match(js,/purchaseAuthorized=false/);
 });

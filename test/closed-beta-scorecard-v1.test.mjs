@@ -77,3 +77,19 @@ test('evidence from non-cohort workspaces cannot contaminate closed beta KPIs',(
   assert.equal(scorecard.metrics.romaniaGapUsefulRate.value,null);
   assert.equal(scorecard.metrics.willingnessToPay29Rate.value,null);
 });
+
+test('participant progress derives only observed journey evidence and suggests operational next action',()=>{
+  const participants=cohort();
+  const p=participants[0];
+  const events=[
+    {workspace_id:'w0',event_name:'BETA_OPPORTUNITY_RATED',created_at:new Date(Date.parse(p.activated_at)+7*60000).toISOString(),metadata:{useful:true,falsePositive:false}},
+    {workspace_id:'w0',event_name:'RADAR_VIEW',created_at:day(2),metadata:{}}
+  ];
+  const feedback=[{workspace_id:'w0',area:'ROMANIA_GAP',rating:5,metadata:{wouldPay29:true}}];
+  const scorecard=buildClosedBetaScorecardV1({participants,events,feedback,now});
+  const first=scorecard.participantProgress.find(x=>x.participantId==='p0');
+  const unlinked=scorecard.participantProgress.find(x=>x.participantId==='p9');
+  assert.equal(first.firstUsefulMinutes,7);assert.equal(first.active7d,true);assert.equal(first.romaniaGapFeedback,1);assert.equal(first.price29Feedback,1);assert.equal(first.nextAction,'WEEK4_REENGAGE');
+  assert.equal(unlinked.linked,false);assert.equal(unlinked.firstUsefulMinutes,null);assert.equal(unlinked.nextAction,'LINK_IDENTITY');
+  assert.equal(scorecard.diagnostics.withUsefulRating,1);assert.equal(scorecard.diagnostics.withRomaniaGapFeedback,1);assert.equal(scorecard.diagnostics.withPrice29Feedback,1);
+});
