@@ -1,0 +1,45 @@
+name: Canonical Bootstrap Import
+
+on:
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: 'Set true only for an explicitly approved canonical registry import'
+        required: true
+        default: 'false'
+      batch_size:
+        description: 'Rows per server RPC batch (1-250)'
+        required: true
+        default: '250'
+
+permissions:
+  contents: read
+
+env:
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+jobs:
+  canonical-bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Dry-run canonical bootstrap plan
+        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=${{ inputs.batch_size }}
+      - name: Execute explicitly approved import
+        if: inputs.execute == 'true'
+        env:
+          MPR_CANONICAL_BOOTSTRAP_IMPORT_APPROVED: 'true'
+        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --execute --batch=${{ inputs.batch_size }}
+      - name: Enforce no paid-provider or purchase authority path
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const s=fs.readFileSync('scripts/import-canonical-bootstrap-to-supabase.mjs','utf8');
+          if(!s.includes("providerSpendEur:0")||!s.includes("paidCallsTriggered:0")||!s.includes("purchaseAuthorized:false"))process.exit(1);
+          if(!s.includes('CANONICAL_BOOTSTRAP_IMPORT_NOT_APPROVED'))process.exit(2);
+          NODE
