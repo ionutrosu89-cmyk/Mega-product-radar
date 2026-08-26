@@ -68,12 +68,30 @@ jobs:
           if(f.salesEvidenceClass!=='NOT_VERIFIED_SALES'||f.verifiedSalesRows!==0||f.paidCallsTriggered!==0||f.providerSpendEur!==0||f.purchaseAuthorized!==false)process.exitCode=3;
           if((f.rows||[]).some(r=>r.confirmedAcceleration===true&&(r.rankSignal?.rankVelocityPerDay<=0||r.reviewSignal?.reviewDelta<=0)))process.exitCode=4;
           NODE
+      - name: Evaluate candidate importability and business fit
+        run: >-
+          node scripts/importability-business-fit.mjs
+          --asin=B00INKVS82
+          --profile=data/importability-profile-b00inkvs82-v1.json
+          --out=artifacts/importability-business-fit-b00inkvs82.json
+      - name: Enforce importability safety truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const i=JSON.parse(fs.readFileSync('artifacts/importability-business-fit-b00inkvs82.json','utf8'));
+          console.log(`importabilityStatus=${i.status}`);
+          console.log(`unknowns=${JSON.stringify(i.unknowns||[])}`);
+          console.log(`hardBlockers=${JSON.stringify(i.hardBlockers||[])}`);
+          if(i.purchaseAuthorized!==false||i.paidCallsTriggered!==0||i.providerSpendEur!==0)process.exitCode=2;
+          if(i.importabilityPassed===true&&i.status!=='IMPORTABILITY_PASS')process.exitCode=3;
+          NODE
       - name: Build First Finalist decision packet
         run: >-
           node scripts/first-finalist-decision.mjs
           --asin=B00INKVS82
           --fusion=artifacts/amazon-strict-trend-fusion-round2.json
           --romania=data/romania-binder-manual-exact-evidence-b00inkvs82-v1.json
+          --importability=artifacts/importability-business-fit-b00inkvs82.json
           --supplier=supplier-evidence/manual-verification-packets-v1.json
           --economics=data/landed-economics-readiness-v1.json
           --out=artifacts/first-finalist-decision-round2.json
@@ -85,13 +103,14 @@ jobs:
           console.log(`decisionStatus=${d.status}`);
           console.log(`gates=${JSON.stringify(d.gates)}`);
           console.log(`blockers=${JSON.stringify(d.blockers)}`);
+          console.log(`supplierSourcingEligible=${d.supplierSourcingEligible}`);
           if(d.purchaseAuthorized!==false||d.paidCallsTriggered!==0||d.providerSpendEur!==0||d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)process.exitCode=2;
-          if(d.finalistEvidenceReady===true && (!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
+          if(d.finalistEvidenceReady===true && (!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.importabilityPassed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
           if(d.testReady!==false)process.exitCode=4;
           NODE
-      - name: Run BSR, fusion and First Finalist unit tests
-        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs
-      - name: Upload Round 2 BSR, fusion and decision evidence
+      - name: Run BSR, fusion, importability and First Finalist unit tests
+        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs
+      - name: Upload Round 2 BSR, fusion, importability and decision evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -100,6 +119,7 @@ jobs:
             artifacts/amazon-leader-bsr-snapshot-round2.json
             artifacts/amazon-leader-bsr-history-round2.json
             artifacts/amazon-strict-trend-fusion-round2.json
+            artifacts/importability-business-fit-b00inkvs82.json
             artifacts/first-finalist-decision-round2.json
           if-no-files-found: error
           retention-days: 7
