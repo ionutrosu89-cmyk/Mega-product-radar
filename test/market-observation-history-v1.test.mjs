@@ -32,7 +32,7 @@ test('same canonical product on different platforms stays in separate metric ser
 test('same ASIN can preserve multiple explicit ranking surfaces at one timestamp',()=>{
   const h=appendMarketObservationHistory([],[obs({surface:'BSR_CATEGORY::OFFICE PRODUCTS',sourceRank:143}),obs({surface:'BSR_CATEGORY::ROUND RING BINDERS',sourceRank:2})]);
   assert.equal(h.history.length,2);assert.equal(h.rejected.length,0);
-  const report=buildObservationHistoryMetrics(h);assert.equal(report.seriesCount,2);assert.notEqual(report.metrics[0].seriesKey,report.metrics[1].seriesKey);
+  const report=buildObservationHistoryMetrics(h.history);assert.equal(report.seriesCount,2);assert.notEqual(report.metrics[0].seriesKey,report.metrics[1].seriesKey);
 });
 
 test('title changes never split a canonical source history',()=>{
