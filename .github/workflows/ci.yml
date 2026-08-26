@@ -18,8 +18,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Audit production dependencies
+        run: npm audit --audit-level=high --omit=dev
+      - name: Verify migration chain
+        run: npm run verify:migrations
       - name: Syntax check V2 engines
         run: |
           for f in app.js market-trend-ui.js free-intelligence-ui.js product-ro.js intelligence-ecosystem.js \
