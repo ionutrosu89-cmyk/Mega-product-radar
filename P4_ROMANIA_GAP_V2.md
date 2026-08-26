@@ -50,6 +50,10 @@ Romania Gap can return `PASS`, `REVIEW`, or `UNKNOWN`.
 
 A Romania Gap PASS is only evidence for the canonical Decision Authority. It cannot promote a product directly to FINALIST, TEST_READY, TEST_VALIDATED, BUY_READY, or authorize a purchase.
 
+## Integration verification
+
+This stacked PR is retargeted to `main` only after Trend Intelligence V2 is merged and green. Integration must preserve exact `canonicalProductId` binding and the distinction between reviewed query-surface evidence and market-wide claims.
+
 ## Truth safeguards
 
 - broad marketplace result counts are not exact comparable counts
