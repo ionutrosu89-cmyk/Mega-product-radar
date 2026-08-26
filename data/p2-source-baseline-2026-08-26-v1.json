@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "MPR_P2_SOURCE_BASELINE_V1",
+  "measuredAt": "2026-08-26T16:10:00Z",
+  "source": {
+    "repositoryPath": "data/real-products-1000.compact.json",
+    "sourceSchemaVersion": "MPR_REAL_PRODUCT_BOOTSTRAP_1000_V1",
+    "upstreamRepo": "luminati-io/Amazon-dataset-samples",
+    "upstreamCommit": "8259a2c9dc6e513219c3ca0aa02503e103c27ed6",
+    "productSetSha256": "d555b25edcd604f29cca36d0f3651026349f332d1931569f809ec95c6cb4afb6"
+  },
+  "rawSourceCoverage": {
+    "uniqueProducts": 1000,
+    "withPrice": 997,
+    "priceCoveragePct": 99.7,
+    "withReviews": 1000,
+    "reviewCoveragePct": 100,
+    "withRating": 1000,
+    "ratingCoveragePct": 100,
+    "withCategory": 1000,
+    "categoryCoveragePct": 100,
+    "sourceUrlIdentityMismatchCount": 212,
+    "sourceUrlIdentityMatchCount": 788,
+    "sourceUrlIdentityMatchPct": 78.8
+  },
+  "canonicalCoverage": {
+    "measured": false,
+    "canonicalProducts": null,
+    "boundAliases": null,
+    "twoPlusObservations": null,
+    "threePlusObservations": null,
+    "reason": "PUBLIC_BOOTSTRAP_DATASET_DOES_NOT_CONTAIN_THE_SERVER_CANONICAL_REGISTRY_OR_RESOLVED_CANONICAL_PRODUCT_UUIDS"
+  },
+  "readiness": {
+    "rawSourceBaseline": "STRONG_BOOTSTRAP_COVERAGE",
+    "controlledScaleDecision": "HOLD_UNTIL_CANONICAL_ALIAS_RESOLUTION_IS_MEASURED",
+    "tenKMilestoneReached": false
+  },
+  "truthPolicy": {
+    "bootstrapDataIsNotLive": true,
+    "catalogueBootstrapIsNotRanking": true,
+    "rawSourceCoverageIsNotCanonicalCoverage": true,
+    "sourceUrlMismatchDoesNotInvalidateExactASINIdentity": true,
+    "titleAutoMergeAllowed": false,
+    "verifiedSalesInferred": false,
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
