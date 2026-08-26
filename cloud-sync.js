@@ -16,7 +16,7 @@ let muted=false;
 let installed=false;
 const timers=new Map();
 const chains=new Map();
-let batchSequence=0;
+let idSequence=0;
 
 function parseValue(raw,shape){
   try{
@@ -34,13 +34,37 @@ function parseLocalDataset(d){
   }
   return d.shape==='map'?{}:[];
 }
+function nextRecordId(){
+  idSequence=(idSequence+1)%1000000;
+  if(typeof crypto!=='undefined'&&crypto.randomUUID)return crypto.randomUUID();
+  return `radar-${Date.now()}-${idSequence}-${Math.random().toString(36).slice(2,10)}`;
+}
 function localRecords(d){
   const raw=parseLocalDataset(d);
-  if(d.shape==='map') return Object.entries(raw).map(([key,value])=>({...((value&&typeof value==='object')?value:{}),__radarKey:key}));
-  return raw;
+  if(d.shape==='map'){
+    let changed=false;
+    const out={...raw};
+    const records=Object.entries(raw).map(([key,value])=>{
+      const base=(value&&typeof value==='object')?value:{};
+      const recordId=String(base.__cloudRecordId||`map:${key}`);
+      if(base.__cloudRecordId!==recordId){out[key]={...base,__cloudRecordId:recordId};changed=true;}
+      return {...base,__radarKey:key,__cloudRecordId:recordId};
+    });
+    if(changed){muted=true;try{localStorage.setItem(d.key,JSON.stringify(out));}finally{muted=false;}}
+    return records;
+  }
+  let changed=false;
+  const hydrated=raw.map(value=>{
+    const base=(value&&typeof value==='object')?value:{};
+    if(base.__cloudRecordId)return base;
+    changed=true;
+    return {...base,__cloudRecordId:nextRecordId()};
+  });
+  if(changed){muted=true;try{localStorage.setItem(d.key,JSON.stringify(hydrated));}finally{muted=false;}}
+  return hydrated;
 }
 function localCount(d){const raw=parseLocalDataset(d);return d.shape==='map'?Object.keys(raw).length:raw.length;}
-function stripMeta(record){if(!record||typeof record!=='object')return record;const {__radarKey,...clean}=record;return clean;}
+function stripMeta(record){if(!record||typeof record!=='object')return record;const {__radarKey,__cloudVersion,...clean}=record;return clean;}
 function recordTime(record){
   if(!record||typeof record!=='object')return 0;
   for(const key of ['updatedAt','responseReceivedAt','sentAt','verifiedAt','orderedAt','at']){const t=Date.parse(record[key]||'');if(Number.isFinite(t))return t;}
@@ -55,7 +79,7 @@ function writeDatasetLocal(d,records){
       const out={};
       for(const record of records||[]){const key=String(record?.__radarKey||record?.productName||record?.name||'').trim();if(key)out[key]=stripMeta(record);}
       localStorage.setItem(d.key,JSON.stringify(out));
-    }else localStorage.setItem(d.key,JSON.stringify((records||[]).map(stripMeta)));
+    }else localStorage.setItem(d.key,JSON.stringify((records||[]).map(stripMeta));
   }finally{muted=false;}
 }
 async function context(){
@@ -66,12 +90,6 @@ async function context(){
   return {client,workspace};
 }
 function datasetFor(key){return CLOUD_DATASETS.find(d=>d.key===key||d.legacyKey===key);}
-function nextBatch(){
-  const now=Date.now();
-  batchSequence=(batchSequence+1)%1000000;
-  const suffix=typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():`${now}-${batchSequence}`;
-  return {id:suffix,at:new Date(now).toISOString()};
-}
 
 export function selectLatestSyncBatchRows(rows=[]){
   const modern=(rows||[]).filter(row=>row?.sync_batch_id&&Date.parse(row?.sync_batch_at||'')>0);
@@ -84,35 +102,73 @@ export function selectLatestSyncBatchRows(rows=[]){
   return modern.filter(row=>row.sync_batch_id===latest.sync_batch_id&&row.sync_batch_at===latest.sync_batch_at).map(row=>row.payload).filter(Boolean);
 }
 
-async function cloudRows(client,d,workspaceId){
-  const {data,error}=await client.from(d.table).select('payload,sync_batch_id,sync_batch_at').eq('workspace_id',workspaceId).order('created_at',{ascending:true});
+export function planRecordUpserts(local=[],cloud=[]){
+  const current=new Map((cloud||[]).filter(x=>x?.sync_record_id).map(x=>[String(x.sync_record_id),x]));
+  const operations=[];
+  for(const record of local||[]){
+    const recordId=String(record?.__cloudRecordId||'').trim();
+    if(!recordId)throw new Error('CLOUD_SYNC_MISSING_STABLE_RECORD_ID');
+    const existing=current.get(recordId);
+    if(!existing){operations.push({kind:'INSERT',recordId,expectedVersion:0,nextVersion:1,record});continue;}
+    const expectedVersion=Number(record?.__cloudVersion||0);
+    const actualVersion=Number(existing.sync_version||1);
+    if(!Number.isInteger(expectedVersion)||expectedVersion<1||expectedVersion!==actualVersion){
+      const error=new Error(`CLOUD_SYNC_VERSION_CONFLICT:${recordId}`);
+      error.code='CLOUD_SYNC_VERSION_CONFLICT';
+      error.recordId=recordId;
+      error.expectedVersion=expectedVersion;
+      error.actualVersion=actualVersion;
+      throw error;
+    }
+    operations.push({kind:'UPDATE',recordId,expectedVersion,nextVersion:actualVersion+1,record});
+  }
+  return operations;
+}
+
+function withCloudMeta(row){
+  const payload=row?.payload&&typeof row.payload==='object'?row.payload:{};
+  return {...payload,__cloudRecordId:String(row?.sync_record_id||payload.__cloudRecordId||''),__cloudVersion:Number(row?.sync_version||1),__radarKey:payload.__radarKey};
+}
+async function cloudStateRows(client,d,workspaceId){
+  const {data,error}=await client.from(d.table).select('sync_record_id,sync_version,payload').eq('workspace_id',workspaceId).order('created_at',{ascending:true});
   if(error)throw error;
-  return selectLatestSyncBatchRows(data||[]);
+  return data||[];
+}
+async function cloudRows(client,d,workspaceId){return (await cloudStateRows(client,d,workspaceId)).filter(x=>x?.sync_record_id).map(withCloudMeta);}
+function rowForSync(d,record,workspaceId,recordId,version){
+  const base=d.toRow(record,workspaceId);
+  const canonicalProductId=String(record?.canonicalProductId||record?.canonical_product_id||'').trim();
+  return {...base,payload:stripMeta(record),sync_record_id:recordId,sync_version:version,sync_batch_id:null,sync_batch_at:null,...(canonicalProductId?{canonical_product_id:canonicalProductId}:{})};
 }
 
 export function localCloudSummary(){return CLOUD_DATASETS.map(d=>({key:d.key,table:d.table,count:localCount(d)}));}
 
 export async function pushDatasetToCloud(key){
-  const d=datasetFor(key);if(!d) return null;
+  const d=datasetFor(key);if(!d)return null;
   const {client,workspace}=await context();
   const records=localRecords(d);
-  const batch=nextBatch();
-  if(records.length){
-    const rows=records.map(x=>({...d.toRow(x,workspace.id),sync_batch_id:batch.id,sync_batch_at:batch.at}));
-    const {error:insertError}=await client.from(d.table).insert(rows);
-    if(insertError)throw insertError;
+  const cloud=await cloudStateRows(client,d,workspace.id);
+  const operations=planRecordUpserts(records,cloud);
+  for(const op of operations){
+    const row=rowForSync(d,op.record,workspace.id,op.recordId,op.nextVersion);
+    if(op.kind==='INSERT'){
+      const {error}=await client.from(d.table).insert(row);
+      if(error){const conflict=new Error(`CLOUD_SYNC_INSERT_CONFLICT:${op.recordId}`);conflict.code='CLOUD_SYNC_INSERT_CONFLICT';conflict.cause=error;throw conflict;}
+    }else{
+      const {data,error}=await client.from(d.table).update(row).eq('workspace_id',workspace.id).eq('sync_record_id',op.recordId).eq('sync_version',op.expectedVersion).select('sync_record_id,sync_version');
+      if(error)throw error;
+      if(!data?.length){const conflict=new Error(`CLOUD_SYNC_VERSION_CONFLICT:${op.recordId}`);conflict.code='CLOUD_SYNC_VERSION_CONFLICT';throw conflict;}
+    }
   }
-  // Destructive cleanup happens only after the replacement batch is safely persisted.
-  // Older concurrent writers cannot delete a newer batch because cleanup is timestamp-bounded.
-  const old=client.from(d.table).delete().eq('workspace_id',workspace.id).lt('sync_batch_at',batch.at);
-  const {error:oldError}=await old;if(oldError)throw oldError;
-  const legacy=client.from(d.table).delete().eq('workspace_id',workspace.id).is('sync_batch_at',null);
-  const {error:legacyError}=await legacy;if(legacyError)throw legacyError;
-  return {workspaceId:workspace.id,table:d.table,count:records.length,batchId:batch.id,batchAt:batch.at,mode:'INSERT_THEN_CLEAN'};
+  // Missing local records are intentionally not deleted remotely. Deletion requires an explicit
+  // tombstone protocol; until then we fail safe and prefer preservation over silent data loss.
+  const refreshed=await cloudRows(client,d,workspace.id);
+  writeDatasetLocal(d,refreshed);
+  return {workspaceId:workspace.id,table:d.table,count:operations.length,mode:'RECORD_UPSERT_CAS'};
 }
 
 export async function pullDatasetFromCloud(key){
-  const d=datasetFor(key);if(!d) return null;
+  const d=datasetFor(key);if(!d)return null;
   const {client,workspace}=await context();
   const records=await cloudRows(client,d,workspace.id);
   writeDatasetLocal(d,records);
@@ -128,6 +184,8 @@ async function reconcileDataset(d){
   if(!cloud.length&&!local.length)return 'EMPTY';
   if(!cloud.length&&local.length){await pushDatasetToCloud(d.key);return 'PUSHED';}
   if(cloud.length&&!local.length){writeDatasetLocal(d,cloud);return 'PULLED';}
+  // Legacy local data must first adopt the server-issued record IDs/versions before it may write.
+  if(local.some(x=>!x.__cloudVersion)){writeDatasetLocal(d,cloud);return 'PULLED_METADATA';}
   const localStamp=latestTime(local),cloudStamp=latestTime(cloud);
   if(localStamp>cloudStamp){await pushDatasetToCloud(d.key);return 'PUSHED';}
   if(cloudStamp>localStamp){writeDatasetLocal(d,cloud);return 'PULLED';}
@@ -156,7 +214,7 @@ export async function installCloudAutosync({hydrate=true,reloadOnHydrate=true}={
     window.addEventListener('storage',e=>{if(e.storageArea===localStorage&&datasetFor(e.key))queueSync(e.key,250);});
   }
   let changed=false;
-  if(hydrate){for(const d of CLOUD_DATASETS){try{if(await reconcileDataset(d)==='PULLED')changed=true;}catch(e){console.warn('Radar cloud hydrate',d.key,e?.message||e);}}}
+  if(hydrate){for(const d of CLOUD_DATASETS){try{if((await reconcileDataset(d)).startsWith('PULLED'))changed=true;}catch(e){console.warn('Radar cloud hydrate',d.key,e?.message||e);}}}
   if(changed&&reloadOnHydrate){const marker='radarCloudHydrated:'+location.pathname;if(sessionStorage.getItem(marker)!=='1'){sessionStorage.setItem(marker,'1');location.reload();}}
   return{active:true,changed};
 }
