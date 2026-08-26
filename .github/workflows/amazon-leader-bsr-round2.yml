@@ -95,21 +95,26 @@ jobs:
           --supplier=supplier-evidence/manual-verification-packets-v1.json
           --economics=data/landed-economics-readiness-v1.json
           --out=artifacts/first-finalist-decision-round2.json
-      - name: Enforce First Finalist truth gates
+      - name: Enforce First Finalist and canonical decision truth gates
         run: |
           node - <<'NODE'
           const fs=require('fs');
           const d=JSON.parse(fs.readFileSync('artifacts/first-finalist-decision-round2.json','utf8'));
+          const c=d.canonicalDecision||{};
           console.log(`decisionStatus=${d.status}`);
+          console.log(`canonicalStage=${c.stage}`);
           console.log(`gates=${JSON.stringify(d.gates)}`);
           console.log(`blockers=${JSON.stringify(d.blockers)}`);
           console.log(`supplierSourcingEligible=${d.supplierSourcingEligible}`);
           if(d.purchaseAuthorized!==false||d.paidCallsTriggered!==0||d.providerSpendEur!==0||d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)process.exitCode=2;
           if(d.finalistEvidenceReady===true && (!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.importabilityPassed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
           if(d.testReady!==false)process.exitCode=4;
+          if(c.authority!=='EVIDENCE_DRIVEN_CANONICAL_DECISION'||c.purchaseAuthorized!==false||c.automaticPurchaseAllowed!==false)process.exitCode=5;
+          if(c.stage==='FINALIST'&&d.finalistEvidenceReady!==true)process.exitCode=6;
+          if(['TEST_READY','TEST_RUNNING','TEST_VALIDATED','BUY_READY'].includes(c.stage))process.exitCode=7;
           NODE
-      - name: Run BSR, fusion, importability and First Finalist unit tests
-        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs
+      - name: Run BSR, fusion, importability and canonical decision unit tests
+        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs test/single-decision-authority-v1.test.mjs
       - name: Upload Round 2 BSR, fusion, importability and decision evidence
         if: always()
         uses: actions/upload-artifact@v4
