@@ -44,6 +44,6 @@ test('beta participant registry and identity binding remain service-role only be
 test('beta operations UI exposes live scorecard and states that users are not fabricated',async()=>{
   const html=await readFile(new URL('../beta-participants.html',import.meta.url),'utf8');
   const js=await readFile(new URL('../beta-participants.js',import.meta.url),'utf8');
-  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Closed Beta Scorecard/i);assert.match(html,/cele 8 KPI-uri canonice P10/i);assert.match(html,/Leagă contul real/i);
-  assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/automaticLaunchAllowed=false/);assert.match(js,/purchaseAuthorized=false/);
+  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Closed Beta Scorecard/i);assert.match(html,/cele 8 KPI-uri canonice P10/i);
+  assert.match(js,/Leagă contul real/i);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/automaticLaunchAllowed=false/);assert.match(js,/purchaseAuthorized=false/);
 });
