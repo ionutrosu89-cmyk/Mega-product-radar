@@ -13,9 +13,9 @@ await writePatched('app.js','app.js',text=>text
   .replace("n(p.marketScout?.checks)>=3&&n(p.marketScout?.foreignPresence)>=1","n(p.marketScout?.checks)>=5&&n(p.marketScout?.foreignPresence)>=1")
   .replace("score>=82?'BUY':score>=76?'TEST':'WATCH'","score>=84?'BUY':score>=76?'TEST':'WATCH'")
   .replace('<small>MEGA 4.2</small>','<small>MEGA 7.0</small>'));
-for(const file of [
+for(const file of[
   'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json',
-  'v6-core.js','source-connectors.js','executive-dashboard.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js',
+  'v6-core.js','domain-contracts-v1.js','portfolio-store.js','feedback-store.js','source-connectors.js','executive-dashboard.html','executive-ro.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js',
   'test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','landed-cost-evidence.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','organic-rising-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
   'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-shell.js','login.html','login.js','account.html','account.js',
@@ -25,12 +25,12 @@ for(const file of [
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js','academy.html','academy.js',
   'pricing.html','pricing.js','beta.html','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
-]) await copyIfExists(file);
+])await copyIfExists(file);
 
 // P0 policy: supplier candidates, RFQ dispatch payloads, manual evidence and negotiation dossiers are private server-side data.
 // Never copy supplier-candidates/, supplier-rfq-dispatch/, supplier-evidence/ or docs/rfq-* into the customer static bundle.
-for(const required of ['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','landed-cost-evidence.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js','test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js','customer-ui.css','customer-shell.js','academy.html','academy.js','plan-recommendation-v1.js'])await fs.access(path.join(out,required));
-for(const forbidden of ['supplier-candidates','supplier-rfq-dispatch','supplier-evidence']){
+for(const required of['commercial-watchlist-page.js','commercial-watchlist.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','supplier-quote-verifier.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','landed-cost-evidence.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js','test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js','customer-ui.css','customer-shell.js','academy.html','academy.js','plan-recommendation-v1.js','executive-ro.html','executive-dashboard.js','portfolio-store.js','feedback-store.js','domain-contracts-v1.js'])await fs.access(path.join(out,required));
+for(const forbidden of['supplier-candidates','supplier-rfq-dispatch','supplier-evidence']){
   try{await fs.access(path.join(out,forbidden));throw new Error(`PRIVATE_STATIC_ARTIFACT_EXPOSED:${forbidden}`);}catch(error){if(error?.code!=='ENOENT')throw error;}
 }
 
