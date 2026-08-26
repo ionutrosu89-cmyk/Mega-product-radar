@@ -5,7 +5,7 @@ import {buildClosedBetaScorecardV1,CLOSED_BETA_TARGETS} from '../closed-beta-sco
 const now='2026-08-26T12:00:00Z';
 const day=n=>new Date(Date.parse(now)-n*86400000).toISOString();
 
-function cohort(count=10){return Array.from({length:count},(_,i)=>({id:`p${i}`,status:i<8?'ACTIVATED':'INVITED',workspace_id:i<8?`w${i}`:null,activated_at:i<8?day(35):null}));}
+function cohort(count=10){return Array.from({length:count},(_,i)=>({id:`p${i}`,status:i<Math.ceil(count*.8)?'ACTIVATED':'INVITED',user_id:i<Math.ceil(count*.8)?`u${i}`:null,workspace_id:i<Math.ceil(count*.8)?`w${i}`:null,activated_at:i<Math.ceil(count*.8)?day(35):null}));}
 
 test('P10 canonical targets match the master plan',()=>{
   assert.equal(CLOSED_BETA_TARGETS.participantMin,10);
@@ -30,10 +30,9 @@ test('missing evidence remains UNKNOWN instead of synthetic zero',()=>{
   assert.equal(scorecard.status,'MEASURING');
 });
 
-test('cohort outside 10-15 fails closed to BUILD_COHORT',()=>{
-  const scorecard=buildClosedBetaScorecardV1({participants:cohort(8),events:[],feedback:[],now});
-  assert.equal(scorecard.cohortReady,false);
-  assert.equal(scorecard.status,'BUILD_COHORT');
+test('cohort gate accepts exactly 10-15 and rejects outside range',()=>{
+  for(const count of [10,15]){const scorecard=buildClosedBetaScorecardV1({participants:cohort(count),events:[],feedback:[],now});assert.equal(scorecard.metrics.cohortSize.status,'PASS');assert.equal(scorecard.cohortReady,true);}
+  for(const count of [8,16]){const scorecard=buildClosedBetaScorecardV1({participants:cohort(count),events:[],feedback:[],now});assert.equal(scorecard.metrics.cohortSize.status,'FAIL');assert.equal(scorecard.cohortReady,false);assert.equal(scorecard.status,'BUILD_COHORT');}
 });
 
 test('explicit usefulness, false positives, Romania Gap and €29 signals are measured directly',()=>{
@@ -44,7 +43,7 @@ test('explicit usefulness, false positives, Romania Gap and €29 signals are me
     events.push({workspace_id:`w${i}`,event_name:'BETA_OPPORTUNITY_RATED',created_at:new Date(Date.parse(participants[i].activated_at)+5*60000).toISOString(),metadata:{useful:i<7,falsePositive:i===7}});
     events.push({workspace_id:`w${i}`,event_name:'RADAR_VIEW',created_at:new Date(Date.parse(participants[i].activated_at)+24*86400000).toISOString(),metadata:{}});
   }
-  const feedback=Array.from({length:10},(_,i)=>({area:'ROMANIA_GAP',rating:i<8?4:3,metadata:{wouldPay29:i<4}}));
+  const feedback=Array.from({length:10},(_,i)=>({workspace_id:`w${i%8}`,area:'ROMANIA_GAP',rating:i<8?4:3,metadata:{wouldPay29:i<4}}));
   const scorecard=buildClosedBetaScorecardV1({participants,events,feedback,now});
   assert.equal(scorecard.metrics.activationRate.status,'PASS');
   assert.equal(scorecard.metrics.firstUsefulOpportunityMinutes.value,5);
@@ -67,4 +66,14 @@ test('high usefulness cannot hide a failed false-positive target',()=>{
   assert.equal(scorecard.metrics.falsePositiveRate.value,25);
   assert.equal(scorecard.metrics.falsePositiveRate.status,'FAIL');
   assert.ok(scorecard.failed.includes('falsePositiveRate'));
+});
+
+test('evidence from non-cohort workspaces cannot contaminate closed beta KPIs',()=>{
+  const participants=cohort();
+  const events=[{workspace_id:'outside',event_name:'BETA_OPPORTUNITY_RATED',created_at:day(1),metadata:{useful:true,falsePositive:false}}];
+  const feedback=[{workspace_id:'outside',area:'ROMANIA_GAP',rating:5,metadata:{wouldPay29:true}}];
+  const scorecard=buildClosedBetaScorecardV1({participants,events,feedback,now});
+  assert.equal(scorecard.metrics.usefulOpportunityRate.value,null);
+  assert.equal(scorecard.metrics.romaniaGapUsefulRate.value,null);
+  assert.equal(scorecard.metrics.willingnessToPay29Rate.value,null);
 });

@@ -21,13 +21,14 @@ function metric({key,label,value,target,comparison,samples=0,eligible=true}){
   let status='UNKNOWN';
   if(eligible&&value!==null&&Number.isFinite(Number(value))){
     const n=Number(value);
-    status=comparison==='LT'?(n<target?'PASS':'FAIL'):(comparison==='LTE'?(n<=target?'PASS':'FAIL'):(n>target?'PASS':'FAIL'));
+    if(comparison==='BETWEEN')status=n>=Number(target.min)&&n<=Number(target.max)?'PASS':'FAIL';
+    else status=comparison==='LT'?(n<target?'PASS':'FAIL'):(comparison==='LTE'?(n<=target?'PASS':'FAIL'):(comparison==='GTE'?(n>=target?'PASS':'FAIL'):(n>target?'PASS':'FAIL')));
   }
   return Object.freeze({key,label,value,target,comparison,samples,status});
 }
 
 function eventMeta(event){return event?.metadata&&typeof event.metadata==='object'?event.metadata:{};}
-function linkedParticipants(participants=[]){return participants.filter(p=>p?.workspace_id&&['ACTIVATED','COMPLETED'].includes(upper(p.status)));}
+function linkedParticipants(participants=[]){return participants.filter(p=>p?.workspace_id&&p?.user_id&&['ACTIVATED','COMPLETED'].includes(upper(p.status)));}
 
 export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[],now=new Date().toISOString()}={}){
   const nowMs=ts(now)??Date.now();
@@ -52,14 +53,14 @@ export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[
   const linkedActive7d=new Set(events.filter(e=>linkedWorkspaceIds.has(e?.workspace_id)&&ts(e.created_at)!==null&&ts(e.created_at)>=sevenDaysAgo&&ts(e.created_at)<=nowMs).map(e=>e.workspace_id));
   const wauRate=pct(linkedActive7d.size,linked.length);
 
-  const ratedEvents=events.filter(e=>upper(e?.event_name)==='BETA_OPPORTUNITY_RATED'&&typeof eventMeta(e).useful==='boolean');
+  const ratedEvents=events.filter(e=>linkedWorkspaceIds.has(e?.workspace_id)&&upper(e?.event_name)==='BETA_OPPORTUNITY_RATED'&&typeof eventMeta(e).useful==='boolean');
   const usefulRate=pct(ratedEvents.filter(e=>eventMeta(e).useful===true).length,ratedEvents.length);
   const falsePositiveRate=pct(ratedEvents.filter(e=>eventMeta(e).falsePositive===true).length,ratedEvents.length);
 
-  const romaniaFeedback=feedback.filter(f=>upper(f?.area)==='ROMANIA_GAP'&&finite(f?.rating)!==null);
+  const romaniaFeedback=feedback.filter(f=>linkedWorkspaceIds.has(f?.workspace_id)&&upper(f?.area)==='ROMANIA_GAP'&&finite(f?.rating)!==null);
   const romaniaGapUsefulRate=pct(romaniaFeedback.filter(f=>finite(f.rating)>=4).length,romaniaFeedback.length);
 
-  const pay29Feedback=feedback.filter(f=>typeof f?.metadata?.wouldPay29==='boolean');
+  const pay29Feedback=feedback.filter(f=>linkedWorkspaceIds.has(f?.workspace_id)&&typeof f?.metadata?.wouldPay29==='boolean');
   const willingnessToPay29Rate=pct(pay29Feedback.filter(f=>f.metadata.wouldPay29===true).length,pay29Feedback.length);
 
   const eligibleWeek4=linked.filter(p=>{const start=ts(p.activated_at);return start!==null&&nowMs-start>=28*86400000;});
@@ -71,7 +72,7 @@ export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[
   const week4RetentionRate=pct(retainedWeek4,eligibleWeek4.length);
 
   const metrics=Object.freeze({
-    cohortSize:metric({key:'cohortSize',label:'Beta cohort size',value:cohortSize,target:CLOSED_BETA_TARGETS.participantMin,comparison:'GT',samples:cohortSize,eligible:cohortSize>0}),
+    cohortSize:metric({key:'cohortSize',label:'Beta cohort size',value:cohortSize,target:{min:CLOSED_BETA_TARGETS.participantMin,max:CLOSED_BETA_TARGETS.participantMax},comparison:'BETWEEN',samples:cohortSize,eligible:cohortSize>0}),
     activationRate:metric({key:'activationRate',label:'Activation rate',value:activationRate,target:CLOSED_BETA_TARGETS.activationRatePct,comparison:'GT',samples:cohortSize,eligible:cohortSize>0}),
     firstUsefulOpportunityMinutes:metric({key:'firstUsefulOpportunityMinutes',label:'Median time to first useful opportunity',value:median(firstUsefulMinutes),target:CLOSED_BETA_TARGETS.firstUsefulOpportunityMinutes,comparison:'LT',samples:firstUsefulMinutes.length,eligible:firstUsefulMinutes.length>0}),
     wauRate:metric({key:'wauRate',label:'Weekly active beta participants',value:wauRate,target:CLOSED_BETA_TARGETS.wauRatePct,comparison:'GT',samples:linked.length,eligible:linked.length>0}),
@@ -85,7 +86,7 @@ export function buildClosedBetaScorecardV1({participants=[],events=[],feedback=[
   const required=Object.values(metrics).filter(m=>m.key!=='cohortSize');
   const unknown=required.filter(m=>m.status==='UNKNOWN').map(m=>m.key);
   const failed=required.filter(m=>m.status==='FAIL').map(m=>m.key);
-  const cohortReady=cohortSize>=CLOSED_BETA_TARGETS.participantMin&&cohortSize<=CLOSED_BETA_TARGETS.participantMax;
+  const cohortReady=metrics.cohortSize.status==='PASS';
   const status=!cohortReady?'BUILD_COHORT':unknown.length?'MEASURING':failed.length?'CALIBRATE':'BETA_TARGETS_MET';
 
   return Object.freeze({schemaVersion:'MPR_CLOSED_BETA_SCORECARD_V1',status,cohortReady,participantCount:cohortSize,linkedParticipantCount:linked.length,metrics,unknown:Object.freeze(unknown),failed:Object.freeze(failed),automaticLaunchAllowed:false,purchaseAuthorized:false,generatedAt:new Date(nowMs).toISOString()});
