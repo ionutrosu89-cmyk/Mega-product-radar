@@ -9,12 +9,16 @@ test('program exposes exactly the eight evidence KPIs',()=>{
   ]);
 });
 
-test('current real baseline stays blocked at longitudinal data',()=>{
+test('current real baseline has longitudinal data and is now blocked at trend fusion',()=>{
   const out=buildFirstFinalistProgram(current);
-  assert.equal(out.phase,'DATA_LONGITUDINAL');
-  assert.equal(out.nextAction,'EXECUTE_AMAZON_ROUND2_AFTER_ELIGIBILITY');
+  assert.equal(out.phase,'TREND_FUSION');
+  assert.equal(out.nextAction,'COLLECT_SECOND_PUBLIC_RANK_SNAPSHOT_AND_FUSE_WITH_REVIEWS');
   assert.equal(out.metrics.firstLiveCoveragePct,25.5);
+  assert.equal(out.metrics.productsWithTwoLiveSnapshots,52);
+  assert.equal(out.metrics.productsWithConfirmedTrendFusion,0);
   assert.equal(out.metrics.finalistProducts,0);
+  assert.equal(out.gates.DATA_LONGITUDINAL,true);
+  assert.equal(out.gates.TREND_FUSION,false);
   assert.equal(out.scaleGate.scaleNow,false);
   assert.equal(out.purchaseAuthorized,false);
   assert.equal(out.spend.paidCallsTriggered,0);
