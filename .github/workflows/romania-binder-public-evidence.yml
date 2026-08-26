@@ -1,0 +1,63 @@
+name: Romania Binder Public Evidence
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/romania-binder-public-evidence-trigger-2026-08-26.json'
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate one-time Romania binder trigger policy
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/romania-binder-public-evidence-trigger-2026-08-26.json';
+          if(!fs.existsSync(p)) throw new Error('ROMANIA_BINDER_TRIGGER_MARKER_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='ROMANIA_BINDER_PUBLIC_EVIDENCE_2026_08_26') throw new Error('ROMANIA_BINDER_TRIGGER_ID_INVALID');
+          if(x.candidateAsin!=='B00INKVS82') throw new Error('ROMANIA_BINDER_ASIN_INVALID');
+          if(x.comparabilityKey!=='THREE_RING_ROUND_RING_BINDERS') throw new Error('ROMANIA_BINDER_COMPARABILITY_INVALID');
+          if(x.platforms?.join(',')!=='EMAG,TRENDYOL') throw new Error('ROMANIA_BINDER_PLATFORMS_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('ROMANIA_BINDER_TRIGGER_POLICY_INVALID');
+          NODE
+      - name: Collect direct public eMAG and Trendyol evidence
+        continue-on-error: true
+        run: node scripts/romania-binder-public-evidence.mjs --out=artifacts/romania-binder-public-evidence.json
+      - name: Enforce fail-closed Romania evidence policy
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/romania-binder-public-evidence.json';
+          if(!fs.existsSync(p)){console.error('ROMANIA_BINDER_ARTIFACT_MISSING');process.exit(1)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`status=${x.status}`);
+          console.log(`observations=${JSON.stringify((x.observations||[]).map(o=>({platform:o.platform,httpStatus:o.httpStatus,blocked:o.blocked,lowerBound:o.productLinkLowerBound,evidenceClass:o.evidenceClass})))}`);
+          if(x.policy?.providerSpendEur!==0||x.policy?.paidCallsTriggered!==0)process.exitCode=3;
+          if(x.policy?.purchaseAuthorized!==false||x.policy?.lowerBoundIsExactCount!==false)process.exitCode=4;
+          if(x.exactRomaniaGapConfirmed!==false||x.promotionEligible!==false)process.exitCode=5;
+          if((x.observations||[]).length!==2)process.exitCode=6;
+          if((x.observations||[]).some(o=>o.listingCount!==null||o.declaredResultCountTrusted!==false||o.marketWideReviewed!==false||o.comparabilityConfirmed!==false||o.salesEvidenceClass!=='NOT_VERIFIED_SALES'||o.purchaseAuthorized!==false))process.exitCode=7;
+          NODE
+      - name: Upload Romania binder public evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: romania-binder-public-evidence
+          path: artifacts/romania-binder-public-evidence.json
+          if-no-files-found: error
+          retention-days: 7
