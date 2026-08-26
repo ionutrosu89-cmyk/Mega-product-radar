@@ -7,7 +7,9 @@
     "check": "node scripts/check-project.mjs",
     "test": "node --test",
     "qa:mobile": "node scripts/qa-mobile.mjs",
-    "build": "node scripts/check-project.mjs && node scripts/build-site.mjs && node scripts/qa-mobile.mjs"
+    "verify:migrations": "node scripts/verify-migration-chain.mjs",
+    "security:audit": "npm audit --audit-level=high --omit=dev",
+    "build": "node scripts/check-project.mjs && node scripts/verify-migration-chain.mjs && node scripts/build-site.mjs && node scripts/qa-mobile.mjs"
   },
   "engines": {"node": ">=22"},
   "dependencies": {
