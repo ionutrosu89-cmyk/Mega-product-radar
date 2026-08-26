@@ -22,6 +22,7 @@ test('valid >=24h Round2 movement becomes preliminary review-price evidence only
   assert.equal(r.rows[0].priceDelta,-2);
   assert.equal(r.rows[0].preliminarySignal,'REVIEWS_INCREASING');
   assert.equal(r.rows[0].trendEvidenceLevel,'PRELIMINARY_REVIEW_PRICE_ONLY');
+  assert.equal(r.rows[0].reviewCountComparable,true);
   assert.equal(r.rows[0].rankVelocityPerDay,null);
   assert.equal(r.rows[0].eligibleForRankTrend,false);
   assert.equal(r.rows[0].eligibleForDemandConfirmation,false);
@@ -52,6 +53,29 @@ test('review decline is preserved as observation but never interpreted as sales'
   assert.equal(r.rows[0].reviewDelta,-2);
   assert.equal(r.salesEvidenceClass,'NOT_VERIFIED_SALES');
   assert.equal(r.verifiedSalesRows,0);
+});
+
+test('large review count jump with mature baseline is rejected as comparability anomaly',()=>{
+  const bad={...artifact,movements:[{...movement,asin:'B09S6R2M8V',reviewCountPrevious:158,reviewCountCurrent:3467,reviewDelta:3309,reviewVelocityPerDay:3260.099}]};
+  const r=buildAmazonRound2PreliminaryTrendEvidence(bad);
+  assert.equal(r.eligible,0);
+  assert.equal(r.rejected[0].error,'REVIEW_COUNT_COMPARABILITY_ANOMALY');
+  assert.equal(r.rejected[0].reviewCountRatio,21.943);
+});
+
+test('large review count collapse with mature baseline is rejected as comparability anomaly',()=>{
+  const bad={...artifact,movements:[{...movement,asin:'B07PX6QSH2',reviewCountPrevious:1097,reviewCountCurrent:172,reviewDelta:-925,reviewVelocityPerDay:-911.33}]};
+  const r=buildAmazonRound2PreliminaryTrendEvidence(bad);
+  assert.equal(r.eligible,0);
+  assert.equal(r.rejected[0].error,'REVIEW_COUNT_COMPARABILITY_ANOMALY');
+  assert.equal(r.rejected[0].reviewCountRatio,0.157);
+});
+
+test('small legitimate baseline movement is not rejected only because percentage is larger',()=>{
+  const small={...artifact,movements:[{...movement,reviewCountPrevious:10,reviewCountCurrent:20,reviewDelta:10,reviewVelocityPerDay:10}]};
+  const r=buildAmazonRound2PreliminaryTrendEvidence(small);
+  assert.equal(r.eligible,1);
+  assert.equal(r.rows[0].reviewCountComparable,true);
 });
 
 test('invalid or fabricated Round2 artifact policy is blocked',()=>{

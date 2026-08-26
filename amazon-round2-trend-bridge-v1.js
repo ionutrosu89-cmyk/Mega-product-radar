@@ -15,6 +15,16 @@ function movementKey(x={}){
   return `${text(x.asin).toUpperCase()}|${iso(x.previousObservedAt)||''}|${iso(x.currentObservedAt)||''}`;
 }
 
+function reviewCountComparability(x={}){
+  const previous=num(x.reviewCountPrevious),current=num(x.reviewCountCurrent),delta=num(x.reviewDelta);
+  if(previous===null||current===null||delta===null)return{comparable:true,ratio:null,reason:null};
+  if(previous<0||current<0)return{comparable:false,ratio:null,reason:'NEGATIVE_REVIEW_COUNT'};
+  if(previous===0)return{comparable:true,ratio:null,reason:null};
+  const ratio=Math.round((current/previous)*1000)/1000;
+  if(previous>=50&&(ratio<0.5||ratio>2))return{comparable:false,ratio,reason:'REVIEW_COUNT_COMPARABILITY_ANOMALY'};
+  return{comparable:true,ratio,reason:null};
+}
+
 export function round2ArtifactToProductSnapshots(artifact={}){
   if(!validRound2Artifact(artifact))return{ok:false,error:'ROUND2_ARTIFACT_POLICY_INVALID',snapshots:[],rejected:[],paidCallsTriggered:0,purchaseAuthorized:false};
   const observations=Array.isArray(artifact.observations)?artifact.observations:[];
@@ -51,6 +61,14 @@ export function buildAmazonRound2PreliminaryTrendEvidence(artifact={}){
     seen.add(key);
     if(x.intervalEligible!==true||elapsedHours===null||elapsedHours<24){rejected.push({asin,error:'MINIMUM_24H_INTERVAL_NOT_MET'});continue;}
     if(x.sourceRankPrevious!=null||x.sourceRankCurrent!=null||x.rankVelocity!=null){rejected.push({asin,error:'ROUND2_RANK_EVIDENCE_NOT_ALLOWED'});continue;}
+    const comparability=reviewCountComparability(x);
+    if(!comparability.comparable){
+      rejected.push({
+        asin,error:comparability.reason,
+        reviewCountPrevious:num(x.reviewCountPrevious),reviewCountCurrent:num(x.reviewCountCurrent),reviewDelta:num(x.reviewDelta),reviewCountRatio:comparability.ratio
+      });
+      continue;
+    }
     const reviewVelocityPerDay=num(x.reviewVelocityPerDay);
     const reviewDelta=num(x.reviewDelta);
     const priceDelta=num(x.priceDelta);
@@ -59,6 +77,7 @@ export function buildAmazonRound2PreliminaryTrendEvidence(artifact={}){
       platform:'AMAZON',externalId:asin,previousObservedAt,currentObservedAt,elapsedHours,
       observationCount:2,
       reviewCountPrevious:num(x.reviewCountPrevious),reviewCountCurrent:num(x.reviewCountCurrent),reviewDelta,reviewVelocityPerDay,
+      reviewCountComparable:true,reviewCountRatio:comparability.ratio,
       pricePrevious:num(x.pricePrevious),priceCurrent:num(x.priceCurrent),priceDelta,
       sourceRankPrevious:null,sourceRankCurrent:null,rankVelocityPerDay:null,
       evidenceClass:'LONGITUDINAL_PUBLIC_PRODUCT_PAGE',
@@ -75,7 +94,7 @@ export function buildAmazonRound2PreliminaryTrendEvidence(artifact={}){
   return{
     ok:true,status:rows.length?'PRELIMINARY_LONGITUDINAL_EVIDENCE_READY':'NO_ELIGIBLE_MOVEMENTS',
     eligible:rows.length,rejectedCount:rejected.length,rows,rejected,
-    policy:'MINIMUM_24H; REVIEW_AND_PRICE_LONGITUDINAL_EVIDENCE_ONLY; REVIEW_VELOCITY_IS_NOT_SALES_VELOCITY; NO_RANK_INFERENCE; NO_DEMAND_CONFIRMATION; PROMISING_SUPPORT_ONLY',
+    policy:'MINIMUM_24H; REVIEW_COUNT_COMPARABILITY_SANITY_GATE; REVIEW_AND_PRICE_LONGITUDINAL_EVIDENCE_ONLY; REVIEW_VELOCITY_IS_NOT_SALES_VELOCITY; NO_RANK_INFERENCE; NO_DEMAND_CONFIRMATION; PROMISING_SUPPORT_ONLY',
     salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,rankVelocityAvailable:0,paidCallsTriggered:0,purchaseAuthorized:false
   };
 }
