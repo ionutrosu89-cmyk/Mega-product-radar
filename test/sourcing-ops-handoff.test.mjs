@@ -6,11 +6,12 @@ const sourcing=await fs.readFile(new URL('../sourcing-ops.js',import.meta.url),'
 const supplier=await fs.readFile(new URL('../supplier-intelligence.js',import.meta.url),'utf8');
 const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
 
-test('REPLIED handoff carries identity context only',()=>{
-  assert.match(sourcing,/URLSearchParams\(\{product:r\.productName,supplier:r\.supplierName,platform:r\.platform\|\|''\}\)/);
-  assert.doesNotMatch(sourcing,/URLSearchParams\(\{[^}]*price/i);
-  assert.doesNotMatch(sourcing,/URLSearchParams\(\{[^}]*moq/i);
-  assert.doesNotMatch(sourcing,/URLSearchParams\(\{[^}]*shipping/i);
+test('REPLIED handoff carries identity and prefill context only',()=>{
+  assert.match(sourcing,/const params=\{product:r\.productName,supplier:r\.supplierName,platform:r\.platform\|\|''\}/);
+  assert.match(sourcing,/isCanonicalProductId\(r\.canonicalProductId\)/);
+  assert.match(sourcing,/params\.canonicalProductId=String\(r\.canonicalProductId\)\.toLowerCase\(\)/);
+  assert.match(sourcing,/new URLSearchParams\(params\)/);
+  assert.doesNotMatch(sourcing,/params\.(?:price|unitPrice|quotedPrice|moq|shipping|bulkShipping|compliance|verified)\s*=/i);
 });
 
 test('Quote Intake prefill is explicitly non-evidence and leaves commercial fields manual',()=>{
@@ -20,6 +21,8 @@ test('Quote Intake prefill is explicitly non-evidence and leaves commercial fiel
   assert.match(supplier,/params\.get\('product'\)/);
   assert.match(supplier,/params\.get\('supplier'\)/);
   assert.match(supplier,/params\.get\('platform'\)/);
+  assert.match(supplier,/params\.get\('canonicalProductId'\)/);
+  assert.match(supplier,/isCanonicalProductId\(rawCanonicalProductId\)/);
   assert.doesNotMatch(supplier,/params\.get\('price'\)/);
   assert.doesNotMatch(supplier,/params\.get\('moq'\)/);
   assert.doesNotMatch(supplier,/params\.get\('bulkShipping'\)/);
