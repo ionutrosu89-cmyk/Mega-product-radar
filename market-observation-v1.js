@@ -7,10 +7,10 @@ const https=v=>/^https:\/\//i.test(text(v))?text(v):null;
 const canonical=v=>isCanonicalProductId(v)?text(v).toLowerCase():null;
 
 export const MARKET_OBSERVATION_POLICY=Object.freeze({
-  identity:'SOURCE_PLATFORM_EXTERNAL_ID_IDENTIFIES_THE_OBSERVATION; CANONICAL_UUID_REQUIRED_FOR_DECISION_HANDOFF; TITLE_NEVER_AUTO_MERGES',
+  identity:'SOURCE_PLATFORM_EXTERNAL_ID_PLUS_SURFACE_IDENTIFIES_THE_METRIC_SERIES; CANONICAL_UUID_REQUIRED_FOR_DECISION_HANDOFF; TITLE_NEVER_AUTO_MERGES',
   missing:'MISSING_NUMERIC_VALUES_REMAIN_NULL',
   sales:'PUBLIC_RANK_REVIEW_PRICE_RATING_NEVER_EQUAL_VERIFIED_SALES',
-  history:'APPEND_ONLY_IDENTITY_PLUS_TIMESTAMP',
+  history:'APPEND_ONLY_SOURCE_IDENTITY_PLUS_SURFACE_PLUS_TIMESTAMP',
   purchase:'NO_PURCHASE_AUTHORITY'
 });
 
@@ -41,7 +41,7 @@ export function normalizeMarketObservation(input={}){
 
 export function marketObservationIdentity(input={}){
   const n=normalizeMarketObservation(input);if(!n.ok)return null;
-  const x=n.observation;return`${x.platform}:${x.externalId}:${x.observedAt}`;
+  const x=n.observation;return`${x.platform}:${x.externalId}:${x.surface||'DEFAULT'}:${x.observedAt}`;
 }
 
 export function observationDecisionHandoff(input={}){
