@@ -1,13 +1,22 @@
-# Mega Product Radar 7.0 — Supabase activation
+# Mega Product Radar — Supabase activation
 
-Radar 7 ships with a SaaS-ready schema and login/workspace UI, but no private keys are committed.
+Production policy: **`supabase/migrations/` is the only supported database source of truth.** `supabase/schema.sql` is retained as a legacy reference snapshot and MUST NOT be used to bootstrap a new environment.
 
-Activation steps:
+## Fresh environment
+
 1. Create a Supabase project owned by the business.
-2. Run `supabase/schema.sql` in the SQL editor.
-3. In Auth, enable Email/Password and set the GitHub Pages URL as Site URL/redirect URL.
-4. Copy only the public Project URL and anon/publishable key into `saas-config.js`.
-5. Never commit a service-role key.
-6. Re-run CI and verify two separate test users cannot read each other's workspace rows.
+2. Apply every SQL file in `supabase/migrations/` in lexical/chronological order, starting with `20260819_baseline_schema.sql`.
+3. Enable Email/Password Auth and configure the Netlify production URL as Site URL/redirect URL.
+4. Put only the public Project URL + anon/publishable key in the browser configuration.
+5. Configure service-role/Stripe/internal secrets only in Netlify environment variables. Never commit them.
+6. Run CI and the migration-chain verification before release.
+7. Verify with two separate users that RLS prevents cross-workspace reads/writes.
+8. Run the backup/restore readiness procedure before public paid launch.
 
-RLS is enabled on all tenant tables. Workspace membership is the tenant boundary. Billing tables are foundation-only until Stripe is connected in a later release.
+## Existing environment
+
+Apply only migrations not already applied. Do not re-run `schema.sql` over a live database. Migrations are designed to be additive/idempotent where practical, but production changes still require a database backup and a tested rollback/restore path.
+
+## Tenant boundary
+
+Workspace membership is the tenant boundary. Protected customer APIs must require explicit `X-MPR-Workspace-Id` context and validate membership server-side. Money-sensitive subscription mutations are OWNER-only.
