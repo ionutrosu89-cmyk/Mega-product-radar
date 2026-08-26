@@ -1,6 +1,6 @@
 import {normalizeMarketObservation,marketObservationIdentity} from './market-observation-v1.js';
 
-const seriesKey=x=>`${x.canonicalProductId?`canonical:${x.canonicalProductId}`:'unbound'}|${x.platform}|${x.externalId}`;
+const seriesKey=x=>`${x.canonicalProductId?`canonical:${x.canonicalProductId}`:'unbound'}|${x.platform}|${x.externalId}|${x.surface||'DEFAULT'}`;
 const hoursBetween=(a,b)=>(Date.parse(b)-Date.parse(a))/3600000;
 const perDay=(a,b,hours)=>a===null||b===null||!Number.isFinite(hours)||hours<=0?null:(b-a)/(hours/24);
 
@@ -30,14 +30,14 @@ export function buildObservationHistoryMetrics(history=[],{minObservationHours=2
     const first=rows[0],latest=rows.at(-1),hours=rows.length>=2?hoursBetween(first.observedAt,latest.observedAt):null,intervalReady=Number.isFinite(hours)&&hours>=minimum;
     const rankVelocity=intervalReady&&first.sourceRank!==null&&latest.sourceRank!==null?(first.sourceRank-latest.sourceRank)/(hours/24):null;
     metrics.push({
-      seriesKey:key,canonicalProductId:first.canonicalProductId,decisionEligible:Boolean(first.canonicalProductId),platform:first.platform,externalId:first.externalId,
+      seriesKey:key,canonicalProductId:first.canonicalProductId,decisionEligible:Boolean(first.canonicalProductId),platform:first.platform,externalId:first.externalId,surface:first.surface,
       observationCount:rows.length,firstObservedAt:first.observedAt,lastObservedAt:latest.observedAt,observationHours:Number.isFinite(hours)?Number(hours.toFixed(3)):null,minObservationHours:minimum,
       status:rows.length<2?'INSUFFICIENT_HISTORY':intervalReady?'LONGITUDINAL_READY':'INSUFFICIENT_OBSERVATION_INTERVAL',eligibleForTrend:intervalReady,
       rankVelocityPerDay:rankVelocity===null?null:Number(rankVelocity.toFixed(6)),reviewVelocityPerDay:intervalReady?perDay(first.reviewCount,latest.reviewCount,hours):null,priceMovementPerDay:intervalReady?perDay(first.price,latest.price,hours):null,
       salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSales:null,purchaseAuthorized:false
     });
   }
-  return{seriesCount:metrics.length,longitudinalReady:metrics.filter(x=>x.eligibleForTrend).length,decisionEligibleSeries:metrics.filter(x=>x.decisionEligible).length,metrics,minObservationHours:minimum,policy:'SAME_SOURCE_IDENTITY_ONLY; MINIMUM_INTERVAL_REQUIRED; NO_VERIFIED_SALES_INFERENCE; NO_CROSS_PLATFORM_RANK_FUSION',paidCallsTriggered:0,purchaseAuthorized:false};
+  return{seriesCount:metrics.length,longitudinalReady:metrics.filter(x=>x.eligibleForTrend).length,decisionEligibleSeries:metrics.filter(x=>x.decisionEligible).length,metrics,minObservationHours:minimum,policy:'SAME_SOURCE_IDENTITY_AND_SURFACE_ONLY; MINIMUM_INTERVAL_REQUIRED; NO_VERIFIED_SALES_INFERENCE; NO_CROSS_PLATFORM_OR_CROSS_CATEGORY_RANK_FUSION',paidCallsTriggered:0,purchaseAuthorized:false};
 }
 
 export function latestMarketObservationView(history=[]){
