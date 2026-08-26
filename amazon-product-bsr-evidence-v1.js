@@ -32,6 +32,7 @@ export function extractAmazonBestSellerRanks(html,{asin=null}={}){
     const rank=Number(String(m[1]).replace(/,/g,''));
     let category=clean(m[2]).replace(/\s*\(.*$/,'').trim();
     category=category.replace(/\s+(?:See Top.*)$/i,'').trim();
+    category=category.replace(/\s+ASIN\s+B[0-9A-Z]{9}(?:\s.*)?$/i,'').trim();
     if(!Number.isInteger(rank)||rank<1||rank>100000000||!category)continue;
     const key=`${rank}|${category.toLowerCase()}`;
     if(seen.has(key))continue;

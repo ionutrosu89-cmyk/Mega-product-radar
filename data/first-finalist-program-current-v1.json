@@ -1,5 +1,5 @@
 {
-  "observedAt": "2026-08-26T04:01:05.223Z",
+  "observedAt": "2026-08-26T06:31:17.808Z",
   "productUniverse": 1000,
   "productsWithFirstLiveSnapshot": 255,
   "productsWithTwoLiveSnapshots": 52,
@@ -7,6 +7,18 @@
   "productsWithPreliminaryReviewPriceTrend": 52,
   "productsWithReviewGrowthAfterSanity": 13,
   "reviewComparabilityAnomalies": 2,
+  "productsWithFirstExplicitBsrSnapshot": 9,
+  "explicitBsrCategoryRankEntries": 18,
+  "productsWithRankVelocity": 0,
+  "priorityTrendFusionCandidateAsin": "B00INKVS82",
+  "priorityTrendFusionCandidateEvidence": {
+    "reviewDelta": 14,
+    "officeProductsRank": 143,
+    "roundRingBindersRank": 2,
+    "rankTrendReady": false,
+    "confirmedTrendFusion": false
+  },
+  "nextEligibleRankSnapshotAt": "2026-08-27T06:31:17.808Z",
   "nichesWithExactRomaniaGap": 0,
   "productsWithVerifiedSupplierPackage": 0,
   "productsWithConfirmedLandedEconomics": 0,
@@ -17,6 +29,6 @@
   "paidCallsTriggered": 0,
   "approvedSpendEur": 0,
   "sourcePolicy": "CURRENT_REAL_EVIDENCE_ONLY",
-  "nextBlocker": "Collect explicit Amazon Best Sellers ranking snapshots at >=24h and fuse rank + review evidence; review-only evidence remains preliminary support.",
-  "note": "Amazon Round 2 produced 54 raw valid movements; the review-count comparability sanity gate excluded 2 anomalies (B07PX6QSH2 and B09S6R2M8V), leaving 52 clean longitudinal comparisons and 13 clean review-growth leaders. No rank trend, verified sales, supplier, economics, FINALIST or TEST_READY promotion is inferred."
+  "nextBlocker": "Collect a second explicit product BSR snapshot for the same ASIN + category at least 24 hours after the first baseline, then fuse eligible rank movement with the already observed review movement. Do not infer rank trend from a single BSR snapshot.",
+  "note": "Amazon Round 2 produced 52 clean longitudinal review/price comparisons and 13 clean review-growth leaders. A targeted product-page BSR pass observed explicit category ranks for 9/13 leaders (18 category-rank entries). B00INKVS82 has +14 reviews, #143 in Office Products and #2 in Round Ring Binders at the first BSR baseline. This is single-point rank evidence only: rank velocity and confirmed trend fusion remain zero. No verified sales, supplier, economics, FINALIST, TEST_READY or purchase authority is inferred."
 }

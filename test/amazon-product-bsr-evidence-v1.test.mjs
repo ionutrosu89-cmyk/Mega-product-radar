@@ -16,6 +16,11 @@ test('extracts every explicit BSR category rank without choosing an arbitrary pr
   assert.ok(r.entries.every(x=>x.salesEvidenceClass==='NOT_VERIFIED_SALES'));
 });
 
+test('strips adjacent ten-character ASIN text from an explicit BSR category label',()=>{
+  const r=extractAmazonBestSellerRanks(`<html><body>${asin}<div>Best Sellers Rank #143 in Office Products #2 in Round Ring Binders ASIN B0006HV1NC Date First Available</div></body></html>`,{asin});
+  assert.deepEqual(r.entries.map(x=>[x.rank,x.category]),[[143,'Office Products'],[2,'Round Ring Binders']]);
+});
+
 test('HTML order without Best Sellers Rank marker never becomes rank evidence',()=>{
   const r=extractAmazonBestSellerRanks(`<html>${asin}<div>#1 in Office Products</div></html>`,{asin});
   assert.equal(r.rankEvidenceCount,0);
