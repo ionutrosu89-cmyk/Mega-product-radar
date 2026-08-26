@@ -74,7 +74,7 @@ jobs:
           --asin=B00INKVS82
           --fusion=artifacts/amazon-strict-trend-fusion-round2.json
           --romania=data/romania-binder-manual-exact-evidence-b00inkvs82-v1.json
-          --supplier=data/landed-economics-readiness-v1.json
+          --supplier=supplier-evidence/manual-verification-packets-v1.json
           --economics=data/landed-economics-readiness-v1.json
           --out=artifacts/first-finalist-decision-round2.json
       - name: Enforce First Finalist truth gates
