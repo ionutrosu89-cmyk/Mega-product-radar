@@ -1,5 +1,8 @@
+import {isCanonicalProductId} from './domain-contracts-v1.js';
+
 const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,Number.isFinite(Number(v))?Number(v):0));
 const norm=s=>String(s||'').trim().toLowerCase();
+const canonicalId=v=>isCanonicalProductId(v)?String(v).toLowerCase():null;
 export const V6_VERSION='6.0';
 export const V6_STORAGE={portfolio:'megaRadarPortfolioV6',feedback:'megaRadarFeedbackV6',supplierMatrix:'megaRadarSupplierMatrixV6',capitalPlan:'megaRadarCapitalPlanV6'};
 
@@ -41,17 +44,18 @@ export function allocateCapital(items=[],budget=0,{maxPerProductPct=35,minCashRe
 }
 
 export function portfolioMetrics(records=[]){
-  const rows=records.map(r=>({name:r.name||'Produs',stock:Math.max(0,Number(r.stock||0)),sold30:Math.max(0,Number(r.sold30||0)),unitCost:Math.max(0,Number(r.unitCost||0)),sellPrice:Math.max(0,Number(r.sellPrice||0)),returnsRate:clamp(r.returnsRate,0,100)}));
+  const rows=records.map(r=>{const id=canonicalId(r.canonicalProductId);return{name:r.name||'Produs',canonicalProductId:id,decisionEligible:Boolean(id),stock:Math.max(0,Number(r.stock||0)),sold30:Math.max(0,Number(r.sold30||0)),unitCost:Math.max(0,Number(r.unitCost||0)),sellPrice:Math.max(0,Number(r.sellPrice||0)),returnsRate:clamp(r.returnsRate,0,100)};});
   const capital=rows.reduce((a,r)=>a+r.stock*r.unitCost,0),revenue30=rows.reduce((a,r)=>a+r.sold30*r.sellPrice,0),gross30=rows.reduce((a,r)=>a+r.sold30*Math.max(0,r.sellPrice-r.unitCost),0);
-  const actions=rows.map(r=>{const days=r.sold30>0?r.stock/(r.sold30/30):999;let action='HOLD';if(days<18&&r.sold30>0)action='REORDER';else if(days>120||r.returnsRate>=12)action='STOP/REDUCE';return{...r,daysOfStock:Math.round(days),action};});
-  return{capitalBlocked:Math.round(capital*100)/100,revenue30:Math.round(revenue30*100)/100,grossProfit30:Math.round(gross30*100)/100,reorder:actions.filter(x=>x.action==='REORDER').length,stop:actions.filter(x=>x.action==='STOP/REDUCE').length,actions};
+  const actions=rows.map(r=>{const days=r.sold30>0?r.stock/(r.sold30/30):999;if(!r.decisionEligible)return{...r,daysOfStock:Math.round(days),action:'IDENTITY_REQUIRED'};let action='HOLD';if(days<18&&r.sold30>0)action='REORDER';else if(days>120||r.returnsRate>=12)action='STOP/REDUCE';return{...r,daysOfStock:Math.round(days),action};});
+  return{capitalBlocked:Math.round(capital*100)/100,revenue30:Math.round(revenue30*100)/100,grossProfit30:Math.round(gross30*100)/100,reorder:actions.filter(x=>x.action==='REORDER').length,stop:actions.filter(x=>x.action==='STOP/REDUCE').length,identityBlocked:actions.filter(x=>x.action==='IDENTITY_REQUIRED').length,actions};
 }
 
 export function feedbackCalibration(entries=[]){
-  const valid=entries.filter(e=>Number.isFinite(Number(e.predictedScore))&&Number.isFinite(Number(e.actualMargin)));
-  if(!valid.length)return{sample:0,scoreBias:0,marginMedian:0,returnPenalty:0,confidence:'LOW'};
+  const canonical=entries.filter(e=>canonicalId(e.canonicalProductId));
+  const valid=canonical.filter(e=>Number.isFinite(Number(e.predictedScore))&&Number.isFinite(Number(e.actualMargin)));
+  if(!valid.length)return{sample:0,totalEntries:Array.isArray(entries)?entries.length:0,identityBlocked:(Array.isArray(entries)?entries.length:0)-canonical.length,scoreBias:0,marginMedian:0,returnPenalty:0,confidence:'LOW'};
   const biases=valid.map(e=>Number(e.actualOutcomeScore??Math.min(100,Math.max(0,Number(e.actualMargin)*2)))-Number(e.predictedScore)).sort((a,b)=>a-b),margins=valid.map(e=>Number(e.actualMargin)).sort((a,b)=>a-b),median=a=>a[Math.floor(a.length/2)]||0,returnPenalty=valid.reduce((a,e)=>a+Math.max(0,Number(e.returnRate||0)-5),0)/valid.length;
-  return{sample:valid.length,scoreBias:Math.round(median(biases)*10)/10,marginMedian:Math.round(median(margins)*10)/10,returnPenalty:Math.round(returnPenalty*10)/10,confidence:valid.length>=20?'HIGH':valid.length>=8?'MEDIUM':'LOW'};
+  return{sample:valid.length,totalEntries:Array.isArray(entries)?entries.length:0,identityBlocked:(Array.isArray(entries)?entries.length:0)-canonical.length,scoreBias:Math.round(median(biases)*10)/10,marginMedian:Math.round(median(margins)*10)/10,returnPenalty:Math.round(returnPenalty*10)/10,confidence:valid.length>=20?'HIGH':valid.length>=8?'MEDIUM':'LOW'};
 }
 export function calibratedScore(baseScore,calibration={}){return clamp(Number(baseScore||0)+Number(calibration.scoreBias||0)-Number(calibration.returnPenalty||0)*.35);}
 
