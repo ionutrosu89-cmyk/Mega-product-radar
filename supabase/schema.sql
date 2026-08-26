@@ -1,3 +1,5 @@
+-- LEGACY REFERENCE SNAPSHOT ONLY. DO NOT USE FOR NEW ENVIRONMENT BOOTSTRAP.
+-- The supported database source of truth is supabase/migrations/ in lexical order.
 -- Mega Product Radar 7.0 SaaS Foundation
 create extension if not exists pgcrypto;
 

@@ -53,8 +53,10 @@ test('Sourcing Ops stores private state and never implements external message se
   assert.doesNotMatch(js,/fetch\([^\n]*(send|message|alibaba)/i);
 });
 
-test('Netlify build ships Sourcing Ops plus source templates without private response data',()=>{
+test('Netlify build ships Sourcing Ops UI but excludes private source templates and response data',()=>{
   const build=fs.readFileSync('scripts/build-site.mjs','utf8');
-  for(const file of ['sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js','supplier-rfq-dispatch/car-sunglasses-magnetic-visor-holder.json','supplier-candidates/car-sunglasses-magnetic-visor-holder.json','docs/rfq-car-sunglasses-magnetic-visor-holder.md'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  for(const file of ['sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  assert.match(build,/Never copy supplier-candidates\/, supplier-rfq-dispatch\/, supplier-evidence\//);
+  assert.match(build,/PRIVATE_STATIC_ARTIFACT_EXPOSED/);
   assert.doesNotMatch(queue.policy,/response content/i);
 });

@@ -1,0 +1,70 @@
+name: Supabase Backup Restore Drill
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: restore
+          POSTGRES_PASSWORD: restore-password
+          POSTGRES_DB: restore_target
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U restore -d restore_target"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      PGPASSWORD: restore-password
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require dedicated backup connection secret
+        env:
+          SOURCE_DB_URL: ${{ secrets.SUPABASE_DB_URL_READONLY_BACKUP }}
+        run: |
+          test -n "$SOURCE_DB_URL" || { echo "SUPABASE_DB_URL_READONLY_BACKUP is required"; exit 2; }
+      - name: Create encrypted-transport database archive
+        env:
+          SOURCE_DB_URL: ${{ secrets.SUPABASE_DB_URL_READONLY_BACKUP }}
+        run: |
+          pg_dump "$SOURCE_DB_URL" --format=custom --no-owner --no-acl --file=mpr-restore-drill.dump
+          test -s mpr-restore-drill.dump
+          pg_restore --list mpr-restore-drill.dump >/dev/null
+      - name: Restore into disposable PostgreSQL
+        run: |
+          pg_restore --host=127.0.0.1 --port=5432 --username=restore --dbname=restore_target --no-owner --no-acl --exit-on-error mpr-restore-drill.dump
+      - name: Verify critical restored tables
+        run: |
+          for table in workspaces workspace_members canonical_products product_aliases subscriptions; do
+            psql --host=127.0.0.1 --port=5432 --username=restore --dbname=restore_target --tuples-only --no-align --command="select to_regclass('public.${table}') is not null" | grep -qx t || { echo "Missing restored table: ${table}"; exit 3; }
+          done
+      - name: Write redacted drill report
+        if: success()
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/backup-restore-drill.txt <<EOF
+          result=SUCCESS
+          run_id=${GITHUB_RUN_ID}
+          commit=${GITHUB_SHA}
+          validated_tables=workspaces,workspace_members,canonical_products,product_aliases,subscriptions
+          archive_uploaded=false
+          EOF
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: backup-restore-drill-report
+          path: artifacts/backup-restore-drill.txt
+          retention-days: 30
+      - name: Destroy archive before runner cleanup
+        if: always()
+        run: rm -f mpr-restore-drill.dump
