@@ -101,6 +101,10 @@ Window weights:
 
 These weights are an explainable V2 baseline and must later be calibrated against real outcomes rather than treated as universal truth.
 
+## Integration verification
+
+This stacked PR is intended to be retargeted to `main` only after the P2 Data Foundation base is merged and its CI is green. The integration check must preserve the P2 canonical identity and append-only history safeguards rather than reintroducing title-based joins or non-canonical trend evidence.
+
 ## Non-negotiable safeguards
 
 - spike != trend
