@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "MPR_AMAZON_LEADER_BSR_BASELINE_V1",
+  "observedAt": "2026-08-26T06:31:17.808Z",
+  "sourceRunId": 32938506098,
+  "sourceArtifactId": 9595685663,
+  "sourceArtifactDigest": "sha256:dae9f5ce766f8130647cb299b8d5cb98a924252c2019d50496a38c630b7f0c05",
+  "targetCount": 13,
+  "validPageCount": 13,
+  "productsWithExplicitBsr": 9,
+  "explicitBsrEntryCount": 18,
+  "productsWithoutObservedBsrBlock": 4,
+  "eligibleForRankVelocityNow": 0,
+  "nextEligibleRankSnapshotAt": "2026-08-27T06:31:17.808Z",
+  "priorityFusionCandidate": {
+    "asin": "B00INKVS82",
+    "reviewDelta": 14,
+    "reviewEvidenceClass": "PRELIMINARY_REVIEW_PRICE_ONLY",
+    "bsrEntries": [
+      {"rank":143,"category":"Office Products"},
+      {"rank":2,"category":"Round Ring Binders"}
+    ],
+    "rankTrendReady": false,
+    "confirmedTrendFusion": false,
+    "reason": "FIRST_EXPLICIT_BSR_SNAPSHOT_ONLY; SECOND_SAME_CATEGORY_BSR_AT_LEAST_24H_LATER_REQUIRED"
+  },
+  "observations": [
+    {"asin":"B004LNM816","reviewDelta":2,"bsrEntries":[{"rank":336979,"category":"Toys & Games"},{"rank":2098,"category":"Bathtub Toys"}]},
+    {"asin":"B005EXPIO6","reviewDelta":1,"bsrEntries":[{"rank":1059316,"category":"Tools & Home Improvement"},{"rank":1441,"category":"Torque Wrenches"}]},
+    {"asin":"B008KJKA9O","reviewDelta":1,"bsrEntries":[{"rank":17198,"category":"Patio, Lawn & Garden"},{"rank":57,"category":"Swimming Pool Clarifiers & Enzymes"}]},
+    {"asin":"B008PKV0TM","reviewDelta":1,"bsrEntries":[{"rank":7699,"category":"Automotive"},{"rank":39,"category":"Air Conditioning Line Repair Tools"}]},
+    {"asin":"B00INKVS82","reviewDelta":14,"bsrEntries":[{"rank":143,"category":"Office Products"},{"rank":2,"category":"Round Ring Binders"}]},
+    {"asin":"B01N6OBLAN","reviewDelta":2,"bsrEntries":[{"rank":12276,"category":"Patio, Lawn & Garden"},{"rank":28,"category":"Shade Sails"}]},
+    {"asin":"B081WRHSJM","reviewDelta":1,"bsrEntries":[{"rank":95517,"category":"Kitchen & Dining"},{"rank":170,"category":"Bakeware Sets"}]},
+    {"asin":"B08BJHMY33","reviewDelta":1,"bsrEntries":[{"rank":118350,"category":"Home & Kitchen"},{"rank":163,"category":"Beach Towels"}]},
+    {"asin":"B0CT2R7ZMT","reviewDelta":6,"bsrEntries":[{"rank":279982,"category":"Pet Supplies"},{"rank":1884,"category":"Standard Cat Litter Boxes"}]}
+  ],
+  "noBsrObserved": ["B018WSR9N2","B01D4DHWQ4","B0746HHRQF","B07TNPHYNV"],
+  "policy": {
+    "explicitBsrOnly": true,
+    "preserveAllCategoryRanks": true,
+    "choosePrimaryRank": false,
+    "htmlPositionIsNotRank": true,
+    "minimumRankTrendIntervalHours": 24,
+    "rankIsNotVerifiedSales": true,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "productsWithConfirmedTrendFusion": 0,
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
