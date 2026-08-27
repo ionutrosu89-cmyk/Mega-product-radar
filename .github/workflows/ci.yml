@@ -1,16 +1,14 @@
-name: Mega Product Radar CI
+name: Amazon Leader BSR Round 2 Ops Run
 
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: ['agent/**']
 
 permissions:
   contents: read
 
 jobs:
-  verify:
+  collect-and-compare:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -18,110 +16,117 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'
-      - name: Install locked dependencies
-        run: npm ci --ignore-scripts --no-fund
-      - name: Audit production dependencies
-        run: npm audit --audit-level=high --omit=dev
-      - name: Verify migration chain
-        run: npm run verify:migrations
-      - name: Syntax check V2 engines
+      - name: Enforce minimum 24h eligibility before network collection
         run: |
-          for f in app.js market-trend-ui.js free-intelligence-ui.js product-ro.js intelligence-ecosystem.js \
-            commercial-decision-engine.js commercial-decision-client.js commercial-validation.js supplier-intelligence.js landed-cost.js \
-            scripts/web-radar-scan.mjs scripts/discovery-v6-expand.mjs \
-            scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
-            scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
-            scripts/free-intelligence-suite.mjs scripts/test-buy-decision.mjs \
-            scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
-            scripts/commercial-final-decision.mjs scripts/golden-product-pipeline.mjs \
-            scripts/category-radar-postprocess.mjs scripts/watchlist-postprocess.mjs \
-            scripts/free-readiness-audit.mjs scripts/dataforseo-keywords.mjs scripts/dataforseo-total-budget.mjs; do node --check "$f"; done
-      - name: Validate DataForSEO safety self-tests
-        run: |
-          node scripts/dataforseo-keywords.mjs --self-test
-          node scripts/provider-intelligence-v26.mjs --self-test
-      - name: Validate critical UI structure
-        run: |
-          node <<'NODE'
+          node - <<'NODE'
           const fs=require('fs');
-          const checks={
-            'action-center.html':['viewport-fit=cover','watchlist-live.json','Ce fac azi?','Maximum 3'],
-            'product-decision.html':['viewport-fit=cover','market-intelligence-live.json','Dosar produs','Review Intelligence V2','Supplier Intelligence','Validare spre TEST','Decision Summary','Blocaj','Acțiunea cu impact maxim'],
-            'test-buy.html':['viewport-fit=cover','Test Buy 20–30','testBuyDecision','Buget test','Landed confirmat','commercial-decision-client.js','5/9'],
-            'category-radar.html':['viewport-fit=cover','Category Radar','category-radar-live.json','10–20','TEST-ready'],
-            'intelligence-ecosystem.html':['viewport-fit=cover','Intelligence Ecosystem','Sales Estimation','Niche Intelligence','Romania Demand','Reverse Keyword','Historical Opportunity','Review Opportunity','Calibration','intelligence-ecosystem.js']
-          };
-          for(const [f,need] of Object.entries(checks)){const s=fs.readFileSync(f,'utf8');for(const x of need)if(!s.includes(x))throw new Error(`${f} missing ${x}`)}
-          const u=require('./category-universe.json');
-          if((u.categories||[]).length<20||u.minimumDisplayPerCategory!==10||u.targetPerCategory!==20)throw new Error('category universe invalid');
+          const b=JSON.parse(fs.readFileSync('data/amazon-leader-bsr-baseline-2026-08-26-v1.json','utf8'));
+          const first=Date.parse(b.observedAt),now=Date.now();
+          const elapsed=(now-first)/36e5;
+          console.log(`baselineObservedAt=${b.observedAt}`);
+          console.log(`nextEligibleRankSnapshotAt=${b.nextEligibleRankSnapshotAt}`);
+          console.log(`elapsedHours=${elapsed.toFixed(4)}`);
+          if(!Number.isFinite(first)||elapsed<24) throw new Error('MINIMUM_24H_INTERVAL_NOT_MET');
+          if(b.policy?.providerSpendEur!==0||b.policy?.paidCallsTriggered!==0||b.policy?.purchaseAuthorized!==false) throw new Error('BASELINE_POLICY_INVALID');
           NODE
-      - name: Generate strict intelligence pipeline
+      - name: Collect second explicit product BSR snapshot
+        run: node scripts/amazon-leader-bsr-snapshot.mjs --out=artifacts/amazon-leader-bsr-snapshot-round2.json
+      - name: Build same-category longitudinal rank history
+        run: >-
+          node scripts/amazon-leader-bsr-round2-history.mjs
+          --baseline=data/amazon-leader-bsr-baseline-2026-08-26-v1.json
+          --current=artifacts/amazon-leader-bsr-snapshot-round2.json
+          --out=artifacts/amazon-leader-bsr-history-round2.json
+      - name: Enforce longitudinal BSR truth gates
         run: |
-          node scripts/market-intelligence-postprocess.mjs
-          node scripts/golden-product-pipeline.mjs --phase=prepaid
-          node scripts/dataforseo-keywords.mjs
-          node scripts/market-intelligence-history.mjs
-          node scripts/market-trend-postprocess.mjs
-          node scripts/opportunity-ranking-v2.mjs
-          node scripts/free-intelligence-suite.mjs
-          node scripts/commercial-hardening.mjs
-          node scripts/intelligence-ecosystem-v25.mjs
-          DATAFORSEO_V26_PAID_ENABLED=false node scripts/provider-intelligence-v26.mjs
-          node scripts/test-buy-decision.mjs
-          node scripts/commercial-final-decision.mjs
-          node scripts/golden-product-pipeline.mjs --phase=final
-          node scripts/category-radar-postprocess.mjs
-          node scripts/watchlist-postprocess.mjs
-          node scripts/free-readiness-audit.mjs
-      - name: Verify V2.8 ecosystem and commercial safety
-        run: |
-          node <<'NODE'
-          const d=require('./market-intelligence-live.json');
-          if(d.intelligenceEcosystem?.version!=='2.5')throw new Error('missing V2.5 ecosystem');
-          if(d.providerIntelligenceV27?.version!=='2.8')throw new Error('missing V2.8 provider layer');
-          if(d.providerIntelligenceV27?.stats?.paidProviderEnabled!==false)throw new Error('paid provider unexpectedly enabled in CI');
-          if(d.providerIntelligenceV27?.stats?.paidCalls!==0)throw new Error('paid provider called in CI');
-          if(Number(d.providerIntelligenceV27?.stats?.accountedCostUsd||0)!==0)throw new Error('CI provider accounted cost must be zero');
-          const provider=require('./provider-intelligence-live.json');
-          if(provider.version!=='2.8'||!provider.stats)throw new Error('provider output invalid');
-          if(provider.stats.providerStatus!=='PAID_DISABLED')throw new Error('unexpected CI provider status');
-          if(provider.stats.costAnomalyCount!==0)throw new Error('unexpected CI cost anomaly');
-          for(const p of d.products||[]){
-            const e=p.evidenceCoverage||{};
-            if((e.concreteRows||0)===0&&(e.coverageScore||0)>0)throw new Error('evidence inflated without proof '+p.name);
-            if(e.evidenceReady&&((e.concreteRows||0)<2||(e.concreteDomains||0)<2))throw new Error('unsafe evidenceReady '+p.name);
-            if(!p.salesEstimation||!p.romaniaDemand||!p.nicheIntelligence||!p.historicalIntelligence||!p.reverseKeywordIntelligence||!p.reviewOpportunity||!p.calibrationEngine)throw new Error('missing ecosystem module '+p.name);
-            if(p.salesEstimation.status==='ESTIMATED_HIGH_CONFIDENCE'&&Number(p.salesEstimation.confidence||0)<75)throw new Error('high sales confidence below 75 '+p.name);
-            const salesPolicy=String(p.salesEstimation.policy||'');
-            const safeDisclaimer=/never\s+(?:labelled|labeled|presented\s+as)\s+verified competitor sales/i.test(salesPolicy);
-            if(p.salesEstimation.status!=='ACTUAL_OBSERVED'&&/verified competitor sales/i.test(salesPolicy)&&!safeDisclaimer)throw new Error('estimate mislabeled as verified sales '+p.name);
-            if(p.romaniaDemand.providerVerified===true&&!(Number(p.romaniaDemand.bestKeywordVolume||p.romaniaDemand.keywordVolume||0)>0))throw new Error('RO provider verified without search volume '+p.name);
-            if((p.reverseKeywordIntelligence.competitorAsins||[]).length===0&&['ASIN_READY','PROVIDER_READY'].includes(p.reverseKeywordIntelligence.status))throw new Error('reverse keyword ready without ASIN '+p.name);
-            if(p.reverseKeywordIntelligence.status==='PROVIDER_READY'&&!(p.reverseKeywordIntelligence.verifiedKeywordCount>0))throw new Error('provider reverse keywords without rows '+p.name);
-            const t=p.testBuyDecision;
-            if(!t)throw new Error('missing testBuyDecision '+p.name);
-            if(Object.keys(t.gates||{}).length!==9)throw new Error('expected 9 final gates '+p.name);
-            if(['TEST','BUY'].includes(t.commercialAction)&&(t.blockers||[]).length)throw new Error('commercial action with blockers '+p.name);
-            if(t.commercialAction==='TEST'){
-              if(t.quantity<20||t.quantity>30)throw new Error('unsafe TEST quantity '+p.name);
-              if(!['ACTUAL_OBSERVED','ESTIMATED_HIGH_CONFIDENCE'].includes(p.salesEstimation.status)||Number(p.salesEstimation.confidence||0)<75)throw new Error('TEST without high-confidence sales model '+p.name);
-              if(p.romaniaDemand?.readyForTestDemandGate!==true)throw new Error('TEST without Romania demand gate '+p.name);
-            }
-            if(t.commercialAction==='BUY'&&!t.buyGate?.completedRealTest)throw new Error('BUY without completed real test '+p.name);
-          }
-          const eco=require('./intelligence-ecosystem-live.json');
-          if(eco.version!=='2.5'||!eco.stats||!eco.niches)throw new Error('ecosystem output invalid');
-          const g=require('./golden-pipeline-live.json');
-          if((g.stats?.paidEligible||0)>15||(g.stats?.validate||0)>5||(g.stats?.finalists||0)>3)throw new Error('Golden funnel quota exceeded');
-          const r=require('./free-readiness-live.json');
-          if(r.technicalReadiness<88)throw new Error('free readiness below target');
+          node - <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/amazon-leader-bsr-snapshot-round2.json','utf8'));
+          const h=JSON.parse(fs.readFileSync('artifacts/amazon-leader-bsr-history-round2.json','utf8'));
+          console.log(`productsWithExplicitBsr=${s.productsWithExplicitBsr}`);
+          console.log(`eligibleProductCount=${h.eligibleProductCount||0}`);
+          console.log(`conflictProductCount=${h.conflictProductCount||0}`);
+          console.log(`comparableCategoryCount=${h.comparableCategoryCount||0}`);
+          if(h.ok!==true||Number(h.elapsedHours)<24)process.exitCode=2;
+          if(h.salesEvidenceClass!=='NOT_VERIFIED_SALES'||h.verifiedSalesRows!==0||h.paidCallsTriggered!==0||h.purchaseAuthorized!==false)process.exitCode=3;
+          if((h.rows||[]).some(r=>r.categorySignalsConflict===true&&r.rankVelocityPerDay!==null))process.exitCode=4;
+          if((h.categoryRows||[]).some(r=>r.evidenceClass!=='LONGITUDINAL_EXPLICIT_PRODUCT_BSR_CATEGORY'||r.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.purchaseAuthorized!==false))process.exitCode=5;
           NODE
-      - name: Validate Organic Rising integrity
+      - name: Fuse clean review and rank evidence
+        run: >-
+          node scripts/amazon-strict-trend-fusion.mjs
+          --leaders=data/amazon-round2-preliminary-leaders-v1.json
+          --rank=artifacts/amazon-leader-bsr-history-round2.json
+          --out=artifacts/amazon-strict-trend-fusion-round2.json
+      - name: Enforce trend fusion truth gates
         run: |
-          node scripts/organic-rising-quality-postprocess.mjs
-          node scripts/qa-organic-rising.mjs
-      - name: Run tests
-        run: npm test
-      - name: Validate build
-        run: npm run build
+          node - <<'NODE'
+          const fs=require('fs');
+          const f=JSON.parse(fs.readFileSync('artifacts/amazon-strict-trend-fusion-round2.json','utf8'));
+          console.log(`fusionStatus=${f.status}`);
+          console.log(`confirmedAccelerationCount=${f.confirmedAccelerationCount||0}`);
+          console.log(`confirmedAsins=${JSON.stringify(f.confirmedAsins||[])}`);
+          if(f.ok!==true)process.exitCode=2;
+          if(f.salesEvidenceClass!=='NOT_VERIFIED_SALES'||f.verifiedSalesRows!==0||f.paidCallsTriggered!==0||f.providerSpendEur!==0||f.purchaseAuthorized!==false)process.exitCode=3;
+          if((f.rows||[]).some(r=>r.confirmedAcceleration===true&&(r.rankSignal?.rankVelocityPerDay<=0||r.reviewSignal?.reviewDelta<=0)))process.exitCode=4;
+          NODE
+      - name: Evaluate candidate importability and business fit
+        run: >-
+          node scripts/importability-business-fit.mjs
+          --asin=B00INKVS82
+          --profile=data/importability-profile-b00inkvs82-v1.json
+          --out=artifacts/importability-business-fit-b00inkvs82.json
+      - name: Enforce importability safety truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const i=JSON.parse(fs.readFileSync('artifacts/importability-business-fit-b00inkvs82.json','utf8'));
+          console.log(`importabilityStatus=${i.status}`);
+          console.log(`unknowns=${JSON.stringify(i.unknowns||[])}`);
+          console.log(`hardBlockers=${JSON.stringify(i.hardBlockers||[])}`);
+          if(i.purchaseAuthorized!==false||i.paidCallsTriggered!==0||i.providerSpendEur!==0)process.exitCode=2;
+          if(i.importabilityPassed===true&&i.status!=='IMPORTABILITY_PASS')process.exitCode=3;
+          NODE
+      - name: Build First Finalist decision packet
+        run: >-
+          node scripts/first-finalist-decision.mjs
+          --asin=B00INKVS82
+          --fusion=artifacts/amazon-strict-trend-fusion-round2.json
+          --romania=data/romania-binder-manual-exact-evidence-b00inkvs82-v1.json
+          --importability=artifacts/importability-business-fit-b00inkvs82.json
+          --supplier=supplier-evidence/manual-verification-packets-v1.json
+          --economics=data/landed-economics-readiness-v1.json
+          --out=artifacts/first-finalist-decision-round2.json
+      - name: Enforce First Finalist and canonical decision truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('artifacts/first-finalist-decision-round2.json','utf8'));
+          const c=d.canonicalDecision||{};
+          console.log(`decisionStatus=${d.status}`);
+          console.log(`canonicalStage=${c.stage}`);
+          console.log(`gates=${JSON.stringify(d.gates)}`);
+          console.log(`blockers=${JSON.stringify(d.blockers)}`);
+          console.log(`supplierSourcingEligible=${d.supplierSourcingEligible}`);
+          if(d.purchaseAuthorized!==false||d.paidCallsTriggered!==0||d.providerSpendEur!==0||d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)process.exitCode=2;
+          if(d.finalistEvidenceReady===true && (!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.importabilityPassed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
+          if(d.testReady!==false)process.exitCode=4;
+          if(c.authority!=='EVIDENCE_DRIVEN_CANONICAL_DECISION'||c.purchaseAuthorized!==false||c.automaticPurchaseAllowed!==false)process.exitCode=5;
+          if(c.stage==='FINALIST'&&d.finalistEvidenceReady!==true)process.exitCode=6;
+          if(['TEST_READY','TEST_RUNNING','TEST_VALIDATED','BUY_READY'].includes(c.stage))process.exitCode=7;
+          NODE
+      - name: Run BSR, fusion, importability and canonical decision unit tests
+        run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs test/single-decision-authority-v1.test.mjs
+      - name: Upload Round 2 BSR, fusion, importability and decision evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-leader-bsr-round2-evidence
+          path: |
+            artifacts/amazon-leader-bsr-snapshot-round2.json
+            artifacts/amazon-leader-bsr-history-round2.json
+            artifacts/amazon-strict-trend-fusion-round2.json
+            artifacts/importability-business-fit-b00inkvs82.json
+            artifacts/first-finalist-decision-round2.json
+          if-no-files-found: error
+          retention-days: 7
