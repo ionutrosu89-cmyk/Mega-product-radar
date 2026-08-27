@@ -11,6 +11,7 @@
     "verify:production-safety": "node scripts/production-safety-gate.mjs",
     "canonicalize:observations": "node scripts/canonicalize-observations.mjs",
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
+    "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "security:audit": "npm audit --audit-level=high --omit=dev",
     "p2:inventory": "node scripts/p2-data-inventory.mjs",
     "measure:p2": "node scripts/measure-p2-source-baseline.mjs",
