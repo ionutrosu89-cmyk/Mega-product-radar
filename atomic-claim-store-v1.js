@@ -5,6 +5,24 @@ const parseTime=value=>{const ms=Date.parse(clean(value));return Number.isFinite
 const iso=value=>parseTime(value)===null?null:new Date(parseTime(value)).toISOString();
 const clone=value=>JSON.parse(JSON.stringify(value??null));
 
+function fencedClaimPayload(claim={}){
+  return{
+    schema:claim.schema,
+    inboxFingerprint:claim.inboxFingerprint??null,
+    sourceFingerprint:claim.sourceFingerprint??null,
+    workerId:claim.workerId??null,
+    fencingToken:Number(claim.fencingToken||0),
+    claimedAt:claim.claimedAt??null,
+    expiresAt:claim.expiresAt??null,
+    leaseDurationMs:Number(claim.leaseDurationMs||0),
+    providerDataSpendEur:0,
+    paidDataCallsTriggered:0,
+    purchaseAuthorized:false,
+    verifiedSalesRows:0,
+    salesEvidenceClass:'NOT_VERIFIED_SALES'
+  };
+}
+
 export function createMemoryAtomicClaimStore(){
   const records=new Map();
   return{
@@ -26,7 +44,7 @@ export function createFencedClaim(input={},options={}){
   const claimedAt=iso(options.claimedAt||new Date().toISOString());
   const leaseDurationMs=Math.max(1000,Number(options.leaseDurationMs||5*60*1000));
   const fencingToken=Math.max(1,Number(options.fencingToken||1));
-  const payload={
+  const payload=fencedClaimPayload({
     schema:'MPR_FENCED_OBSERVATION_CLAIM_V1',
     inboxFingerprint:clean(input.inboxFingerprint)||null,
     sourceFingerprint:clean(input.sourceFingerprint)||null,
@@ -34,22 +52,20 @@ export function createFencedClaim(input={},options={}){
     fencingToken,
     claimedAt,
     expiresAt:claimedAt?new Date(Date.parse(claimedAt)+leaseDurationMs).toISOString():null,
-    leaseDurationMs,
-    providerDataSpendEur:0,
-    paidDataCallsTriggered:0,
-    purchaseAuthorized:false,
-    verifiedSalesRows:0,
-    salesEvidenceClass:'NOT_VERIFIED_SALES'
-  };
+    leaseDurationMs
+  });
   return{...payload,fingerprint:deterministicFingerprint(payload)};
 }
 
 export function validateFencedClaim(claim={},options={}){
   const nowMs=parseTime(options.now||new Date().toISOString());
   const expiresMs=parseTime(claim.expiresAt);
+  const expectedFingerprint=deterministicFingerprint(fencedClaimPayload(claim));
   const reasons=[];
   if(claim.schema!=='MPR_FENCED_OBSERVATION_CLAIM_V1')reasons.push('CLAIM_SCHEMA_INVALID');
+  if(clean(claim.fingerprint)!==expectedFingerprint)reasons.push('CLAIM_FINGERPRINT_MISMATCH');
   if(!clean(claim.inboxFingerprint))reasons.push('INBOX_FINGERPRINT_REQUIRED');
+  if(!clean(claim.sourceFingerprint))reasons.push('SOURCE_FINGERPRINT_REQUIRED');
   if(!clean(claim.workerId))reasons.push('WORKER_ID_REQUIRED');
   if(!(Number(claim.fencingToken)>0))reasons.push('FENCING_TOKEN_REQUIRED');
   if(nowMs===null)reasons.push('NOW_INVALID');
@@ -58,6 +74,7 @@ export function validateFencedClaim(claim={},options={}){
   if(expired)reasons.push('CLAIM_EXPIRED');
   if(Number(claim.providerDataSpendEur||0)!==0||Number(claim.paidDataCallsTriggered||0)!==0)reasons.push('PAID_DATA_ACTIVITY_BLOCKED');
   if(claim.purchaseAuthorized!==false)reasons.push('PURCHASE_AUTHORIZATION_FORBIDDEN');
+  if(Number(claim.verifiedSalesRows||0)!==0||claim.salesEvidenceClass!=='NOT_VERIFIED_SALES')reasons.push('TRUTH_INVARIANT_VIOLATION');
   return{
     schema:'MPR_FENCED_OBSERVATION_CLAIM_VALIDATION_V1',
     valid:reasons.length===0,
@@ -89,11 +106,28 @@ export async function acquireAtomicObservationClaim(store,input={},options={}){
         key,
         claim:clone(currentClaim),
         storeScope:store.scope||'UNKNOWN',
-        productionAtomicityVerified:store.productionAtomicityVerified===true
+        productionAtomicityVerified:store.productionAtomicityVerified===true,
+        exactlyOnceGuaranteed:false
+      };
+    }
+    if(currentClaim&&currentValidation&&!currentValidation.expired){
+      return{
+        schema:'MPR_ATOMIC_OBSERVATION_CLAIM_RESULT_V1',
+        decision:'INVALID_CURRENT_CLAIM_HOLD',
+        acquired:false,
+        idempotent:false,
+        key,
+        claim:clone(currentClaim),
+        validation:currentValidation,
+        storeScope:store.scope||'UNKNOWN',
+        productionAtomicityVerified:store.productionAtomicityVerified===true,
+        exactlyOnceGuaranteed:false
       };
     }
     const fencingToken=Math.max(1,Number(currentClaim?.fencingToken||0)+1);
     const claim=createFencedClaim(input,{...options,claimedAt:now,fencingToken});
+    const validation=validateFencedClaim(claim,{now});
+    if(!validation.active)return{schema:'MPR_ATOMIC_OBSERVATION_CLAIM_RESULT_V1',decision:'CLAIM_VALIDATION_HOLD',acquired:false,key,claim,validation,productionAtomicityVerified:false,exactlyOnceGuaranteed:false};
     const nextRecord={schema:'MPR_ATOMIC_OBSERVATION_CLAIM_RECORD_V1',claim};
     const cas=await store.compareAndSet(key,currentVersion,nextRecord);
     if(cas.ok){
