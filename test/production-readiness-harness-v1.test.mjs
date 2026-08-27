@@ -121,9 +121,26 @@ test('readiness queue gate validates production telemetry evidence and exact att
   const gate=evaluateReadinessQueueGate({workerTelemetryEvidence:evidence});
   assert.equal(gate.queuesStable,true);
   assert.equal(gate.decision,'QUEUE_GATE_READY');
+  assert.equal(gate.snapshotIntegrity,true);
+  assert.equal(gate.evidenceIntegrity,true);
   const tampered=evaluateReadinessQueueGate({workerTelemetryEvidence:{...evidence,attestation:{...evidence.attestation,contentSha256:'f'.repeat(64)}}});
   assert.equal(tampered.queuesStable,false);
   assert.ok(tampered.reasons.includes('TELEMETRY_HASH_BINDING_MISMATCH'));
+  assert.ok(tampered.reasons.includes('WORKER_TELEMETRY_EVIDENCE_INTEGRITY_REQUIRED'));
+});
+
+test('readiness queue gate detects snapshot and top-level evidence tampering',()=>{
+  const evidence=productionWorkerTelemetryEvidence();
+  const snapshotTampered={...evidence,snapshot:{...evidence.snapshot,workers:evidence.snapshot.workers.map(worker=>({...worker,queueDepth:999}))}};
+  const snapshotGate=evaluateReadinessQueueGate({workerTelemetryEvidence:snapshotTampered});
+  assert.equal(snapshotGate.queuesStable,false);
+  assert.ok(snapshotGate.reasons.includes('WORKER_TELEMETRY_SNAPSHOT_INTEGRITY_REQUIRED'));
+  assert.ok(snapshotGate.reasons.includes('WORKER_TELEMETRY_EVIDENCE_INTEGRITY_REQUIRED'));
+  const countTampered={...evidence,healthyWorkerCount:0};
+  const countGate=evaluateReadinessQueueGate({workerTelemetryEvidence:countTampered});
+  assert.equal(countGate.queuesStable,false);
+  assert.ok(countGate.reasons.includes('HEALTHY_WORKER_COUNT_REQUIRED'));
+  assert.ok(countGate.reasons.includes('WORKER_TELEMETRY_EVIDENCE_INTEGRITY_REQUIRED'));
 });
 
 test('progressive scale stages enforce 10K, 100K and 1M volumes',()=>{
