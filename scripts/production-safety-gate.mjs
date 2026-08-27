@@ -55,6 +55,11 @@ const consumptionRunner=await fs.readFile(new URL('./run-observation-consumption
 assert(!consumptionRunner.includes('purchaseAuthorized:true'),'observation consumption runner must not authorize purchase');
 assert(consumptionRunner.includes('not distributed exactly-once processing proof'),'consumption runner must preserve the exactly-once disclaimer');
 
+const leaseRecoveryRunner=await fs.readFile(new URL('./run-observation-lease-recovery.mjs',import.meta.url),'utf8');
+assert(!leaseRecoveryRunner.includes('purchaseAuthorized:true'),'lease recovery runner must not authorize purchase');
+assert(leaseRecoveryRunner.includes('productionLockingVerified:false'),'local lease recovery must not claim production locking');
+assert(leaseRecoveryRunner.includes('exactlyOnceGuaranteed:false'),'local lease recovery must not claim exactly-once delivery');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -68,6 +73,7 @@ console.log(JSON.stringify({
   scheduledRankingRemoteWriteDefault:false,
   productionSchedulerAttestationDefault:false,
   distributedExactlyOnceClaim:false,
+  productionLockingClaim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));

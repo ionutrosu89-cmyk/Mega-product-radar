@@ -16,6 +16,7 @@
     "ranking:scheduled-tick": "node scripts/run-scheduled-ranking-history-tick.mjs",
     "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "ranking:consume": "node scripts/run-observation-consumption-receipt.mjs",
+    "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
     "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "readiness:scale": "node scripts/run-production-readiness-harness.mjs",
     "capacity:progressive": "node scripts/run-progressive-capacity-harness.mjs",

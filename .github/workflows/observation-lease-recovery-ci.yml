@@ -1,0 +1,37 @@
+name: Observation Lease Recovery CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-lease-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax check lease recovery boundary
+        run: |
+          node --check observation-inbox-lease-v1.js
+          node --check scripts/run-observation-lease-recovery.mjs
+      - name: Run lease recovery unit tests
+        run: node --test test/observation-inbox-lease-v1.test.mjs
+      - name: Validate local lease recovery fail-closed
+        run: |
+          npm run ranking:lease-drill -- --out=artifacts/ci-observation-lease-recovery.json --storeRoot=artifacts/ci-observation-lease-store --now=2026-08-27T12:00:00Z
+          node <<'NODE'
+          const d=require('./artifacts/ci-observation-lease-recovery.json');
+          if(d.decision!=='HOLD_PRODUCTION_LOCKING')throw new Error('local lease drill must HOLD production locking');
+          if(d.productionLockingVerified!==false||d.exactlyOnceGuaranteed!==false)throw new Error('local lease drill was promoted to production');
+          if(d.providerDataSpendEur!==0||d.paidDataCallsTriggered!==0||d.purchaseAuthorized!==false)throw new Error('lease recovery policy invariant violation');
+          if(d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)throw new Error('lease recovery truth invariant violation');
+          NODE
