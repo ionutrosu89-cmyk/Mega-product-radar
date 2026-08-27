@@ -42,6 +42,10 @@ begin
       raise exception 'PRODUCT_IDENTITY_REQUIRED';
     end if;
 
+    if coalesce(v_product->>'status','') <> 'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY' then
+      raise exception 'PRODUCT_STATUS_INVARIANT_FAILED';
+    end if;
+
     insert into public.canonical_products(
       canonical_key,title,brand,category,image_url,status,evidence_confidence,priority_score,canonical_name,canonical_category,identity_status
     ) values (
@@ -50,7 +54,7 @@ begin
       nullif(v_product->>'brand',''),
       nullif(v_product->>'category',''),
       nullif(v_product->>'imageUrl',''),
-      'DISCOVERED',0,0,
+      'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',0,0,
       nullif(v_product->>'title',''),
       nullif(v_product->>'category',''),
       'ACTIVE'
