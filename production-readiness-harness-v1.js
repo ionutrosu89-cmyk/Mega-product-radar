@@ -1,5 +1,5 @@
 import {deterministicFingerprint,evaluateScaleGate} from './data-pipeline-core-v1.js';
-import {validateWorkerTelemetryAttestation} from './production-worker-telemetry-evidence-v1.js';
+import {createWorkerTelemetrySnapshot,validateWorkerTelemetryAttestation} from './production-worker-telemetry-evidence-v1.js';
 
 const clean=value=>String(value??'').trim();
 const finite=value=>Number.isFinite(Number(value))?Number(value):null;
@@ -135,20 +135,23 @@ export function evaluateReadinessQueueGate(input={}){
   const snapshot=evidence.snapshot||{};
   const snapshotHash=clean(snapshot.contentSha256).toLowerCase();
   const snapshotHashValid=sha256(snapshotHash);
-  const snapshotFingerprintPresent=clean(snapshot.snapshotFingerprint).length>0;
-  const evidenceFingerprintPresent=clean(evidence.evidenceFingerprint).length>0;
+  const recomputedSnapshot=createWorkerTelemetrySnapshot(snapshot);
+  const snapshotIntegrity=snapshotHashValid&&snapshotHash===recomputedSnapshot.contentSha256&&clean(snapshot.snapshotFingerprint)===recomputedSnapshot.snapshotFingerprint;
+  const evidenceFingerprint=clean(evidence.evidenceFingerprint);
+  const evidenceBase={...evidence};
+  delete evidenceBase.evidenceFingerprint;
+  const evidenceIntegrity=evidenceFingerprint.length>0&&evidenceFingerprint===deterministicFingerprint(evidenceBase);
   const attestation=validateWorkerTelemetryAttestation(evidence.attestation||{},snapshot);
   const safetyBoundaries=Number(evidence.providerDataSpendEur||0)===0&&Number(evidence.paidDataCallsTriggered||0)===0&&evidence.purchaseAuthorized===false&&Number(evidence.verifiedSalesRows||0)===0&&clean(evidence.salesEvidenceClass)==='NOT_VERIFIED_SALES';
-  const queuesStable=schemaOk&&decisionOk&&queuesFlag&&localHealth&&workerCountsValid&&snapshotHashValid&&snapshotFingerprintPresent&&evidenceFingerprintPresent&&attestation.ok&&safetyBoundaries;
+  const queuesStable=schemaOk&&decisionOk&&queuesFlag&&localHealth&&workerCountsValid&&snapshotIntegrity&&evidenceIntegrity&&attestation.ok&&safetyBoundaries;
   const reasons=[];
   if(!schemaOk)reasons.push('PRODUCTION_WORKER_TELEMETRY_EVIDENCE_REQUIRED');
   if(schemaOk&&!decisionOk)reasons.push('PRODUCTION_QUEUE_DECISION_REQUIRED');
   if(schemaOk&&!queuesFlag)reasons.push('PRODUCTION_QUEUE_STABILITY_REQUIRED');
   if(schemaOk&&!localHealth)reasons.push('WORKER_HEALTH_VERIFICATION_REQUIRED');
   if(schemaOk&&!workerCountsValid)reasons.push('HEALTHY_WORKER_COUNT_REQUIRED');
-  if(schemaOk&&!snapshotHashValid)reasons.push('WORKER_TELEMETRY_HASH_REQUIRED');
-  if(schemaOk&&!snapshotFingerprintPresent)reasons.push('WORKER_TELEMETRY_SNAPSHOT_FINGERPRINT_REQUIRED');
-  if(schemaOk&&!evidenceFingerprintPresent)reasons.push('WORKER_TELEMETRY_EVIDENCE_FINGERPRINT_REQUIRED');
+  if(schemaOk&&!snapshotIntegrity)reasons.push('WORKER_TELEMETRY_SNAPSHOT_INTEGRITY_REQUIRED');
+  if(schemaOk&&!evidenceIntegrity)reasons.push('WORKER_TELEMETRY_EVIDENCE_INTEGRITY_REQUIRED');
   if(schemaOk&&!attestation.ok)reasons.push(...attestation.errors);
   if(schemaOk&&!safetyBoundaries)reasons.push('WORKER_TELEMETRY_SAFETY_BOUNDARY_FAILED');
   return{
@@ -159,7 +162,9 @@ export function evaluateReadinessQueueGate(input={}){
     reasons,
     workerCount,
     healthyWorkerCount,
-    snapshotContentSha256:snapshotHashValid?snapshotHash:null,
+    snapshotIntegrity,
+    evidenceIntegrity,
+    snapshotContentSha256:snapshotIntegrity?snapshotHash:null,
     runtimeRef:attestation.attestation.runtimeRef||null,
     evidenceRef:attestation.attestation.evidenceRef||null
   };
