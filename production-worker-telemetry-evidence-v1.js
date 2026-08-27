@@ -108,6 +108,7 @@ export function evaluateWorkerTelemetryEvidence(input={},options={}){
     healthyWorkerCount:evaluated.filter(worker=>worker.healthy).length,
     thresholds:{maxHeartbeatAgeMs,maxFailureRate,maxQueueDepth,maxOldestMessageAgeMs},
     snapshot:{...snapshot,workers:evaluated},
+    attestation:attestation.attestation,
     attestationErrors:attestation.errors,
     reasons,
     providerDataSpendEur:0,
