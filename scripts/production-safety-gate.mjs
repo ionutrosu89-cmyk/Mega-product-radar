@@ -87,6 +87,12 @@ assert(persistenceRestoreRunner.includes('productionStorageContacted:false'),'lo
 assert(persistenceRestoreRunner.includes('LOCAL_ROUND_TRIP_ONLY'),'persistence restore drill must preserve local-only claim');
 assert(persistenceRestoreRunner.includes('not production persistence restore evidence'),'persistence restore drill must preserve production disclaimer');
 
+const workerTelemetryRunner=await fs.readFile(new URL('./run-production-worker-telemetry-evidence.mjs',import.meta.url),'utf8');
+assert(!workerTelemetryRunner.includes('purchaseAuthorized:true'),'worker telemetry runner must not authorize purchase');
+assert(workerTelemetryRunner.includes('productionRuntimeContacted:false'),'local worker telemetry drill must not claim production runtime contact');
+assert(workerTelemetryRunner.includes('productionQueuesStable:false'),'local worker telemetry drill must not claim production queue stability');
+assert(workerTelemetryRunner.includes('Local telemetry is not production queue stability evidence.'),'worker telemetry drill must preserve production disclaimer');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -105,6 +111,8 @@ console.log(JSON.stringify({
   productionAtomicAdapterContactDefault:false,
   productionRestoreClaim:false,
   productionStorageContactDefault:false,
+  productionWorkerRuntimeContactDefault:false,
+  productionQueuesStableClaim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
