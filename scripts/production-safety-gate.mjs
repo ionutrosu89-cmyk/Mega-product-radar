@@ -60,6 +60,12 @@ assert(!leaseRecoveryRunner.includes('purchaseAuthorized:true'),'lease recovery 
 assert(leaseRecoveryRunner.includes('productionLockingVerified:false'),'local lease recovery must not claim production locking');
 assert(leaseRecoveryRunner.includes('exactlyOnceGuaranteed:false'),'local lease recovery must not claim exactly-once delivery');
 
+const atomicClaimRunner=await fs.readFile(new URL('./run-atomic-claim-drill.mjs',import.meta.url),'utf8');
+assert(!atomicClaimRunner.includes('purchaseAuthorized:true'),'atomic claim runner must not authorize purchase');
+assert(atomicClaimRunner.includes('productionAtomicityVerified:false'),'local atomic claim drill must not claim production atomicity');
+assert(atomicClaimRunner.includes('distributedLockingVerified:false'),'local atomic claim drill must not claim distributed locking');
+assert(atomicClaimRunner.includes('exactlyOnceGuaranteed:false'),'local atomic claim drill must not claim exactly-once delivery');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -74,6 +80,7 @@ console.log(JSON.stringify({
   productionSchedulerAttestationDefault:false,
   distributedExactlyOnceClaim:false,
   productionLockingClaim:false,
+  productionAtomicityClaim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
