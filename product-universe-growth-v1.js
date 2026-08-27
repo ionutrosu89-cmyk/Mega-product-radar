@@ -3,7 +3,7 @@ import {getSourceRights} from './source-rights-registry-v1.js';
 
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
-const num=value=>{const n=Number(String(value??'').replace(/[^0-9.-]/g,''));return Number.isFinite(n)?n:null;};
+const num=value=>{const raw=String(value??'').replace(/[^0-9.-]/g,'');if(!raw)return null;const n=Number(raw);return Number.isFinite(n)?n:null;};
 
 export const PRODUCT_UNIVERSE_TARGET=10000;
 export const HF_SOURCE_KEY='HF_AJAY_SANKEY_AMAZON_PRODUCTS_MIT';
