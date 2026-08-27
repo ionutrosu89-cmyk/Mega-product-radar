@@ -1,4 +1,5 @@
 import {deterministicFingerprint,evaluateScaleGate} from './data-pipeline-core-v1.js';
+import {createWorkerTelemetrySnapshot,validateWorkerTelemetryAttestation} from './production-worker-telemetry-evidence-v1.js';
 
 const clean=value=>String(value??'').trim();
 const finite=value=>Number.isFinite(Number(value))?Number(value):null;
@@ -122,6 +123,53 @@ export function evaluateWorkerFleetHealth(workers=[],options={}){
   };
 }
 
+export function evaluateReadinessQueueGate(input={}){
+  const evidence=input.workerTelemetryEvidence||{};
+  const schemaOk=clean(evidence.schema)==='MPR_WORKER_TELEMETRY_EVIDENCE_V1';
+  const decisionOk=clean(evidence.decision)==='PRODUCTION_QUEUES_STABLE';
+  const queuesFlag=evidence.queuesStable===true;
+  const localHealth=evidence.localHealthVerified===true;
+  const workerCount=Math.max(0,Number(evidence.workerCount||0));
+  const healthyWorkerCount=Math.max(0,Number(evidence.healthyWorkerCount||0));
+  const workerCountsValid=workerCount>0&&healthyWorkerCount===workerCount;
+  const snapshot=evidence.snapshot||{};
+  const snapshotHash=clean(snapshot.contentSha256).toLowerCase();
+  const snapshotHashValid=sha256(snapshotHash);
+  const recomputedSnapshot=createWorkerTelemetrySnapshot(snapshot);
+  const snapshotIntegrity=snapshotHashValid&&snapshotHash===recomputedSnapshot.contentSha256&&clean(snapshot.snapshotFingerprint)===recomputedSnapshot.snapshotFingerprint;
+  const evidenceFingerprint=clean(evidence.evidenceFingerprint);
+  const evidenceBase={...evidence};
+  delete evidenceBase.evidenceFingerprint;
+  const evidenceIntegrity=evidenceFingerprint.length>0&&evidenceFingerprint===deterministicFingerprint(evidenceBase);
+  const attestation=validateWorkerTelemetryAttestation(evidence.attestation||{},snapshot);
+  const safetyBoundaries=Number(evidence.providerDataSpendEur||0)===0&&Number(evidence.paidDataCallsTriggered||0)===0&&evidence.purchaseAuthorized===false&&Number(evidence.verifiedSalesRows||0)===0&&clean(evidence.salesEvidenceClass)==='NOT_VERIFIED_SALES';
+  const queuesStable=schemaOk&&decisionOk&&queuesFlag&&localHealth&&workerCountsValid&&snapshotIntegrity&&evidenceIntegrity&&attestation.ok&&safetyBoundaries;
+  const reasons=[];
+  if(!schemaOk)reasons.push('PRODUCTION_WORKER_TELEMETRY_EVIDENCE_REQUIRED');
+  if(schemaOk&&!decisionOk)reasons.push('PRODUCTION_QUEUE_DECISION_REQUIRED');
+  if(schemaOk&&!queuesFlag)reasons.push('PRODUCTION_QUEUE_STABILITY_REQUIRED');
+  if(schemaOk&&!localHealth)reasons.push('WORKER_HEALTH_VERIFICATION_REQUIRED');
+  if(schemaOk&&!workerCountsValid)reasons.push('HEALTHY_WORKER_COUNT_REQUIRED');
+  if(schemaOk&&!snapshotIntegrity)reasons.push('WORKER_TELEMETRY_SNAPSHOT_INTEGRITY_REQUIRED');
+  if(schemaOk&&!evidenceIntegrity)reasons.push('WORKER_TELEMETRY_EVIDENCE_INTEGRITY_REQUIRED');
+  if(schemaOk&&!attestation.ok)reasons.push(...attestation.errors);
+  if(schemaOk&&!safetyBoundaries)reasons.push('WORKER_TELEMETRY_SAFETY_BOUNDARY_FAILED');
+  return{
+    schema:'MPR_READINESS_QUEUE_GATE_V1',
+    queuesStable,
+    decision:queuesStable?'QUEUE_GATE_READY':'HOLD_QUEUE_GATE',
+    source:schemaOk?'WORKER_TELEMETRY_EVIDENCE_V1':'NONE',
+    reasons,
+    workerCount,
+    healthyWorkerCount,
+    snapshotIntegrity,
+    evidenceIntegrity,
+    snapshotContentSha256:snapshotIntegrity?snapshotHash:null,
+    runtimeRef:attestation.attestation.runtimeRef||null,
+    evidenceRef:attestation.attestation.evidenceRef||null
+  };
+}
+
 export function evaluateProgressiveScaleStage(input={},options={}){
   const stage=SCALE_STAGES.find(x=>x.name===clean(options.stage).toUpperCase())||SCALE_STAGES[0];
   const canonicalCount=Math.max(0,Number(input.canonicalCount||0));
@@ -154,7 +202,8 @@ export function evaluateProgressiveScaleStage(input={},options={}){
 }
 
 export function buildProductionReadinessSnapshot(input={},options={}){
-  const fleet=evaluateWorkerFleetHealth(input.workers||[],{...options,attestation:input.workerAttestation||{}});
+  const legacyFleet=evaluateWorkerFleetHealth(input.workers||[],{...options,attestation:input.workerAttestation||{}});
+  const queue=evaluateReadinessQueueGate(input);
   const legacyRestore=verifyCheckpointRestore(input.originalCheckpoint||{},input.restoredCheckpoint||{}, {attestation:input.restoreAttestation||{}});
   const restore=evaluateReadinessRestoreGate(input);
   const stage=evaluateProgressiveScaleStage({
@@ -163,7 +212,7 @@ export function buildProductionReadinessSnapshot(input={},options={}){
     provenanceComplete:input.provenanceComplete,
     replayDeterministic:input.replayDeterministic,
     restoreVerified:restore.restoreVerified,
-    queuesStable:fleet.queuesStable,
+    queuesStable:queue.queuesStable,
     p95Ms:input.p95Ms,
     latencyAttestation:input.latencyAttestation
   },{stage:options.stage||'1M',p95LimitMs:options.p95LimitMs||1000});
@@ -172,13 +221,14 @@ export function buildProductionReadinessSnapshot(input={},options={}){
     provenanceComplete:input.provenanceComplete===true,
     restoreVerified:restore.restoreVerified,
     replayDeterministic:input.replayDeterministic===true,
-    queuesStable:fleet.queuesStable,
+    queuesStable:queue.queuesStable,
     p95Ms:validateProductionAttestation(input.latencyAttestation||{}).ok?finite(input.p95Ms):null,
     p95LimitMs:options.p95LimitMs||1000
   });
   const snapshot={
     schema:'MPR_PRODUCTION_READINESS_SNAPSHOT_V1',
-    fleet,
+    fleet:legacyFleet,
+    queue,
     restore,
     legacyCheckpointRestore:legacyRestore,
     stage,
