@@ -7,19 +7,24 @@ export const OFFICIAL_OFF_IMAGE_LICENSE='CC-BY-SA';
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
 const clean=value=>String(value??'').trim();
 
-const REQUIRED_COLUMNS=['code','product_name','brands','categories','image_front_url','image_url','quantity','countries','nutriscore_grade','last_modified_datetime'];
+const REQUIRED_COLUMNS=['code','product_name'];
+const OPTIONAL_COLUMNS=['brands','categories','image_front_url','image_url','quantity','countries','nutriscore_grade','last_modified_datetime'];
 
 export function buildHeaderIndex(headerLine=''){
   const headers=String(headerLine).replace(/\r$/,'').split('\t');
   const index=Object.fromEntries(headers.map((name,i)=>[name,i]));
   const missing=REQUIRED_COLUMNS.filter(name=>!(name in index));
-  return{headers,index,missing,valid:missing.length===0};
+  const optionalMissing=OPTIONAL_COLUMNS.filter(name=>!(name in index));
+  return{headers,index,missing,optionalMissing,valid:missing.length===0};
 }
 
 export function projectOffTsvLine(line='',headerIndex={}){
   if(!headerIndex?.valid)return null;
   const cells=String(line).replace(/\r$/,'').split('\t');
-  const pick=name=>clean(cells[headerIndex.index[name]]);
+  const pick=name=>{
+    const i=headerIndex.index?.[name];
+    return Number.isInteger(i)?clean(cells[i]):'';
+  };
   const code=pick('code');
   const product_name=pick('product_name');
   if(!code&&!product_name)return null;
