@@ -35,7 +35,7 @@ jobs:
         run: |
           for f in app.js market-trend-ui.js free-intelligence-ui.js product-ro.js intelligence-ecosystem.js \
             commercial-decision-engine.js commercial-decision-client.js commercial-validation.js supplier-intelligence.js landed-cost.js \
-            data-pipeline-core-v1.js ingestion-pipeline-v1.js operational-scale-observability-v1.js production-readiness-harness-v1.js \
+            data-pipeline-core-v1.js ingestion-pipeline-v1.js operational-scale-observability-v1.js production-readiness-harness-v1.js persistence-telemetry-adapters-v1.js \
             scripts/web-radar-scan.mjs scripts/discovery-v6-expand.mjs \
             scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
             scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
@@ -45,7 +45,9 @@ jobs:
             scripts/category-radar-postprocess.mjs scripts/watchlist-postprocess.mjs \
             scripts/free-readiness-audit.mjs scripts/dataforseo-keywords.mjs scripts/dataforseo-total-budget.mjs \
             scripts/production-safety-gate.mjs scripts/canonicalize-observations.mjs scripts/run-ingestion-pipeline.mjs \
-            scripts/run-operational-scale-observability.mjs scripts/run-production-readiness-harness.mjs; do node --check "$f"; done
+            scripts/run-operational-scale-observability.mjs scripts/run-production-readiness-harness.mjs scripts/run-progressive-capacity-harness.mjs; do node --check "$f"; done
+      - name: Validate local capacity fail-closed
+        run: npm run capacity:progressive -- --stage=10K --out=artifacts/ci-progressive-capacity.json
       - name: Validate DataForSEO safety self-tests
         run: |
           node scripts/dataforseo-keywords.mjs --self-test
