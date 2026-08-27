@@ -17,7 +17,15 @@ const DEFAULT_RECORD=Object.freeze({
 });
 
 const REGISTRY=Object.freeze({
-  AMAZON_PUBLIC_PRODUCT_PAGE:Object.freeze({...DEFAULT_RECORD})
+  AMAZON_PUBLIC_PRODUCT_PAGE:Object.freeze({...DEFAULT_RECORD}),
+  HF_AJAY_SANKEY_AMAZON_PRODUCTS_MIT:Object.freeze({
+    status:SOURCE_RIGHTS_STATUS.ANALYSIS_ALLOWED,
+    analysisAllowed:true,
+    commercialUseAllowed:false,
+    basis:'DATASET_CARD_DECLARES_MIT_LICENSE; ANALYSIS_ONLY UNTIL COMMERCIAL_SOURCE_RIGHTS REVIEW',
+    reviewedAt:'2026-08-27T15:00:00.000Z',
+    evidenceRef:'https://huggingface.co/datasets/ajay-sankey/amazon-products'
+  })
 });
 
 export function getSourceRights(sourceKey){
