@@ -11,14 +11,14 @@ function sha256(value){
 }
 
 function truthPolicy(){
-  return {
-    providerDataSpendEur:0,
-    paidDataCallsTriggered:0,
-    purchaseAuthorized:false,
-    verifiedSalesRows:0,
-    salesEvidenceClass:'NOT_VERIFIED_SALES'
-  };
+  return {providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,verifiedSalesRows:0,salesEvidenceClass:'NOT_VERIFIED_SALES'};
 }
+
+const keyOf=x=>String(x?.canonicalKey||x?.canonical_key||'');
+const sourceKeyOf=x=>String(x?.sourceKey||x?.source_key||'');
+const sourceRecordIdOf=x=>String(x?.sourceRecordId||x?.source_record_id||'');
+const observedAtOf=x=>x?.observedAt??x?.observed_at??null;
+const rightsDecisionOf=x=>x?.rightsDecision||x?.rights_decision||'HOLD';
 
 export function buildSupabaseCatalogPersistenceBatch(bundle={}, options={}){
   const maxProducts=Number.isInteger(options.maxProducts)?options.maxProducts:100;
@@ -26,62 +26,66 @@ export function buildSupabaseCatalogPersistenceBatch(bundle={}, options={}){
   if(!bundle || typeof bundle!=='object') throw new Error('PERSISTENCE_BUNDLE_REQUIRED');
 
   const products=(bundle.products||[]).slice(0,maxProducts).map(p=>({
-    canonicalKey:String(p.canonicalKey||p.canonical_key||''),
-    title:String(p.title||p.canonicalName||''),
+    canonicalKey:keyOf(p),
+    title:String(p.title||p.canonicalName||p.canonical_name||''),
     brand:p.brand??null,
-    category:p.category??null,
-    imageUrl:null
+    category:p.category??p.canonical_category??null,
+    imageUrl:null,
+    status:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY'
   }));
   if(products.some(p=>!p.canonicalKey || !p.title)) throw new Error('PRODUCT_IDENTITY_REQUIRED');
   const allowed=new Set(products.map(p=>p.canonicalKey));
 
-  const identities=(bundle.identities||[]).filter(x=>allowed.has(x.canonicalKey)).map(x=>({
-    canonicalKey:x.canonicalKey,
+  const identities=(bundle.identities||[]).filter(x=>allowed.has(keyOf(x))).map(x=>({
+    canonicalKey:keyOf(x),
     namespace:String(x.namespace||''),
     valueNorm:String(x.valueNorm||x.value_norm||''),
     confidence:Number.isFinite(Number(x.confidence))?Number(x.confidence):1,
-    sourceKey:x.sourceKey??null
+    sourceKey:sourceKeyOf(x)||null
   }));
 
-  const sourceRecords=(bundle.sourceRecords||[]).filter(x=>allowed.has(x.canonicalKey)).map(x=>({
-    canonicalKey:x.canonicalKey,
-    sourceKey:String(x.sourceKey||''),
-    sourceRecordId:String(x.sourceRecordId||''),
-    observedAt:x.observedAt??null,
+  const sourceRecords=(bundle.sourceRecords||[]).filter(x=>allowed.has(keyOf(x))).map(x=>({
+    canonicalKey:keyOf(x),
+    sourceKey:sourceKeyOf(x),
+    sourceRecordId:sourceRecordIdOf(x),
+    observedAt:observedAtOf(x),
     evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',
-    rightsDecision:x.rightsDecision||'HOLD',
-    identityStrength:x.identityStrength??null,
-    rawPayload:x.rawPayload||{},
-    contentSha256:x.contentSha256||sha256(x.rawPayload||{})
+    rightsDecision:rightsDecisionOf(x),
+    identityStrength:x.identityStrength||x.identity_strength||null,
+    rawPayload:x.rawPayload||x.payload||{},
+    contentSha256:x.contentSha256||x.content_sha256||sha256(x.rawPayload||x.payload||{})
   }));
 
-  const claims=(bundle.claims||[]).filter(x=>allowed.has(x.canonicalKey)).map(x=>({
-    canonicalKey:x.canonicalKey,
-    sourceKey:String(x.sourceKey||''),
-    sourceRecordId:String(x.sourceRecordId||''),
-    fieldName:String(x.fieldName||''),
-    fieldValue:x.fieldValue??null,
-    observedAt:x.observedAt??null,
-    rightsDecision:x.rightsDecision||'HOLD',
+  const claims=(bundle.claims||[]).filter(x=>allowed.has(keyOf(x))).map(x=>({
+    canonicalKey:keyOf(x),
+    sourceKey:sourceKeyOf(x),
+    sourceRecordId:sourceRecordIdOf(x),
+    fieldName:String(x.fieldName||x.field||''),
+    fieldValue:x.fieldValue??x.value??null,
+    observedAt:observedAtOf(x),
+    rightsDecision:rightsDecisionOf(x),
     evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',
     confidence:Number.isFinite(Number(x.confidence))?Number(x.confidence):0,
-    claimSha256:x.claimSha256||sha256({canonicalKey:x.canonicalKey,sourceKey:x.sourceKey,sourceRecordId:x.sourceRecordId,fieldName:x.fieldName,fieldValue:x.fieldValue})
+    claimSha256:x.claimSha256||x.claim_sha256||sha256({canonicalKey:keyOf(x),sourceKey:sourceKeyOf(x),sourceRecordId:sourceRecordIdOf(x),fieldName:x.fieldName||x.field,fieldValue:x.fieldValue??x.value})
   }));
 
-  const ingestionRun=bundle.ingestionRun?{
-    ...bundle.ingestionRun,
-    providerDataSpendEur:0,
-    paidDataCallsTriggered:0,
-    purchaseAuthorized:false,
-    verifiedSalesRows:0,
-    salesEvidenceClass:'NOT_VERIFIED_SALES'
+  const sourceRun=bundle.ingestionRun||bundle.run||null;
+  const ingestionRun=sourceRun?{
+    sourceKey:sourceRun.sourceKey||sourceRun.source_key,
+    manifestSha256:sourceRun.manifestSha256||sourceRun.manifest_sha256,
+    recordsSha256:sourceRun.recordsSha256||sourceRun.records_sha256,
+    retrievedAt:sourceRun.retrievedAt||sourceRun.retrieved_at,
+    inputCount:sourceRun.inputCount??sourceRun.input_count??0,
+    acceptedCount:Math.min(sourceRun.acceptedCount??sourceRun.accepted_count??products.length,products.length),
+    heldCount:sourceRun.heldCount??sourceRun.held_count??0,
+    logicalDuplicateCount:sourceRun.logicalDuplicateCount??sourceRun.logical_duplicate_count??0,
+    silentDropCount:sourceRun.silentDropCount??sourceRun.silent_drop_count??0,
+    checkpointSha256:sourceRun.checkpointSha256||sourceRun.checkpoint_sha256||null,
+    decision:sourceRun.decision||'INGESTION_ACCOUNTED',
+    providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,verifiedSalesRows:0,salesEvidenceClass:'NOT_VERIFIED_SALES'
   }:null;
 
-  const batch={
-    schema:'MPR_SUPABASE_CATALOG_PERSISTENCE_BATCH_V1',
-    products,identities,sourceRecords,claims,ingestionRun,
-    policy:truthPolicy()
-  };
+  const batch={schema:'MPR_SUPABASE_CATALOG_PERSISTENCE_BATCH_V1',products,identities,sourceRecords,claims,ingestionRun,policy:truthPolicy()};
   return {...batch,batchSha256:sha256(batch)};
 }
 
@@ -89,7 +93,11 @@ export function validateSupabaseCatalogPersistenceBatch(batch={}){
   const reasons=[];
   if(batch.schema!=='MPR_SUPABASE_CATALOG_PERSISTENCE_BATCH_V1') reasons.push('INVALID_SCHEMA');
   if(!Array.isArray(batch.products)||batch.products.length<1) reasons.push('PRODUCTS_REQUIRED');
-  if(batch.products?.some(p=>!p.canonicalKey||!p.title)) reasons.push('PRODUCT_IDENTITY_REQUIRED');
+  if(batch.products?.some(p=>!p.canonicalKey||!p.title||p.status!=='CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY')) reasons.push('PRODUCT_IDENTITY_OR_STATUS_INVALID');
+  const allowed=new Set((batch.products||[]).map(p=>p.canonicalKey));
+  if((batch.identities||[]).some(x=>!allowed.has(x.canonicalKey))) reasons.push('ORPHAN_IDENTITY');
+  if((batch.sourceRecords||[]).some(x=>!allowed.has(x.canonicalKey))) reasons.push('ORPHAN_SOURCE_RECORD');
+  if((batch.claims||[]).some(x=>!allowed.has(x.canonicalKey))) reasons.push('ORPHAN_CLAIM');
   const policy=batch.policy||{};
   if(policy.providerDataSpendEur!==0) reasons.push('PROVIDER_SPEND_FORBIDDEN');
   if(policy.paidDataCallsTriggered!==0) reasons.push('PAID_CALLS_FORBIDDEN');
