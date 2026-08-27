@@ -1,0 +1,38 @@
+name: Product Universe 10K CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-universe-10k-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MPR_UNIVERSE_REMOTE_FETCH_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Syntax check product universe pipeline
+        run: |
+          node --check product-universe-growth-v1.js
+          node --check scripts/run-product-universe-10k-candidate-fetch.mjs
+      - name: Product universe tests
+        run: node --test test/product-universe-growth-v1.test.mjs
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Local analysis-only candidate drill
+        run: npm run universe:10k-candidates -- --currentCanonicalCount=100 --target=10000
