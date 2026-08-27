@@ -73,6 +73,13 @@ assert(productionAtomicAttestationRunner.includes('distributedLockingVerified:fa
 assert(productionAtomicAttestationRunner.includes('exactlyOnceGuaranteed:false'),'production atomic attestation runner must not claim exactly-once delivery');
 assert(productionAtomicAttestationRunner.includes('No production adapter is contacted by this drill.'),'atomic attestation drill must preserve no-production-contact boundary');
 
+const atomicFunctionalEvidenceRunner=await fs.readFile(new URL('./run-atomic-store-functional-evidence.mjs',import.meta.url),'utf8');
+assert(!atomicFunctionalEvidenceRunner.includes('purchaseAuthorized:true'),'atomic functional evidence runner must not authorize purchase');
+assert(atomicFunctionalEvidenceRunner.includes('productionAtomicityVerified:false'),'local functional evidence runner must not claim production atomicity');
+assert(atomicFunctionalEvidenceRunner.includes('persistenceRestoreVerified:false'),'local functional evidence runner must not claim production restore verification');
+assert(atomicFunctionalEvidenceRunner.includes('exactlyOnceGuaranteed:false'),'local functional evidence runner must not claim exactly-once delivery');
+assert(atomicFunctionalEvidenceRunner.includes('Local memory CAS validates functional claim mechanics only.'),'functional evidence runner must preserve local-only boundary');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -89,6 +96,7 @@ console.log(JSON.stringify({
   productionLockingClaim:false,
   productionAtomicityClaim:false,
   productionAtomicAdapterContactDefault:false,
+  productionRestoreClaim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
