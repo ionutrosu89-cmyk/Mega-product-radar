@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises';
 import {evaluateAggregateRankingTrust,applyRankingTrustCap} from '../ranking-eligibility-v1.js';
+import {attachTrustedRankingSignals} from '../ranking-signal-ingestion-v1.js';
 
 const FILE='market-intelligence-live.json';
+const RANKING_SIGNAL_BUNDLE='artifacts/ingestion-run-manifest.json';
 const clamp=(n,min=0,max=100)=>Math.max(min,Math.min(max,Number.isFinite(Number(n))?Number(n):0));
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
 const round=v=>Math.round(num(v)*10)/10;
@@ -87,6 +89,8 @@ function rankProduct(p){
 
 const data=await read(FILE,{products:[],stats:{}});
 const products=Array.isArray(data.products)?data.products:[];
+const ingestionAudit=await read(RANKING_SIGNAL_BUNDLE,null);
+const rankingSignalAttachment=attachTrustedRankingSignals(products,ingestionAudit?.rankingSignals||{});
 for(const p of products)p.opportunityRanking=rankProduct(p);
 products.sort((a,b)=>num(b?.opportunityRanking?.score)-num(a?.opportunityRanking?.score)||num(b?.launchScore?.score)-num(a?.launchScore?.score));
 products.forEach((p,i)=>{p.opportunityRanking.rank=i+1;});
@@ -97,7 +101,9 @@ data.stats.priorityWatch=products.filter(p=>p?.opportunityRanking?.tier==='URMĂ
 data.stats.validationQueue=products.filter(p=>p?.opportunityRanking?.tier==='DE VALIDAT').length;
 data.stats.trustedRankingSignals=products.filter(p=>p?.opportunityRanking?.rankingTrust?.trustedEligible===true).length;
 data.stats.legacyResearchOrdering=products.filter(p=>p?.opportunityRanking?.rankingTrust?.legacyResearchOrderingAllowed===true&&p?.opportunityRanking?.rankingTrust?.trustedEligible!==true).length;
-data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed.';
+data.stats.rankingSignalsAttached=rankingSignalAttachment.attachedSignalCount;
+data.rankingSignalAttachment=rankingSignalAttachment;
+data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed. Trusted ranking signals sunt atașate numai prin identity key marketplace+externalId, fără cross-platform auto-merge.';
 
 await fs.writeFile(FILE,JSON.stringify(data,null,2)+'\n');
-console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat.`);
+console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat, ${data.stats.rankingSignalsAttached||0} semnale atașate.`);
