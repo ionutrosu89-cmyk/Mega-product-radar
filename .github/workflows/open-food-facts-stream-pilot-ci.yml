@@ -1,0 +1,54 @@
+name: Open Food Facts Stream Pilot CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax checks
+        run: |
+          node --check open-food-facts-stream-pilot-v1.js
+          node --check scripts/run-open-food-facts-stream-pilot.mjs
+      - name: Targeted tests
+        run: node --test test/open-food-facts-stream-pilot-v1.test.mjs
+      - name: Local fixture stays fail-closed
+        run: |
+          rm -rf artifacts/off-official-stream-pilot-v1
+          npm run ingest:off-pilot
+          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.tenKCandidateSet||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0) process.exit(1)"
+      - name: Stream official Open Food Facts export
+        env:
+          MPR_OFF_STREAM_FETCH_ENABLED: 'true'
+          MPR_OFF_STREAM_MAX_ROWS: '12000'
+          MPR_OFF_STREAM_MIN_ROWS: '10000'
+        run: |
+          rm -rf artifacts/off-official-stream-pilot-v1
+          npm run ingest:off-pilot
+          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(!x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0||x.pilot.metrics.projectedRows<10000) process.exit(1)"
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Full test suite
+        run: npm test
+      - name: Upload pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: off-official-stream-pilot-evidence
+          path: artifacts/off-official-stream-pilot-v1/
+          if-no-files-found: error
+          retention-days: 7
