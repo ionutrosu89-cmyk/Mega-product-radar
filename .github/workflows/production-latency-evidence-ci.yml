@@ -1,0 +1,35 @@
+name: Production Latency Evidence CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-latency-evidence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Latency evidence unit tests
+        run: node --test test/production-latency-evidence-v1.test.mjs
+      - name: Local fail-closed latency drill
+        run: node scripts/run-production-latency-evidence.mjs
+      - name: Production safety gate
+        run: node scripts/production-safety-gate.mjs
+      - name: Assertions
+        run: |
+          node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('artifacts/production-latency-evidence.json','utf8'));if(r.productionP95Verified!==false||r.evidence.productionP95Verified!==false||r.purchaseAuthorized!==false||r.providerDataSpendEur!==0||r.paidDataCallsTriggered!==0)process.exit(1)"
