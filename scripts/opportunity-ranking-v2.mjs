@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {evaluateAggregateRankingTrust,applyRankingTrustCap} from '../ranking-eligibility-v1.js';
 
 const FILE='market-intelligence-live.json';
 const clamp=(n,min=0,max=100)=>Math.max(min,Math.min(max,Number.isFinite(Number(n))?Number(n):0));
@@ -43,6 +44,7 @@ function rankProduct(p){
   const trendSamples=num(p?.trendIntelligence?.sampleCount);
   const pricingVerified=Boolean(p?.economics?.pricingVerified);
   const competitorEvidence=num(p?.competitors?.evidenceMarkets)>0;
+  const rankingTrust=evaluateAggregateRankingTrust(p);
 
   if(gap>=70)reasons.push('gap România–extern puternic');
   if(demand>=60)reasons.push('cerere externă relativ puternică');
@@ -59,10 +61,15 @@ function rankProduct(p){
   if(trendSamples<2){score=Math.min(score,75);blockers.push('istoric insuficient pentru trend');}
   if(num(p?.economics?.margin)<=0||num(p?.economics?.roi)<=0){score=Math.min(score,45);blockers.push('economie nevalidată');}
 
+  score=applyRankingTrustCap(score,rankingTrust);
+  if(!rankingTrust.trustedEligible){
+    blockers.push(rankingTrust.legacyResearchOrderingAllowed?'ranking fără semnal trustat Policy Kernel':'ranking evidence neverificat');
+  }
+
   score=round(clamp(score));
   let tier='DE CERCETAT';
-  if(score>=80&&evidenceReady&&evidence>=65)tier='TOP OPORTUNITATE';
-  else if(score>=68)tier='URMĂREȘTE PRIORITAR';
+  if(score>=80&&evidenceReady&&evidence>=65&&rankingTrust.trustedEligible)tier='TOP OPORTUNITATE';
+  else if(score>=68&&rankingTrust.trustedEligible)tier='URMĂREȘTE PRIORITAR';
   else if(score>=55)tier='DE VALIDAT';
   else if(score<40)tier='PRIORITATE MICĂ';
 
@@ -73,7 +80,8 @@ function rankProduct(p){
     blockers:[...new Set(blockers)].slice(0,5),
     components,
     evidenceReady,
-    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. Nu schimbă verdictul TEST/CUMPĂRĂ și nu reprezintă probabilitate de succes sau volum de vânzări.'
+    rankingTrust,
+    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. TOP/PRIORITAR necesită semnal de ranking acceptat de Policy Kernel, cu source rights, identitate exactă și proveniență. Datele de bootstrap/catalog pot ordona doar cercetarea și nu sunt semnal de ranking.'
   };
 }
 
@@ -87,7 +95,9 @@ data.stats=data.stats||{};
 data.stats.topOpportunities=products.filter(p=>p?.opportunityRanking?.tier==='TOP OPORTUNITATE').length;
 data.stats.priorityWatch=products.filter(p=>p?.opportunityRanking?.tier==='URMĂREȘTE PRIORITAR').length;
 data.stats.validationQueue=products.filter(p=>p?.opportunityRanking?.tier==='DE VALIDAT').length;
-data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Scorul este plafonat când lipsesc dovezi, pricing verificat, competitor evidence sau istoric suficient.';
+data.stats.trustedRankingSignals=products.filter(p=>p?.opportunityRanking?.rankingTrust?.trustedEligible===true).length;
+data.stats.legacyResearchOrdering=products.filter(p=>p?.opportunityRanking?.rankingTrust?.legacyResearchOrderingAllowed===true&&p?.opportunityRanking?.rankingTrust?.trustedEligible!==true).length;
+data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed.';
 
 await fs.writeFile(FILE,JSON.stringify(data,null,2)+'\n');
-console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat.`);
+console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat.`);
