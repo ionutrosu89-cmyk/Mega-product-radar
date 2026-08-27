@@ -1,0 +1,51 @@
+name: Bulk Catalog Ingestion CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax checks
+        run: |
+          node --check bulk-catalog-ingestion-v1.js
+          node --check scripts/run-bulk-catalog-ingestion.mjs
+      - name: Targeted tests
+        run: node --test test/bulk-catalog-ingestion-v1.test.mjs
+      - name: Local fixture run stays fail-closed
+        run: |
+          mkdir -p artifacts
+          node <<'NODE'
+          const fs=require('fs');
+          const rows=[];
+          for(let i=0;i<20;i++)rows.push({code:String(4006381333931+i),product_name:`CI Product ${i}`,brands:'CI Brand',categories:'CI'});
+          fs.writeFileSync('artifacts/ci-openfacts.json',JSON.stringify(rows));
+          NODE
+          npm run ingest:bulk-catalog -- --input=artifacts/ci-openfacts.json --source=OPEN_FOOD_FACTS --retrievedAt=2026-08-27T16:00:00Z --out=artifacts/ci-bulk-catalog.json
+          node <<'NODE'
+          const d=require('./artifacts/ci-bulk-catalog.json');
+          if(d.productionDatabaseContacted!==false)throw new Error('CI runner contacted production database');
+          if(d.remoteFetchEnabled!==false)throw new Error('remote fetch unexpectedly enabled');
+          if(d.tenKGate?.decision!=='HOLD_10K')throw new Error('small local fixture must not pass 10K gate');
+          if(d.policy?.providerDataSpendEur!==0||d.policy?.paidDataCallsTriggered!==0||d.policy?.purchaseAuthorized!==false)throw new Error('cost/purchase invariant violation');
+          if(d.policy?.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.policy?.verifiedSalesRows!==0)throw new Error('sales truth invariant violation');
+          NODE
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Full test suite
+        run: npm test
