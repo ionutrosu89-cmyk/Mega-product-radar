@@ -64,6 +64,37 @@ export function verifyCheckpointRestore(original={},restored={},options={}){
   };
 }
 
+export function evaluateReadinessRestoreGate(input={}){
+  const evidence=input.persistenceRestoreEvidence||{};
+  const schemaOk=clean(evidence.schema)==='MPR_PERSISTENCE_RESTORE_EVIDENCE_V1';
+  const decisionOk=clean(evidence.decision)==='PRODUCTION_RESTORE_VERIFIED';
+  const productionFlag=evidence.productionRestoreVerified===true;
+  const localIntegrity=evidence.localRestoreVerified===true;
+  const persistedHash=clean(evidence.persistedContentSha256).toLowerCase();
+  const restoredHash=clean(evidence.restoredContentSha256).toLowerCase();
+  const hashesValid=sha256(persistedHash)&&sha256(restoredHash)&&persistedHash===restoredHash;
+  const checkpointFingerprintPresent=clean(evidence.checkpointFingerprint).length>0;
+  const restoreVerified=schemaOk&&decisionOk&&productionFlag&&localIntegrity&&hashesValid&&checkpointFingerprintPresent;
+  const reasons=[];
+  if(!schemaOk)reasons.push('PRODUCTION_PERSISTENCE_RESTORE_EVIDENCE_REQUIRED');
+  if(schemaOk&&!decisionOk)reasons.push('PRODUCTION_RESTORE_DECISION_REQUIRED');
+  if(schemaOk&&!productionFlag)reasons.push('PRODUCTION_RESTORE_VERIFICATION_REQUIRED');
+  if(schemaOk&&!localIntegrity)reasons.push('RESTORE_INTEGRITY_REQUIRED');
+  if(schemaOk&&!hashesValid)reasons.push('RESTORE_HASH_BINDING_REQUIRED');
+  if(schemaOk&&!checkpointFingerprintPresent)reasons.push('CHECKPOINT_FINGERPRINT_REQUIRED');
+  return{
+    schema:'MPR_READINESS_RESTORE_GATE_V1',
+    restoreVerified,
+    decision:restoreVerified?'RESTORE_GATE_READY':'HOLD_RESTORE_GATE',
+    source:schemaOk?'PERSISTENCE_RESTORE_EVIDENCE_V1':'NONE',
+    reasons,
+    evidenceSchema:schemaOk?evidence.schema:null,
+    checkpointFingerprint:checkpointFingerprintPresent?clean(evidence.checkpointFingerprint):null,
+    persistedContentSha256:sha256(persistedHash)?persistedHash:null,
+    restoredContentSha256:sha256(restoredHash)?restoredHash:null
+  };
+}
+
 export function evaluateWorkerFleetHealth(workers=[],options={}){
   const attestation=validateProductionAttestation(options.attestation||{});
   const maxHeartbeatAgeMs=Math.max(1,Number(options.maxHeartbeatAgeMs||60000));
@@ -124,7 +155,8 @@ export function evaluateProgressiveScaleStage(input={},options={}){
 
 export function buildProductionReadinessSnapshot(input={},options={}){
   const fleet=evaluateWorkerFleetHealth(input.workers||[],{...options,attestation:input.workerAttestation||{}});
-  const restore=verifyCheckpointRestore(input.originalCheckpoint||{},input.restoredCheckpoint||{}, {attestation:input.restoreAttestation||{}});
+  const legacyRestore=verifyCheckpointRestore(input.originalCheckpoint||{},input.restoredCheckpoint||{}, {attestation:input.restoreAttestation||{}});
+  const restore=evaluateReadinessRestoreGate(input);
   const stage=evaluateProgressiveScaleStage({
     canonicalCount:input.canonicalCount,
     logicalDuplicateCount:input.logicalDuplicateCount,
@@ -148,6 +180,7 @@ export function buildProductionReadinessSnapshot(input={},options={}){
     schema:'MPR_PRODUCTION_READINESS_SNAPSHOT_V1',
     fleet,
     restore,
+    legacyCheckpointRestore:legacyRestore,
     stage,
     finalScale,
     productionReady:finalScale.decision==='SCALE_READY',
