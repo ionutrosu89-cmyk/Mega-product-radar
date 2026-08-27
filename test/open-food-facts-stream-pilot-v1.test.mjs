@@ -13,20 +13,32 @@ test('official source is pinned to Open Food Facts bulk export',()=>{
   assert.throws(()=>assertOfficialOffSource('https://example.com/data.csv.gz'),/OFFICIAL_OFF_SOURCE_REQUIRED/);
 });
 
-test('header projection requires explicit catalogue fields',()=>{
+test('header projection reads explicit catalogue fields when present',()=>{
   const header='code\tproduct_name\tbrands\tcategories\timage_front_url\timage_url\tquantity\tcountries\tnutriscore_grade\tlast_modified_datetime';
   const index=buildHeaderIndex(header);
   assert.equal(index.valid,true);
   const row=projectOffTsvLine('4006381333931\tAlpha\tAcme\tFood\thttps://a\thttps://b\t1 kg\tRomania\ta\t2026-08-27T00:00:00Z',index);
   assert.equal(row.code,'4006381333931');
   assert.equal(row.product_name,'Alpha');
+  assert.equal(row.image_front_url,'https://a');
 });
 
-test('missing required columns fail closed',()=>{
-  const index=buildHeaderIndex('code\tproduct_name');
+test('optional export columns may be absent without weakening required identity fields',()=>{
+  const index=buildHeaderIndex('code\tproduct_name\tbrands\tcategories');
+  assert.equal(index.valid,true);
+  assert.ok(index.optionalMissing.includes('image_front_url'));
+  const row=projectOffTsvLine('4006381333931\tAlpha\tAcme\tFood',index);
+  assert.equal(row.code,'4006381333931');
+  assert.equal(row.product_name,'Alpha');
+  assert.equal(row.image_front_url,'');
+  assert.equal(row.image_url,'');
+});
+
+test('missing required identity columns fail closed',()=>{
+  const index=buildHeaderIndex('code\tbrands\tcategories');
   assert.equal(index.valid,false);
-  assert.ok(index.missing.includes('brands'));
-  assert.equal(projectOffTsvLine('4006381333931\tAlpha',index),null);
+  assert.ok(index.missing.includes('product_name'));
+  assert.equal(projectOffTsvLine('4006381333931\tAcme\tFood',index),null);
 });
 
 test('pilot summary remains zero-cost and does not authorize commercial use',()=>{
