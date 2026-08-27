@@ -36,5 +36,42 @@ jobs:
         run: node --test test/production-readiness-harness-v1.test.mjs test/production-evidence-bundle-v1.test.mjs test/production-storage-adapter-v1.test.mjs test/scale-ingestion-orchestrator-v1.test.mjs test/ranking-eligibility-v1-bootstrap.test.mjs
       - name: Production safety gate
         run: npm run verify:production-safety
+      - name: Create local scale fixture
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/ci-scale-seed.json <<'JSON'
+          {
+            "observations": [
+              {
+                "sourceKey": "CI_SCALE_FIXTURE",
+                "platform": "AMAZON",
+                "marketplace": "AMAZON",
+                "externalId": "B000000001",
+                "url": "https://example.invalid/B000000001",
+                "observedAt": "2026-08-27T00:00:00.000Z",
+                "contentSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "evidenceStrength": "STRONG",
+                "evidenceClass": "VERIFIED_COMPETITOR_OBSERVATION",
+                "salesEvidenceClass": "NOT_VERIFIED_SALES",
+                "verifiedSalesRows": 0,
+                "purchaseAuthorized": false
+              },
+              {
+                "sourceKey": "CI_SCALE_FIXTURE",
+                "platform": "AMAZON",
+                "marketplace": "AMAZON",
+                "externalId": "B000000002",
+                "url": "https://example.invalid/B000000002",
+                "observedAt": "2026-08-27T00:00:00.000Z",
+                "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "evidenceStrength": "STRONG",
+                "evidenceClass": "VERIFIED_COMPETITOR_OBSERVATION",
+                "salesEvidenceClass": "NOT_VERIFIED_SALES",
+                "verifiedSalesRows": 0,
+                "purchaseAuthorized": false
+              }
+            ]
+          }
+          JSON
       - name: Local scale ingestion fail-closed drill
-        run: npm run scale:ingest-window
+        run: node scripts/run-scale-ingestion-window.mjs artifacts/ci-scale-seed.json artifacts/scale-ingestion-window-v1.json artifacts/local-scale-storage-v1
