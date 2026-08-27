@@ -51,6 +51,10 @@ const observationInboxRunner=await fs.readFile(new URL('./run-live-observation-i
 assert(observationInboxRunner.includes("process.env.MPR_PRODUCTION_SCHEDULER_ATTESTATION_ENABLED||'false'"),'production scheduler attestation must remain disabled by default');
 assert(!observationInboxRunner.includes('purchaseAuthorized:true'),'observation inbox runner must not authorize purchase');
 
+const consumptionRunner=await fs.readFile(new URL('./run-observation-consumption-receipt.mjs',import.meta.url),'utf8');
+assert(!consumptionRunner.includes('purchaseAuthorized:true'),'observation consumption runner must not authorize purchase');
+assert(consumptionRunner.includes('not distributed exactly-once processing proof'),'consumption runner must preserve the exactly-once disclaimer');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -63,6 +67,7 @@ console.log(JSON.stringify({
   rankingHistoryRemoteWriteDefault:false,
   scheduledRankingRemoteWriteDefault:false,
   productionSchedulerAttestationDefault:false,
+  distributedExactlyOnceClaim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
