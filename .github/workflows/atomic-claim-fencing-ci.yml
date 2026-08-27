@@ -1,0 +1,39 @@
+name: Atomic Claim Fencing CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-atomic-claim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax check atomic claim boundary
+        run: |
+          node --check atomic-claim-store-v1.js
+          node --check scripts/run-atomic-claim-drill.mjs
+      - name: Run atomic claim unit tests
+        run: node --test test/atomic-claim-store-v1.test.mjs
+      - name: Validate local atomic claim fail-closed
+        run: |
+          npm run ranking:atomic-claim-drill -- --out=artifacts/ci-atomic-claim-drill.json --now=2026-08-27T12:00:00Z
+          node <<'NODE'
+          const d=require('./artifacts/ci-atomic-claim-drill.json');
+          if(d.decision!=='HOLD_PRODUCTION_ATOMICITY')throw new Error('local atomic claim drill must HOLD production atomicity');
+          if(d.productionAtomicityVerified!==false||d.distributedLockingVerified!==false||d.exactlyOnceGuaranteed!==false)throw new Error('local CAS drill was promoted to production');
+          if(d.first?.claim?.fencingToken!==1||d.reclaimed?.claim?.fencingToken!==2)throw new Error('fencing tokens did not advance');
+          if(d.staleFence?.valid!==false||d.currentFence?.valid!==true)throw new Error('fencing validation failed');
+          if(d.providerDataSpendEur!==0||d.paidDataCallsTriggered!==0||d.purchaseAuthorized!==false)throw new Error('atomic claim policy invariant violation');
+          if(d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)throw new Error('atomic claim truth invariant violation');
+          NODE
