@@ -1,0 +1,70 @@
+name: Observation Consumption CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: observation-consumption-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-consumption:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax check consumption boundary
+        run: |
+          node --check observation-inbox-consumer-v1.js
+          node --check scripts/run-observation-consumption-receipt.mjs
+      - name: Run consumption unit tests
+        run: node --test test/observation-inbox-consumer-v1.test.mjs
+      - name: Validate local consumption receipt fail-closed
+        run: |
+          mkdir -p artifacts
+          node <<'NODE'
+          const fs=require('fs');
+          const inbox={
+            read:{
+              analysisRunnable:true,
+              productionRunnable:false,
+              schedulerAttestation:null,
+              envelope:{fingerprint:'ci-inbox-fingerprint-1',sourceFingerprint:'ci-source-fingerprint-1'}
+            }
+          };
+          const tick={
+            cycle:{decision:'COMPLETED',fingerprint:'ci-cycle-fingerprint-1',productionPersistenceVerified:false},
+            handoff:{manifest:{fingerprint:'ci-handoff-fingerprint-1'}}
+          };
+          fs.writeFileSync('artifacts/ci-consume-inbox.json',JSON.stringify(inbox,null,2));
+          fs.writeFileSync('artifacts/ci-consume-tick.json',JSON.stringify(tick,null,2));
+          NODE
+          npm run ranking:consume -- --inbox=artifacts/ci-consume-inbox.json --tick=artifacts/ci-consume-tick.json --output=artifacts/ci-consume-audit.json --storeRoot=artifacts/ci-consume-store --completedAt=2026-08-27T12:00:00Z
+          node <<'NODE'
+          const d=require('./artifacts/ci-consume-audit.json');
+          if(d.decision!=='COMPLETED')throw new Error('consumption receipt did not complete');
+          if(d.receipt?.analysisConsumed!==true)throw new Error('analysis receipt missing');
+          if(d.receipt?.productionConsumed===true)throw new Error('local receipt promoted to production');
+          if(d.persistence?.decision!=='RECORDED')throw new Error('receipt was not recorded');
+          if(d.policy?.providerDataSpendEur!==0||d.policy?.paidDataCallsTriggered!==0||d.policy?.purchaseAuthorized!==false)throw new Error('consumption policy invariant violation');
+          if(d.policy?.verifiedSalesRows!==0||d.policy?.salesEvidenceClass!=='NOT_VERIFIED_SALES')throw new Error('consumption truth class violation');
+          NODE
+      - name: Validate missing inputs wait safely
+        run: |
+          npm run ranking:consume -- --inbox=artifacts/missing-inbox.json --tick=artifacts/missing-tick.json --output=artifacts/ci-consume-wait.json
+          node <<'NODE'
+          const d=require('./artifacts/ci-consume-wait.json');
+          if(d.decision!=='WAIT')throw new Error('missing consumption inputs must WAIT');
+          NODE
