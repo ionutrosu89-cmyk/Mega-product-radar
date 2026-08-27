@@ -1,0 +1,77 @@
+name: Production Evidence Bundle CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-evidence-bundle-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Syntax check evidence and scale modules
+        run: |
+          node --check production-readiness-harness-v1.js
+          node --check production-evidence-bundle-v1.js
+          node --check production-storage-adapter-v1.js
+          node --check scale-ingestion-orchestrator-v1.js
+          node --check ranking-eligibility-v1.js
+          node --check scripts/run-scale-ingestion-window.mjs
+      - name: Evidence boundary tests
+        run: node --test test/production-readiness-harness-v1.test.mjs test/production-evidence-bundle-v1.test.mjs test/production-storage-adapter-v1.test.mjs test/scale-ingestion-orchestrator-v1.test.mjs test/ranking-eligibility-v1-bootstrap.test.mjs
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Create local scale fixture
+        run: |
+          mkdir -p artifacts
+          cat > artifacts/ci-scale-seed.json <<'JSON'
+          {
+            "observations": [
+              {
+                "sourceKey": "CI_SCALE_FIXTURE",
+                "platform": "AMAZON",
+                "marketplace": "AMAZON",
+                "externalId": "B000000001",
+                "url": "https://example.invalid/B000000001",
+                "observedAt": "2026-08-27T00:00:00.000Z",
+                "contentSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "evidenceStrength": "STRONG",
+                "evidenceClass": "VERIFIED_COMPETITOR_OBSERVATION",
+                "salesEvidenceClass": "NOT_VERIFIED_SALES",
+                "verifiedSalesRows": 0,
+                "purchaseAuthorized": false
+              },
+              {
+                "sourceKey": "CI_SCALE_FIXTURE",
+                "platform": "AMAZON",
+                "marketplace": "AMAZON",
+                "externalId": "B000000002",
+                "url": "https://example.invalid/B000000002",
+                "observedAt": "2026-08-27T00:00:00.000Z",
+                "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "evidenceStrength": "STRONG",
+                "evidenceClass": "VERIFIED_COMPETITOR_OBSERVATION",
+                "salesEvidenceClass": "NOT_VERIFIED_SALES",
+                "verifiedSalesRows": 0,
+                "purchaseAuthorized": false
+              }
+            ]
+          }
+          JSON
+      - name: Local scale ingestion fail-closed drill
+        run: node scripts/run-scale-ingestion-window.mjs artifacts/ci-scale-seed.json artifacts/scale-ingestion-window-v1.json artifacts/local-scale-storage-v1

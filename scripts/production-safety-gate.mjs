@@ -99,6 +99,21 @@ assert(latencyEvidenceRunner.includes('productionRuntimeContacted:false'),'local
 assert(latencyEvidenceRunner.includes('productionP95Verified:false'),'local latency drill must not claim production p95');
 assert(latencyEvidenceRunner.includes('Local p95 is not production latency evidence.'),'latency evidence drill must preserve production disclaimer');
 
+const scaleIngestionRunner=await fs.readFile(new URL('./run-scale-ingestion-window.mjs',import.meta.url),'utf8');
+assert(!scaleIngestionRunner.includes('purchaseAuthorized:true'),'scale ingestion runner must not authorize purchase');
+assert(scaleIngestionRunner.includes("report.scaleDecision!=='HOLD_SCALE'"),'local scale ingestion must assert HOLD_SCALE');
+assert(scaleIngestionRunner.includes('productionRuntimeContacted:false'),'local scale ingestion must not claim production runtime contact');
+assert(scaleIngestionRunner.includes('productionStorageContacted:false'),'local scale ingestion must not claim production storage contact');
+assert(scaleIngestionRunner.includes('syntheticOrBootstrapCountIsNotProductionCanonicalScaleProof:true'),'bootstrap/synthetic count must not be promoted to production scale proof');
+assert(scaleIngestionRunner.includes('not live ranking evidence, verified sales evidence, or production scale authorization'),'scale ingestion runner must preserve truth disclaimer');
+
+const evidenceBundleSource=await fs.readFile(new URL('../production-evidence-bundle-v1.js',import.meta.url),'utf8');
+assert(evidenceBundleSource.includes("inventoryClass!=='REAL_CANONICAL_PRODUCTS'"),'production evidence bundle must require real canonical product inventory');
+assert(evidenceBundleSource.includes("purchaseAuthorized:false"),'production evidence bundle must preserve purchase=false');
+
+const storageAdapterSource=await fs.readFile(new URL('../production-storage-adapter-v1.js',import.meta.url),'utf8');
+assert(storageAdapterSource.includes('LOCAL_ADAPTER_CANNOT_PROVE_PRODUCTION_STORAGE'),'local storage adapter must fail closed for production persistence proof');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -121,6 +136,8 @@ console.log(JSON.stringify({
   productionQueuesStableClaim:false,
   productionLatencyRuntimeContactDefault:false,
   productionP95Claim:false,
+  localScaleAuthorizationClaim:false,
+  productionCanonicalScaleProofFromBootstrap:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));

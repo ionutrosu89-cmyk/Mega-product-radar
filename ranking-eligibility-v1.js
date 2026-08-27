@@ -18,16 +18,23 @@ export const CATALOGUE_ONLY_EVIDENCE_CLASSES=Object.freeze(new Set([
 export function evaluateRankingEligibility(input={}){
   const policyDecision=upper(input.policyDecision||input?.policy?.decision);
   const evidenceClass=upper(input.evidenceClass||input?.envelope?.evidenceClass);
+  const sourceKey=upper(input.sourceKey||input?.envelope?.source?.name||input?.envelope?.payload?.sourceKey);
+  const surface=upper(input.surface||input?.envelope?.payload?.surface);
+  const salesEvidenceClass=upper(input.salesEvidenceClass||input?.envelope?.salesEvidenceClass||'NOT_VERIFIED_SALES');
+  const verifiedSalesRows=Math.max(0,Number(input.verifiedSalesRows??input?.envelope?.verifiedSalesRows??0));
   const analysisAllowed=input.analysisAllowed===true||input?.envelope?.sourceRights?.analysisAllowed===true;
   const exactIdentity=input.exactIdentity===true||input?.identity?.exact===true||Boolean(input?.envelope?.observedIdentity?.externalId&&input?.envelope?.expectedIdentity?.externalId&&upper(input.envelope.observedIdentity.externalId)===upper(input.envelope.expectedIdentity.externalId));
   const hasProvenance=input.hasProvenance===true||Boolean(input?.envelope?.provenance?.collector&&input?.envelope?.provenance?.runId&&input?.envelope?.provenance?.contentSha256);
+  const bootstrapSurface=surface==='CATALOGUE_BOOTSTRAP'||sourceKey==='AMAZON_OPEN_DATASET_BOOTSTRAP'||input.bootstrapDataIsNotLive===true||input.catalogueBootstrapIsNotRanking===true;
   const reasons=[];
   if(policyDecision!=='ACCEPT')reasons.push('POLICY_KERNEL_ACCEPT_REQUIRED');
   if(!analysisAllowed)reasons.push('ANALYSIS_SOURCE_RIGHTS_REQUIRED');
   if(!exactIdentity)reasons.push('EXACT_IDENTITY_REQUIRED');
   if(!hasProvenance)reasons.push('PROVENANCE_REQUIRED');
+  if(bootstrapSurface)reasons.push('BOOTSTRAP_SURFACE_NOT_RANKING_SIGNAL');
   if(CATALOGUE_ONLY_EVIDENCE_CLASSES.has(evidenceClass))reasons.push('CATALOGUE_EVIDENCE_NOT_RANKING_SIGNAL');
   if(!RANKING_EVIDENCE_CLASSES.has(evidenceClass))reasons.push('RANKING_EVIDENCE_CLASS_REQUIRED');
+  if(salesEvidenceClass==='VERIFIED_SALES'&&verifiedSalesRows<=0)reasons.push('UNSUPPORTED_VERIFIED_SALES_CLAIM');
   const trustedEligible=reasons.length===0;
   return{
     schema:'MPR_RANKING_ELIGIBILITY_V1',
@@ -35,9 +42,14 @@ export function evaluateRankingEligibility(input={}){
     decision:trustedEligible?'RANKING_ELIGIBLE':'RANKING_HOLD',
     evidenceClass:evidenceClass||null,
     policyDecision:policyDecision||null,
+    sourceKey:sourceKey||null,
+    surface:surface||null,
+    salesEvidenceClass,
+    verifiedSalesRows,
     analysisAllowed,
     exactIdentity,
     hasProvenance,
+    bootstrapSurface,
     reasons:[...new Set(reasons)]
   };
 }

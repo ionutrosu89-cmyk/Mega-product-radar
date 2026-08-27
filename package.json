@@ -11,6 +11,7 @@
     "verify:production-safety": "node scripts/production-safety-gate.mjs",
     "canonicalize:observations": "node scripts/canonicalize-observations.mjs",
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
+    "scale:ingest-window": "node scripts/run-scale-ingestion-window.mjs",
     "ranking:history": "node scripts/run-ranking-signal-history.mjs",
     "ranking:cycle": "node scripts/run-durable-ranking-history-cycle.mjs",
     "ranking:scheduled-tick": "node scripts/run-scheduled-ranking-history-tick.mjs",
