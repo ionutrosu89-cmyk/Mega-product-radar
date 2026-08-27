@@ -9,6 +9,7 @@ const outputPath=String(args.output||'artifacts/live-observation-inbox-audit.jso
 const storeRoot=String(args.storeRoot||'artifacts/live-observation-inbox-store');
 const now=String(args.now||new Date().toISOString());
 const maxAgeMs=Math.max(1,Number(args.maxAgeMs||2*60*60*1000));
+const productionSchedulerEnabled=String(process.env.MPR_PRODUCTION_SCHEDULER_ATTESTATION_ENABLED||'false').toLowerCase()==='true';
 
 async function readJson(file){try{return JSON.parse(await fs.readFile(file,'utf8'));}catch(error){if(error?.code==='ENOENT')return null;throw error;}}
 async function writeJson(file,value){await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,JSON.stringify(value,null,2));}
@@ -16,25 +17,39 @@ async function writeJson(file,value){await fs.mkdir(path.dirname(file),{recursiv
 const audit=await readJson(inputPath);
 const basePolicy={providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,verifiedSalesRows:0,salesEvidenceClass:'NOT_VERIFIED_SALES',crossPlatformAutoMerge:false};
 if(!audit?.rankingSignalResolution?.manifest){
-  const output={schema:'MPR_LIVE_OBSERVATION_INBOX_AUDIT_V1',generatedAt:new Date().toISOString(),decision:'WAIT',reason:'RANKING_SIGNAL_RESOLUTION_REQUIRED',policy:basePolicy};
+  const output={schema:'MPR_LIVE_OBSERVATION_INBOX_AUDIT_V1',generatedAt:new Date().toISOString(),decision:'WAIT',reason:'RANKING_SIGNAL_RESOLUTION_REQUIRED',productionSchedulerEnabled,policy:basePolicy};
   await writeJson(outputPath,output);
   console.log(JSON.stringify(output,null,2));
   process.exit(0);
 }
 
+const schedulerAttestation=productionSchedulerEnabled?{
+  executionMode:'PRODUCTION_SCHEDULED',
+  environment:'production',
+  schedulerName:process.env.MPR_PRODUCTION_SCHEDULER_NAME,
+  runId:process.env.MPR_PRODUCTION_SCHEDULER_RUN_ID,
+  triggerRef:process.env.MPR_PRODUCTION_SCHEDULER_TRIGGER_REF,
+  scheduledFor:process.env.MPR_PRODUCTION_SCHEDULER_SCHEDULED_FOR,
+  startedAt:process.env.MPR_PRODUCTION_SCHEDULER_STARTED_AT,
+  evidenceRef:process.env.MPR_PRODUCTION_SCHEDULER_EVIDENCE_REF,
+  collectorVersion:'live-observation-inbox-v1',
+  contentSha256:process.env.MPR_PRODUCTION_SCHEDULER_CONTENT_SHA256
+}:null;
+
 const store=createFilesystemHistoryStore(storeRoot);
 const enqueue=await enqueueObservationBundle(store,audit.rankingSignalResolution,{receivedAt:now,sourceRef:inputPath});
-const read=await readObservationInboxEntry(store,enqueue.key,{now,maxAgeMs});
+const read=await readObservationInboxEntry(store,enqueue.key,{now,maxAgeMs,schedulerAttestation});
 const output={
   schema:'MPR_LIVE_OBSERVATION_INBOX_AUDIT_V1',
   generatedAt:new Date().toISOString(),
   inputPath,outputPath,storeRoot,
   decision:read.analysisRunnable?'READY':'WAIT',
   enqueue,read,
-  productionSchedulerAttested:false,
+  productionSchedulerEnabled,
+  productionSchedulerAttested:read.schedulerAttestation?.ok===true,
   policy:basePolicy
 };
 await writeJson(outputPath,output);
-console.log(JSON.stringify({schema:output.schema,decision:output.decision,enqueueDecision:enqueue.decision,analysisRunnable:read.analysisRunnable,productionRunnable:read.productionRunnable,policy:basePolicy},null,2));
-if(read.productionRunnable)throw new Error('LOCAL_INBOX_PROMOTED_TO_PRODUCTION');
+console.log(JSON.stringify({schema:output.schema,decision:output.decision,enqueueDecision:enqueue.decision,analysisRunnable:read.analysisRunnable,productionRunnable:read.productionRunnable,productionSchedulerEnabled,policy:basePolicy},null,2));
+if(!productionSchedulerEnabled&&read.productionRunnable)throw new Error('LOCAL_INBOX_PROMOTED_TO_PRODUCTION');
 if(basePolicy.providerDataSpendEur!==0||basePolicy.paidDataCallsTriggered!==0||basePolicy.purchaseAuthorized!==false)throw new Error('LIVE_OBSERVATION_INBOX_POLICY_INVARIANT_VIOLATION');
