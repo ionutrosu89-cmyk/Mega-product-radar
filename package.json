@@ -21,6 +21,7 @@
     "ranking:atomic-attestation": "node scripts/run-production-atomic-store-attestation.mjs",
     "ranking:atomic-functional-evidence": "node scripts/run-atomic-store-functional-evidence.mjs",
     "persistence:restore-evidence": "node scripts/run-production-persistence-restore-evidence.mjs",
+    "telemetry:worker-evidence": "node scripts/run-production-worker-telemetry-evidence.mjs",
     "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "readiness:scale": "node scripts/run-production-readiness-harness.mjs",
     "capacity:progressive": "node scripts/run-progressive-capacity-harness.mjs",
