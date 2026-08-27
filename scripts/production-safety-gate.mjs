@@ -93,6 +93,12 @@ assert(workerTelemetryRunner.includes('productionRuntimeContacted:false'),'local
 assert(workerTelemetryRunner.includes('productionQueuesStable:false'),'local worker telemetry drill must not claim production queue stability');
 assert(workerTelemetryRunner.includes('Local telemetry is not production queue stability evidence.'),'worker telemetry drill must preserve production disclaimer');
 
+const latencyEvidenceRunner=await fs.readFile(new URL('./run-production-latency-evidence.mjs',import.meta.url),'utf8');
+assert(!latencyEvidenceRunner.includes('purchaseAuthorized:true'),'latency evidence runner must not authorize purchase');
+assert(latencyEvidenceRunner.includes('productionRuntimeContacted:false'),'local latency drill must not claim production runtime contact');
+assert(latencyEvidenceRunner.includes('productionP95Verified:false'),'local latency drill must not claim production p95');
+assert(latencyEvidenceRunner.includes('Local p95 is not production latency evidence.'),'latency evidence drill must preserve production disclaimer');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -113,6 +119,8 @@ console.log(JSON.stringify({
   productionStorageContactDefault:false,
   productionWorkerRuntimeContactDefault:false,
   productionQueuesStableClaim:false,
+  productionLatencyRuntimeContactDefault:false,
+  productionP95Claim:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
