@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import {evaluateAggregateRankingTrust,applyRankingTrustCap} from '../ranking-eligibility-v1.js';
 import {attachTrustedRankingSignals} from '../ranking-signal-ingestion-v1.js';
+import {resolveRankingSignalBundle} from '../ranking-signal-resolution-v1.js';
 
 const FILE='market-intelligence-live.json';
 const RANKING_SIGNAL_BUNDLE='artifacts/ingestion-run-manifest.json';
@@ -83,14 +84,15 @@ function rankProduct(p){
     components,
     evidenceReady,
     rankingTrust,
-    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. TOP/PRIORITAR necesită semnal de ranking acceptat de Policy Kernel, cu source rights, identitate exactă și proveniență. Datele de bootstrap/catalog pot ordona doar cercetarea și nu sunt semnal de ranking.'
+    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. TOP/PRIORITAR necesită semnal de ranking acceptat de Policy Kernel, cu source rights, identitate exactă, proveniență, freshness valid și fără conflict la ultima observație. Datele de bootstrap/catalog pot ordona doar cercetarea și nu sunt semnal de ranking.'
   };
 }
 
 const data=await read(FILE,{products:[],stats:{}});
 const products=Array.isArray(data.products)?data.products:[];
 const ingestionAudit=await read(RANKING_SIGNAL_BUNDLE,null);
-const rankingSignalAttachment=attachTrustedRankingSignals(products,ingestionAudit?.rankingSignals||{});
+const resolvedRankingSignals=ingestionAudit?.rankingSignalResolution||resolveRankingSignalBundle(ingestionAudit?.rankingSignals||{}, {asOf:ingestionAudit?.generatedAt||new Date().toISOString()});
+const rankingSignalAttachment=attachTrustedRankingSignals(products,resolvedRankingSignals);
 for(const p of products)p.opportunityRanking=rankProduct(p);
 products.sort((a,b)=>num(b?.opportunityRanking?.score)-num(a?.opportunityRanking?.score)||num(b?.launchScore?.score)-num(a?.launchScore?.score));
 products.forEach((p,i)=>{p.opportunityRanking.rank=i+1;});
@@ -102,8 +104,11 @@ data.stats.validationQueue=products.filter(p=>p?.opportunityRanking?.tier==='DE 
 data.stats.trustedRankingSignals=products.filter(p=>p?.opportunityRanking?.rankingTrust?.trustedEligible===true).length;
 data.stats.legacyResearchOrdering=products.filter(p=>p?.opportunityRanking?.rankingTrust?.legacyResearchOrderingAllowed===true&&p?.opportunityRanking?.rankingTrust?.trustedEligible!==true).length;
 data.stats.rankingSignalsAttached=rankingSignalAttachment.attachedSignalCount;
+data.stats.rankingSignalConflicts=resolvedRankingSignals?.manifest?.conflictGroupCount||0;
+data.stats.rankingSignalsSuperseded=resolvedRankingSignals?.manifest?.supersededCount||0;
 data.rankingSignalAttachment=rankingSignalAttachment;
-data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed. Trusted ranking signals sunt atașate numai prin identity key marketplace+externalId, fără cross-platform auto-merge.';
+data.rankingSignalResolutionManifest=resolvedRankingSignals?.manifest||null;
+data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel, freshness valid și conflict resolution fail-closed. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed. Trusted ranking signals sunt atașate numai prin identity key marketplace+externalId, fără cross-platform auto-merge.';
 
 await fs.writeFile(FILE,JSON.stringify(data,null,2)+'\n');
-console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat, ${data.stats.rankingSignalsAttached||0} semnale atașate.`);
+console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat, ${data.stats.rankingSignalsAttached||0} semnale atașate, ${data.stats.rankingSignalConflicts||0} conflicte.`);

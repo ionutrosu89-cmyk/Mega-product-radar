@@ -3,6 +3,7 @@ import path from 'node:path';
 import {processIngestionEvents,verifyReplay} from '../ingestion-pipeline-v1.js';
 import {evaluateScaleGate} from '../data-pipeline-core-v1.js';
 import {buildRankingSignalBundle} from '../ranking-signal-ingestion-v1.js';
+import {resolveRankingSignalBundle} from '../ranking-signal-resolution-v1.js';
 
 const args=Object.fromEntries(process.argv.slice(2).map(x=>{const [k,...rest]=x.replace(/^--/,'').split('=');return[k,rest.join('=')||true];}));
 const inputPath=String(args.input||'artifacts/real-public-seed-1000.json');
@@ -19,6 +20,8 @@ const second=processIngestionEvents(events,options);
 const replay=verifyReplay(first,second);
 const provenanceComplete=first.canonicalBatch.accepted.every(row=>Boolean(row?.payload?.provenance));
 const rankingSignals=buildRankingSignalBundle(first.events,{runId});
+const rankingAsOf=String(args.rankingAsOf||collectedAt);
+const rankingSignalResolution=resolveRankingSignalBundle(rankingSignals,{asOf:rankingAsOf});
 const scaleGate=evaluateScaleGate(first.canonicalBatch,{
   provenanceComplete,
   restoreVerified:false,
@@ -34,6 +37,7 @@ const output={
   runId,
   ingestion:first.manifest,
   rankingSignals,
+  rankingSignalResolution,
   replay,
   provenanceComplete,
   scaleGate,
@@ -46,6 +50,7 @@ console.log(JSON.stringify({
   runId,
   ingestion:output.ingestion,
   rankingSignalManifest:rankingSignals.manifest,
+  rankingSignalResolutionManifest:rankingSignalResolution.manifest,
   replay,
   provenanceComplete,
   scaleGate,
