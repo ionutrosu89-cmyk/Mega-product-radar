@@ -14,6 +14,7 @@
     "ranking:history": "node scripts/run-ranking-signal-history.mjs",
     "ranking:cycle": "node scripts/run-durable-ranking-history-cycle.mjs",
     "ranking:scheduled-tick": "node scripts/run-scheduled-ranking-history-tick.mjs",
+    "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "readiness:scale": "node scripts/run-production-readiness-harness.mjs",
     "capacity:progressive": "node scripts/run-progressive-capacity-harness.mjs",
