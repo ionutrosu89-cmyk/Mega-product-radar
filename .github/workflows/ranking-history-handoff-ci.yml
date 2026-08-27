@@ -1,0 +1,80 @@
+name: Ranking History Handoff CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ranking-history-handoff-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-ranking-handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Syntax check ranking handoff
+        run: |
+          node --check ranking-live-handoff-v1.js
+          node --check scripts/run-scheduled-ranking-history-tick.mjs
+      - name: Run ranking handoff unit tests
+        run: node --test test/ranking-live-handoff-v1.test.mjs
+      - name: Validate scheduled tick fail-closed
+        run: |
+          mkdir -p artifacts
+          node <<'NODE'
+          const fs=require('fs');
+          const record={
+            identityKey:'AMAZON:B00CI00001',
+            evidenceClass:'EXPLICIT_PRODUCT_BEST_SELLERS_RANK',
+            observedAt:'2026-08-27T11:00:00Z',
+            fingerprint:'ci-ranking-signal-scheduled-1',
+            trustedEligible:true,
+            resolution:{decision:'SELECTED'},
+            sourceName:'CI_FIXTURE',
+            provenance:{contentSha256:'b'.repeat(64)},
+            envelope:{source:{observedAt:'2026-08-27T11:00:00Z'},payload:{explicitRank:100,rankCategory:'CI_CATEGORY'}}
+          };
+          const audit={
+            schema:'MPR_CI_SCHEDULED_RANKING_FIXTURE_V1',
+            generatedAt:'2026-08-27T11:30:00Z',
+            rankingSignalResolution:{
+              manifest:{fingerprint:'ci-ranking-scheduled-bundle-1',asOf:'2026-08-27T11:30:00Z'},
+              trustedRecords:[record],
+              heldRecords:[]
+            }
+          };
+          fs.writeFileSync('artifacts/ci-scheduled-ranking-input.json',JSON.stringify(audit,null,2));
+          NODE
+          npm run ranking:scheduled-tick -- --input=artifacts/ci-scheduled-ranking-input.json --output=artifacts/ci-scheduled-ranking-tick.json --handoff=artifacts/ci-ranking-trend-handoff.json --storeRoot=artifacts/ci-ranking-scheduled-store --now=2026-08-27T12:00:00Z
+          node <<'NODE'
+          const d=require('./artifacts/ci-scheduled-ranking-tick.json');
+          const h=require('./artifacts/ci-ranking-trend-handoff.json');
+          if(d.mode!=='file')throw new Error('scheduled CI store must remain file mode');
+          if(d.decision!=='COMPLETED'||d.cycle?.decision!=='COMPLETED')throw new Error('scheduled ranking tick did not complete');
+          if(d.cycle?.productionPersistenceVerified===true)throw new Error('local scheduled cycle promoted to production');
+          if((h.productionRecords||[]).length!==0)throw new Error('local handoff exposed production records');
+          if(h.manifest?.handoffStatus!=='NO_COMPARABLE_TRENDS')throw new Error('single observation should not create comparable trend');
+          if(d.policy?.providerDataSpendEur!==0||d.policy?.paidDataCallsTriggered!==0||d.policy?.purchaseAuthorized!==false)throw new Error('scheduled tick policy invariant violation');
+          if(d.policy?.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.policy?.verifiedSalesRows!==0)throw new Error('scheduled tick truth class violation');
+          NODE
+      - name: Validate missing input waits safely
+        run: |
+          npm run ranking:scheduled-tick -- --input=artifacts/does-not-exist.json --output=artifacts/ci-scheduled-ranking-wait.json --now=2026-08-27T12:00:00Z
+          node <<'NODE'
+          const d=require('./artifacts/ci-scheduled-ranking-wait.json');
+          if(d.decision!=='WAIT')throw new Error('missing scheduler input must WAIT');
+          if(d.policy?.providerDataSpendEur!==0||d.policy?.paidDataCallsTriggered!==0||d.policy?.purchaseAuthorized!==false)throw new Error('WAIT path violated policy');
+          NODE
