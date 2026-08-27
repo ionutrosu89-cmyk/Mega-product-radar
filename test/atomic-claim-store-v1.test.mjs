@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createMemoryAtomicClaimStore,acquireAtomicObservationClaim,validateFencingToken} from '../atomic-claim-store-v1.js';
+import {createMemoryAtomicClaimStore,createFencedClaim,validateFencedClaim,acquireAtomicObservationClaim,validateFencingToken} from '../atomic-claim-store-v1.js';
 
 const input={inboxFingerprint:'inbox-atomic-1',sourceFingerprint:'source-atomic-1'};
 
@@ -45,6 +45,14 @@ test('stale fencing token is rejected after reclaim',async()=>{
   const second=await acquireAtomicObservationClaim(store,input,{workerId:'worker-b',now:'2026-08-27T12:00:02Z',leaseDurationMs:1000});
   assert.equal(validateFencingToken(second.claim,first.claim.fencingToken).valid,false);
   assert.equal(validateFencingToken(second.claim,second.claim.fencingToken).valid,true);
+});
+
+test('tampered fenced claim fails fingerprint validation',()=>{
+  const claim=createFencedClaim(input,{workerId:'worker-a',claimedAt:'2026-08-27T12:00:00Z',leaseDurationMs:60000,fencingToken:3});
+  claim.workerId='worker-x';
+  const validation=validateFencedClaim(claim,{now:'2026-08-27T12:00:10Z'});
+  assert.equal(validation.valid,false);
+  assert.ok(validation.reasons.includes('CLAIM_FINGERPRINT_MISMATCH'));
 });
 
 test('CAS retry exhaustion fails closed',async()=>{
