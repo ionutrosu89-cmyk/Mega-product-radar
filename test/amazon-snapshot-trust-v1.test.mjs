@@ -14,6 +14,13 @@ const base=()=>({
   rankEvidenceCount:2
 });
 
+const reviewedAnalysisRights=()=>({
+  status:'ANALYSIS_ALLOWED',
+  basis:'LEGAL_REVIEW_CONFIRMED_ANALYSIS_ONLY',
+  reviewedAt:'2026-08-27T08:30:00Z',
+  evidenceRef:'rights-review:test-analysis'
+});
+
 test('Amazon snapshot remains HOLD while source analysis rights are unconfirmed',()=>{
   const trust=buildAmazonSnapshotTrust(base(),{runId:'run-1'});
   assert.equal(trust.envelope.schema,'EvidenceEnvelopeV2');
@@ -21,6 +28,7 @@ test('Amazon snapshot remains HOLD while source analysis rights are unconfirmed'
   assert.equal(trust.envelope.paidDataCallsTriggered,0);
   assert.equal(trust.envelope.purchaseAuthorized,false);
   assert.equal(trust.envelope.salesEvidenceClass,'NOT_VERIFIED_SALES');
+  assert.equal(trust.sourceRights.status,'UNKNOWN');
   assert.equal(trust.policy.decision,'HOLD');
   assert.ok(trust.policy.reasons.some(x=>x.code==='SOURCE_RIGHTS_NOT_CONFIRMED'));
 });
@@ -35,22 +43,32 @@ test('identity-not-confirmed Amazon page is explicitly rejected by the Policy Ke
   assert.equal(trust.envelope.evidenceStrength,'SUPPORT_ONLY');
 });
 
-test('explicit BSR can become strong analysis evidence only when rights are explicitly confirmed',()=>{
+test('unreviewed rights override cannot elevate Amazon evidence',()=>{
   const trust=buildAmazonSnapshotTrust(base(),{
     runId:'run-3',
-    sourceRights:{analysisAllowed:true,commercialUseAllowed:false,basis:'EXPLICIT_ANALYSIS_RIGHT_CONFIRMED'}
+    sourceRightsOverride:{status:'COMMERCIAL_ALLOWED'}
+  });
+  assert.equal(trust.sourceRights.status,'UNKNOWN');
+  assert.equal(trust.policy.decision,'HOLD');
+});
+
+test('explicit BSR can become strong analysis evidence only after reviewed rights evidence',()=>{
+  const trust=buildAmazonSnapshotTrust(base(),{
+    runId:'run-4',
+    sourceRightsOverride:reviewedAnalysisRights()
   });
   assert.equal(trust.envelope.evidenceStrength,'STRONG');
+  assert.equal(trust.sourceRights.status,'ANALYSIS_ALLOWED');
   assert.equal(trust.policy.decision,'ACCEPT');
   assert.equal(trust.policy.purchaseAuthorized,false);
   assert.equal(trust.policy.monetizationAuthorized,false);
 });
 
-test('commercial use stays blocked when only analysis rights are confirmed',()=>{
+test('commercial use stays blocked when registry override confirms analysis rights only',()=>{
   const trust=buildAmazonSnapshotTrust(base(),{
-    runId:'run-4',
+    runId:'run-5',
     intendedUse:'commercial',
-    sourceRights:{analysisAllowed:true,commercialUseAllowed:false,basis:'ANALYSIS_ONLY'}
+    sourceRightsOverride:reviewedAnalysisRights()
   });
   assert.equal(trust.policy.decision,'HOLD');
   assert.equal(trust.policy.guards.sourceRights.code,'SOURCE_RIGHTS_NOT_CONFIRMED');

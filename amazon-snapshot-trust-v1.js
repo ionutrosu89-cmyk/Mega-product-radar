@@ -1,23 +1,21 @@
 import {createEvidenceEnvelopeV2} from './evidence-envelope-v2.js';
 import {evaluatePolicyKernel} from './policy-kernel-v1.js';
+import {resolveSourceRights} from './source-rights-registry-v1.js';
 
 const clean=value=>String(value??'').trim();
+const SOURCE_KEY='AMAZON_PUBLIC_PRODUCT_PAGE';
 
 export function buildAmazonSnapshotTrust(input={},options={}){
   const asin=clean(input.asin).toUpperCase();
   const identityConfirmed=input.identityConfirmed===true;
   const rankEvidenceCount=Number(input.rankEvidenceCount||0);
-  const sourceRights={
-    analysisAllowed:options.sourceRights?.analysisAllowed===true,
-    commercialUseAllowed:options.sourceRights?.commercialUseAllowed===true,
-    basis:clean(options.sourceRights?.basis)||'NOT_CONFIRMED'
-  };
+  const sourceRights=resolveSourceRights(SOURCE_KEY,options.sourceRightsOverride||null);
   const envelope=createEvidenceEnvelopeV2({
     evidenceId:clean(options.evidenceId)||null,
     expectedIdentity:{marketplace:'AMAZON',externalId:asin},
     observedIdentity:identityConfirmed?{marketplace:'AMAZON',externalId:asin}:{marketplace:'AMAZON',externalId:null},
     source:{
-      name:'AMAZON_PUBLIC_PRODUCT_PAGE',
+      name:SOURCE_KEY,
       url:input.url,
       observedAt:input.observedAt,
       collectedAt:input.collectedAt||input.observedAt,
@@ -37,8 +35,15 @@ export function buildAmazonSnapshotTrust(input={},options={}){
     providerDataSpendEur:0,
     paidDataCallsTriggered:0,
     purchaseAuthorized:false,
-    payload:{statusCode:input.statusCode??null,htmlBytes:input.htmlBytes??0,rankEvidenceCount}
+    payload:{
+      statusCode:input.statusCode??null,
+      htmlBytes:input.htmlBytes??0,
+      rankEvidenceCount,
+      sourceRightsStatus:sourceRights.status,
+      sourceRightsReviewedAt:sourceRights.reviewedAt,
+      sourceRightsEvidenceRef:sourceRights.evidenceRef
+    }
   });
   const policy=evaluatePolicyKernel(envelope,{intendedUse:options.intendedUse||'analysis'});
-  return{envelope,policy};
+  return{envelope,policy,sourceRights};
 }
