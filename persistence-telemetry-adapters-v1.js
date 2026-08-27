@@ -31,12 +31,16 @@ export function verifyPersistedCheckpoint(original={},restored={},options={}){
   const stateMatch=first.checkpoint.checkpointFingerprint===second.checkpoint.checkpointFingerprint;
   const contentHashMatch=first.contentSha256===second.contentSha256;
   const productionStorage=first.storageMode==='PRODUCTION_PERSISTENCE'&&second.storageMode==='PRODUCTION_PERSISTENCE';
-  const productionPersistenceVerified=stateMatch&&contentHashMatch&&productionStorage&&attestation.ok;
+  const storageRefMatch=Boolean(first.storageRef&&second.storageRef&&first.storageRef===second.storageRef);
+  const attestedStorageRefMatch=Boolean(attestation.attestation.evidenceRef&&first.storageRef===attestation.attestation.evidenceRef);
+  const productionPersistenceVerified=stateMatch&&contentHashMatch&&productionStorage&&storageRefMatch&&attestedStorageRefMatch&&attestation.ok;
   return{
     schema:'MPR_PERSISTED_CHECKPOINT_VERIFICATION_V1',
     stateMatch,
     contentHashMatch,
     productionStorage,
+    storageRefMatch,
+    attestedStorageRefMatch,
     productionAttestationValid:attestation.ok,
     attestationErrors:attestation.errors,
     productionPersistenceVerified,
