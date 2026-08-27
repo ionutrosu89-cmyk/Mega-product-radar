@@ -66,6 +66,13 @@ assert(atomicClaimRunner.includes('productionAtomicityVerified:false'),'local at
 assert(atomicClaimRunner.includes('distributedLockingVerified:false'),'local atomic claim drill must not claim distributed locking');
 assert(atomicClaimRunner.includes('exactlyOnceGuaranteed:false'),'local atomic claim drill must not claim exactly-once delivery');
 
+const productionAtomicAttestationRunner=await fs.readFile(new URL('./run-production-atomic-store-attestation.mjs',import.meta.url),'utf8');
+assert(!productionAtomicAttestationRunner.includes('purchaseAuthorized:true'),'production atomic attestation runner must not authorize purchase');
+assert(productionAtomicAttestationRunner.includes('productionAtomicityVerified:false'),'local production atomic attestation must not claim production atomicity');
+assert(productionAtomicAttestationRunner.includes('distributedLockingVerified:false'),'local production atomic attestation must not claim distributed locking');
+assert(productionAtomicAttestationRunner.includes('exactlyOnceGuaranteed:false'),'production atomic attestation runner must not claim exactly-once delivery');
+assert(productionAtomicAttestationRunner.includes('No production adapter is contacted by this drill.'),'atomic attestation drill must preserve no-production-contact boundary');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -81,6 +88,7 @@ console.log(JSON.stringify({
   distributedExactlyOnceClaim:false,
   productionLockingClaim:false,
   productionAtomicityClaim:false,
+  productionAtomicAdapterContactDefault:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
