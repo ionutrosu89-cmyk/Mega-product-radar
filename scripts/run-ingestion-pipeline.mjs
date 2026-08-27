@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {processIngestionEvents,verifyReplay} from '../ingestion-pipeline-v1.js';
 import {evaluateScaleGate} from '../data-pipeline-core-v1.js';
+import {buildRankingSignalBundle} from '../ranking-signal-ingestion-v1.js';
 
 const args=Object.fromEntries(process.argv.slice(2).map(x=>{const [k,...rest]=x.replace(/^--/,'').split('=');return[k,rest.join('=')||true];}));
 const inputPath=String(args.input||'artifacts/real-public-seed-1000.json');
@@ -17,6 +18,7 @@ const first=processIngestionEvents(events,options);
 const second=processIngestionEvents(events,options);
 const replay=verifyReplay(first,second);
 const provenanceComplete=first.canonicalBatch.accepted.every(row=>Boolean(row?.payload?.provenance));
+const rankingSignals=buildRankingSignalBundle(first.events,{runId});
 const scaleGate=evaluateScaleGate(first.canonicalBatch,{
   provenanceComplete,
   restoreVerified:false,
@@ -31,6 +33,7 @@ const output={
   inputPath,
   runId,
   ingestion:first.manifest,
+  rankingSignals,
   replay,
   provenanceComplete,
   scaleGate,
@@ -38,5 +41,14 @@ const output={
 };
 await fs.mkdir(path.dirname(outputPath),{recursive:true});
 await fs.writeFile(outputPath,JSON.stringify(output,null,2));
-console.log(JSON.stringify(output,null,2));
+console.log(JSON.stringify({
+  schema:output.schema,
+  runId,
+  ingestion:output.ingestion,
+  rankingSignalManifest:rankingSignals.manifest,
+  replay,
+  provenanceComplete,
+  scaleGate,
+  policy:output.policy
+},null,2));
 if(scaleGate.scaleAuthorized)throw new Error('UNEXPECTED_SCALE_AUTHORIZATION');
