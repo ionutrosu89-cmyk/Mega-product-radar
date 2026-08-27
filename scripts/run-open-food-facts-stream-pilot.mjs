@@ -20,11 +20,11 @@ const outDir=process.env.MPR_OFF_STREAM_OUT_DIR||'artifacts/off-official-stream-
 
 async function fetchRows(){
   assertOfficialOffSource(OFFICIAL_OFF_CSV_URL);
-  const controller=new AbortController();
-  const response=await fetch(OFFICIAL_OFF_CSV_URL,{signal:controller.signal,headers:{'user-agent':'MegaProductRadar/7.0 catalog-bootstrap-pilot'}});
+  const response=await fetch(OFFICIAL_OFF_CSV_URL,{headers:{'user-agent':'MegaProductRadar/7.0 catalog-bootstrap-pilot'}});
   if(!response.ok||!response.body)throw new Error(`OFF_STREAM_HTTP_${response.status}`);
+  const source=Readable.fromWeb(response.body);
   const gunzip=createGunzip();
-  Readable.fromWeb(response.body).pipe(gunzip);
+  source.pipe(gunzip);
   const rl=createInterface({input:gunzip,crlfDelay:Infinity});
   let header=null;
   const rows=[];
@@ -41,8 +41,9 @@ async function fetchRows(){
     }
   }finally{
     rl.close();
+    source.unpipe(gunzip);
     gunzip.destroy();
-    controller.abort();
+    source.destroy();
   }
   return rows;
 }
