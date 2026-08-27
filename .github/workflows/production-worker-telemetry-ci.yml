@@ -1,0 +1,35 @@
+name: Production Worker Telemetry CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-worker-telemetry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Worker telemetry unit tests
+        run: node --test test/production-worker-telemetry-evidence-v1.test.mjs
+      - name: Local fail-closed telemetry drill
+        run: node scripts/run-production-worker-telemetry-evidence.mjs
+      - name: Production safety gate
+        run: node scripts/production-safety-gate.mjs
+      - name: Assertions
+        run: |
+          node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('artifacts/production-worker-telemetry-evidence.json','utf8'));if(r.productionQueuesStable!==false||r.evidence.queuesStable!==false||r.purchaseAuthorized!==false||r.providerDataSpendEur!==0||r.paidDataCallsTriggered!==0)process.exit(1)"
