@@ -4,7 +4,7 @@ import {validateWorkerTelemetryAttestation} from './production-worker-telemetry-
 const clean=value=>String(value??'').trim();
 const finite=value=>Number.isFinite(Number(value))?Number(value):null;
 const sha256=value=>/^[a-f0-9]{64}$/i.test(clean(value));
-const iso=value=>Number.isFinite(Date.parse(clean(value)))?new Date(Date.parse(clean(value)).toISOString()):null;
+const iso=value=>Number.isFinite(Date.parse(clean(value)))?new Date(Date.parse(clean(value))).toISOString():null;
 
 export const SCALE_STAGES=Object.freeze([
   {name:'10K',requiredCanonicalCount:10000},
@@ -13,12 +13,11 @@ export const SCALE_STAGES=Object.freeze([
 ]);
 
 export function validateProductionAttestation(input={}){
-  const observed=iso(input.observedAt);
   const normalized={
     observationMode:clean(input.observationMode).toUpperCase(),
     environment:clean(input.environment).toLowerCase(),
     evidenceRef:clean(input.evidenceRef)||null,
-    observedAt:observed?observed.toISOString():null,
+    observedAt:iso(input.observedAt),
     collectorVersion:clean(input.collectorVersion)||null,
     contentSha256:clean(input.contentSha256).toLowerCase()||null
   };
