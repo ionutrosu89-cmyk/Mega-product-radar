@@ -40,6 +40,9 @@ assert(unsupportedSales.guards.truth.code==='UNSUPPORTED_VERIFIED_SALES_CLAIM','
 const providerSource=await fs.readFile(new URL('./provider-intelligence-v26.mjs',import.meta.url),'utf8');
 assert(providerSource.includes("process.env.DATAFORSEO_V26_PAID_ENABLED||'false'"),'paid provider must remain disabled by default');
 
+const rankingHistoryRunner=await fs.readFile(new URL('./run-durable-ranking-history-cycle.mjs',import.meta.url),'utf8');
+assert(rankingHistoryRunner.includes("process.env.MPR_RANKING_HISTORY_REMOTE_WRITE_ENABLED||'false'"),'remote ranking history writes must remain disabled by default');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -49,6 +52,7 @@ console.log(JSON.stringify({
   amazonSourceRightsDefault:amazonRights.status,
   providerSpendDefaultEur:0,
   paidCallsDefault:0,
+  rankingHistoryRemoteWriteDefault:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));

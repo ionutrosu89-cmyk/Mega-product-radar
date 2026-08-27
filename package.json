@@ -12,6 +12,7 @@
     "canonicalize:observations": "node scripts/canonicalize-observations.mjs",
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
     "ranking:history": "node scripts/run-ranking-signal-history.mjs",
+    "ranking:cycle": "node scripts/run-durable-ranking-history-cycle.mjs",
     "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "readiness:scale": "node scripts/run-production-readiness-harness.mjs",
     "capacity:progressive": "node scripts/run-progressive-capacity-harness.mjs",
