@@ -47,6 +47,10 @@ const scheduledRankingRunner=await fs.readFile(new URL('./run-scheduled-ranking-
 assert(scheduledRankingRunner.includes("process.env.MPR_RANKING_HISTORY_REMOTE_WRITE_ENABLED||'false'"),'scheduled ranking remote writes must remain disabled by default');
 assert(!scheduledRankingRunner.includes('purchaseAuthorized:true'),'scheduled ranking runner must not authorize purchase');
 
+const observationInboxRunner=await fs.readFile(new URL('./run-live-observation-inbox.mjs',import.meta.url),'utf8');
+assert(observationInboxRunner.includes("process.env.MPR_PRODUCTION_SCHEDULER_ATTESTATION_ENABLED||'false'"),'production scheduler attestation must remain disabled by default');
+assert(!observationInboxRunner.includes('purchaseAuthorized:true'),'observation inbox runner must not authorize purchase');
+
 const netlify=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
 assert(netlify.includes('Netlify is the sole supported production SaaS target.'),'production target declaration missing');
 assert(netlify.includes('command = "npm run build"'),'Netlify must use the repository build gate');
@@ -58,6 +62,7 @@ console.log(JSON.stringify({
   paidCallsDefault:0,
   rankingHistoryRemoteWriteDefault:false,
   scheduledRankingRemoteWriteDefault:false,
+  productionSchedulerAttestationDefault:false,
   purchaseAuthorized:false,
   salesEvidenceClass:'NOT_VERIFIED_SALES'
 },null,2));
