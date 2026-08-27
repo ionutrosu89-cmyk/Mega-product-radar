@@ -57,13 +57,17 @@ export function evaluateProductionAtomicStoreReadiness(store={},attestation={}){
   const productionScope=scope.startsWith('PRODUCTION_');
   const adapterKindMatches=clean(store.adapterKind).toUpperCase()===validation.normalized.adapterKind;
   const adapterIdMatches=clean(store.adapterId)===clean(validation.normalized.adapterId);
-  const productionAtomicityVerified=validation.valid&&storeContractOk&&productionScope&&adapterKindMatches&&adapterIdMatches;
+  const evidenceRefMatches=clean(store.evidenceRef)===clean(validation.normalized.evidenceRef);
+  const attestationFingerprintMatches=clean(store.attestationFingerprint)===clean(validation.fingerprint);
+  const productionAtomicityVerified=validation.valid&&storeContractOk&&productionScope&&adapterKindMatches&&adapterIdMatches&&evidenceRefMatches&&attestationFingerprintMatches;
   const reasons=[];
   if(!validation.valid)reasons.push(...validation.reasons);
   if(!storeContractOk)reasons.push('ATOMIC_STORE_CONTRACT_REQUIRED');
   if(!productionScope)reasons.push('PRODUCTION_STORE_SCOPE_REQUIRED');
   if(!adapterKindMatches)reasons.push('ADAPTER_KIND_MISMATCH');
   if(!adapterIdMatches)reasons.push('ADAPTER_ID_MISMATCH');
+  if(!evidenceRefMatches)reasons.push('EVIDENCE_REF_BINDING_MISMATCH');
+  if(!attestationFingerprintMatches)reasons.push('ATTESTATION_FINGERPRINT_BINDING_MISMATCH');
   return{
     schema:'MPR_PRODUCTION_ATOMIC_STORE_READINESS_V1',
     decision:productionAtomicityVerified?'PRODUCTION_ATOMICITY_VERIFIED':'HOLD_PRODUCTION_ATOMICITY',
@@ -72,6 +76,12 @@ export function evaluateProductionAtomicStoreReadiness(store={},attestation={}){
     exactlyOnceGuaranteed:false,
     storeScope:scope||'UNKNOWN',
     attestation:validation,
+    binding:{
+      adapterKindMatches,
+      adapterIdMatches,
+      evidenceRefMatches,
+      attestationFingerprintMatches
+    },
     reasons:[...new Set(reasons)],
     providerDataSpendEur:0,
     paidDataCallsTriggered:0,
