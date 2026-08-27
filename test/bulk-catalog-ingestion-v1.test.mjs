@@ -52,13 +52,14 @@ test('claims preserve source and analysis-only truth class',()=>{
 
 test('identity calibration exposes review/merge decisions without changing products',()=>{
   const candidates=[
-    {brand:'Acme',title:'Widget Pro 128 GB',model:'WP1',fingerprint:'a'},
-    {brand:'Acme',title:'Widget Pro 128GB',model:'WP1',fingerprint:'b'},
-    {brand:'Other',title:'Different',model:'X',fingerprint:'c'}
+    {brand:'Acme',title:'Widget Pro 128 GB',model:'WP1',gtin:'4006381333931',fingerprint:'a'},
+    {brand:'Acme',title:'Widget Pro 128GB',model:'WP1',gtin:'4006381333931',fingerprint:'b'},
+    {brand:'Other',title:'Different',model:'X',gtin:'5901234123457',fingerprint:'c'}
   ];
   const out=calibrateIdentityDecisions(candidates,{sampleLimit:10});
   assert.equal(out.schema,'MPR_IDENTITY_CALIBRATION_V1');
   assert.ok(out.autoMerge>=1);
+  assert.ok(out.decisions.some(x=>x.reasons.includes('EXACT_GTIN')));
 });
 
 test('10k gate fails closed without real restore and replay evidence',()=>{
