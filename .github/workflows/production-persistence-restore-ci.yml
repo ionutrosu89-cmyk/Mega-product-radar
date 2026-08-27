@@ -1,0 +1,38 @@
+name: Production Persistence Restore CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'agent/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-persistence-restore-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Syntax check
+        run: |
+          node --check production-persistence-restore-evidence-v1.js
+          node --check scripts/run-production-persistence-restore-evidence.mjs
+      - name: Persistence restore evidence tests
+        run: node --test test/production-persistence-restore-evidence-v1.test.mjs
+      - name: Local fail-closed restore drill
+        run: npm run persistence:restore-evidence
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Full tests
+        run: npm test
