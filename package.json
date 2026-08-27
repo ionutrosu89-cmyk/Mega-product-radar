@@ -19,6 +19,7 @@
     "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
     "ranking:atomic-claim-drill": "node scripts/run-atomic-claim-drill.mjs",
     "ranking:atomic-attestation": "node scripts/run-production-atomic-store-attestation.mjs",
+    "ranking:atomic-functional-evidence": "node scripts/run-atomic-store-functional-evidence.mjs",
     "observe:scale": "node scripts/run-operational-scale-observability.mjs",
     "readiness:scale": "node scripts/run-production-readiness-harness.mjs",
     "capacity:progressive": "node scripts/run-progressive-capacity-harness.mjs",
