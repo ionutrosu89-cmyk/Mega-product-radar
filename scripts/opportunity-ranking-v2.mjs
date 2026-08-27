@@ -2,9 +2,11 @@ import fs from 'node:fs/promises';
 import {evaluateAggregateRankingTrust,applyRankingTrustCap} from '../ranking-eligibility-v1.js';
 import {attachTrustedRankingSignals} from '../ranking-signal-ingestion-v1.js';
 import {resolveRankingSignalBundle} from '../ranking-signal-resolution-v1.js';
+import {attachTrustedTrendFusion} from '../ranking-trend-fusion-v1.js';
 
 const FILE='market-intelligence-live.json';
 const RANKING_SIGNAL_BUNDLE='artifacts/ingestion-run-manifest.json';
+const RANKING_TREND_INDEX='artifacts/ranking-signal-trends.json';
 const clamp=(n,min=0,max=100)=>Math.max(min,Math.min(max,Number.isFinite(Number(n))?Number(n):0));
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
 const round=v=>Math.round(num(v)*10)/10;
@@ -48,13 +50,15 @@ function rankProduct(p){
   const pricingVerified=Boolean(p?.economics?.pricingVerified);
   const competitorEvidence=num(p?.competitors?.evidenceMarkets)>0;
   const rankingTrust=evaluateAggregateRankingTrust(p);
+  const trustedTrendFusion=p?.trustedTrendFusion||{supportEligible:false,confirmedAcceleration:false};
 
   if(gap>=70)reasons.push('gap România–extern puternic');
   if(demand>=60)reasons.push('cerere externă relativ puternică');
   if(competition<=35)reasons.push('presiune concurențială RO redusă');
   if(sourcing>=55)reasons.push('sourcing China promițător');
   if(num(p?.economics?.roi)>=45)reasons.push('ROI estimat atractiv');
-  if(['ACCELERATING','RISING'].includes(p?.trendIntelligence?.status))reasons.push('trend intern pozitiv');
+  if(trustedTrendFusion.supportEligible&&trustedTrendFusion.trendStatus==='IMPROVING')reasons.push('trend de rank confirmat din istoric trustat');
+  if(trustedTrendFusion.confirmedAcceleration)reasons.push('accelerație de rank confirmată pe observații comparabile');
   if(evidence>=70)reasons.push('acoperire bună a dovezilor');
 
   if(!evidenceReady){score=Math.min(score,64);blockers.push('dovezi comerciale insuficiente');}
@@ -62,6 +66,7 @@ function rankProduct(p){
   if(!pricingVerified){score=Math.min(score,72);blockers.push('preț/landed cost neverificat');}
   if(!competitorEvidence){score=Math.min(score,68);blockers.push('competiția RO nu este suficient observată');}
   if(trendSamples<2){score=Math.min(score,75);blockers.push('istoric insuficient pentru trend');}
+  if(['ACCELERATING','RISING'].includes(p?.trendIntelligence?.status)&&!trustedTrendFusion.supportEligible)blockers.push('trend pozitiv fără istoric trustat comparabil');
   if(num(p?.economics?.margin)<=0||num(p?.economics?.roi)<=0){score=Math.min(score,45);blockers.push('economie nevalidată');}
 
   score=applyRankingTrustCap(score,rankingTrust);
@@ -84,7 +89,8 @@ function rankProduct(p){
     components,
     evidenceReady,
     rankingTrust,
-    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. TOP/PRIORITAR necesită semnal de ranking acceptat de Policy Kernel, cu source rights, identitate exactă, proveniență, freshness valid și fără conflict la ultima observație. Datele de bootstrap/catalog pot ordona doar cercetarea și nu sunt semnal de ranking.'
+    trustedTrendFusion,
+    policy:'Opportunity Ranking prioritizează ce merită analizat mai întâi. TOP/PRIORITAR necesită semnal de ranking acceptat de Policy Kernel. Orice afirmație de trend/accelerație trustată necesită istoric explicit de rank, comparabil, recent și legat exact de aceeași identitate + evidence class + categorie. Rank trend nu este sales velocity.'
   };
 }
 
@@ -93,6 +99,8 @@ const products=Array.isArray(data.products)?data.products:[];
 const ingestionAudit=await read(RANKING_SIGNAL_BUNDLE,null);
 const resolvedRankingSignals=ingestionAudit?.rankingSignalResolution||resolveRankingSignalBundle(ingestionAudit?.rankingSignals||{}, {asOf:ingestionAudit?.generatedAt||new Date().toISOString()});
 const rankingSignalAttachment=attachTrustedRankingSignals(products,resolvedRankingSignals);
+const trendIndex=await read(RANKING_TREND_INDEX,{trends:[],manifest:null});
+const trustedTrendAttachment=attachTrustedTrendFusion(products,trendIndex,{asOf:ingestionAudit?.generatedAt||new Date().toISOString()});
 for(const p of products)p.opportunityRanking=rankProduct(p);
 products.sort((a,b)=>num(b?.opportunityRanking?.score)-num(a?.opportunityRanking?.score)||num(b?.launchScore?.score)-num(a?.launchScore?.score));
 products.forEach((p,i)=>{p.opportunityRanking.rank=i+1;});
@@ -106,9 +114,13 @@ data.stats.legacyResearchOrdering=products.filter(p=>p?.opportunityRanking?.rank
 data.stats.rankingSignalsAttached=rankingSignalAttachment.attachedSignalCount;
 data.stats.rankingSignalConflicts=resolvedRankingSignals?.manifest?.conflictGroupCount||0;
 data.stats.rankingSignalsSuperseded=resolvedRankingSignals?.manifest?.supersededCount||0;
+data.stats.trustedTrendSupport=trustedTrendAttachment.eligibleCount;
+data.stats.confirmedRankAcceleration=trustedTrendAttachment.confirmedAccelerationCount;
 data.rankingSignalAttachment=rankingSignalAttachment;
 data.rankingSignalResolutionManifest=resolvedRankingSignals?.manifest||null;
-data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. TOP/PRIORITAR necesită ranking evidence acceptat de Policy Kernel, freshness valid și conflict resolution fail-closed. Bootstrap/catalogue evidence nu poate deveni ranking signal; legacy aggregates rămân doar research ordering și sunt plafonate fail-closed. Trusted ranking signals sunt atașate numai prin identity key marketplace+externalId, fără cross-platform auto-merge.';
+data.trustedTrendAttachment=trustedTrendAttachment;
+data.trustedTrendIndexManifest=trendIndex?.manifest||null;
+data.opportunityRankingPolicy='Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Bootstrap/catalogue evidence nu poate deveni ranking signal. Trusted ranking signals cer Policy Kernel ACCEPT + freshness + conflict resolution. Trusted trend support cere în plus istoric explicit de rank comparabil și recent pentru aceeași identitate, evidence class și categorie. Rank trend/acceleration nu este tratat ca verified sales sau sales velocity.';
 
 await fs.writeFile(FILE,JSON.stringify(data,null,2)+'\n');
-console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat, ${data.stats.rankingSignalsAttached||0} semnale atașate, ${data.stats.rankingSignalConflicts||0} conflicte.`);
+console.log(`Opportunity Ranking V2: ${data.stats.topOpportunities||0} top, ${data.stats.priorityWatch||0} prioritar, ${data.stats.validationQueue||0} de validat, ${data.stats.trustedRankingSignals||0} cu semnal trustat, ${data.stats.trustedTrendSupport||0} cu trend trustat, ${data.stats.confirmedRankAcceleration||0} accelerații de rank confirmate.`);
