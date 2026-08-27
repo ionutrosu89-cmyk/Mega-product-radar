@@ -51,11 +51,41 @@ jobs:
         run: npm run capacity:progressive -- --stage=10K --out=artifacts/ci-progressive-capacity.json
       - name: Validate durable ranking history fail-closed
         run: |
-          npm run ingest:audit -- --output=artifacts/ci-ingestion-audit.json
+          mkdir -p artifacts
+          node <<'NODE'
+          const fs=require('fs');
+          const record={
+            identityKey:'AMAZON:B00CI00001',
+            evidenceClass:'EXPLICIT_PRODUCT_BEST_SELLERS_RANK',
+            observedAt:'2026-08-27T10:00:00Z',
+            fingerprint:'ci-ranking-signal-1',
+            trustedEligible:true,
+            resolution:{decision:'SELECTED'},
+            sourceName:'CI_FIXTURE',
+            provenance:{contentSha256:'a'.repeat(64)},
+            envelope:{
+              source:{observedAt:'2026-08-27T10:00:00Z'},
+              payload:{explicitRank:100,rankCategory:'CI_CATEGORY'}
+            }
+          };
+          const audit={
+            schema:'MPR_CI_RANKING_HISTORY_FIXTURE_V1',
+            rankingSignalResolution:{
+              manifest:{fingerprint:'ci-ranking-bundle-1'},
+              trustedRecords:[record],
+              heldRecords:[]
+            }
+          };
+          fs.writeFileSync('artifacts/ci-ingestion-audit.json',JSON.stringify(audit,null,2));
+          NODE
           npm run ranking:cycle -- --input=artifacts/ci-ingestion-audit.json --output=artifacts/ci-ranking-history-cycle.json --storeRoot=artifacts/ci-ranking-history-store --now=2026-08-27T12:00:00Z
           node <<'NODE'
           const d=require('./artifacts/ci-ranking-history-cycle.json');
           if(d.mode!=='file')throw new Error('CI ranking history store must remain file mode');
+          if(d.cycle?.decision!=='COMPLETED')throw new Error('CI durable history cycle did not complete');
+          if(d.cycle?.ledgerEntryCount!==1)throw new Error('CI durable history ledger did not persist fixture');
+          if(d.cycle?.restoreProofs?.ledger?.localVerified!==true)throw new Error('CI durable history ledger restore not verified');
+          if(d.cycle?.restoreProofs?.state?.localVerified!==true)throw new Error('CI durable history state restore not verified');
           if(d.cycle?.productionPersistenceVerified===true)throw new Error('local ranking history was promoted to production');
           if(d.policy?.providerDataSpendEur!==0||d.policy?.paidDataCallsTriggered!==0||d.policy?.purchaseAuthorized!==false)throw new Error('ranking history policy invariant violation');
           if(d.policy?.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.policy?.verifiedSalesRows!==0)throw new Error('ranking history truth class violation');
