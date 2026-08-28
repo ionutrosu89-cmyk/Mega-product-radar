@@ -1,0 +1,20 @@
+import fs from 'node:fs/promises';
+import {evaluateOffProductionLoadEvidence} from '../off-production-load-evidence-v1.js';
+
+const token=String(process.env.MPR_GITHUB_OIDC_TOKEN||'');
+const gatewayUrl=String(process.env.MPR_CATALOG_GATEWAY_URL||'');
+const expectedSha=String(process.env.GITHUB_SHA||'');
+const target=Math.max(1,Number(process.env.MPR_OFF_WRITE_TARGET||10000));
+const out=String(process.env.MPR_OFF_PRODUCTION_EVIDENCE_OUT||'artifacts/off-10k-production-load/production-evidence.json');
+if(!token||!gatewayUrl||!expectedSha)throw new Error('OIDC_GATEWAY_CONFIGURATION_REQUIRED');
+const response=await fetch(gatewayUrl,{method:'POST',headers:{'content-type':'application/json','authorization':`Bearer ${token}`},body:JSON.stringify({action:'counts',expectedSha})});
+const text=await response.text();
+if(!response.ok)throw new Error(`OIDC_COUNT_FAILED:${response.status}:${text.slice(0,1000)}`);
+const payload=JSON.parse(text);
+if(payload?.ok!==true)throw new Error('OIDC_COUNT_RECEIPT_INVALID');
+const evidence=evaluateOffProductionLoadEvidence({target,...payload.counts});
+const enriched={...evidence,canonicalTotal:Number(payload.counts?.canonicalTotal||0),evidenceTransport:'GITHUB_ACTIONS_OIDC_SUPABASE_EDGE'};
+await fs.mkdir(out.split('/').slice(0,-1).join('/')||'.',{recursive:true});
+await fs.writeFile(out,JSON.stringify(enriched,null,2));
+console.log(JSON.stringify(enriched,null,2));
+if(enriched.decision!=='TEN_K_PRODUCTION_LOAD_VERIFIED')process.exit(2);
