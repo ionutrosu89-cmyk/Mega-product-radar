@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-26T13:36:13.094Z",
+  "updatedAt": "2026-08-28T01:12:33.786Z",
   "policy": "Alertele prioritizează atenția; nu reprezintă recomandare de cumpărare.",
   "stats": {
     "products": 10,
-    "high": 4
+    "high": 3
   },
   "items": [
     {
@@ -12,7 +12,7 @@
       "cat": "Auto",
       "imageUrl": "",
       "rank": 1,
-      "opportunityScore": 38.5,
+      "opportunityScore": 38.8,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -21,9 +21,9 @@
           "message": "A intrat/este în Top 1"
         },
         {
-          "type": "LAUNCH_UP",
-          "severity": "HIGH",
-          "message": "Launch Score +6"
+          "type": "RISING",
+          "severity": "MEDIUM",
+          "message": "Trendul intern este în creștere"
         }
       ],
       "confidence": "MEDIE"
@@ -56,9 +56,14 @@
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 3"
+        },
+        {
+          "type": "RISING",
+          "severity": "MEDIUM",
+          "message": "Trendul intern este în creștere"
         }
       ],
-      "confidence": "MEDIE"
+      "confidence": "SCĂZUTĂ"
     },
     {
       "name": "Under desk headphone hanger clamp",
@@ -72,11 +77,6 @@
           "type": "TOP10",
           "severity": "MEDIUM",
           "message": "A intrat/este în Top 4"
-        },
-        {
-          "type": "LAUNCH_UP",
-          "severity": "HIGH",
-          "message": "Launch Score +6"
         }
       ],
       "confidence": "MEDIE"
@@ -98,11 +98,11 @@
       "confidence": "MEDIE"
     },
     {
-      "name": "Shoe washing laundry bag structured",
-      "cat": "Laundry",
+      "name": "Magnetic cable organizer clips set",
+      "cat": "Birou",
       "imageUrl": "",
       "rank": 6,
-      "opportunityScore": 29.7,
+      "opportunityScore": 29.9,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -114,8 +114,8 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Kids bed bedside organizer felt",
-      "cat": "Kids 3–6 • Cameră",
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
       "imageUrl": "",
       "rank": 7,
       "opportunityScore": 29.7,
@@ -130,8 +130,8 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Kids visual timer board non electronic",
-      "cat": "Kids 3–6 • Educațional",
+      "name": "Shoe washing laundry bag structured",
+      "cat": "Laundry",
       "imageUrl": "",
       "rank": 8,
       "opportunityScore": 29.7,
@@ -146,11 +146,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
+      "name": "Kids bed bedside organizer felt",
+      "cat": "Kids 3–6 • Cameră",
       "imageUrl": "",
       "rank": 9,
-      "opportunityScore": 29.6,
+      "opportunityScore": 29.7,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {
@@ -162,11 +162,11 @@
       "confidence": "SCĂZUTĂ"
     },
     {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
+      "name": "Kids visual timer board non electronic",
+      "cat": "Kids 3–6 • Educațional",
       "imageUrl": "",
       "rank": 10,
-      "opportunityScore": 29.4,
+      "opportunityScore": 29.7,
       "tier": "PRIORITATE MICĂ",
       "alerts": [
         {

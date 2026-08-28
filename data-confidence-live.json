@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-26T13:36:13.095Z",
+  "updatedAt": "2026-08-28T01:12:33.787Z",
   "policy": "Data Confidence măsoară completitudinea dovezilor, nu probabilitatea de succes.",
   "stats": {
     "total": 65,
     "levels": {
       "RIDICATĂ": 0,
-      "MEDIE": 5,
-      "SCĂZUTĂ": 60
+      "MEDIE": 4,
+      "SCĂZUTĂ": 61
     }
   },
   "dimensionAverages": {
     "market": 4.6,
-    "demand": 44.8,
+    "demand": 38.3,
     "competition": 28.5,
     "reviews": 1.2,
     "sourcing": 0,
@@ -21,7 +21,7 @@
   },
   "missingCounts": {
     "market": 60,
-    "demand": 49,
+    "demand": 56,
     "competition": 60,
     "reviews": 65,
     "sourcing": 65,
@@ -33,20 +33,10 @@
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
       "rank": 1,
-      "score": 64.4,
+      "score": 55.9,
       "level": "MEDIE",
       "missing": [
-        "reviews",
-        "sourcing"
-      ]
-    },
-    {
-      "name": "Under desk headphone hanger clamp",
-      "cat": "Birou",
-      "rank": 4,
-      "score": 59.9,
-      "level": "MEDIE",
-      "missing": [
+        "demand",
         "reviews",
         "sourcing"
       ]
@@ -55,17 +45,6 @@
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
       "rank": 2,
-      "score": 54.9,
-      "level": "MEDIE",
-      "missing": [
-        "reviews",
-        "sourcing"
-      ]
-    },
-    {
-      "name": "Car headrest hidden hook premium",
-      "cat": "Auto",
-      "rank": 3,
       "score": 54.9,
       "level": "MEDIE",
       "missing": [
@@ -85,9 +64,33 @@
       ]
     },
     {
+      "name": "Under desk headphone hanger clamp",
+      "cat": "Birou",
+      "rank": 4,
+      "score": 51.3,
+      "level": "MEDIE",
+      "missing": [
+        "demand",
+        "reviews",
+        "sourcing"
+      ]
+    },
+    {
+      "name": "Car headrest hidden hook premium",
+      "cat": "Auto",
+      "rank": 3,
+      "score": 46.3,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "demand",
+        "reviews",
+        "sourcing"
+      ]
+    },
+    {
       "name": "Shoe washing laundry bag structured",
       "cat": "Laundry",
-      "rank": 6,
+      "rank": 8,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -101,7 +104,7 @@
     {
       "name": "Kids bed bedside organizer felt",
       "cat": "Kids 3–6 • Cameră",
-      "rank": 7,
+      "rank": 9,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -115,34 +118,6 @@
     {
       "name": "Kids visual timer board non electronic",
       "cat": "Kids 3–6 • Educațional",
-      "rank": 8,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Car trunk side storage net",
-      "cat": "Auto",
-      "rank": 9,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Desk drawer organizer modular trays",
-      "cat": "Birou",
       "rank": 10,
       "score": 34.3,
       "level": "SCĂZUTĂ",
@@ -157,7 +132,7 @@
     {
       "name": "Shower corner shelf adhesive no drill",
       "cat": "Baie",
-      "rank": 11,
+      "rank": 12,
       "score": 34.3,
       "level": "SCĂZUTĂ",
       "missing": [
@@ -171,20 +146,6 @@
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
-      "rank": 12,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Magnetic cable organizer clips set",
-      "cat": "Birou",
       "rank": 13,
       "score": 34.3,
       "level": "SCĂZUTĂ",
@@ -225,13 +186,59 @@
       ]
     },
     {
-      "name": "Kids reusable sticker activity book",
-      "cat": "Kids 3–6 • Educațional",
-      "rank": 16,
-      "score": 34.3,
+      "name": "Magnetic cable organizer clips set",
+      "cat": "Birou",
+      "rank": 6,
+      "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [
         "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Car trunk side storage net",
+      "cat": "Auto",
+      "rank": 7,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Desk drawer organizer modular trays",
+      "cat": "Birou",
+      "rank": 11,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Kids reusable sticker activity book",
+      "cat": "Kids 3–6 • Educațional",
+      "rank": 16,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
         "competition",
         "reviews",
         "sourcing",
