@@ -12,7 +12,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,16 +31,18 @@ jobs:
         run: |
           rm -rf artifacts/off-official-stream-pilot-v1
           npm run ingest:off-pilot
-          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.tenKCandidateSet||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0) process.exit(1)"
-      - name: Stream official Open Food Facts export
+          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.productionScaleAuthorized||x.tenKCandidateSet||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0) process.exit(1)"
+      - name: Stream official Open Food Facts export and prove 10K dry-run candidate set
         env:
           MPR_OFF_STREAM_FETCH_ENABLED: 'true'
-          MPR_OFF_STREAM_MAX_ROWS: '12000'
-          MPR_OFF_STREAM_MIN_ROWS: '10000'
+          MPR_OFF_STREAM_MAX_ROWS: '24000'
+          MPR_OFF_STREAM_MIN_ROWS: '20000'
+          MPR_OFF_STREAM_MIN_ACCEPTED: '10000'
+          MPR_OFF_STREAM_REVIEW_SAMPLE: '200'
         run: |
           rm -rf artifacts/off-official-stream-pilot-v1
           npm run ingest:off-pilot
-          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(!x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0||x.pilot.metrics.projectedRows<10000) process.exit(1)"
+          node -e "const x=require('./artifacts/off-official-stream-pilot-v1/summary.json'); if(!x.remoteFetchEnabled||x.productionCatalogWritePerformed||x.productionScaleAuthorized||x.policy.purchaseAuthorized||x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0||x.pilot.metrics.projectedRows<20000||x.ingestionStats.accepted<10000||x.reviewSampleCount<200||x.dryRun.decision!=='TEN_K_DRY_RUN_EVIDENCE_READY'||!x.tenKCandidateSet) process.exit(1)"
       - name: Production safety gate
         run: npm run verify:production-safety
       - name: Full test suite
