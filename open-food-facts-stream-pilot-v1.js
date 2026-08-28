@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {isValidGtin} from './canonical-identity-v2.js';
 
 export const OFFICIAL_OFF_CSV_URL='https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz';
 export const OFFICIAL_OFF_DATA_LICENSE='ODbL';
@@ -45,13 +46,16 @@ export function projectOffTsvLine(line='',headerIndex={}){
 export function summarizeOfficialOffPilot(input={}){
   const rows=Array.isArray(input.rows)?input.rows:[];
   const minRows=Number.isFinite(Number(input.minRows))?Math.max(1,Number(input.minRows)):10000;
-  const validIdentityRows=rows.filter(row=>/^\d{8,14}$/.test(clean(row.code))&&clean(row.product_name)).length;
+  const identityRows=rows.filter(row=>/^\d{8,14}$/.test(clean(row.code))&&clean(row.product_name));
+  const validChecksumIdentityRows=identityRows.filter(row=>isValidGtin(row.code));
+  const invalidChecksumIdentityRows=identityRows.length-validChecksumIdentityRows.length;
   const uniqueCodes=new Set(rows.map(row=>clean(row.code)).filter(Boolean));
+  const uniqueValidGtins=new Set(validChecksumIdentityRows.map(row=>clean(row.code)));
   const duplicateCodeCount=Math.max(0,rows.filter(row=>clean(row.code)).length-uniqueCodes.size);
   const projectedJson=JSON.stringify(rows);
   const enoughRows=rows.length>=minRows;
   return{
-    schema:'MPR_OFFICIAL_OFF_STREAM_PILOT_V1',
+    schema:'MPR_OFFICIAL_OFF_STREAM_PILOT_V2',
     source:{
       sourceKey:'OPEN_FOOD_FACTS',
       url:OFFICIAL_OFF_CSV_URL,
@@ -62,10 +66,14 @@ export function summarizeOfficialOffPilot(input={}){
     },
     metrics:{
       projectedRows:rows.length,
-      validIdentityRows,
+      syntacticIdentityRows:identityRows.length,
+      validChecksumIdentityRows:validChecksumIdentityRows.length,
+      invalidChecksumIdentityRows,
       uniqueCodeCount:uniqueCodes.size,
+      uniqueValidGtinCount:uniqueValidGtins.size,
       duplicateCodeCount,
-      validIdentityRate:rows.length?validIdentityRows/rows.length:0
+      syntacticIdentityRate:rows.length?identityRows.length/rows.length:0,
+      validChecksumIdentityRate:rows.length?validChecksumIdentityRows.length/rows.length:0
     },
     projectedRowsSha256:sha(projectedJson),
     decision:enoughRows?'PILOT_SAMPLE_ACQUIRED':'HOLD_PILOT_SAMPLE',
@@ -78,8 +86,77 @@ export function summarizeOfficialOffPilot(input={}){
       salesEvidenceClass:'NOT_VERIFIED_SALES',
       commercialUseAuthorized:false
     },
-    note:'Open Food Facts bulk data is treated as catalogue bootstrap evidence only. This evidence does not establish verified sales, commercial rights, or scale readiness.'
+    note:'Open Food Facts bulk data is treated as catalogue bootstrap evidence only. This evidence does not establish verified sales, commercial rights, or production scale readiness.'
   };
+}
+
+export function buildDeterministicReviewSample(candidates=[],limit=200){
+  const safeLimit=Math.max(0,Math.floor(Number(limit)||0));
+  return [...candidates]
+    .filter(Boolean)
+    .sort((a,b)=>String(a.fingerprint||a.gtin||a.sourceRecordId||'').localeCompare(String(b.fingerprint||b.gtin||b.sourceRecordId||'')))
+    .slice(0,safeLimit)
+    .map(candidate=>({
+      sourceKey:candidate.sourceKey,
+      sourceRecordId:candidate.sourceRecordId,
+      title:candidate.title,
+      brand:candidate.brand,
+      category:candidate.category,
+      gtin:candidate.gtin,
+      gtinValid:candidate.gtin?isValidGtin(candidate.gtin):false,
+      identityStrength:candidate.identityStrength,
+      evidenceClass:candidate.evidenceClass,
+      rankingEligible:candidate.rankingEligible,
+      commercialEligible:candidate.commercialEligible,
+      salesEvidenceClass:candidate.salesEvidenceClass,
+      fingerprint:candidate.fingerprint
+    }));
+}
+
+export function evaluateOffTenKDryRun({pilot={},ingestion={},reviewSample=[]}={},options={}){
+  const minAccepted=Math.max(1,Number(options.minAccepted||10000));
+  const minReviewSample=Math.max(1,Number(options.minReviewSample||200));
+  const stats=ingestion.stats||{};
+  const policy=ingestion.policy||{};
+  const reasons=[];
+  if(pilot.decision!=='PILOT_SAMPLE_ACQUIRED')reasons.push('OFFICIAL_SAMPLE_NOT_ACQUIRED');
+  if(ingestion.decision!=='INGESTION_ACCOUNTED')reasons.push('INGESTION_NOT_ACCOUNTED');
+  if(Number(stats.accepted||0)<minAccepted)reasons.push('ACCEPTED_CANDIDATES_BELOW_10K');
+  if(Number(stats.silentDrops||0)!==0)reasons.push('SILENT_DROPS_PRESENT');
+  if(reviewSample.length<minReviewSample)reasons.push('REVIEW_SAMPLE_TOO_SMALL');
+  if(Number(policy.providerDataSpendEur||0)!==0)reasons.push('PROVIDER_SPEND_NONZERO');
+  if(Number(policy.paidDataCallsTriggered||0)!==0)reasons.push('PAID_DATA_CALLS_NONZERO');
+  if(policy.purchaseAuthorized!==false)reasons.push('PURCHASE_AUTHORIZATION_NOT_FALSE');
+  if(policy.salesEvidenceClass!=='NOT_VERIFIED_SALES')reasons.push('SALES_EVIDENCE_CLASS_INVALID');
+  const input=Math.max(0,Number(stats.input||0));
+  const accepted=Math.max(0,Number(stats.accepted||0));
+  const logicalDuplicates=Math.max(0,Number(stats.logicalDuplicates||0));
+  const held=Math.max(0,Number(stats.held||0));
+  const payload={
+    schema:'MPR_OFF_TEN_K_DRY_RUN_GATE_V1',
+    decision:reasons.length?'HOLD_10K_DRY_RUN':'TEN_K_DRY_RUN_EVIDENCE_READY',
+    reasons,
+    metrics:{
+      input,
+      accepted,
+      held,
+      logicalDuplicates,
+      duplicateRate:input?logicalDuplicates/input:0,
+      heldRate:input?held/input:0,
+      strongIdentityProducts:Math.max(0,Number(stats.strongIdentityProducts||0)),
+      claimCount:Math.max(0,Number(stats.claimCount||0)),
+      reviewSampleCount:reviewSample.length
+    },
+    productionScaleAuthorized:false,
+    productionCatalogWriteAuthorized:false,
+    commercialUseAuthorized:false,
+    providerDataSpendEur:0,
+    paidDataCallsTriggered:0,
+    purchaseAuthorized:false,
+    verifiedSalesRows:0,
+    salesEvidenceClass:'NOT_VERIFIED_SALES'
+  };
+  return{...payload,fingerprint:sha(JSON.stringify(payload))};
 }
 
 export function assertOfficialOffSource(url=''){
