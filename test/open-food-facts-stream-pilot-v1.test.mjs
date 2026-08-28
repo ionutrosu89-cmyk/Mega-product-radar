@@ -5,7 +5,9 @@ import {
   assertOfficialOffSource,
   buildHeaderIndex,
   projectOffTsvLine,
-  summarizeOfficialOffPilot
+  summarizeOfficialOffPilot,
+  buildDeterministicReviewSample,
+  evaluateOffTenKDryRun
 } from '../open-food-facts-stream-pilot-v1.js';
 
 test('official source is pinned to Open Food Facts bulk export',()=>{
@@ -41,8 +43,22 @@ test('missing required identity columns fail closed',()=>{
   assert.equal(projectOffTsvLine('4006381333931\tAcme\tFood',index),null);
 });
 
+test('pilot summary distinguishes syntactic GTIN from checksum-valid GTIN',()=>{
+  const rows=[
+    {code:'4006381333931',product_name:'Valid'},
+    {code:'4006381333932',product_name:'Invalid checksum'},
+    {code:'ABC',product_name:'Non GTIN'}
+  ];
+  const out=summarizeOfficialOffPilot({rows,minRows:3});
+  assert.equal(out.decision,'PILOT_SAMPLE_ACQUIRED');
+  assert.equal(out.metrics.syntacticIdentityRows,2);
+  assert.equal(out.metrics.validChecksumIdentityRows,1);
+  assert.equal(out.metrics.invalidChecksumIdentityRows,1);
+  assert.equal(out.metrics.uniqueValidGtinCount,1);
+});
+
 test('pilot summary remains zero-cost and does not authorize commercial use',()=>{
-  const rows=Array.from({length:3},(_,i)=>({code:String(4006381333931+i),product_name:`P${i}`}));
+  const rows=[{code:'4006381333931',product_name:'P1'}];
   const out=summarizeOfficialOffPilot({rows,minRows:10});
   assert.equal(out.decision,'HOLD_PILOT_SAMPLE');
   assert.equal(out.policy.providerDataSpendEur,0);
@@ -53,10 +69,38 @@ test('pilot summary remains zero-cost and does not authorize commercial use',()=
   assert.equal(out.policy.commercialUseAuthorized,false);
 });
 
-test('pilot sample decision only reflects projected row threshold',()=>{
-  const rows=Array.from({length:10},(_,i)=>({code:String(4006381333931+i),product_name:`P${i}`}));
-  const out=summarizeOfficialOffPilot({rows,minRows:10});
-  assert.equal(out.decision,'PILOT_SAMPLE_ACQUIRED');
-  assert.equal(out.metrics.projectedRows,10);
-  assert.match(out.projectedRowsSha256,/^[a-f0-9]{64}$/);
+test('review sample is deterministic and preserves truth boundaries',()=>{
+  const candidates=[
+    {fingerprint:'b',sourceKey:'OPEN_FOOD_FACTS',sourceRecordId:'2',title:'B',gtin:'4006381333931',identityStrength:'STRONG_GTIN',evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',rankingEligible:false,commercialEligible:false,salesEvidenceClass:'NOT_VERIFIED_SALES'},
+    {fingerprint:'a',sourceKey:'OPEN_FOOD_FACTS',sourceRecordId:'1',title:'A',gtin:'5901234123457',identityStrength:'STRONG_GTIN',evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',rankingEligible:false,commercialEligible:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}
+  ];
+  const sample=buildDeterministicReviewSample(candidates,2);
+  assert.deepEqual(sample.map(x=>x.fingerprint),['a','b']);
+  assert.ok(sample.every(x=>x.rankingEligible===false));
+  assert.ok(sample.every(x=>x.salesEvidenceClass==='NOT_VERIFIED_SALES'));
+});
+
+test('10K dry-run gate fails closed below accepted threshold',()=>{
+  const pilot={decision:'PILOT_SAMPLE_ACQUIRED'};
+  const ingestion={decision:'INGESTION_ACCOUNTED',stats:{input:12000,accepted:6498,held:5502,logicalDuplicates:123,strongIdentityProducts:2887,claimCount:16744,silentDrops:0},policy:{providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}};
+  const reviewSample=Array.from({length:200},(_,i)=>({fingerprint:String(i)}));
+  const out=evaluateOffTenKDryRun({pilot,ingestion,reviewSample});
+  assert.equal(out.decision,'HOLD_10K_DRY_RUN');
+  assert.ok(out.reasons.includes('ACCEPTED_CANDIDATES_BELOW_10K'));
+  assert.equal(out.productionScaleAuthorized,false);
+  assert.equal(out.productionCatalogWriteAuthorized,false);
+});
+
+test('10K dry-run evidence can become ready without authorizing production scale',()=>{
+  const pilot={decision:'PILOT_SAMPLE_ACQUIRED'};
+  const ingestion={decision:'INGESTION_ACCOUNTED',stats:{input:22000,accepted:12000,held:10000,logicalDuplicates:200,strongIdentityProducts:5500,claimCount:30000,silentDrops:0},policy:{providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}};
+  const reviewSample=Array.from({length:200},(_,i)=>({fingerprint:String(i)}));
+  const out=evaluateOffTenKDryRun({pilot,ingestion,reviewSample});
+  assert.equal(out.decision,'TEN_K_DRY_RUN_EVIDENCE_READY');
+  assert.equal(out.metrics.accepted,12000);
+  assert.equal(out.productionScaleAuthorized,false);
+  assert.equal(out.productionCatalogWriteAuthorized,false);
+  assert.equal(out.commercialUseAuthorized,false);
+  assert.equal(out.verifiedSalesRows,0);
+  assert.match(out.fingerprint,/^[a-f0-9]{64}$/);
 });
