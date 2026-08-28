@@ -1,30 +1,12 @@
 {
   "version": "1.2",
-  "updatedAt": "2026-08-26T13:37:47.057Z",
-  "status": "SUCCESS",
+  "updatedAt": "2026-08-28T01:13:22.792Z",
+  "status": "FAILED",
   "runAt": "2026-08-25T17:21:36.878Z",
   "providerCostEur": 0.0099,
   "targetProducts": 6,
   "pipelineProducts": 15,
   "catalogueProducts": 65,
   "rawCandidates": 65,
-  "response": {
-    "ok": true,
-    "stage0Cap": 100,
-    "rawBatchCap": 500,
-    "rawProcessed": 65,
-    "rawInserted": 0,
-    "rawUpdated": 65,
-    "canonicalCount": 100,
-    "catalogueUpdated": 62,
-    "catalogueInserted": 0,
-    "aliasesUpserted": 62,
-    "insertedObservations": 62,
-    "refreshScheduled": 62,
-    "pipelineUpdated": 15,
-    "authorizedProducts": 6,
-    "verifiedRows": 0,
-    "insertedSnapshots": 0,
-    "costLogged": true
-  }
+  "error": "Supabase sync HTTP 500: SYNC_FAILED"
 }
