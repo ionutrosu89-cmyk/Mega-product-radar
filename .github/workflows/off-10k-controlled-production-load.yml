@@ -1,0 +1,58 @@
+name: OFF 10K Controlled Production Load
+
+on:
+  push:
+    branches: ['ops/off-10k-production-load-20260828']
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: off-10k-controlled-production-load
+  cancel-in-progress: false
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SUPABASE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      MPR_CATALOG_WORKSPACE_ID: f617d7f7-f1af-4421-827d-6526e0d4847e
+      MPR_SUPABASE_CATALOG_WRITE_ENABLED: 'true'
+      MPR_OFF_EXPECTED_BUNDLE_SHA256: 75ac97f4f5aaa03368e7bab8015b2fab1d1110524d97cad616929e434df3a72f
+      MPR_OFF_WRITE_TARGET: '10000'
+      MPR_OFF_WRITE_BATCH_SIZE: '500'
+      MPR_OFF_WRITE_CONFIRMATION: WRITE_OFF_STRONG_GTIN:75ac97f4f5aaa03368e7bab8015b2fab1d1110524d97cad616929e434df3a72f:10000
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-fund
+      - name: Require configured production credential
+        run: test -n "$SUPABASE_SERVICE_ROLE_KEY"
+      - name: Download immutable PR 331 OFF evidence artifact
+        run: |
+          gh api repos/${{ github.repository }}/actions/artifacts/9677332639/zip > /tmp/off-evidence.zip
+          mkdir -p /tmp/off-evidence
+          unzip -q /tmp/off-evidence.zip -d /tmp/off-evidence
+          BUNDLE="$(find /tmp/off-evidence -name persistence-bundle.json -print -quit)"
+          test -n "$BUNDLE"
+          echo "MPR_OFF_PERSISTENCE_BUNDLE_PATH=$BUNDLE" >> "$GITHUB_ENV"
+      - name: Verify source bundle before write
+        run: |
+          node -e "const fs=require('fs');const b=JSON.parse(fs.readFileSync(process.env.MPR_OFF_PERSISTENCE_BUNDLE_PATH));if(b.bundleSha256!==process.env.MPR_OFF_EXPECTED_BUNDLE_SHA256)process.exit(1);if(b.policy.providerDataSpendEur!==0||b.policy.paidDataCallsTriggered!==0||b.policy.purchaseAuthorized!==false)process.exit(1)"
+      - name: Execute controlled strong-GTIN 10K load
+        run: npm run ingest:off-controlled-write | tee /tmp/off-10k-write-receipt.json
+      - name: Upload operator receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: off-10k-controlled-production-load-receipt
+          path: /tmp/off-10k-write-receipt.json
+          if-no-files-found: warn
+          retention-days: 30
