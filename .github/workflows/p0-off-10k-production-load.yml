@@ -6,16 +6,21 @@ on:
     paths:
       - 'off-production-load-evidence-v1.js'
       - 'scripts/run-off-production-load-evidence.mjs'
+      - 'scripts/run-off-oidc-production-write.mjs'
+      - 'scripts/run-off-oidc-production-evidence.mjs'
       - 'test/off-production-load-evidence-v1.test.mjs'
       - '.github/workflows/p0-off-10k-production-load.yml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/p0-off-10k-production-load.yml'
+      - 'scripts/run-off-oidc-production-write.mjs'
+      - 'scripts/run-off-oidc-production-evidence.mjs'
 
 permissions:
   contents: read
   actions: read
+  id-token: write
 
 jobs:
   validate:
@@ -33,6 +38,8 @@ jobs:
         run: |
           node --check off-production-load-evidence-v1.js
           node --check scripts/run-off-production-load-evidence.mjs
+          node --check scripts/run-off-oidc-production-write.mjs
+          node --check scripts/run-off-oidc-production-evidence.mjs
       - name: Targeted tests
         run: node --test test/off-production-load-evidence-v1.test.mjs
       - name: Production safety gate
@@ -50,10 +57,8 @@ jobs:
       MPR_OFF_WRITE_CONFIRMATION: 'WRITE_OFF_STRONG_GTIN:75ac97f4f5aaa03368e7bab8015b2fab1d1110524d97cad616929e434df3a72f:10000'
       MPR_OFF_WRITE_TARGET: '10000'
       MPR_OFF_WRITE_BATCH_SIZE: '500'
-      MPR_SUPABASE_CATALOG_WRITE_ENABLED: 'true'
       MPR_CATALOG_WORKSPACE_ID: 'f617d7f7-f1af-4421-827d-6526e0d4847e'
-      SUPABASE_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co'
-      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      MPR_CATALOG_GATEWAY_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-catalog-write-v1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -61,10 +66,18 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts --no-fund
-      - name: Verify production secret is configured
-        run: test -n "$SUPABASE_SERVICE_ROLE_KEY"
       - name: Production safety gate before write
         run: npm run verify:production-safety
+      - name: Acquire short-lived GitHub OIDC token
+        shell: bash
+        run: |
+          TOKEN_JSON=$(curl --fail-with-body --silent --show-error \
+            -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-catalog-writer")
+          TOKEN=$(printf '%s' "$TOKEN_JSON" | jq -r '.value')
+          test -n "$TOKEN" && test "$TOKEN" != "null"
+          echo "::add-mask::$TOKEN"
+          echo "MPR_GITHUB_OIDC_TOKEN=$TOKEN" >> "$GITHUB_ENV"
       - name: Download pinned OFF 10K evidence artifact
         env:
           GH_TOKEN: ${{ github.token }}
@@ -78,12 +91,12 @@ jobs:
           test "$(jq -r .bundleSha256 artifacts/off-official-stream-pilot-v1/persistence-bundle.json)" = "$MPR_OFF_EXPECTED_BUNDLE_SHA256"
           test "$(jq -r .dryRun.decision artifacts/off-official-stream-pilot-v1/summary.json)" = "TEN_K_DRY_RUN_EVIDENCE_READY"
           test "$(jq -r .strongCandidateCount artifacts/off-official-stream-pilot-v1/summary.json)" -ge 10000
-      - name: Execute controlled 10K strong-GTIN production write
+      - name: Execute controlled 10K strong-GTIN production write through OIDC gateway
         run: |
-          npm run ingest:off-controlled-write -- --bundle=artifacts/off-official-stream-pilot-v1/persistence-bundle.json --target=10000 --batchSize=500 | tee artifacts/off-10k-production-load/write-receipt.json
+          node scripts/run-off-oidc-production-write.mjs --bundle=artifacts/off-official-stream-pilot-v1/persistence-bundle.json --target=10000 --batchSize=500 | tee artifacts/off-10k-production-load/write-receipt.json
           node -e "const x=require('./artifacts/off-10k-production-load/write-receipt.json'); if(!x.productionWritePerformed||x.targetProducts!==10000||x.completedBatchCount!==20||x.productionScaleAuthorized||x.commercialUseAuthorized||x.providerDataSpendEur!==0||x.paidDataCallsTriggered!==0||x.purchaseAuthorized||x.verifiedSalesRows!==0||x.salesEvidenceClass!=='NOT_VERIFIED_SALES') process.exit(1)"
-      - name: Verify persisted 10K inventory and provenance
-        run: node scripts/run-off-production-load-evidence.mjs
+      - name: Verify persisted 10K inventory and provenance through OIDC gateway
+        run: node scripts/run-off-oidc-production-evidence.mjs
       - name: Upload production load evidence
         uses: actions/upload-artifact@v4
         with:
