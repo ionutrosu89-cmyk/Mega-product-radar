@@ -13,6 +13,7 @@
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
     "ingest:bulk-catalog": "node scripts/run-bulk-catalog-ingestion.mjs",
     "ingest:off-pilot": "node scripts/run-open-food-facts-stream-pilot.mjs",
+    "ingest:off-controlled-write": "node scripts/run-off-controlled-production-write.mjs",
     "scale:ingest-window": "node scripts/run-scale-ingestion-window.mjs",
     "evidence:collect": "node scripts/run-production-evidence-collector.mjs",
     "ranking:history": "node scripts/run-ranking-signal-history.mjs",
