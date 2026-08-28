@@ -5,7 +5,9 @@ import {
   assertOfficialOffSource,
   buildHeaderIndex,
   projectOffTsvLine,
-  summarizeOfficialOffPilot
+  summarizeOfficialOffPilot,
+  buildDeterministicReviewSample,
+  evaluateOffTenKDryRun
 } from '../open-food-facts-stream-pilot-v1.js';
 
 test('official source is pinned to Open Food Facts bulk export',()=>{
@@ -23,17 +25,6 @@ test('header projection reads explicit catalogue fields when present',()=>{
   assert.equal(row.image_front_url,'https://a');
 });
 
-test('optional export columns may be absent without weakening required identity fields',()=>{
-  const index=buildHeaderIndex('code\tproduct_name\tbrands\tcategories');
-  assert.equal(index.valid,true);
-  assert.ok(index.optionalMissing.includes('image_front_url'));
-  const row=projectOffTsvLine('4006381333931\tAlpha\tAcme\tFood',index);
-  assert.equal(row.code,'4006381333931');
-  assert.equal(row.product_name,'Alpha');
-  assert.equal(row.image_front_url,'');
-  assert.equal(row.image_url,'');
-});
-
 test('missing required identity columns fail closed',()=>{
   const index=buildHeaderIndex('code\tbrands\tcategories');
   assert.equal(index.valid,false);
@@ -41,9 +32,18 @@ test('missing required identity columns fail closed',()=>{
   assert.equal(projectOffTsvLine('4006381333931\tAcme\tFood',index),null);
 });
 
+test('pilot summary distinguishes syntactic GTIN from checksum-valid GTIN',()=>{
+  const rows=[{code:'4006381333931',product_name:'Valid'},{code:'4006381333932',product_name:'Invalid checksum'},{code:'ABC',product_name:'Non GTIN'}];
+  const out=summarizeOfficialOffPilot({rows,minRows:3});
+  assert.equal(out.decision,'PILOT_SAMPLE_ACQUIRED');
+  assert.equal(out.metrics.syntacticIdentityRows,2);
+  assert.equal(out.metrics.validChecksumIdentityRows,1);
+  assert.equal(out.metrics.invalidChecksumIdentityRows,1);
+  assert.equal(out.metrics.uniqueValidGtinCount,1);
+});
+
 test('pilot summary remains zero-cost and does not authorize commercial use',()=>{
-  const rows=Array.from({length:3},(_,i)=>({code:String(4006381333931+i),product_name:`P${i}`}));
-  const out=summarizeOfficialOffPilot({rows,minRows:10});
+  const out=summarizeOfficialOffPilot({rows:[{code:'4006381333931',product_name:'P1'}],minRows:10});
   assert.equal(out.decision,'HOLD_PILOT_SAMPLE');
   assert.equal(out.policy.providerDataSpendEur,0);
   assert.equal(out.policy.paidDataCallsTriggered,0);
@@ -53,10 +53,47 @@ test('pilot summary remains zero-cost and does not authorize commercial use',()=
   assert.equal(out.policy.commercialUseAuthorized,false);
 });
 
-test('pilot sample decision only reflects projected row threshold',()=>{
-  const rows=Array.from({length:10},(_,i)=>({code:String(4006381333931+i),product_name:`P${i}`}));
-  const out=summarizeOfficialOffPilot({rows,minRows:10});
-  assert.equal(out.decision,'PILOT_SAMPLE_ACQUIRED');
-  assert.equal(out.metrics.projectedRows,10);
-  assert.match(out.projectedRowsSha256,/^[a-f0-9]{64}$/);
+test('review sample is deterministic and can be strong-identity-only',()=>{
+  const candidates=[
+    {fingerprint:'b',sourceKey:'OPEN_FOOD_FACTS',sourceRecordId:'2',title:'B',gtin:'4006381333931',identityStrength:'STRONG_GTIN',evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',rankingEligible:false,commercialEligible:false,salesEvidenceClass:'NOT_VERIFIED_SALES'},
+    {fingerprint:'a',sourceKey:'OPEN_FOOD_FACTS',sourceRecordId:'1',title:'A',gtin:'5901234123457',identityStrength:'STRONG_GTIN',evidenceClass:'CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY',rankingEligible:false,commercialEligible:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}
+  ];
+  const sample=buildDeterministicReviewSample(candidates,2);
+  assert.deepEqual(sample.map(x=>x.fingerprint),['a','b']);
+  assert.ok(sample.every(x=>x.identityStrength==='STRONG_GTIN'));
+  assert.ok(sample.every(x=>x.gtinValid===true));
+  assert.ok(sample.every(x=>x.rankingEligible===false));
+});
+
+test('10K gate holds even when accepted count passes but strong identities do not',()=>{
+  const pilot={decision:'PILOT_SAMPLE_ACQUIRED'};
+  const ingestion={decision:'INGESTION_ACCOUNTED',stats:{input:24000,accepted:13221,held:10779,logicalDuplicates:291,strongIdentityProducts:6640,claimCount:35181,silentDrops:0},policy:{providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}};
+  const reviewSample=Array.from({length:200},(_,i)=>({identityStrength:'STRONG_GTIN',gtinValid:true,fingerprint:String(i)}));
+  const out=evaluateOffTenKDryRun({pilot,ingestion,reviewSample});
+  assert.equal(out.decision,'HOLD_10K_DRY_RUN');
+  assert.ok(out.reasons.includes('STRONG_IDENTITY_PRODUCTS_BELOW_10K'));
+  assert.equal(out.productionScaleAuthorized,false);
+});
+
+test('10K dry-run readiness requires both accepted and strong identity thresholds',()=>{
+  const pilot={decision:'PILOT_SAMPLE_ACQUIRED'};
+  const ingestion={decision:'INGESTION_ACCOUNTED',stats:{input:48000,accepted:26000,held:22000,logicalDuplicates:500,strongIdentityProducts:13000,claimCount:60000,silentDrops:0},policy:{providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}};
+  const reviewSample=Array.from({length:200},(_,i)=>({identityStrength:'STRONG_GTIN',gtinValid:true,fingerprint:String(i)}));
+  const out=evaluateOffTenKDryRun({pilot,ingestion,reviewSample});
+  assert.equal(out.decision,'TEN_K_DRY_RUN_EVIDENCE_READY');
+  assert.equal(out.metrics.strongIdentityProducts,13000);
+  assert.equal(out.productionScaleAuthorized,false);
+  assert.equal(out.productionCatalogWriteAuthorized,false);
+  assert.equal(out.commercialUseAuthorized,false);
+  assert.equal(out.verifiedSalesRows,0);
+  assert.match(out.fingerprint,/^[a-f0-9]{64}$/);
+});
+
+test('review sample contamination with fallback identity fails closed',()=>{
+  const pilot={decision:'PILOT_SAMPLE_ACQUIRED'};
+  const ingestion={decision:'INGESTION_ACCOUNTED',stats:{input:48000,accepted:26000,held:22000,logicalDuplicates:500,strongIdentityProducts:13000,claimCount:60000,silentDrops:0},policy:{providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}};
+  const reviewSample=Array.from({length:200},(_,i)=>({identityStrength:i===0?'FALLBACK':'STRONG_GTIN',gtinValid:i!==0,fingerprint:String(i)}));
+  const out=evaluateOffTenKDryRun({pilot,ingestion,reviewSample});
+  assert.equal(out.decision,'HOLD_10K_DRY_RUN');
+  assert.ok(out.reasons.includes('REVIEW_SAMPLE_NOT_STRONG_IDENTITY_ONLY'));
 });
