@@ -115,6 +115,7 @@ export function buildDeterministicReviewSample(candidates=[],limit=200){
 
 export function evaluateOffTenKDryRun({pilot={},ingestion={},reviewSample=[]}={},options={}){
   const minAccepted=Math.max(1,Number(options.minAccepted||10000));
+  const minStrongIdentityProducts=Math.max(1,Number(options.minStrongIdentityProducts||10000));
   const minReviewSample=Math.max(1,Number(options.minReviewSample||200));
   const stats=ingestion.stats||{};
   const policy=ingestion.policy||{};
@@ -122,8 +123,10 @@ export function evaluateOffTenKDryRun({pilot={},ingestion={},reviewSample=[]}={}
   if(pilot.decision!=='PILOT_SAMPLE_ACQUIRED')reasons.push('OFFICIAL_SAMPLE_NOT_ACQUIRED');
   if(ingestion.decision!=='INGESTION_ACCOUNTED')reasons.push('INGESTION_NOT_ACCOUNTED');
   if(Number(stats.accepted||0)<minAccepted)reasons.push('ACCEPTED_CANDIDATES_BELOW_10K');
+  if(Number(stats.strongIdentityProducts||0)<minStrongIdentityProducts)reasons.push('STRONG_IDENTITY_PRODUCTS_BELOW_10K');
   if(Number(stats.silentDrops||0)!==0)reasons.push('SILENT_DROPS_PRESENT');
   if(reviewSample.length<minReviewSample)reasons.push('REVIEW_SAMPLE_TOO_SMALL');
+  if(reviewSample.some(x=>x.identityStrength!=='STRONG_GTIN'||x.gtinValid!==true))reasons.push('REVIEW_SAMPLE_NOT_STRONG_IDENTITY_ONLY');
   if(Number(policy.providerDataSpendEur||0)!==0)reasons.push('PROVIDER_SPEND_NONZERO');
   if(Number(policy.paidDataCallsTriggered||0)!==0)reasons.push('PAID_DATA_CALLS_NONZERO');
   if(policy.purchaseAuthorized!==false)reasons.push('PURCHASE_AUTHORIZATION_NOT_FALSE');
@@ -132,8 +135,9 @@ export function evaluateOffTenKDryRun({pilot={},ingestion={},reviewSample=[]}={}
   const accepted=Math.max(0,Number(stats.accepted||0));
   const logicalDuplicates=Math.max(0,Number(stats.logicalDuplicates||0));
   const held=Math.max(0,Number(stats.held||0));
+  const strongIdentityProducts=Math.max(0,Number(stats.strongIdentityProducts||0));
   const payload={
-    schema:'MPR_OFF_TEN_K_DRY_RUN_GATE_V1',
+    schema:'MPR_OFF_TEN_K_DRY_RUN_GATE_V2',
     decision:reasons.length?'HOLD_10K_DRY_RUN':'TEN_K_DRY_RUN_EVIDENCE_READY',
     reasons,
     metrics:{
@@ -143,7 +147,8 @@ export function evaluateOffTenKDryRun({pilot={},ingestion={},reviewSample=[]}={}
       logicalDuplicates,
       duplicateRate:input?logicalDuplicates/input:0,
       heldRate:input?held/input:0,
-      strongIdentityProducts:Math.max(0,Number(stats.strongIdentityProducts||0)),
+      strongIdentityProducts,
+      strongIdentityRate:input?strongIdentityProducts/input:0,
       claimCount:Math.max(0,Number(stats.claimCount||0)),
       reviewSampleCount:reviewSample.length
     },
