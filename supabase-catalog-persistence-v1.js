@@ -85,7 +85,7 @@ export function buildSupabaseCatalogPersistenceBatch(bundle={}, options={}){
     providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false,verifiedSalesRows:0,salesEvidenceClass:'NOT_VERIFIED_SALES'
   }:null;
 
-  const batch={schema:'MPR_SUPABASE_CATALOG_PERSISTENCE_BATCH_V1',products,identities,sourceRecords,claims,ingestionRun,policy:truthPolicy()};
+  const batch={schema:'MPR_SUPABASE_CATALOG_PERSISTENCE_BATCH_V1',products,identities,sourceRecords,claims,...(ingestionRun?{ingestionRun}:{}),policy:truthPolicy()};
   return {...batch,batchSha256:sha256(batch)};
 }
 
