@@ -1,0 +1,54 @@
+name: V2 DataForSEO Amazon Price Pilot
+
+on:
+  pull_request:
+    paths:
+      - 'dataforseo-amazon-price-v1.js'
+      - 'scripts/dataforseo-amazon-public-price-pilot-v1.mjs'
+      - 'test/dataforseo-amazon-price-v1.test.mjs'
+      - '.github/workflows/v2-dataforseo-amazon-price-pilot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit test adapter
+        run: node --test test/dataforseo-amazon-price-v1.test.mjs
+      - name: Dry-run spend guard and output contract
+        run: node scripts/dataforseo-amazon-public-price-pilot-v1.mjs --dryRun=true --out=artifacts/dry-report.json --ledger=artifacts/dry-ledger.json
+      - name: Run live hard-capped price pilot
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_API_LOGIN: ${{ secrets.DATAFORSEO_API_LOGIN }}
+          DATAFORSEO_API_PASSWORD: ${{ secrets.DATAFORSEO_API_PASSWORD }}
+        run: node scripts/dataforseo-amazon-public-price-pilot-v1.mjs --out=artifacts/live-report.json --ledger=artifacts/live-ledger.json
+      - name: Verify pilot truth and cap
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/live-report.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('artifacts/live-ledger.json','utf8'));
+          console.log(JSON.stringify({keywordsAttempted:r.keywordsAttempted,uniquePriceObservations:r.uniquePriceObservations,boughtPastMonthDisplayedSignalCount:r.boughtPastMonthDisplayedSignalCount,providerSpendUsd:r.providerReportedSpendUsd,totalAccountedSpendAfterPilotUsd:r.totalAccountedSpendAfterPilotUsd,ledgerListings:l.listingCount,unresolvedCanonicalListingCount:l.unresolvedCanonicalListingCount},null,2));
+          if(r.providerReportedSpendUsd>0.10+1e-9)process.exit(2);
+          if(r.totalAccountedSpendAfterPilotUsd>15+1e-9)process.exit(3);
+          if(r.truthPolicy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.truthPolicy.verifiedSalesRows!==0)process.exit(4);
+          NODE
+      - name: Upload live structured price evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-dataforseo-amazon-price-pilot
+          path: |
+            artifacts/live-report.json
+            artifacts/live-ledger.json
+          if-no-files-found: error
+          retention-days: 30
