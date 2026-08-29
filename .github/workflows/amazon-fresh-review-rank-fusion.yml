@@ -1,0 +1,123 @@
+name: Amazon Fresh Review Rank Fusion
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-fresh-review-rank-fusion-trigger-2026-08-29.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fresh-fusion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate zero-cost trigger policy
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-fresh-review-rank-fusion-trigger-2026-08-29.json';
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_FRESH_REVIEW_RANK_FUSION_2026_08_29') throw new Error('TRIGGER_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('POLICY_INVALID');
+          if(x.salesEvidenceClass!=='NOT_VERIFIED_SALES') throw new Error('SALES_TRUTH_INVALID');
+          NODE
+      - name: Refresh public Amazon review counts
+        run: node scripts/amazon-round2-refresh.mjs --maxItems=255 --out=artifacts/amazon-fresh-review-refresh.json
+      - name: Apply review comparability and longitudinal truth gates
+        run: node scripts/amazon-round2-trend-bridge.mjs --artifact=artifacts/amazon-fresh-review-refresh.json --out=artifacts/amazon-fresh-review-bridge.json
+      - name: Build temporally fresh leader review evidence for tracked ASINs
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const base=JSON.parse(fs.readFileSync('data/amazon-round2-preliminary-leaders-v1.json','utf8'));
+          const bridge=JSON.parse(fs.readFileSync('artifacts/amazon-fresh-review-bridge.json','utf8'));
+          const titles=new Map((base.leaders||[]).map(x=>[x.asin,x.title]));
+          const tracked=new Set(titles.keys());
+          const rows=(bridge.preliminaryTrend?.rows||[]).filter(x=>tracked.has(x.externalId));
+          const leaders=rows.map(x=>({
+            asin:x.externalId,
+            title:titles.get(x.externalId)||null,
+            reviewDelta:x.reviewDelta,
+            reviewVelocityPerDay:x.reviewVelocityPerDay,
+            priceDelta:x.priceDelta,
+            currentObservedAt:x.currentObservedAt,
+            reviewCountPrevious:x.reviewCountPrevious,
+            reviewCountCurrent:x.reviewCountCurrent
+          }));
+          const generatedAt=leaders.map(x=>x.currentObservedAt).filter(Boolean).sort().at(-1)||null;
+          const out={
+            schemaVersion:'MPR_AMAZON_FRESH_REVIEW_LEADERS_V1',generatedAt,
+            trackedAsins:tracked.size,comparableTrackedAsins:leaders.length,leaders,
+            policy:{evidenceLevel:'PRELIMINARY_REVIEW_PRICE_ONLY',eligibleForRankTrend:false,eligibleForDemandConfirmation:false,eligibleForVerifiedSales:false,maximumFunnelContribution:'PROMISING_SUPPORT_ONLY',autoPromoteOpportunityStage:false,salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,providerSpendEur:0,paidCallsTriggered:0,purchaseAuthorized:false}
+          };
+          if(!generatedAt) throw new Error('NO_FRESH_TRACKED_REVIEW_EVIDENCE');
+          if(out.policy.providerSpendEur!==0||out.policy.paidCallsTriggered!==0||out.policy.purchaseAuthorized!==false) throw new Error('FRESH_REVIEW_POLICY_INVALID');
+          fs.writeFileSync('artifacts/amazon-fresh-review-leaders.json',JSON.stringify(out,null,2));
+          console.log(`comparableTrackedAsins=${leaders.length}`);
+          console.log(`positiveReviewDelta=${leaders.filter(x=>x.reviewDelta>0).length}`);
+          NODE
+      - name: Collect fresh explicit product BSR snapshot
+        run: node scripts/amazon-leader-bsr-snapshot.mjs --out=artifacts/amazon-fresh-bsr-snapshot.json
+      - name: Build same-category longitudinal BSR history
+        run: >-
+          node scripts/amazon-leader-bsr-round2-history.mjs
+          --baseline=data/amazon-leader-bsr-baseline-2026-08-26-v1.json
+          --current=artifacts/amazon-fresh-bsr-snapshot.json
+          --out=artifacts/amazon-fresh-bsr-history.json
+      - name: Enforce fresh rank truth gates
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const h=JSON.parse(fs.readFileSync('artifacts/amazon-fresh-bsr-history.json','utf8'));
+          if(h.ok!==true||Number(h.elapsedHours)<24) process.exitCode=2;
+          if(h.salesEvidenceClass!=='NOT_VERIFIED_SALES'||h.verifiedSalesRows!==0||h.paidCallsTriggered!==0||h.purchaseAuthorized!==false) process.exitCode=3;
+          if((h.rows||[]).some(r=>r.categorySignalsConflict===true&&r.rankVelocityPerDay!==null)) process.exitCode=4;
+          console.log(`eligibleProductCount=${h.eligibleProductCount||0}`);
+          console.log(`conflictProductCount=${h.conflictProductCount||0}`);
+          NODE
+      - name: Fuse temporally aligned review and rank evidence
+        id: fusion
+        continue-on-error: true
+        run: >-
+          node scripts/amazon-strict-trend-fusion.mjs
+          --leaders=artifacts/amazon-fresh-review-leaders.json
+          --rank=artifacts/amazon-fresh-bsr-history.json
+          --out=artifacts/amazon-fresh-strict-trend-fusion.json
+      - name: Enforce fusion truth semantics without forcing promotion
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/amazon-fresh-strict-trend-fusion.json';
+          if(!fs.existsSync(p)) throw new Error('FUSION_ARTIFACT_MISSING');
+          const f=JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`fusionStatus=${f.status}`);
+          console.log(`confirmedAccelerationCount=${f.confirmedAccelerationCount||0}`);
+          console.log(`confirmedAsins=${JSON.stringify(f.confirmedAsins||[])}`);
+          if(f.salesEvidenceClass!=='NOT_VERIFIED_SALES'||f.verifiedSalesRows!==0||f.paidCallsTriggered!==0||f.providerSpendEur!==0||f.purchaseAuthorized!==false) process.exitCode=2;
+          if((f.rows||[]).some(r=>r.confirmedAcceleration===true&&(r.rankSignal?.rankVelocityPerDay<=0||r.reviewSignal?.reviewDelta<=0))) process.exitCode=3;
+          NODE
+      - name: Upload fresh fusion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-fresh-review-rank-fusion-evidence
+          path: |
+            artifacts/amazon-fresh-review-refresh.json
+            artifacts/amazon-fresh-review-bridge.json
+            artifacts/amazon-fresh-review-leaders.json
+            artifacts/amazon-fresh-bsr-snapshot.json
+            artifacts/amazon-fresh-bsr-history.json
+            artifacts/amazon-fresh-strict-trend-fusion.json
+          if-no-files-found: error
+          retention-days: 7
