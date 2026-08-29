@@ -31,6 +31,23 @@ test('persistence bundle targets canonical catalog tables and remains write-disa
   assert.equal(bundle.policy.purchaseAuthorized,false);
 });
 
+test('claims preserve exact canonical mapping after indexed lookup optimization',()=>{
+  const ingestion=runBulkCatalogIngestion({sourceKey:'OPEN_FOOD_FACTS',records:[
+    {code:'4006381333931',product_name:'Valid Product A',brands:'Acme',categories:'Food'},
+    {code:'5901234123457',product_name:'Valid Product B',brands:'Beta',categories:'Food'}
+  ],retrievedAt:'2026-08-27T17:00:00Z'});
+  const bundle=buildCatalogPersistenceBundle(ingestion);
+  assert.ok(bundle.claims.length>0);
+  for(const claim of bundle.claims){
+    const source=bundle.sourceRecords.find(x=>x.source_key===claim.sourceKey&&x.source_record_id===claim.sourceRecordId);
+    assert.ok(source);
+    assert.equal(claim.canonical_key,source.canonical_key);
+  }
+  assert.equal(bundle.policy.salesEvidenceClass,'NOT_VERIFIED_SALES');
+  assert.equal(bundle.policy.verifiedSalesRows,0);
+  assert.equal(bundle.writeAuthorized,false);
+});
+
 test('identical ingestion produces deterministic persistence replay',()=>{
   const input={sourceKey:'OPEN_FOOD_FACTS',records:[{code:'4006381333931',product_name:'Valid Product',brands:'Acme'}],retrievedAt:'2026-08-27T17:00:00Z'};
   const a=buildCatalogPersistenceBundle(runBulkCatalogIngestion(input));
