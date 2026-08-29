@@ -33,9 +33,7 @@ function historicalAccountedSpend(){
   if(Number.isFinite(keyword)&&keyword>=0)return round6(provider+keyword);
   const keywordLedger=readJson('paid-budget-live.json',{events:[]});
   const start=new Date(cap.startedAt||0).getTime();
-  const keywordFallback=(Array.isArray(keywordLedger.events)?keywordLedger.events:[])
-    .filter(e=>new Date(e?.at||0).getTime()>=start)
-    .reduce((s,e)=>s+(Number(e?.costUsd)||0),0);
+  const keywordFallback=(Array.isArray(keywordLedger.events)?keywordLedger.events:[]).filter(e=>new Date(e?.at||0).getTime()>=start).reduce((s,e)=>s+(Number(e?.costUsd)||0),0);
   return round6(provider+keywordFallback);
 }
 
@@ -47,8 +45,8 @@ async function api(endpoint,{method='GET',body=null}={}){
   if(Number(json.status_code)!==20000)throw new Error(`DATAFORSEO_STATUS_${json.status_code}: ${json.status_message||'unknown'}`);
   return json;
 }
-function taskCost(response){const top=Number(response?.cost);const nested=(response?.tasks||[]).reduce((s,t)=>s+(Number(t?.cost)||0),0);return round6(Number.isFinite(top)&&top>0?top:nested);}
-function accountBalance(userData){const n=Number(userData?.tasks?.[0]?.result?.[0]?.money?.balance);return Number.isFinite(n)?n:null;}
+const taskCost=response=>{const top=Number(response?.cost);const nested=(response?.tasks||[]).reduce((s,t)=>s+(Number(t?.cost)||0),0);return round6(Number.isFinite(top)&&top>0?top:nested);};
+const accountBalance=userData=>{const n=Number(userData?.tasks?.[0]?.result?.[0]?.money?.balance);return Number.isFinite(n)?n:null;};
 
 function extractProducts(response,seedAsin){
   const found=new Map();
@@ -69,20 +67,16 @@ async function main(){
   const priorAccountedSpendUsd=historicalAccountedSpend();
   const totalCapUsd=Number(cfg.maxSpendUsd);
   const remainingTotalAuthorizationUsd=round6(Math.max(0,totalCapUsd-priorAccountedSpendUsd));
-  let balance=null;
-  let effectiveBudget=remainingTotalAuthorizationUsd;
+  let balance=null;let effectiveBudget=remainingTotalAuthorizationUsd;
   if(!dryRun){
     if(!login||!password)throw new Error('DATAFORSEO_CREDENTIALS_MISSING: configure repository secrets DATAFORSEO_LOGIN and DATAFORSEO_PASSWORD (or API aliases)');
-    const user=await api(cfg.balanceEndpoint);
-    balance=accountBalance(user);
+    const user=await api(cfg.balanceEndpoint);balance=accountBalance(user);
     if(balance===null)throw new Error('DATAFORSEO_BALANCE_UNKNOWN: fail closed before paid calls');
     if(balance<=0)throw new Error(`DATAFORSEO_INSUFFICIENT_BALANCE: ${balance}`);
     if(remainingTotalAuthorizationUsd<=0)throw new Error(`DATAFORSEO_TOTAL_AUTHORIZATION_EXHAUSTED: historical=${priorAccountedSpendUsd} cap=${totalCapUsd}`);
     effectiveBudget=Math.min(remainingTotalAuthorizationUsd,balance);
   }
-
-  const queue=[],queued=new Set();
-  for(const raw of cfg.seedAsins||[]){const a=cleanAsin(raw);if(a&&!queued.has(a)){queue.push(a);queued.add(a);}}
+  const queue=[],queued=new Set();for(const raw of cfg.seedAsins||[]){const a=cleanAsin(raw);if(a&&!queued.has(a)){queue.push(a);queued.add(a);}}
   const products=new Map();let cursor=0,requests=0,spent=0;const requestLedger=[];
   const maxRequests=Math.min(Number(cfg.maxRequests)||0,Math.floor(effectiveBudget/Number(cfg.conservativeMaxCostPerRequestUsd)));
   while(cursor<queue.length&&requests<maxRequests&&products.size<Number(cfg.targetUniqueProducts)){
@@ -100,7 +94,7 @@ async function main(){
     if(batch.length===0&&cursor>=queue.length)break;
   }
   const stopReason=products.size>=Number(cfg.targetUniqueProducts)?'TARGET_REACHED':requests>=maxRequests?'REQUEST_BUDGET_BOUND_REACHED':priorAccountedSpendUsd+spent+Number(cfg.conservativeMaxCostPerRequestUsd)>totalCapUsd+1e-9?'TOTAL_SPEND_GUARD_STOP':spent+Number(cfg.conservativeMaxCostPerRequestUsd)>effectiveBudget+1e-9?'BALANCE_OR_AUTHORIZATION_GUARD_STOP':cursor>=queue.length?'DISCOVERY_QUEUE_EXHAUSTED':'STOPPED';
-  const output={schemaVersion:'MPR_DATAFORSEO_AMAZON_DISCOVERY_RUN_V1',generatedAt:new Date().toISOString(),dryRun,targetUniqueProducts:Number(cfg.targetUniqueProducts),uniqueProducts:products.size,targetReached:products.size>=Number(cfg.targetUniqueProducts),requestsTriggered:requests,providerReportedSpendUsd:spent,historicalAccountedSpendUsd:priorAccountedSpendUsd,totalAccountedSpendAfterRunUsd:round6(priorAccountedSpendUsd+spent),accountBalanceBeforeUsd:balance,configuredTotalSpendCapUsd:totalCapUsd,remainingTotalAuthorizationBeforeRunUsd,effectiveRunSpendCapUsd:effectiveBudget,stopReason,products:[...products.values()],requestLedger,truthPolicy:{evidenceClass:'DISCOVERY_ONLY',rankingEligible:false,demandConfirmed:false,salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,romaniaGapExact:false,supplierQuoteVerified:false,landedCostConfirmed:false,purchaseAuthorized:false},note:'Unique ASIN discovery is catalogue discovery only. It is not verified demand, verified sales, exact Romania competition, supplier quote, landed cost, PROMISING, VALIDATE or FINALIST evidence.'};
+  const output={schemaVersion:'MPR_DATAFORSEO_AMAZON_DISCOVERY_RUN_V1',generatedAt:new Date().toISOString(),dryRun,targetUniqueProducts:Number(cfg.targetUniqueProducts),uniqueProducts:products.size,targetReached:products.size>=Number(cfg.targetUniqueProducts),requestsTriggered:requests,providerReportedSpendUsd:spent,historicalAccountedSpendUsd:priorAccountedSpendUsd,totalAccountedSpendAfterRunUsd:round6(priorAccountedSpendUsd+spent),accountBalanceBeforeUsd:balance,configuredTotalSpendCapUsd:totalCapUsd,remainingTotalAuthorizationBeforeRunUsd:remainingTotalAuthorizationUsd,effectiveRunSpendCapUsd:effectiveBudget,stopReason,products:[...products.values()],requestLedger,truthPolicy:{evidenceClass:'DISCOVERY_ONLY',rankingEligible:false,demandConfirmed:false,salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,romaniaGapExact:false,supplierQuoteVerified:false,landedCostConfirmed:false,purchaseAuthorized:false},note:'Unique ASIN discovery is catalogue discovery only. It is not verified demand, verified sales, exact Romania competition, supplier quote, landed cost, PROMISING, VALIDATE or FINALIST evidence.'};
   fs.mkdirSync(path.dirname(outPath),{recursive:true});fs.writeFileSync(outPath,JSON.stringify(output,null,2));
   console.log(JSON.stringify({out:outPath,uniqueProducts:output.uniqueProducts,targetReached:output.targetReached,requests,runSpendUsd:spent,priorSpendUsd:priorAccountedSpendUsd,totalSpendAfterRunUsd:output.totalAccountedSpendAfterRunUsd,stopReason},null,2));
 }
