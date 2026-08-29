@@ -40,7 +40,7 @@ const stableDoc=await jsonFetch(`https://api.apify.com/v2/actor-runs/${runId}?to
 finalRun=stableDoc?.data??stableDoc;
 const datasetId=finalRun?.defaultDatasetId;
 if(!datasetId)throw new Error('APIFY_DATASET_ID_MISSING');
-const rawRows=await jsonFetch(`https://api.apify.com/v2/datasets/${datasetId}/items?clean=true&format=json`);
+const rawRows=await jsonFetch(`https://api.apify.com/v2/datasets/${datasetId}/items?clean=true&format=json&token=${encodeURIComponent(token)}`);
 const rows=Array.isArray(rawRows)?rawRows:Array.isArray(rawRows?.items)?rawRows.items:[];
 if(rows.length>MAX_ITEMS)throw new Error(`MAX_ITEMS_BREACH:${rows.length}`);
 const normalized=adaptStructuredSupplierProviderRows(rows,{provider:'APIFY_MEMO23_ALIBABA_SCRAPER',platform:'ALIBABA',observedAt:new Date().toISOString()});
