@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "MPR_APIFY_SUPPLIER_DETAIL_PILOT_TRIGGER_V1",
+  "authorization": "USER_APPROVED_APIFY_SUPPLIER_DETAIL_PILOT_2026_08_29",
+  "actor": "xtracto~alibaba-product-scraper",
+  "maxTotalChargeUsd": 0.05,
+  "maxUniqueSupplierUrls": 5,
+  "sourceTopPairCount": 10,
+  "supplierUrls": [
+    "https://www.alibaba.com/product-detail/Mesh-Desk-Organizer-With-File-Holder_1600756221959.html",
+    "https://www.alibaba.com/product-detail/Desk-Organizers-and-Accessories-5-Tier_1601573810318.html",
+    "https://www.alibaba.com/product-detail/2-Tier-Dresser-Counter-Makeup-Cosmetics_1601190428794.html?s=p",
+    "https://www.alibaba.com/product-detail/2-Tier-Metal-Office-Desk-Organizer_1601404398605.html"
+  ],
+  "dedupeNote": "The approved top-10 pair queue contains repeated supplier URLs; only 4 unique supplier detail URLs are charged/queried.",
+  "discoveryAuthorized": false,
+  "negotiationAuthorized": false,
+  "purchaseAuthorized": false
+}
