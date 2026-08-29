@@ -1,0 +1,64 @@
+name: Free Catalog 100K Supplement
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/free-catalog-100k-supplement-trigger.json'
+
+permissions:
+  contents: read
+
+jobs:
+  open-food-facts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      MPR_OFF_STREAM_FETCH_ENABLED: 'true'
+      MPR_OFF_STREAM_MAX_ROWS: '200000'
+      MPR_OFF_STREAM_MIN_ROWS: '150000'
+      MPR_OFF_STREAM_MIN_ACCEPTED: '20000'
+      MPR_OFF_STREAM_MIN_STRONG_IDENTITIES: '20000'
+      MPR_OFF_STREAM_REVIEW_SAMPLE: '250'
+      MPR_OFF_STREAM_OUT_DIR: 'artifacts/off-100k-supplement-v1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Validate supplement trigger
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const t=JSON.parse(fs.readFileSync('data/free-catalog-100k-supplement-trigger.json','utf8'));
+          if(t.authorization!=='ZERO_COST_PUBLIC_CATALOG_DISCOVERY')throw new Error('SUPPLEMENT_NOT_AUTHORIZED');
+          if(t.providerDataSpendEur!==0||t.paidDataCallsTriggered!==0||t.purchaseAuthorized!==false)throw new Error('SUPPLEMENT_POLICY_INVALID');
+          if(t.evidenceClass!=='CATALOGUE_BOOTSTRAP_ANALYSIS_ONLY')throw new Error('SUPPLEMENT_TRUTH_INVALID');
+          NODE
+      - name: Stream reviewed official public catalog
+        run: node scripts/run-open-food-facts-stream-pilot.mjs
+      - name: Verify zero-cost strong-identity output
+        run: |
+          node <<'NODE'
+          const x=require('./artifacts/off-100k-supplement-v1/summary.json');
+          if(!x.remoteFetchEnabled)throw new Error('REMOTE_PUBLIC_STREAM_NOT_EXECUTED');
+          if(x.productionCatalogWritePerformed||x.productionScaleAuthorized)throw new Error('DRY_RUN_BOUNDARY_BREACHED');
+          if(x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0||x.policy.purchaseAuthorized!==false)throw new Error('COST_OR_PURCHASE_POLICY_BREACH');
+          if(x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||x.policy.verifiedSalesRows!==0)throw new Error('SALES_TRUTH_BREACH');
+          console.log(JSON.stringify({projectedRows:x.pilot?.metrics?.projectedRows,accepted:x.ingestionStats?.accepted,strongIdentityProducts:x.ingestionStats?.strongIdentityProducts,strongCandidateCount:x.strongCandidateCount,tenKCandidateSet:x.tenKCandidateSet},null,2));
+          NODE
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: Upload supplement evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-catalog-100k-supplement
+          path: |
+            artifacts/off-100k-supplement-v1/summary.json
+            artifacts/off-100k-supplement-v1/persistence-bundle.json
+            artifacts/off-100k-supplement-v1/review-sample.json
+          retention-days: 14
+          if-no-files-found: error
