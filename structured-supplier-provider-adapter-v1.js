@@ -62,7 +62,7 @@ export function adaptStructuredSupplierProviderRow(row={},options={}){
     schemaVersion:'MPR_STRUCTURED_SUPPLIER_PROVIDER_ROW_V1',
     normalizedObservation:{
       platform,supplierListingId,supplierName:clean(row.supplierName??row.companyName??row.supplier?.name)||null,
-      sourceUrl,title,currency,publicPriceMin,publicPriceMax,priceTiers,moq,targetOrderQuantity:null,priceUnit,observedAt,
+      sourceUrl,title,category:clean(row.category??row.categoryName)||null,currency,publicPriceMin,publicPriceMax,priceTiers,moq,targetOrderQuantity:null,priceUnit,observedAt,
       linkedMarketplaceCanonicalProductId:null,supplierFingerprintId:null,
       variantAttributes:row.variantAttributes&&typeof row.variantAttributes==='object'?row.variantAttributes:{},
       structuredMetadata:{material:clean(row.material)||null,dimensions:row.dimensions??null,weight:row.weight??null,capacity:row.capacity??null,power:row.power??null,voltage:row.voltage??null,packCount:nonNegative(row.packCount)},
