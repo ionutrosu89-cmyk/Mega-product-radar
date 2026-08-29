@@ -1,0 +1,49 @@
+name: V2 DataForSEO Amazon Price Scale R1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/dataforseo-amazon-price-scale-r1-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run hard-capped structured Amazon price scale round
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_API_LOGIN: ${{ secrets.DATAFORSEO_API_LOGIN }}
+          DATAFORSEO_API_PASSWORD: ${{ secrets.DATAFORSEO_API_PASSWORD }}
+        run: node scripts/dataforseo-amazon-public-price-scale-r1.mjs --out=artifacts/scale-report.json --ledger=artifacts/scale-ledger.json
+      - name: Verify truth and spend caps
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/scale-report.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('artifacts/scale-ledger.json','utf8'));
+          console.log(JSON.stringify({keywordsAttempted:r.keywordsAttempted,stopReason:r.stopReason,uniquePriceObservations:r.uniquePriceObservations,providerSpendUsd:r.providerReportedSpendUsd,priceObservationsPerUsd:r.priceObservationsPerUsd,last5AverageNewUniqueAsins:r.last5AverageNewUniqueAsins,totalAccountedSpendAfterRoundUsd:r.totalAccountedSpendAfterRoundUsd,remainingAuthorizedSpendUsd:r.remainingAuthorizedSpendUsd,ledgerListings:l.listingCount},null,2));
+          if(r.providerReportedSpendUsd>0.25+1e-9)process.exit(2);
+          if(r.totalAccountedSpendAfterRoundUsd>15+1e-9)process.exit(3);
+          if(r.truthPolicy.verifiedSales!==false||r.truthPolicy.purchaseAuthorized!==false)process.exit(4);
+          if(l.truthPolicy.unknownEqualsZero!==false)process.exit(5);
+          NODE
+      - name: Upload scale evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-dataforseo-amazon-price-scale-r1
+          path: |
+            artifacts/scale-report.json
+            artifacts/scale-ledger.json
+          if-no-files-found: error
+          retention-days: 30
