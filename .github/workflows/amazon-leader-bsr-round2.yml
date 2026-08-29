@@ -2,6 +2,11 @@ name: Amazon Leader BSR Round 2
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-leader-bsr-round2-trigger-2026-08-29.json'
 
 permissions:
   contents: read
@@ -15,6 +20,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Validate zero-cost one-time trigger
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-leader-bsr-round2-trigger-2026-08-29.json';
+          if(!fs.existsSync(p)) throw new Error('LEADER_BSR_ROUND2_TRIGGER_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_LEADER_BSR_ROUND2_2026_08_29') throw new Error('LEADER_BSR_ROUND2_TRIGGER_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('LEADER_BSR_ROUND2_POLICY_INVALID');
+          if(x.salesEvidenceClass!=='NOT_VERIFIED_SALES'||x.rankEvidencePolicy!=='EXPLICIT_PRODUCT_BSR_ONLY') throw new Error('LEADER_BSR_ROUND2_TRUTH_INVALID');
+          const notBefore=Date.parse(x.notBefore||'');
+          if(!Number.isFinite(notBefore)||Date.now()<notBefore) throw new Error('LEADER_BSR_ROUND2_TOO_EARLY');
+          NODE
       - name: Enforce minimum 24h eligibility before network collection
         run: |
           node - <<'NODE'
