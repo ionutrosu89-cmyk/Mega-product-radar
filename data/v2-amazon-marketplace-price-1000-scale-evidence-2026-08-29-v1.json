@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "MPR_V2_AMAZON_MARKETPLACE_PRICE_1K_SCALE_EVIDENCE_V1",
+  "generatedAt": "2026-08-29T17:16:29.621Z",
+  "workflowRunId": 33265098168,
+  "artifact": {
+    "id": 9718424323,
+    "name": "v2-amazon-marketplace-price-1000",
+    "digest": "sha256:bb71a4e1ccba59eca578b28240cee8ea3eaad744db3407484c851697fded1a82"
+  },
+  "metrics": {
+    "batchCount": 10,
+    "requested": 1000,
+    "validObservations": 122,
+    "validObservationRatePct": 12.2,
+    "withPrice": 99,
+    "priceCoveragePctOfRequested": 9.9,
+    "withRating": 120,
+    "withReviews": 119,
+    "httpFailures": 7,
+    "ledgerListings": 122,
+    "ledgerSnapshots": 122,
+    "rejectedLedgerRows": 0,
+    "unresolvedCanonicalListingCount": 122,
+    "canonicalProductCount": 0,
+    "paidCallsTriggered": 0,
+    "providerSpend": 0
+  },
+  "diagnosticSample": {
+    "batchOffset": 0,
+    "requested": 100,
+    "validObservations": 10,
+    "withPrice": 8,
+    "httpFailures": 0,
+    "invalidHttp200Count": 90,
+    "invalidRepeatedHtmlBytes": 3781,
+    "invalidPageIdentityFalseCount": 90,
+    "invalidNoExtractedFieldsCount": 90,
+    "interpretation": "HTTP_200_SHELL_LIKE_RESPONSE_NOT_PRODUCT_PAGE"
+  },
+  "decision": {
+    "directAmazonHtmlSuitableForPointRefresh": true,
+    "directAmazonHtmlSuitableAsPrimary100KPriceIngestion": false,
+    "automaticScaleRunEnabled": false,
+    "workflowMode": "MANUAL_ONLY",
+    "nextAction": "USE_STRUCTURED_OR_MORE_SCALABLE_MARKETPLACE_PRICE_SOURCE_FOR_BULK_DATABASE; RETAIN_DIRECT_HTML_FOR_TARGETED_REFRESH_AND_VALIDATION"
+  },
+  "truthPolicy": {
+    "marketplacePriceIsRealizedSale": false,
+    "reviewOrRatingIsVerifiedSales": false,
+    "http200ImpliesValidProductPage": false,
+    "asinIsCrossMarketCanonicalIdentity": false,
+    "unknownEqualsZero": false,
+    "purchaseAuthorized": false
+  }
+}
