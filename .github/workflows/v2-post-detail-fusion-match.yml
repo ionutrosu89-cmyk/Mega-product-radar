@@ -1,0 +1,50 @@
+name: V2 Post Detail Fusion Match
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public-detail-fusion-evidence-v1.js'
+      - 'scripts/fuse-post-detail-matching-v1.mjs'
+      - '.github/workflows/v2-post-detail-fusion-match.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact Amazon and supplier detail evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/top-enrichment artifacts/supplier-detail
+          gh run download 33270481850 -n v2-top-candidate-detail-enrichment -D artifacts/top-enrichment
+          gh run download 33270914349 -n v2-apify-alibaba-supplier-detail-pilot -D artifacts/supplier-detail
+      - name: Fuse detail evidence and rerun precision-first matching
+        run: node scripts/fuse-post-detail-matching-v1.mjs artifacts/top-enrichment/summary.json artifacts/supplier-detail/normalized-detail-evidence.json artifacts/supplier-detail/raw.json artifacts/post-detail-fusion-match.json
+      - name: Verify threshold and zero-spend truth envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/post-detail-fusion-match.json','utf8'));
+          if(s.policy.paidCallsTriggered!==0||s.policy.providerSpendUsd!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
+          if(s.policy.matchingThreshold!==80||s.policy.matchingThresholdRelaxed!==false)throw new Error('MATCH_THRESHOLD_CHANGED');
+          if(s.policy.unknownEqualsZero!==false||s.policy.purchaseAuthorized!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(s.pairCount!==10)throw new Error(`PAIR_SCOPE_CHANGED:${s.pairCount}`);
+          NODE
+      - name: Upload fused matching evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-post-detail-fusion-match
+          path: artifacts/post-detail-fusion-match.json
+          retention-days: 30
+          if-no-files-found: error
