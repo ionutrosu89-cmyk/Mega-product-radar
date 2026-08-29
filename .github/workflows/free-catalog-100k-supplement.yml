@@ -50,6 +50,18 @@ jobs:
           if(x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||x.policy.verifiedSalesRows!==0)throw new Error('SALES_TRUTH_BREACH');
           console.log(JSON.stringify({projectedRows:x.pilot?.metrics?.projectedRows,accepted:x.ingestionStats?.accepted,strongIdentityProducts:x.ingestionStats?.strongIdentityProducts,strongCandidateCount:x.strongCandidateCount,tenKCandidateSet:x.tenKCandidateSet},null,2));
           NODE
+      - name: Prioritize canonical catalogue candidates
+        run: node scripts/prioritize-catalog-persistence.mjs --input=artifacts/off-100k-supplement-v1/persistence-bundle.json --out=artifacts/off-100k-supplement-v1/top-5000-candidates.json --topN=5000
+      - name: Verify prioritization truth boundary
+        run: |
+          node <<'NODE'
+          const x=require('./artifacts/off-100k-supplement-v1/top-5000-candidates.json');
+          if(x.evidenceClass!=='CATALOG_PRIORITIZATION_ONLY')throw new Error('PRIORITIZATION_TRUTH_BREACH');
+          if(x.selectedCount>5000)throw new Error('TOP_N_BOUND_BREACH');
+          if(x.policy.providerDataSpendEur!==0||x.policy.paidDataCallsTriggered!==0||x.policy.purchaseAuthorized!==false)throw new Error('PRIORITIZATION_COST_OR_PURCHASE_BREACH');
+          if(x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||x.policy.verifiedSalesRows!==0)throw new Error('PRIORITIZATION_SALES_TRUTH_BREACH');
+          console.log(JSON.stringify({inputCount:x.inputCount,eligibleCount:x.eligibleCount,selectedCount:x.selectedCount,p1Count:x.p1Count,p2Count:x.p2Count,p3Count:x.p3Count},null,2));
+          NODE
       - name: Production safety gate
         run: npm run verify:production-safety
       - name: Upload supplement evidence
@@ -60,5 +72,6 @@ jobs:
             artifacts/off-100k-supplement-v1/summary.json
             artifacts/off-100k-supplement-v1/persistence-bundle.json
             artifacts/off-100k-supplement-v1/review-sample.json
+            artifacts/off-100k-supplement-v1/top-5000-candidates.json
           retention-days: 14
           if-no-files-found: error
