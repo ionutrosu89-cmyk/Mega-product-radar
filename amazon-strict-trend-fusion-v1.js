@@ -6,7 +6,8 @@ export function buildAmazonStrictTrendFusion({leaders={},rankHistory={},maximumT
   const reviewAt=i(leaders.generatedAt), rankAt=i(rankHistory.rows?.[0]?.latestObservedAt);
   const gap=reviewAt&&rankAt?Math.abs(Date.parse(rankAt)-Date.parse(reviewAt))/36e5:null;
   const temporalCompatible=Number.isFinite(gap)&&gap<=Math.max(24,Number(maximumTemporalGapHours)||48);
-  const baseOk=leaders.schemaVersion==='MPR_AMAZON_ROUND2_PRELIMINARY_LEADERS_V1'&&rankHistory.ok===true&&rankHistory.status==='RANK_HISTORY_READY'&&temporalCompatible;
+  const schemaCompatible=['MPR_AMAZON_ROUND2_PRELIMINARY_LEADERS_V1','MPR_AMAZON_FRESH_REVIEW_LEADERS_V1'].includes(leaders.schemaVersion);
+  const baseOk=schemaCompatible&&rankHistory.ok===true&&rankHistory.status==='RANK_HISTORY_READY'&&temporalCompatible;
   const reviews=new Map((leaders.leaders||[]).map(x=>[t(x.asin).toUpperCase(),x]));
   const ranks=new Map((rankHistory.rows||[]).map(x=>[t(x.externalId).toUpperCase(),x]));
   const rows=[...new Set([...reviews.keys(),...ranks.keys()])].sort().map(externalId=>{
