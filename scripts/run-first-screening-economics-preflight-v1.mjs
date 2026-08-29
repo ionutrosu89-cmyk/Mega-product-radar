@@ -33,7 +33,7 @@ if(amazonUsBenchmarkContext.status!=='COHERENT')throw new Error('AMAZON_US_BENCH
 const fx=evidencePack?.evidence?.fx||{};
 const amazonFee=evidencePack?.evidence?.amazonUsOfficeProductsReferralFee||{};
 const romaniaVat=evidencePack?.evidence?.romaniaVat||{};
-if(!(Number(fx.derivedUsdRon)>0)&&!fx.sourceRef)throw new Error('FX_EVIDENCE_INVALID');
+if(!(Number(fx.derivedUsdRon)>0)||!fx.sourceRef)throw new Error('FX_EVIDENCE_INVALID');
 if(Number(amazonFee.referralFeeRate)!==0.15||amazonFee.scope!=='AMAZON_US_ONLY')throw new Error('AMAZON_US_FEE_EVIDENCE_INVALID');
 if(Number(romaniaVat.standardVatRate)!==0.21||romaniaVat.scope!=='ROMANIA_STANDARD_VAT')throw new Error('ROMANIA_VAT_EVIDENCE_INVALID');
 
