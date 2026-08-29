@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-29T03:37:32.228Z",
-  "completedAt": "2026-08-29T03:43:37.500Z",
-  "updatedAt": "2026-08-29T03:37:44.749Z",
+  "startedAt": "2026-08-29T09:37:47.266Z",
+  "completedAt": "2026-08-29T09:47:38.833Z",
+  "updatedAt": "2026-08-29T09:40:15.738Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,16 +30,16 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-29T03:37:44.804Z",
+    "updatedAt": "2026-08-29T09:40:15.910Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-29T03:43:37.471Z",
+    "updatedAt": "2026-08-29T09:47:38.815Z",
     "candidates": 65,
     "scanSize": 10,
     "openDiscovered": 0,
-    "successfulChecks": 40,
-    "reviewChecks": 8,
+    "successfulChecks": 0,
+    "reviewChecks": 0,
     "network": {
       "markets": [
         {
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-29T03:41:37.444Z",
+      "updatedAt": "2026-08-29T09:45:38.801Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-29T03:40:37.252Z",
-    "category": "Travel",
-    "successfulPages": 19,
-    "totalObserved": 212,
-    "totalClusters": 119,
-    "feedCount": 4,
+    "updatedAt": "2026-08-29T09:44:22.157Z",
+    "category": "Copii 3-6",
+    "successfulPages": 14,
+    "totalObserved": 156,
+    "totalClusters": 111,
+    "feedCount": 1,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 6,
-        "items": 72,
+        "successful": 4,
+        "items": 50,
         "statuses": [
           200,
           200,
@@ -215,8 +215,8 @@
       "amazonIT": {
         "label": "Amazon IT",
         "attempted": 6,
-        "successful": 4,
-        "items": 44,
+        "successful": 3,
+        "items": 41,
         "statuses": [
           200,
           200,
@@ -229,7 +229,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
+          "DIRECT",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER"
         ]
@@ -237,15 +237,15 @@
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 5,
-        "items": 72,
+        "successful": 3,
+        "items": 42,
         "statuses": [
           200,
           200,
           200,
           200,
           503,
-          200
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -253,7 +253,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "ebayUS": {
@@ -262,27 +262,27 @@
         "successful": 0,
         "items": 0,
         "statuses": [
-          403,
-          403,
-          403,
-          403,
-          403,
-          403
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
         ],
         "sources": [
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT",
+          "DIRECT"
         ]
       },
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
         "successful": 4,
-        "items": 24,
+        "items": 23,
         "statuses": [
           200,
           200,
@@ -303,14 +303,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-29T03:41:37.423Z",
+      "at": "2026-08-29T09:45:38.788Z",
       "attempted": 11,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-29T03:41:37.434Z",
+      "at": "2026-08-29T09:45:38.795Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
