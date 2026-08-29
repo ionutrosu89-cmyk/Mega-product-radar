@@ -1,12 +1,6 @@
 name: V2 DataForSEO Amazon Price Pilot
 
 on:
-  pull_request:
-    paths:
-      - 'dataforseo-amazon-price-v1.js'
-      - 'scripts/dataforseo-amazon-public-price-pilot-v1.mjs'
-      - 'test/dataforseo-amazon-price-v1.test.mjs'
-      - '.github/workflows/v2-dataforseo-amazon-price-pilot.yml'
   workflow_dispatch:
 
 permissions:
