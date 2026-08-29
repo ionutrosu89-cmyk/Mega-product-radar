@@ -15,13 +15,16 @@ function normalizeMarketplaceListing(listing={}){
   const currency=clean(latest.currency).toUpperCase()||null;
   const sourceUrl=clean(latest.sourceUrl||listing.sourceUrl)||null;
   const observedAt=clean(latest.observedAt||listing.lastSeenAt)||null;
-  const blockers=[];
-  if(!canonicalProductId)blockers.push('MARKETPLACE_CANONICAL_ID_UNRESOLVED');
-  if(price===null)blockers.push('MARKETPLACE_PRICE_MISSING');
-  if(!currency)blockers.push('MARKETPLACE_CURRENCY_MISSING');
-  if(!sourceUrl)blockers.push('MARKETPLACE_SOURCE_URL_MISSING');
-  if(!observedAt)blockers.push('MARKETPLACE_OBSERVED_AT_MISSING');
-  return {listingKey:clean(listing.listingKey)||null,canonicalProductId,price,currency,sourceUrl,observedAt,priceReady:blockers.length===0,blockers};
+  const evidenceBlockers=[];
+  if(price===null)evidenceBlockers.push('MARKETPLACE_PRICE_MISSING');
+  if(!currency)evidenceBlockers.push('MARKETPLACE_CURRENCY_MISSING');
+  if(!sourceUrl)evidenceBlockers.push('MARKETPLACE_SOURCE_URL_MISSING');
+  if(!observedAt)evidenceBlockers.push('MARKETPLACE_OBSERVED_AT_MISSING');
+  const identityBlockers=[];
+  if(!canonicalProductId)identityBlockers.push('MARKETPLACE_CANONICAL_ID_UNRESOLVED');
+  const priceEvidenceReady=evidenceBlockers.length===0;
+  const pairingIdentityReady=priceEvidenceReady&&identityBlockers.length===0;
+  return {listingKey:clean(listing.listingKey)||null,canonicalProductId,price,currency,sourceUrl,observedAt,priceEvidenceReady,pairingIdentityReady,priceReady:priceEvidenceReady,blockers:[...evidenceBlockers,...identityBlockers],evidenceBlockers,identityBlockers};
 }
 
 function normalizeSupplierListing(listing={}){
@@ -31,13 +34,16 @@ function normalizeSupplierListing(listing={}){
   const currency=clean(latest.currency||listing.latestCurrency).toUpperCase()||null;
   const sourceUrl=clean(latest.sourceUrl||listing.sourceUrl)||null;
   const observedAt=clean(latest.observedAt||listing.lastSeenAt)||null;
-  const blockers=[];
-  if(!canonicalProductId)blockers.push('SUPPLIER_MARKETPLACE_LINK_UNRESOLVED');
-  if(price===null)blockers.push('SUPPLIER_PUBLIC_PRICE_MISSING');
-  if(!currency)blockers.push('SUPPLIER_CURRENCY_MISSING');
-  if(!sourceUrl)blockers.push('SUPPLIER_SOURCE_URL_MISSING');
-  if(!observedAt)blockers.push('SUPPLIER_OBSERVED_AT_MISSING');
-  return {listingKey:clean(listing.listingKey)||null,canonicalProductId,price,currency,sourceUrl,observedAt,priceReady:blockers.length===0,blockers};
+  const evidenceBlockers=[];
+  if(price===null)evidenceBlockers.push('SUPPLIER_PUBLIC_PRICE_MISSING');
+  if(!currency)evidenceBlockers.push('SUPPLIER_CURRENCY_MISSING');
+  if(!sourceUrl)evidenceBlockers.push('SUPPLIER_SOURCE_URL_MISSING');
+  if(!observedAt)evidenceBlockers.push('SUPPLIER_OBSERVED_AT_MISSING');
+  const identityBlockers=[];
+  if(!canonicalProductId)identityBlockers.push('SUPPLIER_MARKETPLACE_LINK_UNRESOLVED');
+  const priceEvidenceReady=evidenceBlockers.length===0;
+  const pairingIdentityReady=priceEvidenceReady&&identityBlockers.length===0;
+  return {listingKey:clean(listing.listingKey)||null,canonicalProductId,price,currency,sourceUrl,observedAt,priceEvidenceReady,pairingIdentityReady,priceReady:priceEvidenceReady,blockers:[...evidenceBlockers,...identityBlockers],evidenceBlockers,identityBlockers};
 }
 
 function collectListings(docs=[],schema,listKey){
@@ -52,13 +58,15 @@ function collectListings(docs=[],schema,listKey){
 export function assessPricePairReadiness({marketplaceDocuments=[],supplierDocuments=[],matchRecords=[]}={}){
   const marketplaceListings=collectListings(marketplaceDocuments,'MPR_MARKETPLACE_PRICE_LEDGER_V1','listings').map(normalizeMarketplaceListing);
   const supplierListings=collectListings(supplierDocuments,'MPR_SUPPLIER_PRICE_LEDGER_V1','listings').map(normalizeSupplierListing);
-  const marketplaceReady=marketplaceListings.filter(x=>x.priceReady);
-  const supplierReady=supplierListings.filter(x=>x.priceReady);
+  const marketplacePriceReady=marketplaceListings.filter(x=>x.priceEvidenceReady);
+  const supplierPriceReady=supplierListings.filter(x=>x.priceEvidenceReady);
+  const marketplacePairingReady=marketplaceListings.filter(x=>x.pairingIdentityReady);
+  const supplierPairingReady=supplierListings.filter(x=>x.pairingIdentityReady);
 
   const marketByCanonical=new Map();
-  for(const row of marketplaceReady){if(!marketByCanonical.has(row.canonicalProductId))marketByCanonical.set(row.canonicalProductId,[]);marketByCanonical.get(row.canonicalProductId).push(row);}
+  for(const row of marketplacePairingReady){if(!marketByCanonical.has(row.canonicalProductId))marketByCanonical.set(row.canonicalProductId,[]);marketByCanonical.get(row.canonicalProductId).push(row);}
   const supplierByCanonical=new Map();
-  for(const row of supplierReady){if(!supplierByCanonical.has(row.canonicalProductId))supplierByCanonical.set(row.canonicalProductId,[]);supplierByCanonical.get(row.canonicalProductId).push(row);}
+  for(const row of supplierPairingReady){if(!supplierByCanonical.has(row.canonicalProductId))supplierByCanonical.set(row.canonicalProductId,[]);supplierByCanonical.get(row.canonicalProductId).push(row);}
 
   const matchByPair=new Map();
   for(const row of Array.isArray(matchRecords)?matchRecords:[]){
@@ -84,10 +92,11 @@ export function assessPricePairReadiness({marketplaceDocuments=[],supplierDocume
   const pairedCanonicalIds=[...new Set(pairs.map(x=>x.canonicalProductId))];
   return {
     schemaVersion:'MPR_PRICE_PAIR_READINESS_V1',
-    marketplace:{listings:marketplaceListings.length,priceReady:marketplaceReady.length,canonicalProductsWithPrice:new Set(marketplaceReady.map(x=>x.canonicalProductId)).size},
-    supplier:{listings:supplierListings.length,priceReady:supplierReady.length,canonicalProductsWithPrice:new Set(supplierReady.map(x=>x.canonicalProductId)).size},
+    marketplace:{listings:marketplaceListings.length,priceEvidenceReady:marketplacePriceReady.length,priceReady:marketplacePriceReady.length,pairingIdentityReady:marketplacePairingReady.length,canonicalProductsWithPrice:new Set(marketplacePairingReady.map(x=>x.canonicalProductId)).size},
+    supplier:{listings:supplierListings.length,priceEvidenceReady:supplierPriceReady.length,priceReady:supplierPriceReady.length,pairingIdentityReady:supplierPairingReady.length,canonicalProductsWithPrice:new Set(supplierPairingReady.map(x=>x.canonicalProductId)).size},
     pairs:{pricePairCount:pairs.length,pairedCanonicalProductCount:pairedCanonicalIds.length,screeningEconomicsReadyCount:pairs.filter(x=>x.screeningEconomicsReady).length,rows:pairs},
     blockerCounts,
-    truthPolicy:{catalogueDiscoveryWithoutPriceIsPriceEvidence:false,canonicalLinkWithoutMatchConfidenceIsScreeningReady:false,unknownEqualsZero:false,pricePairIsConfirmedLandedEconomics:false,verifiedSales:false,purchaseAuthorized:false}
+    readinessLevels:{PRICE_EVIDENCE_READY:'price+currency+source+timestamp',PAIRING_IDENTITY_READY:'price evidence + resolved cross-market canonical identity',SCREENING_READY:'paired marketplace+supplier evidence + matchConfidence>=80'},
+    truthPolicy:{priceEvidenceDoesNotImplyCanonicalIdentity:true,catalogueDiscoveryWithoutPriceIsPriceEvidence:false,canonicalLinkWithoutMatchConfidenceIsScreeningReady:false,unknownEqualsZero:false,pricePairIsConfirmedLandedEconomics:false,verifiedSales:false,purchaseAuthorized:false}
   };
 }
