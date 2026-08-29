@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "MPR_DATAFORSEO_AMAZON_100K_DISCOVERY_PLAN_V1",
+  "targetUniqueProducts": 100000,
+  "maxSpendUsd": 15,
+  "locationCode": 2840,
+  "languageCode": "en",
+  "itemsPerRequest": 1000,
+  "conservativeMaxCostPerRequestUsd": 0.132,
+  "maxRequests": 113,
+  "seedAsins": [
+    "B004LNM816",
+    "B005EXPIO6",
+    "B008KJKA9O",
+    "B008PKV0TM",
+    "B00INKVS82",
+    "B01N6OBLAN",
+    "B018WSR9N2",
+    "B01D4DHWQ4",
+    "B0746HHRQF",
+    "B07TNPHYNV",
+    "B081WRHSJM",
+    "B08BJHMY33",
+    "B0CT2R7ZMT"
+  ],
+  "endpoint": "/v3/dataforseo_labs/amazon/product_competitors/live",
+  "balanceEndpoint": "/v3/appendix/user_data",
+  "truthPolicy": {
+    "evidenceClass": "DISCOVERY_ONLY",
+    "rankingEligible": false,
+    "demandConfirmed": false,
+    "verifiedSalesRows": 0,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "romaniaGapExact": false,
+    "supplierQuoteVerified": false,
+    "landedCostConfirmed": false,
+    "purchaseAuthorized": false
+  },
+  "pricingReference": {
+    "checkedAt": "2026-08-29",
+    "basis": "DataForSEO Labs Amazon public pricing: $0.012/task + $0.00012/item; max 1000 items/request",
+    "url": "https://dataforseo.com/pricing/dataforseo-labs/dataforseo-amazon-api"
+  }
+}
