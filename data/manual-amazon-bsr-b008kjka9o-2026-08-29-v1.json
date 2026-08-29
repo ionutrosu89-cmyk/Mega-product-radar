@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "MPR_MANUAL_AMAZON_BSR_OBSERVATION_V1",
+  "observedDateLocal": "2026-08-29",
+  "observedTimeLocalApprox": "09:27",
+  "source": "amazon.com product page user-supplied screenshot",
+  "sourceUrl": "https://www.amazon.com/dp/B008KJKA9O",
+  "asin": "B008KJKA9O",
+  "identityEvidence": {
+    "brand": "SpaChoice",
+    "modelNumber": "2440PB-02",
+    "upc": "034261200626",
+    "asinVisibleInScreenshot": true
+  },
+  "reviewObservation": {
+    "reviewCount": 167,
+    "rating": 4.3
+  },
+  "explicitBsrEntries": [
+    {"rank":31174,"category":"Patio, Lawn & Garden"},
+    {"rank":87,"category":"Swimming Pool Clarifiers & Enzymes"}
+  ],
+  "baselineComparison": {
+    "baselineObservedAt": "2026-08-26T06:31:17.808Z",
+    "baselineEntries": [
+      {"rank":17198,"category":"Patio, Lawn & Garden"},
+      {"rank":57,"category":"Swimming Pool Clarifiers & Enzymes"}
+    ],
+    "direction": "WORSENING_RANK",
+    "confirmedAcceleration": false,
+    "reason": "Both same-category explicit BSR values increased numerically versus baseline; review growth alone is not sufficient for CONFIRMED_ACCELERATION."
+  },
+  "truthPolicy": {
+    "manualScreenshotIsExplicitRankEvidence": true,
+    "rankIsNotVerifiedSales": true,
+    "reviewIsNotVerifiedSales": true,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false,
+    "romaniaGapExact": false,
+    "supplierQuoteVerified": false,
+    "landedCostConfirmed": false
+  }
+}
