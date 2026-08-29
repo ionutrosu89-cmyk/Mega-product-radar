@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "MPR_LANDED_ECONOMICS_PREFLIGHT_V1",
+  "candidateAsin": "B08BJHMY33",
+  "nicheKey": "home:oversized-cotton-beach-towels-4-pack",
+  "status": "PREFLIGHT_ONLY_UNCONFIRMED",
+  "confirmedLandedEconomics": false,
+  "upstream": {
+    "trendFusion": "CONFIRMED_ACCELERATION",
+    "romaniaGapExact": false,
+    "supplierPackageVerified": false,
+    "supplierRfqFile": "data/supplier-rfq-b08bjhmy33-v1.json"
+  },
+  "targetConfiguration": {
+    "retailSet": "4 oversized beach towels",
+    "material": "100% cotton",
+    "sizeEachApproxCm": "100x180"
+  },
+  "taxAndCustomsPreflight": {
+    "destination": "Romania / EU",
+    "originAssumptionForPreflight": "China",
+    "romaniaStandardVatRate": 0.21,
+    "vatRateEvidence": {
+      "source": "ANAF / Ministerul Finantelor",
+      "url": "https://static.anaf.ro/static/3/Cluj/20250912115924_cj_cotele_reduse_tva_12sep2025.pdf",
+      "note": "ANAF states that from 1 August 2025 the standard VAT rate is 21% for operations subject to the standard rate. Applicability to this import must still be handled under the actual import/VAT accounting facts."
+    },
+    "tariffSystemEvidence": {
+      "source": "European Commission TARIC / tariff classification guidance",
+      "taricUrl": "https://taxation-customs.ec.europa.eu/online-services/online-services-and-databases-customs/eu-customs-tariff-taric_en",
+      "classificationUrl": "https://taxation-customs.ec.europa.eu/customs/common-customs-tariff-cct/tariff-classification-goods_en",
+      "note": "EU classification determines duty and non-tariff measures; TARIC is updated continuously/daily."
+    },
+    "provisionalCnCandidates": [
+      {
+        "cn": "63026000",
+        "description": "cotton terry towelling or similar terry toilet/kitchen linen",
+        "applicability": "POSSIBLE_ONLY_IF_CONSTRUCTION_IS_TERRY_OR_SIMILAR",
+        "dutyRate": null
+      },
+      {
+        "cn": "63029100",
+        "description": "other cotton toilet/kitchen linen",
+        "applicability": "POSSIBLE_IF_PRODUCT_IS_NON_TERRY_COTTON_TOWEL_CONSTRUCTION",
+        "dutyRate": null
+      }
+    ],
+    "classificationConfirmed": false,
+    "dutyRateConfirmed": false,
+    "dutyRate": null,
+    "reasonDutyUnknown": "Supplier has not yet confirmed the exact fabric construction / attributable HS-CN classification, and the current TARIC measure for the exact classification/origin has not been bound to the final quoted product."
+  },
+  "marketPriceEvidence": {
+    "exactComparableRomaniaSellPrice": null,
+    "sellPriceScenarioConfirmed": false,
+    "sampledNonComparableAnchorsOnly": [
+      {
+        "platform": "EMAG",
+        "observedFrom": "user-supplied screenshots 2026-08-29",
+        "examples": [
+          "single 90x180 cotton beach towel visible at 38.50 RON",
+          "single 90x180 beach/spa towel visible at 89.90 RON",
+          "2-pack 90x180 100% cotton towels visible at 154.85 RON"
+        ],
+        "use": "CONTEXT_ONLY_NOT_EXACT_4_PACK_SELL_PRICE"
+      },
+      {
+        "platform": "TRENDYOL_RO",
+        "observedFrom": "user-supplied screenshots 2026-08-29",
+        "examples": [
+          "2-piece 90x180 towel variants visible at 56.97 RON"
+        ],
+        "use": "CONTEXT_ONLY_NOT_EXACT_4_PACK_SELL_PRICE"
+      }
+    ]
+  },
+  "requiredCommercialInputs": {
+    "quoteCurrency": null,
+    "exwOrFobPricePerSet": null,
+    "freightToEuOrDdpPerSet": null,
+    "insurancePerSet": null,
+    "confirmedDutyRate": null,
+    "customsBrokeragePerSet": null,
+    "destinationHandlingPerSet": null,
+    "domesticTransportPerSet": null,
+    "labelingComplianceOtherPerSet": null,
+    "importVatTreatment": null,
+    "fxRate": null,
+    "fxSource": null,
+    "observableComparableSellPriceRon": null,
+    "marketplaceCommissionRate": null,
+    "fulfillmentShippingPerOrderRon": null,
+    "returnsReserveRate": null,
+    "adsReserveRate": null,
+    "otherOperatingReserveRate": null
+  },
+  "calculationContract": {
+    "customsValue": "goods_value + freight_and_insurance_to_EU_border, using actual customs valuation treatment",
+    "customsDuty": "customs_value * confirmed_duty_rate",
+    "importVat": "confirmed_import_vat_base * applicable_vat_rate; recoverability must be recorded separately",
+    "cashLandedCostPerSet": "(goods + international_freight + insurance + customs_duty + import_vat_cash + brokerage + destination_handling + domestic_transport + compliance/labeling costs) / sellable_sets",
+    "netEconomicLandedCostPerSet": "cash_landed_cost_per_set minus only VAT amounts demonstrably recoverable under the importer actual VAT treatment",
+    "profitPerSet": "net_sell_revenue_ex_vat - net_economic_landed_cost - marketplace_fees - fulfillment - ads_reserve - returns_reserve - other_reserves",
+    "margin": "profit_per_set / net_sell_revenue_ex_vat",
+    "roi": "profit_per_set / net_economic_landed_cost",
+    "breakEvenSellPrice": "solve sell price where profit_per_set = 0 using the confirmed fee/reserve structure"
+  },
+  "blockers": [
+    "SUPPLIER_PACKAGE_NOT_VERIFIED",
+    "EXACT_ROMANIA_GAP_NOT_CONFIRMED",
+    "QUOTE_PRICE_UNKNOWN",
+    "FREIGHT_OR_DDP_UNKNOWN",
+    "EXACT_CN_TARIC_CLASSIFICATION_UNKNOWN",
+    "DUTY_RATE_UNKNOWN",
+    "FX_UNKNOWN_IF_QUOTE_NOT_RON",
+    "EXACT_COMPARABLE_ROMANIA_SELL_PRICE_UNKNOWN",
+    "OPERATING_FEES_AND_RESERVES_NOT_CONFIRMED"
+  ],
+  "promotion": {
+    "productsWithConfirmedLandedEconomicsIncrement": 0,
+    "promotionEligible": false,
+    "reason": "MISSING_VERIFIED_QUOTE_FREIGHT_TARIFF_SELL_PRICE_AND_OPERATING_INPUTS"
+  },
+  "truthPolicy": {
+    "unknownIsZero": false,
+    "provisionalHsIsConfirmedClassification": false,
+    "supplierListingIsVerifiedQuote": false,
+    "verifiedQuoteIsConfirmedLandedCost": false,
+    "sampledMarketPriceIsExactComparableSellPrice": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "purchaseAuthorized": false
+  }
+}
