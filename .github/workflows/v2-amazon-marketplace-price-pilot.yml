@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/v2-amazon-marketplace-price-pilot.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/v2-amazon-marketplace-price-pilot.yml'
 
 permissions:
   contents: read
