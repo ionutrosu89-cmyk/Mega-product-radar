@@ -10,6 +10,10 @@ if(!inputs.length)throw new Error('INPUT_REQUIRED: --input=file.json[,file2.json
 function extract(doc,file){
   if(doc?.schemaVersion==='MPR_SUPPLIER_CANDIDATE_PRICE_SNAPSHOT_V1')return [doc];
   if(doc?.schemaVersion==='MPR_SUPPLIER_PRICE_LEDGER_INPUT_V1')return (doc.observations||[]).map(normalizeSupplierCandidatePriceSnapshot);
+  if(doc?.schemaVersion==='MPR_ALIBABA_PUBLIC_PRICE_COLLECTION_V1'){
+    const rows=Array.isArray(doc.observations)?doc.observations:[];
+    return rows.map(normalizeSupplierCandidatePriceSnapshot).filter(x=>x.valid);
+  }
   if(doc?.schemaVersion==='REAL_PUBLIC_SEED_1000_V2'){
     const alibaba=(doc.observations||[]).filter(x=>String(x?.platform||'').toUpperCase()==='ALIBABA');
     if(alibaba.length)throw new Error(`DISCOVERY_ONLY_INPUT_REFUSED: ${file}: REAL_PUBLIC_SEED_1000_V2 has Alibaba catalogue URLs but no verified public price/MOQ payload; refusing evidence upgrade`);
