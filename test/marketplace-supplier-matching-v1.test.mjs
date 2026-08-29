@@ -49,6 +49,13 @@ test('materially different dimensions force rejection',()=>{
   assert.ok(result.hardMismatches.includes('DIMENSION_MISMATCH'));
 });
 
+test('category-critical mismatch forces rejection',()=>{
+  const result=matchMarketplaceToSupplier(product({category:'home'}),product({category:'pet supplies'}));
+  assert.equal(result.matchConfidence,0);
+  assert.equal(result.matchClass,'REJECTED_MATCH');
+  assert.ok(result.hardMismatches.includes('CATEGORY_MISMATCH'));
+});
+
 test('unknown attributes do not become implicit matches or zeros',()=>{
   const sparseA=buildProductFingerprint({productType:'beach towel',sourceTitle:'cotton beach towel'});
   const sparseB=buildProductFingerprint({productType:'beach towel',sourceTitle:'cotton beach towel'});
