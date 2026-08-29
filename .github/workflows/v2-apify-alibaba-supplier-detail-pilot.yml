@@ -1,0 +1,56 @@
+name: V2 Apify Alibaba Supplier Detail Pilot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-apify-supplier-detail-pilot-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+      MPR_APIFY_DETAIL_AUTHORIZATION: USER_APPROVED_APIFY_SUPPLIER_DETAIL_PILOT_2026_08_29
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify exact-URL authorization and hard cap
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const t=JSON.parse(fs.readFileSync('data/v2-apify-supplier-detail-pilot-trigger.json','utf8'));
+          if(t.authorization!=='USER_APPROVED_APIFY_SUPPLIER_DETAIL_PILOT_2026_08_29')throw new Error('APIFY_DETAIL_SPEND_NOT_AUTHORIZED');
+          if(t.maxTotalChargeUsd!==0.05)throw new Error('APIFY_DETAIL_CAP_MUST_EQUAL_0_05');
+          if(t.actor!=='xtracto~alibaba-product-scraper')throw new Error('UNEXPECTED_ACTOR');
+          if(!Array.isArray(t.supplierUrls)||!t.supplierUrls.length||new Set(t.supplierUrls).size>5)throw new Error('URL_SCOPE_INVALID');
+          if(t.discoveryAuthorized!==false||t.purchaseAuthorized!==false||t.negotiationAuthorized!==false)throw new Error('COMMERCIAL_ACTION_FORBIDDEN');
+          if(!process.env.APIFY_TOKEN)throw new Error('APIFY_TOKEN_MISSING');
+          NODE
+      - name: Run hard-capped exact-URL supplier detail pilot
+        run: node scripts/apify-alibaba-supplier-detail-pilot-v1.mjs
+      - name: Verify evidence truth envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/apify-alibaba-supplier-detail-pilot/summary.json','utf8'));
+          if(s.maxTotalChargeUsd!==0.05)throw new Error('HARD_CAP_CHANGED');
+          if(s.reportedUsageUsd!==null&&s.reportedUsageUsd>0.05+1e-9)throw new Error('CHARGE_CAP_BREACH');
+          if(s.requestedUniqueSupplierUrls>5)throw new Error('URL_CAP_BREACH');
+          if(s.truthPolicy.structuredPublicDetailIsVerifiedQuote!==false||s.truthPolicy.structuredPublicDetailIsLandedCost!==false)throw new Error('TRUTH_PROMOTION');
+          if(s.truthPolicy.discoveryAuthorized!==false||s.truthPolicy.purchaseAuthorized!==false)throw new Error('FORBIDDEN_ACTION');
+          NODE
+      - name: Upload supplier detail pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-apify-alibaba-supplier-detail-pilot
+          path: artifacts/apify-alibaba-supplier-detail-pilot/
+          retention-days: 30
+          if-no-files-found: error
