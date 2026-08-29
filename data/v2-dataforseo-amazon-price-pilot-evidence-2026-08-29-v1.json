@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "MPR_V2_DATAFORSEO_AMAZON_PRICE_PILOT_EVIDENCE_V1",
+  "generatedAt": "2026-08-29T17:23:41Z",
+  "workflowRunId": 33265443343,
+  "artifact": {
+    "id": 9718516224,
+    "name": "v2-dataforseo-amazon-price-pilot",
+    "digest": "sha256:6232ed2ebf5a8ffb1c4915a8c6cef678df74c0d8491565d04227f4eb60210c34"
+  },
+  "pilot": {
+    "endpoint": "/v3/merchant/amazon/products/live/advanced",
+    "keywordsAttempted": 5,
+    "depthPerKeyword": 100,
+    "uniquePriceObservations": 515,
+    "ledgerListings": 515,
+    "rejectedLedgerRows": 0,
+    "unresolvedCanonicalListingCount": 515,
+    "boughtPastMonthDisplayedSignalCount": 424,
+    "priceMinObservedUsd": 4.99,
+    "priceMedianObservedUsd": 22.99,
+    "priceMaxObservedUsd": 189.99
+  },
+  "economics": {
+    "providerReportedSpendUsd": 0.0165,
+    "priceObservationsPerRequest": 103,
+    "priceObservationsPerUsd": 31212.12,
+    "historicalAccountedSpendBeforePilotUsd": 11.13414,
+    "totalAccountedSpendAfterPilotUsd": 11.15064,
+    "totalAuthorizedCapUsd": 15,
+    "remainingAuthorizedSpendUsd": 3.84936,
+    "accountBalanceBeforePilotUsd": 38.29986,
+    "pilotHardCapUsd": 0.1
+  },
+  "requestLedger": [
+    {"keyword":"desk organizer","costUsd":0.0033,"priceObservations":98,"newUniqueAsins":98},
+    {"keyword":"car seat organizer","costUsd":0.0033,"priceObservations":117,"newUniqueAsins":117},
+    {"keyword":"stroller organizer","costUsd":0.0033,"priceObservations":98,"newUniqueAsins":98},
+    {"keyword":"packing cubes","costUsd":0.0033,"priceObservations":95,"newUniqueAsins":95},
+    {"keyword":"oversized beach towel","costUsd":0.0033,"priceObservations":107,"newUniqueAsins":107}
+  ],
+  "decision": {
+    "structuredProviderPriceIngestionViable": true,
+    "directAmazonHtmlRemainsPointRefreshOnly": true,
+    "nextScaleGate": "CONTROLLED_DIVERSE_KEYWORD_ROUND_WITH_MARGINAL_UNIQUE_ASIN_MEASUREMENT",
+    "fullRemainingBudgetSpendAuthorizedByThisEvidence": false
+  },
+  "truthPolicy": {
+    "providerStructuredPriceIsRealizedSale": false,
+    "amazonDisplayedBoughtPastMonthIsVerifiedSales": false,
+    "asinIsCrossMarketCanonicalIdentity": false,
+    "priceEvidenceImpliesSupplierMatch": false,
+    "unknownEqualsZero": false,
+    "verifiedSales": false,
+    "purchaseAuthorized": false
+  }
+}
