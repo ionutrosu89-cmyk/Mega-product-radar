@@ -33,8 +33,9 @@ test('calculates landed economics only with complete verified inputs',()=>{
   assert.equal(r.confirmedLandedEconomics,true);
   assert.equal(r.customsValueRon,6050);
   assert.equal(r.customsDutyRon,726);
-  assert.equal(r.cashLandedCostPerSet,84.01);
-  assert.equal(r.landedCostPerSet,70.76);
+  assert.equal(r.importVatRon,1464.96);
+  assert.equal(r.cashLandedCostPerSet,86.41);
+  assert.equal(r.landedCostPerSet,71.76);
   assert.ok(r.profitPerSet>0);
   assert.ok(r.margin>0);
   assert.ok(r.roi>0);
