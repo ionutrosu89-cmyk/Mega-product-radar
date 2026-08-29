@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/run-first-screening-economics-preflight-v1.mjs'
+      - 'screening-market-context-v1.js'
+      - 'data/v2-public-economics-evidence-2026-08-29.json'
       - '.github/workflows/v2-first-screening-economics-preflight.yml'
   workflow_dispatch:
 
@@ -28,14 +30,18 @@ jobs:
           mkdir -p artifacts/match
           gh run download 33271637387 -n v2-secondary-public-match-corroboration -D artifacts/match
       - name: Run fail-closed economics preflight
-        run: node scripts/run-first-screening-economics-preflight-v1.mjs artifacts/match/secondary-corroborated-match.json artifacts/first-screening-economics-preflight.json
-      - name: Verify no assumption fabrication
+        run: node scripts/run-first-screening-economics-preflight-v1.mjs artifacts/match/secondary-corroborated-match.json artifacts/first-screening-economics-preflight.json data/v2-public-economics-evidence-2026-08-29.json
+      - name: Verify market coherence and no assumption fabrication
         run: |
           node <<'NODE'
           const fs=require('fs');
           const s=JSON.parse(fs.readFileSync('artifacts/first-screening-economics-preflight.json','utf8'));
-          if(s.decision!=='BLOCKED_PENDING_PROVENANCE_BACKED_ASSUMPTIONS')throw new Error('PREFLIGHT_UNEXPECTEDLY_UNBLOCKED');
+          if(s.decision!=='BLOCKED_PENDING_ROMANIA_SELL_PRICE_AND_PROVENANCE_BACKED_ASSUMPTIONS')throw new Error('PREFLIGHT_UNEXPECTEDLY_UNBLOCKED');
           if(s.economics.status!=='BLOCKED')throw new Error('ECONOMICS_MUST_FAIL_CLOSED');
+          if(s.marketContexts?.romaniaSellScreen?.status!=='BLOCKED')throw new Error('ROMANIA_MARKET_MUST_BLOCK_US_SELL_PRICE');
+          if(!s.marketContexts.romaniaSellScreen.blockers.includes('SELL_PRICE_MARKET_MISMATCH'))throw new Error('SELL_MARKET_MISMATCH_NOT_DETECTED');
+          if(s.marketContexts?.amazonUsBenchmark?.status!=='COHERENT')throw new Error('AMAZON_US_BENCHMARK_SHOULD_BE_COHERENT');
+          if(s.truthPolicy.amazonUsPriceIsRomaniaSellPrice!==false||s.truthPolicy.amazonUsReferralFeeIsRomaniaMarketplaceFee!==false)throw new Error('CROSS_MARKET_EVIDENCE_PROMOTION');
           if(s.truthPolicy.syntheticTestValuesUsedAsCommercialFacts!==false)throw new Error('SYNTHETIC_ASSUMPTION_PROMOTION');
           if(s.truthPolicy.unknownEqualsZero!==false||s.truthPolicy.purchaseAuthorized!==false)throw new Error('TRUTH_POLICY_BREACH');
           if(s.truthPolicy.paidCallsTriggered!==0||s.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_SPEND');
