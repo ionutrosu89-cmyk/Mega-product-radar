@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "MPR_ROMANIA_MANUAL_REVIEW_PACK_V1",
+  "candidateAsin": "B08BJHMY33",
+  "nicheKey": "home:oversized-cotton-beach-towels-4-pack",
+  "comparabilityKey": "OVERSIZED_COTTON_BEACH_TOWELS_4_PACK",
+  "purpose": "MANUAL_MARKET_WIDE_EXACT_EVIDENCE_COLLECTION_GUIDE_ONLY",
+  "canonicalDefinitionDraft": "Set de exact 4 prosoape de plaja oversized din bumbac, aproximativ 180 x 100 cm / 72 x 40 in, destinate utilizarii la plaja.",
+  "includeOnlyIfAll": [
+    "listing is sold as one set containing exactly 4 towels",
+    "material is cotton or explicitly 100% cotton",
+    "product is positioned for beach use",
+    "each towel is oversized, approximately 180x100 cm, 90x180 cm, 100x180 cm, 72x40 in, or a materially equivalent oversized beach-towel size"
+  ],
+  "excludeIfAny": [
+    "single towel",
+    "set with a quantity other than 4",
+    "microfiber or non-cotton material",
+    "bath-only towel without beach positioning",
+    "hand towel, face towel, kitchen towel or hotel-only set",
+    "poncho, hooded towel, blanket, mat or sarong",
+    "mixed-size bathroom set where the four pieces are not four comparable oversized beach towels"
+  ],
+  "marketplaces": [
+    {
+      "platform": "EMAG",
+      "market": "RO",
+      "queries": [
+        {"q":"set 4 prosoape plaja bumbac","url":"https://www.emag.ro/search/set%204%20prosoape%20plaja%20bumbac"},
+        {"q":"4 prosoape plaja bumbac oversized","url":"https://www.emag.ro/search/4%20prosoape%20plaja%20bumbac%20oversized"},
+        {"q":"set 4 prosoape plaja 180x100","url":"https://www.emag.ro/search/set%204%20prosoape%20plaja%20180x100"},
+        {"q":"set 4 prosoape plaja 90x180","url":"https://www.emag.ro/search/set%204%20prosoape%20plaja%2090x180"}
+      ]
+    },
+    {
+      "platform": "TRENDYOL",
+      "market": "RO",
+      "queries": [
+        {"q":"set 4 prosoape plaja bumbac","url":"https://www.trendyol.com/ro/sr?q=set%204%20prosoape%20plaja%20bumbac"},
+        {"q":"4 prosoape plaja bumbac oversized","url":"https://www.trendyol.com/ro/sr?q=4%20prosoape%20plaja%20bumbac%20oversized"},
+        {"q":"set 4 prosoape plaja 180x100","url":"https://www.trendyol.com/ro/sr?q=set%204%20prosoape%20plaja%20180x100"},
+        {"q":"set 4 prosoape plaja 90x180","url":"https://www.trendyol.com/ro/sr?q=set%204%20prosoape%20plaja%2090x180"}
+      ]
+    }
+  ],
+  "manualReviewChecklist": [
+    "open every alias search on the direct marketplace",
+    "record the displayed result count only as surfaceCount until scope is proven",
+    "enumerate all relevant result pages or prove the complete reviewed surface",
+    "deduplicate repeated listings across aliases",
+    "open ambiguous listings and classify against the canonical definition",
+    "record excluded false positives separately",
+    "mark MARKET_WIDE only after the complete alias set and surface coverage are manually confirmed",
+    "set exactListingCount only after enumeration, deduplication and canonical classification"
+  ],
+  "outputRequirements": {
+    "bothPlatformsRequired": true,
+    "directMarketplaceSourceUrlsRequired": true,
+    "observedTimestampRequired": true,
+    "humanReviewerRequired": true,
+    "marketWideRequired": true,
+    "sameComparabilityKeyRequired": true,
+    "exactListingCountsRequired": true,
+    "attachmentReferencesRequired": true
+  },
+  "truthBoundary": {
+    "reviewPackIsEvidence": false,
+    "unknownIsZero": false,
+    "surfaceCountIsExact": false,
+    "sampledEvidenceMayConfirmExactGap": false,
+    "exactRomaniaGapConfirmed": false,
+    "promotionEligible": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
