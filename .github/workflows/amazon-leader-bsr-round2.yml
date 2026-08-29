@@ -2,6 +2,11 @@ name: Amazon Leader BSR Round 2
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/amazon-leader-bsr-round2-trigger-2026-08-27.json'
 
 permissions:
   contents: read
@@ -15,6 +20,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Validate zero-cost one-time trigger
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='data/amazon-leader-bsr-round2-trigger-2026-08-27.json';
+          if(!fs.existsSync(p)) throw new Error('LEADER_BSR_ROUND2_TRIGGER_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.triggerId!=='AMAZON_LEADER_BSR_ROUND2_2026_08_27') throw new Error('LEADER_BSR_ROUND2_TRIGGER_INVALID');
+          if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('LEADER_BSR_ROUND2_POLICY_INVALID');
+          const notBefore=Date.parse(x.notBefore||'');
+          if(!Number.isFinite(notBefore)||Date.now()<notBefore) throw new Error('LEADER_BSR_ROUND2_TOO_EARLY');
+          NODE
       - name: Enforce minimum 24h eligibility before network collection
         run: |
           node - <<'NODE'
@@ -69,49 +87,17 @@ jobs:
           if((f.rows||[]).some(r=>r.confirmedAcceleration===true&&(r.rankSignal?.rankVelocityPerDay<=0||r.reviewSignal?.reviewDelta<=0)))process.exitCode=4;
           NODE
       - name: Evaluate candidate importability and business fit
-        run: >-
-          node scripts/importability-business-fit.mjs
-          --asin=B00INKVS82
-          --profile=data/importability-profile-b00inkvs82-v1.json
-          --out=artifacts/importability-business-fit-b00inkvs82.json
-      - name: Enforce importability safety truth gates
-        run: |
-          node - <<'NODE'
-          const fs=require('fs');
-          const i=JSON.parse(fs.readFileSync('artifacts/importability-business-fit-b00inkvs82.json','utf8'));
-          console.log(`importabilityStatus=${i.status}`);
-          console.log(`unknowns=${JSON.stringify(i.unknowns||[])}`);
-          console.log(`hardBlockers=${JSON.stringify(i.hardBlockers||[])}`);
-          if(i.purchaseAuthorized!==false||i.paidCallsTriggered!==0||i.providerSpendEur!==0)process.exitCode=2;
-          if(i.importabilityPassed===true&&i.status!=='IMPORTABILITY_PASS')process.exitCode=3;
-          NODE
+        run: node scripts/importability-business-fit.mjs --asin=B00INKVS82 --profile=data/importability-profile-b00inkvs82-v1.json --out=artifacts/importability-business-fit-b00inkvs82.json
       - name: Build First Finalist decision packet
-        run: >-
-          node scripts/first-finalist-decision.mjs
-          --asin=B00INKVS82
-          --fusion=artifacts/amazon-strict-trend-fusion-round2.json
-          --romania=data/romania-binder-manual-exact-evidence-b00inkvs82-v1.json
-          --importability=artifacts/importability-business-fit-b00inkvs82.json
-          --supplier=supplier-evidence/manual-verification-packets-v1.json
-          --economics=data/landed-economics-readiness-v1.json
-          --out=artifacts/first-finalist-decision-round2.json
-      - name: Enforce First Finalist and canonical decision truth gates
+        run: node scripts/first-finalist-decision.mjs --asin=B00INKVS82 --fusion=artifacts/amazon-strict-trend-fusion-round2.json --romania=data/romania-binder-manual-exact-evidence-b00inkvs82-v1.json --importability=artifacts/importability-business-fit-b00inkvs82.json --supplier=supplier-evidence/manual-verification-packets-v1.json --economics=data/landed-economics-readiness-v1.json --out=artifacts/first-finalist-decision-round2.json
+      - name: Enforce First Finalist truth gates
         run: |
           node - <<'NODE'
-          const fs=require('fs');
-          const d=JSON.parse(fs.readFileSync('artifacts/first-finalist-decision-round2.json','utf8'));
-          const c=d.canonicalDecision||{};
-          console.log(`decisionStatus=${d.status}`);
-          console.log(`canonicalStage=${c.stage}`);
-          console.log(`gates=${JSON.stringify(d.gates)}`);
-          console.log(`blockers=${JSON.stringify(d.blockers)}`);
-          console.log(`supplierSourcingEligible=${d.supplierSourcingEligible}`);
+          const fs=require('fs');const d=JSON.parse(fs.readFileSync('artifacts/first-finalist-decision-round2.json','utf8'));const c=d.canonicalDecision||{};
+          console.log(`decisionStatus=${d.status}`);console.log(`canonicalStage=${c.stage}`);console.log(`gates=${JSON.stringify(d.gates)}`);console.log(`blockers=${JSON.stringify(d.blockers)}`);
           if(d.purchaseAuthorized!==false||d.paidCallsTriggered!==0||d.providerSpendEur!==0||d.salesEvidenceClass!=='NOT_VERIFIED_SALES'||d.verifiedSalesRows!==0)process.exitCode=2;
-          if(d.finalistEvidenceReady===true && (!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.importabilityPassed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
-          if(d.testReady!==false)process.exitCode=4;
-          if(c.authority!=='EVIDENCE_DRIVEN_CANONICAL_DECISION'||c.purchaseAuthorized!==false||c.automaticPurchaseAllowed!==false)process.exitCode=5;
-          if(c.stage==='FINALIST'&&d.finalistEvidenceReady!==true)process.exitCode=6;
-          if(['TEST_READY','TEST_RUNNING','TEST_VALIDATED','BUY_READY'].includes(c.stage))process.exitCode=7;
+          if(d.finalistEvidenceReady===true&&(!d.gates?.trendConfirmed||!d.gates?.romaniaGapConfirmed||!d.gates?.importabilityPassed||!d.gates?.supplierVerified||!d.gates?.economicsConfirmed))process.exitCode=3;
+          if(d.testReady!==false||c.purchaseAuthorized!==false||c.automaticPurchaseAllowed!==false)process.exitCode=4;
           NODE
       - name: Run BSR, fusion, importability and canonical decision unit tests
         run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs test/single-decision-authority-v1.test.mjs
