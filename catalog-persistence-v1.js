@@ -16,6 +16,10 @@ function canonicalKey(candidate={}){
   return `FINGERPRINT:${candidate.fingerprint}`;
 }
 
+function sourceRecordLookupKey(sourceKey,sourceRecordId){
+  return `${String(sourceKey??'')}\u0000${String(sourceRecordId??'')}`;
+}
+
 export function buildCatalogPersistenceBundle(ingestion={}){
   if(ingestion.schema!=='MPR_BULK_CATALOG_INGESTION_V1')throw new TypeError('bulk ingestion evidence required');
   if(ingestion.decision!=='INGESTION_ACCOUNTED')throw new TypeError('ingestion must be fully accounted');
@@ -23,8 +27,11 @@ export function buildCatalogPersistenceBundle(ingestion={}){
   const identities=[];
   const sourceRecords=[];
   const claims=[];
+  const canonicalKeyBySourceRecord=new Map();
   for(const c of ingestion.accepted||[]){
     const key=canonicalKey(c);
+    const lookupKey=sourceRecordLookupKey(c.sourceKey,c.sourceRecordId);
+    if(!canonicalKeyBySourceRecord.has(lookupKey))canonicalKeyBySourceRecord.set(lookupKey,key);
     products.push({
       canonical_key:key,
       title:clean(c.title)||'Untitled product',
@@ -44,8 +51,8 @@ export function buildCatalogPersistenceBundle(ingestion={}){
     sourceRecords.push({source_key:c.sourceKey,source_record_id:c.sourceRecordId,canonical_key:key,observed_at:c.observedAt||null,rights_decision:c.rightsDecision,evidence_class:c.evidenceClass,record_fingerprint:c.fingerprint,payload:c.raw});
   }
   for(const claim of ingestion.claims||[]){
-    const c=(ingestion.accepted||[]).find(x=>x.sourceKey===claim.sourceKey&&x.sourceRecordId===claim.sourceRecordId);
-    claims.push({...claim,canonical_key:c?canonicalKey(c):null});
+    const key=canonicalKeyBySourceRecord.get(sourceRecordLookupKey(claim.sourceKey,claim.sourceRecordId))||null;
+    claims.push({...claim,canonical_key:key});
   }
   const run={
     source_key:ingestion.manifest.sourceKey,
