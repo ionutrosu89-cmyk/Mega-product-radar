@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "MPR_V2_AMAZON_MARKETPLACE_PRICE_PILOT_EVIDENCE_V1",
+  "observedAt": "2026-08-29T17:10:33Z",
+  "workflowRunId": 33264893864,
+  "workflowName": "V2 Amazon Marketplace Price Pilot",
+  "artifact": {
+    "id": 9718341871,
+    "name": "v2-amazon-marketplace-price-pilot",
+    "digest": "sha256:ac2218423f78ffd615b8c194307fd7491f06a2f7041e8c42350b0e763bedbc83",
+    "retentionDays": 30
+  },
+  "metrics": {
+    "requested": 100,
+    "validObservations": 90,
+    "successRatePct": 90,
+    "withPrice": 89,
+    "withRating": 90,
+    "withReviews": 90,
+    "blocked": 0,
+    "httpFailures": 10,
+    "ledgerListings": 90,
+    "ledgerSnapshots": 90,
+    "ledgerLatestWithPrice": 89,
+    "rejectedLedgerRows": 0,
+    "unresolvedCanonicalListingCount": 90,
+    "canonicalProductCount": 0
+  },
+  "interpretation": {
+    "amazonPublicPagePriceCollectionViable": true,
+    "priceEvidenceReadyCount": 89,
+    "pairingIdentityReadyCount": 0,
+    "screeningReadyCount": 0,
+    "reasonPairingBlocked": "CROSS_MARKET_CANONICAL_IDENTITY_NOT_RESOLVED",
+    "nextGate": "BUILD_PRODUCT_FINGERPRINT_AND_SUPPLIER_CANDIDATE_MATCHES_WITH_MATCH_CONFIDENCE_GTE_80"
+  },
+  "truthPolicy": {
+    "marketplacePriceIsRealizedSale": false,
+    "reviewOrRatingIsVerifiedSales": false,
+    "asinIsCrossMarketCanonicalIdentity": false,
+    "priceEvidenceImpliesSupplierMatch": false,
+    "unknownEqualsZero": false,
+    "verifiedSales": false,
+    "paidCallsTriggered": 0,
+    "providerSpend": 0,
+    "purchaseAuthorized": false
+  }
+}
