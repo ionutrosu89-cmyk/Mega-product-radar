@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "MPR_SUPPLIER_RFQ_V1",
+  "candidateAsin": "B08BJHMY33",
+  "nicheKey": "home:oversized-cotton-beach-towels-4-pack",
+  "purpose": "Obtain a directly attributable commercial quote sufficient for supplier-package verification and later landed-cost calculation.",
+  "targetSpecification": {
+    "retailPack": "4 towels per retail set",
+    "material": "100% cotton",
+    "use": "beach/pool",
+    "sizeEach": "approximately 100x180 cm",
+    "preferredStyle": "oversized striped/turkish/cabana-style; supplier may quote nearest stock option separately",
+    "branding": "quote both unbranded stock option and custom private-label option if available"
+  },
+  "messageEnglish": "Hello, we are evaluating an import to Romania and need a formal quotation for a retail set of 4 oversized beach towels. Required specification: 100% cotton, approximately 100 x 180 cm each towel, for beach/pool use. Please quote the closest stock product and, separately, a customized/private-label option if available. Please confirm: (1) exact material composition and GSM/weight per towel; (2) MOQ in pieces and in 4-piece retail sets; (3) EXW and FOB price per towel and per 4-piece set for MOQ, 200 sets, 500 sets and 1,000 sets where possible; (4) sample price and sample lead time; (5) production lead time; (6) retail packing options for 4 towels; (7) master carton quantity, carton dimensions and gross/net weight for the quoted 4-piece configuration; (8) FOB port and Incoterm; (9) whether you can quote DDP delivery to Bucharest, Romania, and if yes the DDP freight/total for MOQ and 200 sets; (10) HS code you normally use; (11) available product/testing/compliance documents for EU textile sales; and (12) quotation validity/date. Please identify the exact product/model or attach photos/spec sheet so the quotation can be tied to the quoted item. Thank you.",
+  "requiredResponseFields": [
+    "supplier legal/business identity",
+    "exact quoted product/model or attributable photos/spec sheet",
+    "100% cotton confirmation",
+    "size per towel",
+    "GSM or weight per towel",
+    "MOQ pieces and/or 4-piece sets",
+    "EXW or FOB price",
+    "price tiers if available",
+    "sample cost and lead time",
+    "production lead time",
+    "4-piece retail packing",
+    "master carton quantity",
+    "master carton dimensions",
+    "master carton gross weight",
+    "incoterm and FOB port",
+    "DDP Bucharest availability/price or explicit not offered",
+    "supplier-stated HS code",
+    "EU textile/compliance documentation availability",
+    "quote date/validity"
+  ],
+  "verificationRules": {
+    "publicListingAloneQualifies": false,
+    "quoteMustBeDirectlyAttributableToSupplier": true,
+    "quoteMustBeTiedToExactOrExplicitNearestSpec": true,
+    "unknownFieldsRemainNull": true,
+    "ddpNotOfferedMayBeExplicitlyRecorded": true,
+    "supplierPackageVerifiedOnlyAfterHumanOrDirectMessageEvidence": true,
+    "landedCostConfirmedByThisRfq": false
+  },
+  "responseIntake": {
+    "status": "AWAITING_DIRECT_SUPPLIER_RESPONSE",
+    "supplier": null,
+    "quoteDate": null,
+    "quotedProduct": null,
+    "moq": null,
+    "exwPrice": null,
+    "fobPrice": null,
+    "ddpRomania": null,
+    "leadTime": null,
+    "carton": null,
+    "attachments": [],
+    "supplierPackageVerified": false
+  },
+  "truthPolicy": {
+    "supplierListingIsVerifiedQuote": false,
+    "verifiedQuoteIsConfirmedLandedCost": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false
+  }
+}
