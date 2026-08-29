@@ -24,16 +24,19 @@ test('missing supplier public price is not price evidence',()=>{
   bad.listings[0].latestNormalizedPublicUnitPrice=null;
   bad.listings[0].snapshots[0].normalizedPublicUnitPrice=null;
   const r=assessPricePairReadiness({marketplaceDocuments:[marketDoc],supplierDocuments:[bad]});
-  assert.equal(r.supplier.priceReady,0);
+  assert.equal(r.supplier.priceEvidenceReady,0);
+  assert.equal(r.supplier.pairingIdentityReady,0);
   assert.equal(r.pairs.pricePairCount,0);
   assert.equal(r.blockerCounts.SUPPLIER_PUBLIC_PRICE_MISSING,1);
 });
 
-test('unresolved canonical ids do not pair by title or coincidence',()=>{
+test('unresolved canonical id preserves real price evidence but blocks pairing',()=>{
   const bad=structuredClone(marketDoc);
   bad.listings[0].canonicalProductId=null;
   const r=assessPricePairReadiness({marketplaceDocuments:[bad],supplierDocuments:[supplierDoc]});
-  assert.equal(r.marketplace.priceReady,0);
+  assert.equal(r.marketplace.priceEvidenceReady,1);
+  assert.equal(r.marketplace.pairingIdentityReady,0);
   assert.equal(r.pairs.pricePairCount,0);
   assert.equal(r.blockerCounts.MARKETPLACE_CANONICAL_ID_UNRESOLVED,1);
+  assert.equal(r.truthPolicy.priceEvidenceDoesNotImplyCanonicalIdentity,true);
 });
