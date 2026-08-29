@@ -1,0 +1,74 @@
+name: V2 DataForSEO Alibaba Structured Pilot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-dataforseo-alibaba-structured-pilot-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+      DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+      DATAFORSEO_API_LOGIN: ${{ secrets.DATAFORSEO_API_LOGIN }}
+      DATAFORSEO_API_PASSWORD: ${{ secrets.DATAFORSEO_API_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate hard-capped authorization
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const t=JSON.parse(fs.readFileSync('data/v2-dataforseo-alibaba-structured-pilot-trigger.json','utf8'));
+          if(t.authorization!=='USER_APPROVED_PAID_DATA_DISCOVERY')throw new Error('PAID_DISCOVERY_NOT_AUTHORIZED');
+          if(t.maxAdditionalSpendUsd!==0.05)throw new Error('ROUND_CAP_MUST_EQUAL_0_05_USD');
+          if(t.totalProjectSpendCapUsd!==15)throw new Error('TOTAL_CAP_MUST_EQUAL_15_USD');
+          if(t.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_FORBIDDEN');
+          NODE
+      - name: Discover Alibaba product-detail URLs through structured SERP
+        run: node scripts/dataforseo-alibaba-structured-discovery-pilot.mjs
+      - name: Verify spend and truth envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/dataforseo-alibaba-structured-discovery-pilot.json','utf8'));
+          if(r.providerReportedSpendUsd>0.05+1e-9)throw new Error('ROUND_CAP_BREACH');
+          if(r.totalConservativeAccountedAfterRunUsd>15+1e-9)throw new Error('TOTAL_CAP_BREACH');
+          if(r.truthPolicy.candidateIsSupplierPriceEvidence!==false||r.truthPolicy.candidateIsMarketplaceMatch!==false)throw new Error('CANDIDATE_TRUTH_RELAXED');
+          if(r.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZED');
+          NODE
+      - name: Collect public supplier prices from discovered product pages
+        run: node scripts/collect-alibaba-public-prices-v1.mjs --input=artifacts/dataforseo-alibaba-structured-discovery-pilot.json --out=artifacts/alibaba-public-prices-structured-pilot.json --limit=50 --sleepMs=150
+      - name: Build supplier public-price ledger
+        run: node scripts/build-supplier-price-ledger-v1.mjs --input=artifacts/alibaba-public-prices-structured-pilot.json --out=artifacts/supplier-price-ledger-structured-pilot.json
+      - name: Publish structured supplier pilot summary
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('artifacts/dataforseo-alibaba-structured-discovery-pilot.json','utf8'));
+          const p=JSON.parse(fs.readFileSync('artifacts/alibaba-public-prices-structured-pilot.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('artifacts/supplier-price-ledger-structured-pilot.json','utf8'));
+          const s={schemaVersion:'MPR_STRUCTURED_SUPPLIER_PILOT_SUMMARY_V1',generatedAt:new Date().toISOString(),requestsTriggered:d.requestsTriggered,providerSpendUsd:d.providerReportedSpendUsd,uniqueSupplierCandidates:d.uniqueSupplierCandidates,requestedPricePages:p.requested,acceptedPublicPriceObservations:p.acceptedPriceObservations,rejectedOrUnresolved:p.rejectedOrUnresolved,supplierLedgerRows:l.supplierListingCount||0,snapshotCount:l.snapshotCount||0,truthPolicy:{publicSupplierPriceIsVerifiedQuote:false,publicSupplierPriceIsLandedCost:false,candidateIsMarketplaceMatch:false,purchaseAuthorized:false}};
+          fs.writeFileSync('artifacts/structured-supplier-pilot-summary.json',JSON.stringify(s,null,2)+'\n');
+          console.log(JSON.stringify(s,null,2));
+          NODE
+      - name: Upload structured supplier pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-structured-supplier-pilot
+          path: |
+            artifacts/dataforseo-alibaba-structured-discovery-pilot.json
+            artifacts/alibaba-public-prices-structured-pilot.json
+            artifacts/supplier-price-ledger-structured-pilot.json
+            artifacts/structured-supplier-pilot-summary.json
+          retention-days: 30
+          if-no-files-found: error
