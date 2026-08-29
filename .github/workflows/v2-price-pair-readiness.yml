@@ -1,0 +1,38 @@
+name: V2 Price Pair Readiness
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**/*.json'
+      - 'price-pair-readiness-v1.js'
+      - 'scripts/run-price-pair-readiness-audit-v1.mjs'
+      - '.github/workflows/v2-price-pair-readiness.yml'
+  pull_request:
+    paths:
+      - 'data/**/*.json'
+      - 'price-pair-readiness-v1.js'
+      - 'scripts/run-price-pair-readiness-audit-v1.mjs'
+      - '.github/workflows/v2-price-pair-readiness.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run fail-closed price-pair readiness audit
+        run: node scripts/run-price-pair-readiness-audit-v1.mjs --root=data --out=artifacts/price-pair-readiness-v1.json
+      - name: Upload readiness artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-price-pair-readiness
+          path: artifacts/price-pair-readiness-v1.json
+          if-no-files-found: error
+          retention-days: 30
