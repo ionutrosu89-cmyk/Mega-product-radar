@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "MPR_PUBLIC_ECONOMICS_EVIDENCE_PACK_V1",
+  "generatedAt": "2026-08-29T19:58:00Z",
+  "evidence": {
+    "fx": {
+      "evidenceClass": "PUBLIC_OFFICIAL_REFERENCE_RATE",
+      "publisher": "European Central Bank",
+      "referenceDate": "2026-08-28",
+      "eurUsd": 1.1643,
+      "eurRon": 5.2584,
+      "derivedUsdRon": 4.5163617624,
+      "derivation": "EUR_RON / EUR_USD",
+      "sourceRef": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+      "scope": "ACCOUNTING_NORMALIZATION_REFERENCE_ONLY",
+      "confidence": "HIGH",
+      "transactionRate": false
+    },
+    "amazonUsOfficeProductsReferralFee": {
+      "evidenceClass": "PUBLIC_OFFICIAL_MARKETPLACE_FEE_SCHEDULE",
+      "publisher": "Amazon",
+      "marketplace": "AMAZON_US",
+      "feeCategory": "Office Products",
+      "referralFeeRate": 0.15,
+      "minimumReferralFeeUsd": 0.30,
+      "sourceRef": "https://sell.amazon.com/pricing",
+      "scope": "AMAZON_US_ONLY",
+      "confidence": "HIGH",
+      "fulfillmentFeeResolved": false
+    },
+    "romaniaVat": {
+      "evidenceClass": "PUBLIC_OFFICIAL_LEGAL_REFERENCE",
+      "publisher": "Portal Legislativ - Government of Romania",
+      "standardVatRate": 0.21,
+      "effectiveFrom": "2025-08-01",
+      "sourceRef": "https://legislatie.just.ro/Public/DetaliiDocument/307258",
+      "supportingRef": "https://legislatie.just.ro/public/DetaliiDocument/300407",
+      "scope": "ROMANIA_STANDARD_VAT",
+      "confidence": "HIGH"
+    }
+  },
+  "targetPairMarketState": {
+    "amazonAsin": "B09K5927B5",
+    "supplierListingKey": "1601573810318",
+    "observedMarketplacePriceMarket": "US",
+    "intendedRomaniaScreenMarket": "RO",
+    "romaniaCurrentSellPriceResolved": false,
+    "amazonUsPriceMayBeUsedAsRomaniaSellPrice": false,
+    "staleRomaniaDiscoveryPricePromotedToCurrent": false
+  },
+  "truthPolicy": {
+    "referenceFxIsTransactionFx": false,
+    "amazonUsFeeAppliesToRomaniaMarketplace": false,
+    "romaniaVatAppliesToAmazonUsSellPrice": false,
+    "unknownFulfillmentEqualsZero": false,
+    "unknownFreightEqualsZero": false,
+    "unknownDutyEqualsZero": false,
+    "purchaseAuthorized": false,
+    "negotiationIncluded": false
+  }
+}
