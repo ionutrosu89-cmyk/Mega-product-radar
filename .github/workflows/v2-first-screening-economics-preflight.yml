@@ -1,0 +1,49 @@
+name: V2 First Screening Economics Preflight
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/run-first-screening-economics-preflight-v1.mjs'
+      - '.github/workflows/v2-first-screening-economics-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact screening-eligible match evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/match
+          gh run download 33271637387 -n v2-secondary-public-match-corroboration -D artifacts/match
+      - name: Run fail-closed economics preflight
+        run: node scripts/run-first-screening-economics-preflight-v1.mjs artifacts/match/secondary-corroborated-match.json artifacts/first-screening-economics-preflight.json
+      - name: Verify no assumption fabrication
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/first-screening-economics-preflight.json','utf8'));
+          if(s.decision!=='BLOCKED_PENDING_PROVENANCE_BACKED_ASSUMPTIONS')throw new Error('PREFLIGHT_UNEXPECTEDLY_UNBLOCKED');
+          if(s.economics.status!=='BLOCKED')throw new Error('ECONOMICS_MUST_FAIL_CLOSED');
+          if(s.truthPolicy.syntheticTestValuesUsedAsCommercialFacts!==false)throw new Error('SYNTHETIC_ASSUMPTION_PROMOTION');
+          if(s.truthPolicy.unknownEqualsZero!==false||s.truthPolicy.purchaseAuthorized!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(s.truthPolicy.paidCallsTriggered!==0||s.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_SPEND');
+          NODE
+      - name: Upload economics preflight evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-first-screening-economics-preflight
+          path: artifacts/first-screening-economics-preflight.json
+          retention-days: 30
+          if-no-files-found: error
