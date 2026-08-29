@@ -1,0 +1,47 @@
+name: V2 Top Candidate Detail Enrichment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/enrich-top-candidate-details-v1.mjs'
+      - '.github/workflows/v2-top-candidate-detail-enrichment.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact matching audit evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/matching-audit
+          gh run download 33270281620 -n v2-apify-amazon-pilot-matching-audit -D artifacts/matching-audit
+      - name: Enrich top ten pairs from public detail pages
+        run: node scripts/enrich-top-candidate-details-v1.mjs artifacts/matching-audit/detail-enrichment-queue.json artifacts/top-candidate-detail-enrichment 10
+      - name: Verify zero-spend truth envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/top-candidate-detail-enrichment/summary.json','utf8'));
+          if(s.requestedPairs!==10)throw new Error(`PAIR_COUNT_UNEXPECTED:${s.requestedPairs}`);
+          if(s.policy.paidCallsTriggered!==0||s.policy.providerSpendUsd!==0)throw new Error('ZERO_SPEND_POLICY_BREACH');
+          if(s.policy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_VIOLATION');
+          if(s.policy.unknownEqualsZero!==false)throw new Error('UNKNOWN_ZERO_VIOLATION');
+          NODE
+      - name: Upload detail enrichment evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-top-candidate-detail-enrichment
+          path: artifacts/top-candidate-detail-enrichment
+          retention-days: 30
