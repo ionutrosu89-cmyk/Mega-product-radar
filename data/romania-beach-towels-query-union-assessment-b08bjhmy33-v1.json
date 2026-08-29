@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "MPR_ROMANIA_QUERY_UNION_ASSESSMENT_V1",
+  "candidateAsin": "B08BJHMY33",
+  "nicheKey": "home:oversized-cotton-beach-towels-4-pack",
+  "requiredAliases": [
+    "set 4 prosoape plaja bumbac",
+    "4 prosoape plaja bumbac oversized",
+    "set prosoape plaja 180x100 bumbac",
+    "set 4 prosoape plaja",
+    "4 prosoape plaja 90x180"
+  ],
+  "platforms": [
+    {
+      "platform": "EMAG",
+      "queryEnumerations": [
+        {"alias":"set 4 prosoape plaja bumbac","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"4 prosoape plaja bumbac oversized","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"set prosoape plaja 180x100 bumbac","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"set 4 prosoape plaja","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"4 prosoape plaja 90x180","surfaceExact":false,"canonicalListingIds":[]}
+      ],
+      "aliasSetManuallyApproved": false,
+      "marketCoverageConfirmed": false,
+      "expectedMarketComparableExact": false,
+      "expectedCanonicalListingCount": null,
+      "expectedBlockers": [
+        "NON_EXACT_ALIAS_ENUMERATION",
+        "ALIAS_SET_NOT_MANUALLY_APPROVED",
+        "MARKET_COVERAGE_NOT_CONFIRMED"
+      ]
+    },
+    {
+      "platform": "TRENDYOL",
+      "queryEnumerations": [
+        {"alias":"set 4 prosoape plaja bumbac","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"4 prosoape plaja bumbac oversized","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"set prosoape plaja 180x100 bumbac","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"set 4 prosoape plaja","surfaceExact":false,"canonicalListingIds":[]},
+        {"alias":"4 prosoape plaja 90x180","surfaceExact":false,"canonicalListingIds":[]}
+      ],
+      "aliasSetManuallyApproved": false,
+      "marketCoverageConfirmed": false,
+      "expectedMarketComparableExact": false,
+      "expectedCanonicalListingCount": null,
+      "expectedBlockers": [
+        "NON_EXACT_ALIAS_ENUMERATION",
+        "ALIAS_SET_NOT_MANUALLY_APPROVED",
+        "MARKET_COVERAGE_NOT_CONFIRMED"
+      ]
+    }
+  ],
+  "truthPolicy": {
+    "sampledSurfaceIsExact": false,
+    "declaredZeroQuerySurfaceIsMarketWideZero": false,
+    "unknownIsZero": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "purchaseAuthorized": false
+  }
+}
