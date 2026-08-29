@@ -1,0 +1,82 @@
+{
+  "schema": "MPR_AMAZON_TREND_FUSION_REPLAY_V1",
+  "replayedAtDate": "2026-08-29",
+  "source": {
+    "workflowRunId": 33234234364,
+    "artifactId": 9709436263,
+    "artifactName": "amazon-fresh-review-rank-fusion-evidence",
+    "artifactDigest": "sha256:6b16e6b7d115828e8e293da214e06dafb4c6eb03e50bfa259d9d97592d92cb25",
+    "leadersFile": "amazon-fresh-review-leaders.json",
+    "rankHistoryFile": "amazon-fresh-bsr-history.json"
+  },
+  "engine": {
+    "file": "amazon-strict-trend-fusion-v1.js",
+    "schemaCompatibilityFixPr": 337,
+    "maximumTemporalGapHours": 48
+  },
+  "candidate": {
+    "platform": "AMAZON",
+    "externalId": "B08BJHMY33",
+    "title": "HAVLULAND Oversized Beach Towels Pack of 4",
+    "reviewEvidence": {
+      "previousObservedAt": "2026-08-25T03:40:09.365Z",
+      "currentObservedAt": "2026-08-29T04:36:44.813Z",
+      "elapsedHours": 96.943,
+      "reviewCountPrevious": 3204,
+      "reviewCountCurrent": 3205,
+      "reviewDelta": 1,
+      "reviewVelocityPerDay": 0.248
+    },
+    "rankEvidence": {
+      "previousObservedAt": "2026-08-26T06:31:17.808Z",
+      "latestObservedAt": "2026-08-29T04:38:32.474Z",
+      "elapsedHours": 70.1207,
+      "intervalEligible": true,
+      "categorySignalsConflict": false,
+      "rankVelocityPerDay": 108.498569,
+      "categories": [
+        {
+          "category": "Home & Kitchen",
+          "previousRank": 118350,
+          "latestRank": 117732,
+          "rankDelta": 618,
+          "rankVelocityPerDay": 211.520869,
+          "direction": "IMPROVING"
+        },
+        {
+          "category": "Beach Towels",
+          "previousRank": 163,
+          "latestRank": 147,
+          "rankDelta": 16,
+          "rankVelocityPerDay": 5.476268,
+          "direction": "IMPROVING"
+        }
+      ]
+    },
+    "temporalGapHours": 0.0299,
+    "replayResult": {
+      "status": "CONFIRMED_ACCELERATION",
+      "confirmedAcceleration": true,
+      "maximumFunnelContribution": "CONFIRMED_TREND_SUPPORT"
+    }
+  },
+  "canonicalReplaySummary": {
+    "fusionStatus": "FUSION_READY_WITH_CONFIRMED_ACCELERATION",
+    "productsWithConfirmedTrendFusion": 1,
+    "confirmedAccelerationCount": 1,
+    "confirmedAsins": ["B08BJHMY33"]
+  },
+  "truthPolicy": {
+    "rankAndReviewsAreVerifiedSales": false,
+    "salesEvidenceClass": "NOT_VERIFIED_SALES",
+    "verifiedSalesRows": 0,
+    "providerSpendEur": 0,
+    "paidCallsTriggered": 0,
+    "purchaseAuthorized": false,
+    "romaniaGapExact": false,
+    "supplierQuoteVerified": false,
+    "landedCostConfirmed": false,
+    "autoPromoteOpportunityStage": false
+  },
+  "note": "This replay applies the current strict fusion engine, including the schema compatibility fix merged in PR #337, to immutable contemporaneous review and explicit BSR evidence from workflow run 33234234364. It confirms trend acceleration only; it does not establish verified sales, Romania Gap, supplier quote, landed economics, VALIDATE, FINALIST, or purchase authority."
+}
