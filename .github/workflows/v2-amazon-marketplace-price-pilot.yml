@@ -1,0 +1,54 @@
+name: V2 Amazon Marketplace Price Pilot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v2-amazon-marketplace-price-pilot.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/v2-amazon-marketplace-price-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect 100 live Amazon public product pages
+        id: collect
+        continue-on-error: true
+        run: node scripts/amazon-live-refresh-batch.mjs --offset=0 --limit=100 --out=artifacts/amazon-live-refresh-v2-pilot.json
+      - name: Build normalized marketplace price ledger
+        if: always()
+        run: |
+          test -f artifacts/amazon-live-refresh-v2-pilot.json || { echo 'RAW_AMAZON_PILOT_MISSING'; exit 1; }
+          node scripts/build-marketplace-price-ledger-v1.mjs --input=artifacts/amazon-live-refresh-v2-pilot.json --out=artifacts/marketplace-price-ledger-v2-pilot.json
+      - name: Emit pilot metrics
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const raw=JSON.parse(fs.readFileSync('artifacts/amazon-live-refresh-v2-pilot.json','utf8'));
+          const ledger=JSON.parse(fs.readFileSync('artifacts/marketplace-price-ledger-v2-pilot.json','utf8'));
+          console.log(JSON.stringify({requested:raw.requested,validObservations:raw.validObservations,withPrice:raw.coverage?.withPrice??0,blocked:raw.diagnostics?.filter(x=>x.blocked).length??0,httpFailures:raw.diagnostics?.filter(x=>x.statusCode&&x.statusCode>=400).length??0,ledgerListings:ledger.listingCount,ledgerSnapshots:ledger.snapshotCount,unresolvedCanonicalListingCount:ledger.unresolvedCanonicalListingCount,rejectedCount:ledger.rejectedCount},null,2));
+          if(raw.policy?.paidCallsTriggered!==0||raw.policy?.providerSpendEur!==0)process.exit(2);
+          if(ledger.policy?.paidCallsTriggered!==0)process.exit(3);
+          NODE
+      - name: Upload Amazon marketplace price pilot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-amazon-marketplace-price-pilot
+          path: |
+            artifacts/amazon-live-refresh-v2-pilot.json
+            artifacts/marketplace-price-ledger-v2-pilot.json
+          if-no-files-found: error
+          retention-days: 30
