@@ -7,6 +7,7 @@ const num=v=>{if(v===null||v===undefined||v==='')return null;const n=Number(Stri
 const args=Object.fromEntries(process.argv.slice(2).map(x=>{const [k,...rest]=x.replace(/^--/,'').split('=');return[k,rest.join('=')||true];}));
 const out=String(args.out||'artifacts/amazon-round2-refresh.json');
 const maxItems=Math.max(1,Math.min(255,Number(args.maxItems)||255));
+const targetAsinsFile=args.targetAsinsFile?String(args.targetAsinsFile):null;
 const now=new Date().toISOString();
 const snapshotFiles=[
   'data/live-snapshots/amazon-2026-08-25-batch-000.compact.json',
@@ -15,7 +16,15 @@ const snapshotFiles=[
 ];
 const payloads=await Promise.all(snapshotFiles.map(async p=>JSON.parse(await fs.readFile(p,'utf8'))));
 const plan=buildAmazonRound2Plan(payloads,now,24);
-const targets=plan.eligible.slice(0,maxItems);
+let targetAsins=null;
+if(targetAsinsFile){
+  const targetPayload=JSON.parse(await fs.readFile(targetAsinsFile,'utf8'));
+  const raw=Array.isArray(targetPayload)?targetPayload:(targetPayload.leaders||targetPayload.asins||[]);
+  targetAsins=new Set(raw.map(x=>clean(typeof x==='string'?x:x?.asin)).filter(Boolean));
+  if(targetAsins.size===0) throw new Error('TARGET_ASINS_EMPTY');
+}
+const eligibleTargets=targetAsins?plan.eligible.filter(x=>targetAsins.has(x.asin)):plan.eligible;
+const targets=eligibleTargets.slice(0,maxItems);
 
 function decodeEntities(s){return String(s||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ');}
 function extract(html,asin){
@@ -63,6 +72,7 @@ const result={
   schemaVersion:'MPR_AMAZON_ROUND2_REFRESH_V1',
   generatedAt:now,
   plan:{capturedCount:plan.capturedCount,eligibleCount:plan.eligibleCount,blockedCount:plan.blockedCount,nextEligibleAt:plan.nextEligibleAt,allEligibleAt:plan.allEligibleAt,minIntervalHours:plan.minIntervalHours},
+  targeting:{mode:targetAsins?'EXPLICIT_ASIN_SET':'ALL_ELIGIBLE',targetAsinsFile,targetAsinCount:targetAsins?.size??null,eligibleTargetCount:eligibleTargets.length},
   requested:targets.length,
   validObservations:observations.length,
   successRatePct:targets.length?Math.round(observations.length/targets.length*1000)/10:0,
@@ -74,5 +84,5 @@ const result={
 };
 await fs.mkdir(path.dirname(out),{recursive:true});
 await fs.writeFile(out,JSON.stringify(result,null,2));
-console.log(JSON.stringify({plan:result.plan,requested:result.requested,validObservations:result.validObservations,successRatePct:result.successRatePct,movementSummary:result.movementSummary},null,2));
+console.log(JSON.stringify({plan:result.plan,targeting:result.targeting,requested:result.requested,validObservations:result.validObservations,successRatePct:result.successRatePct,movementSummary:result.movementSummary},null,2));
 if(targets.length===0){console.error(`ROUND2_NOT_ELIGIBLE next=${plan.nextEligibleAt||plan.allEligibleAt}`);process.exitCode=3;}

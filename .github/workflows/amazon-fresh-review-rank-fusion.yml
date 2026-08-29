@@ -31,8 +31,12 @@ jobs:
           if(x.providerSpendEur!==0||x.paidCallsAuthorized!==false||x.purchaseAuthorized!==false) throw new Error('POLICY_INVALID');
           if(x.salesEvidenceClass!=='NOT_VERIFIED_SALES') throw new Error('SALES_TRUTH_INVALID');
           NODE
-      - name: Refresh public Amazon review counts
-        run: node scripts/amazon-round2-refresh.mjs --maxItems=255 --out=artifacts/amazon-fresh-review-refresh.json
+      - name: Refresh public Amazon review counts for tracked leaders
+        run: >-
+          node scripts/amazon-round2-refresh.mjs
+          --maxItems=13
+          --targetAsinsFile=data/amazon-round2-preliminary-leaders-v1.json
+          --out=artifacts/amazon-fresh-review-refresh.json
       - name: Apply review comparability and longitudinal truth gates
         run: node scripts/amazon-round2-trend-bridge.mjs --artifact=artifacts/amazon-fresh-review-refresh.json --out=artifacts/amazon-fresh-review-bridge.json
       - name: Build temporally fresh leader review evidence for tracked ASINs
