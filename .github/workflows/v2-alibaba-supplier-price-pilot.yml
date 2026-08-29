@@ -1,0 +1,53 @@
+name: V2 Alibaba Supplier Price Pilot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v2-alibaba-supplier-price-pilot.yml'
+      - 'alibaba-candidate-discovery-v1.js'
+      - 'scripts/run-alibaba-candidate-discovery-pilot-v1.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test candidate discovery parser
+        run: node --test test/alibaba-candidate-discovery-v1.test.mjs test/alibaba-public-price-extractor-v1.test.mjs
+      - name: Discover supplier candidate URLs
+        run: node scripts/run-alibaba-candidate-discovery-pilot-v1.mjs --maxPerQuery=10 --out=artifacts/alibaba-candidates.json
+      - name: Collect public supplier prices only where observable
+        run: node scripts/collect-alibaba-public-prices-v1.mjs --input=artifacts/alibaba-candidates.json --limit=100 --sleepMs=250 --out=artifacts/alibaba-public-prices.json
+      - name: Build normalized supplier price ledger
+        run: node scripts/build-supplier-price-ledger-v1.mjs --input=artifacts/alibaba-public-prices.json --out=artifacts/alibaba-supplier-price-ledger.json
+      - name: Publish pilot summary
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('artifacts/alibaba-candidates.json','utf8'));
+          const p=JSON.parse(fs.readFileSync('artifacts/alibaba-public-prices.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('artifacts/alibaba-supplier-price-ledger.json','utf8'));
+          const summary={schemaVersion:'MPR_V2_ALIBABA_SUPPLIER_PRICE_PILOT_SUMMARY_V1',generatedAt:new Date().toISOString(),queriesAttempted:d.queriesAttempted,uniqueCandidateUrls:d.uniqueCandidateUrls,publicPriceObservations:p.acceptedPriceObservations,rejectedOrUnresolved:p.rejectedOrUnresolved,ledgerListings:l.listingCount??0,ledgerSnapshots:l.snapshotCount??0,providerSpend:0,paidCallsTriggered:0,truthPolicy:{candidateIsMatch:false,publicSupplierPriceIsVerifiedQuote:false,publicSupplierPriceIsLandedCost:false,unknownEqualsZero:false,purchaseAuthorized:false}};
+          fs.writeFileSync('artifacts/alibaba-supplier-price-pilot-summary.json',JSON.stringify(summary,null,2)+'\n');
+          console.log(JSON.stringify(summary,null,2));
+          NODE
+      - name: Upload supplier pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-alibaba-supplier-price-pilot
+          path: |
+            artifacts/alibaba-candidates.json
+            artifacts/alibaba-public-prices.json
+            artifacts/alibaba-supplier-price-ledger.json
+            artifacts/alibaba-supplier-price-pilot-summary.json
+          if-no-files-found: error
+          retention-days: 30
