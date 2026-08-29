@@ -12,19 +12,57 @@
       "queriesReviewed": [
         "set 4 prosoape plaja bumbac",
         "4 prosoape plaja bumbac oversized",
-        "set prosoape plaja 180x100 bumbac"
+        "set prosoape plaja 180x100 bumbac",
+        "set 4 prosoape plaja",
+        "4 prosoape plaja 90x180"
       ],
-      "sourceUrl": null,
-      "observedAt": null,
-      "manualReviewer": null,
+      "manualSampleObservedAtLocal": "2026-08-29T17:36:00+03:00/2026-08-29T17:41:00+03:00",
+      "manualReviewer": "USER_SUPPLIED_SCREENSHOTS",
+      "sampledQuerySurfaces": [
+        {
+          "query": "set 4 prosoape plaja bumbac",
+          "declaredRawSurfaceCount": 13014,
+          "countSemantics": "CATEGORY_SEARCH_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["4-pack kitchen towels 50x70", "mixed bath/hand towel 4-pack", "2-pack beach towels"]
+        },
+        {
+          "query": "4 prosoape plaja bumbac oversized",
+          "declaredRawSurfaceCount": 5901,
+          "countSemantics": "CATEGORY_SEARCH_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["single 90x180 cotton beach towel", "bath towel 4-pack 50x100", "individual beach towels"]
+        },
+        {
+          "query": "set prosoape plaja 180x100 bumbac",
+          "declaredRawSurfaceCount": 12338,
+          "countSemantics": "CATEGORY_SEARCH_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["microfiber towel with 180x100 option", "single 100x180 cotton beach towel", "2-pack 90x180 cotton beach towels"]
+        },
+        {
+          "query": "set 4 prosoape plaja",
+          "declaredRawSurfaceCount": 4212,
+          "countSemantics": "CATEGORY_SEARCH_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["2-pack microfiber sport towels", "4-pack kitchen towels"]
+        },
+        {
+          "query": "4 prosoape plaja 90x180",
+          "declaredRawSurfaceCount": 771,
+          "countSemantics": "CATEGORY_SEARCH_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["single 90x180 beach/spa towel", "individual 90x180 towels"]
+        }
+      ],
       "marketWideReviewed": false,
       "comparabilityConfirmed": false,
       "exactListingCount": null,
       "excludedFalsePositiveCount": null,
-      "scope": "UNREVIEWED",
+      "scope": "MANUAL_SAMPLED",
       "competitionState": "UNKNOWN",
-      "evidenceNote": "Manual direct marketplace review required. Search/category surface counts must not be treated as exact comparable competition until every relevant listing surface is enumerated/deduplicated and canonical false positives are excluded.",
-      "evidenceAttachmentRef": null
+      "evidenceNote": "User-supplied eMAG screenshots show large raw category/search counts but visibly heavy semantic contamination. These counts are query/category surface counts only and are not accepted as exact comparable competition. Exhaustive pagination, dedupe and manual canonical classification remain required.",
+      "evidenceAttachmentRef": "CONVERSATION_USER_SCREENSHOTS_2026-08-29"
     },
     {
       "platform": "TRENDYOL",
@@ -32,25 +70,63 @@
       "queriesReviewed": [
         "set 4 prosoape plaja bumbac",
         "4 prosoape plaja bumbac oversized",
-        "set prosoape plaja 180x100 bumbac"
+        "set prosoape plaja 180x100 bumbac",
+        "set 4 prosoape plaja",
+        "4 prosoape plaja 90x180"
       ],
-      "sourceUrl": null,
-      "observedAt": null,
-      "manualReviewer": null,
+      "manualSampleObservedAtLocal": "2026-08-29T17:37:00+03:00/2026-08-29T17:42:00+03:00",
+      "manualReviewer": "USER_SUPPLIED_SCREENSHOTS",
+      "sampledQuerySurfaces": [
+        {
+          "query": "4 prosoape plaja bumbac oversized",
+          "declaredRawSurfaceCount": 0,
+          "countSemantics": "QUERY_SURFACE_DECLARED_ZERO_NOT_MARKET_WIDE",
+          "visibleAssessment": "NO_PRODUCTS_FOR_EXACT_QUERY",
+          "visibleExamples": ["fallback recommendations are non-comparable bath/kitchen towels"]
+        },
+        {
+          "query": "set 4 prosoape plaja bumbac",
+          "declaredRawSurfaceCount": null,
+          "countSemantics": "COUNT_NOT_FULLY_VISIBLE_IN_SCREENSHOT",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["4-piece bath towel sets", "4-pack 50x90 bath towels", "5-pack disposable towels"]
+        },
+        {
+          "query": "set prosoape plaja 180x100 bumbac",
+          "declaredRawSurfaceCount": 0,
+          "countSemantics": "QUERY_SURFACE_DECLARED_ZERO_NOT_MARKET_WIDE",
+          "visibleAssessment": "NO_PRODUCTS_FOR_EXACT_QUERY",
+          "visibleExamples": ["fallback individual beach towels"]
+        },
+        {
+          "query": "set 4 prosoape plaja",
+          "declaredRawSurfaceCount": 39,
+          "countSemantics": "QUERY_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "FALSE_POSITIVE_HEAVY",
+          "visibleExamples": ["4 sunbed clips", "5-pack disposable bath towels", "bath towel sets"]
+        },
+        {
+          "query": "4 prosoape plaja 90x180",
+          "declaredRawSurfaceCount": 2,
+          "countSemantics": "QUERY_SURFACE_RAW_NOT_CANONICAL",
+          "visibleAssessment": "ALL_VISIBLE_RESULTS_NON_COMPARABLE",
+          "visibleExamples": ["two 2-piece 90x180 towel variants"]
+        }
+      ],
       "marketWideReviewed": false,
       "comparabilityConfirmed": false,
       "exactListingCount": null,
       "excludedFalsePositiveCount": null,
-      "scope": "UNREVIEWED",
+      "scope": "MANUAL_SAMPLED",
       "competitionState": "UNKNOWN",
-      "evidenceNote": "Manual direct marketplace review required. Broad result counts and sampled product cards remain non-exact until market-wide scope and canonical comparability are explicitly reviewed.",
-      "evidenceAttachmentRef": null
+      "evidenceNote": "User-supplied Trendyol screenshots show two exact-query surfaces declaring no products, a 2-result surface where both visible results are 2-piece sets, and a 39-result broad surface contaminated by non-towel and bath-towel products. This is strong sampled gap support but not MARKET_WIDE exact competition.",
+      "evidenceAttachmentRef": "CONVERSATION_USER_SCREENSHOTS_2026-08-29"
     }
   ],
   "promotion": {
     "exactRomaniaGapConfirmed": false,
     "promotionEligible": false,
-    "reason": "CANONICAL_DEFINITION_AND_BOTH_MARKETPLACE_EXACT_COUNTS_REQUIRE_MANUAL_REVIEW"
+    "reason": "MANUAL_SAMPLES_SUPPORT_GAP_BUT_EXHAUSTIVE_QUERY_UNION_AND_MARKET_COVERAGE_REMAIN_UNCONFIRMED"
   },
   "upstreamTrendEvidence": {
     "status": "CONFIRMED_ACCELERATION",
@@ -59,6 +135,7 @@
   },
   "policy": {
     "unknownIsZero": false,
+    "rawSurfaceCountIsExactComparableCount": false,
     "manualReviewRequired": true,
     "marketWideRequired": true,
     "sameComparabilityKeyRequired": true,
