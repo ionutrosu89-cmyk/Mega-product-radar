@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseRobustDimensions,deriveSupplierSingleUnitPackEvidence} from '../public-detail-fusion-evidence-v1.js';
+import {parseRobustDimensions,deriveSupplierSingleUnitPackEvidence,canonicalMaterialForMatching} from '../public-detail-fusion-evidence-v1.js';
 
 test('parses labeled imperial dimensions',()=>{
   assert.deepEqual(parseRobustDimensions('Product Dimensions 12"D x 13.77"W x 11"H'),{lengthCm:30.48,widthCm:34.976,heightCm:27.94});
@@ -8,6 +8,12 @@ test('parses labeled imperial dimensions',()=>{
 
 test('parses star separated metric dimensions',()=>{
   assert.deepEqual(parseRobustDimensions('Size 360*290*286mm'),{lengthCm:36,widthCm:29,heightCm:28.6});
+});
+
+test('canonicalizes compatible metal descriptions without proving identity',()=>{
+  assert.equal(canonicalMaterialForMatching('metal mesh'),'metal');
+  assert.equal(canonicalMaterialForMatching('alloy steel'),'metal');
+  assert.equal(canonicalMaterialForMatching('cotton'),'cotton');
 });
 
 test('derives pack one only for piece-priced single assembly durable product',()=>{
