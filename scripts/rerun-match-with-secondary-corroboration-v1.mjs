@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {buildProductFingerprint} from '../product-fingerprint-v1.js';
 import {matchMarketplaceToSupplier} from '../marketplace-supplier-matching-v1.js';
+import {canonicalFormFactor,canonicalPrimaryFunction} from '../controlled-matching-ontology-v1.js';
 
 const fusionPath=process.argv[2]||'artifacts/fusion/post-detail-fusion-match.json';
 const corroborationPath=process.argv[3]||'data/v2-secondary-public-corroboration-b09k5927b5.json';
@@ -21,7 +22,7 @@ const existing=target.amazonEvidence||{};
 const marketplaceInput={
   category:existing.category,
   productType:c.productType??existing.productType,
-  primaryFunction:c.primaryFunction??existing.primaryFunction,
+  primaryFunction:canonicalPrimaryFunction(c.primaryFunction??existing.primaryFunction),
   packCount:c.packCount??existing.packCount,
   material:c.material??existing.material,
   dimensions:c.dimensions??existing.dimensions,
@@ -29,19 +30,24 @@ const marketplaceInput={
   capacityMl:existing.capacityMl,
   powerWatts:existing.powerWatts,
   voltage:existing.voltage,
-  formFactor:c.formFactor??existing.formFactor,
+  formFactor:canonicalFormFactor(c.formFactor??existing.formFactor),
   technicalSpecs:{...(existing.technicalSpecs||{}),...(c.technicalSpecs||{})},
   sourceTitle:target.marketplaceTitle
 };
-const supplierInput={...(target.supplierEvidence||{}),sourceTitle:target.supplierTitle};
+const supplierInput={
+  ...(target.supplierEvidence||{}),
+  primaryFunction:canonicalPrimaryFunction(target.supplierEvidence?.primaryFunction),
+  formFactor:canonicalFormFactor(target.supplierEvidence?.formFactor),
+  sourceTitle:target.supplierTitle
+};
 const match=matchMarketplaceToSupplier(buildProductFingerprint(marketplaceInput),buildProductFingerprint(supplierInput),{screeningThreshold:80});
 const output={
   schemaVersion:'MPR_SECONDARY_CORROBORATED_MATCH_V1',generatedAt:new Date().toISOString(),
   target:{amazonAsin:asin,supplierListingKey:String(target.supplierListingKey),marketplaceTitle:target.marketplaceTitle,supplierTitle:target.supplierTitle,marketplacePrice:target.marketplacePrice,supplierPriceMax:target.supplierPriceMax,supplierMoq:target.supplierMoq,supplierPriceTiers:target.supplierPriceTiers},
   marketplaceFingerprintEvidence:marketplaceInput,supplierFingerprintEvidence:supplierInput,match,
   evidenceRefs:{secondary:corroboration.sources,supplierDetailRunId:'33270914349',postDetailFusionRunId:'33271253483'},
-  truthPolicy:{secondaryEvidenceIsDirectAmazonEvidence:false,secondaryEvidenceIsVerifiedSale:false,secondaryEvidenceProvesCrossMarketIdentityByItself:false,publicSupplierDetailIsVerifiedQuote:false,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false,negotiationIncluded:false},
-  policy:{paidCallsTriggered:0,providerSpendUsd:0,screeningThreshold:80}
+  truthPolicy:{secondaryEvidenceIsDirectAmazonEvidence:false,secondaryEvidenceIsVerifiedSale:false,secondaryEvidenceProvesCrossMarketIdentityByItself:false,publicSupplierDetailIsVerifiedQuote:false,controlledOntologyChangesHardMismatchPolicy:false,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false,negotiationIncluded:false},
+  policy:{paidCallsTriggered:0,providerSpendUsd:0,screeningThreshold:80,controlledOntologyVersion:'V1'}
 };
 await fs.mkdir(path.dirname(outPath),{recursive:true});
 await fs.writeFile(outPath,JSON.stringify(output,null,2)+'\n');
