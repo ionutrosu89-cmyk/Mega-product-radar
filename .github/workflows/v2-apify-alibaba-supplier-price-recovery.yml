@@ -1,0 +1,54 @@
+name: V2 Apify Alibaba Supplier Price Recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-apify-supplier-price-recovery-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify zero-spend recovery envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const t=JSON.parse(fs.readFileSync('data/v2-apify-supplier-price-recovery-trigger.json','utf8'));
+          if(t.authorization!=='RECOVER_EXISTING_APIFY_RUN_ONLY')throw new Error('RECOVERY_NOT_AUTHORIZED');
+          if(t.newActorRunsAuthorized!==false)throw new Error('NEW_ACTOR_RUN_FORBIDDEN');
+          if(t.maxAdditionalProviderSpendUsd!==0)throw new Error('RECOVERY_SPEND_MUST_BE_ZERO');
+          if(!process.env.APIFY_TOKEN)throw new Error('APIFY_TOKEN_MISSING');
+          NODE
+      - name: Recover existing successful Apify run only
+        run: node scripts/apify-alibaba-supplier-price-recover-v1.mjs
+      - name: Build normalized Supplier Public Price Ledger
+        run: node scripts/build-supplier-price-ledger-v1.mjs --input=artifacts/apify-alibaba-supplier-pilot-recovery/supplier-ledger-input.json --out=artifacts/apify-alibaba-supplier-pilot-recovery/supplier-price-ledger.json
+      - name: Verify recovery truth and zero additional actor runs
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/apify-alibaba-supplier-pilot-recovery/summary.json','utf8'));
+          if(s.additionalActorRunsTriggered!==0)throw new Error('UNEXPECTED_ACTOR_RUN');
+          if(s.additionalProviderSpendAuthorizedUsd!==0)throw new Error('UNEXPECTED_RECOVERY_SPEND');
+          if(s.truthPolicy.providerResultIsVerifiedQuote!==false||s.truthPolicy.providerResultIsLandedCost!==false)throw new Error('TRUTH_PROMOTION');
+          if(s.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZED');
+          NODE
+      - name: Upload recovered supplier price evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-apify-alibaba-supplier-price-recovery
+          path: artifacts/apify-alibaba-supplier-pilot-recovery/
+          retention-days: 30
+          if-no-files-found: error
