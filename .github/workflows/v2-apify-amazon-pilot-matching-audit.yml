@@ -1,0 +1,55 @@
+name: V2 Apify Amazon Pilot Matching Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'structured-supplier-provider-adapter-v1.js'
+      - 'opportunity-funnel-v1.js'
+      - 'marketplace-supplier-matching-v1.js'
+      - 'product-fingerprint-v1.js'
+      - 'scripts/audit-apify-amazon-pilot-matching-v1.mjs'
+      - '.github/workflows/v2-apify-amazon-pilot-matching-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact Amazon R1 and Apify recovery evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/amazon-r1 artifacts/apify-recovery
+          gh run download 33267650328 -n v2-dataforseo-amazon-price-scale-r1 -D artifacts/amazon-r1
+          gh run download 33269744145 -n v2-apify-alibaba-supplier-price-recovery -D artifacts/apify-recovery
+      - name: Run precision-first matching audit
+        run: node scripts/audit-apify-amazon-pilot-matching-v1.mjs artifacts/amazon-r1/scale-ledger.json artifacts/apify-recovery/raw.json artifacts/apify-amazon-matching-audit
+      - name: Verify truth semantics and useful evidence
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/apify-amazon-matching-audit/summary.json','utf8'));
+          if(s.marketplaceListingCount!==4812)throw new Error(`AMAZON_R1_COUNT_UNEXPECTED:${s.marketplaceListingCount}`);
+          if(s.supplierListingCount!==23)throw new Error(`SUPPLIER_COUNT_UNEXPECTED:${s.supplierListingCount}`);
+          if(s.supplierMoqKnownCount<1)throw new Error('MOQ_EVIDENCE_WAS_LOST');
+          if(s.supplierTierPricingKnownCount<1)throw new Error('TIER_PRICE_EVIDENCE_WAS_LOST');
+          if(s.candidatePairCount<1)throw new Error('NO_CANDIDATE_PAIRS');
+          if(s.truthPolicy.candidatePairIsMatch!==false)throw new Error('CANDIDATE_PAIR_TRUTH_VIOLATION');
+          if(s.truthPolicy.titleSimilarityAloneIsSufficient!==false)throw new Error('TITLE_ONLY_MATCH_VIOLATION');
+          if(s.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_VIOLATION');
+          NODE
+      - name: Upload matching audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-apify-amazon-pilot-matching-audit
+          path: artifacts/apify-amazon-matching-audit
+          retention-days: 30
