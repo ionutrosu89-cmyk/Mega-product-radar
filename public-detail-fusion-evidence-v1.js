@@ -18,24 +18,21 @@ function toCm(value,unit){
 export function parseRobustDimensions(text){
   const s=clean(text);
   if(!s)return null;
-  const patterns=[
-    /(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[dDlL]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[wW]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[hH]?/i,
-    /(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i,
-    /(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i
-  ];
-  for(let i=0;i<patterns.length;i++){
-    const m=s.match(patterns[i]);if(!m)continue;
-    let vals=[];
-    if(i===0){
-      const inchSignal=/"|\binch(?:es)?\b|\bin\b/i.test(m[0]);
-      vals=[m[1],m[2],m[3]].map(v=>toCm(v,inchSignal?'in':'cm'));
-    }else{
-      const unit=m[i===1?4:3];
-      vals=[m[1],m[2],i===1?m[3]:null].filter(Boolean).map(v=>toCm(v,unit));
-    }
-    if(vals.length>=2&&vals.every(v=>Number.isFinite(v)&&v>0))return {
-      lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:vals[2]?Number(vals[2].toFixed(3)):null
-    };
+  const explicit3=s.match(/(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i);
+  if(explicit3){
+    const vals=[explicit3[1],explicit3[2],explicit3[3]].map(v=>toCm(v,explicit3[4]));
+    return {lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:Number(vals[2].toFixed(3))};
+  }
+  const labeled3=s.match(/(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[dDlL]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[wW]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[hH]?/i);
+  if(labeled3){
+    const inchSignal=/"|\binch(?:es)?\b|\bin\b/i.test(labeled3[0]);
+    const vals=[labeled3[1],labeled3[2],labeled3[3]].map(v=>toCm(v,inchSignal?'in':'cm'));
+    return {lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:Number(vals[2].toFixed(3))};
+  }
+  const explicit2=s.match(/(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i);
+  if(explicit2){
+    const vals=[explicit2[1],explicit2[2]].map(v=>toCm(v,explicit2[3]));
+    return {lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:null};
   }
   return null;
 }
