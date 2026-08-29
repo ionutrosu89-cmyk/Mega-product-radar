@@ -1,0 +1,59 @@
+name: DataForSEO Amazon 100K Discovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/dataforseo-100k-discovery-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+      DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+      DATAFORSEO_API_LOGIN: ${{ secrets.DATAFORSEO_API_LOGIN }}
+      DATAFORSEO_API_PASSWORD: ${{ secrets.DATAFORSEO_API_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate explicit user authorization and hard limits
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const t=JSON.parse(fs.readFileSync('data/dataforseo-100k-discovery-trigger.json','utf8'));
+          const c=JSON.parse(fs.readFileSync('data/dataforseo-amazon-100k-discovery-v1.json','utf8'));
+          if(t.authorization!=='USER_APPROVED_PAID_DATA_DISCOVERY')throw new Error('PAID_DISCOVERY_NOT_AUTHORIZED');
+          if(t.maxSpendUsd!==15||c.maxSpendUsd!==15)throw new Error('TOTAL_SPEND_CAP_MUST_EQUAL_15_USD');
+          if(t.purchaseAuthorized!==false||c.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_FORBIDDEN');
+          if(t.salesEvidenceClass!=='NOT_VERIFIED_SALES'||c.truthPolicy.evidenceClass!=='DISCOVERY_ONLY')throw new Error('TRUTH_POLICY_INVALID');
+          NODE
+      - name: Run balance-aware spend-guarded Amazon discovery
+        run: node scripts/dataforseo-amazon-100k-discovery.mjs --out=artifacts/dataforseo-amazon-100k-discovery.json
+      - name: Verify paid run truth envelope
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/dataforseo-amazon-100k-discovery.json','utf8'));
+          if(r.configuredTotalSpendCapUsd!==15)throw new Error('TOTAL_CAP_INVALID');
+          if(r.totalAccountedSpendAfterRunUsd>15+1e-9)throw new Error('TOTAL_SPEND_CAP_BREACH');
+          if(r.providerReportedSpendUsd>r.effectiveRunSpendCapUsd+1e-9)throw new Error('RUN_CAP_BREACH');
+          if(r.truthPolicy.evidenceClass!=='DISCOVERY_ONLY')throw new Error('DISCOVERY_TRUTH_RELAXED');
+          if(r.truthPolicy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.truthPolicy.verifiedSalesRows!==0)throw new Error('SALES_TRUTH_RELAXED');
+          if(r.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZED');
+          console.log(JSON.stringify({uniqueProducts:r.uniqueProducts,targetReached:r.targetReached,requests:r.requestsTriggered,runSpendUsd:r.providerReportedSpendUsd,historicalSpendUsd:r.historicalAccountedSpendUsd,totalSpendAfterRunUsd:r.totalAccountedSpendAfterRunUsd,balanceBeforeUsd:r.accountBalanceBeforeUsd,stopReason:r.stopReason},null,2));
+          NODE
+      - name: Upload discovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: dataforseo-amazon-100k-discovery
+          path: artifacts/dataforseo-amazon-100k-discovery.json
+          retention-days: 14
+          if-no-files-found: error

@@ -1,0 +1,48 @@
+name: DataForSEO 100K Discovery CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/dataforseo-amazon-100k-discovery.mjs'
+      - 'data/dataforseo-amazon-100k-discovery-v1.json'
+      - '.github/workflows/dataforseo-100k-discovery*.yml'
+  push:
+    branches: [main, 'feat/**']
+    paths:
+      - 'scripts/dataforseo-amazon-100k-discovery.mjs'
+      - 'data/dataforseo-amazon-100k-discovery-v1.json'
+      - '.github/workflows/dataforseo-100k-discovery*.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  truth-and-spend-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Syntax check
+        run: node --check scripts/dataforseo-amazon-100k-discovery.mjs
+      - name: Dry-run discovery without network or spend
+        run: node scripts/dataforseo-amazon-100k-discovery.mjs --dryRun=true --out=artifacts/dataforseo-100k-dry-run.json
+      - name: Enforce truth and spend invariants
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const cfg=JSON.parse(fs.readFileSync('data/dataforseo-amazon-100k-discovery-v1.json','utf8'));
+          const r=JSON.parse(fs.readFileSync('artifacts/dataforseo-100k-dry-run.json','utf8'));
+          if(cfg.maxSpendUsd>15)throw new Error('configured spend cap exceeds user authorization');
+          if(cfg.maxRequests*cfg.conservativeMaxCostPerRequestUsd>cfg.maxSpendUsd+1e-9)throw new Error('worst-case plan exceeds spend cap');
+          if(r.providerReportedSpendUsd!==0||r.dryRun!==true)throw new Error('CI dry run must have zero spend');
+          if(r.truthPolicy.evidenceClass!=='DISCOVERY_ONLY')throw new Error('discovery evidence class relaxed');
+          if(r.truthPolicy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.truthPolicy.verifiedSalesRows!==0)throw new Error('sales truth relaxed');
+          if(r.truthPolicy.romaniaGapExact!==false||r.truthPolicy.supplierQuoteVerified!==false||r.truthPolicy.landedCostConfirmed!==false)throw new Error('downstream evidence fabricated');
+          if(r.truthPolicy.purchaseAuthorized!==false)throw new Error('purchase authorization forbidden');
+          NODE
+      - name: Production safety gate
+        run: npm run verify:production-safety
