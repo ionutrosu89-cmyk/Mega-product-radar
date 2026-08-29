@@ -1,0 +1,50 @@
+name: V2 Secondary Public Match Corroboration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-secondary-public-corroboration-b09k5927b5.json'
+      - 'scripts/rerun-match-with-secondary-corroboration-v1.mjs'
+      - '.github/workflows/v2-secondary-public-match-corroboration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  corroborate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact post-detail fusion evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/fusion
+          gh run download 33271253483 -n v2-post-detail-fusion-match -D artifacts/fusion
+      - name: Rerun target match with secondary corroboration
+        run: node scripts/rerun-match-with-secondary-corroboration-v1.mjs artifacts/fusion/post-detail-fusion-match.json data/v2-secondary-public-corroboration-b09k5927b5.json artifacts/secondary-corroborated-match.json
+      - name: Verify truth envelope and unchanged threshold
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/secondary-corroborated-match.json','utf8'));
+          if(s.policy.paidCallsTriggered!==0||s.policy.providerSpendUsd!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
+          if(s.policy.screeningThreshold!==80||s.truthPolicy.matchingThresholdRelaxed!==false)throw new Error('MATCH_THRESHOLD_CHANGED');
+          if(s.truthPolicy.secondaryEvidenceIsDirectAmazonEvidence!==false)throw new Error('SECONDARY_PROMOTED_TO_DIRECT');
+          if(s.truthPolicy.secondaryEvidenceProvesCrossMarketIdentityByItself!==false)throw new Error('CORROBORATION_OVERCLAIM');
+          if(s.truthPolicy.purchaseAuthorized!==false||s.truthPolicy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
+          NODE
+      - name: Upload corroborated match evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-secondary-public-match-corroboration
+          path: artifacts/secondary-corroborated-match.json
+          retention-days: 30
+          if-no-files-found: error

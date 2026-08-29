@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "MPR_SECONDARY_PUBLIC_CORROBORATION_V1",
+  "observedAt": "2026-08-29T19:30:00Z",
+  "marketplace": "AMAZON",
+  "externalProductId": "B09K5927B5",
+  "evidenceClass": "SECONDARY_PUBLIC_CORROBORATION",
+  "directMarketplaceObservation": false,
+  "sources": [
+    {
+      "url": "https://www.desertcart.in/products/562461943-marbrasse-desk-organizer-with-file-holder-5-tier-paper-letter",
+      "sourceType": "SECONDARY_RETAIL_CATALOG",
+      "exactAsinObserved": true
+    },
+    {
+      "url": "https://www.desertcart.in/products/435146482-marbrasse-modern-minimalist-black-desk-organizer-with-5-tier-paper",
+      "sourceType": "SECONDARY_RETAIL_CATALOG",
+      "exactAsinObserved": true
+    },
+    {
+      "url": "https://www.liberia.ubuy.com/product/4DSJVM9E0-marbrasse-desk-organizer-with-file-holder-5-tier-paper-letter-tray-organizer-with-drawer-and-2-pen-holder-mesh-desktop-organizer-and-storage-with",
+      "sourceType": "SECONDARY_RETAIL_CATALOG",
+      "exactAsinObserved": true
+    }
+  ],
+  "corroboratedAttributes": {
+    "productType": "desk organizer",
+    "primaryFunction": "document and stationery organization",
+    "packCount": 1,
+    "material": "metal",
+    "dimensions": {
+      "lengthCm": 35.0,
+      "widthCm": 30.5,
+      "heightCm": 27.9
+    },
+    "formFactor": "desktop organizer",
+    "technicalSpecs": {
+      "tiers": 5,
+      "drawer": "true",
+      "penholders": 2
+    }
+  },
+  "agreement": {
+    "exactAsinAcrossSources": true,
+    "packCountOneAcrossAtLeastTwoSources": true,
+    "materialMetalAcrossAtLeastTwoSources": true,
+    "dimensionsCompatibleAcrossAtLeastTwoSources": true
+  },
+  "truthPolicy": {
+    "secondaryEvidenceIsDirectAmazonEvidence": false,
+    "secondaryEvidenceIsVerifiedSale": false,
+    "secondaryEvidenceProvesCrossMarketIdentityByItself": false,
+    "unknownEqualsZero": false,
+    "purchaseAuthorized": false,
+    "negotiationIncluded": false
+  }
+}
