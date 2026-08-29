@@ -3,6 +3,12 @@ const upper=v=>clean(v).toUpperCase();
 const present=v=>v!==null&&v!==undefined&&v!=='';
 const positive=v=>present(v)&&Number.isFinite(Number(v))&&Number(v)>0?Number(v):null;
 const nonNegative=v=>present(v)&&Number.isFinite(Number(v))&&Number(v)>=0?Number(v):null;
+const firstPositiveFromText=v=>{
+  const direct=positive(v);
+  if(direct!==null)return direct;
+  const match=clean(v).replace(/,/g,'').match(/\d+(?:\.\d+)?/);
+  return match&&Number(match[0])>0?Number(match[0]):null;
+};
 
 function parseRange(value){
   if(Array.isArray(value)&&value.length){const nums=value.map(positive).filter(Boolean);return nums.length?{min:Math.min(...nums),max:Math.max(...nums)}:{min:null,max:null};}
@@ -24,9 +30,9 @@ function detectCurrency(row){
 function normalizeTiers(raw=[]){
   const rows=Array.isArray(raw)?raw:[];
   return rows.map(x=>{
-    const minQuantity=positive(x.minQuantity??x.minQty??x.quantityFrom??x.from);
+    const minQuantity=positive(x.minQuantity??x.minQty??x.quantityFrom??x.from??x.quantityMin);
     const price=positive(x.price??x.unitPrice??x.value);
-    const maxQuantity=positive(x.maxQuantity??x.maxQty??x.quantityTo??x.to);
+    const maxQuantity=positive(x.maxQuantity??x.maxQty??x.quantityTo??x.to??x.quantityMax);
     return minQuantity&&price?{minQuantity,maxQuantity,price}:null;
   }).filter(Boolean).sort((a,b)=>a.minQuantity-b.minQuantity);
 }
@@ -42,7 +48,7 @@ export function adaptStructuredSupplierProviderRow(row={},options={}){
   const publicPriceMin=range.min??(tierPrices.length?Math.min(...tierPrices):null);
   const publicPriceMax=range.max??(tierPrices.length?Math.max(...tierPrices):null);
   const currency=detectCurrency(row);
-  const moq=positive(row.moq??row.minOrderQuantity??row.minimumOrderQuantity??priceTiers[0]?.minQuantity);
+  const moq=firstPositiveFromText(row.moq??row.minOrderQuantity??row.minimumOrderQuantity??row.minOrder)??priceTiers[0]?.minQuantity??null;
   const priceUnit=clean(row.priceUnit??row.unit??row.orderUnit??row.unitLabel)||'piece';
   const observedAt=clean(options.observedAt??row.observedAt)||new Date().toISOString();
   const blockers=[];
