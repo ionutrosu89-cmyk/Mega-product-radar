@@ -52,6 +52,15 @@ function technicalSpecSimilarity(a={},b={}){
   return total/comparable.length;
 }
 
+function appendCategoryCriticalMismatches(a,b,mismatches){
+  const push=code=>{if(!mismatches.includes(code))mismatches.push(code);};
+  if(exactKnown(a.category,b.category)===false)push('CATEGORY_MISMATCH');
+  if(exactKnown(a.formFactor,b.formFactor)===false)push('FORM_FACTOR_MISMATCH');
+  if(known(a.capacityMl)&&known(b.capacityMl)&&(numericSimilarity(a.capacityMl,b.capacityMl,0.05)??0)<1)push('CAPACITY_MISMATCH');
+  if(known(a.powerWatts)&&known(b.powerWatts)&&(numericSimilarity(a.powerWatts,b.powerWatts,0.1)??0)<1)push('POWER_MISMATCH');
+  if(known(a.voltage)&&known(b.voltage)&&Number(a.voltage)!==Number(b.voltage))push('VOLTAGE_MISMATCH');
+}
+
 const FEATURES=Object.freeze([
   {key:'category',weight:10,score:(a,b)=>exactKnown(a.category,b.category)===null?null:(exactKnown(a.category,b.category)?1:0)},
   {key:'productType',weight:15,score:(a,b)=>exactKnown(a.productType,b.productType)===null?null:(exactKnown(a.productType,b.productType)?1:0)},
@@ -78,7 +87,8 @@ export function matchMarketplaceToSupplier(marketplaceInput={},supplierInput={},
   const marketplace=marketplaceInput.schemaVersion==='MPR_PRODUCT_FINGERPRINT_V1'?marketplaceInput:buildProductFingerprint(marketplaceInput);
   const supplier=supplierInput.schemaVersion==='MPR_PRODUCT_FINGERPRINT_V1'?supplierInput:buildProductFingerprint(supplierInput);
   const tolerances={dimensionPct:Number(options.dimensionPct??0.08),weightPct:Number(options.weightPct??0.15)};
-  const hardMismatches=fingerprintHardMismatches(marketplace,supplier,tolerances);
+  const hardMismatches=[...fingerprintHardMismatches(marketplace,supplier,tolerances)];
+  appendCategoryCriticalMismatches(marketplace,supplier,hardMismatches);
 
   const evidence=[];
   let earned=0;
