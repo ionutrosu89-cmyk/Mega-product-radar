@@ -44,10 +44,10 @@ export function prioritizePersistenceBundle(bundle={},options={}){
   const candidates=persistenceBundleToCandidates(bundle);
   const prioritized=prioritizeCatalog(candidates,options);
   return{
+    ...prioritized,
     schema:PERSISTENCE_PRIORITIZATION_SCHEMA,
     sourceBundleSha256:bundle.bundleSha256||null,
     sourceProductCount:Number(bundle.counts?.products)||candidates.length,
-    ...prioritized,
     writeAuthorized:false,
     policy:{...prioritized.policy,providerDataSpendEur:0,paidDataCallsTriggered:0,purchaseAuthorized:false},
     note:'Prioritization consumes a deterministic catalog persistence bundle and selects records for later evidence collection only. No catalog write or commercial validation is performed.'
