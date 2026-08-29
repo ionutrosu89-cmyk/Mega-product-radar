@@ -1,0 +1,58 @@
+name: V2 Apify Alibaba Supplier Price Pilot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-apify-supplier-price-pilot-trigger.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+      MPR_APIFY_AUTHORIZATION: USER_APPROVED_APIFY_SUPPLIER_PRICE_PILOT
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify explicit provider authorization
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const p='data/v2-apify-supplier-price-pilot-trigger.json';
+          if(!fs.existsSync(p))throw new Error('APIFY_TRIGGER_MISSING');
+          const t=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(t.authorization!=='USER_APPROVED_APIFY_SUPPLIER_PRICE_PILOT')throw new Error('APIFY_PROVIDER_SPEND_NOT_AUTHORIZED');
+          if(t.maxTotalChargeUsd!==0.05)throw new Error('APIFY_CAP_MUST_EQUAL_0_05');
+          if(t.maxItems!==25)throw new Error('APIFY_MAX_ITEMS_MUST_EQUAL_25');
+          if(t.purchaseAuthorized!==false||t.negotiationAuthorized!==false)throw new Error('COMMERCIAL_ACTION_FORBIDDEN');
+          if(!process.env.APIFY_TOKEN)throw new Error('APIFY_TOKEN_MISSING');
+          NODE
+      - name: Run hard-capped structured supplier price pilot
+        run: node scripts/apify-alibaba-supplier-price-pilot-v1.mjs
+      - name: Build normalized Supplier Public Price Ledger
+        run: node scripts/build-supplier-price-ledger-v1.mjs --input=artifacts/apify-alibaba-supplier-pilot/supplier-ledger-input.json --out=artifacts/apify-alibaba-supplier-pilot/supplier-price-ledger.json
+      - name: Verify public-price truth semantics
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/apify-alibaba-supplier-pilot/summary.json','utf8'));
+          if(s.maxTotalChargeUsd!==0.05||s.maxItems!==25)throw new Error('HARD_CAP_CHANGED');
+          if(s.reportedUsageUsd!==null&&s.reportedUsageUsd>0.05+1e-9)throw new Error('CHARGE_CAP_BREACH');
+          if(s.truthPolicy.providerResultIsVerifiedQuote!==false||s.truthPolicy.providerResultIsLandedCost!==false)throw new Error('TRUTH_PROMOTION');
+          if(s.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZED');
+          NODE
+      - name: Upload supplier price pilot evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-apify-alibaba-supplier-price-pilot
+          path: artifacts/apify-alibaba-supplier-pilot/
+          retention-days: 30
+          if-no-files-found: error
