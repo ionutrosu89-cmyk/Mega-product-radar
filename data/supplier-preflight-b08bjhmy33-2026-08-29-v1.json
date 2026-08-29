@@ -17,6 +17,9 @@
       "supplier": "Hebei Laibang Import and Export Trade Co., Ltd.",
       "source": "Made-in-China public listing",
       "sourceUrl": "https://hebeilaibang.en.made-in-china.com/product/afSpwABTgVcD/China-Sand-Proof-Organic-Cotton-Soft-Custom-Turkish-Bath-Towels-Beach-Towels-Custom-Beach-Towel.html",
+      "contactUrl": "https://www.madeinchina.com/supplier/hebeilaibang/contact/",
+      "publicContactPerson": "Ms. Lixinhuan",
+      "publicCompanyLastLoginObserved": "2026-08-28",
       "listingObservedDate": "2026-08-29",
       "listingEvidenceClass": "PUBLIC_LISTING_ONLY_NOT_VERIFIED_QUOTE",
       "specObserved": {
@@ -42,6 +45,8 @@
       "supplier": "Hebei Laibang Import and Export Trade Co., Ltd.",
       "source": "Made-in-China public listing",
       "sourceUrl": "https://hebeilaibang.en.made-in-china.com/product/mRUpSsnYRxkl/China-Beach-Towel-Quick-Dry-Manufacturer-Turkey-Oversized-Customized-Cotton-Portable-Beach-Towels.html",
+      "contactUrl": "https://www.madeinchina.com/supplier/hebeilaibang/contact/",
+      "publicContactPerson": "Ms. Lixinhuan",
       "listingObservedDate": "2026-08-29",
       "listingEvidenceClass": "PUBLIC_LISTING_ONLY_NOT_VERIFIED_QUOTE",
       "specObserved": {
@@ -60,7 +65,9 @@
       "gaps": ["exact 4-pack retail configuration not verified", "commercial unit price requires direct quote", "lead time not verified for target configuration", "DDP Romania unknown"]
     },
     {
-      "supplier": "Skylark / public Made-in-China supplier listing",
+      "supplier": "Yiwu Billion Import & Export Co., Ltd.",
+      "listingBrandOrTrademark": "Skylark",
+      "model": "ZT-163",
       "source": "Made-in-China public listing",
       "sourceUrl": "https://skylarkpersonalcare.en.made-in-china.com/product/mJXRSLEUWnpr/China-Wholesale-Custom-Quick-Dry-Lightweight-Large-Size-100-Cotton-Turkish-Beach-Towel.html",
       "listingObservedDate": "2026-08-29",
@@ -68,19 +75,33 @@
       "specObserved": {
         "material": "100% cotton",
         "size": "100x180 cm",
+        "gramWeight": "200 GSM",
         "moqPieces": 100,
         "sampleDays": "about 7 days",
         "leadTime": "7 days for 1-500 pieces; 20 days for 501-2000 pieces; >2000 negotiated",
         "packing": "OPP bag",
         "listingPackageDimensionsCm": "25x34x6",
-        "listingPackageGrossWeightKg": 1
+        "listingPackageGrossWeightKg": 1,
+        "supplierStatedHsCode": "5802209000",
+        "companyAcceptedDeliveryTerms": ["FOB", "CIF", "EXW", "CIP", "FCA", "CPT", "DDP", "Express Delivery", "DAF"]
+      },
+      "hsCodeVerification": {
+        "status": "SUPPLIER_STATED_ONLY_CLASSIFICATION_CONFLICT_REQUIRES_REVIEW",
+        "supplierStatedHsCode": "5802209000",
+        "acceptedForLandedEconomics": false,
+        "reason": "Supplier-stated HS code is not automatically accepted as the EU CN/TARIC classification of the finished quoted 4-pack. The landed-economics preflight separately treats 63026000/63029100 as provisional made-up towel candidates pending exact construction and customs classification."
+      },
+      "ddpCapabilityEvidence": {
+        "status": "COMPANY_LEVEL_DELIVERY_TERM_ONLY_NOT_QUOTE",
+        "ddpListedAsAcceptedDeliveryTerm": true,
+        "ddpRomaniaPrice": null
       },
       "price": null,
       "incoterm": null,
       "ddpRomania": null,
       "quoteFreshnessDate": null,
       "verifiedQuote": false,
-      "gaps": ["listing package metrics may be listing-level proxy and are not confirmed for a 4-pack", "exact 4-pack configuration not verified", "commercial price requires direct quote", "DDP Romania unknown"]
+      "gaps": ["listing package metrics may be listing-level proxy and are not confirmed for a 4-pack", "exact 4-pack configuration not verified", "commercial price requires direct quote", "DDP is listed as an accepted company delivery term but DDP Romania price is unverified", "supplier-stated HS 5802209000 conflicts with provisional finished-towel classification path and requires customs review"]
     }
   ],
   "nextRequiredEvidence": {
@@ -95,6 +116,7 @@
       "carton quantity/dimensions/gross weight for target configuration",
       "incoterm",
       "DDP Romania availability and price if offered",
+      "supplier-stated HS code tied to exact product",
       "quote date"
     ]
   },
@@ -105,6 +127,8 @@
   },
   "truthPolicy": {
     "supplierListingIsVerifiedQuote": false,
+    "supplierStatedHsIsConfirmedEuClassification": false,
+    "companyAcceptedDdpTermIsDdpRomaniaQuote": false,
     "listingPackageIsConfirmedTargetPack": false,
     "unknownShippingIsZero": false,
     "landedCostConfirmed": false,
