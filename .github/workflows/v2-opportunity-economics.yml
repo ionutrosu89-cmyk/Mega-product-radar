@@ -1,0 +1,80 @@
+name: V2 Opportunity Economics
+
+on:
+  workflow_run:
+    workflows: ['V2 Opportunity Pack Gate']
+    types: [completed]
+  pull_request:
+    paths:
+      - 'scripts/run-opportunity-pack-economics-v1.mjs'
+      - 'data/v2-conservative-screening-defaults-v1.json'
+      - 'scripts/build-opportunity-pack-from-rematch-v1.mjs'
+      - 'test/opportunity-pack-auto-economics-v1.test.js'
+      - '.github/workflows/v2-opportunity-economics.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  economics:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test blocked and ready economics behavior
+        run: node --test test/opportunity-pack-auto-economics-v1.test.js
+      - name: Resolve exact opportunity pack source run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            RUN_ID="$TRIGGER_RUN_ID"
+          else
+            RUN_ID="$(gh run list --workflow v2-opportunity-pack-gate.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo 'No successful Opportunity Pack run available.' >&2
+            exit 1
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Using opportunity pack run $RUN_ID"
+      - name: Download exact Opportunity Pack artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.source.outputs.run_id }}
+        run: |
+          mkdir -p artifacts/pack
+          gh run download "$RUN_ID" -n v2-opportunity-pack-gate -D artifacts/pack
+          test -f artifacts/pack/opportunity-pack-live.json
+      - name: Run conditional opportunity economics
+        run: node scripts/run-opportunity-pack-economics-v1.mjs artifacts/pack/opportunity-pack-live.json data/v2-public-economics-evidence-2026-08-29.json data/v2-conservative-screening-defaults-v1.json artifacts/opportunity-economics-live.json "${{ steps.source.outputs.run_id }}"
+      - name: Enforce conservative truth policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const e=JSON.parse(fs.readFileSync('artifacts/opportunity-economics-live.json','utf8'));
+          if(e.rankingScenario!=='CONSERVATIVE'||e.purchaseAuthorized!==false||e.truthPolicy.unknownEqualsZero!==false)throw new Error('ECONOMICS_TRUTH_POLICY_BREACH');
+          if(!Number.isInteger(e.source.opportunityPackWorkflowRunId)||e.source.opportunityPackWorkflowRunId<=0)throw new Error('PACK_PROVENANCE_REQUIRED');
+          if(e.status==='BLOCKED_UPSTREAM_OPPORTUNITY_PACK'&&e.economics!==null)throw new Error('BLOCKED_ECONOMICS_WAS_CALCULATED');
+          if(e.status==='SCREENED'){
+            if(e.economics?.status!=='SCREENED'||e.economics?.rankingScenario!=='CONSERVATIVE')throw new Error('INVALID_SCREENED_ECONOMICS');
+            if(!['SCREENING_OPPORTUNITY','REJECT_CONSERVATIVE_ECONOMICS'].includes(e.opportunityGate?.decision))throw new Error('INVALID_ECONOMICS_DECISION');
+          }
+          NODE
+      - name: Upload opportunity economics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-opportunity-economics
+          path: artifacts/opportunity-economics-live.json
+          retention-days: 30
+          if-no-files-found: error
