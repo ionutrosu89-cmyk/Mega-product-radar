@@ -1,6 +1,13 @@
 import {resolveBillingWorkspaceAccess} from './_billing-workspace-access.mjs';
 
 const PRICE_ENV={DISCOVER:'STRIPE_PRICE_DISCOVER',RADAR:'STRIPE_PRICE_RADAR',LAUNCH:'STRIPE_PRICE_LAUNCH'};
+const CHECKOUT_ATTEMPT_RE=/^[A-Za-z0-9_-]{16,100}$/;
+
+function validCheckoutAttemptId(value=''){return CHECKOUT_ATTEMPT_RE.test(String(value||''));}
+function checkoutIdempotencyKey(workspaceId,plan,attemptId){
+  if(!workspaceId||!PRICE_ENV[String(plan||'').toUpperCase()]||!validCheckoutAttemptId(attemptId))return null;
+  return `mpr-checkout:${workspaceId}:${String(plan).toUpperCase()}:${attemptId}`;
+}
 
 async function recordJourneyEvent({workspaceId,userId,plan,eventName,metadata},{fetchImpl,env}){
   const service=env.SUPABASE_SERVICE_ROLE_KEY;
@@ -22,6 +29,9 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
       const body=await request.json().catch(()=>({}));
       const plan=String(body.plan||'').toUpperCase();
       if(!PRICE_ENV[plan])return Response.json({ok:false,error:'Unsupported billing plan'},{status:400,headers:{'Cache-Control':'no-store'}});
+      const checkoutAttemptId=String(body.checkoutAttemptId||'');
+      const idempotencyKey=checkoutIdempotencyKey(access.workspace.id,plan,checkoutAttemptId);
+      if(!idempotencyKey)return Response.json({ok:false,code:'CHECKOUT_ATTEMPT_REQUIRED',error:'Checkout attempt identity is missing or invalid.'},{status:400,headers:{'Cache-Control':'no-store'}});
       const current=access.subscription;
       const currentStatus=String(current?.status||'').toLowerCase();
       if(['active','trialing'].includes(currentStatus)&&current?.provider_subscription_id){
@@ -40,14 +50,16 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
       params.set('client_reference_id',access.workspace.id);
       params.set('metadata[workspace_id]',access.workspace.id);
       params.set('metadata[plan]',plan);
+      params.set('metadata[checkout_attempt_id]',checkoutAttemptId);
       params.set('subscription_data[metadata][workspace_id]',access.workspace.id);
       params.set('subscription_data[metadata][plan]',plan);
+      params.set('subscription_data[metadata][checkout_attempt_id]',checkoutAttemptId);
       params.set('allow_promotion_codes','true');
       if(access.user?.email)params.set('customer_email',access.user.email);
-      const stripeResponse=await fetchImpl('https://api.stripe.com/v1/checkout/sessions',{method:'POST',headers:{authorization:`Bearer ${env.STRIPE_SECRET_KEY}`,'content-type':'application/x-www-form-urlencoded'},body:params});
+      const stripeResponse=await fetchImpl('https://api.stripe.com/v1/checkout/sessions',{method:'POST',headers:{authorization:`Bearer ${env.STRIPE_SECRET_KEY}`,'content-type':'application/x-www-form-urlencoded','idempotency-key':idempotencyKey},body:params});
       const stripe=await stripeResponse.json();
       if(!stripeResponse.ok||!stripe?.url)return Response.json({ok:false,error:'Stripe checkout creation failed'},{status:502,headers:{'Cache-Control':'no-store'}});
-      await recordJourneyEvent({workspaceId:access.workspace.id,userId:access.user?.id,plan:access.workspace.plan,eventName:'CHECKOUT_STARTED',metadata:{requestedPlan:plan,stripeSessionId:String(stripe.id||'')}},{fetchImpl,env});
+      await recordJourneyEvent({workspaceId:access.workspace.id,userId:access.user?.id,plan:access.workspace.plan,eventName:'CHECKOUT_STARTED',metadata:{requestedPlan:plan,stripeSessionId:String(stripe.id||''),checkoutAttemptId}},{fetchImpl,env});
       return Response.json({ok:true,url:stripe.url,plan,mode:'NEW_SUBSCRIPTION',workspaceId:access.workspace.id},{headers:{'Cache-Control':'private, no-store'}});
     }catch(error){
       return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
@@ -55,6 +67,6 @@ export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.
   };
 }
 
-export {recordJourneyEvent};
+export {recordJourneyEvent,validCheckoutAttemptId,checkoutIdempotencyKey};
 export default createBillingCheckoutHandler();
 export const config={path:'/api/billing/checkout',method:'POST'};
