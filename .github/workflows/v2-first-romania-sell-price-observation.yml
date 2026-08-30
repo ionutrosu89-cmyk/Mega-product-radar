@@ -1,0 +1,57 @@
+name: V2 First Romania Sell Price Observation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'romania-sell-price-evidence-v1.js'
+      - 'scripts/run-first-romania-sell-price-observation-v1.mjs'
+      - '.github/workflows/v2-first-romania-sell-price-observation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run deterministic tests
+        run: node --test test/romania-sell-price-evidence-v1.test.js
+      - name: Observe live Romania sell-side price
+        id: observe
+        continue-on-error: true
+        run: node scripts/run-first-romania-sell-price-observation-v1.mjs --out=artifacts/first-romania-sell-price-observation.json
+      - name: Enforce truth and spend gates
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const p='artifacts/first-romania-sell-price-observation.json';
+          if(!fs.existsSync(p))throw new Error('ROMANIA_PRICE_ARTIFACT_MISSING');
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.market!=='RO'||x.marketplace!=='EMAG')throw new Error('MARKET_SCOPE_BREACH');
+          if(x.policy?.providerSpendUsd!==0||x.policy?.paidCallsTriggered!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
+          if(x.policy?.credentialsUsed!==false||x.policy?.purchaseAuthorized!==false)throw new Error('AUTHORITY_BREACH');
+          if(x.truthPolicy?.publicListingPriceIsRealizedSale!==false||x.truthPolicy?.searchResultIsVerifiedIdentity!==false)throw new Error('EVIDENCE_PROMOTION_BREACH');
+          if(x.truthPolicy?.unknownEqualsZero!==false)throw new Error('UNKNOWN_ZERO_BREACH');
+          if(x.status==='PRICE_OBSERVED_COMPARABLE'){
+            if(!(Number(x.selectedObservation?.grossPriceRon)>0)||x.selectedObservation?.currency!=='RON')throw new Error('INVALID_ROMANIA_PRICE');
+            if(x.selectedObservation?.identityStatus!=='COMPARABLE_SCREENING_CANDIDATE_NOT_VERIFIED_CANONICAL_IDENTITY')throw new Error('IDENTITY_OVERCLAIM');
+          } else {
+            console.log(`Fail-closed live observation blockers: ${JSON.stringify(x.blockers||[])}`);
+          }
+          NODE
+      - name: Upload Romania sell-price evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-first-romania-sell-price-observation
+          path: artifacts/first-romania-sell-price-observation.json
+          if-no-files-found: error
+          retention-days: 14
