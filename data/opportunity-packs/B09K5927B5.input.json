@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "MPR_OPPORTUNITY_PACK_INPUT_V1",
+  "target": {"marketplace":"AMAZON_US","asin":"B09K5927B5"},
+  "supplier": {
+    "externalId": "1600756221959",
+    "supplierName": "Ningbo Koyo Imp & Exp Co., Ltd",
+    "unitPriceUsd": 10.66,
+    "moq": 1000,
+    "priceEvidenceClass": "HISTORICAL_DIRECT_SUPPLIER_DETAIL"
+  },
+  "directSupplierEvidence": {
+    "provenanceMatched": true,
+    "exactConfigurationConfirmed": true,
+    "assembledDimensionsCm": null,
+    "source": "historical direct Alibaba detail artifact for listing 1600756221959"
+  },
+  "match": {
+    "matchConfidence": 65.37,
+    "screeningEconomicsEligible": false,
+    "hardMismatches": [],
+    "source": "current precision matcher before supplier dimensions"
+  },
+  "romaniaPrice": {
+    "grossRon": 90,
+    "evidenceClass": "SECONDARY_SCREENING_PRICE",
+    "source": "recent public Romanian search index; screening only"
+  },
+  "freight": {
+    "usdPerKg": 4.71,
+    "evidenceClass": "PUBLIC_FREIGHT_BENCHMARK"
+  },
+  "purchaseAuthorized": false
+}
