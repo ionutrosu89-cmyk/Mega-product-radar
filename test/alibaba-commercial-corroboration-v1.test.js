@@ -39,6 +39,18 @@ test('conflicting observations for the same id fail commercial fields closed',()
   assert.equal(x.commercialCorroboration.supplierConflict,true);
 });
 
+test('conflict clears commercial fields even when the selected identity row itself contains values',()=>{
+  const identityWithCommercial={...embedded,publicPriceCandidate:{currency:'USD',min:10,max:10},moqCandidate:{value:50},supplierName:'Supplier A Co., Ltd.'};
+  const conflicting={...embedded,evidenceClass:'PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE',publicPriceCandidate:{currency:'USD',min:11,max:11},moqCandidate:{value:100},supplierName:'Supplier B Co., Ltd.'};
+  const [x]=corroborateAlibabaCommercialEvidence([identityWithCommercial,conflicting]);
+  assert.equal(x.commercialCorroboration.priceConflict,true);
+  assert.equal(x.commercialCorroboration.moqConflict,true);
+  assert.equal(x.commercialCorroboration.supplierConflict,true);
+  assert.equal(x.publicPriceCandidate,null);
+  assert.equal(x.moqCandidate,null);
+  assert.equal(x.supplierName,null);
+});
+
 test('truth policy never promotes corroboration to quote detail match economics or purchase',()=>{
   assert.equal(AlibabaCommercialCorroborationTruthPolicy.sameAlibabaExternalIdRequired,true);
   assert.equal(AlibabaCommercialCorroborationTruthPolicy.corroboratedCommercialEvidenceIsVerifiedQuote,false);
