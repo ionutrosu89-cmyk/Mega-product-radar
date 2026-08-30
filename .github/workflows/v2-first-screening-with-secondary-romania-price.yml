@@ -1,0 +1,54 @@
+name: V2 First Screening With Secondary Romania Price
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'romania-screening-price-evidence-v1.js'
+      - 'data/v2-secondary-romania-screening-price-2026-08-30.json'
+      - 'scripts/run-first-screening-with-secondary-romania-price-v1.mjs'
+      - '.github/workflows/v2-first-screening-with-secondary-romania-price.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact screening-eligible match evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/match
+          gh run download 33271637387 -n v2-secondary-public-match-corroboration -D artifacts/match
+      - name: Run economics preflight with secondary Romania price
+        run: node scripts/run-first-screening-with-secondary-romania-price-v1.mjs artifacts/match/secondary-corroborated-match.json artifacts/first-screening-with-secondary-romania-price.json data/v2-public-economics-evidence-2026-08-29.json data/v2-secondary-romania-screening-price-2026-08-30.json
+      - name: Enforce screening-only truth policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/first-screening-with-secondary-romania-price.json','utf8'));
+          if(s.decision!=='BLOCKED_PENDING_PROVENANCE_BACKED_COST_ASSUMPTIONS')throw new Error('UNEXPECTED_DECISION');
+          if(s.economics.status!=='BLOCKED')throw new Error('ECONOMICS_MUST_REMAIN_BLOCKED');
+          if(s.marketContext.status!=='COHERENT')throw new Error('ROMANIA_MARKET_CONTEXT_MUST_BE_COHERENT');
+          if(!(Number(s.observed?.romaniaScreeningPrice?.priceRon)>0))throw new Error('ROMANIA_PRICE_NOT_RESOLVED');
+          if(s.observed.romaniaScreeningPrice.evidenceClass!=='SECONDARY_PUBLIC_SEARCH_INDEX')throw new Error('SECONDARY_EVIDENCE_CLASS_LOST');
+          if(s.truthPolicy.secondaryRomaniaPriceIsDirectObservation!==false||s.truthPolicy.secondaryRomaniaPriceIsConfirmedPrice!==false)throw new Error('SECONDARY_PRICE_PROMOTED');
+          if(s.truthPolicy.unknownEqualsZero!==false||s.truthPolicy.purchaseAuthorized!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(s.truthPolicy.paidCallsTriggered!==0||s.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_SPEND');
+          NODE
+      - name: Upload preflight artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-first-screening-with-secondary-romania-price
+          path: artifacts/first-screening-with-secondary-romania-price.json
+          retention-days: 30
+          if-no-files-found: error
