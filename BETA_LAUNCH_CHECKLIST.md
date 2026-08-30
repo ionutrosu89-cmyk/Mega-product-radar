@@ -8,6 +8,7 @@
 - [ ] `/api/internal/billing-readiness` returns `ready: true`.
 - [ ] Sandbox flow passes: FREE → DISCOVER → RADAR → LAUNCH → cancel-at-period-end → expiry.
 - [ ] No duplicate Stripe subscriptions after changing plan.
+- [ ] Failed Stripe webhook delivery is retried successfully with the same event id and grants/revokes entitlement exactly once.
 - [ ] Paid access is granted only from active/trialing subscription webhook state.
 - [ ] Discover/Radar/Launch paywalls verified in a clean browser session.
 - [ ] Terms and Privacy reviewed by a qualified Romanian/EU professional.
