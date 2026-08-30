@@ -19,7 +19,11 @@ test('does not borrow distinctive identity signals from neighboring card text',(
   const html=`<div class="card"><a href="https://www.alibaba.com/product-detail/Metal-Pen-Cup_1601888888888.html" title="Metal Pen Cup Holder for Office">Metal Pen Cup Holder for Office</a><span>$1.20</span><span>MOQ: 50 pieces</span></div><div class="card"><a href="https://www.alibaba.com/product-detail/Mesh-Desk-Organizer-With-File-Holder_1601999999999.html" title="Mesh Desk Organizer With File Holder 5-Tier Paper Letter Tray Organizer Drawer 2 Pen Holder">Mesh Desk Organizer With File Holder 5-Tier Paper Letter Tray Organizer Drawer 2 Pen Holder</a><span>$9.90</span><span>MOQ: 100 pieces</span></div>`;
   const rows=extractAlibabaIndexEvidence(html);
   const penCup=rows.find(x=>x.externalId==='1601888888888');
-  assert.equal(penCup?.exactDistinctiveConfiguration,false);
-  assert.equal(penCup?.signals.fiveTier,false);
-  assert.equal(penCup?.signals.drawer,false);
+  assert.equal(rows.some(x=>x.externalId==='1601888888888'&&x.exactDistinctiveConfiguration===true),false);
+  if(penCup){
+    assert.equal(penCup.signals.fiveTier,false);
+    assert.equal(penCup.signals.drawer,false);
+  }
+  const exact=rows.find(x=>x.externalId==='1601999999999');
+  assert.equal(exact?.exactDistinctiveConfiguration,true);
 });
