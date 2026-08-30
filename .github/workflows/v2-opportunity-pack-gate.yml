@@ -1,0 +1,65 @@
+name: V2 Opportunity Pack Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supplier-validation-live.json'
+      - 'supplier-shortlist-v1.js'
+      - 'opportunity-pack-gate-v1.js'
+      - 'scripts/build-supplier-shortlist-v1.mjs'
+      - 'scripts/build-opportunity-pack-gate-v1.mjs'
+      - 'data/opportunity-packs/**'
+      - 'test/supplier-shortlist-v1.test.js'
+      - 'test/opportunity-pack-gate-v1.test.js'
+      - '.github/workflows/v2-opportunity-pack-gate.yml'
+  pull_request:
+    paths:
+      - 'supplier-shortlist-v1.js'
+      - 'opportunity-pack-gate-v1.js'
+      - 'scripts/build-supplier-shortlist-v1.mjs'
+      - 'scripts/build-opportunity-pack-gate-v1.mjs'
+      - 'data/opportunity-packs/**'
+      - 'test/supplier-shortlist-v1.test.js'
+      - 'test/opportunity-pack-gate-v1.test.js'
+      - '.github/workflows/v2-opportunity-pack-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run deterministic shortlist and opportunity pack tests
+        run: node --test test/supplier-shortlist-v1.test.js test/opportunity-pack-gate-v1.test.js
+      - name: Build supplier shortlist
+        run: node scripts/build-supplier-shortlist-v1.mjs supplier-validation-live.json artifacts/supplier-shortlist-live.json
+      - name: Build current opportunity pack gate
+        run: node scripts/build-opportunity-pack-gate-v1.mjs data/opportunity-packs/B09K5927B5.input.json artifacts/opportunity-pack-live.json
+      - name: Enforce fail-closed opportunity policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/supplier-shortlist-live.json','utf8'));
+          const p=JSON.parse(fs.readFileSync('artifacts/opportunity-pack-live.json','utf8'));
+          if(s.integrity.shortlistIsMarketplaceMatch!==false||s.integrity.shortlistCanAuthorizeEconomics!==false||s.integrity.shortlistCanAuthorizePurchase!==false)throw new Error('SHORTLIST_PROMOTED');
+          for(const x of s.candidates||[])if(x.economicsAllowed!==false||x.canPromoteToMatch!==false||x.purchaseAuthorized!==false)throw new Error('SHORTLIST_ITEM_PROMOTED');
+          if(p.truthPolicy.unknownEqualsZero!==false||p.truthPolicy.purchaseAuthorized!==false)throw new Error('PACK_TRUTH_BREACH');
+          if(p.status==='BLOCKED'&&p.economicsAllowed!==false)throw new Error('BLOCKED_PACK_ECONOMICS_ALLOWED');
+          if(p.status==='ECONOMICS_READY'&&(p.match.confidence<80||p.match.hardMismatches.length))throw new Error('INVALID_ECONOMICS_READY');
+          NODE
+      - name: Upload decision artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-opportunity-pack-gate
+          path: |
+            artifacts/supplier-shortlist-live.json
+            artifacts/opportunity-pack-live.json
+          retention-days: 30
+          if-no-files-found: error
