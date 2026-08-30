@@ -2,12 +2,17 @@ name: Amazon Live Refresh Round1 Remaining
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/amazon-live-refresh-round1-remaining.yml'
 
 permissions:
   contents: read
 
 jobs:
   collect:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[EXECUTE_AMAZON_REMAINING_ZERO_COST]')
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -45,7 +50,7 @@ jobs:
 
   consolidate:
     needs: collect
-    if: always()
+    if: always() && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[EXECUTE_AMAZON_REMAINING_ZERO_COST]'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
