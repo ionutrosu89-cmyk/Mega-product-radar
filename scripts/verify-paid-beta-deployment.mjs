@@ -37,7 +37,7 @@ async function diagnostic(baseUrl,path,token,fetchImpl){
 export async function verifyPaidBetaDeployment({baseUrl,token,gate='SANDBOX',fetchImpl=fetch}={}){
   const url=normalizeBaseUrl(baseUrl);
   const mode=normalizeGate(gate);
-  if(!String(token||'').trim())throw new Error('MPR_ADMIN_ACCESS_TOKEN is required');
+  if(!String(token||'').trim())throw new Error('MPR_READINESS_PROBE_TOKEN is required');
   const [billingResult,runtimeResult,legalResult]=await Promise.all([
     diagnostic(url,ENDPOINTS.billing,token,fetchImpl),
     diagnostic(url,ENDPOINTS.runtime,token,fetchImpl),
@@ -79,7 +79,7 @@ async function main(){
   try{
     const result=await verifyPaidBetaDeployment({
       baseUrl:process.env.MPR_BASE_URL,
-      token:process.env.MPR_ADMIN_ACCESS_TOKEN,
+      token:process.env.MPR_READINESS_PROBE_TOKEN,
       gate:process.env.MPR_DEPLOYMENT_GATE||'SANDBOX'
     });
     console.log(JSON.stringify(result,null,2));
