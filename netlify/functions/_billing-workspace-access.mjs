@@ -40,7 +40,7 @@ export async function resolveBillingWorkspaceAccess(request,{fetchImpl=fetch,env
   const workspace=(await workspaceResponse.json())?.[0]||null;
   if(!workspace)return {error:'Workspace not found',status:404};
 
-  const subscriptionResponse=await fetchImpl(`${supabaseUrl}/rest/v1/subscriptions?select=workspace_id,plan,status,provider_subscription_id,cancel_at_period_end,current_period_end&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{headers});
+  const subscriptionResponse=await fetchImpl(`${supabaseUrl}/rest/v1/subscriptions?select=workspace_id,plan,status,provider_subscription_id,cancel_at_period_end,current_period_end,last_stripe_event_id&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{headers});
   const subscription=subscriptionResponse.ok?(await subscriptionResponse.json())?.[0]||null:null;
   if(!subscriptionResponse.ok)return {error:'Subscription lookup failed',status:502};
 

@@ -1,4 +1,5 @@
 import {resolveBillingWorkspaceAccess} from './_billing-workspace-access.mjs';
+import {billingMutationIdempotencyKey} from './_billing-mutation-idempotency.mjs';
 
 function stripePeriodEnd(subscription) {
   const direct = Number(subscription?.current_period_end);
@@ -20,10 +21,12 @@ export function createBillingResumeHandler({ fetch: fetchImpl = fetch, env = pro
       if (!sub.cancel_at_period_end) {
         return Response.json({ ok: true, unchanged: true, workspaceId:state.workspace.id, cancelAtPeriodEnd: false }, { headers: { 'Cache-Control': 'private, no-store' } });
       }
+      const mutationKey=billingMutationIdempotencyKey({workspaceId:state.workspace.id,subscriptionId:sub.provider_subscription_id,lastStripeEventId:sub.last_stripe_event_id,operation:'resume',target:'false'});
+      if(!mutationKey)return Response.json({ok:false,error:'Billing mutation identity unavailable'},{status:503});
       const params = new URLSearchParams({ cancel_at_period_end: 'false' });
       const stripeResponse = await fetchImpl(`https://api.stripe.com/v1/subscriptions/${encodeURIComponent(sub.provider_subscription_id)}`, {
         method: 'POST',
-        headers: { authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'content-type': 'application/x-www-form-urlencoded' },
+        headers: { authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'content-type': 'application/x-www-form-urlencoded','idempotency-key':mutationKey },
         body: params
       });
       const stripe = await stripeResponse.json();
