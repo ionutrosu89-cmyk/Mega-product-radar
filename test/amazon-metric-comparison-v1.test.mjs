@@ -23,7 +23,7 @@ test('comparison only uses time-separated current observations',()=>{
   assert.equal(out.manifest.baselineCount,2);
   assert.equal(out.manifest.comparableCount,1);
   assert.equal(out.comparisons[0].delta.price,2);
-  assert.equal(out.comparisons[0].delta.rating,0.1);
+  assert.ok(Math.abs(out.comparisons[0].delta.rating-0.1)<1e-9);
   assert.equal(out.comparisons[0].delta.reviewCount,10);
   assert.equal(out.comparisons[0].reviewGrowthIsSales,false);
   assert.equal(out.policy.demandTrendAuthorized,false);
