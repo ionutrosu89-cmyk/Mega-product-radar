@@ -25,8 +25,10 @@ For an operator terminal or protected GitHub Actions run, configure without comm
 
 - `MPR_BASE_URL` = the HTTPS deployment that actually serves Netlify Functions
 - `MPR_READINESS_PROBE_TOKEN` = the same protected probe token configured server-side
-- `MPR_BILLING_TEST_WORKSPACE_ID` = the dedicated sandbox workspace ID
+- `MPR_SANDBOX_WORKSPACE_ID` = the dedicated sandbox workspace ID
 - optionally `MPR_BILLING_JOURNEY_EVIDENCE` = output path for the evidence JSON
+
+`MPR_BILLING_TEST_WORKSPACE_ID` remains accepted by the checkpoint recorder only as a backward-compatible fallback. New configuration should use `MPR_SANDBOX_WORKSPACE_ID` everywhere.
 
 Never place any of these values in source control or paste secret values into tickets, screenshots, logs, or chat.
 
@@ -43,23 +45,25 @@ Subscribe at minimum to:
 
 The application deliberately does not grant paid entitlement from `checkout.session.completed` alone. Paid access is granted only when the Stripe subscription status is `active` or `trialing`.
 
-## Readiness check
-After deployment and secret configuration, authenticate with an admin allowlisted account and call:
+## Readiness and clean-workspace preflight
+Before opening Stripe Checkout, run the paid-beta deployment acceptance gate in `SANDBOX` mode. It checks billing configuration, database runtime readiness, and the dedicated sandbox workspace through `GET /api/internal/billing-journey-snapshot`.
 
-`GET /api/internal/billing-readiness`
+A SANDBOX `GO` requires all of the following before the first checkout:
 
-A safe response contains only presence flags and validated Stripe price metadata; it never returns secret values.
+- billing readiness is `ready: true` in Stripe Test Mode;
+- all three active monthly EUR prices are valid at 1790 / 2900 / 8900 cents;
+- webhook secret and required server-side billing configuration are present;
+- paid-beta database runtime/migrations are ready;
+- the exact `MPR_SANDBOX_WORKSPACE_ID` exists;
+- workspace entitlement is `FREE`;
+- Stripe reports zero `active` or `trialing` subscriptions for that workspace customer;
+- no cancellation-at-period-end residue is active;
+- local subscription status is absent or terminal/inactive, never an active paid state.
 
-`ready: true` requires:
-
-- every required secret/ID present;
-- all three Stripe Price IDs valid and active;
-- currency EUR;
-- recurring interval monthly;
-- exact unit amounts 1790 / 2900 / 8900 cents.
+If any of these checks fail, the acceptance workflow returns NO-GO and checkout must not start. The preflight performs no purchase, no checkout creation and no real-money charge.
 
 ## End-to-end sandbox test order
-1. Start on FREE.
+1. Pass the automated SANDBOX deployment + clean-workspace preflight.
 2. Capture `FREE_BASELINE`.
 3. Buy Discover using Stripe Test Mode.
 4. Confirm webhook changes Supabase workspace + subscription to DISCOVER / active, then capture `DISCOVER_ACTIVE`.
@@ -121,7 +125,7 @@ Required schema and stages:
 A `GO` verdict requires all six checkpoints in order, the same workspace, one and the same Stripe subscription throughout all paid stages, exactly one active subscription while paid, unique lifecycle webhook event IDs, active/trialing status for paid entitlement, scheduled cancellation while Launch remains active, and terminal fallback to FREE with zero active subscriptions. This verifier is intentionally SANDBOX-only and rejects evidence marked as real-money.
 
 ## Acceptance criteria before first paid beta customer
-- Readiness endpoint returns `ready: true`.
+- Automated SANDBOX deployment preflight returns `GO` for the dedicated FREE workspace.
 - One full sandbox payment succeeds.
 - Automated checkpoint capture completes all six stages without manual evidence edits.
 - `verify:billing-journey-evidence` returns `GO` for the captured full journey.
