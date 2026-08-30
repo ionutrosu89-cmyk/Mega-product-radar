@@ -19,6 +19,16 @@ Configure these only in the deployment secret/environment settings, never in Git
 - `STRIPE_PRICE_LAUNCH`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `BETA_ANALYTICS_ADMIN_EMAILS` for access to internal readiness/analytics dashboards
+- `MPR_READINESS_PROBE_TOKEN` for protected machine-run readiness and sandbox evidence capture
+
+For an operator terminal or protected GitHub Actions run, configure without committing values:
+
+- `MPR_BASE_URL` = the HTTPS deployment that actually serves Netlify Functions
+- `MPR_READINESS_PROBE_TOKEN` = the same protected probe token configured server-side
+- `MPR_BILLING_TEST_WORKSPACE_ID` = the dedicated sandbox workspace ID
+- optionally `MPR_BILLING_JOURNEY_EVIDENCE` = output path for the evidence JSON
+
+Never place any of these values in source control or paste secret values into tickets, screenshots, logs, or chat.
 
 ## Webhook endpoint
 Configure the Stripe Test Mode webhook endpoint to:
@@ -50,18 +60,44 @@ A safe response contains only presence flags and validated Stripe price metadata
 
 ## End-to-end sandbox test order
 1. Start on FREE.
-2. Buy Discover using Stripe Test Mode.
-3. Confirm webhook changes Supabase workspace + subscription to DISCOVER / active.
-4. Confirm Discover full access and Radar remains locked.
-5. Change Discover -> Radar; verify the existing Stripe subscription is changed rather than creating another active subscription.
-6. Confirm Radar access and Launch remains locked.
-7. Change Radar -> Launch and confirm access.
-8. Cancel at period end; confirm `cancel_at_period_end=true` while access remains active until period end.
-9. Simulate/receive subscription deletion/ended status; confirm workspace entitlement falls back to FREE.
-10. Verify Beta Analytics shows paid workspace once, not duplicated by page refreshes.
+2. Capture `FREE_BASELINE`.
+3. Buy Discover using Stripe Test Mode.
+4. Confirm webhook changes Supabase workspace + subscription to DISCOVER / active, then capture `DISCOVER_ACTIVE`.
+5. Confirm Discover full access and Radar remains locked.
+6. Change Discover -> Radar; verify the existing Stripe subscription is changed rather than creating another active subscription, then capture `RADAR_ACTIVE`.
+7. Confirm Radar access and Launch remains locked.
+8. Change Radar -> Launch and confirm access, then capture `LAUNCH_ACTIVE`.
+9. Cancel at period end; confirm `cancel_at_period_end=true` while access remains active until period end, then capture `CANCEL_SCHEDULED`.
+10. Simulate/receive subscription deletion/ended status; confirm workspace entitlement falls back to FREE, then capture `ENDED_FREE`.
+11. Verify Beta Analytics shows paid workspace once, not duplicated by page refreshes.
+12. Run the final machine verifier and require `GO`.
+
+## Automated checkpoint capture
+The protected endpoint `GET /api/internal/billing-journey-snapshot` is SANDBOX-only. It reads workspace/subscription state from Supabase, asks Stripe for all subscriptions belonging to the recorded sandbox customer, and reports the count of `active`/`trialing` subscriptions. This makes duplicate paid subscriptions visible to the acceptance gate while keeping customer identity, email, card data and secret values out of the response.
+
+Capture each checkpoint immediately after the corresponding webhook-backed state is visible:
+
+```bash
+npm run capture:billing-journey-checkpoint -- FREE_BASELINE billing-journey-evidence.json
+npm run capture:billing-journey-checkpoint -- DISCOVER_ACTIVE billing-journey-evidence.json
+npm run capture:billing-journey-checkpoint -- RADAR_ACTIVE billing-journey-evidence.json
+npm run capture:billing-journey-checkpoint -- LAUNCH_ACTIVE billing-journey-evidence.json
+npm run capture:billing-journey-checkpoint -- CANCEL_SCHEDULED billing-journey-evidence.json
+npm run capture:billing-journey-checkpoint -- ENDED_FREE billing-journey-evidence.json
+```
+
+The recorder refuses stages out of order, a different workspace, live Stripe mode, an already-complete journey, or a snapshot that cannot prove Stripe active-subscription count. It builds the final evidence file automatically; operators should not hand-edit the checkpoint fields.
+
+After the sixth checkpoint:
+
+```bash
+npm run verify:billing-journey-evidence -- billing-journey-evidence.json
+```
+
+Only a final `GO` is acceptable evidence for the `BILLING_E2E` launch-readiness check.
 
 ## Machine-verifiable journey evidence
-Do not treat screenshots or a manually checked box as proof of the complete billing journey. After each sandbox checkpoint, record only non-secret operational evidence in one local JSON file. Never store Stripe keys, webhook secrets, Supabase keys, customer email, card data, or payment method data in this artifact.
+Do not treat screenshots or a manually checked box as proof of the complete billing journey. The generated artifact contains only non-secret operational evidence. Never store Stripe keys, webhook secrets, Supabase keys, customer email, card data, payment method data, or Stripe customer IDs in this artifact.
 
 Required schema and stages:
 
@@ -82,16 +118,14 @@ Required schema and stages:
 }
 ```
 
-Validate it with:
-
-`npm run verify:billing-journey-evidence -- path/to/evidence.json`
-
 A `GO` verdict requires all six checkpoints in order, the same workspace, one and the same Stripe subscription throughout all paid stages, exactly one active subscription while paid, unique lifecycle webhook event IDs, active/trialing status for paid entitlement, scheduled cancellation while Launch remains active, and terminal fallback to FREE with zero active subscriptions. This verifier is intentionally SANDBOX-only and rejects evidence marked as real-money.
 
 ## Acceptance criteria before first paid beta customer
 - Readiness endpoint returns `ready: true`.
 - One full sandbox payment succeeds.
+- Automated checkpoint capture completes all six stages without manual evidence edits.
 - `verify:billing-journey-evidence` returns `GO` for the captured full journey.
+- `BILLING_E2E` can PASS only from verified journey evidence.
 - Upgrade does not create a duplicate subscription.
 - Cancellation keeps access until period end and then removes it.
 - Past-due/unpaid/canceled status does not retain paid entitlement.
