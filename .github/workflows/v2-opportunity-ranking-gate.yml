@@ -1,0 +1,79 @@
+name: V2 Opportunity Ranking Gate
+
+on:
+  workflow_run:
+    workflows: ['V2 Opportunity Economics']
+    types: [completed]
+  pull_request:
+    paths:
+      - 'scripts/run-opportunity-ranking-v1.mjs'
+      - 'test/opportunity-ranking-v1.test.js'
+      - '.github/workflows/v2-opportunity-ranking-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  ranking:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test opportunity ranking truth gates
+        run: node --test test/opportunity-ranking-v1.test.js
+      - name: Resolve exact economics source run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            RUN_ID="$TRIGGER_RUN_ID"
+          else
+            RUN_ID="$(gh run list --workflow v2-opportunity-economics.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo 'No successful Opportunity Economics run available.' >&2
+            exit 1
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Using opportunity economics run $RUN_ID"
+      - name: Download exact Opportunity Economics artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.source.outputs.run_id }}
+        run: |
+          mkdir -p artifacts/economics
+          gh run download "$RUN_ID" -n v2-opportunity-economics -D artifacts/economics
+          test -f artifacts/economics/opportunity-economics-live.json
+      - name: Run opportunity ranking gate
+        run: node scripts/run-opportunity-ranking-v1.mjs artifacts/economics/opportunity-economics-live.json artifacts/opportunity-ranking-live.json "${{ steps.source.outputs.run_id }}"
+      - name: Enforce ranking truth policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/opportunity-ranking-live.json','utf8'));
+          if(r.rankingScenario!=='CONSERVATIVE'||r.purchaseAuthorized!==false||r.truthPolicy.unknownEqualsZero!==false)throw new Error('RANKING_TRUTH_POLICY_BREACH');
+          if(r.truthPolicy.rankingDoesNotAuthorizeShortlist!==true||r.truthPolicy.rankingCandidateIsNotFinalist!==true)throw new Error('RANKING_PROMOTION_POLICY_BREACH');
+          if(!Number.isInteger(r.source.economicsWorkflowRunId)||r.source.economicsWorkflowRunId<=0)throw new Error('ECONOMICS_PROVENANCE_REQUIRED');
+          if(r.status!=='RANKED'&&r.candidates.length!==0)throw new Error('BLOCKED_OR_REJECTED_RANKING_HAS_CANDIDATES');
+          if(r.status==='RANKED'){
+            if(r.decision!=='RANKING_CANDIDATE'||r.candidates.length!==1)throw new Error('INVALID_RANKING_OUTPUT');
+            if(r.candidates[0].shortlistPromoted!==false)throw new Error('RANKING_AUTO_PROMOTED_TO_SHORTLIST');
+          }
+          NODE
+      - name: Upload opportunity ranking artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-opportunity-ranking
+          path: artifacts/opportunity-ranking-live.json
+          retention-days: 30
+          if-no-files-found: error
