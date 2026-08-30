@@ -1,0 +1,9 @@
+import fs from 'node:fs/promises';
+import {buildOpportunityPackGate} from '../opportunity-pack-gate-v1.js';
+const inputPath=process.argv[2]||'data/opportunity-packs/B09K5927B5.input.json';
+const outputPath=process.argv[3]||'opportunity-pack-live.json';
+const input=JSON.parse(await fs.readFile(inputPath,'utf8'));
+const gate=buildOpportunityPackGate(input);
+const output={...gate,updatedAt:new Date().toISOString(),target:input.target||null,inputEvidence:{supplierPriceEvidenceClass:input?.supplier?.priceEvidenceClass||null,romaniaPriceEvidenceClass:input?.romaniaPrice?.evidenceClass||null,freightEvidenceClass:input?.freight?.evidenceClass||null},purchaseAuthorized:false};
+await fs.writeFile(outputPath,JSON.stringify(output,null,2)+'\n');
+console.log(JSON.stringify(output,null,2));
