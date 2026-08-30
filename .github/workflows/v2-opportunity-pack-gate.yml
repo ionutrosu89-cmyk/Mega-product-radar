@@ -1,6 +1,9 @@
 name: V2 Opportunity Pack Gate
 
 on:
+  workflow_run:
+    workflows: ['V2 Current Engine Rematch Top10']
+    types: [completed]
   push:
     branches: [main]
     paths:
@@ -9,7 +12,10 @@ on:
       - 'opportunity-pack-gate-v1.js'
       - 'scripts/build-supplier-shortlist-v1.mjs'
       - 'scripts/build-opportunity-pack-gate-v1.mjs'
+      - 'scripts/build-opportunity-pack-from-rematch-v1.mjs'
       - 'data/opportunity-packs/**'
+      - 'data/v2-secondary-romania-screening-price-2026-08-30.json'
+      - 'romania-screening-price-evidence-v1.js'
       - 'test/supplier-shortlist-v1.test.js'
       - 'test/opportunity-pack-gate-v1.test.js'
       - '.github/workflows/v2-opportunity-pack-gate.yml'
@@ -19,7 +25,10 @@ on:
       - 'opportunity-pack-gate-v1.js'
       - 'scripts/build-supplier-shortlist-v1.mjs'
       - 'scripts/build-opportunity-pack-gate-v1.mjs'
+      - 'scripts/build-opportunity-pack-from-rematch-v1.mjs'
       - 'data/opportunity-packs/**'
+      - 'data/v2-secondary-romania-screening-price-2026-08-30.json'
+      - 'romania-screening-price-evidence-v1.js'
       - 'test/supplier-shortlist-v1.test.js'
       - 'test/opportunity-pack-gate-v1.test.js'
       - '.github/workflows/v2-opportunity-pack-gate.yml'
@@ -27,21 +36,51 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   gate:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
       - name: Run deterministic shortlist and opportunity pack tests
-        run: node --test test/supplier-shortlist-v1.test.js test/opportunity-pack-gate-v1.test.js
+        run: node --test test/supplier-shortlist-v1.test.js test/opportunity-pack-gate-v1.test.js test/romania-screening-price-evidence-v1.test.js
+      - name: Resolve exact rematch source run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            RUN_ID="$TRIGGER_RUN_ID"
+          else
+            RUN_ID="$(gh run list --workflow v2-current-engine-rematch-top10.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo 'No successful rematch run available.' >&2
+            exit 1
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Using rematch run $RUN_ID"
+      - name: Download exact rematch artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.source.outputs.run_id }}
+        run: |
+          mkdir -p artifacts/rematch
+          gh run download "$RUN_ID" -n v2-current-engine-rematch-top10 -D artifacts/rematch
+          test -f artifacts/rematch/current-engine-rematch-top10.json
       - name: Build supplier shortlist
         run: node scripts/build-supplier-shortlist-v1.mjs supplier-validation-live.json artifacts/supplier-shortlist-live.json
-      - name: Build current opportunity pack gate
-        run: node scripts/build-opportunity-pack-gate-v1.mjs data/opportunity-packs/B09K5927B5.input.json artifacts/opportunity-pack-live.json
+      - name: Build opportunity pack from live rematch
+        run: node scripts/build-opportunity-pack-from-rematch-v1.mjs artifacts/rematch/current-engine-rematch-top10.json supplier-validation-live.json data/v2-secondary-romania-screening-price-2026-08-30.json data/opportunity-packs/B09K5927B5.input.json artifacts/opportunity-pack-live.json "${{ steps.source.outputs.run_id }}"
       - name: Enforce fail-closed opportunity policy
         run: |
           node <<'NODE'
@@ -51,8 +90,10 @@ jobs:
           if(s.integrity.shortlistIsMarketplaceMatch!==false||s.integrity.shortlistCanAuthorizeEconomics!==false||s.integrity.shortlistCanAuthorizePurchase!==false)throw new Error('SHORTLIST_PROMOTED');
           for(const x of s.candidates||[])if(x.economicsAllowed!==false||x.canPromoteToMatch!==false||x.purchaseAuthorized!==false)throw new Error('SHORTLIST_ITEM_PROMOTED');
           if(p.truthPolicy.unknownEqualsZero!==false||p.truthPolicy.purchaseAuthorized!==false)throw new Error('PACK_TRUTH_BREACH');
+          if(!Number.isInteger(p.source.rematchWorkflowRunId)||p.source.rematchWorkflowRunId<=0)throw new Error('REMATCH_PROVENANCE_REQUIRED');
           if(p.status==='BLOCKED'&&p.economicsAllowed!==false)throw new Error('BLOCKED_PACK_ECONOMICS_ALLOWED');
           if(p.status==='ECONOMICS_READY'&&(p.match.confidence<80||p.match.hardMismatches.length))throw new Error('INVALID_ECONOMICS_READY');
+          if(p.inputEvidence.romaniaPriceEvidenceClass!=='SECONDARY_PUBLIC_SEARCH_INDEX')throw new Error('ROMANIA_PRICE_EVIDENCE_CLASS_LOST');
           NODE
       - name: Upload decision artifacts
         uses: actions/upload-artifact@v4
