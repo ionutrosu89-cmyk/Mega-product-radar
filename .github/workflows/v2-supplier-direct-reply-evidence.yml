@@ -1,0 +1,56 @@
+name: V2 Supplier Direct Reply Evidence
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supplier-direct-reply-evidence-v1.js'
+      - 'scripts/validate-supplier-direct-replies-v1.mjs'
+      - 'data/supplier-replies/**'
+      - 'test/supplier-direct-reply-evidence-v1.test.js'
+      - '.github/workflows/v2-supplier-direct-reply-evidence.yml'
+  pull_request:
+    paths:
+      - 'supplier-direct-reply-evidence-v1.js'
+      - 'scripts/validate-supplier-direct-replies-v1.mjs'
+      - 'data/supplier-replies/**'
+      - 'test/supplier-direct-reply-evidence-v1.test.js'
+      - '.github/workflows/v2-supplier-direct-reply-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run deterministic reply evidence tests
+        run: node --test test/supplier-direct-reply-evidence-v1.test.js
+      - name: Validate supplier reply evidence files
+        run: node scripts/validate-supplier-direct-replies-v1.mjs data/supplier-replies artifacts/supplier-direct-reply-evidence.json
+      - name: Enforce truth policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('artifacts/supplier-direct-reply-evidence.json','utf8'));
+          if(d.integrity.supplierReplyIsNegotiatedQuote!==false)throw new Error('SUPPLIER_REPLY_PROMOTED_TO_NEGOTIATED_QUOTE');
+          if(d.integrity.similarProductEvidenceMayTransfer!==false)throw new Error('SIMILAR_PRODUCT_EVIDENCE_TRANSFER_ENABLED');
+          if(d.integrity.matchingThresholdRelaxed!==false||d.integrity.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(d.integrity.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_BREACH');
+          for(const x of d.evidence||[]){
+            if(x.purchaseAuthorized!==false||x.canAuthorizeEconomics!==false)throw new Error('REPLY_EVIDENCE_OVERPROMOTED');
+            if(x.directIdentityEvidenceUsable===true&&x.provenance?.valid!==true)throw new Error('UNBOUND_REPLY_EVIDENCE_PROMOTED');
+            if(x.directIdentityEvidenceUsable===true&&!x.productDimensions)throw new Error('MISSING_DIMENSIONS_PROMOTED');
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v2-supplier-direct-reply-evidence
+          path: artifacts/supplier-direct-reply-evidence.json
+          retention-days: 30
+          if-no-files-found: error
