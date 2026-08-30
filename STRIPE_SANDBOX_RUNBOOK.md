@@ -60,11 +60,40 @@ A safe response contains only presence flags and validated Stripe price metadata
 9. Simulate/receive subscription deletion/ended status; confirm workspace entitlement falls back to FREE.
 10. Verify Beta Analytics shows paid workspace once, not duplicated by page refreshes.
 
+## Machine-verifiable journey evidence
+Do not treat screenshots or a manually checked box as proof of the complete billing journey. After each sandbox checkpoint, record only non-secret operational evidence in one local JSON file. Never store Stripe keys, webhook secrets, Supabase keys, customer email, card data, or payment method data in this artifact.
+
+Required schema and stages:
+
+```json
+{
+  "schema": "MPR_STRIPE_SANDBOX_JOURNEY_EVIDENCE_V1",
+  "environment": "SANDBOX",
+  "workspaceId": "<test-workspace-id>",
+  "checkout": {"mode": "SUBSCRIPTION", "currency": "EUR", "realMoney": false},
+  "checkpoints": [
+    {"stage":"FREE_BASELINE","workspaceId":"<same>","workspacePlan":"FREE","subscriptionStatus":"none","providerSubscriptionId":"","activeSubscriptionCount":0,"cancelAtPeriodEnd":false,"lastStripeEventId":"","observedAt":"<ISO time>"},
+    {"stage":"DISCOVER_ACTIVE","workspaceId":"<same>","workspacePlan":"DISCOVER","subscriptionStatus":"active","providerSubscriptionId":"<sub id>","activeSubscriptionCount":1,"cancelAtPeriodEnd":false,"lastStripeEventId":"<event id>","observedAt":"<ISO time>"},
+    {"stage":"RADAR_ACTIVE","workspaceId":"<same>","workspacePlan":"RADAR","subscriptionStatus":"active","providerSubscriptionId":"<same sub id>","activeSubscriptionCount":1,"cancelAtPeriodEnd":false,"lastStripeEventId":"<new event id>","observedAt":"<ISO time>"},
+    {"stage":"LAUNCH_ACTIVE","workspaceId":"<same>","workspacePlan":"LAUNCH","subscriptionStatus":"active","providerSubscriptionId":"<same sub id>","activeSubscriptionCount":1,"cancelAtPeriodEnd":false,"lastStripeEventId":"<new event id>","observedAt":"<ISO time>"},
+    {"stage":"CANCEL_SCHEDULED","workspaceId":"<same>","workspacePlan":"LAUNCH","subscriptionStatus":"active","providerSubscriptionId":"<same sub id>","activeSubscriptionCount":1,"cancelAtPeriodEnd":true,"lastStripeEventId":"<new event id>","observedAt":"<ISO time>"},
+    {"stage":"ENDED_FREE","workspaceId":"<same>","workspacePlan":"FREE","subscriptionStatus":"canceled","providerSubscriptionId":"<same sub id>","activeSubscriptionCount":0,"cancelAtPeriodEnd":false,"lastStripeEventId":"<new event id>","observedAt":"<ISO time>"}
+  ]
+}
+```
+
+Validate it with:
+
+`npm run verify:billing-journey-evidence -- path/to/evidence.json`
+
+A `GO` verdict requires all six checkpoints in order, the same workspace, one and the same Stripe subscription throughout all paid stages, exactly one active subscription while paid, unique lifecycle webhook event IDs, active/trialing status for paid entitlement, scheduled cancellation while Launch remains active, and terminal fallback to FREE with zero active subscriptions. This verifier is intentionally SANDBOX-only and rejects evidence marked as real-money.
+
 ## Acceptance criteria before first paid beta customer
 - Readiness endpoint returns `ready: true`.
 - One full sandbox payment succeeds.
+- `verify:billing-journey-evidence` returns `GO` for the captured full journey.
 - Upgrade does not create a duplicate subscription.
 - Cancellation keeps access until period end and then removes it.
 - Past-due/unpaid/canceled status does not retain paid entitlement.
 - Discover/Radar/Launch server-side entitlements match the Stripe-backed workspace plan.
-- No Stripe or Supabase service-role secret appears in Git, browser payloads, logs, or client-side JavaScript.
+- No Stripe or Supabase service-role secret appears in Git, browser payloads, logs, client-side JavaScript, or the journey evidence artifact.
