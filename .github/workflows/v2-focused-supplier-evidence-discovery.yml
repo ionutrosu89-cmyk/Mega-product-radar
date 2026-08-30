@@ -63,9 +63,9 @@ jobs:
           for(const x of d.commercialCorroboratedEvidence||[]){
             if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('CORROBORATED_COMMERCIAL_BECAME_DETAIL');
             if(x.truthPolicy?.sameAlibabaExternalIdRequired!==true||x.truthPolicy?.corroboratedCommercialEvidenceIsVerifiedQuote!==false||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeMatch!==false||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeEconomics!==false)throw new Error('CORROBORATED_COMMERCIAL_PROMOTED');
-            if(x.commercialCorroboration?.priceConflict===true&&x.publicPriceCandidate!==null)throw new Error('CONFLICTING_PRICE_NOT_CLEARED');
-            if(x.commercialCorroboration?.moqConflict===true&&x.moqCandidate!==null)throw new Error('CONFLICTING_MOQ_NOT_CLEARED');
-            if(x.commercialCorroboration?.supplierConflict===true&&x.supplierName!==null)throw new Error('CONFLICTING_SUPPLIER_NOT_CLEARED');
+            if(x.commercialCorroboration?.priceConflict===true&&x.publicPriceCandidate!=null)throw new Error('CONFLICTING_PRICE_NOT_CLEARED');
+            if(x.commercialCorroboration?.moqConflict===true&&x.moqCandidate!=null)throw new Error('CONFLICTING_MOQ_NOT_CLEARED');
+            if(x.commercialCorroboration?.supplierConflict===true&&x.supplierName!=null)throw new Error('CONFLICTING_SUPPLIER_NOT_CLEARED');
           }
           for(const x of d.indexEvidenceCandidates||[]){
             if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_EMBEDDED_OR_CORROBORATED_BECAME_DETAIL_EVIDENCE');
