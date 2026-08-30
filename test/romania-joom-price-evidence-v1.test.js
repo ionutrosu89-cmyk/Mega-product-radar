@@ -34,3 +34,10 @@ test('blocked page remains diagnostic only',()=>{
   assert.deepEqual(x.blockers,['SOURCE_BLOCKED']);
   assert.equal(x.selected,null);
 });
+
+test('robots metadata alone is not treated as an anti-bot block',()=>{
+  const html=`<html><head><meta name="robots" content="index,follow"></head><body><div>Preț 411,90 RON Organizatoare de birou din metal cu plasă cu 5 niveluri cu 1 sertar și 2 suporturi pentru stilouri pentru fișiere A4</div></body></html>`;
+  const x=parseJoomRomaniaHtml(html,'https://www.joom.com/ro/best/example');
+  assert.equal(x.status,'OBSERVED');
+  assert.equal(x.selected.priceRon,411.9);
+});
