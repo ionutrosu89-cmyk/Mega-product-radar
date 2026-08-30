@@ -7,6 +7,10 @@ on:
       - 'public-detail-fusion-evidence-v1.js'
       - 'marketplace-supplier-matching-v1.js'
       - 'product-fingerprint-v1.js'
+      - 'supplier-direct-reply-evidence-v1.js'
+      - 'supplier-reply-match-overlay-v1.js'
+      - 'data/supplier-replies/**'
+      - 'test/supplier-reply-match-overlay-v1.test.js'
       - 'scripts/fuse-post-detail-matching-v1.mjs'
       - '.github/workflows/v2-current-engine-rematch-top10.yml'
   workflow_dispatch:
@@ -24,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Validate supplier reply overlay contract
+        run: node --test test/supplier-reply-match-overlay-v1.test.js test/supplier-direct-reply-evidence-v1.test.js
       - name: Download exact prior top-10 detail evidence
         env:
           GH_TOKEN: ${{ github.token }}
@@ -31,17 +37,21 @@ jobs:
           mkdir -p artifacts/top-enrichment artifacts/supplier-detail
           gh run download 33270481850 -n v2-top-candidate-detail-enrichment -D artifacts/top-enrichment
           gh run download 33270914349 -n v2-apify-alibaba-supplier-detail-pilot -D artifacts/supplier-detail
-      - name: Rematch with current engine
-        run: node scripts/fuse-post-detail-matching-v1.mjs artifacts/top-enrichment/summary.json artifacts/supplier-detail/normalized-detail-evidence.json artifacts/supplier-detail/raw.json artifacts/current-engine-rematch-top10.json
+      - name: Rematch with current engine and exact supplier replies
+        run: node scripts/fuse-post-detail-matching-v1.mjs artifacts/top-enrichment/summary.json artifacts/supplier-detail/normalized-detail-evidence.json artifacts/supplier-detail/raw.json artifacts/current-engine-rematch-top10.json data/supplier-replies
       - name: Enforce zero-spend and threshold policy
         run: |
           node <<'NODE'
           const fs=require('fs');
           const s=JSON.parse(fs.readFileSync('artifacts/current-engine-rematch-top10.json','utf8'));
           if(s.pairCount!==10)throw new Error(`PAIR_SCOPE_CHANGED:${s.pairCount}`);
-          if(s.policy.matchingThreshold!==80||s.policy.matchingThresholdRelaxed!==false)throw new Error('MATCH_THRESHOLD_CHANGED');
+          if(s.policy.matchingThreshold!==80||s.policy.matchingThresholdRelaxed!==false||s.policy.replyCannotRelaxMatchingThreshold!==true)throw new Error('MATCH_THRESHOLD_CHANGED');
           if(s.policy.paidCallsTriggered!==0||s.policy.providerSpendUsd!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
-          if(s.policy.unknownEqualsZero!==false||s.policy.purchaseAuthorized!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(s.policy.unknownEqualsZero!==false||s.policy.purchaseAuthorized!==false||s.policy.similarProductEvidenceMayTransfer!==false)throw new Error('TRUTH_POLICY_BREACH');
+          for(const row of s.rows||[]){
+            const overlay=row.supplierEvidence?.replyOverlay;
+            if(overlay?.applied&&String(overlay.externalId)!==String(row.supplierListingKey))throw new Error('CROSS_LISTING_REPLY_EVIDENCE');
+          }
           NODE
       - name: Upload current-engine rematch
         uses: actions/upload-artifact@v4
