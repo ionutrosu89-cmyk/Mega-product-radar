@@ -13,10 +13,18 @@ function blockers(row){
   return [...new Set(out)];
 }
 
+function validationDistinctiveEnough(row){
+  if(row?.partialDistinctiveConfiguration===true||row?.exactDistinctiveConfiguration===true)return true;
+  const s=row?.signals||{};
+  // VALIDATE may retain a near-complete candidate missing the drawer signal when the stronger
+  // two-pen-holder signal is explicit. This expands investigation recall only; it is never match evidence.
+  return s.fiveTier===true&&s.organizer===true&&s.twoPenHolders===true;
+}
+
 export function buildSupplierValidationQueue(rows=[],limit=20){
   return rows
     .filter(row=>{
-      const distinctive=row?.partialDistinctiveConfiguration===true||row?.exactDistinctiveConfiguration===true;
+      const distinctive=validationDistinctiveEnough(row);
       const incomplete=row?.detailEvidence!==true||!row?.dimensions;
       return distinctive&&incomplete;
     })
@@ -25,7 +33,7 @@ export function buildSupplierValidationQueue(rows=[],limit=20){
       funnelState:'VALIDATE',
       validationStatus:'EVIDENCE_INCOMPLETE_NOT_MATCHED',
       validationBlockers:blockers(row),
-      missingDistinctiveEvidence:(row?.signals?.penHolder&&!row?.signals?.twoPenHolders)?['explicit-two-pen-holders']:[],
+      missingDistinctiveEvidence:[...(row?.signals?.penHolder&&!row?.signals?.twoPenHolders?['explicit-two-pen-holders']:[]),...(!row?.signals?.drawer?['explicit-drawer']:[])],
       canPromoteToMatch:false,
       truthPolicy:{
         ...(row.truthPolicy||{}),
@@ -33,6 +41,7 @@ export function buildSupplierValidationQueue(rows=[],limit=20){
         validationQueueCanAuthorizeEconomics:false,
         validationQueueCanAuthorizePurchase:false,
         exactIndexConfigurationIsDirectIdentity:false,
+        nearCompleteValidationCandidateIsMatchEvidence:false,
         unknownEqualsZero:false
       }
     }))
@@ -54,6 +63,7 @@ export const SupplierValidationQueueTruthPolicy=Object.freeze({
   validationQueueCanAuthorizeEconomics:false,
   validationQueueCanAuthorizePurchase:false,
   exactIndexConfigurationIsDirectIdentity:false,
+  nearCompleteValidationCandidateIsMatchEvidence:false,
   explicitMissingEvidenceRemainsUnknown:true,
   matchingThresholdRelaxed:false,
   unknownEqualsZero:false
