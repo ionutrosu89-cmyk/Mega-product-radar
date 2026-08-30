@@ -8,6 +8,7 @@ const TARGET_SIGNALS=[
   ['metal'],
   ['plasa','mesh']
 ];
+const BLOCK_SIGNALS=['captcha','access denied','verify you are human','are you a robot','confirm you are human','forbidden','unusual traffic'];
 
 const hasAny=(text,variants)=>variants.some(v=>norm(text).includes(norm(v)));
 
@@ -45,22 +46,22 @@ export function evaluateJoomRomaniaCandidate(input={}){
 export function parseJoomRomaniaHtml(html,sourceUrl){
   const source=String(html??'');
   const n=norm(source);
-  const blocked=/captcha|access denied|verify you are human|are you a robot|confirm you are human|forbidden|unusual traffic/.test(n);
-  if(blocked)return {schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['SOURCE_BLOCKED'],selected:null,candidates:[],truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}};
+  const blockerSignal=BLOCK_SIGNALS.find(signal=>n.includes(signal))||null;
+  if(blockerSignal)return {schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['SOURCE_BLOCKED'],blockerSignal,selected:null,candidates:[],truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}};
 
   const plain=clean(source.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '));
   const np=norm(plain);
   const anchors=['organizatoare de birou din metal cu plasa cu 5 niveluri','organizator de birou din metal cu plasa cu 5 niveluri'];
   let idx=-1;
   for(const a of anchors){idx=np.indexOf(norm(a));if(idx>=0)break;}
-  if(idx<0)return {schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['TARGET_PRODUCT_NOT_FOUND'],selected:null,candidates:[],truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}};
+  if(idx<0)return {schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['TARGET_PRODUCT_NOT_FOUND'],blockerSignal:null,selected:null,candidates:[],truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}};
 
   const excerpt=plain.slice(Math.max(0,idx-120),idx+1000);
   const prices=parseRonPrices(excerpt);
   const candidate=evaluateJoomRomaniaCandidate({title:excerpt.slice(0,700),description:excerpt,priceRon:prices[0]??null,sourceUrl});
   return {
     schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:candidate.comparable?'OBSERVED':'BLOCKED',
-    blockers:candidate.comparable?[]:['NO_COMPARABLE_CURRENT_RON_PRICE'],selected:candidate.comparable?candidate:null,candidates:[candidate],
+    blockers:candidate.comparable?[]:['NO_COMPARABLE_CURRENT_RON_PRICE'],blockerSignal:null,selected:candidate.comparable?candidate:null,candidates:[candidate],
     truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}
   };
 }
