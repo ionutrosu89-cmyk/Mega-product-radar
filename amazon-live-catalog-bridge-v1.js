@@ -1,5 +1,5 @@
 const text=value=>String(value??'').trim();
-const finite=value=>{const n=Number(value);return Number.isFinite(n)?n:null;};
+const finite=value=>{if(value===null||value===undefined||value==='')return null;const n=Number(value);return Number.isFinite(n)?n:null;};
 const round2=value=>Math.round(value*100)/100;
 
 function parseCategoryPath(value){
