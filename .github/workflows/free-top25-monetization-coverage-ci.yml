@@ -10,6 +10,7 @@ on:
       - 'test/free-top25-monetization-coverage.test.mjs'
       - 'discovery-live.json'
       - 'organic-rising-live.json'
+      - 'amazon-live-catalog.json'
       - '.github/workflows/free-top25-monetization-coverage-ci.yml'
   push:
     branches: [main]
@@ -18,6 +19,7 @@ on:
       - 'scripts/run-free-top25-monetization-coverage.mjs'
       - 'discovery-live.json'
       - 'organic-rising-live.json'
+      - 'amazon-live-catalog.json'
       - '.github/workflows/free-top25-monetization-coverage-ci.yml'
 
 permissions:
@@ -39,7 +41,7 @@ jobs:
           node --check free-top25-live-v1.js
           node --check scripts/run-free-top25-monetization-coverage.mjs
       - name: Truth-gate tests
-        run: node --test test/free-top25-live-v1.test.mjs test/free-top25-monetization-coverage.test.mjs
+        run: node --test test/free-top25-live-v1.test.mjs test/free-top25-monetization-coverage.test.mjs test/amazon-live-catalog-bridge-v1.test.mjs
       - name: Generate commercial coverage report
         run: node scripts/run-free-top25-monetization-coverage.mjs
       - name: Verify locked pricing and fail-closed coverage policy
@@ -48,6 +50,8 @@ jobs:
           jq -e '.truthPolicy.incompleteNichesDoNotCountAsTop25 == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
           jq -e '.truthPolicy.editorialFallbackDoesNotCountTowardCommercialCoverage == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
           jq -e '.truthPolicy.openFoodFactsCommercialUseNotAssumed == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.amazonLiveCatalogRequiresExactAsinBridge == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.amazonEngagementSignalIsNotSales == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
           jq -e '.truthPolicy.paidProviderSpendAuthorized == false and .truthPolicy.purchaseAuthorized == false' artifacts/free-top25-monetization-coverage/report.json >/dev/null
       - name: Upload coverage evidence
         uses: actions/upload-artifact@v4
