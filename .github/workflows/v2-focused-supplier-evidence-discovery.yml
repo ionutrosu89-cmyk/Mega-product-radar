@@ -8,6 +8,7 @@ on:
       - 'alibaba-index-evidence-v1.js'
       - 'alibaba-exact-phrase-diagnostic-v1.js'
       - 'alibaba-embedded-product-record-v1.js'
+      - 'alibaba-commercial-corroboration-v1.js'
       - 'focused-supplier-evidence-v1.js'
       - 'supplier-validation-queue-v1.js'
       - 'scripts/run-focused-supplier-evidence-discovery-v1.mjs'
@@ -17,6 +18,7 @@ on:
       - 'test/alibaba-index-evidence-coherence-v1.test.js'
       - 'test/alibaba-exact-phrase-diagnostic-v1.test.js'
       - 'test/alibaba-embedded-product-record-v1.test.js'
+      - 'test/alibaba-commercial-corroboration-v1.test.js'
       - 'test/focused-supplier-evidence-v1.test.js'
       - 'test/supplier-validation-queue-v1.test.js'
       - 'test/supplier-validation-live-v1.test.js'
@@ -36,7 +38,7 @@ jobs:
         with:
           node-version: 24
       - name: Run deterministic discovery and evidence parser tests
-        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/alibaba-index-evidence-coherence-v1.test.js test/alibaba-exact-phrase-diagnostic-v1.test.js test/alibaba-embedded-product-record-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js test/supplier-validation-live-v1.test.js
+        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/alibaba-index-evidence-coherence-v1.test.js test/alibaba-exact-phrase-diagnostic-v1.test.js test/alibaba-embedded-product-record-v1.test.js test/alibaba-commercial-corroboration-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js test/supplier-validation-live-v1.test.js
       - name: Run focused public supplier discovery
         run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
       - name: Publish sanitized validation handoff
@@ -52,14 +54,24 @@ jobs:
           if(d.policy.matchingThresholdRelaxed!==false||d.policy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
           if(d.policy.indexEvidenceIsDirectDetail!==false||d.policy.indexEvidenceIsMatchEvidence!==false||d.policy.indexEvidenceDimensionsKnown!==false)throw new Error('INDEX_EVIDENCE_PROMOTED');
           if(d.policy.embeddedRecordBindsUrlAndTitle!==true||d.policy.embeddedRecordIsDirectSupplierDetail!==false||d.policy.embeddedRecordAloneIsMarketplaceMatch!==false||d.policy.embeddedRecordCanAuthorizeEconomics!==false||d.policy.embeddedRecordCanAuthorizePurchase!==false)throw new Error('EMBEDDED_RECORD_POLICY_BREACH');
+          if(d.policy.sameAlibabaExternalIdRequired!==true||d.policy.conflictingCommercialEvidenceBecomesUnknown!==true||d.policy.corroboratedCommercialEvidenceIsVerifiedQuote!==false||d.policy.corroboratedCommercialEvidenceIsDirectSupplierDetail!==false||d.policy.corroboratedCommercialEvidenceCanAuthorizeMatch!==false||d.policy.corroboratedCommercialEvidenceCanAuthorizeEconomics!==false)throw new Error('COMMERCIAL_CORROBORATION_POLICY_BREACH');
           if(d.policy.validationQueueIsMatchEvidence!==false||d.policy.validationQueueCanAuthorizeEconomics!==false||d.policy.validationQueueCanAuthorizePurchase!==false||d.policy.exactIndexConfigurationIsDirectIdentity!==false)throw new Error('VALIDATION_QUEUE_PROMOTED');
           if(d.policy.diagnosticOnly!==true||d.policy.phraseProximityIsProductIdentity!==false||d.policy.nearbyAnchorIsVerifiedAssociation!==false||d.policy.diagnosticIsMatchEvidence!==false||d.policy.diagnosticCanAuthorizeEconomics!==false||d.policy.diagnosticCanAuthorizePurchase!==false)throw new Error('DIAGNOSTIC_POLICY_BREACH');
-          if(live.integrity.indexOrEmbeddedEvidenceIsDirectDetail!==false||live.integrity.validationQueueIsMatchEvidence!==false||live.integrity.validationQueueCanAuthorizeEconomics!==false||live.integrity.validationQueueCanAuthorizePurchase!==false||live.integrity.providerSpendUsd!==0)throw new Error('LIVE_HANDOFF_POLICY_BREACH');
+          if(live.integrity.indexEmbeddedOrCorroboratedEvidenceIsDirectDetail!==false||live.integrity.validationQueueIsMatchEvidence!==false||live.integrity.validationQueueCanAuthorizeEconomics!==false||live.integrity.validationQueueCanAuthorizePurchase!==false||live.integrity.providerSpendUsd!==0)throw new Error('LIVE_HANDOFF_POLICY_BREACH');
           for(const x of d.exactPhraseDiagnostics||[]){if(x.diagnosticOnly!==true||x.canPromoteToMatch!==false||x.canAuthorizeEconomics!==false||x.purchaseAuthorized!==false)throw new Error('DIAGNOSTIC_PROMOTED');if(x.truthPolicy?.phraseProximityIsProductIdentity!==false||x.truthPolicy?.nearbyAnchorIsVerifiedAssociation!==false||x.truthPolicy?.diagnosticIsMatchEvidence!==false)throw new Error('DIAGNOSTIC_IDENTITY_PROMOTED');}
           for(const x of d.embeddedProductRecords||[]){if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('EMBEDDED_RECORD_BECAME_DETAIL');if(x.truthPolicy?.embeddedRecordBindsUrlAndTitle!==true||x.truthPolicy?.embeddedRecordIsDirectSupplierDetail!==false||x.truthPolicy?.embeddedRecordAloneIsMarketplaceMatch!==false)throw new Error('EMBEDDED_RECORD_PROMOTED');}
+          for(const x of d.commercialCorroboratedEvidence||[]){
+            if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('CORROBORATED_COMMERCIAL_BECAME_DETAIL');
+            if(x.truthPolicy?.sameAlibabaExternalIdRequired!==true||x.truthPolicy?.corroboratedCommercialEvidenceIsVerifiedQuote!==false||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeMatch!==false||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeEconomics!==false)throw new Error('CORROBORATED_COMMERCIAL_PROMOTED');
+            if(x.commercialCorroboration?.priceConflict===true&&x.publicPriceCandidate!==null)throw new Error('CONFLICTING_PRICE_NOT_CLEARED');
+            if(x.commercialCorroboration?.moqConflict===true&&x.moqCandidate!==null)throw new Error('CONFLICTING_MOQ_NOT_CLEARED');
+            if(x.commercialCorroboration?.supplierConflict===true&&x.supplierName!==null)throw new Error('CONFLICTING_SUPPLIER_NOT_CLEARED');
+          }
           for(const x of d.indexEvidenceCandidates||[]){
-            if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_OR_EMBEDDED_BECAME_DETAIL_EVIDENCE');
-            if(x.evidenceClass==='PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE'){
+            if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_EMBEDDED_OR_CORROBORATED_BECAME_DETAIL_EVIDENCE');
+            if(x.evidenceClass==='PUBLIC_SUPPLIER_INDEX_CORROBORATED_COMMERCIAL_EVIDENCE'){
+              if(x.truthPolicy?.sameAlibabaExternalIdRequired!==true||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeMatch!==false||x.truthPolicy?.corroboratedCommercialEvidenceCanAuthorizeEconomics!==false)throw new Error('CORROBORATED_INDEX_PROMOTED');
+            }else if(x.evidenceClass==='PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE'){
               if(x.truthPolicy?.embeddedRecordBindsUrlAndTitle!==true||x.truthPolicy?.embeddedRecordAloneIsMarketplaceMatch!==false)throw new Error('EMBEDDED_INDEX_PROMOTED');
             }else if(x.truthPolicy?.indexCardAloneIsMarketplaceMatch!==false)throw new Error('INDEX_CARD_BECAME_MATCH');
           }
