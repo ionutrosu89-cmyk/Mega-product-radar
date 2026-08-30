@@ -41,11 +41,11 @@ async function main(){
   const path=text(process.argv[3]||process.env.MPR_BILLING_JOURNEY_EVIDENCE||'billing-journey-evidence.json');
   const baseUrl=text(process.env.MPR_BASE_URL).replace(/\/+$/,'');
   const token=text(process.env.MPR_READINESS_PROBE_TOKEN);
-  const workspaceId=text(process.env.MPR_BILLING_TEST_WORKSPACE_ID);
+  const workspaceId=text(process.env.MPR_SANDBOX_WORKSPACE_ID||process.env.MPR_BILLING_TEST_WORKSPACE_ID);
   if(!stage)throw new Error('Checkpoint stage is required');
   if(!baseUrl)throw new Error('MPR_BASE_URL is required');
   if(!token)throw new Error('MPR_READINESS_PROBE_TOKEN is required');
-  if(!workspaceId)throw new Error('MPR_BILLING_TEST_WORKSPACE_ID is required');
+  if(!workspaceId)throw new Error('MPR_SANDBOX_WORKSPACE_ID is required');
 
   const response=await fetch(`${baseUrl}/api/internal/billing-journey-snapshot`,{headers:{authorization:`Bearer ${token}`,'x-mpr-workspace-id':workspaceId,accept:'application/json'}});
   const body=await response.json().catch(()=>({}));
