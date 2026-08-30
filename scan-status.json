@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-08-29T21:38:17.219Z",
-  "completedAt": "2026-08-29T21:44:44.996Z",
-  "updatedAt": "2026-08-29T21:38:30.406Z",
+  "startedAt": "2026-08-30T03:37:39.374Z",
+  "completedAt": "2026-08-30T03:43:58.920Z",
+  "updatedAt": "2026-08-30T03:37:52.339Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-08-29T21:38:30.461Z",
+    "updatedAt": "2026-08-30T03:37:52.393Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-08-29T21:44:44.968Z",
+    "updatedAt": "2026-08-30T03:43:58.892Z",
     "candidates": 65,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-08-29T21:42:44.948Z",
+      "updatedAt": "2026-08-30T03:41:58.865Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,12 +175,12 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-08-29T21:41:23.915Z",
-    "category": "Pet",
-    "successfulPages": 16,
-    "totalObserved": 172,
-    "totalClusters": 119,
-    "feedCount": 1,
+    "updatedAt": "2026-08-30T03:40:45.166Z",
+    "category": "Beauty accesorii",
+    "successfulPages": 15,
+    "totalObserved": 179,
+    "totalClusters": 129,
+    "feedCount": 2,
     "feedThreshold": 55,
     "operational": true,
     "qualityReady": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 4,
-        "items": 47,
+        "successful": 6,
+        "items": 71,
         "statuses": [
           200,
           200,
@@ -223,7 +223,7 @@
           200,
           200,
           200,
-          200
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
@@ -231,7 +231,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "amazonDE": {
@@ -244,16 +244,16 @@
           200,
           200,
           200,
-          200,
-          200
+          503,
+          503
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "ebayUS": {
@@ -262,55 +262,55 @@
         "successful": 0,
         "items": 0,
         "statuses": [
-          200,
-          200,
-          200,
-          200,
-          200,
-          200
+          403,
+          403,
+          403,
+          403,
+          403,
+          403
         ],
         "sources": [
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "DIRECT",
-          "DIRECT"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       },
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 5,
-        "items": 27,
+        "successful": 2,
+        "items": 10,
         "statuses": [
           200,
           200,
-          200,
-          200,
           511,
-          200
+          511,
+          511,
+          511
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
-          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED",
-          "GOOGLE_TRANSLATE_RENDER"
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED",
+          "DIRECT+FALLBACKS_FAILED"
         ]
       }
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-08-29T21:42:44.928Z",
-      "attempted": 16,
-      "enriched": 1,
+      "at": "2026-08-30T03:41:58.837Z",
+      "attempted": 14,
+      "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-08-29T21:42:44.939Z",
+      "at": "2026-08-30T03:41:58.855Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
