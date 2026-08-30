@@ -22,6 +22,15 @@ function toCm(value,unit){
   return n;
 }
 
+function toGrams(value,unit){
+  const n=Number(value);if(!Number.isFinite(n)||n<=0)return null;
+  const u=lower(unit);
+  if(/^kg|kilogram/.test(u))return n*1000;
+  if(/^lb|pound/.test(u))return n*453.59237;
+  if(/^oz|ounce/.test(u))return n*28.349523125;
+  return n;
+}
+
 export function parseRobustDimensions(text){
   const s=clean(decodeDimensionEntities(text));if(!s)return null;
   const explicit3=s.match(/(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i);
@@ -31,6 +40,26 @@ export function parseRobustDimensions(text){
   const explicit2=s.match(/(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i);
   if(explicit2){const vals=[explicit2[1],explicit2[2]].map(v=>toCm(v,explicit2[3]));return {lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:null};}
   return null;
+}
+
+export function parseAmazonExplicitFacts(text){
+  const s=clean(decodeDimensionEntities(text));
+  if(!s)return {packCount:null,unitWeightGrams:null,packEvidence:null,weightEvidence:null};
+  const packPatterns=[
+    ['NUMBER_OF_ITEMS',/\bNumber of Items\s+(\d{1,3})\b/i],
+    ['ITEM_PACKAGE_QUANTITY',/\bItem Package Quantity\s+(\d{1,3})\b/i],
+    ['PACKAGE_QUANTITY',/(?<!Item )\bPackage Quantity\s+(\d{1,3})\b/i]
+  ];
+  const packs=[];
+  for(const [label,re] of packPatterns){const m=s.match(re);if(m){const n=Number(m[1]);if(Number.isInteger(n)&&n>0)packs.push({label,value:n});}}
+  const distinct=[...new Set(packs.map(x=>x.value))];
+  const packCount=distinct.length===1?distinct[0]:null;
+  const packEvidence=packCount===null?null:{direct:true,evidenceClass:'DIRECT_PUBLIC_MARKETPLACE_DETAIL',labels:packs.filter(x=>x.value===packCount).map(x=>x.label)};
+  const wm=s.match(/\bItem Weight\s+(\d+(?:\.\d+)?)\s*(kilograms?|kg\b|grams?|g\b|pounds?|lbs?\b|ounces?|oz\b)/i);
+  const grams=wm?toGrams(wm[1],wm[2]):null;
+  const unitWeightGrams=grams===null?null:Number(grams.toFixed(3));
+  const weightEvidence=unitWeightGrams===null?null:{direct:true,evidenceClass:'DIRECT_PUBLIC_MARKETPLACE_DETAIL',label:'ITEM_WEIGHT',raw:wm[0]};
+  return {packCount,unitWeightGrams,packEvidence,weightEvidence,packConflict:distinct.length>1?packs:null};
 }
 
 export function canonicalMaterialForMatching(value){
@@ -58,4 +87,4 @@ export function deriveSupplierSingleUnitPackEvidence({priceUnit,productType,titl
   return {packCount:1,derived:true,reason:'PUBLIC_PRICE_UNIT_PIECE_SINGLE_ASSEMBLY',evidenceClass:'DERIVED_PUBLIC_LISTING_UNIT_EVIDENCE'};
 }
 
-export const PublicDetailFusionTruthPolicy=Object.freeze({derivedPackCountIsDirectSupplierClaim:false,priceUnitPieceAlwaysMeansRetailPackOne:false,materialFamilyCanonicalizationDoesNotProveSameProduct:true,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false});
+export const PublicDetailFusionTruthPolicy=Object.freeze({derivedPackCountIsDirectSupplierClaim:false,priceUnitPieceAlwaysMeansRetailPackOne:false,amazonExplicitPackLabelIsDirectEvidence:true,amazonMissingPackLabelMeansOne:false,materialFamilyCanonicalizationDoesNotProveSameProduct:true,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false});
