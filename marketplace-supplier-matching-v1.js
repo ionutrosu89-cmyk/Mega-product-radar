@@ -40,7 +40,7 @@ function dimensionSimilarity(a=[],b=[],tolerancePct=0.08){
 }
 
 function technicalSpecSimilarity(a={},b={}){
-  const keys=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])];
+  const keys=[...new Set([...Object.keys(a||{}),...Object.keys(b||{})])].filter(k=>known(a?.[k])||known(b?.[k]));
   const comparable=keys.filter(k=>known(a?.[k])&&known(b?.[k]));
   if(!comparable.length)return null;
   let total=0;
@@ -49,7 +49,7 @@ function technicalSpecSimilarity(a={},b={}){
     if(typeof av==='number'&&typeof bv==='number')total+=numericSimilarity(av,bv,0.05)??0;
     else total+=exactKnown(av,bv)?1:0;
   }
-  return total/comparable.length;
+  return total/keys.length;
 }
 
 function appendCategoryCriticalMismatches(a,b,mismatches){
@@ -129,6 +129,7 @@ export function matchMarketplaceToSupplier(marketplaceInput={},supplierInput={},
       similarTitleMayOverrideHardMismatch:false,
       unknownFeatureCountsAsMatch:false,
       unknownFeatureCountsAsZero:false,
+      technicalSpecMissingOnOneSideCountsAsConfirmedMatch:false,
       screeningEconomicsMinimumConfidence:Number(options.screeningThreshold??80),
       highConfidenceRequiresManualPrecisionCalibration:true
     }
@@ -140,6 +141,7 @@ export const MatchingEngineV1Policy=Object.freeze({
   precisionBeforeRecall:true,
   hardMismatchForcesRejection:true,
   semanticSimilarityAloneIsSufficient:false,
+  technicalSpecMissingOnOneSideIsFullMatch:false,
   unknownIsMatch:false,
   unknownIsZero:false
 });
