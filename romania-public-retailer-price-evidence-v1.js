@@ -1,5 +1,5 @@
 const clean = v => String(v ?? '').replace(/\s+/g, ' ').trim();
-const lower = v => clean(v).toLowerCase();
+const lower = v => clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
 const REQUIRED_SIGNALS = [
   ['5 niveluri','5 nivele'],
@@ -25,11 +25,12 @@ export function evaluateRomaniaPublicRetailerCandidate(input={}) {
   const title = clean(input.title);
   const description = clean(input.description);
   const text = `${title} ${description}`;
+  const normalizedText = lower(text);
   const missingSignals = REQUIRED_SIGNALS
     .map((variants, index) => ({index, variants, ok: hasSignal(text, variants)}))
     .filter(x => !x.ok)
     .map(x => x.variants[0]);
-  const officeOrganizer = /organizator/.test(lower(text)) && /(birou|dosare|hartie|hârtie)/.test(lower(text));
+  const officeOrganizer = /organizator/.test(normalizedText) && /(birou|dosare|hartie)/.test(normalizedText);
   const priceRon = Number.isFinite(Number(input.priceRon)) ? Number(input.priceRon) : parseRonPrice(input.priceText || text);
   const comparable = officeOrganizer && missingSignals.length === 0 && Number(priceRon) > 0;
   return {
@@ -51,11 +52,10 @@ export function parseUnchilipirCategoryHtml(html, sourceUrl='https://unchilipir.
   if (blocked) return {blocked:true,candidates:[],selected:null,status:'BLOCKED',blockers:['SOURCE_BLOCKED']};
 
   const text = clean(source.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '));
-  const anchor = lower(text).indexOf('organizator birou cu suport pixuri si sertar');
-  const altAnchor = lower(text).indexOf('organizator birou cu suport pixuri și sertar');
-  const start = Math.max(anchor, altAnchor);
-  if (start < 0) return {blocked:false,candidates:[],selected:null,status:'BLOCKED',blockers:['TARGET_PRODUCT_NOT_FOUND']};
-  const excerpt = text.slice(start, start + 1200);
+  const normalizedText = lower(text);
+  const anchor = normalizedText.indexOf('organizator birou cu suport pixuri si sertar');
+  if (anchor < 0) return {blocked:false,candidates:[],selected:null,status:'BLOCKED',blockers:['TARGET_PRODUCT_NOT_FOUND']};
+  const excerpt = text.slice(anchor, anchor + 1200);
   const priceRon = parseRonPrice(excerpt);
   const candidate = evaluateRomaniaPublicRetailerCandidate({
     title:'Organizator birou cu suport pixuri si sertar',
