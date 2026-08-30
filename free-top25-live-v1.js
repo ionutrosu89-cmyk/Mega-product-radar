@@ -44,11 +44,19 @@ function candidateFromOrganic(product={}){
   return {name,category,score,sourceLabel:evidence.label||'Marketplace public',sourceUrl:evidence.url,sourceTier:'A',sourceKind:'CATEGORY_LIST',sourcePeriod:'live snapshot',sourceKey:'MPR_LIVE_ORGANIC',sourceRank:null,metric:null,note:'Organic Rising eligibil, nepromovat și relevant pentru categorie.'};
 }
 
-function mergeCandidates(discoveryProducts=[],organicProducts=[]){
+function candidateFromAmazonLive(product={}){
+  if(product?.eligibleForFreeTop25!==true||text(product.evidenceClass)!=='LIVE_PUBLIC_PRODUCT_PAGE'||text(product.salesEvidenceClass)!=='NOT_VERIFIED_SALES'||product.purchaseAuthorized!==false)return null;
+  const name=text(product.name),category=text(product.category),url=httpUrl(product.sourceUrl),score=num(product.score),reviews=Number(product.reviewCount);
+  if(!name||!category||!url||!score)return null;
+  return {name,category,score,sourceLabel:'Amazon US · pagină publică live',sourceUrl:url,sourceTier:'A',sourceKind:'PRODUCT_PAGE',sourcePeriod:'live snapshot',sourceKey:'AMAZON_LIVE_CATALOG_BRIDGE',sourceRank:null,metric:Number.isFinite(reviews)?{label:'Recenzii publice observate',value:reviews,unit:'reviews'}:null,note:'Clasare derivată din rating și numărul de recenzii publice. Nu reprezintă vânzări estimate.'};
+}
+
+function mergeCandidates(discoveryProducts=[],organicProducts=[],amazonLiveProducts=[]){
   const byKey=new Map();
   for(const candidate of [
     ...(Array.isArray(discoveryProducts)?discoveryProducts:[]).map(candidateFromDiscovery),
-    ...(Array.isArray(organicProducts)?organicProducts:[]).map(candidateFromOrganic)
+    ...(Array.isArray(organicProducts)?organicProducts:[]).map(candidateFromOrganic),
+    ...(Array.isArray(amazonLiveProducts)?amazonLiveProducts:[]).map(candidateFromAmazonLive)
   ].filter(Boolean)){
     const key=`${normalize(candidate.category)}::${normalize(candidate.name)}`;
     const current=byKey.get(key);
@@ -57,10 +65,10 @@ function mergeCandidates(discoveryProducts=[],organicProducts=[]){
   return [...byKey.values()];
 }
 
-export function buildFreeTop25LiveUniverse({discoveryProducts=[],organicProducts=[]}={},options={}){
+export function buildFreeTop25LiveUniverse({discoveryProducts=[],organicProducts=[],amazonLiveProducts=[]}={},options={}){
   const limit=Math.max(1,Math.min(25,Number(options.limitPerNiche||25)));
   const minProducts=Math.max(limit,Number(options.minProductsPerNiche||25));
-  const candidates=mergeCandidates(discoveryProducts,organicProducts);
+  const candidates=mergeCandidates(discoveryProducts,organicProducts,amazonLiveProducts);
   const grouped=new Map();
   for(const candidate of candidates){
     const key=normalize(candidate.category);
@@ -95,7 +103,7 @@ export function buildFreeTop25LiveUniverse({discoveryProducts=[],organicProducts
   const nearReadyNicheCount=coverage.filter(row=>row.status==='NEAR_READY').length;
   return {
     schema:'MPR_FREE_TOP25_LIVE_V1',
-    truthPolicy:{completeTop25Required:true,directPublicEvidenceRequired:true,supplierDataExposed:false,economicsExposed:false,unknownEqualsZero:false,purchaseAuthorized:false,commercialEligibilityMeasuredOnlyFromAcceptedLiveEvidence:true},
+    truthPolicy:{completeTop25Required:true,directPublicEvidenceRequired:true,supplierDataExposed:false,economicsExposed:false,unknownEqualsZero:false,purchaseAuthorized:false,commercialEligibilityMeasuredOnlyFromAcceptedLiveEvidence:true,amazonLiveCatalogRequiresExactAsinBridge:true,engagementSignalsAreNotSales:true},
     stats:{eligibleCandidates:candidates.length,observedNicheCount:coverage.length,completeNicheCount:niches.length,nearReadyNicheCount,totalDeficitToCompleteAllObservedNiches:totalDeficit,limitPerNiche:limit,minProductsPerNiche:minProducts},
     coverage,
     niches
