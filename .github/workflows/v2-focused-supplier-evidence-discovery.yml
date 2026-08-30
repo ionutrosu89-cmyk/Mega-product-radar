@@ -12,6 +12,7 @@ on:
       - 'scripts/publish-supplier-validation-live-v1.mjs'
       - 'test/alibaba-candidate-discovery-relative-v1.test.js'
       - 'test/alibaba-index-evidence-v1.test.js'
+      - 'test/alibaba-index-evidence-coherence-v1.test.js'
       - 'test/focused-supplier-evidence-v1.test.js'
       - 'test/supplier-validation-queue-v1.test.js'
       - 'test/supplier-validation-live-v1.test.js'
@@ -31,7 +32,7 @@ jobs:
         with:
           node-version: 24
       - name: Run deterministic discovery and evidence parser tests
-        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js test/supplier-validation-live-v1.test.js
+        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/alibaba-index-evidence-coherence-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js test/supplier-validation-live-v1.test.js
       - name: Run focused public supplier discovery
         run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
       - name: Publish sanitized validation handoff
