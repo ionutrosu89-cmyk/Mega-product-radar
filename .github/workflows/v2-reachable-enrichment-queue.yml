@@ -1,12 +1,14 @@
 name: V2 Reachable Enrichment Queue
 
 on:
+  workflow_run:
+    workflows: ["V2 Current Engine Rematch Top10"]
+    types: [completed]
   push:
     branches: [main]
     paths:
       - 'enrichment-reachability-v1.js'
       - 'scripts/build-reachable-enrichment-queue-v1.mjs'
-      - 'marketplace-supplier-matching-v1.js'
       - '.github/workflows/v2-reachable-enrichment-queue.yml'
   workflow_dispatch:
 
@@ -16,21 +18,41 @@ permissions:
 
 jobs:
   queue:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Download exact post-411 current-engine rematch evidence
+      - name: Resolve exact successful rematch run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            RUN_ID="$WORKFLOW_RUN_ID"
+          else
+            RUN_ID="$(gh run list --workflow v2-current-engine-rematch-top10.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "NO_SUCCESSFUL_REMATCH_RUN" >&2
+            exit 1
+          fi
+          echo "REMATCH_RUN_ID=$RUN_ID" >> "$GITHUB_ENV"
+          echo "Using rematch run $RUN_ID"
+      - name: Download exact rematch evidence
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p artifacts/rematch
-          gh run download 33304014685 -n v2-current-engine-rematch-top10 -D artifacts/rematch
+          gh run download "$REMATCH_RUN_ID" -n v2-current-engine-rematch-top10 -D artifacts/rematch
       - name: Build 80-percent reachable enrichment queue
-        run: node scripts/build-reachable-enrichment-queue-v1.mjs artifacts/rematch/current-engine-rematch-top10.json artifacts/reachable-enrichment-queue.json
-      - name: Enforce precision and zero-spend policy
+        run: node scripts/build-reachable-enrichment-queue-v1.mjs artifacts/rematch/current-engine-rematch-top10.json artifacts/reachable-enrichment-queue.json "$REMATCH_RUN_ID"
+      - name: Enforce precision, provenance and zero-spend policy
         run: |
           node <<'NODE'
           const fs=require('fs');
@@ -41,6 +63,7 @@ jobs:
           if(q.truthPolicy.paidCallsTriggered!==0||q.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
           if(q.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_BREACH');
           if(q.queue.some(x=>x.hardMismatches.length))throw new Error('HARD_MISMATCH_ENTERED_QUEUE');
+          if(!Number.isInteger(Number(q.source?.workflowRunId))||Number(q.source.workflowRunId)<=0)throw new Error('REMATCH_PROVENANCE_MISSING');
           NODE
       - name: Upload reachable enrichment queue
         uses: actions/upload-artifact@v4
