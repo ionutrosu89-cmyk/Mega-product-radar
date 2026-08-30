@@ -9,6 +9,8 @@ const blockerPenalty=new Map([
   ['PEN_HOLDER_EVIDENCE_REQUIRED',20],
   ['ORGANIZER_IDENTITY_EVIDENCE_REQUIRED',30]
 ]);
+const identityBlockers=new Set(['DRAWER_EVIDENCE_REQUIRED','TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED','FIVE_TIER_EVIDENCE_REQUIRED','PEN_HOLDER_EVIDENCE_REQUIRED','ORGANIZER_IDENTITY_EVIDENCE_REQUIRED']);
+const identityGapCount=x=>(Array.isArray(x?.blockers)?x.blockers:[]).filter(b=>identityBlockers.has(b)).length;
 function commercialScore(x={}){
   const blockers=Array.isArray(x.blockers)?x.blockers:[];
   let score=100;
@@ -24,14 +26,15 @@ function commercialScore(x={}){
 export function buildSupplierShortlist(candidates=[],limit=5){
   return (Array.isArray(candidates)?candidates:[])
     .filter(x=>x&&x.funnelState==='VALIDATE'&&x.canPromoteToMatch===false&&x.purchaseAuthorized===false)
-    .map(x=>({...x,shortlistScore:commercialScore(x),shortlistStatus:'VALIDATE_ONLY_NOT_MATCHED',economicsAllowed:false}))
-    .sort((a,b)=>b.shortlistScore-a.shortlistScore||((finite(a?.moq?.value)??Infinity)-(finite(b?.moq?.value)??Infinity))||text(a.externalId).localeCompare(text(b.externalId)))
+    .map(x=>({...x,identityGapCount:identityGapCount(x),shortlistScore:commercialScore(x),shortlistStatus:'VALIDATE_ONLY_NOT_MATCHED',economicsAllowed:false}))
+    .sort((a,b)=>a.identityGapCount-b.identityGapCount||b.shortlistScore-a.shortlistScore||((finite(a?.moq?.value)??Infinity)-(finite(b?.moq?.value)??Infinity))||text(a.externalId).localeCompare(text(b.externalId)))
     .slice(0,Math.max(1,Number(limit)||5));
 }
 export const SupplierShortlistTruthPolicy=Object.freeze({
   shortlistIsMarketplaceMatch:false,
   shortlistCanAuthorizeEconomics:false,
   shortlistCanAuthorizePurchase:false,
+  identityCompletenessRanksBeforeMoqAndPrice:true,
   lowerMoqCannotOverrideMissingIdentityEvidence:true,
   unknownEqualsZero:false
 });
