@@ -41,16 +41,18 @@ if(replyOverlay?.quote?.unitPrice&&Number(replyOverlay.quote.unitPrice)>0){
   priceEvidenceClass='SUPPLIER_DIRECT_REPLY_EVIDENCE';
 }
 
+const directSupplierEvidence={
+  provenanceMatched:true,
+  exactConfigurationConfirmed,
+  assembledDimensionsCm:dims,
+  netWeightGrams:row?.supplierEvidence?.unitWeightGrams??null,
+  evidenceClass:replyOverlay?.applied?'SUPPLIER_DIRECT_REPLY_EVIDENCE':(dims?'HISTORICAL_DIRECT_SUPPLIER_DETAIL':'DIRECT_DIMENSIONS_NOT_YET_AVAILABLE'),
+  source:replyOverlay?.sourceRef||'current rematch + exact supplier validation binding'
+};
 const input={
   target:{marketplace:'AMAZON_US',asin},
   supplier:{externalId:supplierId,supplierName:validationCandidate.supplierName||base?.supplier?.supplierName||'',unitPriceUsd,moq,priceEvidenceClass},
-  directSupplierEvidence:{
-    provenanceMatched:true,
-    exactConfigurationConfirmed,
-    assembledDimensionsCm:dims,
-    evidenceClass:replyOverlay?.applied?'SUPPLIER_DIRECT_REPLY_EVIDENCE':(dims?'HISTORICAL_DIRECT_SUPPLIER_DETAIL':'DIRECT_DIMENSIONS_NOT_YET_AVAILABLE'),
-    source:replyOverlay?.sourceRef||'current rematch + exact supplier validation binding'
-  },
+  directSupplierEvidence,
   match:row.match||{},
   romaniaPrice:{grossRon:roValidated.priceRon,evidenceClass:'SECONDARY_SCREENING_PRICE',source:roValidated.sourceRef},
   freight:base.freight||{},
@@ -62,8 +64,11 @@ const output={
   schemaVersion:'MPR_OPPORTUNITY_PACK_LIVE_V1',
   updatedAt:new Date().toISOString(),
   target:input.target,
+  directSupplierEvidence,
+  freight:input.freight,
+  romaniaPriceEvidence:{...input.romaniaPrice,validatedEvidenceClass:roValidated.evidenceClass,confidence:roValidated.confidence},
   source:{rematchWorkflowRunId:sourceWorkflowRunId?Number(sourceWorkflowRunId):null,rematchGeneratedAt:rematch.generatedAt||null,validationUpdatedAt:validation.updatedAt||null,romaniaPriceRetrievedAt:roValidated.retrievedAt||null},
-  inputEvidence:{supplierPriceEvidenceClass:priceEvidenceClass,directSupplierEvidenceClass:input.directSupplierEvidence.evidenceClass,romaniaPriceEvidenceClass:roValidated.evidenceClass,freightEvidenceClass:input.freight.evidenceClass||null},
+  inputEvidence:{supplierPriceEvidenceClass:priceEvidenceClass,directSupplierEvidenceClass:directSupplierEvidence.evidenceClass,romaniaPriceEvidenceClass:roValidated.evidenceClass,freightEvidenceClass:input.freight.evidenceClass||null},
   identityGaps,
   purchaseAuthorized:false
 };
