@@ -42,15 +42,28 @@ test('runtime readiness is admin-only',async()=>{
   assert.equal(response.status,403);
 });
 
-test('migration is read-only and service-role-only',async()=>{
+test('runtime migration is read-only, invoker-security and service-role-only',async()=>{
   const sql=await readFile('supabase/migrations/20260830_paid_beta_runtime_readiness.sql','utf8');
   assert.match(sql,/mpr_billing_runtime_readiness/);
-  assert.match(sql,/to_regclass\('public\.subscriptions'\)/);
-  assert.match(sql,/to_regclass\('public\.billing_webhook_events'\)/);
-  assert.match(sql,/to_regprocedure\('public\.apply_stripe_subscription_event\(uuid,text,text,text,text,timestamp with time zone,boolean,bigint,text\)'\)/);
+  assert.match(sql,/pg_catalog\.to_regclass\('public\.subscriptions'\)/);
+  assert.match(sql,/pg_catalog\.to_regclass\('public\.billing_webhook_events'\)/);
+  assert.match(sql,/pg_catalog\.to_regprocedure\('public\.apply_stripe_subscription_event\(uuid,text,text,text,text,timestamp with time zone,boolean,bigint,text\)'\)/);
+  assert.match(sql,/security invoker/i);
+  assert.doesNotMatch(sql,/security definer/i);
+  assert.match(sql,/set search_path=pg_catalog,public/i);
   assert.match(sql,/revoke execute .* from public,anon,authenticated/i);
   assert.match(sql,/grant execute .* to service_role/i);
   assert.doesNotMatch(sql,/insert into/i);
   assert.doesNotMatch(sql,/update public\./i);
   assert.doesNotMatch(sql,/delete from/i);
+});
+
+test('atomic Stripe entitlement RPC is invoker-security and service-role-only',async()=>{
+  const sql=await readFile('supabase/migrations/20260830_stripe_webhook_ordering.sql','utf8');
+  assert.match(sql,/apply_stripe_subscription_event/);
+  assert.match(sql,/security invoker/i);
+  assert.doesNotMatch(sql,/security definer/i);
+  assert.match(sql,/set search_path=pg_catalog,public/i);
+  assert.match(sql,/revoke execute .* from public,anon,authenticated/i);
+  assert.match(sql,/grant execute .* to service_role/i);
 });
