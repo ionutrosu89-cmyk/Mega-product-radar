@@ -1,4 +1,5 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
+import {authorizeReadinessRequest} from './_readiness-auth.mjs';
 
 const RESPONSE_HEADERS={'Cache-Control':'private, no-store','Vary':'Authorization'};
 
@@ -28,16 +29,10 @@ function normalizeRuntime(body){
 export function createPaidBetaRuntimeReadinessHandler({fetch:fetchImpl=fetch,env=process.env}={}){
   return async request=>{
     try{
-      const auth=request.headers.get('authorization')||'';
-      if(!/^Bearer\s+\S+/i.test(auth))return Response.json({ok:false,error:'Authentication required'},{status:401,headers:RESPONSE_HEADERS});
       const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
       const anon=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
-      if(!supabaseUrl||!anon)return Response.json({ok:false,error:'Supabase access is not configured'},{status:503,headers:RESPONSE_HEADERS});
-      const userCheck=await jsonFetch(`${supabaseUrl}/auth/v1/user`,{headers:{apikey:anon,authorization:auth}},fetchImpl);
-      if(!userCheck.ok)return Response.json({ok:false,error:'Invalid or expired session'},{status:401,headers:RESPONSE_HEADERS});
-      const allowed=String(env.BETA_ANALYTICS_ADMIN_EMAILS||'').split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);
-      if(!allowed.length)return Response.json({ok:false,error:'Admin allowlist is not configured'},{status:503,headers:RESPONSE_HEADERS});
-      if(!allowed.includes(String(userCheck.body?.email||'').toLowerCase()))return Response.json({ok:false,error:'Admin access required'},{status:403,headers:RESPONSE_HEADERS});
+      const authorization=await authorizeReadinessRequest({request,env,fetchImpl,supabaseUrl,anonKey:anon});
+      if(!authorization.ok)return authorization.response;
       const serviceRole=env.SUPABASE_SERVICE_ROLE_KEY;
       if(!serviceRole)return Response.json({ok:true,ready:false,checks:{serviceRolePresent:false},reason:'SERVICE_ROLE_MISSING'},{headers:RESPONSE_HEADERS});
       const runtime=await jsonFetch(`${supabaseUrl}/rest/v1/rpc/mpr_billing_runtime_readiness`,{method:'POST',headers:{apikey:serviceRole,authorization:`Bearer ${serviceRole}`,'content-type':'application/json',accept:'application/json'},body:'{}'},fetchImpl);
