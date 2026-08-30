@@ -1,0 +1,58 @@
+name: Free Top25 Monetization Coverage CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'free-top25-live-v1.js'
+      - 'scripts/run-free-top25-monetization-coverage.mjs'
+      - 'test/free-top25-live-v1.test.mjs'
+      - 'test/free-top25-monetization-coverage.test.mjs'
+      - 'discovery-live.json'
+      - 'organic-rising-live.json'
+      - '.github/workflows/free-top25-monetization-coverage-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'free-top25-live-v1.js'
+      - 'scripts/run-free-top25-monetization-coverage.mjs'
+      - 'discovery-live.json'
+      - 'organic-rising-live.json'
+      - '.github/workflows/free-top25-monetization-coverage-ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-fund
+      - name: Syntax checks
+        run: |
+          node --check free-top25-live-v1.js
+          node --check scripts/run-free-top25-monetization-coverage.mjs
+      - name: Truth-gate tests
+        run: node --test test/free-top25-live-v1.test.mjs test/free-top25-monetization-coverage.test.mjs
+      - name: Generate commercial coverage report
+        run: node scripts/run-free-top25-monetization-coverage.mjs
+      - name: Verify locked pricing and fail-closed coverage policy
+        run: |
+          jq -e '.pricingLocked == {"free":0,"discoverEur":17.9,"radarEur":29,"launchEur":89}' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.incompleteNichesDoNotCountAsTop25 == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.editorialFallbackDoesNotCountTowardCommercialCoverage == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.openFoodFactsCommercialUseNotAssumed == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+          jq -e '.truthPolicy.paidProviderSpendAuthorized == false and .truthPolicy.purchaseAuthorized == false' artifacts/free-top25-monetization-coverage/report.json >/dev/null
+      - name: Upload coverage evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-top25-monetization-coverage
+          path: artifacts/free-top25-monetization-coverage/report.json
+          if-no-files-found: error
+          retention-days: 30
