@@ -9,6 +9,7 @@
     "qa:mobile": "node scripts/qa-mobile.mjs",
     "verify:migrations": "node scripts/verify-migration-chain.mjs",
     "verify:production-safety": "node scripts/production-safety-gate.mjs",
+    "verify:paid-beta-deployment": "node scripts/verify-paid-beta-deployment.mjs",
     "canonicalize:observations": "node scripts/canonicalize-observations.mjs",
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
     "ingest:bulk-catalog": "node scripts/run-bulk-catalog-ingestion.mjs",
