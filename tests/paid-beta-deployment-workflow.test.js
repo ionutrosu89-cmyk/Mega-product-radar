@@ -25,7 +25,8 @@ test('probe credential remains a GitHub secret and missing configuration fails c
   assert.match(source,/MPR_READINESS_PROBE_TOKEN: \$\{\{ secrets\.MPR_READINESS_PROBE_TOKEN \}\}/);
   assert.match(source,/BLOCKED_CONFIGURATION: repository secret MPR_READINESS_PROBE_TOKEN is missing/);
   assert.match(source,/exit 1/);
-  assert.doesNotMatch(source,/echo[^\n]*MPR_READINESS_PROBE_TOKEN/);
+  assert.doesNotMatch(source,/(?:echo|printf)[^\n]*\$\{MPR_READINESS_PROBE_TOKEN\}/);
+  assert.doesNotMatch(source,/console\.log\([^\n]*MPR_READINESS_PROBE_TOKEN/);
 });
 
 test('workflow distinguishes public site reachability from protected readiness diagnostics',async()=>{
