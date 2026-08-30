@@ -1,13 +1,16 @@
 {
   "schemaVersion": "MPR_SUPPLIER_VALIDATION_LIVE_V1",
-  "updatedAt": "2026-08-30T11:50:25.660Z",
+  "updatedAt": "2026-08-30T12:05:35.336Z",
   "target": {
     "marketplace": "AMAZON_US",
     "amazonAsin": "B09K5927B5"
   },
   "integrity": {
-    "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
-    "indexEvidenceIsDirectDetail": false,
+    "evidenceClasses": [
+      "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
+      "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE"
+    ],
+    "indexOrEmbeddedEvidenceIsDirectDetail": false,
     "validationQueueIsMatchEvidence": false,
     "validationQueueCanAuthorizeEconomics": false,
     "validationQueueCanAuthorizePurchase": false,
@@ -20,18 +23,54 @@
       "externalId": "1600756221959",
       "platform": "ALIBABA",
       "title": "Mesh Desk Organizer With File Holder 5-Tier Paper Letter Tray Organizer Drawer 2 Pen Holder Magazine Holder for Office Supplies",
-      "supplierName": "Ningbo Koyo Imp & Exp Co., Ltd",
+      "supplierName": "",
       "productUrl": "https://www.alibaba.com/product-detail/Mesh-Desk-Organizer-With-File-Holder_1600756221959.html",
       "sourceUrl": "https://www.alibaba.com/countrysearch/CN/office-mesh-pen-holder.html",
-      "publicPrice": {
-        "currency": "USD",
-        "min": 9,
-        "max": 9
-      },
-      "moq": {
-        "value": 1000
-      },
-      "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
+      "publicPrice": null,
+      "moq": null,
+      "evidenceClass": "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE",
+      "funnelState": "VALIDATE",
+      "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
+      "blockers": [
+        "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"
+      ],
+      "missingDistinctiveEvidence": [],
+      "canPromoteToMatch": false,
+      "canAuthorizeEconomics": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "externalId": "1601591745115",
+      "platform": "ALIBABA",
+      "title": "OEM Desk Organizer with File Holder 5-Tier Paper Letter Tray Organizer with Sliding Drawer and 2 Pen Holder Mesh File Organizer",
+      "supplierName": "",
+      "productUrl": "https://www.alibaba.com/product-detail/OEM-Desk-Organizer-with-File-Holder_1601591745115.html",
+      "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
+      "publicPrice": null,
+      "moq": null,
+      "evidenceClass": "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE",
+      "funnelState": "VALIDATE",
+      "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
+      "blockers": [
+        "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"
+      ],
+      "missingDistinctiveEvidence": [],
+      "canPromoteToMatch": false,
+      "canAuthorizeEconomics": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "externalId": "1601649468378",
+      "platform": "ALIBABA",
+      "title": "Desk Organizer with File Holder, 5-Tier Paper Letter Tray Organizer with Drawer and 2 Pen Holder, Mesh Desktop Organizer",
+      "supplierName": "",
+      "productUrl": "https://www.alibaba.com/product-detail/Desk-Organizer-with-File-Holder-5_1601649468378.html",
+      "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
+      "publicPrice": null,
+      "moq": null,
+      "evidenceClass": "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE",
       "funnelState": "VALIDATE",
       "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
       "blockers": [
@@ -47,18 +86,36 @@
       "externalId": "1601019174460",
       "platform": "ALIBABA",
       "title": "5-Tier Paper Letter Tray Organizer with File Holder - Desk Organizer with Drawer and Pen Holders Metal Mesh Desk Organizer",
-      "supplierName": "Dalian Sam International Trading Co., Ltd",
+      "supplierName": "",
       "productUrl": "https://www.alibaba.com/product-detail/5-Tier-Paper-Letter-Tray-Organizer_1601019174460.html",
       "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
-      "publicPrice": {
-        "currency": "USD",
-        "min": 7,
-        "max": 7
-      },
-      "moq": {
-        "value": 1
-      },
-      "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
+      "publicPrice": null,
+      "moq": null,
+      "evidenceClass": "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE",
+      "funnelState": "VALIDATE",
+      "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
+      "blockers": [
+        "TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"
+      ],
+      "missingDistinctiveEvidence": [
+        "explicit-two-pen-holders"
+      ],
+      "canPromoteToMatch": false,
+      "canAuthorizeEconomics": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "externalId": "1601530506372",
+      "platform": "ALIBABA",
+      "title": "DS5566 Sliding Drawer and Pen Holders for Desk Accessories 5 Tier Paper Letter Tray for Office Supplies Mesh Desk Organizer",
+      "supplierName": "",
+      "productUrl": "https://www.alibaba.com/product-detail/DS5566-Sliding-Drawer-and-Pen-Holders_1601530506372.html",
+      "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
+      "publicPrice": null,
+      "moq": null,
+      "evidenceClass": "PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE",
       "funnelState": "VALIDATE",
       "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
       "blockers": [
