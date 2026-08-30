@@ -36,11 +36,14 @@ export function corroborateAlibabaCommercialEvidence(rows=[]){
     const priceSource=!priceConflict&&priceRows.size===1?[...priceRows.values()][0]:null;
     const moqSource=!moqConflict&&moqRows.size===1?[...moqRows.values()][0]:null;
     const supplierSource=!supplierConflict&&supplierRows.size===1?[...supplierRows.values()][0]:null;
+    const publicPriceCandidate=priceConflict?null:(priceSource?.publicPriceCandidate??identity.publicPriceCandidate??null);
+    const moqCandidate=moqConflict?null:(moqSource?.moqCandidate??identity.moqCandidate??null);
+    const supplierName=supplierConflict?null:(supplierSource?.supplierName??identity.supplierName??null);
     out.push({...identity,
-      evidenceClass:(priceSource||moqSource||supplierSource)?'PUBLIC_SUPPLIER_INDEX_CORROBORATED_COMMERCIAL_EVIDENCE':identity.evidenceClass,
-      publicPriceCandidate:priceSource?.publicPriceCandidate??identity.publicPriceCandidate??null,
-      moqCandidate:moqSource?.moqCandidate??identity.moqCandidate??null,
-      supplierName:supplierSource?.supplierName??identity.supplierName??null,
+      evidenceClass:(publicPriceCandidate||moqCandidate||supplierName)?'PUBLIC_SUPPLIER_INDEX_CORROBORATED_COMMERCIAL_EVIDENCE':identity.evidenceClass,
+      publicPriceCandidate,
+      moqCandidate,
+      supplierName,
       commercialCorroboration:{
         externalId,
         observationCount:items.length,
