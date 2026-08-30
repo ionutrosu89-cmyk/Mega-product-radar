@@ -1,0 +1,89 @@
+name: V2 Opportunity Shortlist Gate
+
+on:
+  workflow_run:
+    workflows: ['V2 Opportunity Ranking Gate']
+    types: [completed]
+  pull_request:
+    paths:
+      - 'scripts/run-opportunity-shortlist-v1.mjs'
+      - 'test/opportunity-shortlist-v1.test.js'
+      - '.github/workflows/v2-opportunity-shortlist-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  shortlist:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test opportunity shortlist truth gates
+        run: node --test test/opportunity-shortlist-v1.test.js
+      - name: Resolve exact ranking source run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            RUN_ID="$TRIGGER_RUN_ID"
+          else
+            RUN_ID="$(gh run list --workflow v2-opportunity-ranking-gate.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          fi
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            if [ "$EVENT_NAME" = "pull_request" ]; then
+              echo 'No canonical main Opportunity Ranking Gate run exists yet; PR truth tests passed and live-artifact integration remains fail-closed until the first canonical ranking run.'
+              echo "available=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo 'No successful Opportunity Ranking Gate run available.' >&2
+            exit 1
+          fi
+          echo "available=true" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Using opportunity ranking run $RUN_ID"
+      - name: Download exact Opportunity Ranking artifact
+        if: steps.source.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.source.outputs.run_id }}
+        run: |
+          mkdir -p artifacts/ranking
+          gh run download "$RUN_ID" -n v2-opportunity-ranking -D artifacts/ranking
+          test -f artifacts/ranking/opportunity-ranking-live.json
+      - name: Run opportunity shortlist gate
+        if: steps.source.outputs.available == 'true'
+        run: node scripts/run-opportunity-shortlist-v1.mjs artifacts/ranking/opportunity-ranking-live.json artifacts/opportunity-shortlist-live.json "${{ steps.source.outputs.run_id }}"
+      - name: Enforce shortlist truth policy
+        if: steps.source.outputs.available == 'true'
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('artifacts/opportunity-shortlist-live.json','utf8'));
+          if(r.rankingScenario!=='CONSERVATIVE'||r.purchaseAuthorized!==false||r.truthPolicy.unknownEqualsZero!==false)throw new Error('SHORTLIST_TRUTH_POLICY_BREACH');
+          if(r.truthPolicy.shortlistDoesNotAuthorizeFinalist!==true||r.truthPolicy.shortlistCandidateIsNotPurchaseAuthorization!==true)throw new Error('SHORTLIST_PROMOTION_POLICY_BREACH');
+          if(!Number.isInteger(r.source.rankingWorkflowRunId)||r.source.rankingWorkflowRunId<=0)throw new Error('RANKING_PROVENANCE_REQUIRED');
+          if(r.status!=='SHORTLISTED'&&r.candidates.length!==0)throw new Error('BLOCKED_SHORTLIST_HAS_CANDIDATES');
+          if(r.status==='SHORTLISTED'){
+            if(r.decision!=='SHORTLIST_CANDIDATE'||r.candidates.length!==1)throw new Error('INVALID_SHORTLIST_OUTPUT');
+            if(r.candidates[0].shortlistPromoted!==true||r.candidates[0].finalistPromoted!==false||r.candidates[0].purchaseAuthorized!==false)throw new Error('SHORTLIST_AUTHORITY_BREACH');
+          }
+          NODE
+      - name: Upload opportunity shortlist artifact
+        if: steps.source.outputs.available == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-opportunity-shortlist
+          path: artifacts/opportunity-shortlist-live.json
+          retention-days: 30
+          if-no-files-found: error
