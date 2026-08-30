@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
     paths:
+      - 'public-detail-fusion-evidence-v1.js'
+      - 'marketplace-supplier-matching-v1.js'
+      - 'product-fingerprint-v1.js'
+      - 'scripts/fuse-post-detail-matching-v1.mjs'
       - '.github/workflows/v2-current-engine-rematch-top10.yml'
   workflow_dispatch:
 
