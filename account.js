@@ -8,21 +8,30 @@ function refreshLocalCount(){const total=localCloudSummary().reduce((s,x)=>s+x.c
 function syncMessage(text,state='Pregătit'){ $('#syncMessage').textContent=text; $('#syncState').textContent=state; }
 function fmtDate(value){if(!value)return '—';const d=new Date(value);return Number.isNaN(d.getTime())?'—':d.toLocaleDateString('ro-RO');}
 function billingStateLabel(status){const s=String(status||'').toLowerCase();return ({active:'ACTIV',trialing:'PERIOADĂ DE TEST',past_due:'PLATĂ RESTANTĂ',canceled:'ANULAT',cancelled:'ANULAT',incomplete:'INCOMPLET',unpaid:'NEPLĂTIT'})[s]||String(status||'—').toUpperCase();}
-async function refreshBilling({retry=false}={}){
+async function refreshBilling({retry=false,expectedCancel=null,stripeFallback=null,expectedPlan=null}={}){
   const message=$('#billingMessage');
   try{
     let data=await getBillingStatus();
-    if(retry){for(let i=0;i<5&&['FREE','STARTER'].includes(String(data.workspace?.plan||'').toUpperCase());i++){await new Promise(r=>setTimeout(r,1200));data=await getBillingStatus();}}
+    const normalizedExpectedPlan=['DISCOVER','RADAR','LAUNCH'].includes(String(expectedPlan||'').toUpperCase())?String(expectedPlan).toUpperCase():null;
+    const needsRetry=()=>retry&&['FREE','STARTER'].includes(String(data.workspace?.plan||'').toUpperCase())||expectedCancel!==null&&Boolean(data.subscription?.cancelAtPeriodEnd)!==expectedCancel||normalizedExpectedPlan&&String(data.workspace?.plan||'').toUpperCase()!==normalizedExpectedPlan;
+    for(let i=0;i<5&&needsRetry();i++){await new Promise(r=>setTimeout(r,1200));data=await getBillingStatus();}
     const sub=data.subscription;
+    const backendPending=expectedCancel!==null&&Boolean(sub?.cancelAtPeriodEnd)!==expectedCancel;
+    const planPending=Boolean(normalizedExpectedPlan&&String(data.workspace?.plan||'').toUpperCase()!==normalizedExpectedPlan);
+    const pending=backendPending&&stripeFallback?Boolean(stripeFallback.cancelAtPeriodEnd):Boolean(sub?.cancelAtPeriodEnd);
+    const periodEnd=backendPending&&stripeFallback?.currentPeriodEnd?stripeFallback.currentPeriodEnd:sub?.currentPeriodEnd;
     $('#billingState').textContent=sub?billingStateLabel(sub.status):'FREE';
-    $('#billingEnd').textContent=fmtDate(sub?.currentPeriodEnd);
+    $('#billingEnd').textContent=fmtDate(periodEnd);
     $('#plan').textContent=data.workspace?.plan||$('#plan').textContent;
-    const managed=Boolean(sub?.managedByStripe),pending=Boolean(sub?.cancelAtPeriodEnd);
-    const activeLike=['active','trialing','past_due'].includes(String(sub?.status||'').toLowerCase());
+    const managed=Boolean(sub?.managedByStripe),activeLike=['active','trialing','past_due'].includes(String(sub?.status||'').toLowerCase());
     $('#cancelBilling').hidden=!managed||pending||!activeLike;
     $('#resumeBilling').hidden=!managed||!pending||!activeLike;
-    message.textContent=pending?`Anulare programată. Accesul rămâne activ până la ${fmtDate(sub.currentPeriodEnd)}. Poți retrage anularea înainte de această dată.`:managed?'Abonamentul este activ și poate fi schimbat din pagina de planuri.':'Nu există încă un abonament plătit activ.';
-  }catch(e){message.textContent='Informațiile despre abonament nu sunt disponibile momentan.';}
+    $('#cancelBilling').disabled=false;
+    $('#resumeBilling').disabled=false;
+    if(backendPending&&stripeFallback){message.textContent=expectedCancel?`Stripe a confirmat anularea programată până la ${fmtDate(periodEnd)}. Statusul contului se actualizează după webhook; accesul rămâne controlat exclusiv de starea verificată Stripe.`:'Stripe a confirmat retragerea anulării. Statusul contului se actualizează după webhook; accesul rămâne controlat exclusiv de starea verificată Stripe.';return;}
+    if(planPending){message.textContent=`Stripe a confirmat schimbarea către ${normalizedExpectedPlan}. Planul afișat rămâne starea verificată până când webhook-ul Stripe finalizează sincronizarea.`;return;}
+    message.textContent=pending?`Anulare programată. Accesul rămâne activ până la ${fmtDate(periodEnd)}. Poți retrage anularea înainte de această dată.`:managed?'Abonamentul este activ și poate fi schimbat din pagina de planuri.':'Nu există încă un abonament plătit activ.';
+  }catch(e){message.textContent=stripeFallback?'Stripe a confirmat acțiunea, dar statusul contului nu a putut fi reîncărcat momentan. Entitlement-ul nu este modificat din browser.':'Informațiile despre abonament nu sunt disponibile momentan.';$('#cancelBilling').disabled=false;$('#resumeBilling').disabled=false;}
 }
 async function load(){
   if(!isSaasConfigured(SAAS_CONFIG)){ $('#authStatus').textContent='Indisponibil'; return; }
@@ -32,7 +41,7 @@ async function load(){
   $('#email').textContent=session.user.email||session.user.id;
   $('#authStatus').textContent='Autentificat';
   try{await installCloudAutosync({hydrate:true,reloadOnHydrate:false});const ws=await ensurePersonalWorkspace('My Radar');$('#workspace').textContent=ws.name||'My Radar';$('#plan').textContent=ws.plan||'FREE';$('#status').textContent='Datele contului sunt sincronizate în siguranță și păstrate separat pentru contul tău.';refreshLocalCount();syncMessage('Sincronizarea automată este activă.','AUTO');}catch(e){$('#status').textContent='Sincronizarea datelor nu este disponibilă momentan.';}
-  const qs=new URLSearchParams(location.search);await refreshBilling({retry:['success','changed'].includes(qs.get('billing'))});
+  const qs=new URLSearchParams(location.search);const billingResult=qs.get('billing');await refreshBilling({retry:billingResult==='success',expectedPlan:billingResult==='changed'?qs.get('plan'):null});
 }
 $('#cloudPush').addEventListener('click',async()=>{
   if(!confirm('Trimiți datele locale curente în cloud? Copia cloud pentru cele 7 categorii va fi înlocuită.'))return;
@@ -51,12 +60,12 @@ $('#cloudPull').addEventListener('click',async()=>{
 $('#cancelBilling').addEventListener('click',async()=>{
   if(!confirm('Anulezi abonamentul la finalul perioadei curente? Accesul rămâne activ până atunci.'))return;
   $('#cancelBilling').disabled=true;
-  try{await cancelSubscription();await refreshBilling();}catch(e){$('#billingMessage').textContent='Anularea nu a reușit. Încearcă din nou.';$('#cancelBilling').disabled=false;}
+  try{const stripe=await cancelSubscription();await refreshBilling({expectedCancel:true,stripeFallback:stripe});}catch(e){$('#billingMessage').textContent='Anularea nu a reușit. Încearcă din nou.';$('#cancelBilling').disabled=false;}
 });
 $('#resumeBilling').addEventListener('click',async()=>{
   if(!confirm('Retragi anularea programată și păstrezi abonamentul activ?'))return;
   $('#resumeBilling').disabled=true;
-  try{await resumeSubscription();await refreshBilling();}catch(e){$('#billingMessage').textContent='Retragerea anulării nu a reușit. Încearcă din nou.';$('#resumeBilling').disabled=false;}
+  try{const stripe=await resumeSubscription();await refreshBilling({expectedCancel:false,stripeFallback:stripe});}catch(e){$('#billingMessage').textContent='Retragerea anulării nu a reușit. Încearcă din nou.';$('#resumeBilling').disabled=false;}
 });
 $('#logout').addEventListener('click',async()=>{await signOut();location.href='login.html';});
 load();
