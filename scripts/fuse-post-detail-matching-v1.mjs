@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {buildProductFingerprint} from '../product-fingerprint-v1.js';
 import {matchMarketplaceToSupplier} from '../marketplace-supplier-matching-v1.js';
-import {parseRobustDimensions,deriveSupplierSingleUnitPackEvidence,canonicalMaterialForMatching} from '../public-detail-fusion-evidence-v1.js';
+import {parseRobustDimensions,parseAmazonExplicitFacts,deriveSupplierSingleUnitPackEvidence,canonicalMaterialForMatching} from '../public-detail-fusion-evidence-v1.js';
 
 const oldPath=process.argv[2]||'artifacts/top-enrichment/summary.json';
 const supplierDetailPath=process.argv[3]||'artifacts/supplier-detail/normalized-detail-evidence.json';
@@ -33,8 +33,9 @@ async function fetchAmazonEvidence(asin){
     const keys=['Product Dimensions','Item Dimensions','Dimensions'];
     let dimensionWindow='';
     for(const k of keys){const i=body.toLowerCase().indexOf(k.toLowerCase());if(i>=0){dimensionWindow=body.slice(i,Math.min(body.length,i+500));break;}}
-    return {ok:r.ok&&!blocked,blocked,statusCode:r.status,dimensionWindow,dimensions:parseRobustDimensions(dimensionWindow)};
-  }catch(e){return {ok:false,blocked:false,statusCode:null,dimensionWindow:'',dimensions:null,error:String(e?.message||e)};}
+    const facts=parseAmazonExplicitFacts(body);
+    return {ok:r.ok&&!blocked,blocked,statusCode:r.status,dimensionWindow,dimensions:parseRobustDimensions(dimensionWindow),facts};
+  }catch(e){return {ok:false,blocked:false,statusCode:null,dimensionWindow:'',dimensions:null,facts:parseAmazonExplicitFacts(''),error:String(e?.message||e)};}
 }
 
 const output=[];
@@ -47,10 +48,12 @@ for(const row of oldRows){
   const oldA=row.amazonExtracted??{};
   const s=detail.evidence?.fingerprintEvidence??{};
   const amazonDimensions=oldA.dimensions??amazonLive.dimensions??parseRobustDimensions(oldA.sourceTitle??row.marketplaceTitle);
+  const amazonPackCount=oldA.packCount??amazonLive.facts.packCount??null;
+  const amazonUnitWeightGrams=oldA.unitWeightGrams??amazonLive.facts.unitWeightGrams??null;
   const packEvidence=deriveSupplierSingleUnitPackEvidence({priceUnit:raw.priceUnit,productType:s.productType,title:detail.evidence?.title??row.supplierTitle});
   const mpInput={
-    productType:oldA.productType,primaryFunction:oldA.primaryFunction,packCount:oldA.packCount,
-    material:canonicalMaterialForMatching(oldA.material),dimensions:amazonDimensions,
+    productType:oldA.productType,primaryFunction:oldA.primaryFunction,packCount:amazonPackCount,
+    material:canonicalMaterialForMatching(oldA.material),dimensions:amazonDimensions,unitWeightGrams:amazonUnitWeightGrams,
     formFactor:oldA.formFactor,technicalSpecs:oldA.technicalSpecs,sourceTitle:row.marketplaceTitle
   };
   const spInput={
@@ -62,11 +65,11 @@ for(const row of oldRows){
   output.push({
     amazonAsin:row.amazonAsin,supplierListingKey:id,marketplaceTitle:row.marketplaceTitle,supplierTitle:row.supplierTitle,
     marketplacePrice:row.marketplacePrice,supplierPriceMax:row.supplierPriceMax,supplierMoq:row.supplierMoq,supplierPriceTiers:row.supplierPriceTiers,
-    amazonEvidence:{...mpInput,liveDimensionFetch:{ok:amazonLive.ok,blocked:amazonLive.blocked,statusCode:amazonLive.statusCode,dimensionWindow:amazonLive.dimensionWindow}},
+    amazonEvidence:{...mpInput,liveDetailFetch:{ok:amazonLive.ok,blocked:amazonLive.blocked,statusCode:amazonLive.statusCode,dimensionWindow:amazonLive.dimensionWindow,packEvidence:amazonLive.facts.packEvidence,weightEvidence:amazonLive.facts.weightEvidence,packConflict:amazonLive.facts.packConflict??null}},
     supplierEvidence:{...spInput,priceUnit:raw.priceUnit,categoryId:raw.categoryId??null,packEvidence,attributeCount:detail.evidence?.coverage?.attributeCount??0},
     match,
     evidenceClass:'POST_DETAIL_FUSED_PUBLIC_EVIDENCE',
-    truthPolicy:{derivedPackCountIsDirectSupplierClaim:false,publicSupplierDetailIsVerifiedQuote:false,marketplacePriceIsRealizedSale:false,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false,negotiationIncluded:false}
+    truthPolicy:{amazonExplicitPackLabelIsDirectEvidence:true,amazonMissingPackLabelMeansOne:false,derivedPackCountIsDirectSupplierClaim:false,publicSupplierDetailIsVerifiedQuote:false,marketplacePriceIsRealizedSale:false,unknownEqualsZero:false,matchingThresholdRelaxed:false,purchaseAuthorized:false,negotiationIncluded:false}
   });
   await new Promise(r=>setTimeout(r,250));
 }
@@ -74,8 +77,10 @@ output.sort((a,b)=>(b.match?.matchConfidence??-1)-(a.match?.matchConfidence??-1)
 const eligible=output.filter(x=>x.match?.screeningEconomicsEligible);
 const summary={
   schemaVersion:'MPR_POST_DETAIL_FUSION_MATCH_V1',generatedAt:new Date().toISOString(),pairCount:output.length,
-  supplierDetailRows:details.length,amazonLiveDimensionFetchOk:output.filter(x=>x.amazonEvidence?.liveDimensionFetch?.ok).length,
+  supplierDetailRows:details.length,amazonLiveDimensionFetchOk:output.filter(x=>x.amazonEvidence?.liveDetailFetch?.ok).length,
   amazonDimensionsKnown:output.filter(x=>x.amazonEvidence?.dimensions).length,supplierDimensionsKnown:output.filter(x=>x.supplierEvidence?.dimensions).length,
+  amazonExplicitPackKnown:output.filter(x=>x.amazonEvidence?.liveDetailFetch?.packEvidence?.direct).length,
+  amazonExplicitWeightKnown:output.filter(x=>x.amazonEvidence?.liveDetailFetch?.weightEvidence?.direct).length,
   supplierDerivedPackOneCount:output.filter(x=>x.supplierEvidence?.packEvidence?.derived).length,
   maxMatchConfidence:output.length?Math.max(...output.map(x=>x.match?.matchConfidence??0)):null,
   screeningEligibleMatchCount:eligible.length,eligiblePairs:eligible,rows:output,
