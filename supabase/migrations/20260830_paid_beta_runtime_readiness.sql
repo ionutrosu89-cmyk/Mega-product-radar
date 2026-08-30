@@ -1,0 +1,39 @@
+-- Read-only billing runtime readiness probe for paid beta release control.
+-- This migration intentionally reports schema/function presence only and exposes no customer data.
+create or replace function public.mpr_billing_runtime_readiness()
+returns table(
+  ready boolean,
+  subscriptions_table boolean,
+  webhook_events_table boolean,
+  ordering_created_column boolean,
+  ordering_event_id_column boolean,
+  webhook_status_column boolean,
+  webhook_error_column boolean,
+  atomic_apply_rpc boolean
+)
+language sql
+stable
+security definer
+set search_path=public,pg_catalog
+as $$
+  select
+    (
+      to_regclass('public.subscriptions') is not null
+      and to_regclass('public.billing_webhook_events') is not null
+      and exists(select 1 from information_schema.columns where table_schema='public' and table_name='subscriptions' and column_name='last_stripe_event_created')
+      and exists(select 1 from information_schema.columns where table_schema='public' and table_name='subscriptions' and column_name='last_stripe_event_id')
+      and exists(select 1 from information_schema.columns where table_schema='public' and table_name='billing_webhook_events' and column_name='status')
+      and exists(select 1 from information_schema.columns where table_schema='public' and table_name='billing_webhook_events' and column_name='last_error')
+      and to_regprocedure('public.apply_stripe_subscription_event(uuid,text,text,text,text,timestamp with time zone,boolean,bigint,text)') is not null
+    ) as ready,
+    to_regclass('public.subscriptions') is not null as subscriptions_table,
+    to_regclass('public.billing_webhook_events') is not null as webhook_events_table,
+    exists(select 1 from information_schema.columns where table_schema='public' and table_name='subscriptions' and column_name='last_stripe_event_created') as ordering_created_column,
+    exists(select 1 from information_schema.columns where table_schema='public' and table_name='subscriptions' and column_name='last_stripe_event_id') as ordering_event_id_column,
+    exists(select 1 from information_schema.columns where table_schema='public' and table_name='billing_webhook_events' and column_name='status') as webhook_status_column,
+    exists(select 1 from information_schema.columns where table_schema='public' and table_name='billing_webhook_events' and column_name='last_error') as webhook_error_column,
+    to_regprocedure('public.apply_stripe_subscription_event(uuid,text,text,text,text,timestamp with time zone,boolean,bigint,text)') is not null as atomic_apply_rpc;
+$$;
+
+revoke execute on function public.mpr_billing_runtime_readiness() from public,anon,authenticated;
+grant execute on function public.mpr_billing_runtime_readiness() to service_role;
