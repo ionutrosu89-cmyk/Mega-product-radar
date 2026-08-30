@@ -7,9 +7,11 @@ async function readJson(path,fallback={}){
 
 const discovery=await readJson('discovery-live.json',{products:[]});
 const organic=await readJson('organic-rising-live.json',{products:[]});
+const amazonLive=await readJson('amazon-live-catalog.json',{products:[]});
 const report=buildFreeTop25LiveUniverse({
   discoveryProducts:Array.isArray(discovery.products)?discovery.products:[],
-  organicProducts:Array.isArray(organic.products)?organic.products:[]
+  organicProducts:Array.isArray(organic.products)?organic.products:[],
+  amazonLiveProducts:Array.isArray(amazonLive.products)?amazonLive.products:[]
 });
 const targetCompleteNiches=30;
 const commercialReadiness={
@@ -17,6 +19,7 @@ const commercialReadiness={
   generatedAt:new Date().toISOString(),
   pricingLocked:{free:0,discoverEur:17.90,radarEur:29,launchEur:89},
   targets:{minimumCompleteNichesForPaidBeta:targetCompleteNiches,productsPerNiche:25,minimumEligibleProductsAtTarget:targetCompleteNiches*25},
+  inputs:{discoveryProducts:Array.isArray(discovery.products)?discovery.products.length:0,organicProducts:Array.isArray(organic.products)?organic.products.length:0,amazonLiveProducts:Array.isArray(amazonLive.products)?amazonLive.products.length:0},
   current:{
     eligibleCandidates:report.stats.eligibleCandidates,
     observedNicheCount:report.stats.observedNicheCount,
@@ -31,6 +34,8 @@ const commercialReadiness={
     incompleteNichesDoNotCountAsTop25:true,
     editorialFallbackDoesNotCountTowardCommercialCoverage:true,
     openFoodFactsCommercialUseNotAssumed:true,
+    amazonLiveCatalogRequiresExactAsinBridge:true,
+    amazonEngagementSignalIsNotSales:true,
     paidProviderSpendAuthorized:false,
     unknownEqualsZero:false,
     purchaseAuthorized:false
