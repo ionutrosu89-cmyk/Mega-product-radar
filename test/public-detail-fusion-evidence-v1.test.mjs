@@ -6,6 +6,15 @@ test('parses labeled imperial dimensions',()=>{
   assert.deepEqual(parseRobustDimensions('Product Dimensions 12"D x 13.77"W x 11"H'),{lengthCm:30.48,widthCm:34.976,heightCm:27.94});
 });
 
+test('parses Amazon HTML-entity imperial dimensions',()=>{
+  assert.deepEqual(parseRobustDimensions('Product Dimensions 12&#34;L x 12&#34;W x 12&#34;H Shape Rectangular'),{lengthCm:30.48,widthCm:30.48,heightCm:30.48});
+  assert.deepEqual(parseRobustDimensions('Product Dimensions 15.5&quot;L x 9&quot;W x 10.3&quot;H'),{lengthCm:39.37,widthCm:22.86,heightCm:26.162});
+});
+
+test('parses HTML-entity multiplication separator',()=>{
+  assert.deepEqual(parseRobustDimensions('Size 360&#215;290&#215;286mm'),{lengthCm:36,widthCm:29,heightCm:28.6});
+});
+
 test('parses star separated metric dimensions',()=>{
   assert.deepEqual(parseRobustDimensions('Size 360*290*286mm'),{lengthCm:36,widthCm:29,heightCm:28.6});
 });
