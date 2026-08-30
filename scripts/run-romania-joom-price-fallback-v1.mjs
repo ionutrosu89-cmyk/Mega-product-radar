@@ -15,8 +15,8 @@ try{
   payload={...parsed,observedAt,statusCode:response.status,htmlBytes:html.length,sourceUrl,policy,truthPolicy};
   if(!response.ok&&payload.status!=='BLOCKED')payload={...payload,status:'BLOCKED',blockers:['HTTP_NOT_OK'],selected:null};
 }catch(error){
-  payload={schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['FETCH_FAILED'],selected:null,candidates:[],observedAt,sourceUrl,error:String(error?.message||error),policy,truthPolicy};
+  payload={schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['FETCH_FAILED'],blockerSignal:null,selected:null,candidates:[],observedAt,sourceUrl,error:String(error?.message||error),policy,truthPolicy};
 }
 await fs.mkdir(path.dirname(out),{recursive:true});
 await fs.writeFile(out,JSON.stringify(payload,null,2));
-console.log(JSON.stringify({status:payload.status,priceRon:payload.selected?.priceRon??null,blockers:payload.blockers??[],statusCode:payload.statusCode??null,htmlBytes:payload.htmlBytes??0},null,2));
+console.log(JSON.stringify({status:payload.status,priceRon:payload.selected?.priceRon??null,blockers:payload.blockers??[],blockerSignal:payload.blockerSignal??null,statusCode:payload.statusCode??null,htmlBytes:payload.htmlBytes??0},null,2));
