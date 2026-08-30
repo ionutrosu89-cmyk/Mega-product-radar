@@ -8,14 +8,18 @@ function blockers(row){
   if(!s.penHolder)out.push('PEN_HOLDER_EVIDENCE_REQUIRED');
   if(s.penHolder&&!s.twoPenHolders)out.push('TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED');
   if(!s.organizer)out.push('ORGANIZER_IDENTITY_EVIDENCE_REQUIRED');
-  out.push('DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED');
-  out.push('DIRECT_SUPPLIER_DIMENSIONS_REQUIRED');
+  if(row?.detailEvidence!==true)out.push('DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED');
+  if(!row?.dimensions)out.push('DIRECT_SUPPLIER_DIMENSIONS_REQUIRED');
   return [...new Set(out)];
 }
 
 export function buildSupplierValidationQueue(rows=[],limit=20){
   return rows
-    .filter(row=>row?.partialDistinctiveConfiguration===true&&row?.exactDistinctiveConfiguration!==true)
+    .filter(row=>{
+      const distinctive=row?.partialDistinctiveConfiguration===true||row?.exactDistinctiveConfiguration===true;
+      const incomplete=row?.detailEvidence!==true||!row?.dimensions;
+      return distinctive&&incomplete;
+    })
     .map(row=>({
       ...row,
       funnelState:'VALIDATE',
@@ -28,10 +32,14 @@ export function buildSupplierValidationQueue(rows=[],limit=20){
         validationQueueIsMatchEvidence:false,
         validationQueueCanAuthorizeEconomics:false,
         validationQueueCanAuthorizePurchase:false,
+        exactIndexConfigurationIsDirectIdentity:false,
         unknownEqualsZero:false
       }
     }))
+    .filter(row=>row.validationBlockers.length>0)
     .sort((a,b)=>{
+      const ae=a.exactDistinctiveConfiguration?1:0,be=b.exactDistinctiveConfiguration?1:0;
+      if(be!==ae)return be-ae;
       const aMissing=a.validationBlockers.length,bMissing=b.validationBlockers.length;
       if(aMissing!==bMissing)return aMissing-bMissing;
       const am=n(a.moqCandidate?.value),bm=n(b.moqCandidate?.value);if(am!==bm)return am-bm;
@@ -45,6 +53,7 @@ export const SupplierValidationQueueTruthPolicy=Object.freeze({
   validationQueueIsMatchEvidence:false,
   validationQueueCanAuthorizeEconomics:false,
   validationQueueCanAuthorizePurchase:false,
+  exactIndexConfigurationIsDirectIdentity:false,
   explicitMissingEvidenceRemainsUnknown:true,
   matchingThresholdRelaxed:false,
   unknownEqualsZero:false
