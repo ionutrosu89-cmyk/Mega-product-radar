@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "MPR_CONSERVATIVE_SCREENING_POLICY_V1",
+  "generatedAt": "2026-08-30T08:45:00Z",
+  "scope": "SCREENING_ESTIMATE_ONLY",
+  "target": {
+    "amazonAsin": "B09K5927B5",
+    "supplierListingKey": "1601573810318"
+  },
+  "freight": {
+    "dimensionsCm": {"length": 35, "width": 30.5, "height": 27.9},
+    "dimensionEvidenceClass": "SECONDARY_PUBLIC_CORROBORATION",
+    "volumetricDivisorCm3PerKg": 6000,
+    "volumetricDivisorSource": "https://www.iata.org/contentassets/e9cb5a72b88f4f68a5cfc572a50b60c9/laacp-en-final.pdf",
+    "chinaEuropeAirUsdPerKg": 4.71,
+    "rateSource": "https://www.freightos.com/enterprise/terminal/fax-greater-china-asia-to-europe/",
+    "romaniaRoutingBufferMultiplier": 1.5,
+    "routingBufferEvidenceClass": "MPR_CONSERVATIVE_HEURISTIC",
+    "confidence": "LOW"
+  },
+  "dutyTax": {
+    "dutyRate": 0.15,
+    "dutyEvidenceClass": "MPR_UNCLASSIFIED_IMPORT_DUTY_RESERVE",
+    "classificationConfirmed": false,
+    "classificationRef": "UNRESOLVED_HS_CODE",
+    "dutySource": "https://taxation-customs.ec.europa.eu/customs-4/calculation-customs-duties/customs-tariff_en",
+    "importVatRate": 0.21,
+    "vatSource": "https://legislatie.just.ro/Public/DetaliiDocument/307258",
+    "importVatRecoverable": false,
+    "importVatRecoverabilityEvidenceClass": "MPR_CONSERVATIVE_POLICY_ASSUME_NON_RECOVERABLE_UNTIL_ENTITY_STATUS_CONFIRMED",
+    "confidence": "LOW"
+  },
+  "marketplace": {
+    "marketplace": "EMAG_RO",
+    "commissionRate": 0.25,
+    "commissionBasis": "PUBLIC_MAXIMUM_OF_7_TO_25_PERCENT_RANGE",
+    "commissionSource": "https://marketplace.emag.ro/infocenter/start-selling/taxe-si-comisioane/",
+    "fulfillmentPerUnitRon": 10,
+    "fulfillmentEvidenceClass": "MPR_CONSERVATIVE_HEURISTIC_ABOVE_PUBLIC_STARTING_FEE",
+    "fulfillmentSource": "https://marketplace.emag.ro/infocenter/grow-your-business/fbe/",
+    "adsReserveRate": 0.10,
+    "returnsReserveRate": 0.08,
+    "warrantyReserveRate": 0.02,
+    "otherReserveRate": 0.03,
+    "reserveEvidenceClass": "MPR_CONSERVATIVE_SCREENING_POLICY",
+    "confidence": "LOW"
+  },
+  "otherUnitCosts": {
+    "insuranceRateOfSupplierCost": 0.01,
+    "brokeragePerUnitRon": 2,
+    "destinationHandlingPerUnitRon": 3,
+    "domesticTransportPerUnitRon": 5,
+    "packagingPerUnitRon": 3,
+    "complianceReservePerUnitRon": 2,
+    "importVatAdditionalBasePerUnitRon": 0,
+    "evidenceClass": "MPR_CONSERVATIVE_SCREENING_POLICY",
+    "confidence": "LOW"
+  },
+  "truthPolicy": {
+    "policyValuesAreConfirmedCosts": false,
+    "freightBenchmarkIsAQuote": false,
+    "unclassifiedDutyReserveIsTariffClassification": false,
+    "marketplaceCommissionMaximumIsExactCategoryCommission": false,
+    "fulfillmentReserveIsExactFbeFee": false,
+    "screeningEstimateIsConfirmedLandedCost": false,
+    "unknownEqualsZero": false,
+    "purchaseAuthorized": false
+  }
+}
