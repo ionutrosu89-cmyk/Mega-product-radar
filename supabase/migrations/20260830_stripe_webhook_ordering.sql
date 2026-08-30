@@ -20,8 +20,8 @@ create or replace function public.apply_stripe_subscription_event(
   previous_cancel_at_period_end boolean
 )
 language plpgsql
-security definer
-set search_path=public
+security invoker
+set search_path=pg_catalog,public
 as $$
 declare
   current_row public.subscriptions%rowtype;
