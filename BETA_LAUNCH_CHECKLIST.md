@@ -9,6 +9,7 @@
 - [ ] Sandbox flow passes: FREE → DISCOVER → RADAR → LAUNCH → cancel-at-period-end → expiry.
 - [ ] No duplicate Stripe subscriptions after changing plan.
 - [ ] Failed Stripe webhook delivery is retried successfully with the same event id and grants/revokes entitlement exactly once.
+- [ ] Out-of-order or same-second ambiguous Stripe lifecycle events cannot restore or increase entitlement over a newer/safer state.
 - [ ] Paid access is granted only from active/trialing subscription webhook state.
 - [ ] Discover/Radar/Launch paywalls verified in a clean browser session.
 - [ ] Legal release variables configured server-side: `LEGAL_OPERATOR_NAME`, `LEGAL_OPERATOR_VAT`, `LEGAL_OPERATOR_REGISTRY`, `LEGAL_OPERATOR_ADDRESS`, `LEGAL_SUPPORT_EMAIL`.
