@@ -1,0 +1,87 @@
+name: Amazon Live Catalog Bridge CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'amazon-live-catalog-bridge-v1.js'
+      - 'scripts/run-amazon-live-catalog-bridge.mjs'
+      - 'test/amazon-live-catalog-bridge-v1.test.mjs'
+      - 'free-top25-live-v1.js'
+      - 'scripts/run-free-top25-monetization-coverage.mjs'
+      - '.github/workflows/amazon-live-catalog-bridge-ci.yml'
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-fund
+      - name: Syntax checks
+        run: |
+          node --check amazon-live-catalog-bridge-v1.js
+          node --check scripts/run-amazon-live-catalog-bridge.mjs
+      - name: Truth-gate tests
+        run: node --test test/amazon-live-catalog-bridge-v1.test.mjs
+      - name: Production safety gate
+        run: npm run verify:production-safety
+
+  promote-pinned-live-evidence:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[PROMOTE_AMAZON_LIVE_CATALOG]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AMAZON_LIVE_ARTIFACT_ID: '9735301241'
+      AMAZON_LIVE_ARTIFACT_SHA256: 'b232b829b4e8cc0451171650d93f8a6991cbe65658778ae8ada6e6f5a4e1b664'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download pinned validated Amazon artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rm -rf artifacts/amazon-live-round1 /tmp/amazon-live.zip
+          mkdir -p artifacts/amazon-live-round1
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${AMAZON_LIVE_ARTIFACT_ID}/zip" > /tmp/amazon-live.zip
+          test "$(sha256sum /tmp/amazon-live.zip | cut -d' ' -f1)" = "$AMAZON_LIVE_ARTIFACT_SHA256"
+          unzip -q /tmp/amazon-live.zip -d artifacts/amazon-live-round1
+      - name: Build exact-ASIN live catalog snapshot
+        run: node scripts/run-amazon-live-catalog-bridge.mjs --live=artifacts/amazon-live-round1/amazon-round1-remaining.compact.json --out=amazon-live-catalog.json
+      - name: Verify promotion truth policy
+        run: |
+          jq -e '.truthPolicy.exactAsinJoinRequired == true' amazon-live-catalog.json >/dev/null
+          jq -e '.truthPolicy.bootstrapMetricsNotUsed == true' amazon-live-catalog.json >/dev/null
+          jq -e '.truthPolicy.engagementSignalIsNotSales == true' amazon-live-catalog.json >/dev/null
+          jq -e '.truthPolicy.providerSpendEur == 0 and .truthPolicy.paidCallsTriggered == 0 and .truthPolicy.purchaseAuthorized == false' amazon-live-catalog.json >/dev/null
+          jq -e '.stats.missingBootstrapAsin == 0' amazon-live-catalog.json >/dev/null
+      - name: Persist live catalog snapshot on main
+        run: |
+          git config user.name "mpr-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add amazon-live-catalog.json
+          if git diff --cached --quiet; then
+            echo "No live catalog changes to persist"
+          else
+            git commit -m "data: publish exact-ASIN Amazon live catalog snapshot"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amazon-live-catalog-bridge
+          path: amazon-live-catalog.json
+          if-no-files-found: error
+          retention-days: 30
