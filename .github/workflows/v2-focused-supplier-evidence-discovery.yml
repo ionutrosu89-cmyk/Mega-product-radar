@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
     paths:
+      - 'alibaba-candidate-discovery-v1.js'
       - 'focused-supplier-evidence-v1.js'
       - 'scripts/run-focused-supplier-evidence-discovery-v1.mjs'
+      - 'test/alibaba-candidate-discovery-relative-v1.test.js'
       - 'test/focused-supplier-evidence-v1.test.js'
       - '.github/workflows/v2-focused-supplier-evidence-discovery.yml'
   workflow_dispatch:
@@ -22,8 +24,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Run deterministic parser tests
-        run: node --test test/focused-supplier-evidence-v1.test.js
+      - name: Run deterministic discovery and evidence parser tests
+        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/focused-supplier-evidence-v1.test.js
       - name: Run focused public supplier discovery
         run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
       - name: Enforce truth and zero-spend policy
