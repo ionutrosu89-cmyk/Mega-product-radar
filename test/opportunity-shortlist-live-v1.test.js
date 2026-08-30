@@ -15,26 +15,33 @@ function publish(source){
 const truthPolicy={unknownEqualsZero:false,shortlistDoesNotAuthorizeFinalist:true,shortlistCandidateIsNotPurchaseAuthorization:true};
 const sourceIds={rankingWorkflowRunId:35791,economicsWorkflowRunId:24680,opportunityPackWorkflowRunId:123,rematchWorkflowRunId:99};
 
-test('blocked shortlist persists blockers and no candidate',()=>{
+test('blocked shortlist persists blockers and no paid candidate data',()=>{
   const {r,out}=publish({status:'BLOCKED_UPSTREAM_RANKING',rankingScenario:'CONSERVATIVE',generatedAt:'2026-08-30T10:00:00Z',source:sourceIds,purchaseAuthorized:false,truthPolicy,blockers:['DIRECT_SUPPLIER_DIMENSIONS_REQUIRED'],candidates:[]});
   assert.equal(r.status,0,r.stderr);
   assert.equal(out.status,'BLOCKED_UPSTREAM_RANKING');
-  assert.deepEqual(out.candidates,[]);
+  assert.equal(out.summary.candidateCount,0);
   assert.deepEqual(out.blockers,['DIRECT_SUPPLIER_DIMENSIONS_REQUIRED']);
+  assert.equal(out.candidates,undefined);
+  assert.equal(out.integrity.paidOpportunityDataIncluded,false);
   assert.equal(out.integrity.privateSupplierEvidenceIncluded,false);
   assert.equal(out.integrity.purchaseAuthorized,false);
 });
 
-test('shortlisted handoff exposes only dashboard-safe fields',()=>{
+test('shortlisted public handoff exposes only count and pipeline state',()=>{
   const {r,out}=publish({status:'SHORTLISTED',rankingScenario:'CONSERVATIVE',generatedAt:'2026-08-30T10:00:00Z',source:sourceIds,purchaseAuthorized:false,truthPolicy,blockers:[],candidates:[{rank:1,target:{marketplace:'AMAZON_US',asin:'B09K5927B5'},decision:'SHORTLIST_CANDIDATE',metrics:{roi:1.2,netMargin:0.31,netProfitRon:52.4},thresholds:{roi:0.8,netMargin:0.25},evidence:{economicsStatus:'SCREENED',supplierName:'PRIVATE'},shortlistPromoted:true,finalistPromoted:false,purchaseAuthorized:false,supplierName:'PRIVATE',supplierUrl:'https://private.example'}]});
   assert.equal(r.status,0,r.stderr);
-  assert.equal(out.candidates.length,1);
-  assert.equal(out.candidates[0].target.asin,'B09K5927B5');
-  assert.equal(out.candidates[0].supplierName,undefined);
-  assert.equal(out.candidates[0].supplierUrl,undefined);
-  assert.equal(out.candidates[0].evidence.supplierName,undefined);
-  assert.equal(out.candidates[0].finalistPromoted,false);
-  assert.equal(out.candidates[0].purchaseAuthorized,false);
+  assert.equal(out.summary.candidateCount,1);
+  assert.equal(out.candidates,undefined);
+  assert.equal(JSON.stringify(out).includes('B09K5927B5'),false);
+  assert.equal(JSON.stringify(out).includes('PRIVATE'),false);
+  assert.equal(JSON.stringify(out).includes('1.2'),false);
+  assert.equal(out.integrity.paidOpportunityDataIncluded,false);
+});
+
+test('unknown conservative metrics are never coerced to zero',()=>{
+  const {r}=publish({status:'SHORTLISTED',rankingScenario:'CONSERVATIVE',source:sourceIds,purchaseAuthorized:false,truthPolicy,blockers:[],candidates:[{rank:1,target:{marketplace:'AMAZON_US',asin:'X'},metrics:{roi:null,netMargin:.3,netProfitRon:10},shortlistPromoted:true,finalistPromoted:false,purchaseAuthorized:false}]});
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/CONSERVATIVE_METRICS_REQUIRED/);
 });
 
 test('malformed promotion fails closed',()=>{
