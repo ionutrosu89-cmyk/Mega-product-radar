@@ -1,0 +1,51 @@
+name: V2 Reachable Enrichment Queue
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'enrichment-reachability-v1.js'
+      - 'scripts/build-reachable-enrichment-queue-v1.mjs'
+      - 'marketplace-supplier-matching-v1.js'
+      - '.github/workflows/v2-reachable-enrichment-queue.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact post-411 current-engine rematch evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/rematch
+          gh run download 33304014685 -n v2-current-engine-rematch-top10 -D artifacts/rematch
+      - name: Build 80-percent reachable enrichment queue
+        run: node scripts/build-reachable-enrichment-queue-v1.mjs artifacts/rematch/current-engine-rematch-top10.json artifacts/reachable-enrichment-queue.json
+      - name: Enforce precision and zero-spend policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const q=JSON.parse(fs.readFileSync('artifacts/reachable-enrichment-queue.json','utf8'));
+          if(q.screeningThreshold!==80)throw new Error('MATCH_THRESHOLD_CHANGED');
+          if(q.truthPolicy.matchingThresholdRelaxed!==false)throw new Error('MATCH_THRESHOLD_RELAXED');
+          if(q.truthPolicy.optimisticCeilingIsNotMatchEvidence!==true||q.truthPolicy.queueEntryIsNotScreeningEligible!==true)throw new Error('OPTIMISTIC_EVIDENCE_PROMOTED');
+          if(q.truthPolicy.paidCallsTriggered!==0||q.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
+          if(q.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZATION_BREACH');
+          if(q.queue.some(x=>x.hardMismatches.length))throw new Error('HARD_MISMATCH_ENTERED_QUEUE');
+          NODE
+      - name: Upload reachable enrichment queue
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-reachable-enrichment-queue
+          path: artifacts/reachable-enrichment-queue.json
+          retention-days: 30
+          if-no-files-found: error
