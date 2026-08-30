@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_SUPPLIER_VALIDATION_LIVE_V1",
-  "updatedAt": "2026-08-30T11:35:08.948Z",
+  "updatedAt": "2026-08-30T11:43:49.949Z",
   "target": {
     "marketplace": "AMAZON_US",
     "amazonAsin": "B09K5927B5"
@@ -16,6 +16,33 @@
     "providerSpendUsd": 0
   },
   "candidates": [
+    {
+      "externalId": "1600756221959",
+      "platform": "ALIBABA",
+      "title": "Mesh Desk Organizer With File Holder 5-Tier Paper Letter Tray Organizer Drawer 2 Pen Holder Magazine Holder for Office Supplies",
+      "supplierName": "Ningbo Koyo Imp & Exp Co., Ltd",
+      "productUrl": "https://www.alibaba.com/product-detail/Mesh-Desk-Organizer-With-File-Holder_1600756221959.html",
+      "sourceUrl": "https://www.alibaba.com/countrysearch/CN/office-mesh-pen-holder.html",
+      "publicPrice": {
+        "currency": "USD",
+        "min": 9,
+        "max": 9
+      },
+      "moq": {
+        "value": 1000
+      },
+      "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
+      "funnelState": "VALIDATE",
+      "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
+      "blockers": [
+        "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"
+      ],
+      "missingDistinctiveEvidence": [],
+      "canPromoteToMatch": false,
+      "canAuthorizeEconomics": false,
+      "purchaseAuthorized": false
+    },
     {
       "externalId": "1601019174460",
       "platform": "ALIBABA",
