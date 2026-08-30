@@ -6,6 +6,8 @@
 - [ ] Deployment secrets configured: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_DISCOVER`, `STRIPE_PRICE_RADAR`, `STRIPE_PRICE_LAUNCH`, `SUPABASE_SERVICE_ROLE_KEY`.
 - [ ] `BETA_ANALYTICS_ADMIN_EMAILS` configured.
 - [ ] `/api/internal/billing-readiness` returns `ready: true`.
+- [ ] Supabase migrations are applied through `20260830_paid_beta_runtime_readiness.sql` before any payment test.
+- [ ] `/api/internal/paid-beta-runtime-readiness` returns `ready: true`, proving the Stripe ordering columns, webhook event state and atomic entitlement RPC exist in the deployed database.
 - [ ] Sandbox flow passes: FREE → DISCOVER → RADAR → LAUNCH → cancel-at-period-end → expiry.
 - [ ] No duplicate Stripe subscriptions after changing plan.
 - [ ] Failed Stripe webhook delivery is retried successfully with the same event id and grants/revokes entitlement exactly once.
