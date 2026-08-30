@@ -16,7 +16,7 @@ function toCm(value,unit){
 }
 
 export function parseRobustDimensions(text){
-  const s=clean(text);if(!s)return null;
+  const s=clean(text).replace(/&quot;|&#34;|&#x22;/gi,'"');if(!s)return null;
   const explicit3=s.match(/(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(mm|cm|m|inches?|inch|in\b)/i);
   if(explicit3){const vals=[explicit3[1],explicit3[2],explicit3[3]].map(v=>toCm(v,explicit3[4]));return {lengthCm:Number(vals[0].toFixed(3)),widthCm:Number(vals[1].toFixed(3)),heightCm:Number(vals[2].toFixed(3))};}
   const labeled3=s.match(/(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[dDlL]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[wW]?\s*(?:x|×|\*)\s*(\d+(?:\.\d+)?)\s*(?:"|in(?:ch(?:es)?)?)?\s*[hH]?/i);
