@@ -32,8 +32,10 @@ jobs:
           if(x.policy.purchaseAuthorized!==false||x.policy.automaticEconomicPromotion!==false)throw new Error('UNSAFE_PROMOTION');
           if(x.truthPolicy?.unknownEqualsZero!==false)throw new Error('UNKNOWN_ZERO_POLICY_BREACH');
           if(x.status==='OBSERVED' && !(Number(x.selected?.priceRon)>0))throw new Error('OBSERVED_WITHOUT_PRICE');
+          if(x.status==='BLOCKED' && !(Array.isArray(x.blockers)&&x.blockers.length))throw new Error('BLOCKED_WITHOUT_DIAGNOSTIC');
           NODE
       - name: Upload fallback evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: v2-romania-public-retailer-fallback
