@@ -11,9 +11,11 @@
 - [ ] Failed Stripe webhook delivery is retried successfully with the same event id and grants/revokes entitlement exactly once.
 - [ ] Paid access is granted only from active/trialing subscription webhook state.
 - [ ] Discover/Radar/Launch paywalls verified in a clean browser session.
-- [ ] Terms and Privacy reviewed by a qualified Romanian/EU professional.
-- [ ] Legal operator details added to Terms/Privacy: legal name, CUI/VAT, registry number, registered address, support email.
-- [ ] Refund/cancellation policy confirmed for the target customer type (B2B/B2C) before public sales.
+- [ ] Legal release variables configured server-side: `LEGAL_OPERATOR_NAME`, `LEGAL_OPERATOR_VAT`, `LEGAL_OPERATOR_REGISTRY`, `LEGAL_OPERATOR_ADDRESS`, `LEGAL_SUPPORT_EMAIL`.
+- [ ] Refund/cancellation policy is approved and `LEGAL_REFUND_POLICY_APPROVED=true`.
+- [ ] Terms and Privacy reviewed by a qualified Romanian/EU professional and review dates recorded in `LEGAL_TERMS_REVIEWED_AT` / `LEGAL_PRIVACY_REVIEWED_AT`.
+- [ ] `/api/internal/legal-readiness` returns `ready: true`.
+- [ ] The same approved operator details are visibly published in Terms/Privacy before real-money public sales.
 - [ ] Cookie/consent review completed before adding non-essential analytics or marketing tags.
 
 ## First 5–10 beta users
