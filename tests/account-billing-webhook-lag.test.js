@@ -10,6 +10,14 @@ test('account billing UI polls verified backend state after Stripe cancel and re
   assert.match(source,/resumeSubscription\(\);await refreshBilling\(\{expectedCancel:false,stripeFallback:stripe\}\)/);
 });
 
+test('existing-subscription plan changes wait for the exact webhook-verified target plan',async()=>{
+  const source=await readFile('account.js','utf8');
+  assert.match(source,/normalizedExpectedPlan&&String\(data\.workspace\?\.plan\|\|''\)\.toUpperCase\(\)!==normalizedExpectedPlan/);
+  assert.match(source,/expectedPlan:billingResult==='changed'\?qs\.get\('plan'\):null/);
+  assert.match(source,/Stripe a confirmat schimbarea către \$\{normalizedExpectedPlan\}/);
+  assert.match(source,/Planul afișat rămâne starea verificată/);
+});
+
 test('Stripe fallback affects display only and never mutates entitlement locally',async()=>{
   const source=await readFile('account.js','utf8');
   assert.match(source,/Statusul contului se actualizează după webhook/);
