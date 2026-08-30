@@ -1,0 +1,51 @@
+name: V2 First Complete Conservative Screen
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/v2-first-conservative-screening-policy-2026-08-30.json'
+      - 'scripts/run-first-complete-conservative-screen-v1.mjs'
+      - '.github/workflows/v2-first-complete-conservative-screen.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download exact screening-eligible match evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts/match
+          gh run download 33271637387 -n v2-secondary-public-match-corroboration -D artifacts/match
+      - name: Run first complete conservative screen
+        run: node scripts/run-first-complete-conservative-screen-v1.mjs artifacts/match/secondary-corroborated-match.json artifacts/first-complete-conservative-screen.json data/v2-public-economics-evidence-2026-08-29.json data/v2-secondary-romania-screening-price-2026-08-30.json data/v2-first-conservative-screening-policy-2026-08-30.json
+      - name: Enforce screening truth policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const s=JSON.parse(fs.readFileSync('artifacts/first-complete-conservative-screen.json','utf8'));
+          if(s.economics.status!=='SCREENED')throw new Error('ECONOMICS_NOT_SCREENED');
+          if(s.economics.rankingScenario!=='CONSERVATIVE')throw new Error('RANKING_NOT_CONSERVATIVE');
+          if(!['SCREENING_OPPORTUNITY','REJECT_CONSERVATIVE_ECONOMICS'].includes(s.opportunityGate.decision))throw new Error('INVALID_OPPORTUNITY_DECISION');
+          if(s.truthPolicy.policyValuesAreConfirmedCosts!==false||s.truthPolicy.freightBenchmarkIsAQuote!==false)throw new Error('HEURISTIC_PROMOTED_TO_FACT');
+          if(s.truthPolicy.screeningOpportunityIsFinalist!==false||s.truthPolicy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
+          if(s.truthPolicy.paidCallsTriggered!==0||s.truthPolicy.providerSpendUsd!==0||s.truthPolicy.purchaseAuthorized!==false)throw new Error('UNEXPECTED_SPEND_OR_AUTHORITY');
+          NODE
+      - name: Upload first complete screen
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-first-complete-conservative-screen
+          path: artifacts/first-complete-conservative-screen.json
+          retention-days: 30
+          if-no-files-found: error
