@@ -1,18 +1,18 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-30T19:07:08.981Z",
+  "updatedAt": "2026-08-30T19:33:22.051Z",
   "policy": "Data Confidence măsoară completitudinea dovezilor, nu probabilitatea de succes.",
   "stats": {
     "total": 65,
     "levels": {
       "RIDICATĂ": 0,
-      "MEDIE": 4,
-      "SCĂZUTĂ": 61
+      "MEDIE": 2,
+      "SCĂZUTĂ": 63
     }
   },
   "dimensionAverages": {
     "market": 4.6,
-    "demand": 38.3,
+    "demand": 30,
     "competition": 28.5,
     "reviews": 1.2,
     "sourcing": 0,
@@ -21,7 +21,7 @@
   },
   "missingCounts": {
     "market": 60,
-    "demand": 56,
+    "demand": 65,
     "competition": 60,
     "reviews": 65,
     "sourcing": 65,
@@ -42,33 +42,23 @@
       ]
     },
     {
-      "name": "Reusable furniture moving sliders kit",
-      "cat": "Casă",
-      "rank": 2,
-      "score": 54.9,
-      "level": "MEDIE",
-      "missing": [
-        "reviews",
-        "sourcing"
-      ]
-    },
-    {
-      "name": "Car cup holder expander adjustable",
-      "cat": "Auto",
-      "rank": 5,
-      "score": 54.9,
-      "level": "MEDIE",
-      "missing": [
-        "reviews",
-        "sourcing"
-      ]
-    },
-    {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
       "rank": 4,
       "score": 51.3,
       "level": "MEDIE",
+      "missing": [
+        "demand",
+        "reviews",
+        "sourcing"
+      ]
+    },
+    {
+      "name": "Reusable furniture moving sliders kit",
+      "cat": "Casă",
+      "rank": 2,
+      "score": 46.3,
+      "level": "SCĂZUTĂ",
       "missing": [
         "demand",
         "reviews",
@@ -88,101 +78,15 @@
       ]
     },
     {
-      "name": "Shoe washing laundry bag structured",
-      "cat": "Laundry",
-      "rank": 8,
-      "score": 34.3,
+      "name": "Car cup holder expander adjustable",
+      "cat": "Auto",
+      "rank": 5,
+      "score": 46.3,
       "level": "SCĂZUTĂ",
       "missing": [
-        "market",
-        "competition",
+        "demand",
         "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Kids bed bedside organizer felt",
-      "cat": "Kids 3–6 • Cameră",
-      "rank": 9,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Kids visual timer board non electronic",
-      "cat": "Kids 3–6 • Educațional",
-      "rank": 10,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Shower corner shelf adhesive no drill",
-      "cat": "Baie",
-      "rank": 12,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Dog car door protector set",
-      "cat": "Pet",
-      "rank": 13,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Kids car seat snack tray age 3 plus",
-      "cat": "Kids 3–6 • Travel",
-      "rank": 14,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
-      ]
-    },
-    {
-      "name": "Kids portable drawing board storage bag",
-      "cat": "Kids 3–6 • Organizare",
-      "rank": 15,
-      "score": 34.3,
-      "level": "SCĂZUTĂ",
-      "missing": [
-        "market",
-        "competition",
-        "reviews",
-        "sourcing",
-        "pricing"
+        "sourcing"
       ]
     },
     {
@@ -216,9 +120,114 @@
       ]
     },
     {
+      "name": "Shoe washing laundry bag structured",
+      "cat": "Laundry",
+      "rank": 8,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Kids bed bedside organizer felt",
+      "cat": "Kids 3–6 • Cameră",
+      "rank": 9,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Kids visual timer board non electronic",
+      "cat": "Kids 3–6 • Educațional",
+      "rank": 10,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
       "name": "Desk drawer organizer modular trays",
       "cat": "Birou",
       "rank": 11,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Shower corner shelf adhesive no drill",
+      "cat": "Baie",
+      "rank": 12,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Dog car door protector set",
+      "cat": "Pet",
+      "rank": 13,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Kids car seat snack tray age 3 plus",
+      "cat": "Kids 3–6 • Travel",
+      "rank": 14,
+      "score": 25.7,
+      "level": "SCĂZUTĂ",
+      "missing": [
+        "market",
+        "demand",
+        "competition",
+        "reviews",
+        "sourcing",
+        "pricing"
+      ]
+    },
+    {
+      "name": "Kids portable drawing board storage bag",
+      "cat": "Kids 3–6 • Organizare",
+      "rank": 15,
       "score": 25.7,
       "level": "SCĂZUTĂ",
       "missing": [

@@ -1,8 +1,8 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-08-30T19:07:09.459Z",
-  "sourceUpdatedAt": "2026-08-30T19:07:01.118Z",
+  "updatedAt": "2026-08-30T19:33:22.550Z",
+  "sourceUpdatedAt": "2026-08-30T19:33:13.916Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc doar dovezi observate. Dated public pricing/review observations may improve evidence completeness, but never become verified sales or verified supplier quotes.",
   "providerReadiness": {
@@ -26,10 +26,10 @@
     },
     "romaniaCacheReplay": {
       "version": "1.0",
-      "updatedAt": "2026-08-30T19:07:08.646Z",
+      "updatedAt": "2026-08-30T19:33:21.726Z",
       "ttlDays": 7,
-      "replayedProducts": 9,
-      "replayedRows": 22,
+      "replayedProducts": 0,
+      "replayedRows": 0,
       "costUsd": 0,
       "policy": "Fresh cached Romania evidence is free to reuse for all matching products. Paid allowlists govern only new provider requests, never cache visibility."
     }
@@ -44,7 +44,7 @@
     "observedRomaniaDomains": 10,
     "partial": 65,
     "accelerating": 0,
-    "rising": 2,
+    "rising": 3,
     "cooling": 1,
     "topOpportunities": 0,
     "priorityWatch": 0,
@@ -663,11 +663,11 @@
         "phase": "final",
         "stage": "VALIDATE",
         "rank": 1,
-        "score": 54.9,
+        "score": 54.8,
         "paidDataEligible": true,
         "paidDataPriority": 1,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -1222,14 +1222,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 12,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 26,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 21.7,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 19.2,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -1298,7 +1298,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:26.661Z",
+      "checkedAt": "2026-08-30T19:27:07.972Z",
       "economics": {
         "score": 26.8,
         "margin": 8.8,
@@ -1814,19 +1814,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "mutare mobilă",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 23.2,
@@ -1864,46 +1855,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "VALIDATE",
-        "rank": 5,
-        "score": 41.6,
+        "rank": 4,
+        "score": 43,
         "paidDataEligible": true,
-        "paidDataPriority": 5,
+        "paidDataPriority": 4,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "mutare mobilă",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "discuri mobilă",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
-        "status": "STABIL",
-        "score": 3.5,
+        "status": "RISING",
+        "score": 4.6,
         "confidence": "RIDICATĂ",
-        "sampleCount": 7,
+        "sampleCount": 8,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -1912,7 +1875,7 @@
           "marketGap": 0,
           "competition": 0,
           "sourcing": 0,
-          "evidence": 5.8
+          "evidence": 7.7
         },
         "signals": [
           "acoperire dovezi în creștere"
@@ -1950,6 +1913,7 @@
         ],
         "blockers": [
           "dovezi comerciale insuficiente",
+          "trend pozitiv fără istoric trustat comparabil",
           "ranking evidence neverificat"
         ],
         "components": {
@@ -2134,20 +2098,21 @@
         ],
         "blockers": [
           "dovezi comerciale insuficiente",
+          "trend pozitiv fără istoric trustat comparabil",
           "ranking evidence neverificat",
           "lipsește: dovezi comerciale suficiente",
           "lipsește: review evidence",
           "lipsește: sourcing China"
         ],
         "nextCondition": "dovezi comerciale suficiente",
-        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 35.6 · Launch 23.2 · Trend STABIL"
+        "summary": "Prioritate PRIORITATE MICĂ · Opportunity 35.6 · Launch 23.2 · Trend RISING"
       },
       "dataConfidence": {
-        "overall": 54.9,
-        "level": "MEDIE",
+        "overall": 46.3,
+        "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 54,
-          "demand": 90,
+          "demand": 30,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
@@ -2155,6 +2120,7 @@
           "history": 80
         },
         "missing": [
+          "demand",
           "reviews",
           "sourcing"
         ]
@@ -2164,6 +2130,11 @@
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 2"
+        },
+        {
+          "type": "RISING",
+          "severity": "MEDIUM",
+          "message": "Trendul intern este în creștere"
         }
       ],
       "validationTasks": [
@@ -2294,7 +2265,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 7,
+        "snapshotCount": 8,
         "observedDays": 14.9,
         "direction": "STABLE",
         "confidence": 70,
@@ -2314,7 +2285,7 @@
         "estimatedUnits30d": null,
         "rangeLow": null,
         "rangeHigh": null,
-        "confidence": 20,
+        "confidence": 25,
         "inputs": {
           "keywordVolumeVerified": false,
           "keywordVolume": null,
@@ -2323,8 +2294,8 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 7,
-          "trend": "STABIL",
+          "historicalSnapshots": 8,
+          "trend": "RISING",
           "actualSalesObserved": false
         },
         "policy": "Estimated sales are model outputs, never labelled verified sales. Actual competitor sales remain a separate observation. TEST may use a high-confidence estimate; BUY never does."
@@ -2400,8 +2371,8 @@
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
-        "confidence": "MEDIE",
-        "confidenceScore": 54.9,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 46.3,
         "gates": {
           "demandReady": true,
           "pricingVerified": true,
@@ -2410,7 +2381,7 @@
           "reviewVerified": false,
           "marketEvidence": false,
           "economicsHealthy": false,
-          "confidenceReady": true,
+          "confidenceReady": false,
           "trendSafe": true
         },
         "blockers": [
@@ -2418,13 +2389,14 @@
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
           "market evidence concret suficient",
-          "marjă ≥20%, ROI ≥45%, profit pozitiv"
+          "marjă ≥20%, ROI ≥45%, profit pozitiv",
+          "Data Confidence ≥50"
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "TEST requires nine evidence gates, but competitor sales may be a high-confidence estimate rather than unknowable private actual sales. BUY still requires our own completed real commercial test. Proxies below the confidence threshold cannot satisfy TEST.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 4,
+        "passedGates": 3,
         "estimationEvidence": {
           "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
           "romaniaDemandScore": 26,
@@ -2434,7 +2406,7 @@
             null,
             null
           ],
-          "salesEstimateConfidence": 20,
+          "salesEstimateConfidence": 25,
           "actualCompetitorSalesObserved": false,
           "policy": "TEST may use high-confidence estimated sales. Estimates are never relabelled as verified competitor sales."
         },
@@ -2445,7 +2417,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 44.4
+        "commercialReadiness": 33.3
       }
     },
     {
@@ -3012,12 +2984,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "VALIDATE",
-        "rank": 4,
-        "score": 43.7,
+        "rank": 3,
+        "score": 43.6,
         "paidDataEligible": true,
-        "paidDataPriority": 4,
+        "paidDataPriority": 3,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -3506,14 +3478,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 12,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 26,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 21.7,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 19.2,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -4149,7 +4121,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 2,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -5247,80 +5219,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "suport pahar auto",
-        "searchVolume": 390,
-        "competition": "HIGH",
-        "competitionIndex": 100,
-        "cpc": 0.24,
-        "lowTopOfPageBid": 0.06,
-        "highTopOfPageBid": 0.23,
-        "monthlySearches": [
-          {
-            "year": 2026,
-            "month": 7,
-            "searchVolume": 390
-          },
-          {
-            "year": 2026,
-            "month": 6,
-            "searchVolume": 320
-          },
-          {
-            "year": 2026,
-            "month": 5,
-            "searchVolume": 390
-          },
-          {
-            "year": 2026,
-            "month": 4,
-            "searchVolume": 320
-          },
-          {
-            "year": 2026,
-            "month": 3,
-            "searchVolume": 390
-          },
-          {
-            "year": 2026,
-            "month": 2,
-            "searchVolume": 320
-          },
-          {
-            "year": 2026,
-            "month": 1,
-            "searchVolume": 390
-          },
-          {
-            "year": 2025,
-            "month": 12,
-            "searchVolume": 390
-          },
-          {
-            "year": 2025,
-            "month": 11,
-            "searchVolume": 480
-          },
-          {
-            "year": 2025,
-            "month": 10,
-            "searchVolume": 480
-          },
-          {
-            "year": 2025,
-            "month": 9,
-            "searchVolume": 480
-          },
-          {
-            "year": 2025,
-            "month": 8,
-            "searchVolume": 480
-          }
-        ],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22,
@@ -5358,180 +5260,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "VALIDATE",
-        "rank": 3,
-        "score": 48.6,
+        "rank": 5,
+        "score": 40.8,
         "paidDataEligible": true,
-        "paidDataPriority": 3,
+        "paidDataPriority": 5,
         "deepValidationEligible": true,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "suport pahar auto",
-            "searchVolume": 390,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.24,
-            "lowTopOfPageBid": 0.06,
-            "highTopOfPageBid": 0.23,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 390
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 320
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 390
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 320
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 390
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 320
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 390
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 390
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 480
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 480
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 480
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 480
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "suport pahare auto",
-            "searchVolume": 210,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.25,
-            "lowTopOfPageBid": 0.05,
-            "highTopOfPageBid": 0.24,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 210
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 170
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 210
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 210
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 210
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 210
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 210
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 210
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 260
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 210
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 260
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 260
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "adaptor suport pahar",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
-        "score": 1.2,
+        "score": 2.1,
         "confidence": "RIDICATĂ",
-        "sampleCount": 8,
+        "sampleCount": 9,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -5540,7 +5280,7 @@
           "marketGap": 0,
           "competition": 0,
           "sourcing": 0,
-          "evidence": 2
+          "evidence": 3.5
         },
         "signals": [
           "acoperire dovezi în creștere"
@@ -5771,11 +5511,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 34.7 · Launch 22 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 54.9,
-        "level": "MEDIE",
+        "overall": 46.3,
+        "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 54,
-          "demand": 90,
+          "demand": 30,
           "competition": 70,
           "reviews": 0,
           "sourcing": 0,
@@ -5783,6 +5523,7 @@
           "history": 80
         },
         "missing": [
+          "demand",
           "reviews",
           "sourcing"
         ]
@@ -5851,7 +5592,7 @@
           "verifiedUnits30d": null,
           "verifiedRevenue30dRon": null,
           "observations": [],
-          "proxyDemandScore": 77.8,
+          "proxyDemandScore": 26,
           "romaniaSaturationScore": 52,
           "romaniaDomains": 2,
           "romaniaObservedLinks": 2,
@@ -5922,7 +5663,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 8,
+        "snapshotCount": 9,
         "observedDays": 14.9,
         "direction": "STABLE",
         "confidence": 90,
@@ -5938,20 +5679,20 @@
       },
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 12,
-        "rangeLow": 7,
-        "rangeHigh": 17,
-        "confidence": 50,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 20,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 390,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 8,
+          "historicalSnapshots": 9,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -5959,11 +5700,11 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 81,
-        "providerVerified": true,
-        "marketEvidenceReady": false,
-        "keywordVolume": 390,
+        "status": "MARKET_EVIDENCE_READY",
+        "score": 26,
+        "providerVerified": false,
+        "marketEvidenceReady": true,
+        "keywordVolume": null,
         "romaniaDomains": 2,
         "romaniaObservedLinks": 2,
         "romaniaResultProxy": 0,
@@ -5975,15 +5716,15 @@
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
+        "status": "COMPETITOR_EVIDENCE_READY",
         "seedKeywords": [
           "Car cup holder expander adjustable",
           "Auto"
         ],
-        "verifiedKeywordCount": 1,
+        "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 2,
-        "searchVolume": 390,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -6006,14 +5747,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 12,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 26,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 21.7,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 19.2,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -6027,9 +5768,9 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": 390,
-        "confidence": "MEDIE",
-        "confidenceScore": 54.9,
+        "demandSearchVolume": null,
+        "confidence": "SCĂZUTĂ",
+        "confidenceScore": 46.3,
         "gates": {
           "demandReady": true,
           "pricingVerified": true,
@@ -6038,7 +5779,7 @@
           "reviewVerified": false,
           "marketEvidence": false,
           "economicsHealthy": false,
-          "confidenceReady": true,
+          "confidenceReady": false,
           "trendSafe": true
         },
         "blockers": [
@@ -6046,23 +5787,24 @@
           "ofertă furnizor completă și verificată",
           "review evidence verificat",
           "market evidence concret suficient",
-          "marjă ≥20%, ROI ≥45%, profit pozitiv"
+          "marjă ≥20%, ROI ≥45%, profit pozitiv",
+          "Data Confidence ≥50"
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "TEST requires nine evidence gates, but competitor sales may be a high-confidence estimate rather than unknowable private actual sales. BUY still requires our own completed real commercial test. Proxies below the confidence threshold cannot satisfy TEST.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 4,
+        "passedGates": 3,
         "estimationEvidence": {
-          "romaniaDemandStatus": "PROVIDER_VERIFIED",
-          "romaniaDemandScore": 81,
-          "salesEstimateStatus": "ESTIMATED_LOW_CONFIDENCE",
-          "estimatedUnits30d": 12,
+          "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
+          "romaniaDemandScore": 26,
+          "salesEstimateStatus": "INSUFFICIENT_DATA",
+          "estimatedUnits30d": null,
           "salesEstimateRange": [
-            7,
-            17
+            null,
+            null
           ],
-          "salesEstimateConfidence": 50,
+          "salesEstimateConfidence": 20,
           "actualCompetitorSalesObserved": false,
           "policy": "TEST may use high-confidence estimated sales. Estimates are never relabelled as verified competitor sales."
         },
@@ -6073,7 +5815,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 44.4
+        "commercialReadiness": 33.3
       }
     },
     {
@@ -6576,12 +6318,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 15,
+        "rank": 7,
         "score": 14.2,
         "paidDataEligible": true,
-        "paidDataPriority": 15,
+        "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -7624,12 +7366,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 9,
-        "score": 15.4,
+        "rank": 6,
+        "score": 15.3,
         "paidDataEligible": true,
-        "paidDataPriority": 9,
+        "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "COOLING",
@@ -8099,14 +7841,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 12,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 26,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 21.7,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 19.2,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -8179,7 +7921,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:02:09.145Z",
+      "checkedAt": "2026-08-30T19:27:50.455Z",
       "economics": {
         "score": 24.5,
         "margin": 8.2,
@@ -8631,19 +8373,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "sac spălat adidași",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.7,
@@ -8681,46 +8414,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 10,
-        "score": 15.2,
+        "rank": 8,
+        "score": 14.2,
         "paidDataEligible": true,
-        "paidDataPriority": 10,
+        "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "sac spălat adidași",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "husă spălat pantofi",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "RIDICATĂ",
-        "sampleCount": 6,
+        "sampleCount": 7,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -8964,11 +8669,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 29.7 · Launch 22.7 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -8977,6 +8682,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -9099,7 +8805,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 6,
+        "snapshotCount": 7,
         "observedDays": 14.9,
         "direction": "STABLE",
         "confidence": 70,
@@ -9128,7 +8834,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 6,
+          "historicalSnapshots": 7,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -9206,7 +8912,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
           "demandReady": false,
           "pricingVerified": false,
@@ -9715,80 +9421,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "organizator pat",
-        "searchVolume": 30,
-        "competition": "HIGH",
-        "competitionIndex": 97,
-        "cpc": 0.11,
-        "lowTopOfPageBid": 0.07,
-        "highTopOfPageBid": 0.16,
-        "monthlySearches": [
-          {
-            "year": 2026,
-            "month": 7,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 6,
-            "searchVolume": 10
-          },
-          {
-            "year": 2026,
-            "month": 5,
-            "searchVolume": 10
-          },
-          {
-            "year": 2026,
-            "month": 4,
-            "searchVolume": 20
-          },
-          {
-            "year": 2026,
-            "month": 3,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 2,
-            "searchVolume": 20
-          },
-          {
-            "year": 2026,
-            "month": 1,
-            "searchVolume": 50
-          },
-          {
-            "year": 2025,
-            "month": 12,
-            "searchVolume": 30
-          },
-          {
-            "year": 2025,
-            "month": 11,
-            "searchVolume": 50
-          },
-          {
-            "year": 2025,
-            "month": 10,
-            "searchVolume": 40
-          },
-          {
-            "year": 2025,
-            "month": 9,
-            "searchVolume": 40
-          },
-          {
-            "year": 2025,
-            "month": 8,
-            "searchVolume": 20
-          }
-        ],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.7,
@@ -9826,168 +9462,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 6,
-        "score": 32.1,
+        "rank": 9,
+        "score": 14.2,
         "paidDataEligible": true,
-        "paidDataPriority": 6,
+        "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "organizator pat",
-            "searchVolume": 30,
-            "competition": "HIGH",
-            "competitionIndex": 97,
-            "cpc": 0.11,
-            "lowTopOfPageBid": 0.07,
-            "highTopOfPageBid": 0.16,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 50
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 50
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 40
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 40
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 20
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "buzunar pat",
-            "searchVolume": 20,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.09,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 40
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 10
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 10
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "RIDICATĂ",
-        "sampleCount": 7,
+        "sampleCount": 8,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -10231,11 +9717,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 29.7 · Launch 22.7 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -10244,6 +9730,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -10300,11 +9787,11 @@
         },
         "competitorSales": {
           "salesVerified": false,
-          "status": "PROXY_ONLY",
+          "status": "MISSING",
           "verifiedUnits30d": null,
           "verifiedRevenue30dRon": null,
           "observations": [],
-          "proxyDemandScore": 29.8,
+          "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
           "romaniaObservedLinks": 0,
@@ -10366,8 +9853,8 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 7,
-        "observedDays": 10.9,
+        "snapshotCount": 8,
+        "observedDays": 11,
         "direction": "STABLE",
         "confidence": 90,
         "deltas": {
@@ -10382,20 +9869,20 @@
       },
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 1,
-        "rangeLow": 1,
-        "rangeHigh": 2,
-        "confidence": 42,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 30,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 7,
+          "historicalSnapshots": 8,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -10403,31 +9890,31 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 32.8,
-        "providerVerified": true,
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
         "marketEvidenceReady": false,
-        "keywordVolume": 30,
+        "keywordVolume": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "romaniaResultProxy": 0,
         "pricingVerified": false,
         "pricingDomains": 0,
         "evidenceReady": false,
-        "readyForTestDemandGate": true,
+        "readyForTestDemandGate": false,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
+        "status": "PROXY_ONLY",
         "seedKeywords": [
           "Kids bed bedside organizer felt",
           "Kids 3–6 • Cameră"
         ],
-        "verifiedKeywordCount": 1,
+        "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
-        "searchVolume": 30,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -10450,14 +9937,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 1,
-        "estimatedUnitsMedian": 1,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 109.8,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 32.8,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 24.8,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "THIN_SAMPLE"
       },
       "testBuyDecision": {
@@ -10471,11 +9958,11 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": 30,
+        "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
-          "demandReady": true,
+          "demandReady": false,
           "pricingVerified": false,
           "estimatedSalesReady": false,
           "supplierVerified": false,
@@ -10486,6 +9973,7 @@
           "trendSafe": true
         },
         "blockers": [
+          "cerere România suficient validată pentru TEST",
           "pricing România verificat",
           "sales estimate cu confidence ≥75 sau vânzări observate",
           "ofertă furnizor completă și verificată",
@@ -10494,21 +9982,21 @@
           "marjă ≥20%, ROI ≥45%, profit pozitiv",
           "Data Confidence ≥50"
         ],
-        "nextAction": "pricing România verificat",
+        "nextAction": "cerere România suficient validată pentru TEST",
         "policy": "TEST requires nine evidence gates, but competitor sales may be a high-confidence estimate rather than unknowable private actual sales. BUY still requires our own completed real commercial test. Proxies below the confidence threshold cannot satisfy TEST.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 2,
+        "passedGates": 1,
         "estimationEvidence": {
-          "romaniaDemandStatus": "PROVIDER_VERIFIED",
-          "romaniaDemandScore": 32.8,
-          "salesEstimateStatus": "ESTIMATED_LOW_CONFIDENCE",
-          "estimatedUnits30d": 1,
+          "romaniaDemandStatus": "INSUFFICIENT",
+          "romaniaDemandScore": 0,
+          "salesEstimateStatus": "INSUFFICIENT_DATA",
+          "estimatedUnits30d": null,
           "salesEstimateRange": [
-            1,
-            2
+            null,
+            null
           ],
-          "salesEstimateConfidence": 42,
+          "salesEstimateConfidence": 12,
           "actualCompetitorSalesObserved": false,
           "policy": "TEST may use high-confidence estimated sales. Estimates are never relabelled as verified competitor sales."
         },
@@ -10519,7 +10007,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 22.2
+        "commercialReadiness": 11.1
       }
     },
     {
@@ -10981,80 +10469,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "timer copii",
-        "searchVolume": 20,
-        "competition": "HIGH",
-        "competitionIndex": 100,
-        "cpc": 0.08,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [
-          {
-            "year": 2026,
-            "month": 7,
-            "searchVolume": 10
-          },
-          {
-            "year": 2026,
-            "month": 6,
-            "searchVolume": 20
-          },
-          {
-            "year": 2026,
-            "month": 5,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 4,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 3,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 2,
-            "searchVolume": 30
-          },
-          {
-            "year": 2026,
-            "month": 1,
-            "searchVolume": 20
-          },
-          {
-            "year": 2025,
-            "month": 12,
-            "searchVolume": 30
-          },
-          {
-            "year": 2025,
-            "month": 11,
-            "searchVolume": 30
-          },
-          {
-            "year": 2025,
-            "month": 10,
-            "searchVolume": 20
-          },
-          {
-            "year": 2025,
-            "month": 9,
-            "searchVolume": 20
-          },
-          {
-            "year": 2025,
-            "month": 8,
-            "searchVolume": 10
-          }
-        ],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.7,
@@ -11092,180 +10510,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 7,
-        "score": 31.6,
+        "rank": 10,
+        "score": 14.2,
         "paidDataEligible": true,
-        "paidDataPriority": 7,
+        "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "timer copii",
-            "searchVolume": 20,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.08,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 30
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 20
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 10
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "timer vizual copii",
-            "searchVolume": 10,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.17,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 10
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 20
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 40
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 40
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 30
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 0
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 0
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 0
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 0
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 0
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 0
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "ceas vizual copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "RIDICATĂ",
-        "sampleCount": 6,
+        "sampleCount": 7,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -11509,11 +10765,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 29.7 · Launch 22.7 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -11522,6 +10778,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -11578,11 +10835,11 @@
         },
         "competitorSales": {
           "salesVerified": false,
-          "status": "PROXY_ONLY",
+          "status": "MISSING",
           "verifiedUnits30d": null,
           "verifiedRevenue30dRon": null,
           "observations": [],
-          "proxyDemandScore": 26.4,
+          "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
           "romaniaObservedLinks": 0,
@@ -11644,7 +10901,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 6,
+        "snapshotCount": 7,
         "observedDays": 7.1,
         "direction": "STABLE",
         "confidence": 84.1,
@@ -11660,20 +10917,20 @@
       },
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 1,
-        "rangeLow": 1,
-        "rangeHigh": 2,
-        "confidence": 42,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 20,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 6,
+          "historicalSnapshots": 7,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -11681,31 +10938,31 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 29.1,
-        "providerVerified": true,
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
         "marketEvidenceReady": false,
-        "keywordVolume": 20,
+        "keywordVolume": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "romaniaResultProxy": 0,
         "pricingVerified": false,
         "pricingDomains": 0,
         "evidenceReady": false,
-        "readyForTestDemandGate": true,
+        "readyForTestDemandGate": false,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
+        "status": "PROXY_ONLY",
         "seedKeywords": [
           "Kids visual timer board non electronic",
           "Kids 3–6 • Educațional"
         ],
-        "verifiedKeywordCount": 1,
+        "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
-        "searchVolume": 20,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -11728,14 +10985,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 2,
-        "estimatedUnitsMedian": 1,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 99,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 14.6,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 16.5,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "THIN_SAMPLE"
       },
       "testBuyDecision": {
@@ -11749,11 +11006,11 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": 20,
+        "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
-          "demandReady": true,
+          "demandReady": false,
           "pricingVerified": false,
           "estimatedSalesReady": false,
           "supplierVerified": false,
@@ -11764,6 +11021,7 @@
           "trendSafe": true
         },
         "blockers": [
+          "cerere România suficient validată pentru TEST",
           "pricing România verificat",
           "sales estimate cu confidence ≥75 sau vânzări observate",
           "ofertă furnizor completă și verificată",
@@ -11772,21 +11030,21 @@
           "marjă ≥20%, ROI ≥45%, profit pozitiv",
           "Data Confidence ≥50"
         ],
-        "nextAction": "pricing România verificat",
+        "nextAction": "cerere România suficient validată pentru TEST",
         "policy": "TEST requires nine evidence gates, but competitor sales may be a high-confidence estimate rather than unknowable private actual sales. BUY still requires our own completed real commercial test. Proxies below the confidence threshold cannot satisfy TEST.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 2,
+        "passedGates": 1,
         "estimationEvidence": {
-          "romaniaDemandStatus": "PROVIDER_VERIFIED",
-          "romaniaDemandScore": 29.1,
-          "salesEstimateStatus": "ESTIMATED_LOW_CONFIDENCE",
-          "estimatedUnits30d": 1,
+          "romaniaDemandStatus": "INSUFFICIENT",
+          "romaniaDemandScore": 0,
+          "salesEstimateStatus": "INSUFFICIENT_DATA",
+          "estimatedUnits30d": null,
           "salesEstimateRange": [
-            1,
-            2
+            null,
+            null
           ],
-          "salesEstimateConfidence": 42,
+          "salesEstimateConfidence": 12,
           "actualCompetitorSalesObserved": false,
           "policy": "TEST may use high-confidence estimated sales. Estimates are never relabelled as verified competitor sales."
         },
@@ -11797,7 +11055,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 22.2
+        "commercialReadiness": 11.1
       }
     },
     {
@@ -12299,13 +11557,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "DISCOVERED",
-        "rank": 16,
+        "stage": "PROMISING",
+        "rank": 11,
         "score": 14.1,
-        "paidDataEligible": false,
-        "paidDataPriority": null,
+        "paidDataEligible": true,
+        "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -12849,7 +12107,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:02:23.307Z",
+      "checkedAt": "2026-08-30T19:28:04.616Z",
       "economics": {
         "score": 22.1,
         "margin": 6.9,
@@ -13301,80 +12559,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "raft baie",
-        "searchVolume": 2400,
-        "competition": "HIGH",
-        "competitionIndex": 100,
-        "cpc": 0.32,
-        "lowTopOfPageBid": 0.08,
-        "highTopOfPageBid": 0.26,
-        "monthlySearches": [
-          {
-            "year": 2026,
-            "month": 7,
-            "searchVolume": 1900
-          },
-          {
-            "year": 2026,
-            "month": 6,
-            "searchVolume": 1600
-          },
-          {
-            "year": 2026,
-            "month": 5,
-            "searchVolume": 1600
-          },
-          {
-            "year": 2026,
-            "month": 4,
-            "searchVolume": 1600
-          },
-          {
-            "year": 2026,
-            "month": 3,
-            "searchVolume": 1900
-          },
-          {
-            "year": 2026,
-            "month": 2,
-            "searchVolume": 1900
-          },
-          {
-            "year": 2026,
-            "month": 1,
-            "searchVolume": 2400
-          },
-          {
-            "year": 2025,
-            "month": 12,
-            "searchVolume": 2400
-          },
-          {
-            "year": 2025,
-            "month": 11,
-            "searchVolume": 2900
-          },
-          {
-            "year": 2025,
-            "month": 10,
-            "searchVolume": 2400
-          },
-          {
-            "year": 2025,
-            "month": 9,
-            "searchVolume": 2900
-          },
-          {
-            "year": 2025,
-            "month": 8,
-            "searchVolume": 2400
-          }
-        ],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.1,
@@ -13412,168 +12600,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 8,
-        "score": 31.2,
+        "rank": 14,
+        "score": 14,
         "paidDataEligible": true,
-        "paidDataPriority": 8,
+        "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.458Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "raft baie",
-            "searchVolume": 2400,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.32,
-            "lowTopOfPageBid": 0.08,
-            "highTopOfPageBid": 0.26,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 1900
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 1600
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 1600
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 1600
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 1900
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 1900
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 2400
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 2400
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 2900
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 2400
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 2900
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 2400
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "etajeră baie",
-            "searchVolume": 110,
-            "competition": "HIGH",
-            "competitionIndex": 100,
-            "cpc": 0.26,
-            "lowTopOfPageBid": 0.06,
-            "highTopOfPageBid": 0.21,
-            "monthlySearches": [
-              {
-                "year": 2026,
-                "month": 7,
-                "searchVolume": 140
-              },
-              {
-                "year": 2026,
-                "month": 6,
-                "searchVolume": 90
-              },
-              {
-                "year": 2026,
-                "month": 5,
-                "searchVolume": 50
-              },
-              {
-                "year": 2026,
-                "month": 4,
-                "searchVolume": 70
-              },
-              {
-                "year": 2026,
-                "month": 3,
-                "searchVolume": 90
-              },
-              {
-                "year": 2026,
-                "month": 2,
-                "searchVolume": 90
-              },
-              {
-                "year": 2026,
-                "month": 1,
-                "searchVolume": 140
-              },
-              {
-                "year": 2025,
-                "month": 12,
-                "searchVolume": 110
-              },
-              {
-                "year": 2025,
-                "month": 11,
-                "searchVolume": 110
-              },
-              {
-                "year": 2025,
-                "month": 10,
-                "searchVolume": 110
-              },
-              {
-                "year": 2025,
-                "month": 9,
-                "searchVolume": 90
-              },
-              {
-                "year": 2025,
-                "month": 8,
-                "searchVolume": 140
-              }
-            ],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "RIDICATĂ",
-        "sampleCount": 9,
+        "sampleCount": 10,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -13817,11 +12855,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 29.3 · Launch 22.1 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -13830,6 +12868,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -13880,11 +12919,11 @@
         },
         "competitorSales": {
           "salesVerified": false,
-          "status": "PROXY_ONLY",
+          "status": "MISSING",
           "verifiedUnits30d": null,
           "verifiedRevenue30dRon": null,
           "observations": [],
-          "proxyDemandScore": 67.6,
+          "proxyDemandScore": 0,
           "romaniaSaturationScore": 0,
           "romaniaDomains": 0,
           "romaniaObservedLinks": 0,
@@ -13946,7 +12985,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 9,
+        "snapshotCount": 10,
         "observedDays": 14.9,
         "direction": "STABLE",
         "confidence": 90,
@@ -13962,20 +13001,20 @@
       },
       "salesEstimation": {
         "version": "1.0",
-        "status": "ESTIMATED_LOW_CONFIDENCE",
-        "estimatedUnits30d": 72,
-        "rangeLow": 29,
-        "rangeHigh": 115,
-        "confidence": 42,
+        "status": "INSUFFICIENT_DATA",
+        "estimatedUnits30d": null,
+        "rangeLow": null,
+        "rangeHigh": null,
+        "confidence": 12,
         "inputs": {
-          "keywordVolumeVerified": true,
-          "keywordVolume": 2400,
+          "keywordVolumeVerified": false,
+          "keywordVolume": null,
           "foreignDomains": 0,
           "foreignLinks": 0,
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 9,
+          "historicalSnapshots": 10,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -13983,31 +13022,31 @@
       },
       "romaniaDemand": {
         "version": "1.0",
-        "status": "PROVIDER_VERIFIED",
-        "score": 55,
-        "providerVerified": true,
+        "status": "INSUFFICIENT",
+        "score": 0,
+        "providerVerified": false,
         "marketEvidenceReady": false,
-        "keywordVolume": 2400,
+        "keywordVolume": null,
         "romaniaDomains": 0,
         "romaniaObservedLinks": 0,
         "romaniaResultProxy": 0,
         "pricingVerified": false,
         "pricingDomains": 0,
         "evidenceReady": false,
-        "readyForTestDemandGate": true,
+        "readyForTestDemandGate": false,
         "policy": "Provider-verified search volume is strongest. Multi-source Romanian market evidence may satisfy the TEST demand gate but is never labelled verified search volume."
       },
       "reverseKeywordIntelligence": {
         "version": "1.0",
-        "status": "SEED_PROVIDER_READY",
+        "status": "PROXY_ONLY",
         "seedKeywords": [
           "Shower corner shelf adhesive no drill",
           "Baie"
         ],
-        "verifiedKeywordCount": 1,
+        "verifiedKeywordCount": 0,
         "competitorEvidenceRows": 0,
-        "searchVolume": 2400,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
+        "searchVolume": null,
+        "provider": "NONE",
         "needsAsinKeywordProvider": true,
         "policy": "This module exposes the reverse-keyword funnel without inventing competitor keywords. Exact ASIN→keyword ranks require a legitimate provider/API."
       },
@@ -14030,14 +13069,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 4,
-        "estimatedUnitsMedian": 72,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -14051,11 +13090,11 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": 2400,
+        "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
-          "demandReady": true,
+          "demandReady": false,
           "pricingVerified": false,
           "estimatedSalesReady": false,
           "supplierVerified": false,
@@ -14066,6 +13105,7 @@
           "trendSafe": true
         },
         "blockers": [
+          "cerere România suficient validată pentru TEST",
           "pricing România verificat",
           "sales estimate cu confidence ≥75 sau vânzări observate",
           "ofertă furnizor completă și verificată",
@@ -14074,21 +13114,21 @@
           "marjă ≥20%, ROI ≥45%, profit pozitiv",
           "Data Confidence ≥50"
         ],
-        "nextAction": "pricing România verificat",
+        "nextAction": "cerere România suficient validată pentru TEST",
         "policy": "TEST requires nine evidence gates, but competitor sales may be a high-confidence estimate rather than unknowable private actual sales. BUY still requires our own completed real commercial test. Proxies below the confidence threshold cannot satisfy TEST.",
         "commercialAction": "HOLD",
         "gateCount": 9,
-        "passedGates": 2,
+        "passedGates": 1,
         "estimationEvidence": {
-          "romaniaDemandStatus": "PROVIDER_VERIFIED",
-          "romaniaDemandScore": 55,
-          "salesEstimateStatus": "ESTIMATED_LOW_CONFIDENCE",
-          "estimatedUnits30d": 72,
+          "romaniaDemandStatus": "INSUFFICIENT",
+          "romaniaDemandScore": 0,
+          "salesEstimateStatus": "INSUFFICIENT_DATA",
+          "estimatedUnits30d": null,
           "salesEstimateRange": [
-            29,
-            115
+            null,
+            null
           ],
-          "salesEstimateConfidence": 42,
+          "salesEstimateConfidence": 12,
           "actualCompetitorSalesObserved": false,
           "policy": "TEST may use high-confidence estimated sales. Estimates are never relabelled as verified competitor sales."
         },
@@ -14099,7 +13139,7 @@
           "actualUnitProfitRon": null,
           "requirements": "BUY necesită TEST real finalizat, sell-through ≥60%, marjă reală ≥15% și profit/unitate pozitiv."
         },
-        "commercialReadiness": 22.2
+        "commercialReadiness": 11.1
       }
     },
     {
@@ -14561,19 +13601,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "protecție portieră auto",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22,
@@ -14611,46 +13642,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 13,
-        "score": 15,
+        "rank": 15,
+        "score": 14,
         "paidDataEligible": true,
-        "paidDataPriority": 13,
+        "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "protecție portieră auto",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "husă portieră auto",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "RIDICATĂ",
-        "sampleCount": 6,
+        "sampleCount": 7,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -14894,11 +13897,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 29.2 · Launch 22 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -14907,6 +13910,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -15023,7 +14027,7 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 6,
+        "snapshotCount": 7,
         "observedDays": 14.9,
         "direction": "STABLE",
         "confidence": 70,
@@ -15052,7 +14056,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 6,
+          "historicalSnapshots": 7,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -15130,7 +14134,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
           "demandReady": false,
           "pricingVerified": false,
@@ -15639,19 +14643,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "tavă copii mașină",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 23,
@@ -15689,58 +14684,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 11,
-        "score": 15.1,
+        "rank": 12,
+        "score": 14,
         "paidDataEligible": true,
-        "paidDataPriority": 11,
+        "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "tavă copii mașină",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "tavă scaun auto copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "măsuță auto copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "MEDIE",
-        "sampleCount": 3,
+        "sampleCount": 4,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -15984,11 +14939,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.7 · Launch 23 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -15997,6 +14952,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -16113,10 +15069,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
+        "snapshotCount": 4,
         "observedDays": 7.1,
         "direction": "STABLE",
-        "confidence": 44.1,
+        "confidence": 54.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -16142,7 +15098,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -16220,7 +15176,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
           "demandReady": false,
           "pricingVerified": false,
@@ -16729,19 +15685,10 @@
       },
       "keywordDemand": {
         "score": 9,
-        "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-        "verifiedSearchVolume": true,
+        "provider": "OPEN_WEB_PROXY",
+        "verifiedSearchVolume": false,
         "label": "Proxy cerere keyword",
-        "note": "Fresh Romania keyword evidence replayed from already-paid DataForSEO cache; no new provider call.",
-        "keyword": "tablă desen copii",
-        "searchVolume": 0,
-        "competition": null,
-        "competitionIndex": 0,
-        "cpc": 0,
-        "lowTopOfPageBid": 0,
-        "highTopOfPageBid": 0,
-        "monthlySearches": [],
-        "checkedAt": "2026-08-23T19:17:48.112Z"
+        "note": "Nu reprezintă volum verificat de căutări. Structura este pregătită pentru integrare DataForSEO fără schimbarea UI."
       },
       "launchScore": {
         "score": 22.8,
@@ -16779,58 +15726,18 @@
         "version": "2.5",
         "phase": "final",
         "stage": "PROMISING",
-        "rank": 12,
-        "score": 15,
+        "rank": 13,
+        "score": 14,
         "paidDataEligible": true,
-        "paidDataPriority": 12,
+        "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
-      },
-      "providerIntelligence": {
-        "romaniaKeywords": [
-          {
-            "keyword": "tablă desen copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "tablă copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          },
-          {
-            "keyword": "tablă portabilă copii",
-            "searchVolume": 0,
-            "competition": null,
-            "competitionIndex": 0,
-            "cpc": 0,
-            "lowTopOfPageBid": 0,
-            "highTopOfPageBid": 0,
-            "monthlySearches": [],
-            "provider": "DATAFORSEO_GOOGLE_ADS_CACHE",
-            "checkedAt": "2026-08-23T19:17:48.112Z"
-          }
-        ]
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
         "score": 0,
         "confidence": "MEDIE",
-        "sampleCount": 3,
+        "sampleCount": 4,
         "deltaLaunch": 0,
         "deltaDemand": 0,
         "slopes": {
@@ -17074,11 +15981,11 @@
         "summary": "Prioritate PRIORITATE MICĂ · Opportunity 28.6 · Launch 22.8 · Trend STABIL"
       },
       "dataConfidence": {
-        "overall": 34.3,
+        "overall": 25.7,
         "level": "SCĂZUTĂ",
         "dimensions": {
           "market": 0,
-          "demand": 90,
+          "demand": 30,
           "competition": 25,
           "reviews": 0,
           "sourcing": 0,
@@ -17087,6 +15994,7 @@
         },
         "missing": [
           "market",
+          "demand",
           "competition",
           "reviews",
           "sourcing",
@@ -17203,10 +16111,10 @@
       },
       "historicalIntelligence": {
         "version": "1.0",
-        "snapshotCount": 3,
+        "snapshotCount": 4,
         "observedDays": 7.1,
         "direction": "STABLE",
-        "confidence": 44.1,
+        "confidence": 54.1,
         "deltas": {
           "demand": 0,
           "launch": 0,
@@ -17232,7 +16140,7 @@
           "demandScore": 0,
           "reviewSources": 0,
           "reviewSnippets": 0,
-          "historicalSnapshots": 3,
+          "historicalSnapshots": 4,
           "trend": "STABIL",
           "actualSalesObserved": false
         },
@@ -17310,7 +16218,7 @@
         "expectedGrossProfit": 0,
         "demandSearchVolume": null,
         "confidence": "SCĂZUTĂ",
-        "confidenceScore": 34.3,
+        "confidenceScore": 25.7,
         "gates": {
           "demandReady": false,
           "pricingVerified": false,
@@ -17859,13 +16767,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
-        "rank": 14,
-        "score": 14.4,
-        "paidDataEligible": true,
-        "paidDataPriority": 14,
+        "stage": "DISCOVERED",
+        "rank": 16,
+        "score": 13.9,
+        "paidDataEligible": false,
+        "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -18329,14 +17237,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 2,
-        "estimatedUnitsMedian": 1,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 99,
         "medianReviewSnippets": 0,
-        "medianRomaniaDemandScore": 14.6,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "medianRomaniaDemandScore": 0,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 16.5,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "THIN_SAMPLE"
       },
       "testBuyDecision": {
@@ -18902,12 +17810,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 19,
+        "rank": 18,
         "score": 11.5,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19447,7 +18355,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:10.439Z",
+      "checkedAt": "2026-08-30T19:26:51.829Z",
       "economics": {
         "score": 21.6,
         "margin": 6.9,
@@ -19940,12 +18848,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 20,
+        "rank": 19,
         "score": 11.5,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20485,7 +19393,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:12.500Z",
+      "checkedAt": "2026-08-30T19:26:53.812Z",
       "economics": {
         "score": 21.6,
         "margin": 7.6,
@@ -20978,12 +19886,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 21,
+        "rank": 20,
         "score": 11.5,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22016,12 +20924,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 18,
-        "score": 11.6,
+        "rank": 21,
+        "score": 11.5,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22481,14 +21389,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 4,
-        "estimatedUnitsMedian": 72,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -23059,7 +21967,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24097,7 +23005,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25135,7 +24043,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26173,7 +25081,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27211,7 +26119,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28249,7 +27157,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29282,12 +28190,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 29,
+        "rank": 28,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30320,12 +29228,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 30,
+        "rank": 29,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31358,12 +30266,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 31,
+        "rank": 30,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32396,12 +31304,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 32,
+        "rank": 31,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33435,11 +32343,11 @@
         "phase": "final",
         "stage": "DISCOVERED",
         "rank": 17,
-        "score": 12,
+        "score": 11.8,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33899,14 +32807,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 5,
-        "estimatedUnitsMedian": 12,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 49.99,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 26,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 21.7,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 19.2,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -34472,12 +33380,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 33,
+        "rank": 32,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -35510,12 +34418,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 34,
+        "rank": 33,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -36548,12 +35456,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 35,
+        "rank": 34,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -37586,12 +36494,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 36,
+        "rank": 35,
         "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -38624,12 +37532,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 28,
-        "score": 11.4,
+        "rank": 36,
+        "score": 11.3,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -39089,14 +37997,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 4,
-        "estimatedUnitsMedian": 72,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -39662,12 +38570,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 38,
+        "rank": 37,
         "score": 11.2,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -40700,12 +39608,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 39,
+        "rank": 38,
         "score": 11.2,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -41738,12 +40646,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 40,
+        "rank": 39,
         "score": 11.2,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -42283,7 +41191,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:54.984Z",
+      "checkedAt": "2026-08-30T19:27:36.296Z",
       "economics": {
         "score": 16.5,
         "margin": 5.5,
@@ -42776,12 +41684,12 @@
         "version": "2.5",
         "phase": "final",
         "stage": "DISCOVERED",
-        "rank": 37,
-        "score": 11.3,
+        "rank": 40,
+        "score": 11.2,
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -43241,14 +42149,14 @@
       "nicheIntelligence": {
         "version": "1.0",
         "products": 4,
-        "estimatedUnitsMedian": 72,
+        "estimatedUnitsMedian": null,
         "medianPriceRon": 128.55,
         "medianReviewSnippets": 0,
         "medianRomaniaDemandScore": 0,
-        "top3EstimatedSalesConcentrationPct": 100,
+        "top3EstimatedSalesConcentrationPct": null,
         "highConfidenceSalesModels": 0,
-        "providerVerifiedDemandProducts": 1,
-        "nicheScore": 10,
+        "providerVerifiedDemandProducts": 0,
+        "nicheScore": 7.5,
         "status": "TRACKABLE"
       },
       "testBuyDecision": {
@@ -43819,7 +42727,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -44857,7 +43765,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -45895,7 +44803,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -46435,7 +45343,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:02:37.470Z",
+      "checkedAt": "2026-08-30T19:28:18.776Z",
       "economics": {
         "score": 16.4,
         "margin": 5.9,
@@ -46933,7 +45841,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -47971,7 +46879,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -48511,7 +47419,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:11.682Z",
+      "checkedAt": "2026-08-30T19:26:53.057Z",
       "economics": {
         "score": 14.9,
         "margin": 5.2,
@@ -49009,7 +47917,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -50047,7 +48955,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -51085,7 +49993,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -52123,7 +51031,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -53161,7 +52069,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -54199,7 +53107,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -55237,7 +54145,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -56275,7 +55183,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -57313,7 +56221,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -58351,7 +57259,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -58891,7 +57799,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "REJECT",
-      "checkedAt": "2026-08-30T19:01:40.822Z",
+      "checkedAt": "2026-08-30T19:27:22.135Z",
       "economics": {
         "score": 12.8,
         "margin": 4.7,
@@ -59389,7 +58297,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -60427,7 +59335,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -61465,7 +60373,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -62503,7 +61411,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -63541,7 +62449,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -64579,7 +63487,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -65617,7 +64525,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -66633,7 +65541,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -67151,7 +66059,7 @@
       "imageSourceUrl": "",
       "sourceStatus": "PARTIAL",
       "suggestedStage": "NEW",
-      "checkedAt": "2026-08-30T19:01:09.617Z",
+      "checkedAt": "2026-08-30T19:26:51.109Z",
       "economics": {
         "score": 0,
         "margin": 0,
@@ -67649,7 +66557,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -68665,7 +67573,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-08-30T19:07:09.459Z"
+        "updatedAt": "2026-08-30T19:33:22.550Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -69180,7 +68088,7 @@
   "goldenPipeline": {
     "version": "2.5",
     "phase": "final",
-    "updatedAt": "2026-08-30T19:07:09.459Z",
+    "updatedAt": "2026-08-30T19:33:22.550Z",
     "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence + Romania demand + high-confidence sales model are credible → TEST_READY after all TEST gates → BUY_READY only after a successful real test.",
     "quotas": {
       "promising": 15,
@@ -69198,7 +68106,7 @@
       "paidEligible": 15,
       "deepValidationEligible": 5,
       "highConfidenceSales": 0,
-      "romaniaDemandReady": 8
+      "romaniaDemandReady": 5
     }
   },
   "trendPolicy": "Trend Intelligence folosește numai snapshoturile istorice interne și nu modifică verdictul TEST/CUMPĂRĂ.",
@@ -69212,7 +68120,7 @@
   "rankingSignalResolutionManifest": {
     "schema": "MPR_RANKING_SIGNAL_RESOLVED_BUNDLE_V1",
     "sourceBundleFingerprint": null,
-    "asOf": "2026-08-30T19:07:08.872Z",
+    "asOf": "2026-08-30T19:33:21.946Z",
     "maxAgeMs": 604800000,
     "trustedInputCount": 0,
     "resolvedTrustedCount": 0,
@@ -69224,7 +68132,7 @@
     "purchaseAuthorized": false,
     "salesEvidenceClass": "NOT_VERIFIED_SALES",
     "crossPlatformAutoMerge": false,
-    "fingerprint": "871ce87c8ea2f07eefdf96afaf2fa7cbbd741f42f4a0396dec0d999d4d9a4a9c"
+    "fingerprint": "e2c8774a1cc8c1653c2f0459e613092f95ffa763ad50c7c4d8a0e1e42dabeb96"
   },
   "trustedTrendAttachment": {
     "schema": "MPR_TRUSTED_TREND_FUSION_ATTACHMENT_V1",
@@ -69241,7 +68149,7 @@
   "opportunityRankingPolicy": "Opportunity Ranking V2 este separat de Launch Score și verdictul comercial. Bootstrap/catalogue evidence nu poate deveni ranking signal. Trusted ranking signals cer Policy Kernel ACCEPT + freshness + conflict resolution. Trusted trend support cere în plus istoric explicit de rank comparabil și recent pentru aceeași identitate, evidence class și categorie. Rank trend/acceleration nu este tratat ca verified sales sau sales velocity.",
   "freeIntelligenceSuite": {
     "version": "1.0",
-    "updatedAt": "2026-08-30T19:07:08.960Z",
+    "updatedAt": "2026-08-30T19:33:22.033Z",
     "modules": [
       "Alert Engine V1",
       "Validation Queue",
@@ -69256,7 +68164,7 @@
   },
   "commercialHardening": {
     "version": "1.1",
-    "updatedAt": "2026-08-30T19:07:09.045Z",
+    "updatedAt": "2026-08-30T19:33:22.120Z",
     "stats": {
       "products": 65,
       "pricingVerified": 5,
@@ -69277,7 +68185,7 @@
   },
   "intelligenceEcosystem": {
     "version": "2.5",
-    "updatedAt": "2026-08-30T19:07:09.139Z",
+    "updatedAt": "2026-08-30T19:33:22.213Z",
     "policy": "Helium10/JungleScout/Keepa/SmartScout/SellerSprite-inspired methodology implemented with our own evidence-first models. Estimates remain estimates; actual observations remain separate. TEST may use high-confidence estimated demand; BUY requires our own real test.",
     "engines": {
       "salesEstimation": true,
@@ -69292,9 +68200,9 @@
       "products": 65,
       "salesHighConfidence": 0,
       "salesMediumConfidence": 0,
-      "romaniaDemandReady": 8,
-      "providerVerifiedRomaniaDemand": 4,
-      "reverseKeywordProviderReady": 4,
+      "romaniaDemandReady": 5,
+      "providerVerifiedRomaniaDemand": 0,
+      "reverseKeywordProviderReady": 0,
       "reviewOpportunityReady": 2,
       "historicalTrackable": 16,
       "niches": 17,
@@ -69303,7 +68211,7 @@
   },
   "testBuyEngine": {
     "version": "2.5",
-    "updatedAt": "2026-08-30T19:07:09.367Z",
+    "updatedAt": "2026-08-30T19:33:22.458Z",
     "readyProducts": 0,
     "policy": "TEST folosește demand validat + sales estimation HIGH confidence; BUY cere suplimentar performanță reală după lotul nostru de test.",
     "testReady": 0,

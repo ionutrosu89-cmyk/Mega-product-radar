@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-30T19:07:08.979Z",
+  "updatedAt": "2026-08-30T19:33:22.050Z",
   "policy": "Alertele prioritizează atenția; nu reprezintă recomandare de cumpărare.",
   "stats": {
     "products": 10,
@@ -40,9 +40,14 @@
           "type": "TOP10",
           "severity": "HIGH",
           "message": "A intrat/este în Top 2"
+        },
+        {
+          "type": "RISING",
+          "severity": "MEDIUM",
+          "message": "Trendul intern este în creștere"
         }
       ],
-      "confidence": "MEDIE"
+      "confidence": "SCĂZUTĂ"
     },
     {
       "name": "Car headrest hidden hook premium",
@@ -95,7 +100,7 @@
           "message": "A intrat/este în Top 5"
         }
       ],
-      "confidence": "MEDIE"
+      "confidence": "SCĂZUTĂ"
     },
     {
       "name": "Magnetic cable organizer clips set",
