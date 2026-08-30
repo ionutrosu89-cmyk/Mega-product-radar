@@ -48,7 +48,7 @@ export function parseAmazonExplicitFacts(text){
   const packPatterns=[
     ['NUMBER_OF_ITEMS',/\bNumber of Items\s+(\d{1,3})\b/i],
     ['ITEM_PACKAGE_QUANTITY',/\bItem Package Quantity\s+(\d{1,3})\b/i],
-    ['PACKAGE_QUANTITY',/\bPackage Quantity\s+(\d{1,3})\b/i]
+    ['PACKAGE_QUANTITY',/(?<!Item )\bPackage Quantity\s+(\d{1,3})\b/i]
   ];
   const packs=[];
   for(const [label,re] of packPatterns){const m=s.match(re);if(m){const n=Number(m[1]);if(Number.isInteger(n)&&n>0)packs.push({label,value:n});}}
