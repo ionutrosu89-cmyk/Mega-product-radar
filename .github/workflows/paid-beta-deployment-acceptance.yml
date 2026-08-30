@@ -1,0 +1,61 @@
+name: Paid Beta Deployment Acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      gate:
+        description: Paid beta gate to verify
+        required: true
+        default: SANDBOX
+        type: choice
+        options:
+          - SANDBOX
+          - LIVE_PREREQS
+  push:
+    branches:
+      - main
+    paths:
+      - .deploy-trigger
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      MPR_BASE_URL: ${{ vars.MPR_BASE_URL }}
+      MPR_ADMIN_ACCESS_TOKEN: ${{ secrets.MPR_ADMIN_ACCESS_TOKEN }}
+      MPR_DEPLOYMENT_GATE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate || 'SANDBOX' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preflight protected deployment configuration
+        id: preflight
+        shell: bash
+        run: |
+          if [[ -z "${MPR_BASE_URL}" || -z "${MPR_ADMIN_ACCESS_TOKEN}" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "### Paid Beta Deployment Acceptance" >> "$GITHUB_STEP_SUMMARY"
+            echo "BLOCKED_CONFIGURATION: configure repository variable MPR_BASE_URL and secret MPR_ADMIN_ACCESS_TOKEN." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "configured=true" >> "$GITHUB_OUTPUT"
+          echo "### Paid Beta Deployment Acceptance" >> "$GITHUB_STEP_SUMMARY"
+          echo "Protected deployment configuration is present. Running ${MPR_DEPLOYMENT_GATE} gate." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up Node
+        if: steps.preflight.outputs.configured == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        if: steps.preflight.outputs.configured == 'true'
+        run: npm ci
+
+      - name: Verify paid beta deployment
+        if: steps.preflight.outputs.configured == 'true'
+        run: npm run verify:paid-beta-deployment
