@@ -1,0 +1,74 @@
+name: Amazon Metric Refresh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'amazon-metric-comparison-v1.js'
+      - 'scripts/run-amazon-metric-refresh.mjs'
+      - 'test/amazon-metric-comparison-v1.test.mjs'
+      - '.github/workflows/amazon-metric-refresh.yml'
+  schedule:
+    - cron: '30 17 * * *'
+  workflow_dispatch:
+    inputs:
+      baseline_run_id:
+        description: 'Run containing amazon-round1-canonical-bridge artifact'
+        required: false
+        default: '33324435777'
+      min_interval_ms:
+        description: 'Minimum interval before comparison'
+        required: false
+        default: '86400000'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run metric comparison unit tests
+        run: node --test test/amazon-metric-comparison-v1.test.mjs
+      - name: Download canonical Amazon baseline
+        uses: actions/download-artifact@v4
+        with:
+          name: amazon-round1-canonical-bridge
+          path: artifacts/amazon-metric-source
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.baseline_run_id || '33324435777' }}
+      - name: Run gated metric refresh
+        run: >-
+          node scripts/run-amazon-metric-refresh.mjs
+          --input=artifacts/amazon-metric-source/amazon-round1-canonical-bridge.json
+          --out=artifacts/amazon-metric-refresh/amazon-metric-comparison.json
+          --minIntervalMs=${{ github.event.inputs.min_interval_ms || '86400000' }}
+          --concurrency=5
+      - name: Validate fail-closed metric contract
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('artifacts/amazon-metric-refresh/amazon-metric-comparison.json','utf8'));
+          if(x.schemaVersion==='MPR_AMAZON_METRIC_REFRESH_WAIT_V1'){
+            if(x.decision!=='WAIT'||x.policy.externalRequestsTriggered!==0)throw new Error('WAIT_POLICY_INVALID');
+            if(x.policy.demandTrendAuthorized!==false||x.policy.reviewGrowthIsSales!==false||x.policy.purchaseAuthorized!==false)throw new Error('WAIT_TRUTH_POLICY_INVALID');
+            console.log(JSON.stringify({decision:x.decision,nextEligibleAt:x.readiness.nextEligibleAt,policy:x.policy},null,2));
+            process.exit(0);
+          }
+          if(x.schemaVersion!=='MPR_AMAZON_METRIC_COMPARISON_V1')throw new Error('COMPARISON_SCHEMA_INVALID');
+          if(x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||x.policy.reviewGrowthIsSales!==false||x.policy.demandTrendAuthorized!==false)throw new Error('COMPARISON_TRUTH_POLICY_INVALID');
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0||x.policy.purchaseAuthorized!==false||x.policy.scaleAuthorized!==false)throw new Error('COMPARISON_AUTH_POLICY_INVALID');
+          console.log(JSON.stringify({comparableCount:x.manifest.comparableCount,priceDeltaKnownCount:x.manifest.priceDeltaKnownCount,ratingDeltaKnownCount:x.manifest.ratingDeltaKnownCount,reviewDeltaKnownCount:x.manifest.reviewDeltaKnownCount,refresh:x.refresh,policy:x.policy},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amazon-metric-refresh
+          path: artifacts/amazon-metric-refresh/amazon-metric-comparison.json
+          retention-days: 30
+          if-no-files-found: error
