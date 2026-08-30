@@ -60,27 +60,44 @@ function mergeCandidates(discoveryProducts=[],organicProducts=[]){
 export function buildFreeTop25LiveUniverse({discoveryProducts=[],organicProducts=[]}={},options={}){
   const limit=Math.max(1,Math.min(25,Number(options.limitPerNiche||25)));
   const minProducts=Math.max(limit,Number(options.minProductsPerNiche||25));
+  const candidates=mergeCandidates(discoveryProducts,organicProducts);
   const grouped=new Map();
-  for(const candidate of mergeCandidates(discoveryProducts,organicProducts)){
+  for(const candidate of candidates){
     const key=normalize(candidate.category);
     if(!key)continue;
     const rows=grouped.get(key)||[];rows.push(candidate);grouped.set(key,rows);
   }
   const niches=[];
+  const coverage=[];
   for(const [key,rows] of grouped){
     rows.sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name,'ro'));
+    const label=rows[0].category;
+    const eligibleProductCount=rows.length;
+    const deficitToTop25=Math.max(0,minProducts-eligibleProductCount);
+    coverage.push({
+      id:`LIVE_${freeTop25NicheId(label)}`,
+      label,
+      eligibleProductCount,
+      requiredProductCount:minProducts,
+      deficitToTop25,
+      readinessRatio:Math.min(1,eligibleProductCount/minProducts),
+      status:deficitToTop25===0?'TOP25_READY':eligibleProductCount>=Math.ceil(minProducts*0.8)?'NEAR_READY':'BUILDING'
+    });
     if(rows.length<minProducts)continue;
     const selected=rows.slice(0,limit).map((row,index)=>({
       name:row.name,rank:index+1,sourceKey:row.sourceKey,sourceLabel:row.sourceLabel,sourceUrl:row.sourceUrl,sourceTier:row.sourceTier,sourceKind:row.sourceKind,sourcePeriod:row.sourcePeriod,sourceRank:null,metric:row.metric,note:row.note,internalRankClass:'DERIVED'
     }));
-    const label=rows[0].category;
-    niches.push({id:`LIVE_${freeTop25NicheId(label)}`,label,emoji:'📊',mode:'LIVE_EVIDENCE',products:selected,eligibleProductCount:rows.length});
+    niches.push({id:`LIVE_${freeTop25NicheId(label)}`,label,emoji:'📊',mode:'LIVE_EVIDENCE',products:selected,eligibleProductCount});
   }
   niches.sort((a,b)=>b.eligibleProductCount-a.eligibleProductCount||a.label.localeCompare(b.label,'ro'));
+  coverage.sort((a,b)=>b.readinessRatio-a.readinessRatio||b.eligibleProductCount-a.eligibleProductCount||a.label.localeCompare(b.label,'ro'));
+  const totalDeficit=coverage.reduce((sum,row)=>sum+row.deficitToTop25,0);
+  const nearReadyNicheCount=coverage.filter(row=>row.status==='NEAR_READY').length;
   return {
     schema:'MPR_FREE_TOP25_LIVE_V1',
-    truthPolicy:{completeTop25Required:true,directPublicEvidenceRequired:true,supplierDataExposed:false,economicsExposed:false,unknownEqualsZero:false,purchaseAuthorized:false},
-    stats:{eligibleCandidates:mergeCandidates(discoveryProducts,organicProducts).length,completeNicheCount:niches.length,limitPerNiche:limit,minProductsPerNiche:minProducts},
+    truthPolicy:{completeTop25Required:true,directPublicEvidenceRequired:true,supplierDataExposed:false,economicsExposed:false,unknownEqualsZero:false,purchaseAuthorized:false,commercialEligibilityMeasuredOnlyFromAcceptedLiveEvidence:true},
+    stats:{eligibleCandidates:candidates.length,observedNicheCount:coverage.length,completeNicheCount:niches.length,nearReadyNicheCount,totalDeficitToCompleteAllObservedNiches:totalDeficit,limitPerNiche:limit,minProductsPerNiche:minProducts},
+    coverage,
     niches
   };
 }
