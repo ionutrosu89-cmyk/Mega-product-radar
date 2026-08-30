@@ -7,12 +7,14 @@ on:
   pull_request:
     paths:
       - 'scripts/run-opportunity-shortlist-v1.mjs'
+      - 'scripts/publish-opportunity-shortlist-live-v1.mjs'
       - 'test/opportunity-shortlist-v1.test.js'
+      - 'test/opportunity-shortlist-live-v1.test.js'
       - '.github/workflows/v2-opportunity-shortlist-gate.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 jobs:
@@ -21,13 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
       - name: Test opportunity shortlist truth gates
-        run: node --test test/opportunity-shortlist-v1.test.js
+        run: node --test test/opportunity-shortlist-v1.test.js test/opportunity-shortlist-live-v1.test.js
       - name: Resolve exact ranking source run
         id: source
         env:
@@ -79,11 +79,44 @@ jobs:
             if(r.candidates[0].shortlistPromoted!==true||r.candidates[0].finalistPromoted!==false||r.candidates[0].purchaseAuthorized!==false)throw new Error('SHORTLIST_AUTHORITY_BREACH');
           }
           NODE
-      - name: Upload opportunity shortlist artifact
+      - name: Publish sanitized dashboard handoff
+        if: steps.source.outputs.available == 'true'
+        run: node scripts/publish-opportunity-shortlist-live-v1.mjs artifacts/opportunity-shortlist-live.json opportunity-shortlist-live.json
+      - name: Enforce dashboard persistence truth policy
+        if: steps.source.outputs.available == 'true'
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('opportunity-shortlist-live.json','utf8'));
+          if(d.schemaVersion!=='MPR_OPPORTUNITY_SHORTLIST_DASHBOARD_V1')throw new Error('INVALID_DASHBOARD_SCHEMA');
+          if(d.integrity.paidOpportunityDataIncluded!==false||d.integrity.privateSupplierEvidenceIncluded!==false||d.integrity.shortlistIsFinalist!==false||d.integrity.shortlistCanAuthorizePurchase!==false)throw new Error('DASHBOARD_PROMOTION_POLICY_BREACH');
+          if(d.integrity.unknownEqualsZero!==false||d.integrity.providerSpendUsd!==0||d.integrity.paidCallsTriggered!==0||d.integrity.purchaseAuthorized!==false)throw new Error('DASHBOARD_TRUTH_POLICY_BREACH');
+          if(!Number.isInteger(d.source.rankingWorkflowRunId)||d.source.rankingWorkflowRunId<=0)throw new Error('DASHBOARD_PROVENANCE_REQUIRED');
+          if(d.candidates!==undefined)throw new Error('PAID_SHORTLIST_DATA_MUST_NOT_BE_PUBLIC');
+          if(!Number.isInteger(d.summary?.candidateCount)||d.summary.candidateCount<0||d.summary.candidateCount>1)throw new Error('INVALID_PUBLIC_CANDIDATE_COUNT');
+          if(d.status!=='SHORTLISTED'&&d.summary.candidateCount!==0)throw new Error('BLOCKED_DASHBOARD_HAS_CANDIDATE_COUNT');
+          if(d.status==='SHORTLISTED'&&d.summary.candidateCount!==1)throw new Error('SHORTLISTED_DASHBOARD_COUNT_REQUIRED');
+          NODE
+      - name: Upload opportunity shortlist artifacts
         if: steps.source.outputs.available == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: v2-opportunity-shortlist
-          path: artifacts/opportunity-shortlist-live.json
+          path: |
+            artifacts/opportunity-shortlist-live.json
+            opportunity-shortlist-live.json
           retention-days: 30
           if-no-files-found: error
+      - name: Persist sanitized shortlist handoff on main
+        if: github.event_name == 'workflow_run' && steps.source.outputs.available == 'true'
+        run: |
+          if git diff --quiet -- opportunity-shortlist-live.json; then
+            echo 'Shortlist dashboard handoff unchanged.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add opportunity-shortlist-live.json
+          git commit -m 'Update opportunity shortlist live handoff'
+          git pull --rebase origin main
+          git push origin HEAD:main
