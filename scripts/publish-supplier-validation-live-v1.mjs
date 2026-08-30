@@ -12,7 +12,7 @@ const allowedBlockers=new Set([
   'TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED','ORGANIZER_IDENTITY_EVIDENCE_REQUIRED',
   'DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED','DIRECT_SUPPLIER_DIMENSIONS_REQUIRED'
 ]);
-const allowedEvidenceClasses=new Set(['PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE','PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE','PUBLIC_SUPPLIER_INDEX_CORROBORATED_COMMERCIAL_EVIDENCE']);
+const allowedEvidenceClasses=new Set(['PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE','PUBLIC_SUPPLIER_EMBEDDED_PRODUCT_RECORD_EVIDENCE','PUBLIC_SUPPLIER_INDEX_CORROBORATED_COMMERCIAL_EVIDENCE','PUBLIC_SUPPLIER_EXACT_TITLE_CORROBORATED_COMMERCIAL_EVIDENCE']);
 const evidenceClassOf=x=>allowedEvidenceClasses.has(cleanText(x?.evidenceClass))?cleanText(x.evidenceClass):'PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE';
 const candidates=(Array.isArray(source.validationQueue)?source.validationQueue:[]).slice(0,20).map(x=>({
   externalId:cleanText(x.externalId),
@@ -40,6 +40,9 @@ const output={
   integrity:{
     evidenceClasses:[...allowedEvidenceClasses],
     indexEmbeddedOrCorroboratedEvidenceIsDirectDetail:false,
+    exactTitleCorroboratedEvidenceIsDirectDetail:false,
+    exactTitleCorroboratedEvidenceCanAuthorizeMatch:false,
+    exactTitleCorroboratedEvidenceCanAuthorizeEconomics:false,
     validationQueueIsMatchEvidence:false,
     validationQueueCanAuthorizeEconomics:false,
     validationQueueCanAuthorizePurchase:false,
