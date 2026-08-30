@@ -9,15 +9,17 @@ on:
       - 'focused-supplier-evidence-v1.js'
       - 'supplier-validation-queue-v1.js'
       - 'scripts/run-focused-supplier-evidence-discovery-v1.mjs'
+      - 'scripts/publish-supplier-validation-live-v1.mjs'
       - 'test/alibaba-candidate-discovery-relative-v1.test.js'
       - 'test/alibaba-index-evidence-v1.test.js'
       - 'test/focused-supplier-evidence-v1.test.js'
       - 'test/supplier-validation-queue-v1.test.js'
+      - 'test/supplier-validation-live-v1.test.js'
       - '.github/workflows/v2-focused-supplier-evidence-discovery.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   discover:
@@ -29,39 +31,47 @@ jobs:
         with:
           node-version: 24
       - name: Run deterministic discovery and evidence parser tests
-        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js
+        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js test/supplier-validation-live-v1.test.js
       - name: Run focused public supplier discovery
         run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
+      - name: Publish sanitized validation handoff
+        run: node scripts/publish-supplier-validation-live-v1.mjs artifacts/focused-supplier-evidence-discovery.json supplier-validation-live.json
       - name: Enforce truth and zero-spend policy
         run: |
           node <<'NODE'
           const fs=require('fs');
           const d=JSON.parse(fs.readFileSync('artifacts/focused-supplier-evidence-discovery.json','utf8'));
+          const live=JSON.parse(fs.readFileSync('supplier-validation-live.json','utf8'));
           if(d.policy.providerSpendUsd!==0||d.policy.paidCallsTriggered!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
           if(d.policy.credentialsUsed!==false||d.policy.purchaseAuthorized!==false)throw new Error('AUTHORIZATION_BREACH');
           if(d.policy.matchingThresholdRelaxed!==false||d.policy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
           if(d.policy.indexEvidenceIsDirectDetail!==false||d.policy.indexEvidenceIsMatchEvidence!==false||d.policy.indexEvidenceDimensionsKnown!==false)throw new Error('INDEX_EVIDENCE_PROMOTED');
           if(d.policy.validationQueueIsMatchEvidence!==false||d.policy.validationQueueCanAuthorizeEconomics!==false||d.policy.validationQueueCanAuthorizePurchase!==false)throw new Error('VALIDATION_QUEUE_PROMOTED');
-          for(const x of d.indexEvidenceCandidates||[]){
-            if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_CARD_BECAME_DETAIL_EVIDENCE');
-            if(x.truthPolicy?.indexCardAloneIsMarketplaceMatch!==false)throw new Error('INDEX_CARD_BECAME_MATCH');
-          }
-          for(const x of d.validationQueue||[]){
-            if(x.funnelState!=='VALIDATE'||x.canPromoteToMatch!==false)throw new Error('INVALID_VALIDATION_QUEUE_STATE');
-            if(x.exactDistinctiveConfiguration===true)throw new Error('EXACT_MATCH_MISROUTED_TO_VALIDATION_QUEUE');
-            if(x.truthPolicy?.validationQueueIsMatchEvidence!==false||x.truthPolicy?.validationQueueCanAuthorizeEconomics!==false)throw new Error('VALIDATION_ITEM_PROMOTED');
-            if(!Array.isArray(x.validationBlockers)||x.validationBlockers.length===0)throw new Error('VALIDATION_BLOCKERS_REQUIRED');
-          }
-          for(const x of d.screeningCandidates){
-            if(!x.evidence?.distinctiveConfigConfirmed)throw new Error('NON_DISTINCTIVE_CONFIG_PROMOTED');
-            if(!x.evidence?.dimensions)throw new Error('UNLABELED_DIMENSIONS_PROMOTED');
-            if(x.evidence?.truthPolicy?.publicPageIsVerifiedQuote!==false)throw new Error('PUBLIC_PAGE_PROMOTED_TO_QUOTE');
-          }
+          if(live.integrity.validationQueueIsMatchEvidence!==false||live.integrity.validationQueueCanAuthorizeEconomics!==false||live.integrity.validationQueueCanAuthorizePurchase!==false||live.integrity.providerSpendUsd!==0)throw new Error('LIVE_HANDOFF_POLICY_BREACH');
+          for(const x of d.indexEvidenceCandidates||[]){if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_CARD_BECAME_DETAIL_EVIDENCE');if(x.truthPolicy?.indexCardAloneIsMarketplaceMatch!==false)throw new Error('INDEX_CARD_BECAME_MATCH');}
+          for(const x of d.validationQueue||[]){if(x.funnelState!=='VALIDATE'||x.canPromoteToMatch!==false)throw new Error('INVALID_VALIDATION_QUEUE_STATE');if(x.exactDistinctiveConfiguration===true)throw new Error('EXACT_MATCH_MISROUTED_TO_VALIDATION_QUEUE');if(x.truthPolicy?.validationQueueIsMatchEvidence!==false||x.truthPolicy?.validationQueueCanAuthorizeEconomics!==false)throw new Error('VALIDATION_ITEM_PROMOTED');if(!Array.isArray(x.validationBlockers)||x.validationBlockers.length===0)throw new Error('VALIDATION_BLOCKERS_REQUIRED');}
+          for(const x of live.candidates||[]){if(x.funnelState!=='VALIDATE'||x.canPromoteToMatch!==false||x.canAuthorizeEconomics!==false||x.purchaseAuthorized!==false)throw new Error('LIVE_CANDIDATE_PROMOTED');if(!Array.isArray(x.blockers)||x.blockers.length===0)throw new Error('LIVE_BLOCKERS_REQUIRED');}
+          for(const x of d.screeningCandidates){if(!x.evidence?.distinctiveConfigConfirmed)throw new Error('NON_DISTINCTIVE_CONFIG_PROMOTED');if(!x.evidence?.dimensions)throw new Error('UNLABELED_DIMENSIONS_PROMOTED');if(x.evidence?.truthPolicy?.publicPageIsVerifiedQuote!==false)throw new Error('PUBLIC_PAGE_PROMOTED_TO_QUOTE');}
           NODE
       - name: Upload focused supplier evidence
         uses: actions/upload-artifact@v4
         with:
           name: v2-focused-supplier-evidence-discovery
-          path: artifacts/focused-supplier-evidence-discovery.json
+          path: |
+            artifacts/focused-supplier-evidence-discovery.json
+            supplier-validation-live.json
           retention-days: 30
           if-no-files-found: error
+      - name: Persist validation handoff on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if git diff --quiet -- supplier-validation-live.json; then
+            echo 'Validation handoff unchanged.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add supplier-validation-live.json
+          git commit -m 'Update supplier validation live evidence'
+          git pull --rebase origin main
+          git push origin HEAD:main
