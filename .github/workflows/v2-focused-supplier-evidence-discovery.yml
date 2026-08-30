@@ -7,10 +7,12 @@ on:
       - 'alibaba-candidate-discovery-v1.js'
       - 'alibaba-index-evidence-v1.js'
       - 'focused-supplier-evidence-v1.js'
+      - 'supplier-validation-queue-v1.js'
       - 'scripts/run-focused-supplier-evidence-discovery-v1.mjs'
       - 'test/alibaba-candidate-discovery-relative-v1.test.js'
       - 'test/alibaba-index-evidence-v1.test.js'
       - 'test/focused-supplier-evidence-v1.test.js'
+      - 'test/supplier-validation-queue-v1.test.js'
       - '.github/workflows/v2-focused-supplier-evidence-discovery.yml'
   workflow_dispatch:
 
@@ -27,7 +29,7 @@ jobs:
         with:
           node-version: 24
       - name: Run deterministic discovery and evidence parser tests
-        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/focused-supplier-evidence-v1.test.js
+        run: node --test test/alibaba-candidate-discovery-relative-v1.test.js test/alibaba-index-evidence-v1.test.js test/focused-supplier-evidence-v1.test.js test/supplier-validation-queue-v1.test.js
       - name: Run focused public supplier discovery
         run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
       - name: Enforce truth and zero-spend policy
@@ -39,9 +41,16 @@ jobs:
           if(d.policy.credentialsUsed!==false||d.policy.purchaseAuthorized!==false)throw new Error('AUTHORIZATION_BREACH');
           if(d.policy.matchingThresholdRelaxed!==false||d.policy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
           if(d.policy.indexEvidenceIsDirectDetail!==false||d.policy.indexEvidenceIsMatchEvidence!==false||d.policy.indexEvidenceDimensionsKnown!==false)throw new Error('INDEX_EVIDENCE_PROMOTED');
+          if(d.policy.validationQueueIsMatchEvidence!==false||d.policy.validationQueueCanAuthorizeEconomics!==false||d.policy.validationQueueCanAuthorizePurchase!==false)throw new Error('VALIDATION_QUEUE_PROMOTED');
           for(const x of d.indexEvidenceCandidates||[]){
             if(x.detailEvidence!==false||x.dimensions!==null)throw new Error('INDEX_CARD_BECAME_DETAIL_EVIDENCE');
             if(x.truthPolicy?.indexCardAloneIsMarketplaceMatch!==false)throw new Error('INDEX_CARD_BECAME_MATCH');
+          }
+          for(const x of d.validationQueue||[]){
+            if(x.funnelState!=='VALIDATE'||x.canPromoteToMatch!==false)throw new Error('INVALID_VALIDATION_QUEUE_STATE');
+            if(x.exactDistinctiveConfiguration===true)throw new Error('EXACT_MATCH_MISROUTED_TO_VALIDATION_QUEUE');
+            if(x.truthPolicy?.validationQueueIsMatchEvidence!==false||x.truthPolicy?.validationQueueCanAuthorizeEconomics!==false)throw new Error('VALIDATION_ITEM_PROMOTED');
+            if(!Array.isArray(x.validationBlockers)||x.validationBlockers.length===0)throw new Error('VALIDATION_BLOCKERS_REQUIRED');
           }
           for(const x of d.screeningCandidates){
             if(!x.evidence?.distinctiveConfigConfirmed)throw new Error('NON_DISTINCTIVE_CONFIG_PROMOTED');
