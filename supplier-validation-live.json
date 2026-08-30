@@ -1,7 +1,10 @@
 {
   "schemaVersion": "MPR_SUPPLIER_VALIDATION_LIVE_V1",
-  "updatedAt": "2026-08-30T11:11:48Z",
-  "target": {"marketplace": "AMAZON_US", "amazonAsin": "B09K5927B5"},
+  "updatedAt": "2026-08-30T11:25:08.085Z",
+  "target": {
+    "marketplace": "AMAZON_US",
+    "amazonAsin": "B09K5927B5"
+  },
   "integrity": {
     "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
     "indexEvidenceIsDirectDetail": false,
@@ -12,22 +15,36 @@
     "matchingThresholdRelaxed": false,
     "providerSpendUsd": 0
   },
-  "candidates": [{
-    "externalId": "1601019174460",
-    "platform": "ALIBABA",
-    "title": "5-Tier Paper Letter Tray Organizer with File Holder - Desk Organizer with Drawer and Pen Holders Metal Mesh Desk Organizer",
-    "supplierName": "Dalian Sam",
-    "productUrl": "https://www.alibaba.com/product-detail/5-Tier-Paper-Letter-Tray-Organizer-with_1601019174460.html",
-    "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
-    "publicPrice": {"currency": "USD", "min": 7, "max": 7},
-    "moq": {"value": 1},
-    "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
-    "funnelState": "VALIDATE",
-    "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
-    "blockers": ["TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED", "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED", "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"],
-    "missingDistinctiveEvidence": ["explicit-two-pen-holders"],
-    "canPromoteToMatch": false,
-    "canAuthorizeEconomics": false,
-    "purchaseAuthorized": false
-  }]
+  "candidates": [
+    {
+      "externalId": "1601019174460",
+      "platform": "ALIBABA",
+      "title": "5-Tier Paper Letter Tray Organizer with File Holder - Desk Organizer with Drawer and Pen Holders Metal Mesh Desk Organizer",
+      "supplierName": "Dalian Sam International Trading Co., Ltd",
+      "productUrl": "https://www.alibaba.com/product-detail/5-Tier-Paper-Letter-Tray-Organizer_1601019174460.html",
+      "sourceUrl": "https://www.alibaba.com/countrysearch/CN/mesh-paper-holder.html",
+      "publicPrice": {
+        "currency": "USD",
+        "min": 7,
+        "max": 7
+      },
+      "moq": {
+        "value": 1
+      },
+      "evidenceClass": "PUBLIC_SUPPLIER_INDEX_CARD_EVIDENCE",
+      "funnelState": "VALIDATE",
+      "validationStatus": "EVIDENCE_INCOMPLETE_NOT_MATCHED",
+      "blockers": [
+        "TWO_PEN_HOLDERS_EXPLICIT_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DETAIL_EVIDENCE_REQUIRED",
+        "DIRECT_SUPPLIER_DIMENSIONS_REQUIRED"
+      ],
+      "missingDistinctiveEvidence": [
+        "explicit-two-pen-holders"
+      ],
+      "canPromoteToMatch": false,
+      "canAuthorizeEconomics": false,
+      "purchaseAuthorized": false
+    }
+  ]
 }
