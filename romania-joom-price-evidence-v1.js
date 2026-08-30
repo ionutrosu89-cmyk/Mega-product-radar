@@ -45,7 +45,7 @@ export function evaluateJoomRomaniaCandidate(input={}){
 export function parseJoomRomaniaHtml(html,sourceUrl){
   const source=String(html??'');
   const n=norm(source);
-  const blocked=/captcha|access denied|verify you are human|robot|forbidden/.test(n);
+  const blocked=/captcha|access denied|verify you are human|are you a robot|confirm you are human|forbidden|unusual traffic/.test(n);
   if(blocked)return {schemaVersion:'MPR_ROMANIA_JOOM_PRICE_EVIDENCE_V1',market:'RO',marketplace:'JOOM_RO',status:'BLOCKED',blockers:['SOURCE_BLOCKED'],selected:null,candidates:[],truthPolicy:{publicListingPriceIsRealizedSale:false,localizedMarketplaceListingIsVerifiedCanonicalIdentity:false,unknownEqualsZero:false,purchaseAuthorized:false}};
 
   const plain=clean(source.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '));
