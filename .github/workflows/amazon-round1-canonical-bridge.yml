@@ -1,0 +1,69 @@
+name: Amazon Round1 Canonical Bridge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'amazon-round1-canonical-bridge-v1.js'
+      - 'scripts/amazon-round1-canonical-bridge.mjs'
+      - 'test/amazon-round1-canonical-bridge-v1.test.mjs'
+      - '.github/workflows/amazon-round1-canonical-bridge.yml'
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Workflow run containing amazon-live-round1-consolidated'
+        required: false
+        default: '33322314894'
+      expected_count:
+        description: 'Expected canonical product count'
+        required: false
+        default: '294'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  canonicalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run bridge unit tests
+        run: node --test test/amazon-round1-canonical-bridge-v1.test.mjs
+      - name: Download consolidated Amazon round1 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: amazon-live-round1-consolidated
+          path: artifacts/amazon-round1-source
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.inputs.source_run_id || '33322314894' }}
+      - name: Build canonical Amazon round1 artifact
+        run: >-
+          node scripts/amazon-round1-canonical-bridge.mjs
+          --input=artifacts/amazon-round1-source/amazon-round1-remaining.compact.json
+          --out=artifacts/amazon-round1-canonical/amazon-round1-canonical-bridge.json
+          --sourceRunId=${{ github.event.inputs.source_run_id || '33322314894' }}
+          --expectedCount=${{ github.event.inputs.expected_count || '294' }}
+      - name: Validate truth contract
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('artifacts/amazon-round1-canonical/amazon-round1-canonical-bridge.json','utf8'));
+          if(x.schemaVersion!=='MPR_AMAZON_ROUND1_CANONICAL_BRIDGE_V1') throw new Error('SCHEMA_INVALID');
+          if(x.manifest.rejectedCount!==0||x.manifest.logicalDuplicateCount!==0) throw new Error('CANONICAL_REJECTIONS_PRESENT');
+          if(x.policy.salesEvidenceClass!=='NOT_VERIFIED_SALES') throw new Error('SALES_POLICY_INVALID');
+          if(x.policy.trendAuthorized!==false) throw new Error('TREND_POLICY_INVALID');
+          if(x.policy.crossPlatformAutoMerge!==false) throw new Error('CROSS_PLATFORM_POLICY_INVALID');
+          if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0) throw new Error('PAID_POLICY_INVALID');
+          if(x.policy.purchaseAuthorized!==false||x.policy.scaleAuthorized!==false) throw new Error('AUTHORIZATION_POLICY_INVALID');
+          console.log(JSON.stringify({canonicalCount:x.manifest.canonicalCount,coverage:x.source.coverage,policy:x.policy},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amazon-round1-canonical-bridge
+          path: artifacts/amazon-round1-canonical/amazon-round1-canonical-bridge.json
+          retention-days: 14
+          if-no-files-found: error
