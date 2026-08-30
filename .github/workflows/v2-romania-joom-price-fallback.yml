@@ -1,0 +1,44 @@
+name: V2 Romania Joom Price Fallback
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'romania-joom-price-evidence-v1.js'
+      - 'scripts/run-romania-joom-price-fallback-v1.mjs'
+      - '.github/workflows/v2-romania-joom-price-fallback.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run zero-cost Romania Joom fallback
+        run: node scripts/run-romania-joom-price-fallback-v1.mjs artifacts/romania-joom-price-fallback.json
+      - name: Enforce truth and spend policy
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('artifacts/romania-joom-price-fallback.json','utf8'));
+          if(x.policy.providerSpendUsd!==0||x.policy.paidCallsTriggered!==0||x.policy.credentialsUsed!==false)throw new Error('UNEXPECTED_PROVIDER_USAGE');
+          if(x.policy.purchaseAuthorized!==false||x.policy.automaticEconomicPromotion!==false)throw new Error('UNSAFE_PROMOTION');
+          if(x.truthPolicy?.unknownEqualsZero!==false)throw new Error('UNKNOWN_ZERO_POLICY_BREACH');
+          if(x.status==='OBSERVED'&&!(Number(x.selected?.priceRon)>0))throw new Error('OBSERVED_WITHOUT_PRICE');
+          if(x.status==='BLOCKED'&&!(Array.isArray(x.blockers)&&x.blockers.length))throw new Error('BLOCKED_WITHOUT_DIAGNOSTIC');
+          NODE
+      - name: Upload Joom fallback evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-romania-joom-price-fallback
+          path: artifacts/romania-joom-price-fallback.json
+          if-no-files-found: error
+          retention-days: 14
