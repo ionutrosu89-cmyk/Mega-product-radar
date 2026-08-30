@@ -1,0 +1,49 @@
+name: V2 Focused Supplier Evidence Discovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'focused-supplier-evidence-v1.js'
+      - 'scripts/run-focused-supplier-evidence-discovery-v1.mjs'
+      - 'test/focused-supplier-evidence-v1.test.js'
+      - '.github/workflows/v2-focused-supplier-evidence-discovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run deterministic parser tests
+        run: node --test test/focused-supplier-evidence-v1.test.js
+      - name: Run focused public supplier discovery
+        run: node scripts/run-focused-supplier-evidence-discovery-v1.mjs artifacts/focused-supplier-evidence-discovery.json
+      - name: Enforce truth and zero-spend policy
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('artifacts/focused-supplier-evidence-discovery.json','utf8'));
+          if(d.policy.providerSpendUsd!==0||d.policy.paidCallsTriggered!==0)throw new Error('UNEXPECTED_PROVIDER_SPEND');
+          if(d.policy.credentialsUsed!==false||d.policy.purchaseAuthorized!==false)throw new Error('AUTHORIZATION_BREACH');
+          if(d.policy.matchingThresholdRelaxed!==false||d.policy.unknownEqualsZero!==false)throw new Error('TRUTH_POLICY_BREACH');
+          for(const x of d.screeningCandidates){
+            if(!x.evidence?.distinctiveConfigConfirmed)throw new Error('NON_DISTINCTIVE_CONFIG_PROMOTED');
+            if(!x.evidence?.dimensions)throw new Error('UNLABELED_DIMENSIONS_PROMOTED');
+            if(x.evidence?.truthPolicy?.publicPageIsVerifiedQuote!==false)throw new Error('PUBLIC_PAGE_PROMOTED_TO_QUOTE');
+          }
+          NODE
+      - name: Upload focused supplier evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-focused-supplier-evidence-discovery
+          path: artifacts/focused-supplier-evidence-discovery.json
+          retention-days: 30
+          if-no-files-found: error
