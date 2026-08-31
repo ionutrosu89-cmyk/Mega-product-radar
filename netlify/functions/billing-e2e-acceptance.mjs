@@ -36,6 +36,18 @@ async function loadRun({supabaseUrl,service,workspaceId,deploymentRef,fetchImpl}
   return jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs?select=id,status,evidence,verdict,checkpoint_count,version,updated_at&environment=eq.SANDBOX&workspace_id=eq.${encodeURIComponent(workspaceId)}&deployment_ref=eq.${encodeURIComponent(deploymentRef)}&limit=1`,{headers},fetchImpl);
 }
 
+async function resolveWorkspaceId({supabaseUrl,service,env,fetchImpl}){
+  const configuredId=text(env.MPR_SANDBOX_WORKSPACE_ID);
+  if(configuredId)return {ok:true,workspaceId:configuredId};
+  const workspaceSlug=text(env.MPR_SANDBOX_WORKSPACE_SLUG)||'mpr-billing-sandbox';
+  const headers={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
+  const result=await jsonFetch(`${supabaseUrl}/rest/v1/workspaces?select=id&slug=eq.${encodeURIComponent(workspaceSlug)}&limit=1`,{headers},fetchImpl);
+  if(!result.ok)return {ok:false,code:'SANDBOX_WORKSPACE_LOOKUP_FAILED'};
+  const workspaceId=text(Array.isArray(result.body)?result.body[0]?.id:'');
+  if(!workspaceId)return {ok:false,code:'SANDBOX_WORKSPACE_NOT_FOUND'};
+  return {ok:true,workspaceId};
+}
+
 async function baselinePreflight({request,fetchImpl,env}){
   const billingResponse=await createBillingReadinessHandler({fetch:fetchImpl,env})(request);
   const billing=await billingResponse.json().catch(()=>({}));
@@ -52,13 +64,14 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
       const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
       const anon=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
       const service=text(env.SUPABASE_SERVICE_ROLE_KEY);
-      const workspaceId=text(env.MPR_SANDBOX_WORKSPACE_ID);
       const deploymentRef=text(env.MPR_DEPLOYMENT_REF||env.COMMIT_REF||env.DEPLOY_ID);
       const authorization=await authorizeReadinessRequest({request,env,fetchImpl,supabaseUrl,anonKey:anon});
       if(!authorization.ok)return authorization.response;
       if(!service||!supabaseUrl)return Response.json({ok:false,code:'ACCEPTANCE_NOT_CONFIGURED',error:'Billing E2E acceptance storage is not configured'},{status:503,headers:RESPONSE_HEADERS});
-      if(!workspaceId)return Response.json({ok:false,code:'SANDBOX_WORKSPACE_NOT_CONFIGURED',error:'Dedicated sandbox workspace is not configured'},{status:503,headers:RESPONSE_HEADERS});
       if(deploymentRef.length<7)return Response.json({ok:false,code:'DEPLOYMENT_REF_NOT_CONFIGURED',error:'Deployed release identity is not available'},{status:503,headers:RESPONSE_HEADERS});
+      const workspaceResolution=await resolveWorkspaceId({supabaseUrl,service,env,fetchImpl});
+      if(!workspaceResolution.ok)return Response.json({ok:false,code:workspaceResolution.code,error:'Dedicated sandbox workspace is unavailable'},{status:503,headers:RESPONSE_HEADERS});
+      const workspaceId=workspaceResolution.workspaceId;
 
       const current=await loadRun({supabaseUrl,service,workspaceId,deploymentRef,fetchImpl});
       if(!current.ok)return Response.json({ok:false,code:'ACCEPTANCE_LOOKUP_FAILED',error:'Billing E2E acceptance state unavailable'},{status:502,headers:RESPONSE_HEADERS});
