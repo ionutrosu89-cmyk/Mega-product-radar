@@ -1,0 +1,49 @@
+name: Production Integrity Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integrity:
+    name: production-integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Unit and integration tests
+        run: npm test
+
+      - name: Verify migration chain
+        run: npm run verify:migrations
+
+      - name: Verify production safety invariants
+        run: npm run verify:production-safety
+
+      - name: Build production artifact
+        run: npm run build
+
+      - name: Audit production dependencies
+        run: npm run security:audit
