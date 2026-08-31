@@ -1,0 +1,79 @@
+name: Amazon Need History Pilot V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
+      - 'scripts/amazon-need-history-pilot.mjs'
+      - '.github/workflows/amazon-need-history-pilot-v1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
+      - 'scripts/amazon-need-history-pilot.mjs'
+      - '.github/workflows/amazon-need-history-pilot-v1.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static safety checks
+        run: |
+          node --check scripts/amazon-need-history-pilot.mjs
+          grep -q "coalesce(o.n,0) <= 1" supabase/migrations/20260831_amazon_need_history_targets_v1.sql
+          grep -q "grant execute.*service_role" supabase/migrations/20260831_amazon_need_history_targets_v1.sql
+          if grep -E "DataForSEO|Apify|purchaseAuthorized:true|paidCallsTriggered:[1-9]" scripts/amazon-need-history-pilot.mjs; then exit 2; fi
+
+  pilot:
+    if: github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Mint scoped OIDC token
+        id: oidc
+        shell: bash
+        run: |
+          TOKEN_JSON="$(curl --fail-with-body -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-need-history")"
+          echo "token=$(jq -r '.value' <<<"$TOKEN_JSON")" >> "$GITHUB_OUTPUT"
+      - name: Fetch 25 zero/one-history exact-ASIN targets
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          jq -n --arg expectedSha "$GITHUB_SHA" '{action:"targets",expectedSha:$expectedSha,limit:25}' >/tmp/targets-request.json
+          curl --fail-with-body -sS -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' --data-binary @/tmp/targets-request.json \
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts-targets.json
+          jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_TARGETS_V1" and (.targets|length) == 25' artifacts-targets.json >/dev/null
+          jq -e 'all(.targets[]; (.existing_observation_count|tonumber) <= 1)' artifacts-targets.json >/dev/null
+          mkdir -p artifacts && cp artifacts-targets.json artifacts/amazon-need-history-targets.json
+      - name: Collect public Amazon evidence
+        run: node scripts/amazon-need-history-pilot.mjs --input=artifacts/amazon-need-history-targets.json --out=artifacts/amazon-need-history-pilot.json
+      - name: Persist valid live observations
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          jq -n --arg expectedSha "$GITHUB_SHA" --slurpfile x artifacts/amazon-need-history-pilot.json '{action:"persist",expectedSha:$expectedSha,rows:$x[0].observations}' >/tmp/persist-request.json
+          curl --fail-with-body -sS -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' --data-binary @/tmp/persist-request.json \
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts/amazon-need-history-persist-receipt.json
+          jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_PERSIST_RECEIPT_V1"' artifacts/amazon-need-history-persist-receipt.json >/dev/null
+          jq -e '.receipt.providerSpendEur == 0 and .receipt.paidCallsTriggered == 0 and .receipt.purchaseAuthorized == false and .receipt.verifiedSales == false' artifacts/amazon-need-history-persist-receipt.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amazon-need-history-pilot-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
