@@ -12,7 +12,7 @@ on:
     paths:
       - '.github/workflows/romania-refresh-consumer-v1.yml'
       - 'scripts/run-romania-refresh-consumer-v1.mjs'
-      - 'supabase/migrations/20260831194950_romania_scale_10000_membership_and_refresh_queue_v1.sql'
+      - 'supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql'
 
 permissions:
   contents: read
@@ -79,5 +79,5 @@ jobs:
           set -euo pipefail
           grep -q "MPR_ROMANIA_REFRESH_LIMIT: '25'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'worker: \[0, 1, 2, 3\]' .github/workflows/romania-refresh-consumer-v1.yml
-          grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831194950_romania_scale_10000_membership_and_refresh_queue_v1.sql
-          ! grep -Eqi 'paid_calls_allowed[^f]*true|purchase_authorized[^f]*true' supabase/migrations/20260831194950_romania_scale_10000_membership_and_refresh_queue_v1.sql
+          grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
+          ! grep -Eqi 'paid_calls_allowed[^f]*true|purchase_authorized[^f]*true' supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
