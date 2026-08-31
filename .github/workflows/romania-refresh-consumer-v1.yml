@@ -8,6 +8,11 @@ on:
     branches: [main]
     paths:
       - '.romania-refresh-consumer-trigger'
+  pull_request:
+    paths:
+      - '.github/workflows/romania-refresh-consumer-v1.yml'
+      - 'scripts/run-romania-refresh-consumer-v1.mjs'
+      - 'supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql'
 
 permissions:
   contents: read
@@ -16,17 +21,23 @@ permissions:
 env:
   MPR_ROMANIA_REFRESH_AUDIENCE: 'mpr-romania-refresh-consumer'
   MPR_ROMANIA_REFRESH_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-refresh-consumer-v1'
-  MPR_ROMANIA_REFRESH_LIMIT: '6'
-  MPR_ROMANIA_REFRESH_RECEIPT: 'artifacts/romania-refresh-consumer-v1.json'
+  MPR_ROMANIA_REFRESH_LIMIT: '25'
 
 concurrency:
-  group: romania-refresh-consumer-v1
+  group: romania-refresh-consumer-v1-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   consume-romania-refresh:
+    if: github.event_name != 'pull_request'
+    strategy:
+      fail-fast: false
+      matrix:
+        worker: [0, 1, 2, 3]
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
+    env:
+      MPR_ROMANIA_REFRESH_RECEIPT: artifacts/romania-refresh-consumer-v1-worker-${{ matrix.worker }}.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,18 +52,32 @@ jobs:
           OIDC_JSON="$(curl --fail-with-body --silent --show-error -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${MPR_ROMANIA_REFRESH_AUDIENCE}")"
           OIDC_TOKEN="$(printf '%s' "$OIDC_JSON" | jq -er '.value')"
           echo "OIDC_TOKEN=${OIDC_TOKEN}" >> "$GITHUB_ENV"
-      - name: Consume bounded Romania refresh batch
+      - name: Consume bounded Romania refresh shard
         run: node scripts/run-romania-refresh-consumer-v1.mjs
       - name: Verify fail-closed receipt
         shell: bash
         run: |
           set -euo pipefail
-          jq -e '.schemaVersion == "MPR_ROMANIA_REFRESH_CONSUMER_RECEIPT_V1" and .claimed <= 6 and .policy.providerSpendEur == 0 and .policy.paidCallsTriggered == 0 and .policy.purchaseAuthorized == false and .policy.salesEvidenceClass == "NOT_VERIFIED_SALES"' "$MPR_ROMANIA_REFRESH_RECEIPT" >/dev/null
+          jq -e '.schemaVersion == "MPR_ROMANIA_REFRESH_CONSUMER_RECEIPT_V1" and .claimed <= 25 and .policy.providerSpendEur == 0 and .policy.paidCallsTriggered == 0 and .policy.purchaseAuthorized == false and .policy.salesEvidenceClass == "NOT_VERIFIED_SALES"' "$MPR_ROMANIA_REFRESH_RECEIPT" >/dev/null
       - name: Preserve Romania refresh evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: romania-refresh-consumer-v1-${{ github.run_id }}
-          path: artifacts/romania-refresh-consumer-v1.json
+          name: romania-refresh-consumer-v1-${{ github.run_id }}-worker-${{ matrix.worker }}
+          path: ${{ env.MPR_ROMANIA_REFRESH_RECEIPT }}
           if-no-files-found: warn
           retention-days: 30
+
+  validate-romania-refresh-contract:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify bounded zero-cost scale contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "MPR_ROMANIA_REFRESH_LIMIT: '25'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'worker: \[0, 1, 2, 3\]' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
+          ! grep -Eqi 'paid_calls_allowed[^f]*true|purchase_authorized[^f]*true' supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
