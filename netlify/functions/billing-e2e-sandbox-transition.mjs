@@ -30,7 +30,8 @@ async function resolveWorkspace({supabaseUrl,service,env,fetchImpl}){
 async function loadSubscription({supabaseUrl,service,workspaceId,fetchImpl}){
   const headers={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
   const result=await jsonFetch(`${supabaseUrl}/rest/v1/subscriptions?select=plan,status,provider_customer_id,provider_subscription_id,cancel_at_period_end,last_stripe_event_id&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{headers},fetchImpl);
-  return result.ok&&Array.isArray(result.body)?result.body[0]||null:null;
+  if(!result.ok||!Array.isArray(result.body))return {ok:false,row:null};
+  return {ok:true,row:result.body[0]||null};
 }
 async function loadAcceptance({supabaseUrl,service,workspaceId,deploymentRef,fetchImpl}){
   const headers={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
@@ -40,6 +41,12 @@ async function loadAcceptance({supabaseUrl,service,workspaceId,deploymentRef,fet
 function expectedStage(row){const count=Number(row?.checkpoint_count)||0;return REQUIRED_STAGES[count]||null;}
 function safeError(code,error,status=409){return Response.json({ok:false,code,error},{status,headers:RESPONSE_HEADERS});}
 
+async function assertNoRemoteActiveSubscriptions({customerId,env,fetchImpl}){
+  if(!customerId)return;
+  const remote=await jsonFetch(`https://api.stripe.com/v1/subscriptions?customer=${encodeURIComponent(customerId)}&status=all&limit=100`,{headers:{authorization:`Bearer ${env.STRIPE_SECRET_KEY}`}},fetchImpl);
+  if(!remote.ok||!Array.isArray(remote.body?.data))throw new Error('REMOTE_SUBSCRIPTION_STATE_UNAVAILABLE');
+  if(remote.body.data.some(item=>active(item?.status)))throw new Error('REMOTE_ACTIVE_SUBSCRIPTION_EXISTS');
+}
 async function ensureTestCustomer({workspaceId,deploymentRef,subscription,env,fetchImpl}){
   let customerId=text(subscription?.provider_customer_id);
   if(!customerId){
@@ -47,6 +54,7 @@ async function ensureTestCustomer({workspaceId,deploymentRef,subscription,env,fe
     if(!created.ok||!created.body?.id)throw new Error('TEST_CUSTOMER_CREATE_FAILED');
     customerId=String(created.body.id);
   }else{
+    await assertNoRemoteActiveSubscriptions({customerId,env,fetchImpl});
     const updated=await stripeForm(`customers/${encodeURIComponent(customerId)}`,{source:'tok_visa','metadata[workspace_id]':workspaceId},{env,fetchImpl,idempotencyKey:`mpr-e2e:${deploymentRef}:customer-source`});
     if(!updated.ok)throw new Error('TEST_CUSTOMER_UPDATE_FAILED');
   }
@@ -109,7 +117,9 @@ export function createBillingE2eSandboxTransitionHandler({fetch:fetchImpl=fetch,
       if(!ledger)return safeError('ACCEPTANCE_NOT_STARTED','Current deployment billing acceptance is not started.',409);
       if(ledger.status==='GO')return safeError('ACCEPTANCE_ALREADY_GO','Current deployment billing acceptance is already complete.',409);
       if(expectedStage(ledger)!==stage)return safeError('STAGE_OUT_OF_ORDER',`Expected ${expectedStage(ledger)||'no further stage'}.`,409);
-      const subscription=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
+      const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
+      if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
+      const subscription=subscriptionState.row;
       let outcome;
       if(stage==='DISCOVER_ACTIVE')outcome=await createDiscover({workspace,subscription,deploymentRef,env,fetchImpl});
       else if(stage==='RADAR_ACTIVE'||stage==='LAUNCH_ACTIVE')outcome=await changePlan({stage,workspace,subscription,deploymentRef,env,fetchImpl});
