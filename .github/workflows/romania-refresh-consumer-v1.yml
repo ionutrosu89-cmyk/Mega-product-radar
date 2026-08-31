@@ -59,12 +59,34 @@ jobs:
           for round in $(seq 1 "$MPR_ROMANIA_EDGE_BATCH_ROUNDS"); do
             worker_id="w${WORKER}-r${round}"
             jq -n --arg action collectBatch --arg workerId "$worker_id" --argjson limit "$MPR_ROMANIA_EDGE_BATCH_LIMIT" '{action:$action,workerId:$workerId,limit:$limit}' > request.json
-            curl --fail-with-body --silent --show-error --max-time 120 \
+            cp request.json "artifacts/edge-request-${worker_id}.json"
+
+            # Preserve the Edge response and HTTP status even when curl fails.
+            # The request remains strictly fail-closed: any transport or HTTP error
+            # exits non-zero before response-contract validation or evidence promotion.
+            set +e
+            http_status="$(curl --fail-with-body --silent --show-error --max-time 120 \
               -X POST "$MPR_ROMANIA_REFRESH_URL" \
               -H "Authorization: Bearer $OIDC_TOKEN" \
               -H 'content-type: application/json' \
               --data-binary @request.json \
-              -o batch.json
+              -o batch.json \
+              -w '%{http_code}')"
+            curl_rc=$?
+            set -e
+
+            printf '%s\n' "$http_status" > "artifacts/edge-http-status-${worker_id}.txt"
+            if [ -f batch.json ]; then
+              cp batch.json "artifacts/edge-response-${worker_id}.json"
+            fi
+            if [ "$curl_rc" -ne 0 ]; then
+              echo "EDGE_REQUEST_FAILED worker=${WORKER} round=${round} curl_rc=${curl_rc} http_status=${http_status}" >&2
+              if [ -s batch.json ]; then
+                cat batch.json >&2
+              fi
+              exit "$curl_rc"
+            fi
+
             jq -e '
               .ok == true and
               .schemaVersion == "MPR_ROMANIA_EDGE_HYDRATION_BATCH_V1" and
@@ -106,6 +128,8 @@ jobs:
           grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '3'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'worker: \[0, 1, 2, 3\]' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'collectBatch' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'edge-http-status-' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'edge-response-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'comparabilityPromoted == false' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'missingAsZero == false' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
