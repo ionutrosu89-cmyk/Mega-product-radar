@@ -5,12 +5,14 @@ on:
     branches: [main]
     paths:
       - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
+      - 'supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql'
       - 'scripts/amazon-need-history-pilot.mjs'
       - '.github/workflows/amazon-need-history-pilot-v1.yml'
   push:
     branches: [main]
     paths:
       - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
+      - 'supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql'
       - 'scripts/amazon-need-history-pilot.mjs'
       - '.github/workflows/amazon-need-history-pilot-v1.yml'
 
@@ -29,8 +31,9 @@ jobs:
       - name: Static safety checks
         run: |
           node --check scripts/amazon-need-history-pilot.mjs
-          grep -q "coalesce(o.n,0) <= 1" supabase/migrations/20260831_amazon_need_history_targets_v1.sql
-          grep -q "grant execute.*service_role" supabase/migrations/20260831_amazon_need_history_targets_v1.sql
+          grep -q "coalesce(o.n,0) <= 1" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
+          grep -q "external_id like 'B%'" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
+          grep -q "grant execute.*service_role" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
           if grep -E "DataForSEO|Apify|purchaseAuthorized:true|paidCallsTriggered:[1-9]" scripts/amazon-need-history-pilot.mjs; then exit 2; fi
 
   pilot:
@@ -58,6 +61,7 @@ jobs:
             'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts-targets.json
           jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_TARGETS_V1" and (.targets|length) == 25' artifacts-targets.json >/dev/null
           jq -e 'all(.targets[]; (.existing_observation_count|tonumber) <= 1)' artifacts-targets.json >/dev/null
+          jq -e 'all(.targets[]; (.external_id|startswith("B")))' artifacts-targets.json >/dev/null
           mkdir -p artifacts && cp artifacts-targets.json artifacts/amazon-need-history-targets.json
       - name: Collect public Amazon evidence
         run: node scripts/amazon-need-history-pilot.mjs --input=artifacts/amazon-need-history-targets.json --out=artifacts/amazon-need-history-pilot.json
