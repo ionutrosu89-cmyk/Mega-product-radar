@@ -1,0 +1,68 @@
+name: Stripe Sandbox Billing E2E
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: HTTPS deployment URL (optional; falls back to repository variable, then canonical Netlify production URL)
+        required: false
+        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - .billing-e2e-trigger
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: stripe-sandbox-billing-e2e-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  stripe-sandbox-e2e:
+    name: Stripe sandbox billing E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL || 'https://mega-product-radar.netlify.app' }}
+      MPR_DEPLOYMENT_GATE: SANDBOX
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Declare sandbox-only execution
+        shell: bash
+        run: |
+          echo "### Stripe Sandbox Billing E2E" >> "$GITHUB_STEP_SUMMARY"
+          node -e "const u=new URL(process.env.MPR_BASE_URL);if(u.protocol!=='https:')throw new Error('Deployment target must use HTTPS');console.log('Target:',u.origin)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mode: Stripe TEST/SANDBOX only" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Real-money authority: NONE" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Entitlement authority: WEBHOOK ONLY" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mint short-lived readiness credential
+        run: node scripts/github-actions-readiness-oidc.mjs
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-fund
+
+      - name: Verify sandbox deployment preflight
+        run: npm run verify:paid-beta-deployment
+
+      - name: Run resumable Stripe sandbox journey
+        run: npm run verify:stripe-sandbox-e2e
+
+      - name: Record machine GO summary
+        if: success()
+        shell: bash
+        run: |
+          echo "- Stripe sandbox billing journey: 6/6 GO" >> "$GITHUB_STEP_SUMMARY"
+          echo "- No live charge was authorized or executed." >> "$GITHUB_STEP_SUMMARY"
