@@ -3,6 +3,8 @@ import {appendBillingCheckpoint} from '../../scripts/capture-billing-journey-che
 import {REQUIRED_STAGES,verifyBillingJourneyEvidence} from '../../scripts/verify-billing-journey-evidence.mjs';
 import {authorizeReadinessRequest} from './_readiness-auth.mjs';
 import {createBillingJourneySnapshotHandler} from './billing-journey-snapshot.mjs';
+import {createBillingReadinessHandler} from './billing-readiness.mjs';
+import {createPaidBetaRuntimeReadinessHandler} from './paid-beta-runtime-readiness.mjs';
 
 const RESPONSE_HEADERS={'Cache-Control':'private, no-store','Vary':'Authorization'};
 const text=value=>String(value??'').trim();
@@ -15,10 +17,11 @@ async function jsonFetch(url,options,fetchImpl){
 }
 
 function safeRun(row){
-  if(!row)return {configured:true,exists:false,status:'NOT_STARTED',checkpointCount:0,nextStage:REQUIRED_STAGES[0],verdict:'NO-GO',updatedAt:null};
+  if(!row)return {configured:true,deploymentBound:true,exists:false,status:'NOT_STARTED',checkpointCount:0,nextStage:REQUIRED_STAGES[0],verdict:'NO-GO',updatedAt:null};
   const count=Number(row.checkpoint_count)||0;
   return {
     configured:true,
+    deploymentBound:true,
     exists:true,
     status:text(row.status)||'IN_PROGRESS',
     checkpointCount:count,
@@ -28,9 +31,19 @@ function safeRun(row){
   };
 }
 
-async function loadRun({supabaseUrl,service,workspaceId,fetchImpl}){
+async function loadRun({supabaseUrl,service,workspaceId,deploymentRef,fetchImpl}){
   const headers={apikey:service,authorization:`Bearer ${service}`,accept:'application/json'};
-  return jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs?select=id,status,evidence,verdict,checkpoint_count,version,updated_at&environment=eq.SANDBOX&workspace_id=eq.${encodeURIComponent(workspaceId)}&limit=1`,{headers},fetchImpl);
+  return jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs?select=id,status,evidence,verdict,checkpoint_count,version,updated_at&environment=eq.SANDBOX&workspace_id=eq.${encodeURIComponent(workspaceId)}&deployment_ref=eq.${encodeURIComponent(deploymentRef)}&limit=1`,{headers},fetchImpl);
+}
+
+async function baselinePreflight({request,fetchImpl,env}){
+  const billingResponse=await createBillingReadinessHandler({fetch:fetchImpl,env})(request);
+  const billing=await billingResponse.json().catch(()=>({}));
+  if(!billingResponse.ok||!billing?.ok||billing.ready!==true||billing.stripeMode!=='SANDBOX')return {ok:false,code:'BILLING_PREFLIGHT_NOT_READY'};
+  const runtimeResponse=await createPaidBetaRuntimeReadinessHandler({fetch:fetchImpl,env})(request);
+  const runtime=await runtimeResponse.json().catch(()=>({}));
+  if(!runtimeResponse.ok||!runtime?.ok||runtime.ready!==true)return {ok:false,code:'RUNTIME_PREFLIGHT_NOT_READY'};
+  return {ok:true};
 }
 
 export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=process.env,now=()=>new Date()}={}){
@@ -40,12 +53,14 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
       const anon=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
       const service=text(env.SUPABASE_SERVICE_ROLE_KEY);
       const workspaceId=text(env.MPR_SANDBOX_WORKSPACE_ID);
+      const deploymentRef=text(env.MPR_DEPLOYMENT_REF||env.COMMIT_REF||env.DEPLOY_ID);
       const authorization=await authorizeReadinessRequest({request,env,fetchImpl,supabaseUrl,anonKey:anon});
       if(!authorization.ok)return authorization.response;
       if(!service||!supabaseUrl)return Response.json({ok:false,code:'ACCEPTANCE_NOT_CONFIGURED',error:'Billing E2E acceptance storage is not configured'},{status:503,headers:RESPONSE_HEADERS});
       if(!workspaceId)return Response.json({ok:false,code:'SANDBOX_WORKSPACE_NOT_CONFIGURED',error:'Dedicated sandbox workspace is not configured'},{status:503,headers:RESPONSE_HEADERS});
+      if(deploymentRef.length<7)return Response.json({ok:false,code:'DEPLOYMENT_REF_NOT_CONFIGURED',error:'Deployed release identity is not available'},{status:503,headers:RESPONSE_HEADERS});
 
-      const current=await loadRun({supabaseUrl,service,workspaceId,fetchImpl});
+      const current=await loadRun({supabaseUrl,service,workspaceId,deploymentRef,fetchImpl});
       if(!current.ok)return Response.json({ok:false,code:'ACCEPTANCE_LOOKUP_FAILED',error:'Billing E2E acceptance state unavailable'},{status:502,headers:RESPONSE_HEADERS});
       const row=Array.isArray(current.body)?current.body[0]||null:null;
 
@@ -70,6 +85,11 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
       if(stage!==expectedStage)return Response.json({ok:false,code:'STAGE_OUT_OF_ORDER',error:`Expected ${expectedStage||'no further stage'}`},{status:409,headers:RESPONSE_HEADERS});
       if(row?.status==='GO')return Response.json({ok:false,code:'VERIFIED_RUN_IMMUTABLE',error:'Billing E2E acceptance is already verified'},{status:409,headers:RESPONSE_HEADERS});
 
+      if(stage==='FREE_BASELINE'){
+        const preflight=await baselinePreflight({request,fetchImpl,env});
+        if(!preflight.ok)return Response.json({ok:false,code:preflight.code,error:'Billing E2E baseline requires SANDBOX billing and deployed database runtime readiness'},{status:409,headers:RESPONSE_HEADERS});
+      }
+
       const snapshotHandler=createBillingJourneySnapshotHandler({fetch:fetchImpl,env,now});
       const snapshotRequest=new Request(request.url,{headers:{authorization:request.headers.get('authorization')||'','x-mpr-workspace-id':workspaceId,accept:'application/json'}});
       const snapshotResponse=await snapshotHandler(snapshotRequest);
@@ -89,7 +109,7 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
 
       let saved;
       if(!row){
-        saved=await jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs`,{method:'POST',headers:dbHeaders,body:JSON.stringify({environment:'SANDBOX',workspace_id:workspaceId,status,evidence,verdict,checkpoint_count:checkpointCount,version:1,started_at:time,completed_at:status==='GO'?time:null,updated_at:time})},fetchImpl);
+        saved=await jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs`,{method:'POST',headers:dbHeaders,body:JSON.stringify({environment:'SANDBOX',workspace_id:workspaceId,deployment_ref:deploymentRef,status,evidence,verdict,checkpoint_count:checkpointCount,version:1,started_at:time,completed_at:status==='GO'?time:null,updated_at:time})},fetchImpl);
       }else{
         saved=await jsonFetch(`${supabaseUrl}/rest/v1/billing_e2e_acceptance_runs?id=eq.${encodeURIComponent(row.id)}&version=eq.${Number(row.version)}`,{method:'PATCH',headers:dbHeaders,body:JSON.stringify({status,evidence,verdict,checkpoint_count:checkpointCount,version:Number(row.version)+1,completed_at:status==='GO'?time:null,updated_at:time})},fetchImpl);
       }
