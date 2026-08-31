@@ -93,6 +93,20 @@ async function endSubscription({subscription,deploymentRef,env,fetchImpl}){
   if(!ended.ok||String(ended.body?.status||'').toLowerCase()!=='canceled')throw new Error('SUBSCRIPTION_END_FAILED');
   return {action:'ENDED_TEST_SUBSCRIPTION'};
 }
+async function recoverToFree({workspace,subscription,deploymentRef,env,fetchImpl}){
+  if(!active(subscription?.status)){
+    return {action:String(workspace.plan||'').toUpperCase()==='FREE'?'SANDBOX_ALREADY_FREE':'WAITING_FOR_WEBHOOK'};
+  }
+  const subscriptionId=text(subscription?.provider_subscription_id);
+  if(!subscriptionId)throw new Error('RECOVERY_SUBSCRIPTION_ID_MISSING');
+  const remote=await jsonFetch(`https://api.stripe.com/v1/subscriptions/${encodeURIComponent(subscriptionId)}`,{headers:{authorization:`Bearer ${env.STRIPE_SECRET_KEY}`}},fetchImpl);
+  if(!remote.ok)throw new Error('RECOVERY_REMOTE_STATE_UNAVAILABLE');
+  if(String(remote.body?.status||'').toLowerCase()==='canceled')return {action:'WAITING_FOR_WEBHOOK'};
+  if(!active(remote.body?.status))throw new Error('RECOVERY_REMOTE_STATE_UNEXPECTED');
+  const ended=await stripeForm(`subscriptions/${encodeURIComponent(subscriptionId)}`,null,{env,fetchImpl,idempotencyKey:`mpr-e2e:${deploymentRef}:recover:${subscriptionId}`,method:'DELETE'});
+  if(!ended.ok||String(ended.body?.status||'').toLowerCase()!=='canceled')throw new Error('RECOVERY_SUBSCRIPTION_END_FAILED');
+  return {action:'RECOVERY_END_REQUESTED'};
+}
 
 export function createBillingE2eSandboxTransitionHandler({fetch:fetchImpl=fetch,env=process.env,authorize=authorizeReadinessRequest}={}){
   return async request=>{
@@ -109,17 +123,24 @@ export function createBillingE2eSandboxTransitionHandler({fetch:fetchImpl=fetch,
       const deploymentRef=text(request.headers.get('x-mpr-deployment-ref'));
       if(!GITHUB_SHA_RE.test(deploymentRef))return safeError('DEPLOYMENT_REF_REQUIRED','A full workflow commit SHA is required.',400);
       const body=await request.json().catch(()=>({}));
-      const stage=text(body.stage).toUpperCase();
-      if(!['DISCOVER_ACTIVE','RADAR_ACTIVE','LAUNCH_ACTIVE','CANCEL_SCHEDULED','ENDED_FREE'].includes(stage))return safeError('INVALID_STAGE','Unsupported sandbox transition stage.',400);
+      const action=text(body.action).toUpperCase();
       const workspace=await resolveWorkspace({supabaseUrl,service,env,fetchImpl});
       if(!workspace)return safeError('SANDBOX_WORKSPACE_NOT_FOUND','Dedicated sandbox workspace is unavailable.',503);
+      const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
+      if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
+      const subscription=subscriptionState.row;
+
+      if(action==='RECOVER_FREE'){
+        const outcome=await recoverToFree({workspace,subscription,deploymentRef,env,fetchImpl});
+        return Response.json({ok:true,action:outcome.action,realMoney:false,stripeMode:'SANDBOX',entitlementAuthority:'WEBHOOK_ONLY',recovery:true},{headers:RESPONSE_HEADERS});
+      }
+
+      const stage=text(body.stage).toUpperCase();
+      if(!['DISCOVER_ACTIVE','RADAR_ACTIVE','LAUNCH_ACTIVE','CANCEL_SCHEDULED','ENDED_FREE'].includes(stage))return safeError('INVALID_STAGE','Unsupported sandbox transition stage.',400);
       const ledger=await loadAcceptance({supabaseUrl,service,workspaceId:workspace.id,deploymentRef,fetchImpl});
       if(!ledger)return safeError('ACCEPTANCE_NOT_STARTED','Current deployment billing acceptance is not started.',409);
       if(ledger.status==='GO')return safeError('ACCEPTANCE_ALREADY_GO','Current deployment billing acceptance is already complete.',409);
       if(expectedStage(ledger)!==stage)return safeError('STAGE_OUT_OF_ORDER',`Expected ${expectedStage(ledger)||'no further stage'}.`,409);
-      const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
-      if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
-      const subscription=subscriptionState.row;
       let outcome;
       if(stage==='DISCOVER_ACTIVE')outcome=await createDiscover({workspace,subscription,deploymentRef,env,fetchImpl});
       else if(stage==='RADAR_ACTIVE'||stage==='LAUNCH_ACTIVE')outcome=await changePlan({stage,workspace,subscription,deploymentRef,env,fetchImpl});
