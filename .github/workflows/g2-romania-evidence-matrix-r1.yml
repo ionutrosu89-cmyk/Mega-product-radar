@@ -1,0 +1,38 @@
+name: G2 Romania Evidence Matrix R1
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/select-romania-benchmark-r1.mjs'
+      - 'scripts/build-romania-evidence-matrix-r1.mjs'
+      - 'data/real-products-1000.compact.json'
+      - '.github/workflows/g2-romania-evidence-matrix-r1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build 100 x 3 Romania evidence matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-romania-evidence-matrix-r1.mjs data/real-products-1000.compact.json romania-benchmark-r1.json romania-evidence-matrix-r1.json | tee romania-evidence-matrix-summary.json
+          jq -e '.schemaVersion == "MPR_ROMANIA_EVIDENCE_MATRIX_R1_V1" and .productCount == 100 and .normalizedCategoryCount >= 20 and .surfaceCount == 3 and .totalSlots == 300 and .knownSlots == 0 and .unknownSlots == 300 and .unknownRate == 1 and .providerSpendEur == 0 and .paidCallsTriggered == 0 and .purchaseAuthorized == false' romania-evidence-matrix-summary.json >/dev/null
+      - name: Preserve matrix evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-romania-evidence-matrix-r1-${{ github.sha }}
+          path: |
+            romania-benchmark-r1.json
+            romania-evidence-matrix-r1.json
+            romania-evidence-matrix-summary.json
+          retention-days: 30
