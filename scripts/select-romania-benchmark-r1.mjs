@@ -16,21 +16,40 @@ for (const required of ['asin', 'title', 'categoryLabel']) {
   if (!(required in ix)) throw new Error(`REQUIRED_FIELD_MISSING:${required}`);
 }
 
-const products = (dataset.products || []).map((row) => ({
-  asin: String(row[ix.asin] ?? '').trim(),
-  title: String(row[ix.title] ?? '').trim(),
-  brand: 'brand' in ix ? String(row[ix.brand] ?? '').trim() || null : null,
-  categoryLabel: String(row[ix.categoryLabel] ?? '').trim() || 'UNKNOWN_CATEGORY',
-  sourceUrl: 'sourceUrl' in ix ? String(row[ix.sourceUrl] ?? '').trim() || null : null,
-}));
+function parseCategory(rawCategory) {
+  const text = String(rawCategory ?? '').trim();
+  if (!text) return { breadcrumb: [], family: 'UNKNOWN_CATEGORY' };
+  try {
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed) && parsed.length) {
+      const breadcrumb = parsed.map((x) => String(x).trim()).filter(Boolean);
+      const family = breadcrumb.slice(0, 2).join(' > ') || breadcrumb[0] || 'UNKNOWN_CATEGORY';
+      return { breadcrumb, family };
+    }
+  } catch {}
+  return { breadcrumb: [text], family: text };
+}
+
+const products = (dataset.products || []).map((row) => {
+  const category = parseCategory(row[ix.categoryLabel]);
+  return {
+    asin: String(row[ix.asin] ?? '').trim(),
+    title: String(row[ix.title] ?? '').trim(),
+    brand: 'brand' in ix ? String(row[ix.brand] ?? '').trim() || null : null,
+    categoryLabel: String(row[ix.categoryLabel] ?? '').trim() || 'UNKNOWN_CATEGORY',
+    categoryFamily: category.family,
+    categoryBreadcrumb: category.breadcrumb,
+    sourceUrl: 'sourceUrl' in ix ? String(row[ix.sourceUrl] ?? '').trim() || null : null,
+  };
+});
 if (products.length !== 1000) throw new Error('ROW_COUNT_REJECTED');
 if (new Set(products.map((p) => p.asin)).size !== 1000) throw new Error('DUPLICATE_ASIN_REJECTED');
 
 const byCategory = new Map();
 for (const p of products) {
-  const arr = byCategory.get(p.categoryLabel) || [];
+  const arr = byCategory.get(p.categoryFamily) || [];
   arr.push(p);
-  byCategory.set(p.categoryLabel, arr);
+  byCategory.set(p.categoryFamily, arr);
 }
 for (const arr of byCategory.values()) arr.sort((a, b) => a.asin.localeCompare(b.asin));
 
@@ -54,13 +73,14 @@ while (selected.length < TARGET) {
 }
 if (selected.length !== TARGET) throw new Error(`BENCHMARK_SIZE_REJECTED:${selected.length}`);
 
-const categoryCounts = Object.fromEntries([...new Set(selected.map((p) => p.categoryLabel))].sort().map((c) => [c, selected.filter((p) => p.categoryLabel === c).length]));
+const categoryCounts = Object.fromEntries([...new Set(selected.map((p) => p.categoryFamily))].sort().map((c) => [c, selected.filter((p) => p.categoryFamily === c).length]));
 const selectedAsinDigest = crypto.createHash('sha256').update(selected.map((p) => p.asin).join('\n')).digest('hex');
 const result = {
-  schemaVersion: 'MPR_ROMANIA_BENCHMARK_R1_V1',
+  schemaVersion: 'MPR_ROMANIA_BENCHMARK_R1_V2',
   generatedFrom: INPUT,
   sourceProductSetSha256: dataset.productSetSha256,
-  selectionMethod: 'DETERMINISTIC_ROUND_ROBIN_BY_CATEGORY_THEN_ASIN',
+  selectionMethod: 'DETERMINISTIC_ROUND_ROBIN_BY_NORMALIZED_CATEGORY_FAMILY_THEN_ASIN',
+  categoryNormalization: 'FIRST_TWO_BREADCRUMB_LEVELS',
   targetCount: TARGET,
   selectedCount: selected.length,
   categoryCount: Object.keys(categoryCounts).length,
