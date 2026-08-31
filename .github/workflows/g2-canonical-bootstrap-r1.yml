@@ -5,15 +5,15 @@ on:
     branches: [main]
     paths:
       - '.g2-canonical-bootstrap-r1-trigger'
-  workflow_dispatch:
 
 permissions:
   contents: read
+  id-token: write
 
 env:
-  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
   MPR_CANONICAL_BOOTSTRAP_IMPORT_APPROVED: 'true'
+  MPR_CANONICAL_BOOTSTRAP_AUDIENCE: 'mpr-amazon-canonical-bootstrap'
+  MPR_CANONICAL_BOOTSTRAP_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-canonical-bootstrap-v1'
 
 jobs:
   canonical-bootstrap-r1:
@@ -33,15 +33,35 @@ jobs:
           if(d.uniqueProductCount!==1000) process.exit(2);
           if(d.productSetSha256!=='d555b25edcd604f29cca36d0f3651026349f332d1931569f809ec95c6cb4afb6') process.exit(3);
           NODE
-      - name: Dry-run import plan
-        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=250 | tee canonical-bootstrap-dry-run.txt
-      - name: Execute exact-source canonical bootstrap
-        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --execute --batch=250 | tee canonical-bootstrap-result.txt
+      - name: Dry-run local import plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=250 | tee canonical-bootstrap-dry-run.txt
+      - name: Execute exact-source bootstrap via GitHub OIDC
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" || { echo 'GITHUB_OIDC_REQUEST_URL_REQUIRED'; exit 10; }
+          test -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" || { echo 'GITHUB_OIDC_REQUEST_TOKEN_REQUIRED'; exit 11; }
+          OIDC_JSON="$(curl --fail-with-body --silent --show-error \
+            -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${MPR_CANONICAL_BOOTSTRAP_AUDIENCE}")"
+          OIDC_TOKEN="$(printf '%s' "$OIDC_JSON" | jq -er '.value')"
+          REQUEST_BODY="$(jq -nc --arg sha "$GITHUB_SHA" '{action:"bootstrap",expectedSha:$sha}')"
+          curl --fail-with-body --silent --show-error \
+            -H "Authorization: Bearer ${OIDC_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            --data "$REQUEST_BODY" \
+            "$MPR_CANONICAL_BOOTSTRAP_URL" | tee canonical-bootstrap-result.json
+          jq -e '.ok == true and .inputCount == 1000 and .resolvedCount == 1000 and .rejectedCount == 0 and .policy.providerSpendEur == 0 and .policy.paidCallsTriggered == 0 and .policy.purchaseAuthorized == false' canonical-bootstrap-result.json >/dev/null
       - name: Preserve bootstrap evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: g2-canonical-bootstrap-r1-${{ github.sha }}
           path: |
             canonical-bootstrap-dry-run.txt
-            canonical-bootstrap-result.txt
+            canonical-bootstrap-result.json
+          if-no-files-found: warn
           retention-days: 30
