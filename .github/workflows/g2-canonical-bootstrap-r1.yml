@@ -1,0 +1,47 @@
+name: G2 Canonical Bootstrap R1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.g2-canonical-bootstrap-r1-trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+  MPR_CANONICAL_BOOTSTRAP_IMPORT_APPROVED: 'true'
+
+jobs:
+  canonical-bootstrap-r1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify exact dataset digest
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('data/real-products-1000.compact.json','utf8'));
+          if(d.schemaVersion!=='MPR_REAL_PRODUCT_BOOTSTRAP_1000_V1') process.exit(1);
+          if(d.uniqueProductCount!==1000) process.exit(2);
+          if(d.productSetSha256!=='d555b25edcd604f29cca36d0f3651026349f332d1931569f809ec95c6cb4afb6') process.exit(3);
+          NODE
+      - name: Dry-run import plan
+        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=250 | tee canonical-bootstrap-dry-run.txt
+      - name: Execute exact-source canonical bootstrap
+        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --execute --batch=250 | tee canonical-bootstrap-result.txt
+      - name: Preserve bootstrap evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-canonical-bootstrap-r1-${{ github.sha }}
+          path: |
+            canonical-bootstrap-dry-run.txt
+            canonical-bootstrap-result.txt
+          retention-days: 30
