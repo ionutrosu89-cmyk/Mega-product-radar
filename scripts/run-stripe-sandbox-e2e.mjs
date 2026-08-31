@@ -4,9 +4,35 @@ const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const SHA_RE=/^[0-9a-f]{40}$/i;
 
 async function jsonRequest(url,options,fetchImpl){
-  const response=await fetchImpl(url,options);
-  let body={};try{body=await response.json();}catch{}
-  return {response,body};
+  try{
+    const response=await fetchImpl(url,options);
+    let body={};try{body=await response.json();}catch{}
+    return {response,body,networkError:false};
+  }catch{return {response:null,body:{},networkError:true};}
+}
+const statusOf=result=>result?.response?.status||0;
+const ok=result=>Boolean(result?.response?.ok&&result?.body?.ok===true);
+
+async function reliableGet(url,headers,{fetchImpl,sleepImpl,attempts=4,pollMs=1000}){
+  let last;
+  for(let attempt=0;attempt<attempts;attempt+=1){
+    last=await jsonRequest(url,{headers},fetchImpl);
+    if(last.response)return last;
+    if(attempt<attempts-1)await sleepImpl(pollMs);
+  }
+  return last;
+}
+
+async function captureStage({stage,stageIndex,acceptanceUrl,authHeaders,fetchImpl,sleepImpl,maxPolls,pollMs}){
+  for(let attempt=0;attempt<maxPolls;attempt+=1){
+    if(attempt>0)await sleepImpl(pollMs);
+    const capture=await jsonRequest(acceptanceUrl,{method:'POST',headers:{...authHeaders,'content-type':'application/json'},body:JSON.stringify({stage})},fetchImpl);
+    if(ok(capture)&&capture.body?.capturedStage===stage)return capture.body;
+    const current=await reliableGet(acceptanceUrl,authHeaders,{fetchImpl,sleepImpl,attempts:2,pollMs:Math.min(pollMs,1000)});
+    if(ok(current)&&Number(current.body.checkpointCount)>=stageIndex)return current.body;
+    if(capture.response&&![409,502,503].includes(statusOf(capture)))throw new Error(`${stage} capture failed (${statusOf(capture)} ${capture.body?.code||'UNKNOWN'})`);
+  }
+  return null;
 }
 
 export async function runStripeSandboxE2e({baseUrl,token,deploymentRef,fetchImpl=fetch,sleepImpl=sleep,maxPolls=30,pollMs=2000}={}){
@@ -20,34 +46,49 @@ export async function runStripeSandboxE2e({baseUrl,token,deploymentRef,fetchImpl
   const acceptanceUrl=`${root}/api/internal/billing-e2e-acceptance`;
   const transitionUrl=`${root}/api/internal/billing-e2e-sandbox-transition`;
 
-  const initial=await jsonRequest(acceptanceUrl,{headers:authHeaders},fetchImpl);
-  if(!initial.response.ok||initial.body?.ok!==true)throw new Error(`Acceptance lookup failed (${initial.response.status} ${initial.body?.code||'UNKNOWN'})`);
-  if(initial.body.checkpointCount!==1||initial.body.nextStage!=='DISCOVER_ACTIVE')throw new Error(`Journey must start from verified FREE baseline (got ${initial.body.checkpointCount||0}/6 ${initial.body.nextStage||'UNKNOWN'})`);
+  const initial=await reliableGet(acceptanceUrl,authHeaders,{fetchImpl,sleepImpl});
+  if(!ok(initial))throw new Error(`Acceptance lookup failed (${statusOf(initial)} ${initial.body?.code||'NETWORK_ERROR'})`);
+  const initialCount=Number(initial.body.checkpointCount)||0;
+  if(initialCount===6&&initial.body.verdict==='GO')return {ok:true,verdict:'GO',checkpointCount:6,completed:[],resumed:true,realMoney:false,stripeMode:'SANDBOX'};
+  if(initialCount<1||initialCount>5||STAGES[initialCount-1]!==initial.body.nextStage)throw new Error(`Journey must have a verified resumable checkpoint (got ${initialCount}/6 ${initial.body.nextStage||'UNKNOWN'})`);
 
   const completed=[];
-  for(const stage of STAGES){
-    const transition=await jsonRequest(transitionUrl,{method:'POST',headers:{...authHeaders,'content-type':'application/json'},body:JSON.stringify({stage})},fetchImpl);
-    if(!transition.response.ok||transition.body?.ok!==true)throw new Error(`${stage} transition failed (${transition.response.status} ${transition.body?.code||'UNKNOWN'})`);
-    if(transition.body.realMoney!==false||transition.body.stripeMode!=='SANDBOX'||transition.body.entitlementAuthority!=='WEBHOOK_ONLY')throw new Error(`${stage} transition did not prove sandbox/webhook-only safety`);
+  const resumed=initialCount>1;
+  for(let index=initialCount-1;index<STAGES.length;index+=1){
+    const stage=STAGES[index];
+    const targetCount=index+2;
 
-    let captured=null;
-    for(let attempt=0;attempt<maxPolls;attempt+=1){
-      if(attempt>0)await sleepImpl(pollMs);
-      const capture=await jsonRequest(acceptanceUrl,{method:'POST',headers:{...authHeaders,'content-type':'application/json'},body:JSON.stringify({stage})},fetchImpl);
-      if(capture.response.ok&&capture.body?.ok===true&&capture.body?.capturedStage===stage){captured=capture.body;break;}
-      const current=await jsonRequest(acceptanceUrl,{headers:authHeaders},fetchImpl);
-      const stageIndex=STAGES.indexOf(stage)+2;
-      if(current.response.ok&&current.body?.ok===true&&Number(current.body.checkpointCount)>=stageIndex){captured=current.body;break;}
-      if(![409,502,503].includes(capture.response.status))throw new Error(`${stage} capture failed (${capture.response.status} ${capture.body?.code||'UNKNOWN'})`);
+    // Recovery after a lost HTTP response: if Stripe/webhook already reached the next state,
+    // capture it before attempting the provider mutation again.
+    let captured=await captureStage({stage,stageIndex:targetCount,acceptanceUrl,authHeaders,fetchImpl,sleepImpl,maxPolls:2,pollMs:Math.min(pollMs,750)});
+    if(!captured){
+      let transitioned=false;
+      for(let transitionAttempt=0;transitionAttempt<3&&!transitioned;transitionAttempt+=1){
+        const transition=await jsonRequest(transitionUrl,{method:'POST',headers:{...authHeaders,'content-type':'application/json'},body:JSON.stringify({stage})},fetchImpl);
+        if(ok(transition)){
+          if(transition.body.realMoney!==false||transition.body.stripeMode!=='SANDBOX'||transition.body.entitlementAuthority!=='WEBHOOK_ONLY')throw new Error(`${stage} transition did not prove sandbox/webhook-only safety`);
+          transitioned=true;
+          break;
+        }
+        // A network failure can happen after Stripe accepted the mutation. Observe the webhook-backed
+        // state before retrying the idempotent transition.
+        captured=await captureStage({stage,stageIndex:targetCount,acceptanceUrl,authHeaders,fetchImpl,sleepImpl,maxPolls:3,pollMs:Math.min(pollMs,1000)});
+        if(captured){transitioned=true;break;}
+        if(transition.response&&![409,502,503].includes(statusOf(transition)))throw new Error(`${stage} transition failed (${statusOf(transition)} ${transition.body?.code||'UNKNOWN'})`);
+        if(transitionAttempt<2)await sleepImpl(1000);
+      }
+      if(!transitioned)throw new Error(`${stage} transition could not be confirmed after retry-safe observation`);
     }
+
+    if(!captured)captured=await captureStage({stage,stageIndex:targetCount,acceptanceUrl,authHeaders,fetchImpl,sleepImpl,maxPolls,pollMs});
     if(!captured)throw new Error(`${stage} webhook-backed checkpoint timed out`);
     completed.push(stage);
     if(stage!=='ENDED_FREE')await sleepImpl(1250);
   }
 
-  const final=await jsonRequest(acceptanceUrl,{headers:authHeaders},fetchImpl);
-  if(!final.response.ok||final.body?.ok!==true||final.body.checkpointCount!==6||final.body.verdict!=='GO')throw new Error(`Final billing E2E verdict is not GO (${final.body?.checkpointCount||0}/6 ${final.body?.verdict||'UNKNOWN'})`);
-  return {ok:true,verdict:'GO',checkpointCount:6,completed,realMoney:false,stripeMode:'SANDBOX'};
+  const final=await reliableGet(acceptanceUrl,authHeaders,{fetchImpl,sleepImpl});
+  if(!ok(final)||Number(final.body.checkpointCount)!==6||final.body.verdict!=='GO')throw new Error(`Final billing E2E verdict is not GO (${final.body?.checkpointCount||0}/6 ${final.body?.verdict||'UNKNOWN'})`);
+  return {ok:true,verdict:'GO',checkpointCount:6,completed,resumed,realMoney:false,stripeMode:'SANDBOX'};
 }
 
 if(import.meta.url===`file://${process.argv[1]}`){
