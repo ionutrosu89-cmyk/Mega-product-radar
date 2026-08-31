@@ -1,13 +1,13 @@
 -- Persist pinned exact-ASIN Amazon live public-page observations.
 -- No identity creation, no title merge, no sales inference, no provider spend.
 
-insert into public.data_sources(source_key,provider,collection_method,allowed_use,redistribution_right,retention,paid,enabled,metadata)
+insert into public.data_sources(source_key,provider,collection_method,allowed_use,redistribution_right,retention_rule,paid,enabled,metadata)
 values(
   'amazon_live_public_page_v1','Amazon public product pages via MPR live collector','public_product_page',
   'internal_analytics','not_assumed','retain_pinned_evidence',false,true,
   jsonb_build_object('evidenceClass','LIVE_PUBLIC_PRODUCT_PAGE','verifiedSales',false,'providerSpendEur',0,'paidCallsTriggered',0,'purchaseAuthorized',false)
 )
-on conflict(source_key) do update set enabled=true,paid=false,metadata=excluded.metadata;
+on conflict(source_key) do update set enabled=true,paid=false,metadata=excluded.metadata,updated_at=now();
 
 create or replace function public.persist_amazon_live_observations_v1(p_rows jsonb)
 returns jsonb
