@@ -23,6 +23,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: paid-beta-deployment-acceptance-${{ github.ref }}
@@ -35,34 +36,28 @@ jobs:
     timeout-minutes: 10
     env:
       MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL }}
-      MPR_READINESS_PROBE_TOKEN: ${{ secrets.MPR_READINESS_PROBE_TOKEN }}
       MPR_DEPLOYMENT_GATE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate || 'SANDBOX' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Require deployment target and protected probe configuration
+      - name: Require deployment target configuration
         shell: bash
         run: |
           echo "### Paid Beta Deployment Acceptance" >> "$GITHUB_STEP_SUMMARY"
-          missing=0
           if [[ -z "${MPR_BASE_URL}" ]]; then
             echo "- BLOCKED_CONFIGURATION: deployment URL is missing. Supply workflow input base_url or repository variable MPR_BASE_URL." >> "$GITHUB_STEP_SUMMARY"
-            missing=1
-          fi
-          if [[ -z "${MPR_READINESS_PROBE_TOKEN}" ]]; then
-            echo "- BLOCKED_CONFIGURATION: repository secret MPR_READINESS_PROBE_TOKEN is missing." >> "$GITHUB_STEP_SUMMARY"
-            missing=1
-          fi
-          if [[ "$missing" -ne 0 ]]; then
-            echo "Paid beta deployment acceptance is NO-GO until protected configuration is present." >> "$GITHUB_STEP_SUMMARY"
+            echo "Paid beta deployment acceptance is NO-GO until deployment target configuration is present." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
           node -e "const u=new URL(process.env.MPR_BASE_URL);if(u.protocol!=='https:')throw new Error('Deployment target must use HTTPS');console.log('Deployment target:',u.origin)" >> "$GITHUB_STEP_SUMMARY"
-          echo "Protected probe configuration is present. Running ${MPR_DEPLOYMENT_GATE} gate." >> "$GITHUB_STEP_SUMMARY"
+          echo "Deployment target configuration is present. Running ${MPR_DEPLOYMENT_GATE} gate." >> "$GITHUB_STEP_SUMMARY"
           if [[ "${MPR_DEPLOYMENT_GATE}" == "SANDBOX" ]]; then
             echo "Dedicated sandbox workspace is resolved server-side; preflight requires FREE plan, zero active/trialing Stripe subscriptions and no scheduled cancellation." >> "$GITHUB_STEP_SUMMARY"
           fi
+
+      - name: Mint short-lived readiness credential
+        run: node scripts/github-actions-readiness-oidc.mjs
 
       - name: Verify public deployment is reachable
         shell: bash

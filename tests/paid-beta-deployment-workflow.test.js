@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 
 const workflowPath='.github/workflows/paid-beta-deployment-acceptance.yml';
+const oidcHelperPath='scripts/github-actions-readiness-oidc.mjs';
 
 async function workflow(){return readFile(workflowPath,'utf8');}
 
@@ -20,13 +21,25 @@ test('manual acceptance may supply a public HTTPS base URL without storing it as
   assert.match(source,/Deployment target must use HTTPS/);
 });
 
-test('probe credential remains a GitHub secret and missing configuration fails closed',async()=>{
+test('readiness authentication uses short-lived GitHub OIDC rather than a persistent repository secret',async()=>{
   const source=await workflow();
-  assert.match(source,/MPR_READINESS_PROBE_TOKEN: \$\{\{ secrets\.MPR_READINESS_PROBE_TOKEN \}\}/);
-  assert.match(source,/BLOCKED_CONFIGURATION: repository secret MPR_READINESS_PROBE_TOKEN is missing/);
+  const helper=await readFile(oidcHelperPath,'utf8');
+  assert.match(source,/permissions:\n\s+contents: read\n\s+id-token: write/);
+  assert.match(source,/Mint short-lived readiness credential/);
+  assert.match(source,/node scripts\/github-actions-readiness-oidc\.mjs/);
+  assert.doesNotMatch(source,/secrets\.MPR_READINESS_PROBE_TOKEN/);
+  assert.match(helper,/ACTIONS_ID_TOKEN_REQUEST_URL/);
+  assert.match(helper,/ACTIONS_ID_TOKEN_REQUEST_TOKEN/);
+  assert.match(helper,/audience='mega-product-radar-readiness'/);
+  assert.match(helper,/::add-mask::/);
+  assert.match(helper,/MPR_READINESS_PROBE_TOKEN=/);
+  assert.doesNotMatch(helper,/console\.log\([^\n]*MPR_READINESS_PROBE_TOKEN/);
+});
+
+test('missing deployment URL still fails closed before protected checks run',async()=>{
+  const source=await workflow();
+  assert.match(source,/BLOCKED_CONFIGURATION: deployment URL is missing/);
   assert.match(source,/exit 1/);
-  assert.doesNotMatch(source,/(?:echo|printf)[^\n]*\$\{MPR_READINESS_PROBE_TOKEN\}/);
-  assert.doesNotMatch(source,/console\.log\([^\n]*MPR_READINESS_PROBE_TOKEN/);
 });
 
 test('sandbox workspace identity is resolved server-side instead of supplied to GitHub Actions',async()=>{
