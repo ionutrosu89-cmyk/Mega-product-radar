@@ -32,6 +32,37 @@ test('DISCOVER transition creates only a Stripe test subscription and does not w
   assert.match(String(createSub.options.body),/metadata%5Bplan%5D=DISCOVER/);
 });
 
+test('subscription-state outage fails closed before any Stripe side effect',async()=>{
+  const calls=[];
+  const fetchImpl=async(url)=>{
+    const value=String(url);calls.push(value);
+    if(value.includes('/rest/v1/workspaces?'))return Response.json([{id:workspaceId,plan:'FREE'}]);
+    if(value.includes('/rest/v1/billing_e2e_acceptance_runs?'))return Response.json([{status:'IN_PROGRESS',checkpoint_count:1}]);
+    if(value.includes('/rest/v1/subscriptions?'))return Response.json({error:'database unavailable'},{status:503});
+    return Response.json({error:'unexpected'},{status:500});
+  };
+  const handler=createBillingE2eSandboxTransitionHandler({fetch:fetchImpl,env:baseEnv,authorize:oidc});
+  const response=await handler(request());
+  assert.equal(response.status,502);assert.equal((await response.json()).code,'SUBSCRIPTION_STATE_UNAVAILABLE');
+  assert.equal(calls.some(value=>value.startsWith('https://api.stripe.com/')),false);
+});
+
+test('existing Stripe customer is checked for remote active subscriptions before Discover creation',async()=>{
+  const calls=[];
+  const fetchImpl=async(url)=>{
+    const value=String(url);calls.push(value);
+    if(value.includes('/rest/v1/workspaces?'))return Response.json([{id:workspaceId,plan:'FREE'}]);
+    if(value.includes('/rest/v1/billing_e2e_acceptance_runs?'))return Response.json([{status:'IN_PROGRESS',checkpoint_count:1}]);
+    if(value.includes('/rest/v1/subscriptions?'))return Response.json([{plan:'FREE',status:'canceled',provider_customer_id:'cus_existing',provider_subscription_id:'sub_old',cancel_at_period_end:false}]);
+    if(value.includes('/v1/subscriptions?customer=cus_existing'))return Response.json({data:[{id:'sub_remote',status:'active'}]});
+    return Response.json({error:'unexpected'},{status:500});
+  };
+  const handler=createBillingE2eSandboxTransitionHandler({fetch:fetchImpl,env:baseEnv,authorize:oidc});
+  const response=await handler(request());
+  assert.equal(response.status,409);assert.equal((await response.json()).code,'REMOTE_ACTIVE_SUBSCRIPTION_EXISTS');
+  assert.equal(calls.includes('https://api.stripe.com/v1/subscriptions'),false);
+});
+
 test('transition endpoint rejects every non-OIDC principal before side effects',async()=>{
   let touched=false;
   const handler=createBillingE2eSandboxTransitionHandler({fetch:async()=>{touched=true;return Response.json({});},env:baseEnv,authorize:async()=>({ok:true,principal:'READINESS_PROBE'})});
