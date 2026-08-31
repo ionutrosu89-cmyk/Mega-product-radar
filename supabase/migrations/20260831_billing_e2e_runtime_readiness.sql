@@ -1,5 +1,10 @@
 -- Require the deployment-bound billing E2E acceptance ledger in paid-beta DB readiness.
-create or replace function public.mpr_billing_runtime_readiness()
+-- The return signature gains one column, so Postgres requires a transactional drop/recreate.
+begin;
+
+drop function if exists public.mpr_billing_runtime_readiness();
+
+create function public.mpr_billing_runtime_readiness()
 returns table(
   ready boolean,
   subscriptions_table boolean,
@@ -39,3 +44,5 @@ $$;
 
 revoke execute on function public.mpr_billing_runtime_readiness() from public,anon,authenticated;
 grant execute on function public.mpr_billing_runtime_readiness() to service_role;
+
+commit;
