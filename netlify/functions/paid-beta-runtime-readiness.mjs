@@ -21,7 +21,8 @@ function normalizeRuntime(body){
       orderingEventIdColumn:Boolean(row.ordering_event_id_column),
       webhookStatusColumn:Boolean(row.webhook_status_column),
       webhookErrorColumn:Boolean(row.webhook_error_column),
-      atomicApplyRpc:Boolean(row.atomic_apply_rpc)
+      atomicApplyRpc:Boolean(row.atomic_apply_rpc),
+      billingE2eAcceptanceTable:Boolean(row.billing_e2e_acceptance_table)
     }
   };
 }
