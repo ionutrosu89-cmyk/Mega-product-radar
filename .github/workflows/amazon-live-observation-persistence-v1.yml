@@ -5,12 +5,14 @@ on:
     branches: [main]
     paths:
       - 'supabase/migrations/20260831_amazon_live_observation_persistence_v1.sql'
+      - 'supabase/migrations/20260831_amazon_live_observation_url_fix_v1.sql'
       - '.github/workflows/amazon-live-observation-persistence-v1.yml'
       - 'amazon-live-catalog.json'
   push:
     branches: [main]
     paths:
       - 'supabase/migrations/20260831_amazon_live_observation_persistence_v1.sql'
+      - 'supabase/migrations/20260831_amazon_live_observation_url_fix_v1.sql'
       - '.github/workflows/amazon-live-observation-persistence-v1.yml'
 
 permissions:
