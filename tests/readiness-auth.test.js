@@ -57,6 +57,17 @@ test('valid GitHub Actions OIDC token is accepted without a persistent probe sec
   assert.equal(result.principal,'GITHUB_ACTIONS_OIDC');
 });
 
+test('Stripe sandbox billing E2E workflow OIDC is accepted only by its exact workflow ref',async()=>{
+  const token=oidcToken({workflow_ref:'ionutrosu89-cmyk/Mega-product-radar/.github/workflows/stripe-sandbox-billing-e2e.yml@refs/heads/main'});
+  assert.equal(await verifyGitHubActionsOidcToken(token,{fetchImpl:async()=>jwksFetch()}),true);
+  const result=await authorizeReadinessRequest({request:request(token),env:{},fetchImpl:async()=>jwksFetch()});
+  assert.equal(result.ok,true);
+  assert.equal(result.principal,'GITHUB_ACTIONS_OIDC');
+
+  const lookalike=oidcToken({workflow_ref:'ionutrosu89-cmyk/Mega-product-radar/.github/workflows/stripe-sandbox-billing-e2e-copy.yml@refs/heads/main'});
+  assert.equal(await verifyGitHubActionsOidcToken(lookalike,{fetchImpl:async()=>jwksFetch()}),false);
+});
+
 test('immutable GitHub subject format is not assumed when stable signed claims match',async()=>{
   const legacySubject=oidcToken({sub:'repo:ionutrosu89-cmyk/Mega-product-radar:ref:refs/heads/main'});
   const immutableSubject=oidcToken({sub:'repo:ionutrosu89-cmyk@315386782/Mega-product-radar@1329831891:ref:refs/heads/main'});
