@@ -14,10 +14,10 @@ test('deployment acceptance has a distinct operator-visible job and bounded runt
   assert.match(source,/group: paid-beta-deployment-acceptance-/);
 });
 
-test('manual acceptance may supply a public HTTPS base URL without storing it as a secret',async()=>{
+test('manual acceptance may supply a public HTTPS base URL and canonical Netlify target needs no secret',async()=>{
   const source=await workflow();
   assert.match(source,/base_url:\n\s+description: HTTPS deployment URL/);
-  assert.match(source,/inputs\.base_url \|\| vars\.MPR_BASE_URL/);
+  assert.match(source,/inputs\.base_url \|\| vars\.MPR_BASE_URL \|\| 'https:\/\/mega-product-radar\.netlify\.app'/);
   assert.match(source,/Deployment target must use HTTPS/);
 });
 
@@ -36,7 +36,7 @@ test('readiness authentication uses short-lived GitHub OIDC rather than a persis
   assert.doesNotMatch(helper,/console\.log\([^\n]*MPR_READINESS_PROBE_TOKEN/);
 });
 
-test('missing deployment URL still fails closed before protected checks run',async()=>{
+test('deployment target still fails closed if all configured fallbacks are removed',async()=>{
   const source=await workflow();
   assert.match(source,/BLOCKED_CONFIGURATION: deployment URL is missing/);
   assert.match(source,/exit 1/);
