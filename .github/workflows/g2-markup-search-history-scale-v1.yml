@@ -1,0 +1,80 @@
+name: G2 Markup Search History Scale V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/build-markup-search-history-pilot-v1.py'
+      - '.github/workflows/g2-markup-search-history-scale-v1.yml'
+      - 'data/real-products-1000.compact.json'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-markup-search-history-pilot-v1.py'
+      - '.github/workflows/g2-markup-search-history-scale-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned The Markup datasets
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' --output amazon-markup-products.csv.xz
+          curl --fail --location --retry 3 --connect-timeout 20 'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/searches.csv.xz' --output amazon-markup-searches.csv.xz
+          echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
+          echo '0071593ee788681df31110b1490fe2b71243003ece1666a415c06fa3f5cdd985  amazon-markup-searches.csv.xz' | sha256sum --check --strict
+      - name: Build deterministic 2100-product scale window after pilot
+        run: |
+          set -euo pipefail
+          python3 scripts/build-markup-search-history-pilot-v1.py amazon-markup-products.csv.xz amazon-markup-searches.csv.xz data/real-products-1000.compact.json markup-history-scale-rows.json markup-history-scale-receipt.json 2100 25 | tee markup-history-scale-summary.txt
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_PILOT_BUILD_V1" and .pilotRows==2100 and .offset==25 and .eligibleAsinsTwoPlusMetrics==8897 and .observationRowsPlanned>=4200 and .observationRowsPlanned<=6300 and .policy.historicalOnly==true and .policy.observedAtPrecision=="DAY" and .policy.verifiedSales==false and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false and .policy.databaseWrites==0' markup-history-scale-receipt.json >/dev/null
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_ROWS_V1" and (.rows|length)==2100 and ([.rows[]|select(([has("price"),has("rating"),has("reviewCount")]|map(select(.==true))|length)<2)]|length)==0' markup-history-scale-rows.json >/dev/null
+      - name: Split into bounded 250-row chunks
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib
+          data=json.load(open('markup-history-scale-rows.json'))['rows']
+          out=pathlib.Path('chunks'); out.mkdir()
+          chunks=[data[i:i+250] for i in range(0,len(data),250)]
+          assert len(data)==2100 and len(chunks)==9 and all(1<=len(c)<=250 for c in chunks)
+          for i,c in enumerate(chunks):
+              (out/f'chunk-{i:02d}.json').write_text(json.dumps({'rows':c},separators=(',',':'))+'\n')
+          print(json.dumps({'rows':len(data),'chunks':len(chunks),'sizes':[len(c) for c in chunks]}))
+          PY
+      - name: Persist scale through exact-scope GitHub OIDC
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-markup-history-v1
+        run: |
+          set -euo pipefail
+          : > scale-receipts.ndjson
+          OIDC_JSON="$(curl --fail --silent --show-error -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-markup-history")"
+          TOKEN="$(jq -er '.value' <<<"$OIDC_JSON")"
+          for f in chunks/chunk-*.json; do
+            jq -c --arg sha "$GITHUB_SHA" '{action:"persist",expectedSha:$sha,rows:.rows}' "$f" > persist-request.json
+            receipt="$(curl --fail-with-body --silent --show-error -X POST "$EDGE_URL" -H "Authorization: Bearer $TOKEN" -H 'content-type: application/json' --data-binary @persist-request.json)"
+            echo "$receipt" | tee -a scale-receipts.ndjson
+            jq -e --arg sha "$GITHUB_SHA" '.ok==true and .schema=="MPR_AMAZON_MARKUP_HISTORY_PERSIST_RECEIPT_V1" and .deploymentSha==$sha and .receipt.ok==true and .receipt.matchedExactAsin==.receipt.inputRows and .receipt.sourceKey=="the_markup_amazon_searches_2021" and .receipt.verifiedSales==false and .receipt.providerSpendEur==0 and .receipt.paidCallsTriggered==0 and .receipt.purchaseAuthorized==false' <<<"$receipt" >/dev/null
+          done
+          jq -s '{schemaVersion:"MPR_MARKUP_SEARCH_HISTORY_SCALE_PERSIST_V1",batches:length,inputRows:(map(.receipt.inputRows)|add),matchedExactAsin:(map(.receipt.matchedExactAsin)|add),observationRowsInserted:(map(.receipt.observationRowsInserted)|add),providerSpendEur:(map(.receipt.providerSpendEur)|add),paidCallsTriggered:(map(.receipt.paidCallsTriggered)|add),purchaseAuthorized:(map(.receipt.purchaseAuthorized)|any)}' scale-receipts.ndjson | tee markup-history-scale-persist-receipt.json
+          PLANNED="$(jq -r '.observationRowsPlanned' markup-history-scale-receipt.json)"
+          jq -e --argjson planned "$PLANNED" '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_SCALE_PERSIST_V1" and .batches==9 and .inputRows==2100 and .matchedExactAsin==2100 and .observationRowsInserted==$planned and .providerSpendEur==0 and .paidCallsTriggered==0 and .purchaseAuthorized==false' markup-history-scale-persist-receipt.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g2-markup-search-history-scale-${{ github.sha }}
+          path: |
+            markup-history-scale-receipt.json
+            markup-history-scale-summary.txt
+            markup-history-scale-persist-receipt.json
+            scale-receipts.ndjson
+          if-no-files-found: ignore
+          retention-days: 30
