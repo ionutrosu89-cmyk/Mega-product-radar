@@ -12,6 +12,7 @@
     "verify:package-manager": "node scripts/check-package-manager.mjs",
     "verify:paid-beta-deployment": "node scripts/verify-paid-beta-deployment.mjs",
     "verify:billing-journey-evidence": "node scripts/verify-billing-journey-evidence.mjs",
+    "verify:stripe-sandbox-e2e": "node scripts/run-stripe-sandbox-e2e.mjs",
     "capture:billing-journey-checkpoint": "node scripts/capture-billing-journey-checkpoint.mjs",
     "canonicalize:observations": "node scripts/canonicalize-observations.mjs",
     "ingest:audit": "node scripts/run-ingestion-pipeline.mjs",
