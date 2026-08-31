@@ -11,9 +11,9 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
-      - name: Probe public Romania surfaces without writes
+      - name: Probe public Romania surfaces from GitHub runner
         shell: bash
         run: |
           set -euo pipefail
@@ -21,12 +21,12 @@ jobs:
           : > surface-probe.tsv
           probe() {
             name="$1"; url="$2"
-            code="$(curl -L -sS -A "$UA" --connect-timeout 10 --max-time 20 -o body.html -w '%{http_code}' "$url" || true)"
+            rm -f body.html
+            code="$(curl --http1.1 -L -sS -A "$UA" --connect-timeout 10 --max-time 20 -o body.html -w '%{http_code}' "$url" || true)"
             bytes="$(wc -c < body.html 2>/dev/null || echo 0)"
-            final="$(curl -L -sS -A "$UA" --connect-timeout 10 --max-time 20 -o /dev/null -w '%{url_effective}' "$url" || true)"
             blocked=false
-            if grep -Eqi 'captcha|access denied|verify you are human|robot|temporarily unavailable' body.html 2>/dev/null; then blocked=true; fi
-            printf '%s\t%s\t%s\t%s\t%s\n' "$name" "$code" "$bytes" "$blocked" "$final" | tee -a surface-probe.tsv
+            if grep -Eqi 'captcha|access denied|verify you are human|robot|temporarily unavailable|cloudflare' body.html 2>/dev/null; then blocked=true; fi
+            printf '%s\t%s\t%s\t%s\n' "$name" "$code" "$bytes" "$blocked" | tee -a surface-probe.tsv
           }
           probe TRENDYOL_RO 'https://www.trendyol.com/ro/sr?q=weather%20station'
           probe TRENDYOL_GLOBAL 'https://www.trendyol.com/sr?q=weather%20station'
@@ -34,11 +34,20 @@ jobs:
           probe CEL_RO 'https://www.cel.ro/cauta/weather+station/'
           probe ALTEX_RO 'https://altex.ro/cauta/?q=weather%20station'
           probe EMAG_RO 'https://www.emag.ro/search/weather%20station'
-          echo '--- machine summary ---'
-          cat surface-probe.tsv
+      - name: Probe same surfaces through Supabase Edge egress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 100 \
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-edge-egress-probe-v1' \
+            -o edge-probe.json
+          jq . edge-probe.json
+          jq -e '.ok==true and .schemaVersion=="MPR_ROMANIA_EDGE_EGRESS_PROBE_V1" and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' edge-probe.json >/dev/null
       - name: Preserve probe evidence
         uses: actions/upload-artifact@v4
         with:
           name: g2-romania-public-surface-probe-${{ github.sha }}
-          path: surface-probe.tsv
+          path: |
+            surface-probe.tsv
+            edge-probe.json
           retention-days: 7
