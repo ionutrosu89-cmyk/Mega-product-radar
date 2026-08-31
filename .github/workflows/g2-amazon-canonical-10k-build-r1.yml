@@ -1,0 +1,58 @@
+name: G2 Amazon Canonical 10K Build R1
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-amazon-canonical-10k-r1.py'
+      - '.github/workflows/g2-amazon-canonical-10k-build-r1.yml'
+      - 'data/real-products-1000.compact.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned licensed public Amazon dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' \
+            --output amazon-markup-products.csv.xz
+          echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
+      - name: Build deterministic 9K expansion and 10K identity set
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build-amazon-canonical-10k-r1.py \
+            amazon-markup-products.csv.xz \
+            data/real-products-1000.compact.json \
+            amazon-canonical-new-9000-r1.json \
+            amazon-canonical-10k-build-receipt-r1.json | tee amazon-canonical-10k-build-summary.txt
+          jq -e '
+            .schemaVersion == "MPR_AMAZON_CANONICAL_SCALE_9000_R1" and
+            .currentCount == 1000 and
+            .newCount == 9000 and
+            .combinedCount == 10000 and
+            (.newRowsSha256 | length) == 64 and
+            (.combinedAsinSetSha256 | length) == 64 and
+            .policy.providerSpendEur == 0 and
+            .policy.paidCallsTriggered == 0 and
+            .policy.purchaseAuthorized == false and
+            .policy.databaseWrites == 0
+          ' amazon-canonical-10k-build-receipt-r1.json >/dev/null
+          jq -e '.schemaVersion == "MPR_AMAZON_CANONICAL_SCALE_9000_R1" and (.rows|length)==9000' amazon-canonical-new-9000-r1.json >/dev/null
+      - name: Preserve exact 10K build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-amazon-canonical-10k-build-r1-${{ github.sha }}
+          path: |
+            amazon-canonical-new-9000-r1.json
+            amazon-canonical-10k-build-receipt-r1.json
+            amazon-canonical-10k-build-summary.txt
+          retention-days: 30
