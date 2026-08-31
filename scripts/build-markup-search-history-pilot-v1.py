@@ -20,7 +20,11 @@ with lzma.open(PRODUCTS,'rt',encoding='utf-8-sig',newline='') as f:
         a=str(r.get('asin') or '').strip().upper(); t=str(r.get('title') or '').strip()
         if ASIN_RE.match(a) and t and a not in current and a not in candidates: candidates[a]=t
 selected_asins=sorted(candidates)[:9000]
-selected_digest=hashlib.sha256(('\n'.join(selected_asins)).encode()).hexdigest()
+
+def canonical_identity_row(asin):
+    x={'platform':'AMAZON','externalId':asin,'title':candidates[asin],'brand':None,'categoryLabel':None,'market':'US','sourceUrl':None,'evidenceClass':'HISTORICAL_PUBLIC_RESEARCH_DATASET','sourceDataset':'the-markup/investigation-amazon-brands:data/output/datasets/products.csv.xz','sourceSha256':PRODUCTS_SHA,'verifiedSales':False,'freshnessClass':'HISTORICAL_IDENTITY_BOOTSTRAP_NOT_LIVE'}
+    return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+selected_digest=hashlib.sha256('\n'.join(canonical_identity_row(a) for a in selected_asins).encode()).hexdigest()
 if selected_digest!=SELECTED9K_SHA: raise SystemExit('SELECTED9K_DIGEST_MISMATCH:'+selected_digest)
 selected=set(selected_asins)
 
@@ -49,8 +53,6 @@ with lzma.open(SEARCHES,'rt',encoding='utf-8-sig',newline='') as f:
         dt=capture_date(r.get('filename'))
         if not dt: date_missing+=1; continue
         price=num(r.get('price')); rating=num(r.get('stars')); reviews=num(r.get('reviews'))
-        metrics=sum(x is not None for x in (price,rating,reviews))
-        if metrics<2: continue
         if price is not None and price<=0: price=None
         if rating is not None and not (0<=rating<=5): rating=None
         if reviews is not None and reviews<0: reviews=None
