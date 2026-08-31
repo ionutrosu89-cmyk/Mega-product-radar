@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-import csv, json, hashlib, sys
+import csv, json, hashlib, sys, lzma, gzip
 from pathlib import Path
 
-# Public product datasets can contain long description/features fields. Raise the
-# parser ceiling only; identity and schema gates below remain unchanged.
 csv.field_size_limit(16 * 1024 * 1024)
 
 SOURCE = Path(sys.argv[1] if len(sys.argv) > 1 else 'amazon-public-candidate.csv')
@@ -27,16 +25,32 @@ current_asins = {str(r[ix_asin]).strip().upper() for r in current.get('products'
 if len(current_asins) != 1000:
     raise SystemExit(f'CURRENT_ASIN_COUNT_REJECTED:{len(current_asins)}')
 
-with SOURCE.open('r', encoding='utf-8-sig', newline='') as f:
+def open_text(path):
+    suffix = path.suffix.lower()
+    if suffix == '.xz':
+        return lzma.open(path, 'rt', encoding='utf-8-sig', newline='')
+    if suffix == '.gz':
+        return gzip.open(path, 'rt', encoding='utf-8-sig', newline='')
+    return path.open('r', encoding='utf-8-sig', newline='')
+
+def find_key(normalized, candidates):
+    for candidate in candidates:
+        if candidate in normalized:
+            return normalized[candidate]
+    return None
+
+with open_text(SOURCE) as f:
     reader = csv.DictReader(f)
     headers = reader.fieldnames or []
     normalized = {h.strip().lower(): h for h in headers}
-    asin_key = next((normalized[k] for k in ['asin','product_asin','product_id'] if k in normalized), None)
-    title_key = next((normalized[k] for k in ['title','product_title','name'] if k in normalized), None)
-    url_key = next((normalized[k] for k in ['url','product_url'] if k in normalized), None)
-    category_key = next((normalized[k] for k in ['categories','category','breadcrumbs'] if k in normalized), None)
-    if not asin_key or not title_key:
-        raise SystemExit('SOURCE_REQUIRED_FIELDS_MISSING')
+    asin_key = find_key(normalized, ['asin','product_asin','product_id','asin1','asin_1'])
+    title_key = find_key(normalized, ['title','product_title','name','product_name'])
+    url_key = find_key(normalized, ['url','product_url','page_url'])
+    category_key = find_key(normalized, ['categories','category','breadcrumbs','category_name'])
+    if not asin_key:
+        raise SystemExit('SOURCE_ASIN_FIELD_MISSING:' + ','.join(headers[:50]))
+    if not title_key:
+        raise SystemExit('SOURCE_TITLE_FIELD_MISSING:' + ','.join(headers[:50]))
 
     row_count = 0
     invalid_asin_rows = 0
@@ -73,6 +87,9 @@ receipt = {
     'status': status,
     'sourceFile': SOURCE.name,
     'sourceSha256': source_sha256,
+    'sourceHeaders': headers,
+    'detectedAsinField': asin_key,
+    'detectedTitleField': title_key,
     'sourceRowCount': row_count,
     'sourceDistinctValidAsins': len(seen),
     'sourceInvalidRows': invalid_asin_rows,
