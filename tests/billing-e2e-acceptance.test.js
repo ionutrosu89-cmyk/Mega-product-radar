@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {createBillingE2eAcceptanceHandler} from '../netlify/functions/billing-e2e-acceptance.mjs';
+import {createBillingE2eAcceptanceHandler,resolveDeploymentRef} from '../netlify/functions/billing-e2e-acceptance.mjs';
 
 const workspaceId='11111111-1111-4111-8111-111111111111';
 const deploymentRef='abcdef1234567890';
+const workflowSha='1234567890abcdef1234567890abcdef12345678';
 const probe='readiness-probe-secret';
 const baseEnv={
   SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service',
@@ -47,6 +48,23 @@ test('FREE baseline is captured server-side only after sandbox billing and runti
   assert.ok(seen.some(url=>url.includes(`deployment_ref=eq.${deploymentRef}`)));
   assert.ok(seen.some(url=>url.includes('/rpc/mpr_billing_runtime_readiness')));
   assert.ok(seen.filter(url=>url.includes('api.stripe.com/v1/prices/')).length===3);
+});
+
+test('OIDC-authenticated workflow SHA is a deployment-ref fallback when Netlify runtime identity is absent',()=>{
+  const request=new Request('https://mpr.example/api/internal/billing-e2e-acceptance',{headers:{'x-mpr-deployment-ref':workflowSha}});
+  assert.equal(resolveDeploymentRef({env:{},request,authorization:{principal:'GITHUB_ACTIONS_OIDC'}}),workflowSha);
+});
+
+test('deployment-ref header is ignored for non-OIDC principals and malformed SHAs',()=>{
+  const validRequest=new Request('https://mpr.example',{headers:{'x-mpr-deployment-ref':workflowSha}});
+  assert.equal(resolveDeploymentRef({env:{},request:validRequest,authorization:{principal:'READINESS_PROBE'}}),'');
+  const malformedRequest=new Request('https://mpr.example',{headers:{'x-mpr-deployment-ref':'not-a-sha'}});
+  assert.equal(resolveDeploymentRef({env:{},request:malformedRequest,authorization:{principal:'GITHUB_ACTIONS_OIDC'}}),'');
+});
+
+test('configured Netlify deployment identity remains authoritative over workflow header',()=>{
+  const request=new Request('https://mpr.example',{headers:{'x-mpr-deployment-ref':workflowSha}});
+  assert.equal(resolveDeploymentRef({env:{COMMIT_REF:deploymentRef},request,authorization:{principal:'GITHUB_ACTIONS_OIDC'}}),deploymentRef);
 });
 
 test('acceptance refuses to start without a deployed release identity',async()=>{
