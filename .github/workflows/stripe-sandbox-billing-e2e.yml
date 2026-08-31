@@ -57,6 +57,9 @@ jobs:
       - name: Verify sandbox deployment preflight
         run: npm run verify:paid-beta-deployment
 
+      - name: Ensure verified FREE baseline for this deployment SHA
+        run: node scripts/ensure-free-baseline.mjs
+
       - name: Run resumable Stripe sandbox journey
         run: npm run verify:stripe-sandbox-e2e
 
