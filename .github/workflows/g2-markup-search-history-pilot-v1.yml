@@ -1,0 +1,65 @@
+name: G2 Markup Search History Pilot V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/build-markup-search-history-pilot-v1.py'
+      - 'supabase/migrations/20260831_amazon_markup_search_history_v1.sql'
+      - 'supabase/functions/github-oidc-amazon-markup-history-v1/index.ts'
+      - '.github/workflows/g2-markup-search-history-pilot-v1.yml'
+      - 'data/real-products-1000.compact.json'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-markup-search-history-pilot-v1.py'
+      - 'supabase/migrations/20260831_amazon_markup_search_history_v1.sql'
+      - 'supabase/functions/github-oidc-amazon-markup-history-v1/index.ts'
+      - '.github/workflows/g2-markup-search-history-pilot-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned The Markup datasets
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' --output amazon-markup-products.csv.xz
+          curl --fail --location --retry 3 --connect-timeout 20 'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/searches.csv.xz' --output amazon-markup-searches.csv.xz
+          echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
+          echo '0071593ee788681df31110b1490fe2b71243003ece1666a415c06fa3f5cdd985  amazon-markup-searches.csv.xz' | sha256sum --check --strict
+      - name: Build deterministic 25-product historical pilot
+        run: |
+          set -euo pipefail
+          python3 scripts/build-markup-search-history-pilot-v1.py amazon-markup-products.csv.xz amazon-markup-searches.csv.xz data/real-products-1000.compact.json markup-history-pilot-rows.json markup-history-pilot-receipt.json 25 | tee markup-history-pilot-summary.txt
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_PILOT_BUILD_V1" and .pilotRows==25 and .eligibleAsinsTwoPlusMetrics>=3000 and .policy.historicalOnly==true and .policy.observedAtPrecision=="DAY" and .policy.verifiedSales==false and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false and .policy.databaseWrites==0' markup-history-pilot-receipt.json >/dev/null
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_ROWS_V1" and (.rows|length)==25 and ([.rows[]|select(([has("price"),has("rating"),has("reviewCount")]|map(select(.==true))|length)<2)]|length)==0' markup-history-pilot-rows.json >/dev/null
+      - name: Persist pilot through exact-scope GitHub OIDC
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        id: oidc
+        env:
+          EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-markup-history-v1
+        run: |
+          set -euo pipefail
+          OIDC_JSON="$(curl --fail --silent --show-error -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-markup-history")"
+          TOKEN="$(jq -er '.value' <<<"$OIDC_JSON")"
+          jq -c --arg sha "$GITHUB_SHA" '{action:"persist",expectedSha:$sha,rows:.rows}' markup-history-pilot-rows.json > persist-request.json
+          curl --fail-with-body --silent --show-error -X POST "$EDGE_URL" -H "Authorization: Bearer $TOKEN" -H 'content-type: application/json' --data-binary @persist-request.json | tee markup-history-persist-receipt.json
+          jq -e '.ok==true and .schema=="MPR_AMAZON_MARKUP_HISTORY_PERSIST_RECEIPT_V1" and .deploymentSha==env.GITHUB_SHA and .receipt.ok==true and .receipt.inputRows==25 and .receipt.matchedExactAsin==25 and .receipt.sourceKey=="the_markup_amazon_searches_2021" and .receipt.verifiedSales==false and .receipt.providerSpendEur==0 and .receipt.paidCallsTriggered==0 and .receipt.purchaseAuthorized==false' markup-history-persist-receipt.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g2-markup-search-history-pilot-${{ github.sha }}
+          path: |
+            markup-history-pilot-rows.json
+            markup-history-pilot-receipt.json
+            markup-history-pilot-summary.txt
+            markup-history-persist-receipt.json
+          if-no-files-found: ignore
+          retention-days: 30
