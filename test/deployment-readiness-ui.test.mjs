@@ -50,6 +50,18 @@ test('billing E2E card exposes progress only and keeps deployment identity serve
   assert.doesNotMatch(js,/deploymentRef|COMMIT_REF|DEPLOY_ID/);
 });
 
+test('admin checkpoint action captures only the next server-verified state and cannot start billing',async()=>{
+  const html=await readFile('deployment-readiness.html','utf8');
+  const js=await readFile('deployment-readiness.js','utf8');
+  assert.match(html,/id="captureCheckpoint" disabled/);
+  assert.match(html,/Capturarea nu pornește Checkout, nu face plată și nu modifică entitlement-ul/);
+  assert.match(js,/const stage=latestE2e\?\.nextStage/);
+  assert.match(js,/method:'POST'/);
+  assert.match(js,/body:JSON\.stringify\(\{stage\}\)/);
+  assert.doesNotMatch(js,/billing\/checkout|billing\/change-plan|billing\/cancel|billing\/resume/);
+  assert.doesNotMatch(js,/workspacePlan\s*=|localStorage.*plan/i);
+});
+
 test('interactive guide lists every required Stripe and Supabase variable',async()=>{
   const js=await readFile('deployment-readiness.js','utf8');
   for(const key of ['STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET','STRIPE_PRICE_DISCOVER','STRIPE_PRICE_RADAR','STRIPE_PRICE_LAUNCH','SUPABASE_SERVICE_ROLE_KEY'])assert.match(js,new RegExp(key));
