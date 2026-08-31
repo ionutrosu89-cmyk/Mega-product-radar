@@ -8,7 +8,10 @@ const GITHUB_REPOSITORY='ionutrosu89-cmyk/Mega-product-radar';
 const GITHUB_REPOSITORY_ID='1329831891';
 const GITHUB_REPOSITORY_OWNER_ID='315386782';
 const GITHUB_MAIN_REF='refs/heads/main';
-const GITHUB_WORKFLOW_REF=`${GITHUB_REPOSITORY}/.github/workflows/paid-beta-deployment-acceptance.yml@${GITHUB_MAIN_REF}`;
+const GITHUB_ALLOWED_WORKFLOW_REFS=new Set([
+  `${GITHUB_REPOSITORY}/.github/workflows/paid-beta-deployment-acceptance.yml@${GITHUB_MAIN_REF}`,
+  `${GITHUB_REPOSITORY}/.github/workflows/stripe-sandbox-billing-e2e.yml@${GITHUB_MAIN_REF}`
+]);
 const GITHUB_ALLOWED_EVENTS=new Set(['push','workflow_dispatch']);
 const CLOCK_SKEW_SECONDS=60;
 
@@ -47,7 +50,7 @@ function claimsAreAllowed(payload,nowSeconds){
   if(String(payload.repository_id||'')!==GITHUB_REPOSITORY_ID)return false;
   if(String(payload.repository_owner_id||'')!==GITHUB_REPOSITORY_OWNER_ID)return false;
   if(payload.ref!==GITHUB_MAIN_REF)return false;
-  if(payload.workflow_ref!==GITHUB_WORKFLOW_REF)return false;
+  if(!GITHUB_ALLOWED_WORKFLOW_REFS.has(payload.workflow_ref))return false;
   if(!GITHUB_ALLOWED_EVENTS.has(payload.event_name))return false;
   if(!Number.isFinite(payload.exp)||payload.exp<nowSeconds-CLOCK_SKEW_SECONDS)return false;
   if(Number.isFinite(payload.nbf)&&payload.nbf>nowSeconds+CLOCK_SKEW_SECONDS)return false;
