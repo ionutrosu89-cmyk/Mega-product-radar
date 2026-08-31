@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "MPR_ROMANIA_EVIDENCE_CONTRACT_R1_V1",
+  "type": "object",
+  "required": ["canonicalProductId","surface","sourceName","observedAt","evidenceClass","freshnessClass","comparabilityStatus","comparabilityConfidence","manualReviewed","comparableScopeConfirmed","salesEvidence"],
+  "properties": {
+    "canonicalProductId": {"type":"string","minLength":1},
+    "surface": {"enum":["EMAG_RO","TRENDYOL_RO","ROMANIA_RETAIL_WEB"]},
+    "sourceName": {"type":"string","minLength":1},
+    "sourceUrl": {"type":["string","null"]},
+    "rawRef": {"type":["string","null"]},
+    "observedAt": {"type":"string","format":"date-time"},
+    "evidenceClass": {"enum":["DIRECT_MARKETPLACE_PRODUCT_PRESENCE","DIRECT_MARKETPLACE_QUERY_SURFACE","MANUAL_REVIEWED_MARKET_WIDE","DIRECT_RETAILER_PRODUCT_PRESENCE","DIRECT_RETAILER_LISTING_PRICE","SECONDARY_PUBLIC_SEARCH_INDEX","UNKNOWN"]},
+    "freshnessClass": {"enum":["LIVE_OR_CURRENT","RECENT","AGING","STALE","HISTORICAL"]},
+    "comparabilityStatus": {"enum":["EXACT_COMPARABLE","STRONG_COMPARABLE","PARTIAL_COMPARABLE","NON_COMPARABLE","UNKNOWN"]},
+    "comparabilityConfidence": {"type":"number","minimum":0,"maximum":1},
+    "identitySignals": {"type":"array","items":{"type":"string"}},
+    "variantSignals": {"type":"array","items":{"type":"string"}},
+    "listingCount": {"type":["integer","null"],"minimum":0},
+    "sellerCount": {"type":["integer","null"],"minimum":0},
+    "countSemantics": {"enum":["EXACT","LOWER_BOUND","QUERY_SURFACE","UNKNOWN"]},
+    "priceRon": {"type":["number","null"],"minimum":0},
+    "manualReviewed": {"type":"boolean"},
+    "comparableScopeConfirmed": {"type":"boolean"},
+    "salesEvidence": {"const":"NOT_VERIFIED_SALES"},
+    "notes": {"type":["string","null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"comparabilityStatus":{"const":"EXACT_COMPARABLE"}}},
+      "then": {"properties":{"manualReviewed":{"const":true},"comparableScopeConfirmed":{"const":true}}}
+    },
+    {
+      "if": {"properties":{"surface":{"const":"ROMANIA_RETAIL_WEB"}}},
+      "then": {"not":{"properties":{"evidenceClass":{"const":"MANUAL_REVIEWED_MARKET_WIDE"}}}}
+    }
+  ],
+  "additionalProperties": false
+}
