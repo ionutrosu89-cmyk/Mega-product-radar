@@ -74,8 +74,9 @@ begin
 end;
 $function$;
 
--- Keep the existing hourly cadence, but route it through the queue-v2-aware scheduler.
-update cron.job
-set command = 'select public.enqueue_data_refreshes_v4();'
-where jobid = 1
-  and command = 'select public.enqueue_data_refreshes_v3();';
+-- Keep the existing named hourly job and cadence, but update it through pg_cron's supported API.
+select cron.schedule(
+  'mpr_v3_refresh_queue_hourly',
+  '5 * * * *',
+  'select public.enqueue_data_refreshes_v4();'
+);
