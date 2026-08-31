@@ -1,0 +1,55 @@
+name: G2 Amazon 10K Public Source Preflight
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/preflight-amazon-10k-public-source.py'
+      - '.github/workflows/g2-amazon-10k-public-source-preflight.yml'
+      - 'data/real-products-1000.compact.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch licensed public Amazon candidate dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' \
+            --output amazon-markup-products.csv.xz
+          test -s amazon-markup-products.csv.xz
+          sha256sum amazon-markup-products.csv.xz | tee amazon-markup-source-sha256.txt
+      - name: Preflight source against current 1K exact-ASIN set
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/preflight-amazon-10k-public-source.py \
+            amazon-markup-products.csv.xz \
+            data/real-products-1000.compact.json \
+            amazon-10k-source-preflight.json | tee amazon-10k-source-preflight-summary.txt
+          jq -e '
+            .schemaVersion == "MPR_AMAZON_10K_PUBLIC_SOURCE_PREFLIGHT_V1" and
+            .status == "QUALIFIED_FOR_10K_BUILD" and
+            .newDistinctAsins >= 9000 and
+            .eligibleNewAsinsForNextBuild == 9000 and
+            .policy.providerSpendEur == 0 and
+            .policy.paidCallsTriggered == 0 and
+            .policy.purchaseAuthorized == false and
+            .policy.databaseWrites == 0
+          ' amazon-10k-source-preflight.json >/dev/null
+      - name: Preserve exact preflight evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-amazon-10k-public-source-preflight-${{ github.sha }}
+          path: |
+            amazon-10k-source-preflight.json
+            amazon-10k-source-preflight-summary.txt
+            amazon-markup-source-sha256.txt
+          retention-days: 30
