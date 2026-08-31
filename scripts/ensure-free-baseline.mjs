@@ -1,15 +1,21 @@
 const text=value=>String(value??'').trim();
+const GITHUB_SHA_RE=/^[0-9a-f]{40}$/i;
 
-export async function ensureFreeBaseline({baseUrl,token,fetchImpl=fetch}={}){
+export async function ensureFreeBaseline({baseUrl,token,deploymentRef,fetchImpl=fetch}={}){
   const root=text(baseUrl).replace(/\/+$/,'');
   const credential=text(token);
+  const releaseRef=text(deploymentRef);
   if(!root)throw new Error('MPR_BASE_URL is required');
   if(!credential)throw new Error('MPR_READINESS_PROBE_TOKEN is required');
   const url=`${root}/api/internal/billing-e2e-acceptance`;
   const headers={authorization:`Bearer ${credential}`,accept:'application/json'};
+  if(releaseRef){
+    if(!GITHUB_SHA_RE.test(releaseRef))throw new Error('Deployment ref must be a full GitHub commit SHA');
+    headers['x-mpr-deployment-ref']=releaseRef;
+  }
   const currentResponse=await fetchImpl(url,{headers});
   const current=await currentResponse.json().catch(()=>({}));
-  if(!currentResponse.ok||current?.ok!==true)throw new Error(`Billing E2E acceptance lookup failed (${currentResponse.status})`);
+  if(!currentResponse.ok||current?.ok!==true)throw new Error(`Billing E2E acceptance lookup failed (${currentResponse.status} ${current?.code||'UNKNOWN'})`);
 
   const count=Number(current.checkpointCount)||0;
   if(count>0||current.verdict==='GO'){
@@ -26,7 +32,7 @@ export async function ensureFreeBaseline({baseUrl,token,fetchImpl=fetch}={}){
 }
 
 if(import.meta.url===`file://${process.argv[1]}`){
-  ensureFreeBaseline({baseUrl:process.env.MPR_BASE_URL,token:process.env.MPR_READINESS_PROBE_TOKEN})
+  ensureFreeBaseline({baseUrl:process.env.MPR_BASE_URL,token:process.env.MPR_READINESS_PROBE_TOKEN,deploymentRef:process.env.GITHUB_SHA})
     .then(result=>{console.log(JSON.stringify(result,null,2));})
     .catch(error=>{console.error(String(error?.message||error));process.exit(1);});
 }
