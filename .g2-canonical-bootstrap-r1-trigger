@@ -1,7 +1,8 @@
 approved_at=2026-08-31
 source_digest=d555b25edcd604f29cca36d0f3651026349f332d1931569f809ec95c6cb4afb6
-purpose=G2 exact-source canonical bootstrap round 1 via GitHub OIDC
-followup=Persist 997 price + 1000 rating + 1000 review-count historical observations
+purpose=G2 historical Amazon observations only
+retry_reason=remove redundant canonical bootstrap action rejected by edge v2
 freshness=HISTORICAL_BOOTSTRAP_NOT_LIVE
+expected_observations=2997
 provider_spend=0
 purchase_authorized=false
