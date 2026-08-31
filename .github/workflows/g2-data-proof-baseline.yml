@@ -1,0 +1,48 @@
+name: G2 Data Proof Baseline
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/p2-data-inventory.mjs'
+      - 'scripts/measure-p2-source-baseline.mjs'
+      - '.github/workflows/g2-data-proof-baseline.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    name: g2-data-proof-baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Measure P2 inventory
+        run: npm run p2:inventory | tee p2-inventory.txt
+
+      - name: Measure P2 source baseline
+        run: npm run measure:p2 | tee p2-source-baseline.txt
+
+      - name: Preserve baseline evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-data-proof-baseline-${{ github.sha }}
+          path: |
+            p2-inventory.txt
+            p2-source-baseline.txt
+          if-no-files-found: error
+          retention-days: 30
