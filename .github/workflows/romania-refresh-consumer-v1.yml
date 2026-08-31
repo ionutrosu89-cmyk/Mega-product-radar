@@ -14,6 +14,7 @@ on:
       - '.github/workflows/romania-refresh-consumer-v1.yml'
       - 'scripts/run-romania-refresh-consumer-v1.mjs'
       - 'supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql'
+      - 'supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql'
 
 permissions:
   contents: read
@@ -134,3 +135,10 @@ jobs:
           grep -q 'missingAsZero == false' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
           ! grep -Eqi 'paid_calls_allowed[^f]*true|purchase_authorized[^f]*true' supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
+          grep -q 'evidence_surface text;' supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          grep -q 'evidence_observed_at timestamptz;' supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          ! grep -Eq '(^|[[:space:]])surface text;' supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          ! grep -Eq '(^|[[:space:]])observed_at timestamptz;' supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          grep -q "'NOT_VERIFIED_SALES'" supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          grep -q "'purchaseAuthorized',false" supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
+          grep -q "'providerSpendEur',0" supabase/migrations/20260901_romania_refresh_conflict_target_ambiguity_fix.sql
