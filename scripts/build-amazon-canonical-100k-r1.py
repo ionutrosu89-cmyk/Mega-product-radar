@@ -77,6 +77,37 @@ def row_for(asin):
 def canonical_row(row):
     return json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
 
+def merkle_parent(left_hex, right_hex):
+    return hashlib.sha256(bytes.fromhex(left_hex) + bytes.fromhex(right_hex)).hexdigest()
+
+def build_merkle(leaves):
+    if not leaves:
+        raise SystemExit('MERKLE_LEAVES_EMPTY')
+    levels = [list(leaves)]
+    while len(levels[-1]) > 1:
+        cur = levels[-1]
+        nxt = []
+        for i in range(0, len(cur), 2):
+            left = cur[i]
+            right = cur[i+1] if i+1 < len(cur) else left
+            nxt.append(merkle_parent(left, right))
+        levels.append(nxt)
+    proofs = []
+    for original_index in range(len(leaves)):
+        idx = original_index
+        proof = []
+        for level in levels[:-1]:
+            sibling_idx = idx ^ 1
+            if sibling_idx >= len(level):
+                sibling_idx = idx
+            proof.append({
+                'position': 'LEFT' if sibling_idx < idx else 'RIGHT',
+                'sha256': level[sibling_idx]
+            })
+            idx //= 2
+        proofs.append(proof)
+    return levels[-1][0], proofs
+
 prior_rows = [row_for(a) for a in prior_asins]
 prior_digest = hashlib.sha256(('\n'.join(canonical_row(r) for r in prior_rows)).encode('utf-8')).hexdigest()
 if prior_digest != EXPECTED_PRIOR_9K_ROWS_SHA256:
@@ -92,6 +123,9 @@ batches = [rows[i:i+BATCH_SIZE] for i in range(0, len(rows), BATCH_SIZE)]
 batch_digests = [hashlib.sha256(('\n'.join(canonical_row(r) for r in batch)).encode('utf-8')).hexdigest() for batch in batches]
 if len(batches) != 360 or any(len(b) != BATCH_SIZE for b in batches):
     raise SystemExit('BATCH_CONTRACT_REJECTED')
+merkle_root, merkle_proofs = build_merkle(batch_digests)
+if len(merkle_proofs) != len(batch_digests):
+    raise SystemExit('MERKLE_PROOF_COUNT_REJECTED')
 
 payload = {
     'schemaVersion': 'MPR_AMAZON_CANONICAL_SCALE_100K_R1',
@@ -115,6 +149,8 @@ payload = {
     'newRowsSha256': new_digest,
     'combinedAsinSetSha256': combined_digest,
     'batchDigestsSha256': batch_digests,
+    'batchMerkleRootSha256': merkle_root,
+    'batchMerkleProofs': merkle_proofs,
     'firstSelectedAsin': selected_asins[0],
     'lastSelectedAsin': selected_asins[-1],
     'policy': {
@@ -130,4 +166,4 @@ payload = {
 }
 OUT_ROWS.write_text(json.dumps({'schemaVersion':'MPR_AMAZON_CANONICAL_SCALE_100K_R1','rows':rows}, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
 OUT_RECEIPT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-print(json.dumps(payload, ensure_ascii=False, indent=2))
+print(json.dumps({k:v for k,v in payload.items() if k not in ('batchDigestsSha256','batchMerkleProofs')}, ensure_ascii=False, indent=2))
