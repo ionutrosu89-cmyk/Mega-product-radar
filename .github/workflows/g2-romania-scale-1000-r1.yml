@@ -1,0 +1,36 @@
+name: G2 Romania Scale 1000 R1
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-romania-scale-1000-r1.mjs'
+      - 'data/real-products-1000.compact.json'
+      - '.github/workflows/g2-romania-scale-1000-r1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build 1K x 3 Romania scale matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-romania-scale-1000-r1.mjs data/real-products-1000.compact.json romania-scale-1000-r1.json romania-scale-1000-summary.json
+          jq -e '.schemaVersion == "MPR_ROMANIA_SCALE_1000_R1_V1" and .productCount == 1000 and .surfaceCount == 3 and .slotCount == 3000 and .unknownSlots == 3000 and .unknownRate == 1 and .providerSpendEur == 0 and .paidCallsTriggered == 0 and .purchaseAuthorized == false' romania-scale-1000-summary.json >/dev/null
+      - name: Preserve scale evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-romania-scale-1000-r1-${{ github.sha }}
+          path: |
+            romania-scale-1000-r1.json
+            romania-scale-1000-summary.json
+          retention-days: 30
