@@ -43,6 +43,15 @@ jobs:
             -o edge-probe.json
           jq . edge-probe.json
           jq -e '.ok==true and .schemaVersion=="MPR_ROMANIA_EDGE_EGRESS_PROBE_V1" and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' edge-probe.json >/dev/null
+      - name: Validate existing Edge eMAG product-link parser
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 40 \
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-public-probe-v1?q=weather%20station' \
+            -o emag-edge-parser.json
+          jq . emag-edge-parser.json
+          jq -e '.ok==true and .status==200 and .productLinkLowerBound>=1 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' emag-edge-parser.json >/dev/null
       - name: Preserve probe evidence
         uses: actions/upload-artifact@v4
         with:
@@ -50,4 +59,5 @@ jobs:
           path: |
             surface-probe.tsv
             edge-probe.json
+            emag-edge-parser.json
           retention-days: 7
