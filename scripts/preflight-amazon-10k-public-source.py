@@ -2,6 +2,10 @@
 import csv, json, hashlib, sys
 from pathlib import Path
 
+# Public product datasets can contain long description/features fields. Raise the
+# parser ceiling only; identity and schema gates below remain unchanged.
+csv.field_size_limit(16 * 1024 * 1024)
+
 SOURCE = Path(sys.argv[1] if len(sys.argv) > 1 else 'amazon-public-candidate.csv')
 CURRENT = Path(sys.argv[2] if len(sys.argv) > 2 else 'data/real-products-1000.compact.json')
 OUT = Path(sys.argv[3] if len(sys.argv) > 3 else 'amazon-10k-source-preflight.json')
@@ -35,7 +39,6 @@ with SOURCE.open('r', encoding='utf-8-sig', newline='') as f:
         raise SystemExit('SOURCE_REQUIRED_FIELDS_MISSING')
 
     row_count = 0
-    valid_rows = 0
     invalid_asin_rows = 0
     duplicate_asin_rows = 0
     seen = set()
@@ -51,7 +54,6 @@ with SOURCE.open('r', encoding='utf-8-sig', newline='') as f:
             duplicate_asin_rows += 1
             continue
         seen.add(asin)
-        valid_rows += 1
         if len(sample) < 5:
             sample.append({
                 'asin': asin,
