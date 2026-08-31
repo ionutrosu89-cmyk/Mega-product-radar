@@ -12,7 +12,7 @@ on:
           - SANDBOX
           - LIVE_PREREQS
       base_url:
-        description: HTTPS deployment URL (optional; falls back to repository variable MPR_BASE_URL)
+        description: HTTPS deployment URL (optional; falls back to repository variable, then canonical Netlify production URL)
         required: false
         type: string
   push:
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL }}
+      MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL || 'https://mega-product-radar.netlify.app' }}
       MPR_DEPLOYMENT_GATE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate || 'SANDBOX' }}
     steps:
       - name: Checkout
@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "### Paid Beta Deployment Acceptance" >> "$GITHUB_STEP_SUMMARY"
           if [[ -z "${MPR_BASE_URL}" ]]; then
-            echo "- BLOCKED_CONFIGURATION: deployment URL is missing. Supply workflow input base_url or repository variable MPR_BASE_URL." >> "$GITHUB_STEP_SUMMARY"
+            echo "- BLOCKED_CONFIGURATION: deployment URL is missing. Supply workflow input base_url, repository variable MPR_BASE_URL, or restore the canonical Netlify fallback." >> "$GITHUB_STEP_SUMMARY"
             echo "Paid beta deployment acceptance is NO-GO until deployment target configuration is present." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
