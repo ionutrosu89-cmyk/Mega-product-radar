@@ -3,11 +3,12 @@ name: Romania Refresh Consumer V1
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '7,22,37,52 * * * *'
   push:
     branches: [main]
     paths:
       - '.romania-refresh-consumer-trigger'
+      - '.github/workflows/romania-refresh-consumer-v1.yml'
   pull_request:
     paths:
       - '.github/workflows/romania-refresh-consumer-v1.yml'
@@ -21,7 +22,8 @@ permissions:
 env:
   MPR_ROMANIA_REFRESH_AUDIENCE: 'mpr-romania-refresh-consumer'
   MPR_ROMANIA_REFRESH_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-refresh-consumer-v1'
-  MPR_ROMANIA_REFRESH_LIMIT: '25'
+  MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'
+  MPR_ROMANIA_EDGE_BATCH_ROUNDS: '3'
 
 concurrency:
   group: romania-refresh-consumer-v1-${{ github.ref }}
@@ -36,13 +38,7 @@ jobs:
         worker: [0, 1, 2, 3]
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      MPR_ROMANIA_REFRESH_RECEIPT: artifacts/romania-refresh-consumer-v1-worker-${{ matrix.worker }}.json
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
       - name: Mint GitHub OIDC token
         shell: bash
         run: |
@@ -52,19 +48,48 @@ jobs:
           OIDC_JSON="$(curl --fail-with-body --silent --show-error -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${MPR_ROMANIA_REFRESH_AUDIENCE}")"
           OIDC_TOKEN="$(printf '%s' "$OIDC_JSON" | jq -er '.value')"
           echo "OIDC_TOKEN=${OIDC_TOKEN}" >> "$GITHUB_ENV"
-      - name: Consume bounded Romania refresh shard
-        run: node scripts/run-romania-refresh-consumer-v1.mjs
-      - name: Verify fail-closed receipt
+      - name: Consume Romania hydration through Supabase Edge egress
         shell: bash
+        env:
+          WORKER: ${{ matrix.worker }}
         run: |
           set -euo pipefail
-          jq -e '.schemaVersion == "MPR_ROMANIA_REFRESH_CONSUMER_RECEIPT_V1" and .claimed <= 25 and .policy.providerSpendEur == 0 and .policy.paidCallsTriggered == 0 and .policy.purchaseAuthorized == false and .policy.salesEvidenceClass == "NOT_VERIFIED_SALES"' "$MPR_ROMANIA_REFRESH_RECEIPT" >/dev/null
-      - name: Preserve Romania refresh evidence
+          mkdir -p artifacts
+          : > artifacts/edge-batches.ndjson
+          for round in $(seq 1 "$MPR_ROMANIA_EDGE_BATCH_ROUNDS"); do
+            worker_id="w${WORKER}-r${round}"
+            jq -n --arg action collectBatch --arg workerId "$worker_id" --argjson limit "$MPR_ROMANIA_EDGE_BATCH_LIMIT" '{action:$action,workerId:$workerId,limit:$limit}' > request.json
+            curl --fail-with-body --silent --show-error --max-time 120 \
+              -X POST "$MPR_ROMANIA_REFRESH_URL" \
+              -H "Authorization: Bearer $OIDC_TOKEN" \
+              -H 'content-type: application/json' \
+              --data-binary @request.json \
+              -o batch.json
+            jq -e '
+              .ok == true and
+              .schemaVersion == "MPR_ROMANIA_EDGE_HYDRATION_BATCH_V1" and
+              .claimed <= 8 and
+              .policy.providerSpendEur == 0 and
+              .policy.paidCallsTriggered == 0 and
+              .policy.purchaseAuthorized == false and
+              .policy.salesEvidenceClass == "NOT_VERIFIED_SALES" and
+              .policy.comparabilityPromoted == false and
+              .policy.missingAsZero == false
+            ' batch.json >/dev/null
+            jq -c . batch.json >> artifacts/edge-batches.ndjson
+            completed="$(jq -r '.completed' batch.json)"
+            claimed="$(jq -r '.claimed' batch.json)"
+            echo "worker=${WORKER} round=${round} claimed=${claimed} completed=${completed}"
+            if [ "$claimed" = "0" ]; then break; fi
+          done
+          jq -s '{schemaVersion:"MPR_ROMANIA_EDGE_HYDRATION_WORKER_RECEIPT_V1",batches:.,claimed:(map(.claimed)|add//0),completed:(map(.completed)|add//0),deferred:(map(.deferred)|add//0),failed:(map(.failed)|add//0),policy:{providerSpendEur:0,paidCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:"NOT_VERIFIED_SALES",comparabilityPromoted:false,missingAsZero:false}}' artifacts/edge-batches.ndjson > "artifacts/romania-edge-worker-${WORKER}.json"
+          jq . "artifacts/romania-edge-worker-${WORKER}.json"
+      - name: Preserve Romania Edge hydration evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: romania-refresh-consumer-v1-${{ github.run_id }}-worker-${{ matrix.worker }}
-          path: ${{ env.MPR_ROMANIA_REFRESH_RECEIPT }}
+          name: romania-edge-hydration-${{ github.run_id }}-worker-${{ matrix.worker }}
+          path: artifacts/
           if-no-files-found: warn
           retention-days: 30
 
@@ -73,11 +98,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify bounded zero-cost scale contract
+      - name: Verify bounded zero-cost Edge hydration contract
         shell: bash
         run: |
           set -euo pipefail
-          grep -q "MPR_ROMANIA_REFRESH_LIMIT: '25'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '3'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'worker: \[0, 1, 2, 3\]' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'collectBatch' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'comparabilityPromoted == false' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'missingAsZero == false' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "ROMANIA_10K_HYDRATION_EMAG_V1" supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
           ! grep -Eqi 'paid_calls_allowed[^f]*true|purchase_authorized[^f]*true' supabase/migrations/20260831_romania_scale_10000_membership_and_refresh_queue_v1.sql
