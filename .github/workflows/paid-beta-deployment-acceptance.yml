@@ -33,7 +33,7 @@ jobs:
   deployment-acceptance:
     name: Paid beta deployment acceptance
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     env:
       MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL || 'https://mega-product-radar.netlify.app' }}
       MPR_DEPLOYMENT_GATE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate || 'SANDBOX' }}
