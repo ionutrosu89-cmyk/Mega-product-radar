@@ -15,10 +15,6 @@ on:
         description: HTTPS deployment URL (optional; falls back to repository variable MPR_BASE_URL)
         required: false
         type: string
-      sandbox_workspace_id:
-        description: Dedicated FREE sandbox workspace ID (optional; falls back to repository variable MPR_SANDBOX_WORKSPACE_ID)
-        required: false
-        type: string
   push:
     branches:
       - main
@@ -41,7 +37,6 @@ jobs:
       MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL }}
       MPR_READINESS_PROBE_TOKEN: ${{ secrets.MPR_READINESS_PROBE_TOKEN }}
       MPR_DEPLOYMENT_GATE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate || 'SANDBOX' }}
-      MPR_SANDBOX_WORKSPACE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.sandbox_workspace_id || vars.MPR_SANDBOX_WORKSPACE_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,10 +54,6 @@ jobs:
             echo "- BLOCKED_CONFIGURATION: repository secret MPR_READINESS_PROBE_TOKEN is missing." >> "$GITHUB_STEP_SUMMARY"
             missing=1
           fi
-          if [[ "${MPR_DEPLOYMENT_GATE}" == "SANDBOX" && -z "${MPR_SANDBOX_WORKSPACE_ID}" ]]; then
-            echo "- BLOCKED_CONFIGURATION: dedicated sandbox workspace is missing. Supply workflow input sandbox_workspace_id or repository variable MPR_SANDBOX_WORKSPACE_ID." >> "$GITHUB_STEP_SUMMARY"
-            missing=1
-          fi
           if [[ "$missing" -ne 0 ]]; then
             echo "Paid beta deployment acceptance is NO-GO until protected configuration is present." >> "$GITHUB_STEP_SUMMARY"
             exit 1
@@ -70,7 +61,7 @@ jobs:
           node -e "const u=new URL(process.env.MPR_BASE_URL);if(u.protocol!=='https:')throw new Error('Deployment target must use HTTPS');console.log('Deployment target:',u.origin)" >> "$GITHUB_STEP_SUMMARY"
           echo "Protected probe configuration is present. Running ${MPR_DEPLOYMENT_GATE} gate." >> "$GITHUB_STEP_SUMMARY"
           if [[ "${MPR_DEPLOYMENT_GATE}" == "SANDBOX" ]]; then
-            echo "Dedicated sandbox workspace preflight is required: FREE plan, zero active/trialing Stripe subscriptions, no scheduled cancellation." >> "$GITHUB_STEP_SUMMARY"
+            echo "Dedicated sandbox workspace is resolved server-side; preflight requires FREE plan, zero active/trialing Stripe subscriptions and no scheduled cancellation." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Verify public deployment is reachable

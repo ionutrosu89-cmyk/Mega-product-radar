@@ -20,7 +20,8 @@ Configure these only in the deployment secret/environment settings, never in Git
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `BETA_ANALYTICS_ADMIN_EMAILS` for access to internal readiness/analytics dashboards
 - `MPR_READINESS_PROBE_TOKEN` for protected machine-run readiness and sandbox evidence capture
-- `MPR_SANDBOX_WORKSPACE_ID` for the dedicated sandbox workspace
+
+The dedicated sandbox workspace is resolved server-side by the reserved slug `mpr-billing-sandbox`. An optional server-only `MPR_SANDBOX_WORKSPACE_SLUG` may override that slug. `MPR_SANDBOX_WORKSPACE_ID` remains supported only as a backward-compatible server-side override; it is not required in GitHub Actions, browser state, or operator inputs.
 
 Netlify normally supplies `COMMIT_REF` / `DEPLOY_ID`. `MPR_DEPLOYMENT_REF` may be supplied explicitly by an equivalent deployment environment. Billing E2E acceptance refuses to run unless it can bind evidence to one deployed release identity of at least seven characters.
 
@@ -28,12 +29,11 @@ For an operator terminal or protected GitHub Actions run, configure without comm
 
 - `MPR_BASE_URL` = the HTTPS deployment that actually serves Netlify Functions
 - `MPR_READINESS_PROBE_TOKEN` = the same protected probe token configured server-side
-- `MPR_SANDBOX_WORKSPACE_ID` = the dedicated sandbox workspace ID
 - optionally `MPR_BILLING_JOURNEY_EVIDENCE` = local debugging artifact path only
 
-`MPR_BILLING_TEST_WORKSPACE_ID` remains accepted by the legacy checkpoint recorder only as a backward-compatible fallback. New configuration should use `MPR_SANDBOX_WORKSPACE_ID` everywhere.
+`MPR_BILLING_TEST_WORKSPACE_ID` remains accepted by the legacy checkpoint recorder only as a backward-compatible fallback. It is not release authority.
 
-Never place any of these values in source control or paste secret values into tickets, screenshots, logs, or chat.
+Never place any secret values in source control or paste them into tickets, screenshots, logs, or chat.
 
 ## Webhook endpoint
 Configure the Stripe Test Mode webhook endpoint to:
@@ -49,7 +49,7 @@ Subscribe at minimum to:
 The application deliberately does not grant paid entitlement from `checkout.session.completed` alone. Paid access is granted only when the Stripe subscription status is `active` or `trialing`.
 
 ## Readiness and clean-workspace preflight
-Before opening Stripe Checkout, run the paid-beta deployment acceptance gate in `SANDBOX` mode. It checks billing configuration, database runtime readiness, and the dedicated sandbox workspace.
+Before opening Stripe Checkout, run the paid-beta deployment acceptance gate in `SANDBOX` mode. It checks billing configuration, database runtime readiness, and the dedicated sandbox workspace resolved server-side.
 
 A SANDBOX `GO` requires all of the following before the first checkout:
 
@@ -57,7 +57,7 @@ A SANDBOX `GO` requires all of the following before the first checkout:
 - all three active monthly EUR prices are valid at 1790 / 2900 / 8900 cents;
 - webhook secret and required server-side billing configuration are present;
 - paid-beta database runtime/migrations are ready;
-- the exact `MPR_SANDBOX_WORKSPACE_ID` exists;
+- the reserved sandbox workspace exists;
 - workspace entitlement is `FREE`;
 - Stripe reports zero `active` or `trialing` subscriptions for that workspace customer;
 - no cancellation-at-period-end residue is active;
@@ -71,7 +71,7 @@ The release authority for `BILLING_E2E` is `POST /api/internal/billing-e2e-accep
 The endpoint:
 
 - is protected by the readiness/admin authorization layer;
-- reads the dedicated workspace ID only from server environment;
+- resolves the dedicated sandbox workspace only server-side;
 - captures every checkpoint itself from Supabase + Stripe through the protected snapshot handler;
 - validates every partial state immediately before it can enter the ledger;
 - stores evidence in `billing_e2e_acceptance_runs`, which is service-role-only behind RLS;
