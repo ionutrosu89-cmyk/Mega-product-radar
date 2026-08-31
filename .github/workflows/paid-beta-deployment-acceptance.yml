@@ -54,6 +54,7 @@ jobs:
           echo "Deployment target configuration is present. Running ${MPR_DEPLOYMENT_GATE} gate." >> "$GITHUB_STEP_SUMMARY"
           if [[ "${MPR_DEPLOYMENT_GATE}" == "SANDBOX" ]]; then
             echo "Dedicated sandbox workspace is resolved server-side; preflight requires FREE plan, zero active/trialing Stripe subscriptions and no scheduled cancellation." >> "$GITHUB_STEP_SUMMARY"
+            echo "The automated billing journey is Stripe Test Mode only, uses webhook-backed entitlement authority, and cannot spend real money." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Mint short-lived readiness credential
@@ -83,3 +84,7 @@ jobs:
       - name: Ensure verified FREE baseline
         if: env.MPR_DEPLOYMENT_GATE == 'SANDBOX'
         run: node scripts/ensure-free-baseline.mjs
+
+      - name: Run webhook-backed Stripe sandbox billing journey
+        if: env.MPR_DEPLOYMENT_GATE == 'SANDBOX'
+        run: npm run verify:stripe-sandbox-e2e
