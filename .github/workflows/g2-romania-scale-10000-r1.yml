@@ -1,0 +1,75 @@
+name: G2 Romania Scale 10000 R1
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-romania-scale-10000-r1.mjs'
+      - 'scripts/build-amazon-canonical-10k-r1.py'
+      - '.github/workflows/g2-romania-scale-10000-r1.yml'
+      - 'data/real-products-1000.compact.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Fetch pinned licensed Amazon identity source
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' \
+            --output amazon-markup-products.csv.xz
+          echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
+      - name: Rebuild exact 9K identity expansion
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build-amazon-canonical-10k-r1.py \
+            amazon-markup-products.csv.xz \
+            data/real-products-1000.compact.json \
+            amazon-canonical-new-9000-r1.json \
+            amazon-canonical-10k-build-receipt-r1.json >/dev/null
+          jq -e '
+            .newCount == 9000 and .combinedCount == 10000 and
+            .newRowsSha256 == "e8b53b0aceb7e5847e2f468a64fc8c2c4ce620d8cce5129daa7f3094c4dd1787" and
+            .combinedAsinSetSha256 == "7cbd46e5fd861c8ccecd4533ba853d6189447c48df09a55621522fb25e87259c"
+          ' amazon-canonical-10k-build-receipt-r1.json >/dev/null
+      - name: Build 10K x 3 Romania evidence matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-romania-scale-10000-r1.mjs \
+            data/real-products-1000.compact.json \
+            amazon-canonical-new-9000-r1.json \
+            romania-scale-10000-r1.json \
+            romania-scale-10000-summary.json | tee romania-scale-10000-console.json
+          jq -e '
+            .schemaVersion == "MPR_ROMANIA_SCALE_10000_R1_V1" and
+            .productCount == 10000 and
+            .surfaceCount == 3 and
+            .slotCount == 30000 and
+            .unknownSlots == 30000 and
+            .unknownRate == 1 and
+            .combinedAsinSetSha256 == "7cbd46e5fd861c8ccecd4533ba853d6189447c48df09a55621522fb25e87259c" and
+            .providerSpendEur == 0 and
+            .paidCallsTriggered == 0 and
+            .purchaseAuthorized == false
+          ' romania-scale-10000-summary.json >/dev/null
+      - name: Preserve 10K Romania scale evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-romania-scale-10000-r1-${{ github.sha }}
+          path: |
+            romania-scale-10000-r1.json
+            romania-scale-10000-summary.json
+            amazon-canonical-10k-build-receipt-r1.json
+          retention-days: 30
