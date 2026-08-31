@@ -12,8 +12,10 @@ test('Stripe sandbox E2E workflow is sandbox-only and OIDC-protected',()=>{
   assert.match(workflow,/MPR_DEPLOYMENT_GATE: SANDBOX/);
   assert.match(workflow,/github-actions-readiness-oidc\.mjs/);
   assert.match(workflow,/npm run verify:paid-beta-deployment/);
+  assert.match(workflow,/ensure-free-baseline\.mjs/);
   assert.match(workflow,/npm run verify:stripe-sandbox-e2e/);
   assert.match(workflow,/cancel-in-progress: false/);
+  assert.ok(workflow.indexOf('ensure-free-baseline.mjs')<workflow.indexOf('npm run verify:stripe-sandbox-e2e'));
 });
 
 test('Stripe sandbox E2E workflow never consumes live billing or static readiness secrets',()=>{
