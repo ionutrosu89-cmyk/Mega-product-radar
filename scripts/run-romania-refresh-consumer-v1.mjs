@@ -52,7 +52,7 @@ async function collectEmag(job){
 async function collect(job){
   if(job.target_surface==='EMAG_RO') return collectEmag(job);
   if(job.target_surface==='TRENDYOL_RO') return {outcome:'DEFERRED',error:'TRENDYOL_RO_ADAPTER_NOT_YET_APPROVED',retryAfterSeconds:86400};
-  if(job.target_surface==='RETAIL_WEB_RO') return {outcome:'DEFERRED',error:'RETAIL_WEB_RO_ADAPTER_NOT_YET_APPROVED',retryAfterSeconds:86400};
+  if(job.target_surface==='RO_RETAIL_WEB') return {outcome:'DEFERRED',error:'RO_RETAIL_WEB_ADAPTER_NOT_YET_APPROVED',retryAfterSeconds:86400};
   return {outcome:'FAILED',error:'SURFACE_NOT_SUPPORTED',retryAfterSeconds:86400};
 }
 
@@ -76,7 +76,7 @@ const payload={
   completed:receipts.filter(x=>x.outcome==='COMPLETED').length,
   deferred:receipts.filter(x=>x.outcome==='DEFERRED').length,
   failed:receipts.filter(x=>x.outcome==='FAILED').length,
-  bySurface:Object.fromEntries(['EMAG_RO','TRENDYOL_RO','RETAIL_WEB_RO'].map(s=>[s,receipts.filter(x=>x.surface===s).length])),
+  bySurface:Object.fromEntries(['EMAG_RO','TRENDYOL_RO','RO_RETAIL_WEB'].map(s=>[s,receipts.filter(x=>x.surface===s).length])),
   receipts,
   policy:{providerSpendEur:0,paidCallsTriggered:0,purchaseAuthorized:false,salesEvidenceClass:'NOT_VERIFIED_SALES'}
 };
