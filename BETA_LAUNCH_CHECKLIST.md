@@ -4,11 +4,17 @@
 
 - [ ] Stripe Test Mode products/prices created: Discover €17.90 monthly, Radar €29 monthly, Launch €89 monthly.
 - [ ] Deployment secrets configured: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_DISCOVER`, `STRIPE_PRICE_RADAR`, `STRIPE_PRICE_LAUNCH`, `SUPABASE_SERVICE_ROLE_KEY`.
-- [ ] `BETA_ANALYTICS_ADMIN_EMAILS` configured.
-- [ ] `/api/internal/billing-readiness` returns `ready: true`.
-- [ ] Supabase migrations are applied through `20260830_paid_beta_runtime_readiness.sql` before any payment test.
+- [ ] `BETA_ANALYTICS_ADMIN_EMAILS`, `MPR_READINESS_PROBE_TOKEN` and `MPR_SANDBOX_WORKSPACE_ID` configured server-side.
+- [ ] Current deployment has a stable release identity (`COMMIT_REF`, `DEPLOY_ID` or explicit `MPR_DEPLOYMENT_REF`) so E2E evidence cannot be reused across releases.
+- [ ] `/api/internal/billing-readiness` returns `ready: true` in Stripe Test Mode.
+- [ ] Supabase migrations are applied through `20260831_billing_e2e_acceptance.sql` before any payment test.
 - [ ] `/api/internal/paid-beta-runtime-readiness` returns `ready: true`, proving the Stripe ordering columns, webhook event state and atomic entitlement RPC exist in the deployed database.
+- [ ] `/api/internal/sandbox-preflight-readiness` reports the dedicated workspace CLEAN: FREE, zero active/trialing subscriptions and no cancellation residue.
+- [ ] Server-owned E2E ledger starts at `FREE_BASELINE` only after billing + runtime preflight pass.
 - [ ] Sandbox flow passes: FREE → DISCOVER → RADAR → LAUNCH → cancel-at-period-end → expiry.
+- [ ] All six checkpoints are captured by `/api/internal/billing-e2e-acceptance` from Stripe/Supabase state, in exact order, without client-authored evidence fields.
+- [ ] Current deployment's server-owned billing E2E ledger reaches `GO` with exactly six checkpoints.
+- [ ] `BILLING_E2E` launch readiness PASS is derived only from that current-deployment server GO. A local JSON artifact or old deployment PASS is not release authority.
 - [ ] No duplicate Stripe subscriptions after changing plan.
 - [ ] Failed Stripe webhook delivery is retried successfully with the same event id and grants/revokes entitlement exactly once.
 - [ ] Out-of-order or same-second ambiguous Stripe lifecycle events cannot restore or increase entitlement over a newer/safer state.
