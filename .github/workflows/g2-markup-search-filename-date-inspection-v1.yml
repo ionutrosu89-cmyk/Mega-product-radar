@@ -1,0 +1,39 @@
+name: G2 Markup Search Filename Date Inspection V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/inspect-markup-search-filename-date.py'
+      - '.github/workflows/g2-markup-search-filename-date-inspection-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned searches dataset
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/searches.csv.xz' \
+            --output amazon-markup-searches.csv.xz
+          echo '0071593ee788681df31110b1490fe2b71243003ece1666a415c06fa3f5cdd985  amazon-markup-searches.csv.xz' | sha256sum --check --strict
+      - name: Inspect filename timestamp semantics
+        run: |
+          set -euo pipefail
+          python3 scripts/inspect-markup-search-filename-date.py amazon-markup-searches.csv.xz markup-search-filename-date-inspection.json | tee markup-search-filename-date-inspection.txt
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_FILENAME_DATE_INSPECTION_V1" and .rows>0 and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' markup-search-filename-date-inspection.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: markup-search-filename-date-inspection-${{ github.sha }}
+          path: |
+            markup-search-filename-date-inspection.json
+            markup-search-filename-date-inspection.txt
+          retention-days: 30
+          if-no-files-found: error
