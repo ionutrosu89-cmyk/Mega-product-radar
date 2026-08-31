@@ -19,9 +19,11 @@ function oidcToken(overrides={}){
     iss:'https://token.actions.githubusercontent.com',
     aud:'mega-product-radar-readiness',
     repository:'ionutrosu89-cmyk/Mega-product-radar',
+    repository_id:'1329831891',
+    repository_owner_id:'315386782',
     ref:'refs/heads/main',
     workflow_ref:'ionutrosu89-cmyk/Mega-product-radar/.github/workflows/paid-beta-deployment-acceptance.yml@refs/heads/main',
-    sub:'repo:ionutrosu89-cmyk/Mega-product-radar:ref:refs/heads/main',
+    sub:'repo:ionutrosu89-cmyk@315386782/Mega-product-radar@1329831891:ref:refs/heads/main',
     event_name:'push',
     iat:now-5,
     nbf:now-5,
@@ -55,13 +57,21 @@ test('valid GitHub Actions OIDC token is accepted without a persistent probe sec
   assert.equal(result.principal,'GITHUB_ACTIONS_OIDC');
 });
 
+test('immutable GitHub subject format is not assumed when stable signed claims match',async()=>{
+  const legacySubject=oidcToken({sub:'repo:ionutrosu89-cmyk/Mega-product-radar:ref:refs/heads/main'});
+  const immutableSubject=oidcToken({sub:'repo:ionutrosu89-cmyk@315386782/Mega-product-radar@1329831891:ref:refs/heads/main'});
+  assert.equal(await verifyGitHubActionsOidcToken(legacySubject,{fetchImpl:async()=>jwksFetch()}),true);
+  assert.equal(await verifyGitHubActionsOidcToken(immutableSubject,{fetchImpl:async()=>jwksFetch()}),true);
+});
+
 test('GitHub Actions OIDC authentication rejects mismatched authorization claims',async()=>{
   const invalidTokens=[
     oidcToken({aud:'wrong-audience'}),
     oidcToken({repository:'other/repo'}),
+    oidcToken({repository_id:'999'}),
+    oidcToken({repository_owner_id:'999'}),
     oidcToken({ref:'refs/heads/feature'}),
     oidcToken({workflow_ref:'ionutrosu89-cmyk/Mega-product-radar/.github/workflows/other.yml@refs/heads/main'}),
-    oidcToken({sub:'repo:other/repo:ref:refs/heads/main'}),
     oidcToken({event_name:'pull_request'}),
     oidcToken({exp:Math.floor(Date.now()/1000)-120})
   ];
