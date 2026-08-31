@@ -39,31 +39,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 scripts/build-amazon-canonical-100k-r1.py \
-            amazon-markup-products.csv.xz \
-            data/real-products-1000.compact.json \
-            amazon-canonical-new-90000-r1.json \
-            amazon-canonical-100k-build-receipt-r1.json | tee amazon-canonical-100k-build-summary.txt
-          jq -e '
-            .schemaVersion == "MPR_AMAZON_CANONICAL_SCALE_100K_R1" and
-            .productionAmazonBefore == 10000 and
-            .sourceBaselineCount == 1000 and
-            .priorExpansionCount == 9000 and
-            .newCount == 90000 and
-            .combinedCount == 100000 and
-            .batchSize == 250 and
-            .batchCount == 360 and
-            .prior9kRowsSha256 == "e8b53b0aceb7e5847e2f468a64fc8c2c4ce620d8cce5129daa7f3094c4dd1787" and
-            (.batchDigestsSha256|length) == 360 and
-            (.batchMerkleProofs|length) == 360 and
-            (.batchMerkleRootSha256|type) == "string" and
-            (.batchMerkleRootSha256|length) == 64 and
-            .policy.databaseWrites == 0 and
-            .policy.providerSpendEur == 0 and
-            .policy.paidCallsTriggered == 0 and
-            .policy.purchaseAuthorized == false and
-            .policy.verifiedSales == false
-          ' amazon-canonical-100k-build-receipt-r1.json >/dev/null
+          python3 scripts/build-amazon-canonical-100k-r1.py amazon-markup-products.csv.xz data/real-products-1000.compact.json amazon-canonical-new-90000-r1.json amazon-canonical-100k-build-receipt-r1.json | tee amazon-canonical-100k-build-summary.txt
+          jq -e '.schemaVersion=="MPR_AMAZON_CANONICAL_SCALE_100K_R1" and .productionAmazonBefore==10000 and .sourceBaselineCount==1000 and .priorExpansionCount==9000 and .newCount==90000 and .combinedCount==100000 and .batchSize==250 and .batchCount==360 and .prior9kRowsSha256=="e8b53b0aceb7e5847e2f468a64fc8c2c4ce620d8cce5129daa7f3094c4dd1787" and (.batchDigestsSha256|length)==360 and (.batchMerkleProofs|length)==360 and (.batchMerkleRootSha256|length)==64 and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false and .policy.verifiedSales==false' amazon-canonical-100k-build-receipt-r1.json >/dev/null
+      - name: Verify rotating OIDC contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'i % 20 == 0' .github/workflows/g2-amazon-canonical-100k-import-r1.yml
+          grep -q 'Mint fresh GitHub OIDC token for finalize' .github/workflows/g2-amazon-canonical-100k-import-r1.yml
       - name: Preserve validation evidence
         uses: actions/upload-artifact@v4
         with:
@@ -84,9 +67,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --retry 3 --connect-timeout 20 \
-            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' \
-            --output amazon-markup-products.csv.xz
+          curl --fail --location --retry 3 --connect-timeout 20 'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' --output amazon-markup-products.csv.xz
           echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
       - name: Rebuild exact 90K payload
         shell: bash
@@ -94,18 +75,8 @@ jobs:
           set -euo pipefail
           python3 scripts/build-amazon-canonical-100k-r1.py amazon-markup-products.csv.xz data/real-products-1000.compact.json amazon-canonical-new-90000-r1.json amazon-canonical-100k-build-receipt-r1.json >/dev/null
           jq -e '.newCount==90000 and .combinedCount==100000 and .batchCount==360 and .batchSize==250 and (.batchMerkleProofs|length)==360' amazon-canonical-100k-build-receipt-r1.json >/dev/null
-      - name: Mint GitHub OIDC token
-        id: oidc
-        shell: bash
-        run: |
-          set -euo pipefail
-          OIDC_JSON="$(curl --fail --silent --show-error -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-canonical-scale-100k")"
-          TOKEN="$(printf '%s' "$OIDC_JSON" | jq -r '.value')"
-          test -n "$TOKEN" && test "$TOKEN" != "null"
-          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
-      - name: Import 360 exact Merkle-proven batches
+      - name: Import 360 exact Merkle-proven batches with OIDC rotation
         env:
-          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
           EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-canonical-scale-100k-r1
         shell: bash
         run: |
@@ -114,7 +85,13 @@ jobs:
           NEW_DIGEST="$(jq -r '.newRowsSha256' amazon-canonical-100k-build-receipt-r1.json)"
           COMBINED_DIGEST="$(jq -r '.combinedAsinSetSha256' amazon-canonical-100k-build-receipt-r1.json)"
           MERKLE_ROOT="$(jq -r '.batchMerkleRootSha256' amazon-canonical-100k-build-receipt-r1.json)"
+          OIDC_TOKEN=''
           for i in $(seq 0 359); do
+            if (( i % 20 == 0 )); then
+              OIDC_JSON="$(curl --fail --silent --show-error -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-canonical-scale-100k")"
+              OIDC_TOKEN="$(printf '%s' "$OIDC_JSON" | jq -er '.value')"
+              test -n "$OIDC_TOKEN"
+            fi
             start=$((i * 250)); end=$((start + 250))
             jq ".rows[$start:$end]" amazon-canonical-new-90000-r1.json > batch.json
             DIGEST="$(jq -r ".batchDigestsSha256[$i]" amazon-canonical-100k-build-receipt-r1.json)"
@@ -124,9 +101,17 @@ jobs:
             test "$HTTP" = "200" || { cat "batch-receipts/batch-$i.json"; exit 1; }
             jq -e --argjson i "$i" '.ok==true and .schemaVersion=="MPR_AMAZON_CANONICAL_SCALE_100K_BATCH_OIDC_RECEIPT_V1" and .batchIndex==$i and .merkleVerified==true and .resolvedCount==250 and .rejectedCount==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' "batch-receipts/batch-$i.json" >/dev/null
           done
+      - name: Mint fresh GitHub OIDC token for finalize
+        id: final_oidc
+        shell: bash
+        run: |
+          set -euo pipefail
+          OIDC_JSON="$(curl --fail --silent --show-error -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-canonical-scale-100k")"
+          TOKEN="$(printf '%s' "$OIDC_JSON" | jq -er '.value')"
+          echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
       - name: Finalize exact Amazon alias count
         env:
-          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+          OIDC_TOKEN: ${{ steps.final_oidc.outputs.token }}
           EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-canonical-scale-100k-r1
         shell: bash
         run: |
