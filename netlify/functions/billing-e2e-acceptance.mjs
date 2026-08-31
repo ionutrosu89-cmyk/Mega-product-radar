@@ -7,6 +7,7 @@ import {createBillingReadinessHandler} from './billing-readiness.mjs';
 import {createPaidBetaRuntimeReadinessHandler} from './paid-beta-runtime-readiness.mjs';
 
 const RESPONSE_HEADERS={'Cache-Control':'private, no-store','Vary':'Authorization'};
+const GITHUB_SHA_RE=/^[0-9a-f]{40}$/i;
 const text=value=>String(value??'').trim();
 
 async function jsonFetch(url,options,fetchImpl){
@@ -14,6 +15,14 @@ async function jsonFetch(url,options,fetchImpl){
   let body={};
   try{body=await response.json();}catch{}
   return {ok:response.ok,status:response.status,body};
+}
+
+export function resolveDeploymentRef({env={},request,authorization}={}){
+  const configured=text(env.MPR_DEPLOYMENT_REF||env.COMMIT_REF||env.DEPLOY_ID);
+  if(configured.length>=7)return configured;
+  const workflowSha=text(request?.headers?.get?.('x-mpr-deployment-ref'));
+  if(authorization?.principal==='GITHUB_ACTIONS_OIDC'&&GITHUB_SHA_RE.test(workflowSha))return workflowSha;
+  return '';
 }
 
 function safeRun(row){
@@ -64,9 +73,9 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
       const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
       const anon=env.SUPABASE_ANON_KEY||SAAS_CONFIG.supabaseAnonKey;
       const service=text(env.SUPABASE_SERVICE_ROLE_KEY);
-      const deploymentRef=text(env.MPR_DEPLOYMENT_REF||env.COMMIT_REF||env.DEPLOY_ID);
       const authorization=await authorizeReadinessRequest({request,env,fetchImpl,supabaseUrl,anonKey:anon});
       if(!authorization.ok)return authorization.response;
+      const deploymentRef=resolveDeploymentRef({env,request,authorization});
       if(!service||!supabaseUrl)return Response.json({ok:false,code:'ACCEPTANCE_NOT_CONFIGURED',error:'Billing E2E acceptance storage is not configured'},{status:503,headers:RESPONSE_HEADERS});
       if(deploymentRef.length<7)return Response.json({ok:false,code:'DEPLOYMENT_REF_NOT_CONFIGURED',error:'Deployed release identity is not available'},{status:503,headers:RESPONSE_HEADERS});
       const workspaceResolution=await resolveWorkspaceId({supabaseUrl,service,env,fetchImpl});
