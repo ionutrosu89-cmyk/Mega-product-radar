@@ -1,0 +1,44 @@
+name: G2 Romania Public Surface Probe R1
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/g2-romania-public-surface-probe-r1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Probe public Romania surfaces without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36'
+          : > surface-probe.tsv
+          probe() {
+            name="$1"; url="$2"
+            code="$(curl -L -sS -A "$UA" --connect-timeout 10 --max-time 20 -o body.html -w '%{http_code}' "$url" || true)"
+            bytes="$(wc -c < body.html 2>/dev/null || echo 0)"
+            final="$(curl -L -sS -A "$UA" --connect-timeout 10 --max-time 20 -o /dev/null -w '%{url_effective}' "$url" || true)"
+            blocked=false
+            if grep -Eqi 'captcha|access denied|verify you are human|robot|temporarily unavailable' body.html 2>/dev/null; then blocked=true; fi
+            printf '%s\t%s\t%s\t%s\t%s\n' "$name" "$code" "$bytes" "$blocked" "$final" | tee -a surface-probe.tsv
+          }
+          probe TRENDYOL_RO 'https://www.trendyol.com/ro/sr?q=weather%20station'
+          probe TRENDYOL_GLOBAL 'https://www.trendyol.com/sr?q=weather%20station'
+          probe COMPARI_RO 'https://www.compari.ro/?st=weather+station'
+          probe CEL_RO 'https://www.cel.ro/cauta/weather+station/'
+          probe ALTEX_RO 'https://altex.ro/cauta/?q=weather%20station'
+          probe EMAG_RO 'https://www.emag.ro/search/weather%20station'
+          echo '--- machine summary ---'
+          cat surface-probe.tsv
+      - name: Preserve probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: g2-romania-public-surface-probe-${{ github.sha }}
+          path: surface-probe.tsv
+          retention-days: 7
