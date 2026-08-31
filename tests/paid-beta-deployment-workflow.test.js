@@ -29,6 +29,12 @@ test('probe credential remains a GitHub secret and missing configuration fails c
   assert.doesNotMatch(source,/console\.log\([^\n]*MPR_READINESS_PROBE_TOKEN/);
 });
 
+test('sandbox workspace identity is resolved server-side instead of supplied to GitHub Actions',async()=>{
+  const source=await workflow();
+  assert.doesNotMatch(source,/sandbox_workspace_id|MPR_SANDBOX_WORKSPACE_ID/);
+  assert.match(source,/Dedicated sandbox workspace is resolved server-side/);
+});
+
 test('workflow distinguishes public site reachability from protected readiness diagnostics',async()=>{
   const source=await workflow();
   assert.match(source,/curl --fail --silent --show-error --location --max-time 15/);
