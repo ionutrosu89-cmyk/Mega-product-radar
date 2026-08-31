@@ -33,15 +33,29 @@ jobs:
           if(d.uniqueProductCount!==1000) process.exit(2);
           if(d.productSetSha256!=='d555b25edcd604f29cca36d0f3651026349f332d1931569f809ec95c6cb4afb6') process.exit(3);
           NODE
+      - name: Require Supabase service configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${SUPABASE_URL:-}" || { echo 'SUPABASE_URL_REQUIRED'; exit 10; }
+          test -n "${SUPABASE_SERVICE_ROLE_KEY:-}" || { echo 'SUPABASE_SERVICE_ROLE_KEY_REQUIRED'; exit 11; }
       - name: Dry-run import plan
-        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=250 | tee canonical-bootstrap-dry-run.txt
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/import-canonical-bootstrap-to-supabase.mjs --batch=250 | tee canonical-bootstrap-dry-run.txt
       - name: Execute exact-source canonical bootstrap
-        run: node scripts/import-canonical-bootstrap-to-supabase.mjs --execute --batch=250 | tee canonical-bootstrap-result.txt
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/import-canonical-bootstrap-to-supabase.mjs --execute --batch=250 | tee canonical-bootstrap-result.txt
       - name: Preserve bootstrap evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: g2-canonical-bootstrap-r1-${{ github.sha }}
           path: |
             canonical-bootstrap-dry-run.txt
             canonical-bootstrap-result.txt
+          if-no-files-found: warn
           retention-days: 30
