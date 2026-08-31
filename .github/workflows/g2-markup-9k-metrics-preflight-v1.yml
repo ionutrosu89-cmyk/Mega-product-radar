@@ -1,0 +1,55 @@
+name: G2 Markup 9K Metrics Preflight V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/preflight-markup-9k-metrics.py'
+      - 'scripts/preflight-markup-searches-9k.py'
+      - '.github/workflows/g2-markup-9k-metrics-preflight-v1.yml'
+      - 'data/real-products-1000.compact.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned The Markup datasets
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/products.csv.xz' \
+            --output amazon-markup-products.csv.xz
+          echo '77fd690fc627b05ca68bd0ba3e7217b7a401e364d96eb6308d502ace92c737e9  amazon-markup-products.csv.xz' | sha256sum --check --strict
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            'https://raw.githubusercontent.com/the-markup/investigation-amazon-brands/master/data/output/datasets/searches.csv.xz' \
+            --output amazon-markup-searches.csv.xz
+      - name: Measure exact 9K product-page metric coverage
+        run: |
+          set -euo pipefail
+          python3 scripts/preflight-markup-9k-metrics.py amazon-markup-products.csv.xz data/real-products-1000.compact.json markup-9k-metrics-preflight.json | tee markup-9k-metrics-preflight.txt
+          jq -e '.schemaVersion=="MPR_MARKUP_9K_METRICS_PREFLIGHT_V1" and .selectedCount==9000 and .selected9kSha256=="e8b53b0aceb7e5847e2f468a64fc8c2c4ce620d8cce5129daa7f3094c4dd1787" and .policy.databaseWrites==0' markup-9k-metrics-preflight.json >/dev/null
+          echo "productCoverage=$(jq -c '.coverage' markup-9k-metrics-preflight.json)"
+      - name: Measure exact 9K search-result metric overlap
+        run: |
+          set -euo pipefail
+          python3 scripts/preflight-markup-searches-9k.py amazon-markup-products.csv.xz amazon-markup-searches.csv.xz data/real-products-1000.compact.json markup-searches-9k-preflight.json | tee markup-searches-9k-preflight.txt
+          jq -e '.schemaVersion=="MPR_MARKUP_SEARCHES_9K_PREFLIGHT_V1" and .selected9kCount==9000 and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' markup-searches-9k-preflight.json >/dev/null
+          echo "searchesSha256=$(jq -r '.searchesSha256' markup-searches-9k-preflight.json)"
+          echo "detectedFields=$(jq -c '.detectedFields' markup-searches-9k-preflight.json)"
+          echo "searchCoverage=$(jq -c '.coverage' markup-searches-9k-preflight.json)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: markup-9k-metrics-preflight-${{ github.sha }}
+          path: |
+            markup-9k-metrics-preflight.json
+            markup-9k-metrics-preflight.txt
+            markup-searches-9k-preflight.json
+            markup-searches-9k-preflight.txt
+          retention-days: 30
+          if-no-files-found: error
