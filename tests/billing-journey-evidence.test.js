@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {verifyBillingJourneyEvidence} from '../scripts/verify-billing-journey-evidence.mjs';
+import {verifyBillingJourneyEvidence,verifyBillingJourneyProgress} from '../scripts/verify-billing-journey-evidence.mjs';
 
 function validEvidence(){
   const workspaceId='workspace-test-1';
@@ -26,6 +26,17 @@ test('complete sandbox journey with one Stripe subscription can pass',()=>{
   assert.equal(result.ok,true);
   assert.equal(result.verdict,'GO');
   assert.equal(result.checks.oneSubscriptionAcrossPaidJourney,true);
+  assert.equal(result.checks.complete,true);
+});
+
+test('partial prefix can validate without pretending the full journey passed',()=>{
+  const evidence=validEvidence();
+  evidence.checkpoints=evidence.checkpoints.slice(0,2);
+  const progress=verifyBillingJourneyProgress(evidence);
+  assert.equal(progress.ok,true);
+  assert.equal(progress.verdict,'VALID');
+  assert.equal(progress.nextStage,'RADAR_ACTIVE');
+  assert.equal(verifyBillingJourneyEvidence(evidence).ok,false);
 });
 
 test('a duplicate Stripe subscription during upgrade fails closed',()=>{
@@ -55,15 +66,35 @@ test('scheduled cancellation must retain active Launch entitlement until termina
   assert.ok(result.errors.includes('PLAN_MISMATCH:CANCEL_SCHEDULED'));
 });
 
-test('ended checkpoint requires FREE and zero active subscriptions',()=>{
+test('baseline and terminal active subscription counts are mandatory numeric proof',()=>{
   const evidence=validEvidence();
-  const ended=evidence.checkpoints.find(row=>row.stage==='ENDED_FREE');
-  ended.workspacePlan='LAUNCH';
-  ended.activeSubscriptionCount=1;
+  delete evidence.checkpoints[0].activeSubscriptionCount;
+  delete evidence.checkpoints[5].activeSubscriptionCount;
   const result=verifyBillingJourneyEvidence(evidence);
   assert.equal(result.ok,false);
-  assert.ok(result.errors.includes('ENDED_NOT_FREE'));
-  assert.ok(result.errors.includes('ENDED_ACTIVE_SUBSCRIPTION_REMAINS'));
+  assert.ok(result.errors.includes('FREE_BASELINE_ACTIVE_COUNT_REQUIRED'));
+  assert.ok(result.errors.includes('ENDED_ACTIVE_COUNT_REQUIRED'));
+});
+
+test('ended checkpoint requires terminal status exact subscription and cancel flag false',()=>{
+  const evidence=validEvidence();
+  const ended=evidence.checkpoints.find(row=>row.stage==='ENDED_FREE');
+  ended.subscriptionStatus='';
+  ended.providerSubscriptionId='';
+  ended.cancelAtPeriodEnd=true;
+  const result=verifyBillingJourneyEvidence(evidence);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.includes('ENDED_STATUS_NOT_TERMINAL'));
+  assert.ok(result.errors.includes('ENDED_SUBSCRIPTION_ID_REQUIRED'));
+  assert.ok(result.errors.includes('ENDED_CANCEL_FLAG_INVALID'));
+});
+
+test('checkpoint array order is authoritative and cannot be rearranged into a passing map',()=>{
+  const evidence=validEvidence();
+  [evidence.checkpoints[1],evidence.checkpoints[2]]=[evidence.checkpoints[2],evidence.checkpoints[1]];
+  const result=verifyBillingJourneyEvidence(evidence);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.some(error=>error.startsWith('STAGE_ORDER_MISMATCH')));
 });
 
 test('real-money or non-sandbox evidence is rejected by this acceptance gate',()=>{

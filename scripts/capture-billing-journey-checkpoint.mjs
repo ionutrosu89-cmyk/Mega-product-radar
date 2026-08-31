@@ -1,6 +1,6 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-import {REQUIRED_STAGES} from './verify-billing-journey-evidence.mjs';
+import {REQUIRED_STAGES,verifyBillingJourneyProgress} from './verify-billing-journey-evidence.mjs';
 
 const text=value=>String(value??'').trim();
 
@@ -28,6 +28,8 @@ export function appendBillingCheckpoint(existing,stage,checkpoint){
 
   const {schema:_schema,environment:_environment,source:_source,...safeCheckpoint}=checkpoint;
   evidence.checkpoints.push({stage:normalizedStage,...safeCheckpoint});
+  const progress=verifyBillingJourneyProgress(evidence);
+  if(!progress.ok)throw new Error(`Checkpoint ${normalizedStage} fails billing journey truth gates: ${progress.errors.join(', ')}`);
   return evidence;
 }
 
@@ -52,7 +54,7 @@ async function main(){
   if(!response.ok||!body?.ok||!body?.checkpoint)throw new Error(`Checkpoint snapshot failed (${response.status}): ${body?.code||body?.error||'unknown error'}`);
   const evidence=appendBillingCheckpoint(await readExisting(path),stage,body.checkpoint);
   await writeFile(path,`${JSON.stringify(evidence,null,2)}\n`,'utf8');
-  console.log(JSON.stringify({ok:true,stage,workspaceId,path,checkpointCount:evidence.checkpoints.length,nextStage:REQUIRED_STAGES[evidence.checkpoints.length]||null},null,2));
+  console.log(JSON.stringify({ok:true,stage,path,checkpointCount:evidence.checkpoints.length,nextStage:REQUIRED_STAGES[evidence.checkpoints.length]||null},null,2));
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
