@@ -5,7 +5,7 @@ const ENDPOINTS={
   billing:'/api/internal/billing-readiness',
   runtime:'/api/internal/paid-beta-runtime-readiness',
   legal:'/api/internal/legal-readiness',
-  sandboxWorkspace:'/api/internal/billing-journey-snapshot'
+  sandboxWorkspace:'/api/internal/sandbox-preflight-readiness'
 };
 
 export function normalizeBaseUrl(value){
@@ -55,12 +55,10 @@ async function diagnostic(baseUrl,path,token,fetchImpl,headers={}){
   return {ok:true,status:response.status,body};
 }
 
-export async function verifyPaidBetaDeployment({baseUrl,token,gate='SANDBOX',sandboxWorkspaceId,fetchImpl=fetch}={}){
+export async function verifyPaidBetaDeployment({baseUrl,token,gate='SANDBOX',fetchImpl=fetch}={}){
   const url=normalizeBaseUrl(baseUrl);
   const mode=normalizeGate(gate);
   if(!String(token||'').trim())throw new Error('MPR_READINESS_PROBE_TOKEN is required');
-  const workspaceId=String(sandboxWorkspaceId||'').trim();
-  if(mode==='SANDBOX'&&!workspaceId)throw new Error('MPR_SANDBOX_WORKSPACE_ID is required for SANDBOX preflight');
 
   const common=[
     diagnostic(url,ENDPOINTS.billing,token,fetchImpl),
@@ -68,7 +66,7 @@ export async function verifyPaidBetaDeployment({baseUrl,token,gate='SANDBOX',san
     diagnostic(url,ENDPOINTS.legal,token,fetchImpl)
   ];
   const sandboxProbe=mode==='SANDBOX'
-    ? diagnostic(url,ENDPOINTS.sandboxWorkspace,token,fetchImpl,{'x-mpr-workspace-id':workspaceId})
+    ? diagnostic(url,ENDPOINTS.sandboxWorkspace,token,fetchImpl)
     : Promise.resolve({ok:true,status:0,body:{}});
   const [billingResult,runtimeResult,legalResult,sandboxResult]=await Promise.all([...common,sandboxProbe]);
 
@@ -76,8 +74,12 @@ export async function verifyPaidBetaDeployment({baseUrl,token,gate='SANDBOX',san
   const billing=billingResult.body||{};
   const runtime=runtimeResult.body||{};
   const legal=legalResult.body||{};
-  const checkpoint=sandboxResult.body?.checkpoint||{};
-  const sandboxWorkspace=mode==='SANDBOX'?assessSandboxWorkspacePreflight(checkpoint):{clean:false};
+  const sandboxWorkspace=mode==='SANDBOX'?{
+    clean:Boolean(sandboxResult.body?.ready),
+    configured:Boolean(sandboxResult.body?.configured),
+    checks:sandboxResult.body?.checks||{},
+    reason:sandboxResult.body?.reason||null
+  }:{clean:false};
   const sandboxWorkspaceReachable=mode==='SANDBOX'?sandboxResult.ok:true;
   const sandboxReady=Boolean(diagnosticsReady&&sandboxWorkspaceReachable&&billing.ready&&billing.stripeMode==='SANDBOX'&&runtime.ready&&sandboxWorkspace.clean);
   const livePrereqsReady=Boolean(diagnosticsReady&&billing.publicLaunchBillingReady&&runtime.ready&&legal.ready);
@@ -116,8 +118,7 @@ async function main(){
     const result=await verifyPaidBetaDeployment({
       baseUrl:process.env.MPR_BASE_URL,
       token:process.env.MPR_READINESS_PROBE_TOKEN,
-      gate:process.env.MPR_DEPLOYMENT_GATE||'SANDBOX',
-      sandboxWorkspaceId:process.env.MPR_SANDBOX_WORKSPACE_ID
+      gate:process.env.MPR_DEPLOYMENT_GATE||'SANDBOX'
     });
     console.log(JSON.stringify(result,null,2));
     if(!result.ok)process.exitCode=1;
