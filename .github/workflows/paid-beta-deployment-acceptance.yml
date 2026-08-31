@@ -79,3 +79,7 @@ jobs:
 
       - name: Verify paid beta deployment
         run: npm run verify:paid-beta-deployment
+
+      - name: Ensure verified FREE baseline
+        if: env.MPR_DEPLOYMENT_GATE == 'SANDBOX'
+        run: node scripts/ensure-free-baseline.mjs
