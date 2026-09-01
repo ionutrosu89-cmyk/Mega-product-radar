@@ -1,0 +1,40 @@
+name: Viral Radar Daily
+on:
+  schedule:
+    - cron: '15 3 * * *'
+  workflow_dispatch:
+    inputs:
+      execute_live:
+        description: 'Run live collector and persistence (requires configured secrets and source approval)'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: viral-radar-daily
+  cancel-in-progress: false
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      MPR_YOUTUBE_TERMS_APPROVED: ${{ vars.MPR_YOUTUBE_TERMS_APPROVED }}
+      MPR_YOUTUBE_SOURCE_ENABLED: ${{ vars.MPR_YOUTUBE_SOURCE_ENABLED }}
+      MPR_VIRAL_PRODUCTION_WRITE_APPROVED: ${{ vars.MPR_VIRAL_PRODUCTION_WRITE_APPROVED }}
+      MPR_VIRAL_SCORE_REFRESH_APPROVED: ${{ vars.MPR_VIRAL_SCORE_REFRESH_APPROVED }}
+      MPR_VIRAL_ROMANIA_ROUTING_APPROVED: ${{ vars.MPR_VIRAL_ROMANIA_ROUTING_APPROVED }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Run guarded viral pipeline
+        run: node scripts/run-viral-pipeline.mjs --execute=${{ github.event_name == 'workflow_dispatch' && inputs.execute_live || false }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: viral-pipeline-run
+          path: artifacts/viral-pipeline-run.json
