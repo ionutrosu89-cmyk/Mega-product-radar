@@ -30,6 +30,7 @@
     "viral:persist-youtube": "node scripts/persist-youtube-viral-report.mjs",
     "viral:refresh-scores": "node scripts/refresh-viral-candidate-scores.mjs",
     "viral:route-romania": "node scripts/route-viral-candidates-to-romania.mjs",
+    "viral:pipeline": "node scripts/run-viral-pipeline.mjs",
     "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "ranking:consume": "node scripts/run-observation-consumption-receipt.mjs",
     "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
