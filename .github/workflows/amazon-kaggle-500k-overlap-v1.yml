@@ -1,0 +1,39 @@
+name: Amazon Kaggle 500K Overlap V1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/migrations/20260901_amazon_kaggle_overlap_v1.sql'
+      - 'supabase/functions/github-oidc-amazon-kaggle-overlap-v1/index.ts'
+      - 'scripts/build-amazon-kaggle-400k-new-v1.py'
+      - '.github/workflows/amazon-kaggle-500k-overlap-v1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  overlap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download qualified public Kaggle dataset
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-delay 2 'https://www.kaggle.com/api/v1/datasets/download/asaniczka/amazon-products-dataset-2023-1-4m-products' --output /tmp/amazon-products-2023.zip
+          test -s /tmp/amazon-products-2023.zip
+      - name: Select exact 400K new ASINs read-only
+        env:
+          MPR_OVERLAP_EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-kaggle-overlap-v1
+        run: |
+          set -euo pipefail
+          python3 scripts/build-amazon-kaggle-400k-new-v1.py
+      - name: Upload selection receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-kaggle-400k-new-v1-${{ github.run_id }}
+          path: |
+            /tmp/amazon-kaggle-400k-new-receipt.json
+            /tmp/amazon-kaggle-400k-new-asins.txt
+          if-no-files-found: error
+          retention-days: 14
