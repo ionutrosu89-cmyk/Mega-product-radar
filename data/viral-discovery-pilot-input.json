@@ -1,0 +1,13 @@
+{
+  "schema":"MPR_VIRAL_PILOT_INPUT_V1",
+  "sourcePolicies":{
+    "TIKTOK":{"termsApproved":false,"enabled":false},
+    "GOOGLE_TRENDS":{"termsApproved":false,"enabled":false}
+  },
+  "observations":[
+    {"platform":"TIKTOK","countryCode":"US","externalId":"fixture-tt-1","sourceUrl":"https://example.com/evidence/fixture-tt-1","observedAt":"2026-08-25T00:00:00Z","conceptName":"Portable dog paw cleaner","category":"Pet care","brandPolicyClass":"GENERIC_PRIVATE_LABEL","evidenceClass":"UNVERIFIED","metrics":{"viewCount":1000}},
+    {"platform":"TIKTOK","countryCode":"US","externalId":"fixture-tt-1","sourceUrl":"https://example.com/evidence/fixture-tt-1","observedAt":"2026-08-31T00:00:00Z","conceptName":"Portable dog paw cleaner","category":"Pet care","brandPolicyClass":"GENERIC_PRIVATE_LABEL","evidenceClass":"UNVERIFIED","metrics":{"viewCount":9000}},
+    {"platform":"GOOGLE_TRENDS","countryCode":"GB","externalId":"fixture-gt-1","sourceUrl":"https://example.com/evidence/fixture-gt-1","observedAt":"2026-08-25T00:00:00Z","conceptName":"Portable dog paw cleaner","category":"Pet care","brandPolicyClass":"GENERIC_PRIVATE_LABEL","evidenceClass":"UNVERIFIED","metrics":{"searchInterest":12}},
+    {"platform":"GOOGLE_TRENDS","countryCode":"GB","externalId":"fixture-gt-1","sourceUrl":"https://example.com/evidence/fixture-gt-1","observedAt":"2026-08-31T00:00:00Z","conceptName":"Portable dog paw cleaner","category":"Pet care","brandPolicyClass":"GENERIC_PRIVATE_LABEL","evidenceClass":"UNVERIFIED","metrics":{"searchInterest":48}}
+  ]
+}

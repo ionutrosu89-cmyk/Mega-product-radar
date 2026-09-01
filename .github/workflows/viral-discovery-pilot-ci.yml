@@ -1,0 +1,23 @@
+name: Viral Discovery Pilot CI
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: node --check viral-collector-contract.js
+      - run: node --check scripts/run-viral-discovery-pilot.mjs
+      - run: node --test test/viral-growth-engine-v1.test.mjs test/viral-collector-contract-v1.test.mjs
+      - run: node scripts/run-viral-discovery-pilot.mjs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: viral-discovery-pilot-report
+          path: artifacts/viral-discovery-pilot-report.json
