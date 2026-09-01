@@ -6,6 +6,7 @@ on:
       - 'supabase/migrations/20260901_amazon_kaggle_overlap_v1.sql'
       - 'supabase/functions/github-oidc-amazon-kaggle-overlap-v1/index.ts'
       - 'scripts/build-amazon-kaggle-400k-new-v1.py'
+      - 'scripts/build-amazon-kaggle-million-new-v1.py'
       - '.github/workflows/amazon-kaggle-500k-overlap-v1.yml'
   workflow_dispatch:
 permissions:
@@ -22,18 +23,27 @@ jobs:
           set -euo pipefail
           curl --fail --location --retry 3 --retry-delay 2 'https://www.kaggle.com/api/v1/datasets/download/asaniczka/amazon-products-dataset-2023-1-4m-products' --output /tmp/amazon-products-2023.zip
           test -s /tmp/amazon-products-2023.zip
-      - name: Select exact 400K new ASINs read-only
+      - name: Select exact 510001 new ASINs read-only
         env:
           MPR_OVERLAP_EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-kaggle-overlap-v1
         run: |
           set -euo pipefail
-          python3 scripts/build-amazon-kaggle-400k-new-v1.py
+          python3 scripts/build-amazon-kaggle-million-new-v1.py
+          jq -e '.schema=="MPR_AMAZON_MILLION_SELECTION_V1"
+            and .baselineDistinctAsins==500000
+            and .selectedNewAsins==510001
+            and .expectedFinalDistinctAsins==1010001
+            and .writePerformed==false
+            and .verifiedSales==false
+            and .providerSpendEur==0
+            and .paidCallsTriggered==0
+            and .purchaseAuthorized==false' /tmp/amazon-kaggle-million-selection-receipt.json >/dev/null
       - name: Upload selection receipt
         uses: actions/upload-artifact@v4
         with:
-          name: amazon-kaggle-400k-new-v1-${{ github.run_id }}
+          name: amazon-kaggle-million-new-v1-${{ github.run_id }}
           path: |
-            /tmp/amazon-kaggle-400k-new-receipt.json
-            /tmp/amazon-kaggle-400k-new-asins.txt
+            /tmp/amazon-kaggle-million-selection-receipt.json
+            /tmp/amazon-kaggle-million-new-asins.txt
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 30
