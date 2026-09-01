@@ -25,6 +25,7 @@ env:
   MPR_ROMANIA_REFRESH_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-refresh-consumer-v1'
   MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'
   MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'
+  MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS: '5'
 
 concurrency:
   group: romania-refresh-consumer-v1-${{ github.ref }}
@@ -63,30 +64,48 @@ jobs:
             cp request.json "artifacts/edge-request-${worker_id}.json"
 
             # Preserve the Edge response and HTTP status even when curl fails.
-            # The request remains strictly fail-closed: any transport or HTTP error
-            # exits non-zero before response-contract validation or evidence promotion.
-            set +e
-            http_status="$(curl --fail-with-body --silent --show-error --max-time 120 \
-              -X POST "$MPR_ROMANIA_REFRESH_URL" \
-              -H "Authorization: Bearer $OIDC_TOKEN" \
-              -H 'content-type: application/json' \
-              --data-binary @request.json \
-              -o batch.json \
-              -w '%{http_code}')"
-            curl_rc=$?
-            set -e
+            # The request remains strictly fail-closed. The only retry permitted is
+            # one bounded wait for the observed transient GitHub/Supabase clock-skew
+            # response `JWT issued at future`; all other failures exit immediately.
+            attempt=1
+            while true; do
+              rm -f batch.json
+              set +e
+              http_status="$(curl --fail-with-body --silent --show-error --max-time 120 \
+                -X POST "$MPR_ROMANIA_REFRESH_URL" \
+                -H "Authorization: Bearer $OIDC_TOKEN" \
+                -H 'content-type: application/json' \
+                --data-binary @request.json \
+                -o batch.json \
+                -w '%{http_code}')"
+              curl_rc=$?
+              set -e
 
-            printf '%s\n' "$http_status" > "artifacts/edge-http-status-${worker_id}.txt"
-            if [ -f batch.json ]; then
-              cp batch.json "artifacts/edge-response-${worker_id}.json"
-            fi
-            if [ "$curl_rc" -ne 0 ]; then
-              echo "EDGE_REQUEST_FAILED worker=${WORKER} round=${round} curl_rc=${curl_rc} http_status=${http_status}" >&2
+              printf '%s\n' "$http_status" > "artifacts/edge-http-status-${worker_id}-attempt-${attempt}.txt"
+              if [ -f batch.json ]; then
+                cp batch.json "artifacts/edge-response-${worker_id}-attempt-${attempt}.json"
+              fi
+
+              if [ "$curl_rc" -eq 0 ]; then
+                break
+              fi
+
+              if [ "$attempt" -eq 1 ] && [ -s batch.json ] && grep -Fq 'JWT issued at future' batch.json; then
+                echo "EDGE_TRANSIENT_JWT_CLOCK_SKEW worker=${WORKER} round=${round}; retrying once after ${MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS}s" >&2
+                sleep "$MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS"
+                attempt=2
+                continue
+              fi
+
+              echo "EDGE_REQUEST_FAILED worker=${WORKER} round=${round} attempt=${attempt} curl_rc=${curl_rc} http_status=${http_status}" >&2
               if [ -s batch.json ]; then
                 cat batch.json >&2
               fi
               exit "$curl_rc"
-            fi
+            done
+
+            cp "artifacts/edge-http-status-${worker_id}-attempt-${attempt}.txt" "artifacts/edge-http-status-${worker_id}.txt"
+            cp "artifacts/edge-response-${worker_id}-attempt-${attempt}.json" "artifacts/edge-response-${worker_id}.json"
 
             jq -e '
               .ok == true and
@@ -127,8 +146,11 @@ jobs:
           set -euo pipefail
           grep -q "MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS: '5'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'worker: \[0, 1, 2, 3, 4, 5, 6, 7\]' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'collectBatch' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'JWT issued at future' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'attempt=2' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-http-status-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-response-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'comparabilityPromoted == false' .github/workflows/romania-refresh-consumer-v1.yml
