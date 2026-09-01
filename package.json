@@ -24,6 +24,7 @@
     "ranking:history": "node scripts/run-ranking-signal-history.mjs",
     "ranking:cycle": "node scripts/run-durable-ranking-history-cycle.mjs",
     "ranking:scheduled-tick": "node scripts/run-scheduled-ranking-history-tick.mjs",
+    "test:viral-growth": "node --test test/viral-growth-engine-v1.test.mjs",
     "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "ranking:consume": "node scripts/run-observation-consumption-receipt.mjs",
     "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
