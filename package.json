@@ -27,6 +27,7 @@
     "test:viral-growth": "node --test test/viral-growth-engine-v1.test.mjs",
     "viral:pilot": "node scripts/run-viral-discovery-pilot.mjs",
     "viral:youtube": "node scripts/run-youtube-viral-collector.mjs",
+    "viral:persist-youtube": "node scripts/persist-youtube-viral-report.mjs",
     "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "ranking:consume": "node scripts/run-observation-consumption-receipt.mjs",
     "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
