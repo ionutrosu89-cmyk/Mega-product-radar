@@ -6,6 +6,7 @@ on:
     paths:
       - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
       - 'supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql'
+      - 'supabase/migrations/20260901_intelligence_priority_routing_v1.sql'
       - 'scripts/amazon-need-history-pilot.mjs'
       - '.github/workflows/amazon-need-history-pilot-v1.yml'
   push:
@@ -13,8 +14,12 @@ on:
     paths:
       - 'supabase/migrations/20260831_amazon_need_history_targets_v1.sql'
       - 'supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql'
+      - 'supabase/migrations/20260901_intelligence_priority_routing_v1.sql'
       - 'scripts/amazon-need-history-pilot.mjs'
       - '.github/workflows/amazon-need-history-pilot-v1.yml'
+  schedule:
+    - cron: '37 */6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -31,13 +36,13 @@ jobs:
       - name: Static safety checks
         run: |
           node --check scripts/amazon-need-history-pilot.mjs
-          grep -q "coalesce(o.n,0) <= 1" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
-          grep -q "external_id like 'B%'" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
-          grep -q "grant execute.*service_role" supabase/migrations/20260831_amazon_need_history_target_priority_v2.sql
+          grep -q "coalesce(o.n,0) <= 1" supabase/migrations/20260901_intelligence_priority_routing_v1.sql
+          grep -q "external_id like 'B%'" supabase/migrations/20260901_intelligence_priority_routing_v1.sql
+          grep -q "TREND_HISTORY" supabase/migrations/20260901_intelligence_priority_routing_v1.sql
           if grep -E "DataForSEO|Apify|purchaseAuthorized:true|paidCallsTriggered:[1-9]" scripts/amazon-need-history-pilot.mjs; then exit 2; fi
 
   pilot:
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 12
@@ -52,7 +57,7 @@ jobs:
         run: |
           TOKEN_JSON="$(curl --fail-with-body -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-need-history")"
           echo "token=$(jq -r '.value' <<<"$TOKEN_JSON")" >> "$GITHUB_OUTPUT"
-      - name: Fetch 25 zero/one-history exact-ASIN targets
+      - name: Fetch 25 intelligence-priority zero/one-history exact-ASIN targets
         env:
           OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
         run: |
