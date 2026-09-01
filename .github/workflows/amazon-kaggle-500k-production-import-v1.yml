@@ -56,19 +56,19 @@ jobs:
       - name: Import exact ASIN batches through GitHub OIDC
         env:
           EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-kaggle-import-v1
-          OIDC_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
-          OIDC_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
           HEAD_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
+          : "${ACTIONS_ID_TOKEN_REQUEST_URL:?GitHub OIDC URL missing}"
+          : "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:?GitHub OIDC request token missing}"
           MANIFEST='3492ad16cfd2be451646492bd6e014a95182893f7f5867e195655b2d9db07dd2'
           batch_no=0
           : > /tmp/import-receipts.jsonl
           for shard in /tmp/amazon-kaggle-500k-payload/shard-*.jsonl; do
             split -l 1000 -d -a 3 "$shard" /tmp/mpr-batch-
             for batch in /tmp/mpr-batch-*; do
-              if (( batch_no % 20 == 0 )); then
-                GH_OIDC="$(curl --fail --silent --show-error -H "Authorization: Bearer $OIDC_TOKEN" "${OIDC_URL}&audience=mpr-amazon-kaggle-500k-import" | jq -er '.value')"
+              if (( batch_no % 5 == 0 )); then
+                GH_OIDC="$(curl --fail --silent --show-error -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-kaggle-500k-import" | jq -er '.value')"
               fi
               jq -s --arg sha "$HEAD_SHA" --arg manifest "$MANIFEST" '{action:"importBatch",expectedSha:$sha,manifestSha256:$manifest,rows:.}' "$batch" > /tmp/request.json
               curl --fail --silent --show-error --retry 3 --retry-delay 2 \
@@ -84,15 +84,15 @@ jobs:
       - name: Verify exact production target
         env:
           EDGE_URL: https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-kaggle-import-v1
-          OIDC_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
-          OIDC_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
           HEAD_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          GH_OIDC="$(curl --fail --silent --show-error -H "Authorization: Bearer $OIDC_TOKEN" "${OIDC_URL}&audience=mpr-amazon-kaggle-500k-import" | jq -er '.value')"
+          : "${ACTIONS_ID_TOKEN_REQUEST_URL:?GitHub OIDC URL missing}"
+          : "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:?GitHub OIDC request token missing}"
+          GH_OIDC="$(curl --fail --silent --show-error -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-amazon-kaggle-500k-import" | jq -er '.value')"
           jq -n --arg sha "$HEAD_SHA" '{action:"finalize",expectedSha:$sha,manifestSha256:"3492ad16cfd2be451646492bd6e014a95182893f7f5867e195655b2d9db07dd2"}' > /tmp/finalize.json
           curl --fail --silent --show-error -H "Authorization: Bearer $GH_OIDC" -H 'Content-Type: application/json' --data-binary @/tmp/finalize.json "$EDGE_URL" | tee /tmp/final-receipt.json
-          jq -e '.ok==true and .amazonDistinctAsins==500000 and .amazonDistinctProducts==500000 and .ambiguousAsins==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' /tmp/final-receipt.json >/dev/null
+          jq -e '.ok==true and .distinctAsins==500000 and .distinctProducts==500000 and .ambiguousAsins==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' /tmp/final-receipt.json >/dev/null
       - name: Upload receipts
         uses: actions/upload-artifact@v4
         with:
