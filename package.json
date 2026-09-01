@@ -31,6 +31,7 @@
     "viral:refresh-scores": "node scripts/refresh-viral-candidate-scores.mjs",
     "viral:route-romania": "node scripts/route-viral-candidates-to-romania.mjs",
     "viral:pipeline": "node scripts/run-viral-pipeline.mjs",
+    "viral:tiktok-commercial": "node scripts/run-tiktok-commercial-collector.mjs",
     "ranking:inbox": "node scripts/run-live-observation-inbox.mjs",
     "ranking:consume": "node scripts/run-observation-consumption-receipt.mjs",
     "ranking:lease-drill": "node scripts/run-observation-lease-recovery.mjs",
