@@ -1,0 +1,52 @@
+name: Amazon Kaggle 500K Import V1
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-amazon-kaggle-500k-import-payload-v1.py'
+      - '.github/workflows/amazon-kaggle-500k-import-v1.yml'
+      - 'supabase/functions/github-oidc-amazon-kaggle-import-v1/index.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+
+jobs:
+  validate-payload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download pinned 400K manifest artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          curl --fail --location -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' \
+            'https://api.github.com/repos/ionutrosu89-cmyk/Mega-product-radar/actions/artifacts/9787714578/zip' \
+            --output /tmp/manifest-artifact.zip
+          mkdir -p /tmp/manifest-artifact
+          unzip -q /tmp/manifest-artifact.zip -d /tmp/manifest-artifact
+          cp /tmp/manifest-artifact/amazon-kaggle-400k-new-asins.txt /tmp/amazon-kaggle-400k-new-asins.txt
+          echo '3492ad16cfd2be451646492bd6e014a95182893f7f5867e195655b2d9db07dd2  /tmp/amazon-kaggle-400k-new-asins.txt' | sha256sum --check --strict
+      - name: Download qualified ODC-By source
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-delay 2 \
+            'https://www.kaggle.com/api/v1/datasets/download/asaniczka/amazon-products-dataset-2023-1-4m-products' \
+            --output /tmp/amazon-products-2023.zip
+          test -s /tmp/amazon-products-2023.zip
+      - name: Build exact sharded import payload read-only
+        run: |
+          set -euo pipefail
+          python3 scripts/build-amazon-kaggle-500k-import-payload-v1.py
+          jq -e '.schema=="MPR_AMAZON_KAGGLE_500K_IMPORT_PAYLOAD_V1" and .rowCount==400000 and .shardCount==8 and .shardSize==50000 and (.shardDigestsSha256|length)==8 and .manifestSha256=="3492ad16cfd2be451646492bd6e014a95182893f7f5867e195655b2d9db07dd2" and .verifiedSales==false and .databaseWrites==0 and .providerSpendEur==0 and .paidCallsTriggered==0 and .purchaseAuthorized==false' /tmp/amazon-kaggle-500k-payload/receipt.json >/dev/null
+      - name: Upload validation receipt only
+        uses: actions/upload-artifact@v4
+        with:
+          name: amazon-kaggle-500k-import-validation-${{ github.run_id }}
+          path: /tmp/amazon-kaggle-500k-payload/receipt.json
+          if-no-files-found: error
+          retention-days: 14
