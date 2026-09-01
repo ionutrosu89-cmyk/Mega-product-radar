@@ -24,7 +24,7 @@ env:
   MPR_ROMANIA_REFRESH_AUDIENCE: 'mpr-romania-refresh-consumer'
   MPR_ROMANIA_REFRESH_URL: 'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/romania-refresh-consumer-v1'
   MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'
-  MPR_ROMANIA_EDGE_BATCH_ROUNDS: '3'
+  MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'
 
 concurrency:
   group: romania-refresh-consumer-v1-${{ github.ref }}
@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        worker: [0, 1, 2, 3]
+        worker: [0, 1, 2, 3, 4, 5, 6, 7]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -126,8 +126,8 @@ jobs:
         run: |
           set -euo pipefail
           grep -q "MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'" .github/workflows/romania-refresh-consumer-v1.yml
-          grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '3'" .github/workflows/romania-refresh-consumer-v1.yml
-          grep -q 'worker: \[0, 1, 2, 3\]' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'worker: \[0, 1, 2, 3, 4, 5, 6, 7\]' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'collectBatch' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-http-status-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-response-' .github/workflows/romania-refresh-consumer-v1.yml
