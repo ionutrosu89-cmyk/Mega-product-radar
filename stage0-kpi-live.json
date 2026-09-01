@@ -1,15 +1,15 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-09-01T16:20:16.724Z",
+  "updatedAt": "2026-09-01T21:49:27.471Z",
   "verdict": "HOLD_STAGE0",
   "manualPromotionRequired": true,
   "metrics": {
     "pipelineProducts": 65,
-    "targetCount": 0,
-    "usefulEnrichments": 0,
-    "enrichmentSuccessPct": 0,
+    "targetCount": 6,
+    "usefulEnrichments": 1,
+    "enrichmentSuccessPct": 16.7,
     "runCostConservativeEur": 0.0099,
-    "costPerUsefulEnrichmentEur": null,
+    "costPerUsefulEnrichmentEur": 0.0099,
     "cumulativeTestSpendConservativeEur": 1.9455
   },
   "criteria": {
@@ -18,20 +18,72 @@
     "maxStage0SpendEur": 10
   },
   "checks": {
-    "allowlistActive": false,
+    "allowlistActive": true,
     "pipelineDatasetAvailable": true,
-    "targetSetEvaluable": false,
+    "targetSetEvaluable": true,
     "enrichmentSuccess": false,
-    "costEfficiency": false,
+    "costEfficiency": true,
     "stageBudgetSafe": true,
     "noCostAnomaly": true
   },
   "blockers": [
-    "allowlistActive",
-    "targetSetEvaluable",
-    "enrichmentSuccess",
-    "costEfficiency"
+    "enrichmentSuccess"
   ],
-  "evaluated": [],
+  "evaluated": [
+    {
+      "canonicalKey": "reusable-furniture-moving-sliders-kit",
+      "title": "Reusable furniture moving sliders kit",
+      "useful": true,
+      "romaniaDemandReady": true,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "shoe-washing-laundry-bag-structured",
+      "title": "Shoe washing laundry bag structured",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-car-seat-snack-tray-age-3-plus",
+      "title": "Kids car seat snack tray age 3 plus",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-portable-drawing-board-storage-bag",
+      "title": "Kids portable drawing board storage bag",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    },
+    {
+      "canonicalKey": "kids-reusable-sticker-activity-book",
+      "title": "Kids reusable sticker activity book",
+      "useful": false,
+      "romaniaDemandReady": false,
+      "keywordVolume": 0,
+      "hasAmazonEvidence": false,
+      "hasRankedKeywords": false
+    }
+  ],
   "policy": "The 100-candidate Stage 0 universe lives in Supabase and is not inferred from the smaller market-intelligence execution dataset. Stage 1 is never enabled automatically. This evaluator only reports whether the current paid batch meets quality and cost thresholds; commercial TEST/BUY gates remain unchanged."
 }
