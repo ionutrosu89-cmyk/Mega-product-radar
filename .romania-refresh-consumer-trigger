@@ -1,13 +1,12 @@
 approved_at=2026-09-01
 purpose=edge_romania_10k_hydration_consumer
-workers=4
-edge_batch_limit=8
-edge_batch_rounds=3
-max_claimed_per_run=96
+batch_limit=25
+batch_rounds=3
+max_claimed_per_run=75
 provider_spend_eur=0
 paid_calls_triggered=0
 purchase_authorized=false
 truth_class=NOT_VERIFIED_SALES
 comparability_promoted=false
 missing_as_zero=false
-trigger_reason=verified_1191_of_10000_continue_hydration
+trigger_reason=verified_1266_of_10000_continue_hydration
