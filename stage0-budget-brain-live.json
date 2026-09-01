@@ -1,12 +1,61 @@
 {
   "version": "1.1-oidc",
-  "updatedAt": "2026-09-01T16:19:41.861Z",
-  "status": "BLOCKED_ALLOWLIST_UNAVAILABLE",
-  "targetCount": 0,
-  "eligibleCount": 0,
-  "blockedCount": 65,
-  "targets": [],
-  "error": "Stage 0 secure targets HTTP 500",
+  "updatedAt": "2026-09-01T21:49:03.770Z",
+  "status": "ACTIVE",
+  "targetCount": 6,
+  "eligibleCount": 6,
+  "blockedCount": 59,
+  "targets": [
+    {
+      "canonicalKey": "reusable-furniture-moving-sliders-kit",
+      "title": "Reusable furniture moving sliders kit",
+      "status": "VALIDATE",
+      "estimatedCostEur": 0.05,
+      "informationValue": 201.925,
+      "paidDataPriority": 1
+    },
+    {
+      "canonicalKey": "shoe-washing-laundry-bag-structured",
+      "title": "Shoe washing laundry bag structured",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 165.075,
+      "paidDataPriority": 2
+    },
+    {
+      "canonicalKey": "kids-car-seat-snack-tray-age-3-plus",
+      "title": "Kids car seat snack tray age 3 plus",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 163.075,
+      "paidDataPriority": 3
+    },
+    {
+      "canonicalKey": "kids-portable-drawing-board-storage-bag",
+      "title": "Kids portable drawing board storage bag",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 162.575,
+      "paidDataPriority": 4
+    },
+    {
+      "canonicalKey": "dog-car-door-protector-set",
+      "title": "Dog car door protector set",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 161.575,
+      "paidDataPriority": 5
+    },
+    {
+      "canonicalKey": "kids-reusable-sticker-activity-book",
+      "title": "Kids reusable sticker activity book",
+      "status": "PROMISING",
+      "estimatedCostEur": 0.05,
+      "informationValue": 128.575,
+      "paidDataPriority": 6
+    }
+  ],
+  "error": null,
   "authorization": "GITHUB_OIDC_EDGE",
   "policy": "Fail closed. Only PROMISING/VALIDATE products returned by the server-side Stage 0 RO queue may retain goldenPipeline.paidDataEligible=true. Browser/public RPC access is not used."
 }
