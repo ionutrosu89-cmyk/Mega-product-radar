@@ -1,9 +1,9 @@
 {
   "ok": true,
   "status": "completed",
-  "startedAt": "2026-09-01T09:43:54.835Z",
-  "completedAt": "2026-09-01T09:50:05.541Z",
-  "updatedAt": "2026-09-01T09:44:08.586Z",
+  "startedAt": "2026-09-01T16:13:15.139Z",
+  "completedAt": "2026-09-01T16:19:35.820Z",
+  "updatedAt": "2026-09-01T16:13:27.708Z",
   "newCandidates": 0,
   "totalProducts": 97,
   "model": "Mega Product Radar V2",
@@ -30,11 +30,11 @@
   },
   "v2Validation": {
     "version": "2.2",
-    "updatedAt": "2026-09-01T09:44:08.644Z",
+    "updatedAt": "2026-09-01T16:13:27.763Z",
     "policy": "Evidence first: verified supplier listings may support TEST; BUY still requires strong live evidence and commercial confirmation gates."
   },
   "discovery": {
-    "updatedAt": "2026-09-01T09:50:05.511Z",
+    "updatedAt": "2026-09-01T16:19:35.793Z",
     "candidates": 65,
     "scanSize": 10,
     "openDiscovered": 0,
@@ -148,7 +148,7 @@
     },
     "supplierHunter": {
       "version": "2.0",
-      "updatedAt": "2026-09-01T09:48:05.487Z",
+      "updatedAt": "2026-09-01T16:17:35.767Z",
       "platforms": [
         "Alibaba",
         "1688",
@@ -175,11 +175,11 @@
     "mode": "WIDE_DISCOVERY_STRICT_VALIDATION"
   },
   "organicRising": {
-    "updatedAt": "2026-09-01T09:47:00.263Z",
-    "category": "Beauty accesorii",
-    "successfulPages": 15,
-    "totalObserved": 152,
-    "totalClusters": 97,
+    "updatedAt": "2026-09-01T16:16:17.405Z",
+    "category": "Fitness & recuperare",
+    "successfulPages": 13,
+    "totalObserved": 137,
+    "totalClusters": 87,
     "feedCount": 2,
     "feedThreshold": 55,
     "operational": true,
@@ -193,8 +193,8 @@
       "amazonUS": {
         "label": "Amazon US",
         "attempted": 6,
-        "successful": 6,
-        "items": 69,
+        "successful": 4,
+        "items": 48,
         "statuses": [
           200,
           200,
@@ -216,44 +216,44 @@
         "label": "Amazon IT",
         "attempted": 6,
         "successful": 3,
-        "items": 35,
+        "items": 42,
         "statuses": [
           200,
           200,
           200,
           200,
-          503,
-          503
+          200,
+          200
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "amazonDE": {
         "label": "Amazon DE",
         "attempted": 6,
-        "successful": 3,
-        "items": 36,
+        "successful": 2,
+        "items": 23,
         "statuses": [
           200,
           200,
           200,
           200,
-          503,
-          503
+          200,
+          200
         ],
         "sources": [
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT",
-          "DIRECT+FALLBACKS_FAILED",
-          "DIRECT+FALLBACKS_FAILED"
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER",
+          "GOOGLE_TRANSLATE_RENDER"
         ]
       },
       "ebayUS": {
@@ -281,13 +281,13 @@
       "emagRO": {
         "label": "eMAG RO",
         "attempted": 6,
-        "successful": 3,
-        "items": 12,
+        "successful": 4,
+        "items": 24,
         "statuses": [
           200,
           200,
           200,
-          511,
+          200,
           511,
           511
         ],
@@ -295,7 +295,7 @@
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
           "GOOGLE_TRANSLATE_RENDER",
-          "DIRECT+FALLBACKS_FAILED",
+          "GOOGLE_TRANSLATE_RENDER",
           "DIRECT+FALLBACKS_FAILED",
           "DIRECT+FALLBACKS_FAILED"
         ]
@@ -303,14 +303,14 @@
     },
     "reviewEnrichment": {
       "version": "1.0",
-      "at": "2026-09-01T09:48:05.468Z",
-      "attempted": 14,
+      "at": "2026-09-01T16:17:35.750Z",
+      "attempted": 12,
       "enriched": 0,
       "policy": "Numărul de review-uri lipsă din pagina de rezultate este verificat suplimentar pe pagina exactă a produsului. Lipsa dovezii rămâne NECUNOSCUT."
     },
     "qualityPostprocess": {
       "version": "1.1",
-      "at": "2026-09-01T09:48:05.477Z",
+      "at": "2026-09-01T16:17:35.758Z",
       "exactListingReviewGate": true,
       "missingReviewIsNotZero": true,
       "categoryRelevanceGate": true,
