@@ -13,34 +13,6 @@ on:
         required: false
         default: ''
         type: string
-  push:
-    branches: [main]
-    paths:
-      - 'v6-core.js'
-      - 'discovery-catalogue.json'
-      - 'discovery-themes.json'
-      - 'discovery-themes-wide.json'
-      - 'category-universe.json'
-      - 'category-radar.html'
-      - 'organic-rising-config.json'
-      - 'discovery-engine.js'
-      - 'discovery-history.js'
-      - 'review-intelligence.js'
-      - 'market-intelligence.html'
-      - 'watchlist.html'
-      - 'test-buy.html'
-      - 'free-readiness.html'
-      - 'alerts.html'
-      - 'validation-queue.html'
-      - 'data-confidence.html'
-      - 'free-intelligence-ui.js'
-      - 'commercial-observations.json'
-      - '.deploy-trigger'
-  schedule:
-    - cron: '30 3 * * *'
-    - cron: '30 9 * * *'
-    - cron: '30 15 * * *'
-    - cron: '30 21 * * *'
 
 permissions:
   contents: write
@@ -52,6 +24,7 @@ concurrency:
 
 jobs:
   scan:
+    # Free beta: never run on a schedule/push. Every run must be started manually.
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
