@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { getStore } from "@netlify/blobs";
+import {freeBetaProviderResponse,paidProviderCallsEnabled} from './_commercial-launch-mode.mjs';
 
 const BUCKETS = [
   "home organization, cleaning tools, kitchen non-electric, travel accessories",
@@ -162,6 +163,7 @@ async function fallbackProducts(baseUrl) {
 }
 
 export default async (req) => {
+  if (!paidProviderCallsEnabled(process.env)) return freeBetaProviderResponse();
   const secret = process.env.RADAR_INTERNAL_SECRET;
   if (!secret || req.headers.get("x-radar-secret") !== secret) {
     return new Response("Forbidden", { status: 403 });
