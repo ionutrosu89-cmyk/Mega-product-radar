@@ -7,14 +7,26 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
 const safeUrl=u=>{try{const x=new URL(String(u||''),location.href);return ['http:','https:'].includes(x.protocol)?x.href:'#';}catch{return'#';}};
 const representativeImageUrl=name=>`https://tse1.mm.bing.net/th?q=${encodeURIComponent(`${String(name||'').trim()} product`)}&pid=Api`;
-const fmtMetric=m=>{if(!m)return '—';if(m.unit==='searches')return `${Number(m.value||0).toLocaleString('ro-RO')} căutări`;if(m.unit==='results')return `${Number(m.value||0).toLocaleString('ro-RO')} rezultate`;return String(m.value??'—');};
-const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
+const fmtMetric=m=>{if(!m)return '—';if(m.unit==='searches')return `${Number(m.value||0).toLocaleString('ro-RO')} căutări`;if(m.unit==='results')return `${Number(m.value||0).toLocaleString('ro-RO')} rezultate`;if(m.unit==='reviews_historical')return `${Number(m.value||0).toLocaleString('ro-RO')} recenzii istorice`;return String(m.value??'—');};
+const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',HISTORICAL_PRODUCT:'PRODUS ISTORIC LICENȚIAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
 const fmtDate=value=>{if(!value)return '—';const raw=String(value);const d=new Date(raw.length===10?`${raw}T00:00:00`:raw);return Number.isNaN(d.getTime())?raw:new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(d);};
+const normalizeSearch=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
 let niches=[...FREE_TOP25_NICHES];
 let current=niches[0];
 let renderToken=0;
 
-function tabs(){const root=$('#tabs');root.innerHTML=niches.map((n,i)=>`<button data-niche="${esc(n.id)}" class="${i===0?'active':''}">${n.emoji} ${esc(n.label)}${n.mode==='LIVE_EVIDENCE'?' · LIVE':''}</button>`).join('');root.addEventListener('click',event=>{const btn=event.target.closest('[data-niche]');if(!btn)return;const next=niches.find(n=>n.id===btn.dataset.niche);if(!next)return;current=next;root.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===btn));render();});}
+function tabs(){
+  const root=$('#tabs'),search=$('#nicheSearch'),counter=$('#nicheCount');
+  const draw=()=>{
+    const query=normalizeSearch(search?.value);
+    const visible=query?niches.filter(niche=>normalizeSearch(`${niche.label} ${niche.id}`).includes(query)):niches;
+    root.innerHTML=visible.map(n=>`<button data-niche="${esc(n.id)}" class="${n.id===current?.id?'active':''}">${n.emoji} ${esc(n.label)}${n.mode==='LIVE_EVIDENCE'?' · LIVE':n.mode==='LICENSED_HISTORICAL_EVIDENCE'?' · DATASET':''}</button>`).join('')||'<span>Nu am găsit această nișă.</span>';
+    if(counter)counter.textContent=`${visible.length}/${niches.length} nișe · ${niches.length*25} produse urmărite`;
+  };
+  root.addEventListener('click',event=>{const btn=event.target.closest('[data-niche]');if(!btn)return;const next=niches.find(n=>n.id===btn.dataset.niche);if(!next)return;current=next;draw();render();});
+  search?.addEventListener('input',draw);
+  draw();
+}
 
 function card(raw,movement,previousReviewedAt,currentEvidence,currentReviewedAt){
   const p=hardenTop25Evidence(raw);
@@ -36,8 +48,10 @@ async function render(){
   $('#nicheTitle').textContent=`${niche.emoji} Top 25 · ${niche.label}`;
   $('#nicheText').textContent=niche.mode==='LIVE_EVIDENCE'
     ?`${products.length} produse selectate automat din evidence live. O nișă LIVE apare numai când există 25/25 produse cu sursă publică directă.`
-    :`${products.length} produse cu sursă publică atașată. Rank-ul intern este DERIVED; mișcarea se calculează numai între două revizii distincte.`;
-  $('#coverage').textContent=`${products.length}/25${niche.mode==='LIVE_EVIDENCE'?' LIVE':''}`;
+    :niche.mode==='LICENSED_HISTORICAL_EVIDENCE'
+      ?`${products.length} produse din dataset licențiat, ordonate după dovada istorică disponibilă. Nu reprezintă vânzări curente; brand gate rămâne obligatoriu înainte de analiză comercială.`
+      :`${products.length} produse cu sursă publică atașată. Rank-ul intern este DERIVED; mișcarea se calculează numai între două revizii distincte.`;
+  $('#coverage').textContent=`${products.length}/25${niche.mode==='LIVE_EVIDENCE'?' LIVE':niche.mode==='LICENSED_HISTORICAL_EVIDENCE'?' DATASET':''}`;
   const trackingEl=$('#trackingStatus');if(trackingEl)trackingEl.textContent='Se încarcă istoricul central…';
 
   const tracking=await prepareTop25MovementCentral(niche,reviewedAt);
