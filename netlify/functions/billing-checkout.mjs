@@ -1,4 +1,5 @@
 import {resolveBillingWorkspaceAccess} from './_billing-workspace-access.mjs';
+import {freeBetaBillingResponse,paidBillingEnabled} from './_commercial-launch-mode.mjs';
 
 const PRICE_ENV={DISCOVER:'STRIPE_PRICE_DISCOVER',RADAR:'STRIPE_PRICE_RADAR',LAUNCH:'STRIPE_PRICE_LAUNCH'};
 const CHECKOUT_ATTEMPT_RE=/^[A-Za-z0-9_-]{16,100}$/;
@@ -23,6 +24,7 @@ async function recordJourneyEvent({workspaceId,userId,plan,eventName,metadata},{
 export function createBillingCheckoutHandler({fetch:fetchImpl=fetch,env=process.env}={}){
   return async request=>{
     try{
+      if(!paidBillingEnabled(env))return freeBetaBillingResponse();
       if(!env.STRIPE_SECRET_KEY)return Response.json({ok:false,error:'Stripe billing is not configured'},{status:503,headers:{'Cache-Control':'no-store'}});
       const access=await resolveBillingWorkspaceAccess(request,{fetchImpl,env,mode:'OWNER'});
       if(access.error)return Response.json({ok:false,error:access.error,code:access.code},{status:access.status,headers:{'Cache-Control':'no-store'}});
