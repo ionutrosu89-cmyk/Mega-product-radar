@@ -40,6 +40,19 @@ assert(unsupportedSales.guards.truth.code==='UNSUPPORTED_VERIFIED_SALES_CLAIM','
 const providerSource=await fs.readFile(new URL('./provider-intelligence-v26.mjs',import.meta.url),'utf8');
 assert(providerSource.includes("process.env.DATAFORSEO_V26_PAID_ENABLED||'false'"),'paid provider must remain disabled by default');
 
+const commercialMode=await fs.readFile(new URL('../netlify/functions/_commercial-launch-mode.mjs',import.meta.url),'utf8');
+assert(commercialMode.includes('MPR_PAID_BILLING_ENABLED'),'paid billing must require a separate explicit switch');
+assert(commercialMode.includes('MPR_PAID_PROVIDER_CALLS_ENABLED'),'paid AI/data calls must require a separate explicit switch');
+
+const radarTrigger=await fs.readFile(new URL('../netlify/functions/radar-trigger.mjs',import.meta.url),'utf8');
+const radarBackground=await fs.readFile(new URL('../netlify/functions/radar-scan-background.mjs',import.meta.url),'utf8');
+assert(radarTrigger.includes('paidProviderCallsEnabled(env)'),'Radar trigger must fail closed before launching a provider job');
+assert(radarBackground.includes('paidProviderCallsEnabled(process.env)'),'Radar background must fail closed before OpenAI or storage activity');
+
+const radarWorkflow=await fs.readFile(new URL('../.github/workflows/radar-scan.yml',import.meta.url),'utf8');
+assert(!/schedule\s*:/.test(radarWorkflow),'free beta must not run automated scheduled collection');
+assert(!/^\s+push\s*:/m.test(radarWorkflow),'free beta must not run collection on repository pushes');
+
 const rankingHistoryRunner=await fs.readFile(new URL('./run-durable-ranking-history-cycle.mjs',import.meta.url),'utf8');
 assert(rankingHistoryRunner.includes("process.env.MPR_RANKING_HISTORY_REMOTE_WRITE_ENABLED||'false'"),'remote ranking history writes must remain disabled by default');
 
@@ -123,6 +136,8 @@ console.log(JSON.stringify({
   amazonSourceRightsDefault:amazonRights.status,
   providerSpendDefaultEur:0,
   paidCallsDefault:0,
+  paidBillingDefault:false,
+  scheduledCollectionDefault:false,
   rankingHistoryRemoteWriteDefault:false,
   scheduledRankingRemoteWriteDefault:false,
   productionSchedulerAttestationDefault:false,
