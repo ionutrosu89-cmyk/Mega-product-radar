@@ -15,10 +15,10 @@ test('Stage 0 gives broad keyword coverage before deep variants',async()=>{
   assert.match(keywords,/const toQuery=uncached\.slice\(0,maxKeywords\)/);
 });
 
-test('ordinary script commits cannot trigger paid Radar Scan',async()=>{
+test('free beta cannot trigger Radar Scan automatically',async()=>{
   const workflow=await fs.readFile('.github/workflows/radar-scan.yml','utf8');
-  assert.equal(workflow.includes("- 'scripts/**'"),false);
-  assert.match(workflow,/- '\.deploy-trigger'/);
-  assert.match(workflow,/schedule:/);
+  assert.doesNotMatch(workflow,/^\s+push\s*:/m);
+  assert.doesNotMatch(workflow,/schedule\s*:/);
   assert.match(workflow,/workflow_dispatch:/);
+  assert.match(workflow,/inputs\.allow_paid/);
 });
