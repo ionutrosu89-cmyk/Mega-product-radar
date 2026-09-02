@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 
-test('paid beta landing states the decision positioning and non-guarantee',async()=>{
+test('free beta landing states the demand-validation positioning and non-guarantee',async()=>{
   const html=await readFile('beta.html','utf8');
-  assert.match(html,/Ce merită să testezi în România/);
-  assert.match(html,/VERIFIED \/ ESTIMATED \/ DERIVED/);
-  assert.match(html,/nu garantează vânzări, profit sau succes comercial/i);
+  assert.match(html,/Beta gratuită de validare/);
+  assert.match(html,/fără card/i);
+  assert.match(html,/nu reprezintă garanții de vânzări ori profit/i);
+  assert.match(html,/intenția de plată/i);
 });
 
 test('pricing links terms privacy and beta feedback',async()=>{
@@ -26,13 +27,16 @@ test('beta feedback is workspace scoped and protected with RLS',async()=>{
   assert.match(client,/from\('beta_feedback'\)\.insert/);
 });
 
-test('legal beta pages expose explicit pre-public-launch blockers instead of pretending final compliance',async()=>{
+test('legal beta pages publish the confirmed operator and keep real payments blocked',async()=>{
   const terms=await readFile('terms.html','utf8');
   const privacy=await readFile('privacy.html','utf8');
-  assert.match(terms,/datele juridice complete ale operatorului/i);
-  assert.match(terms,/nu reprezintă consultanță juridică/i);
-  assert.match(privacy,/identitatea și datele de contact ale operatorului/i);
-  assert.match(privacy,/nu reprezintă consultanță juridică/i);
+  for(const page of [terms,privacy]){
+    assert.match(page,/RED COMMERCE S\.R\.L\./);
+    assert.match(page,/46520923/);
+    assert.match(page,/office\.redcommerce@gmail\.com/);
+  }
+  assert.match(terms,/nu există checkout activ/i);
+  assert.match(privacy,/Nu solicităm date de card/i);
 });
 
 test('beta launch checklist preserves commercial evidence gates',async()=>{
