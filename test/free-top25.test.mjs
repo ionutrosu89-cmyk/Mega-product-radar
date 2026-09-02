@@ -65,6 +65,11 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(js,/Tip dovadă/);
   assert.match(js,/Revizie dovadă/);
   assert.match(js,/Vezi sursa/);
+  assert.match(js,/TOP25_SEARCHED/);
+  assert.match(js,/PRODUCT_OPENED/);
+  assert.match(js,/DECISION_REACHED/);
+  assert.match(js,/Merită investigat/);
+  assert.match(html,/beta-decision/);
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
 
