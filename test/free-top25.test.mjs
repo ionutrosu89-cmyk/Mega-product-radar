@@ -30,7 +30,7 @@ test('evidence hardening suppresses unobserved source ranks and separates eviden
   for(const niche of FREE_TOP25_NICHES){
     for(const raw of niche.products){
       const p=hardenTop25Evidence(raw);
-      assert.ok(['EXACT_RANK','EXACT_PRODUCT','SEARCH_VOLUME','TREND_SIGNAL','EDITORIAL_SIGNAL','CATEGORY_EVIDENCE'].includes(p.evidenceType));
+      assert.ok(['EXACT_RANK','EXACT_PRODUCT','HISTORICAL_PRODUCT','SEARCH_VOLUME','TREND_SIGNAL','EDITORIAL_SIGNAL','CATEGORY_EVIDENCE'].includes(p.evidenceType));
       assert.ok(['HIGH','MEDIUM'].includes(p.evidenceConfidence));
       assert.ok(['VERIFIED','DERIVED'].includes(p.evidenceClass));
       assert.equal(p.evidenceReviewedAt,TOP25_EVIDENCE_REVIEWED_AT);
@@ -46,6 +46,15 @@ test('evidence hardening suppresses unobserved source ranks and separates eviden
   }
 });
 
+test('licensed historical evidence is labelled distinctly and never treated as a live rank',()=>{
+  const product=hardenTop25Evidence({name:'Historical product',sourceKey:'KAGGLE_AMAZON_PRODUCTS_2023',sourceTier:'B',sourceKind:'HISTORICAL_DATASET',sourceRank:1,metric:{label:'Recenzii istorice observate',value:100,unit:'reviews_historical'}});
+  assert.equal(product.evidenceType,'HISTORICAL_PRODUCT');
+  assert.equal(product.evidenceClass,'DERIVED');
+  assert.equal(product.evidenceConfidence,'MEDIUM');
+  assert.equal(product.sourceRank,null);
+  assert.equal(product.sourceRankObserved,false);
+});
+
 test('Free Top 25 is free while dynamic Discover remains a paid entitlement',()=>{
   assert.equal(hasFeature('FREE','FREE_TOP25'),true);
   assert.equal(hasFeature('FREE','TOP_PRODUCTS'),false);
@@ -59,7 +68,7 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(html,/ordinea internă.*DERIVED/is);
   assert.match(html,/Rank sursă.*numai.*observată explicit/is);
   assert.match(html,/Încredere în dovadă.*nu șansa comercială/is);
-  assert.match(html,/Search volume nu este prezentat ca vânzări/i);
+  assert.match(html,/Search volume(?: și recenziile istorice)? nu (?:este|sunt) prezentat(?:e)? ca vânzări/i);
   assert.match(js,/Rank sursă observat/);
   assert.match(js,/Încredere în dovadă/);
   assert.match(js,/Tip dovadă/);
@@ -70,10 +79,14 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(js,/DECISION_REACHED/);
   assert.match(js,/Merită investigat/);
   assert.match(html,/beta-decision/);
+  assert.match(html,/id="nicheSearch"/);
+  assert.match(html,/recenziile istorice nu sunt prezentate ca vânzări/i);
+  assert.match(js,/LICENSED_HISTORICAL_EVIDENCE/);
+  assert.match(js,/produse urmărite/);
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
 
 test('Top 25 pages, evidence policy and dataset are included in the Netlify build',async()=>{
   const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
-  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
 });
