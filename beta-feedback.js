@@ -24,7 +24,7 @@ $('#feedbackForm').addEventListener('submit',async event=>{
     if(message.length<10)throw new Error('Scrie minimum 10 caractere ca să putem folosi feedback-ul.');
     const client=await getSupabaseClient();
     const ws=await ensurePersonalWorkspace('My Radar');
-    const wouldPay=tri($('#wouldPay').value),wouldPay29=tri($('#wouldPay29').value);
+    const wouldPay=tri($('#wouldPay').value),wouldPay29=tri($('#wouldPay29').value),decisionChanged=tri($('#decisionChanged').value);
     const row={
       workspace_id:ws.id,
       user_id:session.user.id,
@@ -33,11 +33,11 @@ $('#feedbackForm').addEventListener('submit',async event=>{
       message,
       would_pay:wouldPay,
       requested_feature:$('#requestedFeature').value.trim().slice(0,500)||null,
-      metadata:{plan:String(ws.plan||'FREE'),source:'beta-feedback.html',wouldPay29,pricePointEur:29}
+      metadata:{plan:String(ws.plan||'FREE'),source:'beta-feedback.html',wouldPay29,pricePointEur:29,decisionChanged}
     };
     const {error}=await client.from('beta_feedback').insert(row);
     if(error)throw error;
-    await trackJourneyEvent('BETA_FEEDBACK_SUBMITTED',{rating:row.rating,area:row.area,wouldPay,wouldPay29,pricePointEur:29});
+    await trackJourneyEvent('BETA_FEEDBACK_SUBMITTED',{rating:row.rating,area:row.area,wouldPay,wouldPay29,pricePointEur:29,decisionChanged});
     $('#feedbackForm').reset();
     status.textContent='Mulțumim. Feedback-ul a fost salvat și va intra în scorecard-ul beta.';
   }catch(error){status.textContent=`Eroare: ${error.message||error}`;}
