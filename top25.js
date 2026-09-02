@@ -78,7 +78,7 @@ async function loadLiveNiches(){
       if(!response.ok||!payload?.ok||!Array.isArray(payload.niches))continue;
       const live=payload.niches
         .filter(niche=>Array.isArray(niche?.products)&&niche.products.length===25)
-        .map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊',mode:'LIVE_EVIDENCE',reviewedAt:payload.updatedAt||TOP25_EVIDENCE_REVIEWED_AT}));
+        .map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊',mode:niche.mode||'LIVE_EVIDENCE',reviewedAt:niche.reviewedAt||payload.updatedAt||TOP25_EVIDENCE_REVIEWED_AT}));
       if(!live.length)continue;
       const liveLabels=new Set(live.map(niche=>String(niche.label||'').trim().toLowerCase()));
       niches=[...live,...FREE_TOP25_NICHES.filter(niche=>!liveLabels.has(String(niche.label||'').trim().toLowerCase()))];
