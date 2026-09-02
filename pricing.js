@@ -5,9 +5,9 @@ import {trackJourneyEvent} from './journey-events.js';
 
 const copy={
   FREE:{badge:'Activ acum',desc:'Pentru utilizatorii care vor topuri pe nișe înainte să plătească.',features:['Category Universe + Top Products','Top Sellers și Top Brands','Semnale publice etichetate','Feedback de produs']},
-  DISCOVER:{badge:'Ipoteză de preț',desc:'Pentru cei care ar plăti pentru sourcing și economics.',features:['Tot din Free','Supplier Intelligence + benchmark','Landed cost scenarios','Profit, marjă și ROI']},
-  RADAR:{badge:'Ipoteză de preț',desc:'Pentru sellerii care ar plăti pentru oportunități validate în România.',features:['Tot din Discover','Trend Intelligence','Romania Gap','Opportunity Engine']},
-  LAUNCH:{badge:'Ipoteză de preț',desc:'Pentru utilizatorii care ar plăti pentru traseul complet de execuție.',features:['Tot din Radar','Shortlist + capital','Launch Academy','Launch workflow']}
+  DISCOVER:{badge:'Preț blocat',desc:'Pentru cei care ar plăti pentru sourcing și economics.',features:['Tot din Free','Supplier Intelligence + benchmark','Landed cost scenarios','Profit, marjă și ROI']},
+  RADAR:{badge:'Preț blocat',desc:'Pentru sellerii care ar plăti pentru oportunități validate în România.',features:['Tot din Discover','Trend Intelligence','Romania Gap','Opportunity Engine']},
+  LAUNCH:{badge:'Preț blocat',desc:'Pentru utilizatorii care ar plăti pentru traseul complet de execuție.',features:['Tot din Radar','Shortlist + capital','Launch Academy','Launch workflow']}
 };
 
 const plans=document.getElementById('plans');
