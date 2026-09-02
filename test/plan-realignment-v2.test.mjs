@@ -28,14 +28,18 @@ test('plan order remains Free Discover Radar Launch',()=>{
   assert.deepEqual(['FREE','DISCOVER','RADAR','LAUNCH'].map(commercialPlanRank),[0,1,2,3]);
 });
 
-test('pricing page explains supplier economics in Discover, trends in Radar and Academy in Launch',()=>{
+test('pricing presents the four-level roadmap as non-billing interest hypotheses',()=>{
   const html=fs.readFileSync(new URL('../pricing.html',import.meta.url),'utf8');
-  assert.match(html,/Supplier Intelligence \+ benchmark/);
-  assert.match(html,/Rising \/ New \/ trenduri \/ alerte/);
-  assert.match(html,/Romania Gap \+ Opportunity Engine/);
-  assert.match(html,/Launch Academy \+ launch roadmap/);
-  assert.match(html,/Free îți arată ce se vinde/i);
-  assert.match(html,/Discover îți arată de unde poți cumpăra/i);
+  const client=fs.readFileSync(new URL('../pricing.js',import.meta.url),'utf8');
+  const publicPricing=`${html}\n${client}`;
+  assert.match(publicPricing,/Supplier Intelligence \+ benchmark/);
+  assert.match(publicPricing,/Trend Intelligence/);
+  assert.match(publicPricing,/Romania Gap/);
+  assert.match(publicPricing,/Launch Academy/);
+  assert.match(publicPricing,/Category Universe \+ Top Products/);
+  assert.match(publicPricing,/Vezi topurile gratuite/);
+  assert.match(html,/Checkout-ul și abonamentele reale sunt oprite/);
+  assert.doesNotMatch(client,/startSubscriptionCheckout/);
 });
 
 test('commercial blueprint V2 documents the same product sequence',()=>{
