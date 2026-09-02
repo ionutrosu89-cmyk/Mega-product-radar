@@ -82,6 +82,8 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(html,/id="nicheSearch"/);
   assert.match(html,/recenziile istorice nu sunt prezentate ca vânzări/i);
   assert.match(js,/LICENSED_HISTORICAL_EVIDENCE/);
+  assert.match(js,/mode:niche\.mode\|\|'LIVE_EVIDENCE'/);
+  assert.doesNotMatch(js,/\.map\(niche=>\(\{\.\.\.niche,[^\n]*mode:'LIVE_EVIDENCE'/);
   assert.match(js,/produse urmărite/);
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
