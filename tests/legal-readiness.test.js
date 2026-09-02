@@ -27,7 +27,7 @@ test('invalid support email blocks legal readiness',()=>{
 });
 
 test('missing operator identity blocks legal readiness',()=>{
-  const state=assessLegalReadiness({...complete,LEGAL_OPERATOR_ADDRESS:''});
+  const state=assessLegalReadiness({...complete,LEGAL_OPERATOR_ADDRESS:' '});
   assert.equal(state.ready,false);
   assert.equal(state.checks.identityComplete,false);
 });
@@ -37,4 +37,18 @@ test('future or missing legal reviews stay fail-closed',()=>{
   assert.equal(state.ready,false);
   assert.equal(state.approvals.LEGAL_TERMS_REVIEWED_AT,false);
   assert.equal(state.approvals.LEGAL_PRIVACY_REVIEWED_AT,false);
+});
+
+test('confirmed RED COMMERCE public identity is the safe default while legal approvals remain explicit',()=>{
+  const identityOnly=assessLegalReadiness({});
+  assert.equal(identityOnly.checks.identityComplete,true);
+  assert.equal(identityOnly.checks.approvalsComplete,false);
+  assert.equal(identityOnly.ready,false);
+
+  const approved=assessLegalReadiness({
+    LEGAL_REFUND_POLICY_APPROVED:'true',
+    LEGAL_TERMS_REVIEWED_AT:'2026-09-02',
+    LEGAL_PRIVACY_REVIEWED_AT:'2026-09-02'
+  });
+  assert.equal(approved.ready,true);
 });
