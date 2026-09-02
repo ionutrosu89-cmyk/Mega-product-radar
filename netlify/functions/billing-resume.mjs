@@ -1,5 +1,6 @@
 import {resolveBillingWorkspaceAccess} from './_billing-workspace-access.mjs';
 import {billingMutationIdempotencyKey} from './_billing-mutation-idempotency.mjs';
+import {freeBetaBillingResponse,paidBillingEnabled} from './_commercial-launch-mode.mjs';
 
 function stripePeriodEnd(subscription) {
   const direct = Number(subscription?.current_period_end);
@@ -11,6 +12,7 @@ function stripePeriodEnd(subscription) {
 export function createBillingResumeHandler({ fetch: fetchImpl = fetch, env = process.env } = {}) {
   return async request => {
     try {
+      if (!paidBillingEnabled(env)) return freeBetaBillingResponse();
       if (!env.STRIPE_SECRET_KEY) return Response.json({ ok: false, error: 'Stripe billing is not configured' }, { status: 503 });
       const state = await resolveBillingWorkspaceAccess(request,{fetchImpl,env,mode:'OWNER'});
       if (state.error) return Response.json({ ok: false, error: state.error, code: state.code }, { status: state.status });

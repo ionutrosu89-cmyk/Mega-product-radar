@@ -32,19 +32,34 @@ test('billing readiness validates exact EUR monthly price configuration but keep
   const body=await response.json();
   assert.equal(body.ready,true);
   assert.equal(body.stripeMode,'SANDBOX');
+  assert.equal(body.freeBetaOnly,true);
+  assert.equal(body.paidBillingEnabled,false);
   assert.equal(body.publicLaunchBillingReady,false);
   assert.equal(body.checks.amountsMatch,true);
   assert.equal(body.prices.STRIPE_PRICE_DISCOVER.unitAmount,1790);
   assert.equal(JSON.stringify(body).includes('sk_test_only'),false);
 });
 
-test('live Stripe mode can satisfy public launch billing readiness without returning the secret',async()=>{
+test('live Stripe mode stays blocked while the explicit paid-billing switch is off',async()=>{
   const env={...baseEnv,STRIPE_SECRET_KEY:'sk_live_secret'};
   const handler=createBillingReadinessHandler({env,fetch:fakeFetch});
   const response=await handler(new Request('https://radar.example/api/internal/billing-readiness',{headers:{authorization:'Bearer token'}}));
   const body=await response.json();
   assert.equal(body.ready,true);
   assert.equal(body.stripeMode,'LIVE');
+  assert.equal(body.freeBetaOnly,true);
+  assert.equal(body.publicLaunchBillingReady,false);
+  assert.equal(JSON.stringify(body).includes('sk_live_secret'),false);
+});
+
+test('live Stripe mode requires an explicit paid-billing switch before public readiness',async()=>{
+  const env={...baseEnv,STRIPE_SECRET_KEY:'sk_live_secret',MPR_PAID_BILLING_ENABLED:'true'};
+  const handler=createBillingReadinessHandler({env,fetch:fakeFetch});
+  const response=await handler(new Request('https://radar.example/api/internal/billing-readiness',{headers:{authorization:'Bearer token'}}));
+  const body=await response.json();
+  assert.equal(body.ready,true);
+  assert.equal(body.stripeMode,'LIVE');
+  assert.equal(body.freeBetaOnly,false);
   assert.equal(body.publicLaunchBillingReady,true);
   assert.equal(JSON.stringify(body).includes('sk_live_secret'),false);
 });

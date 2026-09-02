@@ -26,9 +26,11 @@ test('journey tracking is workspace scoped and protected by RLS',async()=>{
   assert.match(tracking,/journey_events/);
 });
 
-test('home upgrade prompts respect plan rank and do not alter decision gates',async()=>{
+test('home paid-plan interest prompts respect plan rank and do not alter decision gates',async()=>{
   const home=await fs.readFile(new URL('../home.js',import.meta.url),'utf8');
-  assert.match(home,/pricing\.html\?upgrade=RADAR/);
-  assert.match(home,/pricing\.html\?upgrade=LAUNCH/);
+  assert.match(home,/pricing\.html\?interest=RADAR/);
+  assert.match(home,/pricing\.html\?interest=LAUNCH/);
+  assert.match(home,/Marchează interesul/);
+  assert.doesNotMatch(home,/startSubscriptionCheckout/);
   assert.doesNotMatch(home,/testBuyDecision\s*=|commercialAction\s*=|gates\s*=/);
 });

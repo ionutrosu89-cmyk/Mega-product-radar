@@ -4,10 +4,11 @@ import {createHmac} from 'node:crypto';
 import {createBillingCheckoutHandler} from '../netlify/functions/billing-checkout.mjs';
 import {createBillingWebhookHandler,verifySignature} from '../netlify/functions/billing-webhook.mjs';
 
-test('checkout remains disabled until Stripe secret is configured',async()=>{
+test('checkout remains disabled during the free beta even without Stripe configuration',async()=>{
   const handler=createBillingCheckoutHandler({env:{},fetch:async()=>new Response(null,{status:500})});
   const response=await handler(new Request('https://radar.example/api/billing/checkout',{method:'POST'}));
-  assert.equal(response.status,503);
+  assert.equal(response.status,403);
+  assert.equal((await response.json()).code,'FREE_BETA_ONLY');
 });
 
 test('webhook remains disabled until secrets are configured',async()=>{

@@ -2,12 +2,14 @@ import {getStore} from '@netlify/blobs';
 import {hasFeature} from '../../billing-plans.js';
 import {resolveWorkspaceAccess} from './_workspace-access.mjs';
 import {enforceRateLimit,recordSecurityAudit} from './_security-ops.mjs';
+import {freeBetaProviderResponse,paidProviderCallsEnabled} from './_commercial-launch-mode.mjs';
 
 const strongStore=getStoreImpl=>getStoreImpl({name:'mega-radar-live',consistency:'strong'});
 
 export function createTriggerHandler({getStore:getStoreImpl=getStore,fetch:fetchImpl=fetch,env=process.env}={}){
   return async req=>{
     if(req.method!=='POST')return Response.json({error:'Method not allowed'},{status:405,headers:{Allow:'POST'}});
+    if(!paidProviderCallsEnabled(env))return freeBetaProviderResponse();
     const access=await resolveWorkspaceAccess(req,{fetchImpl,env,allowedRoles:['OWNER','ADMIN']});
     if(access.error)return Response.json({ok:false,error:access.error,code:access.code},{status:access.status,headers:{'Cache-Control':'private, no-store','Vary':'Authorization, X-MPR-Workspace-Id'}});
     if(!hasFeature(access.plan.code,'RADAR'))return Response.json({ok:false,error:'Radar plan required'},{status:403});

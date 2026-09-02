@@ -1,5 +1,6 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {authorizeReadinessRequest} from './_readiness-auth.mjs';
+import {paidBillingEnabled} from './_commercial-launch-mode.mjs';
 
 const REQUIRED=['STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET','STRIPE_PRICE_DISCOVER','STRIPE_PRICE_RADAR','STRIPE_PRICE_LAUNCH','SUPABASE_SERVICE_ROLE_KEY'];
 const PRICE_KEYS=['STRIPE_PRICE_DISCOVER','STRIPE_PRICE_RADAR','STRIPE_PRICE_LAUNCH'];
@@ -45,14 +46,17 @@ export function createBillingReadinessHandler({fetch:fetchImpl=fetch,env=process
       const amountsMatch=PRICE_KEYS.every(k=>prices[k]?.unitAmount===expected[k]&&String(prices[k]?.currency||'').toLowerCase()==='eur');
       const mode=stripeMode(stripeSecret);
       const ready=allConfigured&&allPricesValid&&amountsMatch;
+      const paidEnabled=paidBillingEnabled(env);
       return Response.json({
         ok:true,
         ready,
         stripeMode:mode,
-        publicLaunchBillingReady:ready&&mode==='LIVE',
+        freeBetaOnly:!paidEnabled,
+        paidBillingEnabled:paidEnabled,
+        publicLaunchBillingReady:paidEnabled&&ready&&mode==='LIVE',
         configured,
         prices,
-        checks:{allConfigured,allPricesValid,amountsMatch,webhookSecretPresent:Boolean(env.STRIPE_WEBHOOK_SECRET),serviceRolePresent:Boolean(env.SUPABASE_SERVICE_ROLE_KEY),liveMode:mode==='LIVE'}
+        checks:{allConfigured,allPricesValid,amountsMatch,webhookSecretPresent:Boolean(env.STRIPE_WEBHOOK_SECRET),serviceRolePresent:Boolean(env.SUPABASE_SERVICE_ROLE_KEY),liveMode:mode==='LIVE',paidBillingEnabled:paidEnabled}
       },{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
     }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});}
   };

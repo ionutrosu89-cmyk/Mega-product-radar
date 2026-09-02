@@ -2,11 +2,11 @@
 
 ## 1. Invitation
 
-**Subject:** Ai acces la Mega Product Radar Beta
+**Subject:** Testează gratuit Mega Product Radar — fără card
 
 Salut,
 
-Te invităm să testezi Mega Product Radar într-un beta controlat. Scopul nu este să vezi cât mai multe produse, ci să alegi un produs real și să parcurgi traseul complet:
+Te invităm să testezi gratuit Mega Product Radar într-un beta controlat, fără card și fără abonament. Scopul nu este să vezi cât mai multe produse, ci să alegi o nișă și un produs real și să parcurgi traseul complet:
 
 Discover → Radar → Launch → decizie de test.
 
@@ -14,7 +14,7 @@ Discover → Radar → Launch → decizie de test.
 
 Important: platforma folosește atât date verificate, cât și estimări/indicatori derivați. Acestea sunt etichetate explicit și nu reprezintă garanții de vânzări sau profit.
 
-După sesiune, te rugăm să trimiți feedback din pagina „Feedback beta”.
+După sesiune, te rugăm să trimiți feedback din pagina „Feedback beta”. Dacă marchezi interesul pentru un plan viitor, înregistrăm doar intenția; nu se inițiază nicio plată.
 
 Mulțumim.
 
@@ -52,7 +52,7 @@ Trimite feedback din pagina „Feedback beta” din aplicație. Te rugăm să fi
 
 ---
 
-## 4. Upgrade explanation
+## 4. Explicația planurilor viitoare
 
 **Subject:** De ce există Discover, Radar și Launch separat
 
@@ -62,6 +62,6 @@ Radar răspunde la „Ce merită să testez în România?”.
 
 Launch răspunde la „Cum îmi aloc bugetul și cum execut testul?”.
 
-Nu vrem să forțăm utilizatorii să plătească pentru funcții de care nu au nevoie. De aceea fiecare nivel deblochează o problemă diferită.
+În perioada de validare, planurile plătite sunt ipoteze de produs. Butoanele lor înregistrează doar interesul; nu cer card și nu creează abonament. Vom decide dacă merită activate numai după analiza folosirii reale și a feedbackului.
 
 Sourcing-ul uman și negocierea cu furnizorii rămân serviciu separat, pentru că implică muncă umană și nu poate fi susținută nelimitat într-un abonament software.

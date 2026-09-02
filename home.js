@@ -6,7 +6,7 @@ import {trackJourneyEvent,installJourneyLinkTracking} from './journey-events.js'
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const PLAN_RANK={FREE:0,DISCOVER:1,RADAR:2,LAUNCH:3};
-const nextUpgrade={FREE:{code:'DISCOVER',price:'€17,90',why:'Vezi produsele în creștere, istoricul, filtrele și semnalele prioritizate.'},DISCOVER:{code:'RADAR',price:'€29',why:'Transformă semnalele în oportunități validate pentru România, cu economics și verdict TEST/HOLD.'},RADAR:{code:'LAUNCH',price:'€89',why:'Primești shortlist personalizat, plan de buget, pași clari de execuție și acces la un agent China testat de noi.'}};
+const nextUpgrade={FREE:{code:'DISCOVER',price:'€17,90',why:'Spune-ne dacă ai testa produse în creștere, istoric, filtre și semnale prioritizate.'},DISCOVER:{code:'RADAR',price:'€29',why:'Spune-ne dacă ai folosi oportunități validate pentru România, cu economics și verdict TEST/HOLD.'},RADAR:{code:'LAUNCH',price:'€89',why:'Spune-ne dacă ai folosi shortlist-ul, bugetul și pașii de execuție.'}};
 
 function card(title,text,href,label,event,locked=false){return `<article class="card ${locked?'locked':''}"><h3>${esc(title)}</h3><p>${esc(text)}</p><a ${locked?'class="secondary"':''} href="${href}" data-journey-event="${event}">${esc(label)}</a></article>`;}
 function tags(p){const out=[];if(p.experience_level)out.push(p.experience_level==='BEGINNER'?'Începător':p.experience_level==='SELLER'?'Seller activ':'Avansat');if(Number(p.monthly_budget_ron)>0)out.push(`${Number(p.monthly_budget_ron).toLocaleString('ro-RO')} lei/lună`);if((p.marketplaces||[]).length)out.push((p.marketplaces||[]).slice(0,2).join(' · '));return out.map(x=>`<span class="tag">${esc(x)}</span>`).join('');}
@@ -28,12 +28,12 @@ async function load(){
   $('#progressBar').style.width=`${completed/4*100}%`;
   const cards=[];
   cards.push(card('1. Top 25 pe nișă','Explorează topuri documentate pentru categoriile principale.','top25.html','Vezi Top 25','HOME_OPEN_TOP25'));
-  cards.push(card('2. Discover',rank>=1?'Vezi produse Rising/New, istoric, filtre și semnale prioritizate după dovezi.':'Deblochează semnalele dinamice și prioritizarea cross-source.',rank>=1?'discover.html':'pricing.html?upgrade=DISCOVER',rank>=1?'Deschide Discover':'Vezi Discover · €17,90',rank>=1?'HOME_OPEN_DISCOVER':'UPGRADE_INTENT_DISCOVER',rank<1));
-  cards.push(card('3. Radar',rank>=2?'Vezi România Gap, furnizor, landed cost, profit, ROI și verdict TEST/HOLD.':'Deblochează validarea comercială pentru România.',rank>=2?'commercial-radar.html':'pricing.html?upgrade=RADAR',rank>=2?'Deschide Radar':'Vezi Radar · €29',rank>=2?'HOME_OPEN_RADAR':'UPGRADE_INTENT_RADAR',rank<2));
-  cards.push(card('4. Launch',rank>=3?'Vezi shortlist-ul personalizat, bugetul, pașii de execuție și accesul la agentul China testat.':'Deblochează planul complet de lansare, capital și accesul la un agent China testat de noi.',rank>=3?'commercial-launch.html':'pricing.html?upgrade=LAUNCH',rank>=3?'Deschide Launch':'Vezi Launch · €89',rank>=3?'HOME_OPEN_LAUNCH':'UPGRADE_INTENT_LAUNCH',rank<3));
+  cards.push(card('2. Discover',rank>=1?'Vezi produse Rising/New, istoric, filtre și semnale prioritizate după dovezi.':'Înregistrează dacă ai testa semnalele dinamice și prioritizarea cross-source.',rank>=1?'discover.html':'pricing.html?interest=DISCOVER',rank>=1?'Deschide Discover':'Marchează interesul · €17,90',rank>=1?'HOME_OPEN_DISCOVER':'UPGRADE_INTENT_DISCOVER',rank<1));
+  cards.push(card('3. Radar',rank>=2?'Vezi România Gap, furnizor, landed cost, profit, ROI și verdict TEST/HOLD.':'Înregistrează dacă ai testa validarea comercială pentru România.',rank>=2?'commercial-radar.html':'pricing.html?interest=RADAR',rank>=2?'Deschide Radar':'Marchează interesul · €29',rank>=2?'HOME_OPEN_RADAR':'UPGRADE_INTENT_RADAR',rank<2));
+  cards.push(card('4. Launch',rank>=3?'Vezi shortlist-ul personalizat, bugetul și pașii de execuție.':'Înregistrează dacă ai testa planul complet de lansare și capital.',rank>=3?'commercial-launch.html':'pricing.html?interest=LAUNCH',rank>=3?'Deschide Launch':'Marchează interesul · €89',rank>=3?'HOME_OPEN_LAUNCH':'UPGRADE_INTENT_LAUNCH',rank<3));
   $('#cards').innerHTML=cards.join('');
   const up=nextUpgrade[plan],box=$('#upgrade');
-  if(up){box.hidden=false;box.innerHTML=`<h3>Următorul nivel: ${up.code} · ${up.price}/lună</h3><p>${esc(up.why)}</p><a href="pricing.html?upgrade=${up.code}" data-journey-event="HOME_UPGRADE_${up.code}">Vezi ce deblochează</a>`;}
+  if(up){box.hidden=false;box.innerHTML=`<h3>Ipoteză de preț: ${up.code} · ${up.price}/lună</h3><p>${esc(up.why)} Nu se solicită card și nu se activează o plată.</p><a href="pricing.html?interest=${up.code}" data-journey-event="HOME_UPGRADE_${up.code}">Marchează interesul</a>`;}
   installJourneyLinkTracking();
   trackJourneyEvent('HOME_VIEW',{plan,experience:prefs.experience_level,goal:prefs.goal,onboarding:true});
 }
