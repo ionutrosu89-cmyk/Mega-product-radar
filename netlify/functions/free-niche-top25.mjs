@@ -1,5 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
+import taxonomy from '../../category-universe-v2.json' with {type:'json'};
 import {buildFreeNicheTop25Plan} from '../../free-niche-top25-engine-v1.js';
 import {enforceRateLimit} from './_security-ops.mjs';
 
@@ -15,13 +16,11 @@ export function createFreeNicheTop25Handler({env=process.env,fetch:fetchImpl=fet
       const rate=await enforceRateLimit(request,{route:'free-niche-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
       const url=new URL(request.url);
-      const [taxonomy,discovery,organic,amazonLive]=await Promise.all([
-        readJson('category-universe-v2.json'),
+      const [discovery,organic,amazonLive]=await Promise.all([
         readJson('discovery-live.json'),
         readJson('organic-rising-live.json'),
         readJson('amazon-live-catalog-bridge-v1.json')
       ]);
-      if(!taxonomy)return Response.json({ok:false,error:'Free niche taxonomy unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});
       const plan=buildFreeNicheTop25Plan({
         taxonomy,
         discoveryProducts:Array.isArray(discovery?.products)?discovery.products:[],
