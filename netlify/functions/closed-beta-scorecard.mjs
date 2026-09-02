@@ -1,5 +1,5 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
-import {buildClosedBetaScorecardV1} from '../../closed-beta-scorecard-v1.js';
+import {buildFreeBetaScorecardV1} from '../../free-beta-scorecard-v1.js';
 import {isAnalyticsAdmin} from './beta-analytics.mjs';
 
 async function jsonFetch(url,headers,fetchImpl){const response=await fetchImpl(url,{headers});if(!response.ok)throw new Error(`Closed beta source failed: ${response.status}`);return response.json();}
@@ -22,7 +22,7 @@ export function createClosedBetaScorecardHandler({fetch:fetchImpl=fetch,env=proc
         jsonFetch(`${supabaseUrl}/rest/v1/journey_events?select=workspace_id,user_id,event_name,metadata,created_at&created_at=gte.${encodeURIComponent(since)}&order=created_at.asc&limit=10000`,headers,fetchImpl),
         jsonFetch(`${supabaseUrl}/rest/v1/beta_feedback?select=workspace_id,user_id,rating,area,would_pay,metadata,created_at&created_at=gte.${encodeURIComponent(since)}&order=created_at.asc&limit=5000`,headers,fetchImpl)
       ]);
-      const scorecard=buildClosedBetaScorecardV1({participants,events,feedback,now:now.toISOString()});
+      const scorecard=buildFreeBetaScorecardV1({participants,events,feedback,now:now.toISOString()});
       return Response.json({ok:true,...scorecard},{headers:{'Cache-Control':'private, no-store','Vary':'Authorization'}});
     }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});}
   };
