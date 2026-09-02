@@ -22,11 +22,14 @@ test('signup preserves validated next destination like login does',async()=>{
 
 test('pricing Free reflects roadmap market intelligence while legacy Top 25 remains available',async()=>{
   const pricing=await readFile('pricing.html','utf8');
+  const pricingClient=await readFile('pricing.js','utf8');
+  const publicPricing=`${pricing}\n${pricingClient}`;
   const discoverFn=await readFile('netlify/functions/commercial-discover.mjs','utf8');
-  assert.match(pricing,/Category Universe \+ Top Products/);
-  assert.match(pricing,/Top Sellers și Top Brands/);
-  assert.match(pricing,/Vezi topurile gratuite/);
-  assert.doesNotMatch(pricing,/3 vizualizări\/credite/);
+  assert.match(publicPricing,/Category Universe \+ Top Products/);
+  assert.match(publicPricing,/Top Sellers și Top Brands/);
+  assert.match(publicPricing,/Vezi topurile gratuite/);
+  assert.doesNotMatch(publicPricing,/3 vizualizări\/credite/);
+  assert.doesNotMatch(pricingClient,/startSubscriptionCheckout/);
   assert.equal(await exists('top25.html'),true);
   assert.match(discoverFn,/const limit=full\?20:3/);
   assert.match(discoverFn,/slice\(0,limit\)/);
@@ -40,11 +43,13 @@ test('paid data stays behind authenticated server endpoints in commercial journe
   assert.match(radar,/\/api\/commercial\/radar/);
 });
 
-test('legal beta blockers remain explicit before real-money public launch',async()=>{
+test('legal beta publishes the operator while real-money launch remains blocked',async()=>{
   const terms=await readFile('terms.html','utf8');
   const privacy=await readFile('privacy.html','utf8');
-  assert.match(terms,/datele juridice complete ale operatorului/i);
-  assert.match(privacy,/identitatea și datele de contact ale operatorului/i);
+  assert.match(terms,/RED COMMERCE S\.R\.L\./);
+  assert.match(privacy,/RED COMMERCE S\.R\.L\./);
+  assert.match(terms,/nu există checkout activ/i);
+  assert.match(privacy,/nu activăm abonamente cu plată/i);
 });
 
 test('billing lifecycle endpoints required for paid beta are present',async()=>{
