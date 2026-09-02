@@ -42,7 +42,7 @@ jobs:
           if(s.pairCount!==10)throw new Error(`PAIR_SCOPE_CHANGED:${s.pairCount}`);
           NODE
       - name: Upload fused matching evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-post-detail-fusion-match
           path: artifacts/post-detail-fusion-match.json

@@ -65,7 +65,7 @@ jobs:
             .purchaseAuthorized == false
           ' romania-scale-10000-summary.json >/dev/null
       - name: Preserve 10K Romania scale evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-romania-scale-10000-r1-${{ github.sha }}
           path: |

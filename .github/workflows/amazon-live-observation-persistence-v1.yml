@@ -63,7 +63,7 @@ jobs:
           jq -e '.ok == true and .schema == "MPR_AMAZON_LIVE_OBSERVATION_OIDC_RECEIPT_V1"' amazon-live-observation-receipt.json >/dev/null
           jq -e '.receipt.ok == true and .receipt.inputRows == 290 and .receipt.matchedExactAsin == 290' amazon-live-observation-receipt.json >/dev/null
           jq -e '.receipt.providerSpendEur == 0 and .receipt.paidCallsTriggered == 0 and .receipt.purchaseAuthorized == false and .receipt.verifiedSales == false' amazon-live-observation-receipt.json >/dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: amazon-live-observation-receipt-${{ github.sha }}
           path: amazon-live-observation-receipt.json

@@ -48,7 +48,7 @@ jobs:
           if(s.truthPolicy.discoveryAuthorized!==false||s.truthPolicy.purchaseAuthorized!==false)throw new Error('FORBIDDEN_ACTION');
           NODE
       - name: Upload supplier detail pilot evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-apify-alibaba-supplier-detail-pilot
           path: artifacts/apify-alibaba-supplier-detail-pilot/

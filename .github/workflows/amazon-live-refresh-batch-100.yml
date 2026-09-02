@@ -52,7 +52,7 @@ jobs:
           NODE
       - name: Upload live snapshot batch artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-live-refresh-${{ inputs.offset }}-${{ inputs.limit }}
           path: artifacts/amazon-live-refresh.json

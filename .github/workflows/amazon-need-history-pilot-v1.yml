@@ -79,7 +79,7 @@ jobs:
             'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts/amazon-need-history-persist-receipt.json
           jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_PERSIST_RECEIPT_V1"' artifacts/amazon-need-history-persist-receipt.json >/dev/null
           jq -e '.receipt.providerSpendEur == 0 and .receipt.paidCallsTriggered == 0 and .receipt.purchaseAuthorized == false and .receipt.verifiedSales == false' artifacts/amazon-need-history-persist-receipt.json >/dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: amazon-need-history-pilot-${{ github.sha }}

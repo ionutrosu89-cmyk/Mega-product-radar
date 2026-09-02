@@ -65,7 +65,7 @@ jobs:
       - name: Production safety gate
         run: npm run verify:production-safety
       - name: Upload supplement evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: free-catalog-100k-supplement
           path: |

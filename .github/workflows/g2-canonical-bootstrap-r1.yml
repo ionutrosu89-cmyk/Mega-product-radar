@@ -50,7 +50,7 @@ jobs:
           jq -e '.ok == true and .inputProducts == 1000 and .matchedProducts == 1000 and .observationRowsPlanned == 2997 and .sourceObservationRowsAfter == 2997 and .policy.providerSpendEur == 0 and .policy.paidCallsTriggered == 0 and .policy.purchaseAuthorized == false and .policy.verifiedSales == false and .policy.freshnessClass == "HISTORICAL_BOOTSTRAP_NOT_LIVE"' canonical-observations-result.json >/dev/null
       - name: Preserve observation evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-historical-observations-${{ github.sha }}
           path: canonical-observations-result.json

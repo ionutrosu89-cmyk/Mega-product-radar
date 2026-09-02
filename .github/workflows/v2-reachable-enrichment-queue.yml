@@ -66,7 +66,7 @@ jobs:
           if(!Number.isInteger(Number(q.source?.workflowRunId))||Number(q.source.workflowRunId)<=0)throw new Error('REMATCH_PROVENANCE_MISSING');
           NODE
       - name: Upload reachable enrichment queue
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-reachable-enrichment-queue
           path: artifacts/reachable-enrichment-queue.json
