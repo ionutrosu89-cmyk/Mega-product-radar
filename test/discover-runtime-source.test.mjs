@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 
 test('Netlify bundles Discover source JSON for runtime fallback',async()=>{
   const toml=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');
+  assert.match(toml,/included_files\s*=\s*\[[^\]]*category-universe-v2\.json[^\]]*\]/s);
   assert.match(toml,/included_files\s*=\s*\[[^\]]*discovery-live\.json[^\]]*organic-rising-live\.json[^\]]*\]/s);
 });
 
