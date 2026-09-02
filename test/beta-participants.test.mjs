@@ -48,9 +48,9 @@ test('beta participant registry and identity binding remain service-role only be
   assert.match(bindingSql,/user_id uuid references auth\.users/i);assert.match(bindingSql,/workspace_id uuid references public\.workspaces/i);
 });
 
-test('beta operations UI exposes live scorecard, journey next action and states that users are not fabricated',async()=>{
+test('beta operations UI exposes the zero-cost scorecard, journey next action and states that users are not fabricated',async()=>{
   const html=await readFile(new URL('../beta-participants.html',import.meta.url),'utf8');
   const js=await readFile(new URL('../beta-participants.js',import.meta.url),'utf8');
-  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Closed Beta Scorecard/i);assert.match(html,/cele 8 KPI-uri canonice P10/i);assert.match(html,/Registru beta \+ next action/i);assert.match(html,/Journey coverage indisponibil/i);
-  assert.match(js,/Leagă contul real/i);assert.match(js,/COLLECT_ROMANIA_GAP_FEEDBACK/);assert.match(js,/WEEK4_REENGAGE/);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/automaticLaunchAllowed=false/);assert.match(js,/purchaseAuthorized=false/);
+  assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Free Beta Scorecard/i);assert.match(html,/25 invitați/i);assert.match(html,/Registru beta \+ next action/i);assert.match(html,/Journey coverage indisponibil/i);
+  assert.match(js,/Leagă contul real/i);assert.match(js,/RUN_TOP25_SEARCH/);assert.match(js,/REACH_PRODUCT_DECISION/);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/lansare automată=false/);assert.match(js,/achiziții autorizate=false/);
 });

@@ -25,6 +25,9 @@ test('beta feedback is workspace scoped and protected with RLS',async()=>{
   assert.match(migration,/user_id = auth\.uid\(\)/);
   assert.match(client,/ensurePersonalWorkspace/);
   assert.match(client,/from\('beta_feedback'\)\.insert/);
+  assert.match(client,/decisionChanged/);
+  const html=await readFile('beta-feedback.html','utf8');
+  assert.match(html,/Ți-a schimbat aplicația o decizie reală/i);
 });
 
 test('legal beta pages publish the confirmed operator and keep real payments blocked',async()=>{
