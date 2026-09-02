@@ -6,6 +6,7 @@ function evidenceType(product){
   const hasSearchMetric=product?.metric?.unit==='searches'&&Number.isFinite(Number(product?.metric?.value));
   if(OBSERVED_RANK_SOURCES.has(product?.sourceKey)&&Number.isInteger(product?.sourceRank)&&product.sourceRank>0)return 'EXACT_RANK';
   if(hasSearchMetric)return 'SEARCH_VOLUME';
+  if(kind==='HISTORICAL_DATASET')return 'HISTORICAL_PRODUCT';
   if(['BEST_SELLERS','NEW_RELEASES','CATEGORY_LIST'].includes(kind))return 'EXACT_PRODUCT';
   if(kind==='TREND_GROWTH')return 'TREND_SIGNAL';
   if(['AMAZON_EDITORIAL','EDITORIAL_RANKING','PUBLISHED_RANKING'].includes(kind))return 'EDITORIAL_SIGNAL';
