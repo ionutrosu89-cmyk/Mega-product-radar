@@ -26,7 +26,7 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
       - name: Sync verified Stage 0 evidence to Supabase via GitHub OIDC
