@@ -27,13 +27,13 @@ test('plan change direction distinguishes upgrades, downgrades and no-op updates
   assert.equal(planChangeDirection('RADAR','RADAR'),'UNCHANGED');
 });
 
-test('plan change, cancellation and resume remain disabled until Stripe is configured',async()=>{
+test('paid plan changes and resume are blocked by free beta while cancellation remains fail-closed',async()=>{
   const change=createBillingChangePlanHandler({env:{},fetch:async()=>new Response(null,{status:500})});
   const cancel=createBillingCancelHandler({env:{},fetch:async()=>new Response(null,{status:500})});
   const resume=createBillingResumeHandler({env:{},fetch:async()=>new Response(null,{status:500})});
-  assert.equal((await change(new Request('https://radar.example/api/billing/change-plan',{method:'POST'}))).status,503);
+  assert.equal((await change(new Request('https://radar.example/api/billing/change-plan',{method:'POST'}))).status,403);
   assert.equal((await cancel(new Request('https://radar.example/api/billing/cancel',{method:'POST'}))).status,503);
-  assert.equal((await resume(new Request('https://radar.example/api/billing/resume',{method:'POST'}))).status,503);
+  assert.equal((await resume(new Request('https://radar.example/api/billing/resume',{method:'POST'}))).status,403);
 });
 
 test('resume cancellation calls Stripe only for a scheduled active owner subscription',async()=>{
@@ -47,7 +47,7 @@ test('resume cancellation calls Stripe only for a scheduled active owner subscri
     if(u.includes('api.stripe.com/v1/subscriptions/sub_1'))return Response.json({id:'sub_1',status:'active',cancel_at_period_end:false,items:{data:[{current_period_end:1782000000}]}});
     return new Response(null,{status:404});
   };
-  const resume=createBillingResumeHandler({fetch:fetchImpl,env:{STRIPE_SECRET_KEY:'sk_test',SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
+  const resume=createBillingResumeHandler({fetch:fetchImpl,env:{MPR_PAID_BILLING_ENABLED:'true',STRIPE_SECRET_KEY:'sk_test',SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
   const response=await resume(new Request('https://radar.example/api/billing/resume',{method:'POST',headers:{authorization:'Bearer token','x-mpr-workspace-id':'w1'}}));
   assert.equal(response.status,200);
   const body=await response.json();
