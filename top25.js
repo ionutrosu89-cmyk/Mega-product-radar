@@ -55,16 +55,21 @@ async function render(){
 }
 
 async function loadLiveNiches(){
-  try{
-    const response=await fetch('/api/free/top25',{headers:{accept:'application/json'},cache:'no-store'});
-    const payload=await response.json();
-    if(!response.ok||!payload?.ok||!Array.isArray(payload.niches))return;
-    const live=payload.niches.filter(niche=>Array.isArray(niche?.products)&&niche.products.length===25).map(niche=>({...niche,reviewedAt:payload.updatedAt||TOP25_EVIDENCE_REVIEWED_AT}));
-    if(!live.length)return;
-    const liveLabels=new Set(live.map(niche=>String(niche.label||'').trim().toLowerCase()));
-    niches=[...live,...FREE_TOP25_NICHES.filter(niche=>!liveLabels.has(String(niche.label||'').trim().toLowerCase()))];
-    current=niches[0]||FREE_TOP25_NICHES[0];
-  }catch{/* Curated Top25 remains the safe fallback when the live endpoint is unavailable. */}
+  for(const endpoint of ['/api/free/niches','/api/free/top25']){
+    try{
+      const response=await fetch(endpoint,{headers:{accept:'application/json'},cache:'no-store'});
+      const payload=await response.json();
+      if(!response.ok||!payload?.ok||!Array.isArray(payload.niches))continue;
+      const live=payload.niches
+        .filter(niche=>Array.isArray(niche?.products)&&niche.products.length===25)
+        .map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊',mode:'LIVE_EVIDENCE',reviewedAt:payload.updatedAt||TOP25_EVIDENCE_REVIEWED_AT}));
+      if(!live.length)continue;
+      const liveLabels=new Set(live.map(niche=>String(niche.label||'').trim().toLowerCase()));
+      niches=[...live,...FREE_TOP25_NICHES.filter(niche=>!liveLabels.has(String(niche.label||'').trim().toLowerCase()))];
+      current=niches[0]||FREE_TOP25_NICHES[0];
+      return;
+    }catch{/* Try the compatible endpoint, then keep the curated fallback. */}
+  }
 }
 
 await loadLiveNiches();
