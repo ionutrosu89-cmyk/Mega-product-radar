@@ -18,6 +18,22 @@ test('unreviewed sources fail closed',()=>{
   assert.ok(r.reasons.includes('SOURCE_RIGHTS_REVIEW_INCOMPLETE'));
 });
 
+test('zero-cost licensed Amazon datasets allow facts but never imply current sales',()=>{
+  const kaggle=evaluateSourceUse('KAGGLE_AMAZON_PRODUCTS_2023',{intendedUse:'commercial'});
+  const markup=evaluateSourceUse('THE_MARKUP_AMAZON_SEARCHES_2021',{intendedUse:'commercial'});
+  assert.equal(kaggle.decision,'ACCEPT');
+  assert.equal(markup.decision,'ACCEPT');
+  assert.match(kaggle.profile.basis,/IMAGES, DESCRIPTIONS AND TRADEMARK CONTENT EXCLUDED/);
+  assert.match(markup.profile.basis,/NEVER PRESENT AS CURRENT MARKET OR VERIFIED SALES/);
+});
+
+test('marketplace pages and social libraries remain held without written permission',()=>{
+  for(const source of ['AMAZON_PUBLIC_PRODUCT_PAGE','EMAG_PUBLIC_PRODUCT_PAGE','TRENDYOL_PUBLIC_PRODUCT_PAGE','META_AD_LIBRARY','TIKTOK_COMMERCIAL_CONTENT_API']){
+    const result=evaluateSourceUse(source,{intendedUse:'analysis'});
+    assert.equal(result.decision,'HOLD',source);
+  }
+});
+
 test('GTIN normalization and checksum work',()=>{
   assert.equal(normalizeGtin('4006381333931'),'04006381333931');
   assert.equal(isValidGtin('4006381333931'),true);
