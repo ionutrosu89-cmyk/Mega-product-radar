@@ -61,13 +61,13 @@ jobs:
         env:
           OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
         run: |
+          mkdir -p artifacts
           jq -n --arg expectedSha "$GITHUB_SHA" '{action:"targets",expectedSha:$expectedSha,limit:25}' >/tmp/targets-request.json
           curl --fail-with-body -sS -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' --data-binary @/tmp/targets-request.json \
-            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts-targets.json
-          jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_TARGETS_V1" and (.targets|length) == 25' artifacts-targets.json >/dev/null
-          jq -e 'all(.targets[]; (.existing_observation_count|tonumber) <= 1)' artifacts-targets.json >/dev/null
-          jq -e 'all(.targets[]; (.external_id|startswith("B")))' artifacts-targets.json >/dev/null
-          mkdir -p artifacts && cp artifacts-targets.json artifacts/amazon-need-history-targets.json
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts/amazon-need-history-targets.json
+          jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_TARGETS_V1" and (.targets|length) == 25' artifacts/amazon-need-history-targets.json >/dev/null
+          jq -e 'all(.targets[]; (.existing_observation_count|tonumber) <= 1)' artifacts/amazon-need-history-targets.json >/dev/null
+          jq -e 'all(.targets[]; (.external_id|startswith("B")))' artifacts/amazon-need-history-targets.json >/dev/null
       - name: Collect public Amazon evidence
         run: node scripts/amazon-need-history-pilot.mjs --input=artifacts/amazon-need-history-targets.json --out=artifacts/amazon-need-history-pilot.json
       - name: Persist valid live observations
