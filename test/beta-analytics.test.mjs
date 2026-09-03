@@ -9,14 +9,23 @@ test('anonymous Free analytics measures niche and signup demand without claiming
     {page_session_id:'top25-1',event_name:'FREE_TOP25_VIEW',acquisition_source:'tiktok'},
     {page_session_id:'top25-1',event_name:'FREE_NICHE_SELECTED',niche_id:'AUTO',acquisition_source:'tiktok'},
     {page_session_id:'top25-1',event_name:'FREE_PRODUCT_OPENED',niche_id:'AUTO',acquisition_source:'tiktok'},
+    {page_session_id:'top25-1',event_name:'FREE_DECISION_REACHED',niche_id:'AUTO',acquisition_source:'tiktok',metadata:{decision:'SHORTLIST_ADD',target:'PLATFORM:AMAZON_ARCHIVE'}},
+    {page_session_id:'top25-1',event_name:'FREE_PRODUCT_OPENED',niche_id:'AUTO',acquisition_source:'tiktok',metadata:{target:'COMPARE'}},
+    {page_session_id:'top25-1',event_name:'FREE_DECISION_REACHED',niche_id:'AUTO',acquisition_source:'tiktok',metadata:{decision:'REQUEST_PLATFORM',target:'PLATFORM:EBAY'}},
+    {page_session_id:'top25-1',event_name:'FREE_DECISION_REACHED',niche_id:'AUTO',acquisition_source:'tiktok',metadata:{decision:'INVESTIGATE'}},
     {page_session_id:'top25-1',event_name:'FREE_SIGNUP_CTA_CLICK',niche_id:'AUTO',acquisition_source:'tiktok'}
   ]);
   assert.equal(data.totals.sessions,2);
   assert.equal(data.totals.top25ViewSessions,1);
   assert.equal(data.conversion.productFromTop25,100);
+  assert.equal(data.conversion.shortlistFromTop25,100);
+  assert.equal(data.conversion.compareFromTop25,100);
+  assert.equal(data.totals.decisionSessions,1);
+  assert.equal(data.totals.platformRequestSessions,1);
   assert.equal(data.conversion.signupFromTop25,100);
-  assert.deepEqual(data.topNiches[0],{label:'AUTO',count:3});
-  assert.deepEqual(data.acquisitionSources[0],{label:'tiktok',count:6});
+  assert.deepEqual(data.requestedPlatforms[0],{label:'EBAY',count:1});
+  assert.deepEqual(data.topNiches[0],{label:'AUTO',count:7});
+  assert.deepEqual(data.acquisitionSources[0],{label:'tiktok',count:10});
 });
 
 test('beta analytics separates usage, billing, retention and churn without double counting workspaces',()=>{

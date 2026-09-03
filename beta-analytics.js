@@ -24,10 +24,15 @@ function render(data){
   $('#freeTop25Views').textContent=n(ft.top25ViewSessions);
   $('#freeNicheSessions').textContent=n(ft.nicheSessions);
   $('#freeProductSessions').textContent=n(ft.productSessions);
+  $('#freeShortlistSessions').textContent=n(ft.shortlistSessions);
+  $('#freeCompareSessions').textContent=n(ft.comparisonSessions);
+  $('#freePlatformRequestSessions').textContent=n(ft.platformRequestSessions);
   $('#freeDecisionSessions').textContent=n(ft.decisionSessions);
   $('#freeSignupSessions').textContent=n(ft.signupSessions);
   $('#freeSignupRate').textContent=rate(fc.signupFromTop25);
-  $('#freeProductRate').textContent=rate(fc.productFromTop25);
+  $('#freeShortlistRate').textContent=rate(fc.shortlistFromTop25);
+  $('#freeCompareRate').textContent=rate(fc.compareFromTop25);
+  $('#freeRequestedPlatforms').innerHTML=(free.requestedPlatforms||[]).map(row=>countRow(row.label,row.count)).join('')||'<div class="status">Nu există încă cereri de platformă.</div>';
   $('#freeTopNiches').innerHTML=(free.topNiches||[]).map(row=>countRow(row.label,row.count)).join('')||'<div class="status">Nu există încă selecții de nișă.</div>';
   $('#freeAcquisition').innerHTML=(free.acquisitionSources||[]).map(row=>countRow(row.label,row.count)).join('')||'<div class="status">Nu există încă trafic măsurat.</div>';
   $('#usageFunnel').innerHTML=funnelHtml(data.usageFunnel||[]);
