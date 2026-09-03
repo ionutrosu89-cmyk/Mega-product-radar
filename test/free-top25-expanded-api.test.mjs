@@ -44,10 +44,24 @@ test('expanded Free plan exposes only complete 25-product niches and hardens the
       assert.equal(row.sourceRank,null);
       assert.equal(row.internalRankClass,'DERIVED');
       assert.equal(row.commercialGate,'BRAND_REVIEW_REQUIRED');
+      assert.equal(row.brandPolicyClass,'UNKNOWN_REVIEW');
+      assert.equal(row.commercialEligible,true);
       assert.equal('supplierCost' in row,false);
       assert.equal('margin' in row,false);
       assert.equal('purchaseAuthorized' in row,false);
     }
+  }
+});
+
+test('expanded Free API marks established-brand rows as stopped before the public commercial funnel',async()=>{
+  const rows=FREE_TOP25_EXPANDED_REGISTRY.map(niche=>({
+    niche_id:niche.id,reviewed_at:'2026-09-03',
+    products:Array.from({length:25},(_,i)=>product(i+1,i===0?{name:'Rubbermaid organizer'}:{}))
+  }));
+  const niches=await loadExpandedTop25Niches({env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'server-secret'},fetchImpl:async()=>Response.json(rows)});
+  for(const niche of niches){
+    assert.equal(niche.products[0].commercialGate,'STOP_BRAND_GATE');
+    assert.equal(niche.products[0].commercialEligible,false);
   }
 });
 

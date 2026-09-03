@@ -68,8 +68,8 @@ test('Top 25 UI clearly separates archive, live platform rank and evidence confi
   assert.match(html,/Amazon Historical este o arhivă licențiată/i);
   assert.match(html,/Rank platformă ≠ unități vândute/i);
   assert.match(html,/Consensus se activează numai.*minimum două platforme/i);
-  assert.match(js,/Rank sursă observat/);
-  assert.match(js,/Încredere în dovadă/);
+  assert.match(js,/Poziție sursă observată/);
+  assert.match(js,/Brand gate/);
   assert.match(js,/Tip dovadă/);
   assert.match(js,/Revizie dovadă/);
   assert.match(js,/Vezi sursa/);
@@ -79,12 +79,14 @@ test('Top 25 UI clearly separates archive, live platform rank and evidence confi
   assert.match(js,/Merită investigat/);
   assert.match(html,/beta-decision/);
   assert.match(html,/id="nicheSearch"/);
-  assert.match(js,/Amazon Historical disponibil|datasetul istoric licențiat/i);
+  assert.match(`${html}\n${js}`,/arhivă licențiată 2023|poziții istorice/i);
   assert.match(js,/AMAZON_ARCHIVE/);
   assert.match(js,/FREE_CROSS_MARKET_PLATFORMS/);
   assert.match(js,/FAIL-CLOSED/);
   assert.match(js,/FREE_TOP25_VIEW/);
-  assert.match(html,/25 nișe × Top 25 produse/i);
+  assert.match(html,/25 de nișe pentru explorare/i);
+  assert.match(html,/Topuri live în pregătire/i);
+  assert.match(js,/brand gate/i);
   assert.doesNotMatch(js,/tse\d?\.mm\.bing\.net/i);
   assert.doesNotMatch(js,/FREE_TOP25_NICHES/);
   assert.match(js,/Shortlist-ul|Salvează/);

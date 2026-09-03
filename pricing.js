@@ -5,15 +5,28 @@ import {trackJourneyEvent} from './journey-events.js';
 
 const copy={
   FREE:{badge:'Activ acum',desc:'Pentru utilizatorii care vor topuri pe nișe înainte să plătească.',features:['Category Universe + Top Products','Top Sellers și Top Brands','Semnale publice etichetate','Feedback de produs']},
-  DISCOVER:{badge:'Preț blocat',desc:'Pentru cei care ar plăti pentru sourcing și economics.',features:['Tot din Free','Supplier Intelligence + benchmark','Landed cost scenarios','Profit, marjă și ROI']},
-  RADAR:{badge:'Preț blocat',desc:'Pentru sellerii care ar plăti pentru oportunități validate în România.',features:['Tot din Discover','Trend Intelligence','Romania Gap','Opportunity Engine']},
-  LAUNCH:{badge:'Preț blocat',desc:'Pentru utilizatorii care ar plăti pentru traseul complet de execuție.',features:['Tot din Radar','Shortlist + capital','Launch Academy','Launch workflow']}
+  DISCOVER:{badge:'Preț blocat',desc:'Pentru cei care vor semnale globale actuale și schimbări urmărite în timp.',features:['Tot din Free','Trend Intelligence','Rising + alerte','Filtre și istoric']},
+  RADAR:{badge:'Preț blocat',desc:'Pentru sellerii care vor oportunități validate pentru piața din România.',features:['Tot din Discover','Romania Gap','Brand + importability gate','Opportunity Engine']},
+  LAUNCH:{badge:'Preț blocat',desc:'Pentru utilizatorii care vor validare economică și traseul complet de execuție.',features:['Tot din Radar','Supplier Intelligence + benchmark','Landed cost, marjă și ROI','Launch Academy + workflow']}
 };
 
 const plans=document.getElementById('plans');
 const status=document.getElementById('billingStatus');
 const qs=new URLSearchParams(location.search);
 const highlighted=String(qs.get('recommended')||qs.get('upgrade')||qs.get('interest')||'RADAR').toUpperCase();
+
+const matrixRows=[
+  ['Category Universe + topuri produse pe nișe','Activ','Inclus','Inclus','Inclus'],
+  ['Top Sellers + Top Brands + concentrare piață','Activ limitat','Inclus','Inclus','Inclus'],
+  ['Rising / trenduri / alerte globale','—','Test interes','Test interes','Test interes'],
+  ['Romania Gap + Opportunity Engine','—','—','Test interes','Test interes'],
+  ['Brand gate + importability','Gate de bază','Gate de bază','Validare','Validare'],
+  ['Supplier Intelligence + benchmark furnizori','—','—','—','Test interes'],
+  ['Landed cost + profit + marjă + ROI','—','—','—','Test interes'],
+  ['Launch Academy + plan de execuție','—','—','—','Test interes']
+];
+const matrixBody=document.querySelector('.matrix tbody');
+if(matrixBody)matrixBody.innerHTML=matrixRows.map(row=>`<tr><td>${row[0]}</td>${row.slice(1).map(value=>`<td class="${value==='—'?'no':'yes'}">${value}</td>`).join('')}</tr>`).join('');
 
 plans.innerHTML=Object.values(SAAS_PLANS).map(plan=>{
   const price=plan.monthlyPriceEur===0?'€0':`€${String(plan.monthlyPriceEur).replace('.',',')} <small>/ lună după beta</small>`;

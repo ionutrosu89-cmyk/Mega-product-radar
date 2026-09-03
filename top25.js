@@ -4,6 +4,7 @@ import {trackJourneyEvent} from './journey-events.js';
 import {installFreeDemandTracking,trackFreeDemand} from './free-demand.js';
 import {FREE_CROSS_MARKET_PLATFORMS} from './free-cross-market-registry.js';
 import {freeProductKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from './free-shortlist.js';
+import {classifyPublicBrandGate,publicCommerciallyEligible} from './brand-policy-v1.js';
 
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -21,6 +22,7 @@ const trackingCache=new Map();
 const currentPlatform=()=>crossMarket.platforms.find(platform=>platform.id===selectedPlatform)||FREE_CROSS_MARKET_PLATFORMS.at(-1);
 const currentRanking=()=>crossMarket.rankings.find(row=>row.platform===selectedPlatform&&row.nicheId===current?.id)||null;
 const platformProducts=()=>selectedPlatform==='AMAZON_ARCHIVE'?(current?.products||[]):(currentRanking()?.products||[]);
+const eligiblePlatformProducts=()=>platformProducts().filter(publicCommerciallyEligible);
 
 function drawNicheTabs(){
   const root=$('#tabs'),query=normalizeSearch($('#nicheSearch')?.value);
@@ -41,7 +43,12 @@ function installNicheTabs(){
 }
 
 function drawMarketTabs(){
-  $('#marketTabs').innerHTML=crossMarket.platforms.map(platform=>`<button type="button" data-platform="${esc(platform.id)}" class="${platform.id===selectedPlatform?'active':''}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
+  const available=crossMarket.platforms.filter(platform=>platform.status==='LIVE'||platform.status==='AVAILABLE_ARCHIVE');
+  const upcoming=crossMarket.platforms.filter(platform=>!available.includes(platform));
+  $('#marketTabs').innerHTML=available.map(platform=>`<button type="button" data-platform="${esc(platform.id)}" class="${platform.id===selectedPlatform?'active':''}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
+  $('#upcomingPlatforms').innerHTML=upcoming.map(platform=>`<button type="button" data-platform="${esc(platform.id)}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
+  $('#upcomingSummary').textContent=`Topuri live în pregătire (${upcoming.length})`;
+  $('#upcoming').hidden=upcoming.length===0;
   drawMarketContext();
 }
 
@@ -52,11 +59,13 @@ function drawMarketContext(){
 }
 
 function installMarketTabs(){
-  $('#marketTabs').addEventListener('click',event=>{
+  const selectPlatform=event=>{
     const button=event.target.closest('[data-platform]');if(!button)return;
     selectedPlatform=button.dataset.platform;comparison=new Set();drawMarketTabs();
     trackFreeDemand('FREE_NICHE_SELECTED',{nicheId:current?.id,nicheLabel:current?.label,target:`PLATFORM:${selectedPlatform}`});render({trackSearch:true});
-  });
+  };
+  $('#marketTabs').addEventListener('click',selectPlatform);
+  $('#upcomingPlatforms').addEventListener('click',selectPlatform);
   $('#marketContext').addEventListener('click',event=>{
     const button=event.target.closest('[data-platform-request]');if(!button)return;
     button.disabled=true;button.textContent='Cerere înregistrată ✓';
@@ -66,8 +75,9 @@ function installMarketTabs(){
 }
 
 function displayProduct(raw){
-  if(selectedPlatform==='AMAZON_ARCHIVE')return hardenTop25Evidence(raw);
-  return {...raw,name:raw.name,rank:raw.rank,sourceUrl:raw.sourceUrl,sourceLabel:raw.sourceLabel,sourceTier:'A',sourcePeriod:`observat ${fmtDate(raw.observedAt)}`,sourceRank:raw.rank,sourceRankObserved:true,evidenceType:'EXACT_RANK',evidenceConfidence:raw.evidenceClass==='DIRECT'?'HIGH':'MEDIUM',evidenceClass:raw.evidenceClass,evidenceReviewedAt:raw.observedAt,metric:raw.sourceMetric||null};
+  const gate=classifyPublicBrandGate(raw);
+  if(selectedPlatform==='AMAZON_ARCHIVE')return {...hardenTop25Evidence(raw),...gate};
+  return {...raw,...gate,name:raw.name,rank:raw.rank,sourceUrl:raw.sourceUrl,sourceLabel:raw.sourceLabel,sourceTier:'A',sourcePeriod:`observat ${fmtDate(raw.observedAt)}`,sourceRank:raw.rank,sourceRankObserved:true,evidenceType:'EXACT_RANK',evidenceConfidence:raw.evidenceClass==='DIRECT'?'HIGH':'MEDIUM',evidenceClass:raw.evidenceClass,evidenceReviewedAt:raw.observedAt,metric:raw.sourceMetric||null};
 }
 
 function card(raw,movement,previousReviewedAt,currentEvidence,currentReviewedAt){
@@ -78,7 +88,7 @@ function card(raw,movement,previousReviewedAt,currentEvidence,currentReviewedAt)
   const mv=selectedPlatform==='AMAZON_ARCHIVE'?movementDisplay(movement):{tone:'new',label:'LIVE',detail:fmtDate(raw.observedAt)};
   const movementContext=previousReviewedAt?`Față de ${fmtDate(previousReviewedAt)}`:selectedPlatform==='AMAZON_ARCHIVE'?'Prima revizie centrală':'Observație recentă';
   const reviewedAt=currentReviewedAt||product.evidenceReviewedAt,saved=shortlist.has(key),compared=comparison.has(key);
-  return `<article class="card" data-product="${esc(product.name)}" data-product-key="${esc(key)}"><div class="rank">#${product.rank}</div><div class="movement ${esc(mv.tone)}"><b>${esc(mv.label)}</b><span>${esc(mv.detail)}</span><small>${esc(movementContext)}</small></div><div class="product"><div class="media" aria-hidden="true"><span class="placeholder">${esc(current.emoji||'📦')}</span></div><div class="copy"><h3>${esc(product.name)}</h3><small>${esc(current.label)} · ${selectedPlatform==='AMAZON_ARCHIVE'?'rank MPR DERIVED':`rank ${esc(currentPlatform().shortLabel)}`}</small></div></div><div class="quick-actions"><button type="button" data-shortlist class="${saved?'selected':''}" aria-pressed="${saved}">${saved?'★ Salvat':'☆ Salvează'}</button><button type="button" data-compare class="${compared?'selected':''}" aria-pressed="${compared}">${compared?'✓ Compară':'⇄ Compară'}</button></div><div class="stats"><div class="stat"><small>Rank sursă observat</small><b>${esc(rankSource)}</b></div><div class="stat"><small>Încredere în dovadă</small><b>${esc(product.evidenceConfidence)}</b></div><div class="stat"><small>Tip dovadă</small><b>${esc(evidenceTypeLabel(liveEvidenceType))}</b></div><div class="stat"><small>Statistică publică</small><b>${esc(fmtMetric(product.metric))}</b></div></div><div class="evidence"><div class="src"><small>Sursă · Tier ${esc(product.sourceTier)} · ${esc(product.sourcePeriod)}</small><b>${esc(product.sourceLabel)}</b><small>Revizie dovadă · ${esc(fmtDate(reviewedAt))}</small></div><span class="chip ${String(product.sourceTier).toLowerCase()}">${esc(product.evidenceClass)}</span>${sourceUrl!=='#'?`<a class="source-link" data-product-opened data-product-action="source" href="${esc(sourceUrl)}" target="_blank" rel="noopener noreferrer">Vezi sursa</a>`:''}</div><div class="beta-decision"><small>Decizia ta după această analiză</small><div><button type="button" data-product-decision="INVESTIGATE">Merită investigat</button><button type="button" data-product-decision="HOLD">Nu acum</button><button type="button" data-product-decision="UNKNOWN">Dovezi insuficiente</button></div></div><div class="actions"><a class="discover" data-product-opened data-product-action="discover" href="login.html?next=discover.html">Creează cont și urmărește</a><a class="source" data-product-opened data-product-action="romania" href="pricing.html?upgrade=RADAR">Vreau analiza România</a></div></article>`;
+  return `<article class="card" data-product="${esc(product.name)}" data-product-key="${esc(key)}"><div class="rank">#${product.rank}</div><div class="movement ${esc(mv.tone)}"><b>${esc(mv.label)}</b><span>${esc(mv.detail)}</span><small>${esc(movementContext)}</small></div><div class="product"><div class="media" aria-hidden="true"><span class="placeholder">${esc(current.emoji||'📦')}</span></div><div class="copy"><h3>${esc(product.name)}</h3><small>${esc(current.label)} · ${selectedPlatform==='AMAZON_ARCHIVE'?'poziție MPR derivată':`poziție ${esc(currentPlatform().shortLabel)}`}</small></div></div><div class="quick-actions"><button type="button" data-shortlist class="${saved?'selected':''}" aria-pressed="${saved}">${saved?'★ Salvat':'☆ Salvează'}</button><button type="button" data-compare class="${compared?'selected':''}" aria-pressed="${compared}">${compared?'✓ Compară':'⇄ Compară'}</button></div><div class="stats"><div class="stat"><small>Poziție sursă observată</small><b>${esc(rankSource)}</b></div><div class="stat"><small>Brand gate</small><b>${esc(product.brandPolicyClass==='GENERIC_PRIVATE_LABEL'?'GENERIC':product.brandPolicyClass==='UNKNOWN_REVIEW'?'DE VERIFICAT':'EXCLUS')}</b></div><div class="stat"><small>Tip dovadă</small><b>${esc(evidenceTypeLabel(liveEvidenceType))}</b></div><div class="stat"><small>Statistică publică</small><b>${esc(fmtMetric(product.metric))}</b></div></div><div class="evidence"><div class="src"><small>Sursă · Tier ${esc(product.sourceTier)} · ${esc(product.sourcePeriod)}</small><b>${esc(product.sourceLabel)}</b><small>Revizie dovadă · ${esc(fmtDate(reviewedAt))}</small></div><span class="chip ${String(product.sourceTier).toLowerCase()}">${esc(product.evidenceClass)}</span>${sourceUrl!=='#'?`<a class="source-link" data-product-opened data-product-action="source" href="${esc(sourceUrl)}" target="_blank" rel="noopener noreferrer">Vezi sursa</a>`:''}</div><div class="beta-decision"><small>Decizia ta după această analiză</small><div><button type="button" data-product-decision="INVESTIGATE">Merită investigat</button><button type="button" data-product-decision="HOLD">Nu acum</button><button type="button" data-product-decision="UNKNOWN">Dovezi insuficiente</button></div></div></article>`;
 }
 
 function filteredProducts(products){
@@ -93,9 +103,9 @@ function filteredProducts(products){
 function drawCompareTray(){const tray=$('#compareTray'),count=comparison.size;tray.hidden=count===0;$('#compareCount').textContent=String(count);$('#shortlistCount').textContent=String(shortlist.size);}
 
 function openComparison(){
-  const products=platformProducts().filter(product=>comparison.has(freeProductKey(product,selectedPlatform))).map(displayProduct);if(products.length<2)return;
-  $('#compareContent').innerHTML=`<div class="compare-table"><div class="compare-row head"><span>Criteriu</span>${products.map(product=>`<b>${esc(product.name)}</b>`).join('')}</div><div class="compare-row"><span>Poziție</span>${products.map(product=>`<b>#${product.rank}</b>`).join('')}</div><div class="compare-row"><span>Platformă</span>${products.map(()=>`<b>${esc(currentPlatform().shortLabel)}</b>`).join('')}</div><div class="compare-row"><span>Dovadă</span>${products.map(product=>`<b>${esc(product.evidenceClass)}</b>`).join('')}</div><div class="compare-row"><span>Statistică</span>${products.map(product=>`<b>${esc(fmtMetric(product.metric))}</b>`).join('')}</div><div class="compare-row"><span>Data</span>${products.map(product=>`<b>${esc(fmtDate(product.evidenceReviewedAt))}</b>`).join('')}</div></div>`;
-  $('#compareDialog').showModal();trackFreeDemand('FREE_PRODUCT_OPENED',{nicheId:current.id,nicheLabel:current.label,target:'COMPARE',productCount:products.length});
+  const products=eligiblePlatformProducts().filter(product=>comparison.has(freeProductKey(product,selectedPlatform))).map(displayProduct);if(products.length<2)return;
+  $('#compareContent').innerHTML=`<div class="compare-table"><div class="compare-row head"><span>Criteriu</span>${products.map(product=>`<b>${esc(product.name)}</b>`).join('')}</div><div class="compare-row"><span>Poziție MPR</span>${products.map(product=>`<b>#${product.rank}</b>`).join('')}</div><div class="compare-row"><span>Platformă</span>${products.map(()=>`<b>${esc(currentPlatform().shortLabel)}</b>`).join('')}</div><div class="compare-row"><span>Brand gate</span>${products.map(product=>`<b>${esc(product.brandPolicyClass==='UNKNOWN_REVIEW'?'DE VERIFICAT':'GENERIC')}</b>`).join('')}</div><div class="compare-row"><span>Tip dovadă</span>${products.map(product=>`<b>${esc(evidenceTypeLabel(product.evidenceType))}</b>`).join('')}</div><div class="compare-row"><span>Statistică</span>${products.map(product=>`<b>${esc(fmtMetric(product.metric))}</b>`).join('')}</div><div class="compare-row"><span>Perioadă</span>${products.map(product=>`<b>${esc(product.sourcePeriod||'—')}</b>`).join('')}</div><div class="compare-row"><span>Revizie</span>${products.map(product=>`<b>${esc(fmtDate(product.evidenceReviewedAt))}</b>`).join('')}</div></div>`;
+  $('#compareDialog').showModal();$('#compareClose').focus();trackFreeDemand('FREE_PRODUCT_OPENED',{nicheId:current.id,nicheLabel:current.label,target:'COMPARE',productCount:products.length});
 }
 
 async function trackingFor(niche,reviewedAt){
@@ -110,10 +120,10 @@ function emptyState(platform){
 
 async function render({trackSearch=false}={}){
   if(!current)return;
-  const token=++renderToken,niche=current,platform=currentPlatform(),sourceProducts=platformProducts(),products=filteredProducts(sourceProducts),reviewedAt=niche.reviewedAt||TOP25_EVIDENCE_REVIEWED_AT;
+  const token=++renderToken,niche=current,platform=currentPlatform(),allSourceProducts=platformProducts(),sourceProducts=eligiblePlatformProducts(),excludedCount=allSourceProducts.length-sourceProducts.length,products=filteredProducts(sourceProducts),reviewedAt=niche.reviewedAt||TOP25_EVIDENCE_REVIEWED_AT;
   $('#nicheTitle').textContent=`${niche.emoji} ${platform.shortLabel} · ${niche.label}`;
-  $('#nicheText').textContent=platform.id==='AMAZON_ARCHIVE'?`${sourceProducts.length} produse din datasetul istoric licențiat. Nu reprezintă vânzări curente și nu intră în Consensus Live 2026.`:platform.status==='LIVE'?`${sourceProducts.length} produse cu observații recente și sursă oficială sau licențiată.`:'Acest clasament se publică numai după acces oficial, verificarea drepturilor și 25/25 poziții recente.';
-  $('#coverage').textContent=`${sourceProducts.length}/25${platform.status==='LIVE'?' LIVE':platform.id==='AMAZON_ARCHIVE'?' ARHIVĂ':''}`;$('#resultCount').textContent=`${products.length} rezultate afișate`;
+  $('#nicheText').textContent=platform.id==='AMAZON_ARCHIVE'?`${sourceProducts.length} din 25 poziții istorice rămân după brand gate; ${excludedCount} produse de brand consacrat sunt ascunse. Lista nu reprezintă vânzări curente.`:platform.status==='LIVE'?`${sourceProducts.length} produse cu observații recente și sursă oficială sau licențiată.`:'Acest clasament se publică numai după acces oficial, verificarea drepturilor și 25/25 poziții recente.';
+  $('#coverage').textContent=`${sourceProducts.length}/25${platform.status==='LIVE'?' LIVE':platform.id==='AMAZON_ARCHIVE'?' ELIGIBILE':''}`;$('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} excluse prin brand gate`:''}`;
   const tracking=await trackingFor(niche,reviewedAt);if(token!==renderToken||current!==niche)return;
   $('#trackingStatus').textContent=platform.id==='AMAZON_ARCHIVE'?(tracking.previousReviewedAt?`Comparat cu revizia ${fmtDate(tracking.previousReviewedAt)} · istoric central`:'ARHIVĂ · prima revizie centrală'):`${statusLabel(platform.status)} · prospețime maximă ${platform.freshnessDays||'—'} zile`;
   $('#grid').innerHTML=products.map(raw=>card(raw,tracking.movements.get(top25ProductKey(raw)),tracking.previousReviewedAt,tracking.currentProducts?.get(top25ProductKey(raw)),tracking.currentReviewedAt)).join('')||emptyState(platform);
@@ -136,7 +146,10 @@ if(loaded){
   installNicheTabs();installMarketTabs();trackFreeDemand('FREE_TOP25_VIEW',{nicheCount:niches.length,productCount:niches.length*25,offer:'CROSS_MARKET_FREE'});
   $('#productSearch').addEventListener('input',render);$('#productSort').addEventListener('change',render);
   $('#shortlistToggle').addEventListener('click',()=>{shortlistOnly=!shortlistOnly;$('#shortlistToggle').classList.toggle('active',shortlistOnly);render();});
-  $('#compareOpen').addEventListener('click',openComparison);$('#compareClear').addEventListener('click',()=>{comparison=new Set();render();});$('#compareClose').addEventListener('click',()=>$('#compareDialog').close());
+  const dialog=$('#compareDialog'),closeDialog=()=>dialog.close();
+  $('#compareOpen').addEventListener('click',openComparison);$('#compareClear').addEventListener('click',()=>{comparison=new Set();render();});$('#compareClose').addEventListener('click',closeDialog);
+  dialog.addEventListener('close',()=>$('#compareOpen').focus());
+  dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const focusable=[...dialog.querySelectorAll('button:not([disabled]),a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')];if(focusable.length===0)return;const first=focusable[0],last=focusable.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});
   $('#grid').addEventListener('click',event=>{
     const cardElement=event.target.closest?.('[data-product]'),emptyRequest=event.target.closest?.('[data-empty-request]');
     if(emptyRequest){emptyRequest.disabled=true;emptyRequest.textContent='Interes înregistrat ✓';trackFreeDemand('FREE_DECISION_REACHED',{nicheId:current.id,nicheLabel:current.label,decision:'REQUEST_PLATFORM',target:`PLATFORM:${emptyRequest.dataset.emptyRequest}`});return;}
