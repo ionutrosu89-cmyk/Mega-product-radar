@@ -9,10 +9,21 @@
 <body><main class="wrap"><article class="paper">
   <a href="beta.html">← Mega Product Radar</a>
   <h1>Surse, licențe și limite</h1>
-  <p>Versiune: 2 septembrie 2026</p>
+  <p>Versiune: 3 septembrie 2026</p>
   <div class="notice"><b>Politică fail-closed:</b> o sursă fără drept documentat de analiză nu intră în scoruri, iar o sursă fără drept comercial documentat nu produce câmpuri vizibile clienților. Plata unui API nu este considerată automat licență de redistribuire.</div>
   <h2>Sursa planului Free</h2>
   <p>Cele 25 de nișe Free folosesc exclusiv <b>Amazon Products Dataset 2023</b>, publicat pe Kaggle și indicat ca ODC-By 1.0. MPR afișează atribuirea, perioada snapshot-ului și linkul către dataset. Titlurile și identificatorii sunt fapte istorice de catalog; imaginile produselor și conținutul promoțional al marketplace-ului nu sunt incluse în această utilizare.</p>
+  <h2>Cross-Market Free</h2>
+  <p>Interfața permite compararea acelorași nișe între platforme, dar existența unui tab nu înseamnă că datele acelei platforme sunt active. La 3 septembrie 2026, numai arhiva Amazon 2023 are poziții publicate. AliExpress, eBay, Amazon US/DE, TikTok, Google și România rămân nepublicate până când există acces oficial sau licențiat, verificarea termenilor și 25 de poziții recente pentru nișa respectivă.</p>
+  <table><thead><tr><th>Termen de comparație</th><th>Ce poate măsura</th><th>Regulă publică</th></tr></thead><tbody>
+    <tr><td>AliExpress</td><td>Hot Products din interfața oficială disponibilă aplicației</td><td class="hold">Nu este încă activ. Nu echivalăm „hot” cu unități vândute.</td></tr>
+    <tr><td>eBay</td><td>BEST_SELLING din API-ul oficial eBay Marketing</td><td class="hold">Nu este încă activ. Poziția API nu devine automat volum de vânzări.</td></tr>
+    <tr><td>Amazon US / DE</td><td>Clasament sau semnale curente din acces oficial/licențiat</td><td class="hold">Nu este încă activ; arhiva 2023 rămâne separată.</td></tr>
+    <tr><td>TikTok</td><td>Trend, Shop sau publicitate, conform accesului aprobat</td><td class="hold">Viralitatea este semnal, nu dovadă de vânzări.</td></tr>
+    <tr><td>Google</td><td>Best Sellers ori accelerație de căutare, etichetate distinct</td><td class="hold">Nu este încă activ.</td></tr>
+    <tr><td>România</td><td>Oferte comparabile și suprafețe independente</td><td class="hold">Măsoară oferta observată, nu vânzările locale.</td></tr>
+    <tr><td>Consensus</td><td>Confirmarea aceluiași concept pe platforme independente</td><td class="hold">Se activează numai cu minimum două platforme live.</td></tr>
+  </tbody></table>
   <h2>Surse utilizabile în beta</h2>
   <table><thead><tr><th>Sursă</th><th>Status</th><th>Utilizare</th></tr></thead><tbody>
     <tr><td><a href="https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products">Amazon Products Dataset 2023</a><br>Licență ODC-By 1.0</td><td class="go">PERMIS CONDIȚIONAT</td><td>Identificatori și fapte despre produse, cu atribuire. Imaginile, descrierile și materialele de marcă nu sunt incluse în aprobarea MPR.</td></tr>
@@ -29,7 +40,7 @@
     <tr><td>DataForSEO / Keepa</td><td class="hold">NU ESTE CUMPĂRAT</td><td>Confirmare scrisă privind stocarea, derivarea și afișarea în SaaS către utilizatori.</td></tr>
   </tbody></table>
   <h2>Reguli de prezentare</h2>
-  <ul><li>Nu numim produsele „cele mai vândute” fără un clasament oficial de vânzări și o perioadă clară.</li><li>Top 25 Free este un clasament intern DERIVED din catalogul istoric, nu ranking Amazon.</li><li>Nu afișăm fotografia originală a produsului fără drept separat.</li><li>Fiecare rezultat indică sursa, data și clasa de evidență.</li><li>Brandurile consacrate sunt excluse din funnel-ul comercial.</li><li>Scorurile MPR sunt indicatori derivați și nu garantează profitul.</li></ul>
+  <ul><li>Nu numim produsele „cele mai vândute” fără un clasament oficial de vânzări și o perioadă clară.</li><li>Top 25 din arhiva Free este un clasament intern DERIVED din catalogul istoric, nu ranking Amazon.</li><li>Fiecare Top 25 live trebuie să aibă exact 25 poziții recente și URL-uri valide ale sursei; altfel interfața rămâne fail-closed.</li><li>Nu afișăm fotografia originală a produsului fără drept separat.</li><li>Fiecare rezultat indică sursa, data și clasa de evidență.</li><li>Brandurile consacrate sunt excluse din funnel-ul comercial.</li><li>Scorurile MPR sunt indicatori derivați și nu garantează profitul.</li></ul>
   <h2>Operator</h2>
   <p><b>RED COMMERCE S.R.L.</b>, CUI 46520923, J23/4881/2022, cu sediul în Str. Amurgului nr. 30A, et. 3, ap. 13, Popești-Leordeni, Ilfov, România.</p>
   <p>Pentru întrebări despre surse: <a href="mailto:office.redcommerce@gmail.com">office.redcommerce@gmail.com</a>.</p>

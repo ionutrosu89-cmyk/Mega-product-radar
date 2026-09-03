@@ -62,12 +62,12 @@ test('Free Top 25 is free while dynamic Discover remains a paid entitlement',()=
   assert.equal(hasFeature('DISCOVER','TOP_PRODUCTS'),true);
 });
 
-test('Top 25 UI clearly separates internal rank, observed source rank and evidence confidence',async()=>{
+test('Top 25 UI clearly separates archive, live platform rank and evidence confidence',async()=>{
   const html=await fs.readFile(new URL('../top25.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../top25.js',import.meta.url),'utf8');
-  assert.match(html,/Poziția #1–#25.*DERIVED/is);
-  assert.match(html,/nu un clasament Amazon al vânzărilor/i);
-  assert.match(html,/Rank MPR: DERIVED · nu vânzări curente/i);
+  assert.match(html,/Amazon Historical este o arhivă licențiată/i);
+  assert.match(html,/Rank platformă ≠ unități vândute/i);
+  assert.match(html,/Consensus se activează numai.*minimum două platforme/i);
   assert.match(js,/Rank sursă observat/);
   assert.match(js,/Încredere în dovadă/);
   assert.match(js,/Tip dovadă/);
@@ -79,21 +79,19 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(js,/Merită investigat/);
   assert.match(html,/beta-decision/);
   assert.match(html,/id="nicheSearch"/);
-  assert.match(html,/nu reprezintă disponibilitate, viralitate ori vânzări curente/i);
-  assert.match(js,/LICENSED_HISTORICAL_EVIDENCE/);
-  assert.match(js,/mode:niche\.mode\|\|'LIVE_EVIDENCE'/);
-  assert.doesNotMatch(js,/\.map\(niche=>\(\{\.\.\.niche,[^\n]*mode:'LIVE_EVIDENCE'/);
+  assert.match(js,/Amazon Historical disponibil|datasetul istoric licențiat/i);
+  assert.match(js,/AMAZON_ARCHIVE/);
+  assert.match(js,/FREE_CROSS_MARKET_PLATFORMS/);
   assert.match(js,/FAIL-CLOSED/);
   assert.match(js,/FREE_TOP25_VIEW/);
   assert.match(html,/25 nișe × Top 25 produse/i);
-  assert.match(html,/nu un clasament Amazon al vânzărilor/i);
   assert.doesNotMatch(js,/tse\d?\.mm\.bing\.net/i);
   assert.doesNotMatch(js,/FREE_TOP25_NICHES/);
-  assert.match(js,/produse urmărite/);
+  assert.match(js,/Shortlist-ul|Salvează/);
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
 
 test('Top 25 pages, evidence policy and dataset are included in the Netlify build',async()=>{
   const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
-  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js','free-demand.js','beta.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','free-demand.js','beta.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
 });
