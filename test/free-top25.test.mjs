@@ -65,10 +65,9 @@ test('Free Top 25 is free while dynamic Discover remains a paid entitlement',()=
 test('Top 25 UI clearly separates internal rank, observed source rank and evidence confidence',async()=>{
   const html=await fs.readFile(new URL('../top25.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../top25.js',import.meta.url),'utf8');
-  assert.match(html,/ordinea internă.*DERIVED/is);
-  assert.match(html,/Rank sursă.*numai.*observată explicit/is);
-  assert.match(html,/Încredere în dovadă.*nu șansa comercială/is);
-  assert.match(html,/Search volume(?: și recenziile istorice)? nu (?:este|sunt) prezentat(?:e)? ca vânzări/i);
+  assert.match(html,/Poziția #1–#25.*DERIVED/is);
+  assert.match(html,/nu un clasament Amazon al vânzărilor/i);
+  assert.match(html,/Rank MPR: DERIVED · nu vânzări curente/i);
   assert.match(js,/Rank sursă observat/);
   assert.match(js,/Încredere în dovadă/);
   assert.match(js,/Tip dovadă/);
@@ -80,15 +79,21 @@ test('Top 25 UI clearly separates internal rank, observed source rank and eviden
   assert.match(js,/Merită investigat/);
   assert.match(html,/beta-decision/);
   assert.match(html,/id="nicheSearch"/);
-  assert.match(html,/recenziile istorice nu sunt prezentate ca vânzări/i);
+  assert.match(html,/nu reprezintă disponibilitate, viralitate ori vânzări curente/i);
   assert.match(js,/LICENSED_HISTORICAL_EVIDENCE/);
   assert.match(js,/mode:niche\.mode\|\|'LIVE_EVIDENCE'/);
   assert.doesNotMatch(js,/\.map\(niche=>\(\{\.\.\.niche,[^\n]*mode:'LIVE_EVIDENCE'/);
+  assert.match(js,/FAIL-CLOSED/);
+  assert.match(js,/FREE_TOP25_VIEW/);
+  assert.match(html,/25 nișe × Top 25 produse/i);
+  assert.match(html,/nu un clasament Amazon al vânzărilor/i);
+  assert.doesNotMatch(js,/tse\d?\.mm\.bing\.net/i);
+  assert.doesNotMatch(js,/FREE_TOP25_NICHES/);
   assert.match(js,/produse urmărite/);
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
 
 test('Top 25 pages, evidence policy and dataset are included in the Netlify build',async()=>{
   const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
-  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js','free-demand.js','beta.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
 });

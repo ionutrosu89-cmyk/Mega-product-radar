@@ -92,12 +92,13 @@ export function createFreeTop25Handler({fetch:fetchImpl=fetch,env=process.env}={
         organicProducts:Array.isArray(organic.data?.products)?organic.data.products:[]
       });
       const expandedNiches=await loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[]);
+      const publishedNiches=expandedNiches.length===25?expandedNiches:[...universe.niches,...expandedNiches].slice(0,25);
       const expandedUpdatedAt=expandedNiches.map(niche=>niche.reviewedAt).filter(Boolean).sort().at(-1)||null;
       return Response.json({
         ok:true,
         ...universe,
-        stats:{...universe.stats,completeNicheCount:universe.niches.length+expandedNiches.length,expandedNicheCount:expandedNiches.length,expandedProductCount:expandedNiches.length*25},
-        niches:[...universe.niches,...expandedNiches],
+        stats:{...universe.stats,completeNicheCount:publishedNiches.length,expandedNicheCount:expandedNiches.length,expandedProductCount:expandedNiches.length*25,publishedNicheCount:publishedNiches.length,publishedProductCount:publishedNiches.length*25},
+        niches:publishedNiches,
         sourceDiagnostics:{discovery:discovery.via,organic:organic.via},
         updatedAt:[discovery.data?.updatedAt,organic.data?.updatedAt,expandedUpdatedAt].filter(Boolean).sort().at(-1)||null
       },{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});

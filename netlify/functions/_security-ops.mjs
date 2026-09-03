@@ -12,7 +12,7 @@ export function requestId(request){return text(request?.headers?.get?.('x-reques
 function localRateLimit(key,limit,windowSeconds){const now=nowMs(),windowMs=Math.max(1,Number(windowSeconds)||60)*1000;const prior=(localBuckets.get(key)||[]).filter(t=>now-t<windowMs);if(prior.length>=limit)return {ok:false,status:429,retryAfterSeconds:Math.max(1,Math.ceil((windowMs-(now-prior[0]))/1000)),code:'RATE_LIMITED',mode:'LOCAL_FALLBACK'};prior.push(now);localBuckets.set(key,prior);return {ok:true,remaining:Math.max(0,limit-prior.length),mode:'LOCAL_FALLBACK'};}
 
 export async function enforceRateLimit(request,{route,workspaceId=null,userId=null,limit=60,windowSeconds=60,env=process.env,fetchImpl=fetch}={}){
-  const subject=text(userId||workspaceId||clientIp(request)||'anonymous');
+  const subject=text(userId||workspaceId||hashIp(clientIp(request)||'unknown',env));
   const key=`${route||'route'}:${subject}`;
   const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl,service=env.SUPABASE_SERVICE_ROLE_KEY;
   if(supabaseUrl&&service){

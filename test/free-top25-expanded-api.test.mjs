@@ -30,7 +30,8 @@ test('expanded Free plan exposes only complete 25-product niches and hardens the
   const fetchImpl=async()=>Response.json(rows);
   const niches=await loadExpandedTop25Niches({env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'server-secret'},fetchImpl});
 
-  assert.equal(niches.length,15);
+  assert.equal(FREE_TOP25_EXPANDED_REGISTRY.length,25);
+  assert.equal(niches.length,24);
   assert.ok(!niches.some(niche=>niche.id==='GRADINA_BALCON'));
   assert.equal(niches.find(niche=>niche.id==='ORGANIZARE_CASA').reviewedAt,'2026-09-02');
   for(const niche of niches){
