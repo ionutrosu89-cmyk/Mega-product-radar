@@ -11,6 +11,7 @@ function funnelHtml(stages=[]){
 }
 function render(data){
   const t=data.totals||{},r=data.retention||{};
+  const free=data.freeDemand||{},ft=free.totals||{},fc=free.conversion||{};
   $('#workspaces').textContent=n(t.workspaces);
   $('#active').textContent=n(t.activeWorkspaces);
   $('#users').textContent=n(t.activeUsers);
@@ -19,6 +20,16 @@ function render(data){
   $('#paid').textContent=n(t.activePaidWorkspaces);
   $('#cancelPending').textContent=n(t.cancelPendingWorkspaces);
   $('#retentionRate').textContent=`${n(r.retentionRate).toFixed(1)}%`;
+  $('#freeSessions').textContent=n(ft.sessions);
+  $('#freeTop25Views').textContent=n(ft.top25ViewSessions);
+  $('#freeNicheSessions').textContent=n(ft.nicheSessions);
+  $('#freeProductSessions').textContent=n(ft.productSessions);
+  $('#freeDecisionSessions').textContent=n(ft.decisionSessions);
+  $('#freeSignupSessions').textContent=n(ft.signupSessions);
+  $('#freeSignupRate').textContent=rate(fc.signupFromTop25);
+  $('#freeProductRate').textContent=rate(fc.productFromTop25);
+  $('#freeTopNiches').innerHTML=(free.topNiches||[]).map(row=>countRow(row.label,row.count)).join('')||'<div class="status">Nu există încă selecții de nișă.</div>';
+  $('#freeAcquisition').innerHTML=(free.acquisitionSources||[]).map(row=>countRow(row.label,row.count)).join('')||'<div class="status">Nu există încă trafic măsurat.</div>';
   $('#usageFunnel').innerHTML=funnelHtml(data.usageFunnel||[]);
   $('#billingFunnel').innerHTML=funnelHtml(data.billingFunnel||[]);
   $('#plans').innerHTML=['FREE','DISCOVER','RADAR','LAUNCH'].map(p=>`<div class="plan"><b>${n(data.byPlan?.[p])}</b><small>${p}</small></div>`).join('');

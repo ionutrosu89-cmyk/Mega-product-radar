@@ -1,6 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {aggregate,createBetaAnalyticsHandler} from '../netlify/functions/beta-analytics.mjs';
+import {aggregate,aggregateFreeDemand,createBetaAnalyticsHandler} from '../netlify/functions/beta-analytics.mjs';
+
+test('anonymous Free analytics measures niche and signup demand without claiming persistent unique users',()=>{
+  const data=aggregateFreeDemand([
+    {page_session_id:'landing-1',event_name:'FREE_LANDING_VIEW',acquisition_source:'tiktok'},
+    {page_session_id:'landing-1',event_name:'FREE_TOP25_CTA_CLICK',acquisition_source:'tiktok'},
+    {page_session_id:'top25-1',event_name:'FREE_TOP25_VIEW',acquisition_source:'tiktok'},
+    {page_session_id:'top25-1',event_name:'FREE_NICHE_SELECTED',niche_id:'AUTO',acquisition_source:'tiktok'},
+    {page_session_id:'top25-1',event_name:'FREE_PRODUCT_OPENED',niche_id:'AUTO',acquisition_source:'tiktok'},
+    {page_session_id:'top25-1',event_name:'FREE_SIGNUP_CTA_CLICK',niche_id:'AUTO',acquisition_source:'tiktok'}
+  ]);
+  assert.equal(data.totals.sessions,2);
+  assert.equal(data.totals.top25ViewSessions,1);
+  assert.equal(data.conversion.productFromTop25,100);
+  assert.equal(data.conversion.signupFromTop25,100);
+  assert.deepEqual(data.topNiches[0],{label:'AUTO',count:3});
+  assert.deepEqual(data.acquisitionSources[0],{label:'tiktok',count:6});
+});
 
 test('beta analytics separates usage, billing, retention and churn without double counting workspaces',()=>{
   const data=aggregate({events:[
