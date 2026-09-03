@@ -10,10 +10,10 @@ Core sequence:
 
 The four customer questions are:
 
-- **FREE — What is selling?**
-- **DISCOVER — Where can I source it and does the economics make sense?**
-- **RADAR — What opportunity is emerging, especially in Romania?**
-- **LAUNCH — How do I execute and build the business?**
+- **FREE — What documented products can I explore?**
+- **DISCOVER — What is starting to move globally?**
+- **RADAR — Which signals survive Romania Gap and importability gates?**
+- **LAUNCH — Do sourcing and economics support execution?**
 
 The platform must never present estimates as verified facts. Sensitive metrics must carry an evidence class such as `VERIFIED`, `ESTIMATED`, `DERIVED`, or `UNKNOWN`. Missing values remain unknown; they are never normalized to zero merely to complete a calculation.
 
@@ -45,28 +45,20 @@ Data milestones:
 
 Free does not include supplier economics, Romania opportunity detection, or execution services.
 
-Primary CTA: **Analyze sourcing and economics with Discover.**
+Primary CTA: **Track current global signals with Discover.**
 
 ### Discover — €17.90 / month
 
-Purpose: connect market demand to sourcing and unit economics.
+Purpose: add current global trend intelligence to the Free discovery layer.
 
-Discover answers: **“Where can I source this product and does it have viable economics?”**
+Discover answers: **“What is starting to move globally, and is that movement persistent?”**
 
 Includes everything in Free plus:
-- Supplier Intelligence;
-- supplier candidate history and evidence;
-- Supplier Benchmark: observed min/median/max prices, DDP/unit, MOQ, lead time and evidence coverage where the sample supports them;
-- quote evidence ledger and supplier-stated vs documented vs manually verified distinctions;
-- Landed Cost scenarios;
-- profit, margin, ROI and break-even analysis;
-- maximum acceptable supplier / landed-cost scenarios;
-- import-risk context;
-- commercial economics labels such as favorable, marginal, negotiate, or poor economics.
-
-Discover does **not** turn a supplier quote into an order recommendation. Supplier and economics data remain intelligence unless stricter downstream evidence gates are satisfied.
-
-Supplier database milestone: **100 products × minimum 3 supplier observations = 300 structured supplier offers**.
+- Rising and New Products;
+- Trend Intelligence and persistence windows;
+- multi-market confirmation;
+- keyword/search momentum where the source permits it;
+- filters, alerts and extended history.
 
 Primary CTA: **Find emerging Romania opportunities with Radar.**
 
@@ -77,16 +69,12 @@ Purpose: identify opportunities before they become obvious.
 Radar answers: **“What is starting to grow, and where is the Romanian market still under-supplied?”**
 
 Includes everything in Discover plus:
-- Rising Products;
-- New Products;
-- Trend Intelligence;
-- keyword/search momentum;
-- historical growth windows;
+- brand and importability hard gates;
 - alerts and watchlists;
 - Romania demand intelligence;
 - local listing/seller/price context;
 - Romania Gap;
-- Opportunity Engine combining global demand, growth, Romanian demand, local competition, supplier availability, economics and data confidence;
+- Opportunity Engine combining global demand, growth, Romanian demand, local competition, importability and data confidence;
 - evidence-backed commercial decision support.
 
 Initial Romania intelligence milestone: **1,000 products** with useful Romanian keyword/demand, competition, seller-density and price context.
@@ -102,6 +90,10 @@ Purpose: convert intelligence into a structured route from idea to operating bus
 Launch answers: **“How do I actually execute?”**
 
 Includes everything in Radar plus:
+- Supplier Intelligence and a minimum three-option benchmark for deep candidates;
+- quote evidence ledger;
+- Landed Cost scenarios;
+- profit, margin, ROI and break-even analysis;
 - personalized shortlist;
 - capital and budget planning;
 - Launch roadmap;
@@ -117,6 +109,8 @@ Includes everything in Radar plus:
 - access/introduction to a tested/verified China sourcing contact when available.
 
 Launch Academy should evolve from a static article library into an interactive checklist and execution roadmap.
+
+Supplier database milestone: **100 products × minimum 3 supplier observations = 300 structured supplier offers**.
 
 Suggested curriculum:
 1. Company / legal setup;
@@ -248,11 +242,11 @@ Use staged freshness tiers and information-value budgeting:
 
 ## Commercial funnel
 
-Free market intelligence → Discover sourcing/economics → Radar opportunity intelligence → Launch execution ecosystem → optional paid partner/human services.
+Free documented exploration → Discover global trend intelligence → Radar Romania opportunity validation → Launch sourcing/economics and execution → optional paid partner/human services.
 
 Upgrade triggers:
-- Free: user wants supplier/economic context;
-- Discover: user wants trend/Romania opportunity detection;
+- Free: user wants current trend context;
+- Discover: user wants Romania opportunity validation;
 - Radar: user wants a personalized execution roadmap;
 - Launch: optional external/human services when needed.
 
@@ -262,13 +256,13 @@ Upgrade triggers:
 2. Product Universe and historical observations.
 3. Top Products FREE engine.
 4. Seller & Brand Intelligence.
-5. Supplier Evidence Database and Benchmark Engine.
-6. Discover supplier/economics experience.
-7. Trend Intelligence.
-8. Romania Gap V1.
-9. Opportunity Engine.
-10. Alerts / Radar feed.
-11. Launch Academy and roadmap.
+5. Trend Intelligence.
+6. Discover global trend experience.
+7. Romania Gap V1.
+8. Opportunity Engine and hard gates.
+9. Alerts / Radar feed.
+10. Supplier Evidence Database and Benchmark Engine.
+11. Launch economics, Academy and roadmap.
 12. Partner Network.
 13. 5–10 closed beta users.
 14. First paid customer.
@@ -315,4 +309,4 @@ Do not prioritize yet:
 
 Current priority remains:
 
-**Category Universe → Product Universe → Top Products → Seller & Brand → Discover Supplier/Economics → Trend → Romania Gap → Opportunity Engine → Launch execution.**
+**Category Universe → Product Universe → Top Products → Seller & Brand → Discover Trend → Romania Gap → Opportunity Engine → Launch Supplier/Economics and execution.**

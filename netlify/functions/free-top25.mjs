@@ -4,6 +4,7 @@ import {buildFreeTop25LiveUniverse} from '../../free-top25-live-v1.js';
 import {FREE_TOP25_EXPANDED_REGISTRY} from '../../free-top25-expanded-registry.js';
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {enforceRateLimit} from './_security-ops.mjs';
+import {classifyPublicBrandGate} from '../../brand-policy-v1.js';
 
 async function fetchJson(fetchImpl,url){
   const response=await fetchImpl(url,{headers:{accept:'application/json'},cache:'no-store'});
@@ -33,6 +34,7 @@ function safeExpandedProduct(product,index){
   const asin=String(row.asin||'').trim().toUpperCase();
   const metricValue=Number(row?.metric?.value);
   if(!name||!/^([A-Z0-9]{10})$/.test(asin)||row.sourceKey!=='KAGGLE_AMAZON_PRODUCTS_2023')return null;
+  const brandGate=classifyPublicBrandGate(row);
   return {
     name,
     asin,
@@ -48,7 +50,10 @@ function safeExpandedProduct(product,index){
     note:'Produs din catalogul istoric licențiat. Nu reprezintă vânzări curente, disponibilitate live sau recomandare de import.',
     internalRankClass:'DERIVED',
     evidenceClass:'DERIVED',
-    commercialGate:'BRAND_REVIEW_REQUIRED'
+    commercialGate:brandGate.commercialEligible?'BRAND_REVIEW_REQUIRED':'STOP_BRAND_GATE',
+    brandPolicyClass:brandGate.brandPolicyClass,
+    commercialEligible:brandGate.commercialEligible,
+    brandPolicyReason:brandGate.reason
   };
 }
 

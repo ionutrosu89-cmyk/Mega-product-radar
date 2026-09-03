@@ -3,6 +3,11 @@ const fallbackUuid=()=> 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c
 const PAGE_SESSION_ID=globalThis.crypto?.randomUUID?.()||fallbackUuid();
 const clean=(value,max=120)=>String(value??'').trim().slice(0,max)||null;
 
+export function isFreeDemandTestTraffic(){
+  const params=new URLSearchParams(location.search);
+  return params.get('mpr_test')==='1'||params.get('test')==='1'||globalThis.navigator?.webdriver===true;
+}
+
 function acquisitionContext(){
   const params=new URLSearchParams(location.search);
   let referrerHost=null;
@@ -18,6 +23,7 @@ function acquisitionContext(){
 
 export async function trackFreeDemand(eventName,metadata={}){
   try{
+    if(isFreeDemandTestTraffic())return false;
     const payload={
       eventName:clean(eventName,80),
       page:clean(location.pathname.split('/').pop()||'/',80),
