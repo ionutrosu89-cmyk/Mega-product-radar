@@ -1,4 +1,4 @@
-const EBAY_SCOPE='https://api.ebay.com/oauth/api_scope';
+const EBAY_SCOPE='https://api.ebay.com/oauth/api_scope/buy.marketing';
 const TOKEN_URL='https://api.ebay.com/identity/v1/oauth2/token';
 let cached=null;
 
