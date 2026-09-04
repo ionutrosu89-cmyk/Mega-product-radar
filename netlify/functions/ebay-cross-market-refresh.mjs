@@ -1,3 +1,4 @@
+import {timingSafeEqual} from 'node:crypto';
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {collectEbayBestSellingTarget,parseEbayTargets} from './_ebay-best-selling.mjs';
 import {ebayBuyAccessState} from './_ebay-buy-auth.mjs';
@@ -6,7 +7,7 @@ const clean=value=>String(value??'').trim();
 const safeEqual=(left,right)=>{
   const a=Buffer.from(clean(left));
   const b=Buffer.from(clean(right));
-  return a.length>0&&a.length===b.length&&crypto.timingSafeEqual(a,b);
+  return a.length>0&&a.length===b.length&&timingSafeEqual(a,b);
 };
 const serviceHeaders=service=>({apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'resolution=merge-duplicates,return=minimal'});
 
