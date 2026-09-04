@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {scoreCompetition} from '../competition-signal-v1.js';
+test('sampled competition remains sampled',()=>{const r=scoreCompetition({scopeClass:'SAMPLED_COMPETITION_ESTIMATE',comparableListingCount:12,uniqueSellerCount:8,uniqueBrandCount:5,priceCompressionPct:20,medianReviewCount:50,topSellerConcentrationPct:30});assert.equal(r.scopeClass,'SAMPLED_COMPETITION_ESTIMATE');assert.equal(r.truthPolicy.sampledMayBeRelabeledExact,false);assert.ok(r.competitionOpportunityScore>0);});
+test('unknown scope remains explicit',()=>{const r=scoreCompetition({});assert.equal(r.scopeClass,'UNKNOWN');assert.ok(r.confidenceScore<50);});
