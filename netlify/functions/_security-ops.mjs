@@ -4,9 +4,16 @@ import {SAAS_CONFIG} from '../../saas-config.js';
 const localBuckets=new Map();
 const text=v=>String(v??'').trim();
 const nowMs=()=>Date.now();
+const isProduction=env=>text(env?.CONTEXT).toLowerCase()==='production'||text(env?.MPR_ENV).toLowerCase()==='production';
 
 function clientIp(request){return text(request?.headers?.get?.('x-nf-client-connection-ip')||request?.headers?.get?.('x-forwarded-for')?.split(',')[0]||'unknown');}
-function hashIp(ip,env){const salt=text(env.SECURITY_AUDIT_SALT||env.STRIPE_WEBHOOK_SECRET||'mpr');return createHash('sha256').update(`${salt}:${ip}`).digest('hex').slice(0,32);}
+export function securityAuditSalt(env=process.env){
+  const salt=text(env?.SECURITY_AUDIT_SALT);
+  if(salt.length>=32)return salt;
+  if(isProduction(env))throw new Error('SECURITY_AUDIT_SALT_REQUIRED');
+  return 'mpr-local-development-only';
+}
+function hashIp(ip,env){return createHash('sha256').update(`${securityAuditSalt(env)}:${ip}`).digest('hex').slice(0,32);}
 export function requestId(request){return text(request?.headers?.get?.('x-request-id'))||randomUUID();}
 
 function localRateLimit(key,limit,windowSeconds){const now=nowMs(),windowMs=Math.max(1,Number(windowSeconds)||60)*1000;const prior=(localBuckets.get(key)||[]).filter(t=>now-t<windowMs);if(prior.length>=limit)return {ok:false,status:429,retryAfterSeconds:Math.max(1,Math.ceil((windowMs-(now-prior[0]))/1000)),code:'RATE_LIMITED',mode:'LOCAL_FALLBACK'};prior.push(now);localBuckets.set(key,prior);return {ok:true,remaining:Math.max(0,limit-prior.length),mode:'LOCAL_FALLBACK'};}
