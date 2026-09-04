@@ -1,6 +1,6 @@
 # Free Cross-Market — plan de activare
 
-Versiune: 3 septembrie 2026
+Versiune: 4 septembrie 2026
 Operator: RED COMMERCE S.R.L.
 
 ## Regula de publicare
@@ -22,11 +22,21 @@ Consensus se publică numai când același concept este confirmat de minimum dou
 | Prioritate | Platformă | Acces urmărit | Cost activat acum | Ce trebuie făcut de operator |
 |---|---|---|---:|---|
 | P0 | AliExpress | API oficial Hot Products / afiliere, dacă termenii permit utilizarea SaaS | 0 € | Cont developer pe RED COMMERCE S.R.L.; acceptarea termenilor; chei în variabilele Netlify, niciodată în repository |
-| P0 | eBay | eBay Developers + Marketing API `BEST_SELLING` | 0 € | Cont developer și aplicație; token OAuth server-side; confirmarea dreptului de afișare/retentie |
+| P0 | eBay | eBay Developers + Buy Marketing API `BEST_SELLING` | 0 € | Creează aplicația Production pe RED COMMERCE S.R.L.; obține Client ID + Client Secret; finalizează eligibilitatea/aprobarea Buy API Production; introdu doar credentialele în Netlify. Aplicația generează automat Application Access Token server-side și nu cere token manual |
 | P1 | România | feeduri, pagini permise, index public sau verificare umană limitată | 0 € | Aprobarea fiecărei surse în registrul de drepturi înainte de automatizare |
 | P1 | Google | Merchant Center Best Sellers / Trends, conform eligibilității și termenilor | 0 € | Verificarea accesului contului și a permisiunilor de utilizare în produsul SaaS |
 | P2 | Amazon US/DE | API oficial ori dataset licențiat cu drept de utilizare comercială | 0 € până la ofertă aprobată | Nu se pornește un furnizor plătit fără aprobare separată |
 | P2 | TikTok | API aprobat pentru Research/Shop/Ads, după caz | 0 € | Aplicarea pentru produsul API adecvat; fără scraping Creative Center |
+
+## eBay — gate de producție
+
+Implementarea eBay este fail-closed. Starea devine `READY_TO_COLLECT` numai când sunt prezente credentialele aplicației și sunt confirmate atât termenii, cât și accesul Buy API în producție. Până atunci nu se execută apeluri către eBay și nu se publică Top 25.
+
+Tokenul OAuth de tip Application Access Token este generat prin client-credentials grant cu scope-ul minim Buy Marketing și reutilizat până aproape de expirare. Tokenul nu se stochează în repository, nu se trimite în browser și nu trebuie introdus manual în Netlify.
+
+Top 25 eBay folosește `BEST_SELLING` numai pentru nișe care au o mapare explicit aprobată la `category_id`. Categoria nu este ghicită din numele nișei. Configurația server-side `MPR_EBAY_CROSS_MARKET_TARGETS_JSON` conține doar mapările aprobate, de forma `nicheId + categoryId + marketplaceId`. În prima versiune sunt acceptate numai `EBAY_US` și `EBAY_DE`, pentru care avem și link public de produs determinist. Dacă lista API nu produce exact 25 de produse valide, snapshot-ul nu este scris.
+
+Refresh-ul este expus numai pe ruta internă protejată și folosește `MPR_INTERNAL_REFRESH_SECRET`. Secretul se generează și se păstrează numai în Netlify. Un refresh reușit scrie în `top25_snapshots` sub cheia `XMARKET:EBAY:<NICHE>`; endpoint-ul public Cross-Market îl preia apoi prin contractul existent, fără bypass al validării de prospețime și 25/25.
 
 ## Secret management
 

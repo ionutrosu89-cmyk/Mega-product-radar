@@ -2,6 +2,7 @@ import {SAAS_CONFIG} from '../../saas-config.js';
 import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
 import {loadExpandedTop25Niches} from './free-top25.mjs';
 import {enforceRateLimit} from './_security-ops.mjs';
+import {ebayBuyAccessState} from './_ebay-buy-auth.mjs';
 
 const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept:'application/json'});
 const present=(env,key)=>Boolean(String(env[key]||'').trim());
@@ -10,7 +11,7 @@ const access=(env,credentials,terms)=>credentials.some(key=>!present(env,key))?'
 function buildServerAccessState(env){
   return {
     ALIEXPRESS:access(env,['ALIEXPRESS_APP_KEY','ALIEXPRESS_APP_SECRET'],'MPR_ALIEXPRESS_TERMS_APPROVED'),
-    EBAY:access(env,['EBAY_OAUTH_TOKEN'],'MPR_EBAY_TERMS_APPROVED'),
+    EBAY:ebayBuyAccessState(env),
     AMAZON_US:access(env,['AMAZON_PRODUCT_DATA_ACCESS_TOKEN'],'MPR_AMAZON_DATA_RIGHTS_APPROVED'),
     AMAZON_DE:access(env,['AMAZON_PRODUCT_DATA_ACCESS_TOKEN'],'MPR_AMAZON_DATA_RIGHTS_APPROVED'),
     TIKTOK:access(env,['TIKTOK_COMMERCIAL_ACCESS_TOKEN'],'MPR_TIKTOK_COMMERCIAL_TERMS_APPROVED'),
