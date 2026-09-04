@@ -1,59 +1,49 @@
 name: Production Integrity Gate
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
-    branches: ["main"]
+    branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: production-integrity-${{ github.workflow }}-${{ github.ref }}
+  group: production-integrity-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  production-integrity:
-    name: Production Integrity
+  integrity:
+    name: production-integrity
     runs-on: ubuntu-latest
     timeout-minutes: 35
+
     steps:
-      - name: Prepare build environment
+      - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
           cache: npm
-      - name: Install dependencies
+
+      - name: Install locked dependencies
         run: npm ci
-      - name: Verify JavaScript and module syntax
-        run: |
-          node --check netlify/functions/free-top25.mjs
-          node --check netlify/functions/ad-automation.mjs
-          node --check netlify-edge-functions/canary-router.js
-          node --check free-top25-expanded-registry.js
-      - name: Check production safety gates
-        run: npm run check:production-safety
-      - name: Validate migration chain
-        run: npm run check:migrations
-      - name: Run full test suite
+
+      - name: Unit and integration tests
         run: npm test
-      - name: Run production build
+
+      - name: Verify migration chain
+        run: npm run verify:migrations
+
+      - name: Verify production safety invariants
+        run: npm run verify:production-safety
+
+      - name: Build production artifact
         run: npm run build
+
       - name: Audit production dependencies
-        run: npm audit --audit-level=high --omit=dev
-      - name: Snapshot production assets
-        run: |
-          mkdir -p artifacts
-          find site -maxdepth 4 -type f -print0 | sort -z | xargs -0 sha256sum > artifacts/site.sha256
-          sha256sum package-lock.json > artifacts/package-lock.sha256
-      - name: Upload integrity evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: production-integrity-${{ github.sha }}
-          path: artifacts/*.sha256
-          if-no-files-found: error
-          retention-days: 14
+        run: npm run security:audit
