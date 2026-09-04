@@ -1,7 +1,7 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
 import {loadExpandedTop25Niches} from './free-top25.mjs';
-import {enforceRateLimit} from './_security-ops.mjs';
+import {enforceRateLimit,requestId} from './_security-ops.mjs';
 import {ebayBuyAccessState} from './_ebay-buy-auth.mjs';
 
 const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept:'application/json'});
@@ -35,7 +35,7 @@ async function loadCrossMarketSnapshots({fetchImpl,env}){
   return Array.isArray(rows)?rows:[];
 }
 
-export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.env,now=()=>new Date()}={}){
+export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.env,now=()=>new Date(),logger=console}={}){
   return async request=>{
     try{
       const rate=await enforceRateLimit(request,{route:'free-cross-market',limit:90,windowSeconds:60,env,fetchImpl});
@@ -47,7 +47,9 @@ export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.
       const experience=buildFreeCrossMarketExperience({snapshots,archiveNicheCount:archiveNiches.length,accessByPlatform:buildServerAccessState(env),now:now()});
       return Response.json({ok:true,...experience},{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});
     }catch(error){
-      return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});
+      const incidentId=requestId(request);
+      logger?.error?.('FREE_CROSS_MARKET_INTERNAL_ERROR',{incidentId,errorName:String(error?.name||'Error'),errorMessage:String(error?.message||'unknown').slice(0,300)});
+      return Response.json({ok:false,error:'Internal server error',incidentId},{status:500,headers:{'Cache-Control':'no-store'}});
     }
   };
 }
