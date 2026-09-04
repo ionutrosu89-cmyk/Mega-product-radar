@@ -1,6 +1,7 @@
 import {getEbayApplicationToken,ebayBuyAccessState} from './_ebay-buy-auth.mjs';
 
 const API_URL='https://api.ebay.com/buy/marketing/v1/merchandised_product';
+const MARKETPLACE_HOSTS=Object.freeze({EBAY_US:'www.ebay.com',EBAY_DE:'www.ebay.de'});
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
 const finite=value=>Number.isFinite(Number(value));
@@ -15,7 +16,7 @@ export function parseEbayTargets(env=process.env){
     const nicheId=upper(row?.nicheId);
     const categoryId=clean(row?.categoryId);
     const marketplaceId=upper(row?.marketplaceId||'EBAY_US');
-    if(!/^[A-Z0-9_]+$/.test(nicheId)||!/^[0-9]+$/.test(categoryId)||!/^EBAY_[A-Z]{2,5}$/.test(marketplaceId))return [];
+    if(!/^[A-Z0-9_]+$/.test(nicheId)||!/^[0-9]+$/.test(categoryId)||!MARKETPLACE_HOSTS[marketplaceId])return [];
     const key=`${nicheId}:${marketplaceId}`;
     if(seen.has(key))return [];
     seen.add(key);
@@ -24,8 +25,8 @@ export function parseEbayTargets(env=process.env){
 }
 
 function productUrl(epid,marketplaceId){
-  const host=marketplaceId==='EBAY_DE'?'www.ebay.de':'www.ebay.com';
-  return `https://${host}/p/${encodeURIComponent(epid)}`;
+  const host=MARKETPLACE_HOSTS[marketplaceId];
+  return host?`https://${host}/p/${encodeURIComponent(epid)}`:'';
 }
 
 export function normalizeEbayBestSelling(payload,{target,observedAt=new Date().toISOString()}={}){
@@ -65,6 +66,7 @@ export function normalizeEbayBestSelling(payload,{target,observedAt=new Date().t
 
 export async function collectEbayBestSellingTarget({target,env=process.env,fetchImpl=fetch,now=()=>new Date()}={}){
   if(ebayBuyAccessState(env)!=='READY_TO_COLLECT')return {ok:false,code:'EBAY_ACCESS_NOT_READY',target,products:[]};
+  if(!MARKETPLACE_HOSTS[target?.marketplaceId])return {ok:false,code:'EBAY_MARKETPLACE_UNSUPPORTED',target,products:[]};
   const token=await getEbayApplicationToken({env,fetchImpl,now:()=>now().getTime()});
   const url=new URL(API_URL);
   url.searchParams.set('category_id',target.categoryId);
@@ -78,4 +80,4 @@ export async function collectEbayBestSellingTarget({target,env=process.env,fetch
   return {ok:true,code:'READY',target,products};
 }
 
-export const EBAY_BEST_SELLING={apiUrl:API_URL,metric:'BEST_SELLING',requiredCount:25};
+export const EBAY_BEST_SELLING={apiUrl:API_URL,metric:'BEST_SELLING',requiredCount:25,supportedMarketplaces:Object.keys(MARKETPLACE_HOSTS)};
