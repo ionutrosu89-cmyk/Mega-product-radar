@@ -32,7 +32,11 @@ Consensus se publică numai când același concept este confirmat de minimum dou
 
 Implementarea eBay este fail-closed. Starea devine `READY_TO_COLLECT` numai când sunt prezente credentialele aplicației și sunt confirmate atât termenii, cât și accesul Buy API în producție. Până atunci nu se execută apeluri către eBay și nu se publică Top 25.
 
-Tokenul OAuth de tip Application Access Token este generat prin client-credentials grant și reutilizat până aproape de expirare. Tokenul nu se stochează în repository, nu se trimite în browser și nu trebuie introdus manual în Netlify.
+Tokenul OAuth de tip Application Access Token este generat prin client-credentials grant cu scope-ul minim Buy Marketing și reutilizat până aproape de expirare. Tokenul nu se stochează în repository, nu se trimite în browser și nu trebuie introdus manual în Netlify.
+
+Top 25 eBay folosește `BEST_SELLING` numai pentru nișe care au o mapare explicit aprobată la `category_id`. Categoria nu este ghicită din numele nișei. Configurația server-side `MPR_EBAY_CROSS_MARKET_TARGETS_JSON` conține doar mapările aprobate, de forma `nicheId + categoryId + marketplaceId`. În prima versiune sunt acceptate numai `EBAY_US` și `EBAY_DE`, pentru care avem și link public de produs determinist. Dacă lista API nu produce exact 25 de produse valide, snapshot-ul nu este scris.
+
+Refresh-ul este expus numai pe ruta internă protejată și folosește `MPR_INTERNAL_REFRESH_SECRET`. Secretul se generează și se păstrează numai în Netlify. Un refresh reușit scrie în `top25_snapshots` sub cheia `XMARKET:EBAY:<NICHE>`; endpoint-ul public Cross-Market îl preia apoi prin contractul existent, fără bypass al validării de prospețime și 25/25.
 
 ## Secret management
 
