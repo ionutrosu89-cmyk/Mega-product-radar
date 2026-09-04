@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {buildCategoryCoverageReview,getEbayCategoryCoverageReview} from '../netlify/functions/_ebay-taxonomy-review.mjs';
+import {resetEbayTokenCacheForTests} from '../netlify/functions/_ebay-buy-auth.mjs';
 
 const tree={category:{categoryId:'0',categoryName:'Root'},leafCategoryTreeNode:false,childCategoryTreeNodes:[
   {category:{categoryId:'1',categoryName:'Home & Garden'},leafCategoryTreeNode:false,childCategoryTreeNodes:[{category:{categoryId:'11',categoryName:'Home Organization'},leafCategoryTreeNode:true}]},
@@ -19,6 +20,31 @@ test('coverage review evaluates all canonical niches without activating candidat
   assert.equal(casa.candidates[0].categoryId,'1');
   assert.equal(casa.candidates[0].activationEligible,false);
   assert.equal(casa.candidates[0].evidenceClass,'EBAY_CATEGORY_TREE_REVIEW_CANDIDATE');
+});
+
+test('coverage collector uses exactly two Taxonomy business calls and preserves tree version',async()=>{
+  resetEbayTokenCacheForTests();
+  const env={EBAY_CLIENT_ID:'id',EBAY_CLIENT_SECRET:'secret',MPR_EBAY_TERMS_APPROVED:'true',MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'true'};
+  let fetchCalls=0;
+  const fetchImpl=async input=>{
+    fetchCalls++;
+    const url=String(input);
+    if(url.includes('/identity/v1/oauth2/token'))return Response.json({access_token:'token',expires_in:3600});
+    if(url.includes('/get_default_category_tree_id'))return Response.json({categoryTreeId:'0',categoryTreeVersion:'123'});
+    if(url.endsWith('/category_tree/0'))return Response.json({categoryTreeVersion:'124',rootCategoryNode:tree});
+    throw new Error(`unexpected URL: ${url}`);
+  };
+  const result=await getEbayCategoryCoverageReview({marketplaceId:'EBAY_US',env,fetchImpl,now:()=>1_000});
+  assert.equal(result.ok,true);
+  assert.equal(result.code,'REVIEW_REQUIRED');
+  assert.equal(result.providerCalls,2);
+  assert.equal(fetchCalls,3);
+  assert.equal(result.categoryTreeId,'0');
+  assert.equal(result.categoryTreeVersion,'124');
+  assert.equal(result.targetCount,25);
+  assert.equal(result.targets.length,25);
+  assert.equal(result.policy.autoActivation,false);
+  assert.equal(result.policy.syntheticProductRanking,false);
 });
 
 test('coverage review makes zero provider calls before eBay production access is approved',async()=>{
