@@ -127,11 +127,10 @@ export function createBillingE2eSandboxTransitionHandler({fetch:fetchImpl=fetch,
       const action=text(body.action).toUpperCase();
       const workspace=await resolveWorkspace({supabaseUrl,service,env,fetchImpl});
       if(!workspace)return safeError('SANDBOX_WORKSPACE_NOT_FOUND','Dedicated sandbox workspace is unavailable.',503);
-      const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
-      if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
-      const subscription=subscriptionState.row;
       if(action==='CLEAN_SANDBOX'){
-        const outcome=await cleanSandbox({workspace,subscription,deploymentRef,env,fetchImpl});
+        const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
+        if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
+        const outcome=await cleanSandbox({workspace,subscription:subscriptionState.row,deploymentRef,env,fetchImpl});
         return Response.json({ok:true,action:outcome.action,endedSubscriptions:outcome.endedSubscriptions,realMoney:false,stripeMode:'SANDBOX',entitlementAuthority:'WEBHOOK_ONLY'},{headers:RESPONSE_HEADERS});
       }
       const stage=text(body.stage).toUpperCase();
@@ -140,6 +139,9 @@ export function createBillingE2eSandboxTransitionHandler({fetch:fetchImpl=fetch,
       if(!ledger)return safeError('ACCEPTANCE_NOT_STARTED','Current deployment billing acceptance is not started.',409);
       if(ledger.status==='GO')return safeError('ACCEPTANCE_ALREADY_GO','Current deployment billing acceptance is already complete.',409);
       if(expectedStage(ledger)!==stage)return safeError('STAGE_OUT_OF_ORDER',`Expected ${expectedStage(ledger)||'no further stage'}.`,409);
+      const subscriptionState=await loadSubscription({supabaseUrl,service,workspaceId:workspace.id,fetchImpl});
+      if(!subscriptionState.ok)return safeError('SUBSCRIPTION_STATE_UNAVAILABLE','Verified sandbox subscription state is unavailable.',502);
+      const subscription=subscriptionState.row;
       let outcome;
       if(stage==='DISCOVER_ACTIVE')outcome=await createDiscover({workspace,subscription,deploymentRef,env,fetchImpl});
       else if(stage==='RADAR_ACTIVE'||stage==='LAUNCH_ACTIVE')outcome=await changePlan({stage,workspace,subscription,deploymentRef,env,fetchImpl});
