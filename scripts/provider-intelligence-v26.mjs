@@ -8,6 +8,7 @@ const password=String(process.env.DATAFORSEO_PASSWORD||'').trim();
 const paidEnabled=String(process.env.DATAFORSEO_V26_PAID_ENABLED||'false').toLowerCase()==='true';
 const credentialsConfigured=Boolean(login&&password);
 const topN=Math.max(1,Math.min(5,Number(process.env.V26_DEEP_PRODUCTS||5)||5));
+const targetProduct=String(process.env.V26_TARGET_PRODUCT||'').trim();
 const maxPaidCalls=Math.max(1,Math.min(10,Number(process.env.V26_MAX_PAID_CALLS||5)||5));
 const maxRunCostUsd=Math.max(.01,Number(process.env.V26_MAX_RUN_COST_USD||.50)||.50);
 const maxAmazonCalls=Math.max(1,Math.min(maxPaidCalls,Number(process.env.V26_MAX_AMAZON_CALLS||3)||3));
@@ -78,7 +79,7 @@ if(process.argv.includes('--self-test')){
 
 const data=await read(MARKET,null);if(!data){console.log('V2.8 provider intelligence: market dataset missing; skipped.');process.exit(0)}
 const cache=await read(CACHE,{version:'2.8',products:{}});cache.products=cache.products||{};
-const products=arr(data.products);const ranked=products.slice().sort((a,b)=>n0(a?.goldenPipeline?.rank||999)-n0(b?.goldenPipeline?.rank||999));
+const products=arr(data.products);const rankedAll=products.slice().sort((a,b)=>n0(a?.goldenPipeline?.rank||999)-n0(b?.goldenPipeline?.rank||999));const ranked=targetProduct?rankedAll.filter(p=>norm(p.name)===norm(targetProduct)):rankedAll;if(targetProduct&&!ranked.length)throw new Error(`V26_TARGET_PRODUCT_NOT_FOUND: ${targetProduct}`);
 for(const p of products)p.providerIntelligence={...(p.providerIntelligence||{}),version:'2.8',romaniaKeywords:arr(p?.providerIntelligence?.romaniaKeywords),paidProviderEnabled:paidEnabled,credentialsConfigured};
 let paidCalls=0,reportedRunCost=0,accountedRunCost=0,amazonEnriched=0,reverseKeywordEnriched=0;const providerErrors=[],costAnomalies=[];
 function charge(res,fallback,layer,context){const c=accountCost(res.reportedCostUsd,fallback,layer,context);paidCalls++;reportedRunCost+=n0(c.reportedCostUsd);accountedRunCost+=c.accountedCostUsd;if(c.anomaly)costAnomalies.push(c.anomaly);if(accountedRunCost>maxRunCostUsd)throw new Error(`V2.8 budget guard exceeded $${maxRunCostUsd} accounted cost`);return c;}
