@@ -37,7 +37,7 @@ jobs:
       - name: Run metric comparison unit tests
         run: node --test test/amazon-metric-comparison-v1.test.mjs
       - name: Download canonical Amazon baseline
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: amazon-round1-canonical-bridge
           path: artifacts/amazon-metric-source
