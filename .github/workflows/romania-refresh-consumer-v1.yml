@@ -128,7 +128,7 @@ jobs:
           jq . "artifacts/romania-edge-worker-${WORKER}.json"
       - name: Preserve Romania Edge hydration evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: romania-edge-hydration-${{ github.run_id }}-worker-${{ matrix.worker }}
           path: artifacts/

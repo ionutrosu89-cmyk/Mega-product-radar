@@ -27,7 +27,7 @@ jobs:
           node scripts/select-romania-benchmark-r1.mjs data/real-products-1000.compact.json romania-benchmark-r1.json | tee romania-benchmark-summary.json
           jq -e '.schemaVersion == "MPR_ROMANIA_BENCHMARK_R1_V2" and .selectedCount == 100 and .categoryCount >= 20 and .providerSpendEur == 0 and .paidCallsTriggered == 0 and .purchaseAuthorized == false' romania-benchmark-summary.json >/dev/null
       - name: Preserve benchmark evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-romania-benchmark-r1-${{ github.sha }}
           path: |

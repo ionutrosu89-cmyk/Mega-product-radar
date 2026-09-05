@@ -113,7 +113,7 @@ jobs:
           NODE
       - name: Upload fresh fusion evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-fresh-review-rank-fusion-evidence
           path: |

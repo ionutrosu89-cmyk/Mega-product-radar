@@ -136,7 +136,7 @@ jobs:
         run: node --test test/amazon-leader-bsr-history-v1.test.js test/amazon-strict-trend-fusion-v1.test.mjs test/importability-business-fit-gate-v1.test.mjs test/first-finalist-decision-gate-v1.test.mjs test/single-decision-authority-v1.test.mjs
       - name: Upload Round 2 BSR, fusion, importability and decision evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-leader-bsr-round2-evidence
           path: |

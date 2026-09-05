@@ -47,7 +47,7 @@ jobs:
           if(s.truthPolicy.paidCallsTriggered!==0||s.truthPolicy.providerSpendUsd!==0)throw new Error('UNEXPECTED_SPEND');
           NODE
       - name: Upload economics preflight evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-first-screening-economics-preflight
           path: artifacts/first-screening-economics-preflight.json
