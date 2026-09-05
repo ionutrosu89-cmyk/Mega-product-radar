@@ -1,0 +1,19 @@
+{
+  "triggerId": "MPR_CANDIDATE1_SALES_EVIDENCE_2026_09_05_V1",
+  "authorization": "USER_APPROVED_PAID_SALES_EVIDENCE",
+  "authorizedAtLocal": "2026-09-05T21:09:00+03:00",
+  "candidate": "Car sunglasses magnetic visor holder",
+  "canonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "provider": "DataForSEO",
+  "purpose": "Raise candidate-specific sales-evidence confidence using provider-observed Amazon bought_past_month peer signals.",
+  "maxSpendUsd": 0.1,
+  "maxPaidCalls": 1,
+  "purchaseAuthorized": false,
+  "supplierContactAuthorized": false,
+  "sampleOrderAuthorized": false,
+  "truthPolicy": {
+    "providerObservedBoughtPastMonthIsVerifiedSales": false,
+    "mayProduceEstimatedHighConfidence": true,
+    "finalistPromotionRequiresExistingDownstreamGates": true
+  }
+}
