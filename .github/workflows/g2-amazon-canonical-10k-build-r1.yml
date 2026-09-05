@@ -1,6 +1,10 @@
 name: G2 Amazon Canonical 10K Build R1
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.g2-amazon-10k-build-trigger'
   pull_request:
     paths:
       - 'scripts/build-amazon-canonical-10k-r1.py'
