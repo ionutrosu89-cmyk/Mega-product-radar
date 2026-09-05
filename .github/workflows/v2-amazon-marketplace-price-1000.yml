@@ -1,6 +1,10 @@
 name: V2 Amazon Marketplace Price 1K
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.v2-amazon-marketplace-price-trigger'
   workflow_dispatch:
 
 permissions:
