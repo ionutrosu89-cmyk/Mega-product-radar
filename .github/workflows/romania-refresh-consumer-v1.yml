@@ -26,6 +26,7 @@ env:
   MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'
   MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'
   MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS: '5'
+  MPR_ROMANIA_TRANSIENT_NETWORK_RETRY_SECONDS: '3'
 
 concurrency:
   group: romania-refresh-consumer-v1-${{ github.ref }}
@@ -64,9 +65,9 @@ jobs:
             cp request.json "artifacts/edge-request-${worker_id}.json"
 
             # Preserve the Edge response and HTTP status even when curl fails.
-            # The request remains strictly fail-closed. The only retry permitted is
-            # one bounded wait for the observed transient GitHub/Supabase clock-skew
-            # response `JWT issued at future`; all other failures exit immediately.
+            # The request remains strictly fail-closed. Permit only bounded retries
+            # for observed transient GitHub/Supabase clock skew or transport errors.
+            # Business/HTTP contract failures are never retried into success.
             attempt=1
             while true; do
               rm -f batch.json
@@ -90,10 +91,17 @@ jobs:
                 break
               fi
 
-              if [ "$attempt" -eq 1 ] && [ -s batch.json ] && grep -Fq 'JWT issued at future' batch.json; then
-                echo "EDGE_TRANSIENT_JWT_CLOCK_SKEW worker=${WORKER} round=${round}; retrying once after ${MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS}s" >&2
+              if [ "$attempt" -lt 3 ] && [ -s batch.json ] && grep -Fq 'JWT issued at future' batch.json; then
+                echo "EDGE_TRANSIENT_JWT_CLOCK_SKEW worker=${WORKER} round=${round}; retrying after ${MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS}s" >&2
                 sleep "$MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS"
-                attempt=2
+                attempt=$((attempt+1))
+                continue
+              fi
+
+              if [ "$attempt" -lt 3 ] && [[ "$curl_rc" =~ ^(7|18|28|52|55|56|92)$ ]]; then
+                echo "EDGE_TRANSIENT_NETWORK_ERROR worker=${WORKER} round=${round} curl_rc=${curl_rc}; retrying after ${MPR_ROMANIA_TRANSIENT_NETWORK_RETRY_SECONDS}s" >&2
+                sleep "$MPR_ROMANIA_TRANSIENT_NETWORK_RETRY_SECONDS"
+                attempt=$((attempt+1))
                 continue
               fi
 
@@ -147,10 +155,12 @@ jobs:
           grep -q "MPR_ROMANIA_EDGE_BATCH_LIMIT: '8'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "MPR_ROMANIA_EDGE_BATCH_ROUNDS: '4'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q "MPR_ROMANIA_JWT_CLOCK_SKEW_RETRY_SECONDS: '5'" .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q "MPR_ROMANIA_TRANSIENT_NETWORK_RETRY_SECONDS: '3'" .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'worker: \[0, 1, 2, 3, 4, 5, 6, 7\]' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'collectBatch' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'JWT issued at future' .github/workflows/romania-refresh-consumer-v1.yml
-          grep -q 'attempt=2' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'attempt=$((attempt+1))' .github/workflows/romania-refresh-consumer-v1.yml
+          grep -q 'EDGE_TRANSIENT_NETWORK_ERROR' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-http-status-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'edge-response-' .github/workflows/romania-refresh-consumer-v1.yml
           grep -q 'comparabilityPromoted == false' .github/workflows/romania-refresh-consumer-v1.yml
