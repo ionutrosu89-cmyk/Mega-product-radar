@@ -38,6 +38,12 @@ Top 25 eBay folosește `BEST_SELLING` numai pentru nișe care au o mapare explic
 
 Refresh-ul este expus numai pe ruta internă protejată și folosește `MPR_INTERNAL_REFRESH_SECRET`. Secretul se generează și se păstrează numai în Netlify. Un refresh reușit scrie în `top25_snapshots` sub cheia `XMARKET:EBAY:<NICHE>`; endpoint-ul public Cross-Market îl preia apoi prin contractul existent, fără bypass al validării de prospețime și 25/25.
 
+## eBay — category review
+
+Maparea nișelor la categoriile eBay se face printr-un flux separat de review. Aplicația poate apela Taxonomy API oficial pentru a obține `categoryTreeId`, versiunea arborelui și maximum 10 categorii leaf sugerate pentru o interogare. Rezultatele sunt doar propuneri de lucru: fiecare este etichetat `REVIEW_REQUIRED`, `activationEligible=false` și `EBAY_TAXONOMY_SUGGESTION`.
+
+Ruta internă `/api/internal/ebay-category-review` este protejată de `MPR_INTERNAL_REFRESH_SECRET`. Nu persistă automat o mapare și nu modifică `MPR_EBAY_CROSS_MARKET_TARGETS_JSON`. Numai după review uman și aprobarea explicită a perechii `nicheId + marketplaceId + categoryId` poate categoria fi introdusă în configurația de colectare. O schimbare a versiunii taxonomy este motiv de reverificare a mapărilor, nu de auto-migrare.
+
 ## Secret management
 
 - Toate credentialele rămân server-side în Netlify Environment Variables.
