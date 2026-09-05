@@ -1,0 +1,41 @@
+name: production-integrity
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Full test suite
+        run: npm test
+
+      - name: Production build and safety gates
+        run: npm run build
+
+      - name: High-severity dependency audit
+        run: npm run security:audit
