@@ -1,0 +1,87 @@
+name: Candidate 1 Sales Evidence Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/approvals/car-sunglasses-magnetic-visor-holder-sales-evidence.json'
+      - '.github/workflows/candidate1-sales-evidence.yml'
+      - 'scripts/provider-intelligence-v26.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate1-sales-evidence
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate approval
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const a=JSON.parse(fs.readFileSync('data/approvals/car-sunglasses-magnetic-visor-holder-sales-evidence.json','utf8'));
+          if(a.authorization!=='USER_APPROVED_PAID_SALES_EVIDENCE') throw new Error('APPROVAL_MISSING');
+          if(a.candidate!=='Car sunglasses magnetic visor holder') throw new Error('CANDIDATE_MISMATCH');
+          if(Number(a.maxSpendUsd)!==0.10) throw new Error('CAP_MISMATCH');
+          if(a.purchaseAuthorized!==false) throw new Error('PURCHASE_AUTHORITY_FORBIDDEN');
+          NODE
+      - name: Run targeted DataForSEO evidence collection
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_V26_PAID_ENABLED: 'true'
+          V26_TARGET_PRODUCT: 'Car sunglasses magnetic visor holder'
+          V26_DEEP_PRODUCTS: '1'
+          V26_MAX_PAID_CALLS: '1'
+          V26_MAX_AMAZON_CALLS: '1'
+          V26_MAX_REVERSE_CALLS: '0'
+          V26_MAX_RUN_COST_USD: '0.10'
+          V26_AMAZON_FALLBACK_COST_USD: '0.01'
+        run: node scripts/provider-intelligence-v26.mjs
+      - name: Rebuild Golden Pipeline and finalist queue
+        run: |
+          node scripts/golden-product-pipeline.mjs --phase=final
+          node scripts/finalist-evidence-queue.mjs
+      - name: Verify spend and truth policy
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('provider-intelligence-live.json','utf8'));
+          if(Number(p.stats?.accountedCostUsd||0)>0.10+1e-9) throw new Error('SPEND_CAP_BREACH');
+          const row=(p.items||[]).find(x=>x.name==='Car sunglasses magnetic visor holder');
+          if(!row) throw new Error('TARGET_RESULT_MISSING');
+          if(row.salesEstimation?.policy && /verified competitor sales/i.test(row.salesEstimation.policy)) throw new Error('TRUTH_POLICY_BREACH');
+          console.log(JSON.stringify({
+            candidate:row.name,
+            salesEstimateStatus:row.salesEstimation?.status,
+            salesEstimateConfidence:row.salesEstimation?.confidence,
+            estimatedUnits30d:row.salesEstimation?.estimatedUnits30d,
+            observedPeerBoughtPastMonth:row.salesEstimation?.observedPeerBoughtPastMonth,
+            providerSpendUsd:p.stats?.accountedCostUsd
+          },null,2));
+          NODE
+      - name: Persist evidence
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market-intelligence-live.json provider-intelligence-cache.json provider-intelligence-live.json golden-pipeline-live.json finalist-evidence-queue-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist candidate 1 paid sales evidence"
+            git push origin main
+          else
+            echo "No evidence changes to persist."
+          fi
