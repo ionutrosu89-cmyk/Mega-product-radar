@@ -45,6 +45,36 @@ jobs:
       - name: Mint short-lived readiness credential
         run: node scripts/github-actions-readiness-oidc.mjs
 
+      - name: Ensure clean sandbox workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          preflight_url="${MPR_BASE_URL%/}/api/internal/sandbox-preflight-readiness"
+          transition_url="${MPR_BASE_URL%/}/api/internal/billing-e2e-sandbox-transition"
+          auth_header="Authorization: Bearer ${MPR_READINESS_PROBE_TOKEN}"
+          curl --fail-with-body --silent --show-error -H "$auth_header" "$preflight_url" -o /tmp/sandbox-preflight.json
+          if jq -e '.ok==true and .ready==true' /tmp/sandbox-preflight.json >/dev/null; then
+            echo "Sandbox workspace already clean."
+          else
+            jq -n '{action:"CLEAN_SANDBOX"}' >/tmp/sandbox-cleanup.json
+            curl --fail-with-body --silent --show-error -X POST "$transition_url"               -H "$auth_header"               -H "x-mpr-deployment-ref: $GITHUB_SHA"               -H 'content-type: application/json'               --data-binary @/tmp/sandbox-cleanup.json               -o /tmp/sandbox-cleanup-response.json
+            jq -e '.ok==true and .realMoney==false and .stripeMode=="SANDBOX" and .entitlementAuthority=="WEBHOOK_ONLY"' /tmp/sandbox-cleanup-response.json >/dev/null
+            clean=false
+            for attempt in $(seq 1 30); do
+              sleep 2
+              curl --fail-with-body --silent --show-error -H "$auth_header" "$preflight_url" -o /tmp/sandbox-preflight.json
+              if jq -e '.ok==true and .ready==true' /tmp/sandbox-preflight.json >/dev/null; then
+                clean=true
+                break
+              fi
+            done
+            if [ "$clean" != "true" ]; then
+              jq . /tmp/sandbox-preflight.json
+              echo "SANDBOX_WORKSPACE_CLEANUP_TIMEOUT" >&2
+              exit 1
+            fi
+          fi
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
