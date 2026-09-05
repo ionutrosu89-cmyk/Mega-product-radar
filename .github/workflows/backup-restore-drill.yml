@@ -27,7 +27,7 @@ jobs:
     env:
       PGPASSWORD: restore-password
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Require dedicated backup connection secret
         env:
           SOURCE_DB_URL: ${{ secrets.SUPABASE_DB_URL_READONLY_BACKUP }}

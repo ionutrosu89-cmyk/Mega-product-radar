@@ -22,7 +22,7 @@ jobs:
       MPR_OFF_STREAM_REVIEW_SAMPLE: '250'
       MPR_OFF_STREAM_OUT_DIR: 'artifacts/off-100k-supplement-v1'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
