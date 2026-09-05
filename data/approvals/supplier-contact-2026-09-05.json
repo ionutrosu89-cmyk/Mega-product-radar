@@ -1,0 +1,23 @@
+{
+  "triggerId": "MPR_SUPPLIER_CONTACT_2026_09_05_V1",
+  "authorization": "USER_APPROVED_SUPPLIER_CONTACT",
+  "authorizedAtLocal": "2026-09-05T22:49:00+03:00",
+  "scope": "Supplier outreach for MPR candidates that reach supplier-commercial-validation stage",
+  "allowed": [
+    "request unit price",
+    "request MOQ",
+    "request sample price",
+    "request production lead time",
+    "request shipping terms/cost to Romania",
+    "request product specifications/compliance documents"
+  ],
+  "forbidden": [
+    "place order",
+    "pay supplier",
+    "approve sample purchase",
+    "accept binding commercial terms"
+  ],
+  "sampleOrderAuthorized": false,
+  "purchaseAuthorized": false,
+  "paymentAuthorized": false
+}
