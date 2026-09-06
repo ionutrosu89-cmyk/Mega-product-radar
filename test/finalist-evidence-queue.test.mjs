@@ -2,16 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
-test('Finalist Evidence Queue authorizes supplier work only after RO demand and high-confidence sales',async()=>{
+test('Finalist Evidence Queue authorizes page-backed supplier work only after RO demand and high-confidence sales',async()=>{
   const src=await fs.readFile('scripts/finalist-evidence-queue.mjs','utf8');
-  assert.match(src,/p\?\.stage\|\|''\)==='VALIDATE'/);
+  assert.match(src,/const stage=String\(p\?\.stage\|\|''\)/);
+  assert.match(src,/\['VALIDATE','FINALIST'\]\.includes\(stage\)/);
   assert.match(src,/PROVIDER_VERIFIED/);
   assert.match(src,/ESTIMATED_HIGH_CONFIDENCE/);
   assert.match(src,/salesEstimateConfidence/);
   assert.match(src,/>=75/);
-  assert.match(src,/supplierIntelligenceAuthorized:p\.nextGate==='SUPPLIER_QUOTE'/);
-  assert.match(src,/never invents supplier quotes/);
-  assert.match(src,/never confirms landed cost/);
+  assert.match(src,/supplierIntelligenceAuthorized:p\.nextGate==='SUPPLIER_PAGE_EVIDENCE'/);
+  assert.match(src,/requiredSupplierEvidence/);
+  assert.match(src,/do not contact suppliers/);
+  assert.match(src,/never promotes TEST\/BUY/);
+  assert.match(src,/invents landed cost/);
 });
 
 test('Finalist Evidence Queue workflow is zero-cost and cannot trigger Radar Scan',async()=>{

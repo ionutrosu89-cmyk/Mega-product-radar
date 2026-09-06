@@ -7,6 +7,7 @@ const loginJs=fs.readFileSync(new URL('../login.js',import.meta.url),'utf8');
 const accountHtml=fs.readFileSync(new URL('../account.html',import.meta.url),'utf8');
 const accountJs=fs.readFileSync(new URL('../account.js',import.meta.url),'utf8');
 const supabaseClient=fs.readFileSync(new URL('../supabase-client.js',import.meta.url),'utf8');
+const saasShell=fs.readFileSync(new URL('../saas-shell.js',import.meta.url),'utf8');
 
 test('signup UI and validation match the 12-character production password policy',()=>{
   assert.match(loginHtml,/minimum 12 caractere pentru cont nou/);
@@ -34,4 +35,12 @@ test('recovery completion requires a valid session, updates password and reconfi
 test('expired recovery link fails closed without pretending recovery succeeded',()=>{
   assert.match(accountJs,/Link invalid sau expirat/);
   assert.match(accountJs,/Sesiunea de recuperare a expirat/);
+});
+
+
+test('site-url fallback recovery callback is forwarded to the recovery form without exposing tokens',()=>{
+  assert.match(saasShell,/recoveryHash\.get\('type'\)==='recovery'/);
+  assert.match(saasShell,/new URL\('account\.html\?reset=1',location\.href\)/);
+  assert.match(saasShell,/target\.hash=location\.hash/);
+  assert.match(saasShell,/location\.replace\(target\.href\)/);
 });
