@@ -7,6 +7,8 @@ on:
     paths:
       - 'finalist-evidence-queue-live.json'
       - 'scripts/supplier-intelligence-v3.mjs'
+      - 'scripts/supplier-page-evidence-collector.mjs'
+      - 'supplier-candidates/**'
       - '.github/workflows/supplier-intelligence-v3.yml'
 
 permissions:
@@ -27,13 +29,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Build page-backed supplier evidence
+        run: node scripts/supplier-page-evidence-collector.mjs
       - name: Build gated Supplier Intelligence V3 readiness
         run: node scripts/supplier-intelligence-v3.mjs
       - name: Persist Supplier Intelligence V3 readiness
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add supplier-intelligence-v3-live.json
+          git add supplier-intelligence-v3-live.json supplier-page-evidence-live.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Supplier Intelligence V3 readiness"
             git push origin main
