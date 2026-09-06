@@ -30,10 +30,10 @@ Please provide current terms for the exact item above:
 3. Sample unit cost.
 4. Sample shipping cost to Romania.
 5. Sample dispatch time and bulk production/dispatch lead time.
-6. EXW and FOB terms, plus DDP Romania if available.
-7. Bulk shipping quote or shipping terms to Romania for 20 / 50 / 100 / 300 pieces.
-8. Incoterm used for each shipping option.
-9. Carton quantity, gross weight and carton dimensions.
+6. EXW / FOB / FCA terms available for the quoted item.
+7. If you can arrange transport, please quote the transport cost separately for the requested quantity and identify the transport mode/service (express courier, air cargo, rail, sea, etc.).
+8. Incoterm used for each supplier-arranged shipping option.
+9. Carton quantity, gross weight and carton dimensions. These logistics data are required even when transport is arranged independently by the buyer.
 10. Logo customization availability, MOQ and cost.
 11. Custom packaging availability, MOQ and cost.
 12. Material declarations and any compliance/test documentation relevant to EU sale for the exact product/material.
@@ -46,6 +46,6 @@ Please provide current terms for the exact item above:
 
 The response remains `QUOTE_INCOMPLETE` until all commercially material fields are explicit. A quote may become `MANUALLY_VERIFIED_QUOTE` only when the exact product and source are identifiable, current pricing and MOQ are confirmed, shipping terms to Romania are known, required material/compliance evidence is addressed, and a human records the manual verification timestamp and verifier identity.
 
-Missing values remain UNKNOWN. Public listing prices, estimated shipping and inferred commercial terms must never be substituted for supplier-confirmed values.
+Missing values remain UNKNOWN. Public listing prices, estimated shipping and inferred commercial terms must never be substituted for supplier-confirmed values. The supplier is not expected to determine Romanian VAT or customs duty. MPR sources VAT, customs and carrier/forwarder charges independently. A supplier freight quote is optional when complete carrier-ready carton dimensions and gross weight are verified.
 
 Confirmed landed cost remains blocked until at least one complete supplier quote passes the MPR quote verifier. TEST and BUY remain governed by the normal MPR commercial gates.
