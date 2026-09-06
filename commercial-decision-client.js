@@ -3,7 +3,7 @@ import {getSupabaseClient,getCurrentSession} from './supabase-client.js';
 import {ensurePersonalWorkspace} from './workspace-client.js';
 import {evaluateCommercialDecision} from './commercial-decision-engine.js';
 
-const KEYS={supplierRecords:'megaRadarSupplierRecordsV1',supplierOffers:'megaRadarSupplierMatrixV6',landedCosts:'megaRadarLandedCostRecordsV1',observations:'megaRadarCommercialObservationsV1'};
+const KEYS={supplierRecords:'megaRadarSupplierRecordsV1',supplierOffers:'megaRadarSupplierMatrixV6',landedCosts:'megaRadarLandedCostRecordsV1',quantityEconomics:'megaRadarQuantityEconomicsV1',observations:'megaRadarCommercialObservationsV1'};
 const read=(key,fallback)=>{try{const v=JSON.parse(localStorage.getItem(key)||'');return v??fallback;}catch{return fallback;}};
 const write=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch{}};
 
@@ -36,7 +36,7 @@ async function hydrateTestExecutions(){
 export async function loadPrivateCommercialState(){
   try{await installCloudAutosync({hydrate:true,reloadOnHydrate:false});}catch(e){console.warn('Commercial decision cloud hydrate',e?.message||e);}
   const [observations,testExecutions]=await Promise.all([hydrateCommercialObservations(),hydrateTestExecutions()]);
-  return {supplierRecords:read(KEYS.supplierRecords,{}),supplierOffers:read(KEYS.supplierOffers,[]),landedCosts:read(KEYS.landedCosts,{}),observations,testExecutions};
+  return {supplierRecords:read(KEYS.supplierRecords,{}),supplierOffers:read(KEYS.supplierOffers,[]),landedCosts:read(KEYS.landedCosts,{}),quantityEconomics:read(KEYS.quantityEconomics,{}),observations,testExecutions};
 }
 
 export async function applyPrivateCommercialDecisions(products=[]){
