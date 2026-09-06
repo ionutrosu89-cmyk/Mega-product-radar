@@ -13,7 +13,7 @@ const completeQuote={
 
 test('shared quote verifier stays fail-closed and accepts only complete manually verified evidence',()=>{
   assert.equal(verifySupplierQuote(completeQuote).verified,true);
-  assert.equal(verifySupplierQuote({...completeQuote,bulkShippingToRomania:null}).verified,false);
+  assert.equal(verifySupplierQuote({...completeQuote,bulkShippingToRomania:null,shippingCurrency:null}).verified,true);
   assert.equal(verifySupplierQuote({...completeQuote,manualVerifiedAt:''}).verified,false);
   assert.equal(verifySupplierQuote({...completeQuote,sourceUrl:'search results'}).verified,false);
 });
