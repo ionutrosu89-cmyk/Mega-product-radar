@@ -5,14 +5,16 @@ import fs from 'node:fs/promises';
 test('Supplier Intelligence V3 stays blocked without an authorized finalist',async()=>{
   const src=await fs.readFile('scripts/supplier-intelligence-v3.mjs','utf8');
   assert.match(src,/supplierIntelligenceAuthorized===true/);
-  assert.match(src,/nextGate==='SUPPLIER_QUOTE'/);
+  assert.match(src,/SUPPLIER_PAGE_EVIDENCE/);
   assert.match(src,/BLOCKED_NO_AUTHORIZED_FINALIST/);
   assert.match(src,/minimumComparableOffers:3/);
   assert.match(src,/targetOfferCount:5/);
+  assert.match(src,/screeningEconomicsEligible:true/);
   assert.match(src,/landedCostEligible:false/);
   assert.match(src,/testGateEligible:false/);
   assert.match(src,/buyGateEligible:false/);
-  assert.match(src,/never fabricates suppliers, quotes, certifications, shipping or landed cost/);
+  assert.match(src,/page-backed only/i);
+  assert.match(src,/no supplier outreach/i);
 });
 
 test('Supplier Intelligence V3 workflow is zero-cost and cannot trigger paid Radar',async()=>{
