@@ -2,11 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
-test('priority RFQ dispatch queue starts entirely NOT_SENT',async()=>{
+test('priority RFQ dispatch queue preserves the real first reply and leaves remaining candidates NOT_SENT',async()=>{
   const queue=JSON.parse(await fs.readFile('supplier-rfq-dispatch/car-sunglasses-magnetic-visor-holder.json','utf8'));
   assert.equal(queue.productCanonicalKey,'car-sunglasses-magnetic-visor-holder');
   assert.equal(queue.entries.length,5);
-  for(const entry of queue.entries){
+  const first=queue.entries[0];
+  assert.equal(first.status,'REPLIED');
+  assert.equal(first.sentBy,'USER');
+  assert.ok(first.responseReference);
+  assert.ok(first.quoteFile);
+  for(const entry of queue.entries.slice(1)){
     assert.equal(entry.status,'NOT_SENT');
     assert.equal(entry.sentAt,null);
     assert.equal(entry.sentBy,null);
@@ -14,8 +19,7 @@ test('priority RFQ dispatch queue starts entirely NOT_SENT',async()=>{
     assert.equal(entry.responseReference,null);
     assert.equal(entry.quoteFile,null);
   }
-  assert.match(queue.policy,/never means a supplier was contacted/);
-  assert.match(queue.policy,/SENT requires a real human\/agent dispatch timestamp/);
+  assert.match(queue.policy,/real supplier reply/i);
 });
 
 test('car sunglasses quote intake template is incomplete and landed-cost blocked by default',async()=>{
