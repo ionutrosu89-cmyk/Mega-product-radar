@@ -22,7 +22,8 @@ export function verifySupplierQuote(input={}){
   requirePositive('moq','MOQ');
   requireNonNegative('sampleCost','sample cost');
   requireNonNegative('sampleShippingToRomania','sample shipping to Romania');
-  requirePositive('leadTimeDays','lead time');
+  const leadExact=positive(input.leadTimeDays),leadRange=positive(input.leadTimeDaysMin)&&positive(input.leadTimeDaysMax)&&Number(input.leadTimeDaysMax)>=Number(input.leadTimeDaysMin);
+  if(!leadExact&&!leadRange)blockers.push('lead time');
   requireText('incoterm','Incoterm');
   const supplierFreightQuoted=nonNegative(input.bulkShippingToRomania);
   if(supplierFreightQuoted) requireText('shippingCurrency','shipping currency');
