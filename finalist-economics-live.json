@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T14:51:10.838Z",
+  "updatedAt": "2026-09-06T14:52:25.543Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -648,6 +648,8 @@
         "primaryPrice": {
           "sellPriceGrossRon": 44.74,
           "observedMarketPrice": true,
+          "marketRangeScenario": false,
+          "insideObservedMarketRange": true,
           "stretchScenario": false,
           "goodsOnlyEligible": true,
           "maxAdditionalLandedHeadroomRon": 51.02,
@@ -657,10 +659,17 @@
           "status": "SCREENING_CANDIDATE",
           "robustness": "VERY_TIGHT_UNKNOWN_COST_BUFFER"
         },
+        "recommendedEvidenceClass": "EXACT_OBSERVED_MARKET_PRICE",
+        "observedMarketRange": {
+          "minRon": 10.5,
+          "maxRon": 44.74
+        },
         "scenarios": [
           {
             "sellPriceGrossRon": 10.5,
             "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
             "stretchScenario": false,
             "goodsOnlyEligible": false,
             "maxAdditionalLandedHeadroomRon": null,
@@ -673,6 +682,8 @@
           {
             "sellPriceGrossRon": 39,
             "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
             "stretchScenario": false,
             "goodsOnlyEligible": false,
             "maxAdditionalLandedHeadroomRon": -488.98,
@@ -685,6 +696,8 @@
           {
             "sellPriceGrossRon": 44.74,
             "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
             "stretchScenario": false,
             "goodsOnlyEligible": true,
             "maxAdditionalLandedHeadroomRon": 51.02,
@@ -697,6 +710,8 @@
           {
             "sellPriceGrossRon": 49.99,
             "observedMarketPrice": false,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": false,
             "stretchScenario": true,
             "goodsOnlyEligible": true,
             "maxAdditionalLandedHeadroomRon": 546.02,
@@ -708,7 +723,7 @@
           }
         ],
         "purchaseAuthorized": false,
-        "policy": "Prefer verified observed-market prices, but expose robustness separately. A mathematically positive price with a very small unknown-import-cost buffer is not commercially robust. Stretch prices remain scenario-only until market evidence exists."
+        "policy": "Prefer a healthy exact observed price. If exact observed prices are too tight, a price inside the current high-match observed market range may be used as a screening scenario, explicitly marked as not an exact observed offer. Prices outside the observed range remain stretch scenarios."
       },
       "importCostStress": {
         "schemaVersion": "MPR_IMPORT_COST_STRESS_V1",
