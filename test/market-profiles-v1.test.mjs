@@ -8,6 +8,9 @@ test('Romania is the only active launch market and VAT remains configuration',()
   assert.equal(ro.active,true);
   assert.equal(ro.importVatRatePct,21);
   assert.equal(ro.sellVatRatePct,21);
+  assert.match(ro.vatSourceUrl,/anaf\.ro/);
+  assert.match(ro.customsTaricUrl,/taxation-customs\.ec\.europa\.eu/);
+  assert.equal(ro.vatSourceStatus,'OFFICIAL_SOURCE_VERIFIED');
 });
 
 test('future market shells cannot silently invent tax rates',()=>{
