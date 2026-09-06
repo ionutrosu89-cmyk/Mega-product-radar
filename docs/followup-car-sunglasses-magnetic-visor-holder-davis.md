@@ -1,3 +1,9 @@
+# Supplier follow-up — ARCHIVED / DO NOT SEND
+
+Status: `DO_NOT_SEND — PAGE_BACKED_SOURCING_POLICY`
+
+MPR no longer contacts suppliers for standard sourcing data. Use public product and supplier pages only. Missing fields remain UNKNOWN and do not create an outreach task.
+
 # Supplier follow-up — Car sunglasses magnetic visor holder
 
 Product: Car sunglasses magnetic visor holder  
