@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "MPR_FREIGHT_BENCHMARK_V1",
+  "generatedAt": "2026-09-06T14:36:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "shipment": {
+    "quantity": 30,
+    "originCountry": "CN",
+    "destinationCountry": "RO",
+    "actualGrossWeightKg": 1.7,
+    "carton": {
+      "lengthCm": 30,
+      "widthCm": 20,
+      "heightCm": 10,
+      "cartons": 1
+    },
+    "volumetricDivisor": 5000,
+    "volumetricWeightKg": 1.2,
+    "chargeableWeightKg": 1.7
+  },
+  "option": {
+    "carrier": "DHL Express",
+    "service": "Time Definite International / Import",
+    "baseRateRon": null,
+    "fuelSurchargePct": null,
+    "demandSurchargeRonPerKg": 0,
+    "demandSurchargePeriodChecked": "2026-09-06",
+    "futureDemandSurcharge": {
+      "activeFrom": "2026-10-01",
+      "activeUntil": "2027-02-05",
+      "chinaToEuropeRonPerKg": 10
+    },
+    "evidenceClass": "OFFICIAL_CARRIER_RULES_ONLY",
+    "evidenceUrls": [
+      "https://www.dhl.com/ro-ro/home/express/products-and-solutions/products-and-services-overview/surcharges/comision-perioada-de-varf.html",
+      "https://dct.dhl.com/help"
+    ],
+    "usableForDecision": false,
+    "blockers": [
+      "LIVE_DHL_BASE_RATE_REQUIRED",
+      "CURRENT_DHL_FUEL_SURCHARGE_REQUIRED",
+      "ANY_APPLICABLE_CLEARANCE_OR_OPTIONAL_SERVICE_CHARGES_REQUIRED"
+    ],
+    "policy": "DHL benchmark records official chargeable-weight and surcharge rules only. Without a live base rate it is not a freight quote."
+  },
+  "purchaseAuthorized": false
+}
