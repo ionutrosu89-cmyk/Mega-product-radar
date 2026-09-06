@@ -48,7 +48,7 @@ jobs:
             if(x.directIdentityEvidenceUsable===true&&!x.productDimensions)throw new Error('MISSING_DIMENSIONS_PROMOTED');
           }
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: v2-supplier-direct-reply-evidence
           path: artifacts/supplier-direct-reply-evidence.json

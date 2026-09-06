@@ -41,7 +41,7 @@ jobs:
           if(ids.size!==x.observations.length) throw new Error('DUPLICATE_ASIN_WITHIN_BATCH');
           console.log(JSON.stringify({offset:x.offset,valid:x.validObservations,rate:x.successRatePct,coverage:x.coverage}));
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: amazon-live-round1-${{ matrix.offset }}
           path: artifacts/amazon-live-refresh-batch-${{ matrix.offset }}.json
@@ -80,7 +80,7 @@ jobs:
           if(files.length!==9) process.exitCode=2;
           if(new Set(rows.map(r=>r[0])).size!==rows.length) process.exitCode=3;
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: amazon-live-round1-consolidated

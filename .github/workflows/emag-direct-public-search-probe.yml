@@ -43,7 +43,7 @@ jobs:
           NODE
       - name: Upload eMAG probe artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: emag-direct-public-search-probe
           path: artifacts/emag-direct-public-search-probe.json

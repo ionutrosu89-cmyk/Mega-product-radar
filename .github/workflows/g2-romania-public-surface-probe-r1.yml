@@ -53,7 +53,7 @@ jobs:
           jq . emag-edge-parser.json
           jq -e '.ok==true and .status==200 and .productLinkLowerBound>=1 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' emag-edge-parser.json >/dev/null
       - name: Preserve probe evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-romania-public-surface-probe-${{ github.sha }}
           path: |

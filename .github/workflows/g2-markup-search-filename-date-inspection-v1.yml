@@ -29,7 +29,7 @@ jobs:
           set -euo pipefail
           python3 scripts/inspect-markup-search-filename-date.py amazon-markup-searches.csv.xz markup-search-filename-date-inspection.json | tee markup-search-filename-date-inspection.txt
           jq -e '.schemaVersion=="MPR_MARKUP_SEARCH_FILENAME_DATE_INSPECTION_V1" and .rows>0 and .policy.databaseWrites==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' markup-search-filename-date-inspection.json >/dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: markup-search-filename-date-inspection-${{ github.sha }}
           path: |

@@ -72,7 +72,7 @@ jobs:
           NODE
       - name: Upload Round 2 artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-round2-refresh
           path: artifacts/amazon-round2-refresh.json
