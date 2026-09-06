@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T14:52:25.543Z",
+  "updatedAt": "2026-09-06T14:52:41.683Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -18,9 +18,25 @@
           39,
           44.74
         ],
+        "currentHighMatchPricesRon": [
+          19.04,
+          39.37,
+          35.99,
+          67.9
+        ],
+        "combinedObservedPricesRon": [
+          10.5,
+          19.04,
+          35.99,
+          39,
+          39.37,
+          44.74,
+          67.9
+        ],
         "minRon": 10.5,
         "medianRon": 39,
-        "maxRon": 44.74
+        "maxRon": 67.9,
+        "currentPriceEvidenceFile": "data/romania-pricing/car-sunglasses-magnetic-visor-holder-2026-09-06.json"
       },
       "supplierPage": {
         "leader": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
@@ -646,27 +662,41 @@
         "schemaVersion": "MPR_PRICE_STRATEGY_V1",
         "status": "SCREENING_PRICE_AVAILABLE",
         "primaryPrice": {
-          "sellPriceGrossRon": 44.74,
+          "sellPriceGrossRon": 67.9,
           "observedMarketPrice": true,
           "marketRangeScenario": false,
           "insideObservedMarketRange": true,
           "stretchScenario": false,
           "goodsOnlyEligible": true,
-          "maxAdditionalLandedHeadroomRon": 51.02,
+          "maxAdditionalLandedHeadroomRon": 2238.02,
           "allocatedFreightTotalRon": 21.71,
-          "remainingImportCostAllowanceRon": 29.31,
-          "remainingImportCostAllowancePerUnitRon": 0.1,
+          "remainingImportCostAllowanceRon": 2216.31,
+          "remainingImportCostAllowancePerUnitRon": 7.39,
           "status": "SCREENING_CANDIDATE",
-          "robustness": "VERY_TIGHT_UNKNOWN_COST_BUFFER"
+          "robustness": "HEALTHY_SCREENING_BUFFER"
         },
         "recommendedEvidenceClass": "EXACT_OBSERVED_MARKET_PRICE",
         "observedMarketRange": {
-          "minRon": 10.5,
-          "maxRon": 44.74
+          "minRon": 19.04,
+          "maxRon": 67.9
         },
         "scenarios": [
           {
             "sellPriceGrossRon": 10.5,
+            "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": false,
+            "stretchScenario": false,
+            "goodsOnlyEligible": false,
+            "maxAdditionalLandedHeadroomRon": null,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": null,
+            "remainingImportCostAllowancePerUnitRon": null,
+            "status": "REJECT_PRICE_BEFORE_FREIGHT",
+            "robustness": "NOT_APPLICABLE"
+          },
+          {
+            "sellPriceGrossRon": 19.04,
             "observedMarketPrice": true,
             "marketRangeScenario": false,
             "insideObservedMarketRange": true,
@@ -676,6 +706,20 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": null,
             "remainingImportCostAllowancePerUnitRon": null,
+            "status": "REJECT_PRICE_BEFORE_FREIGHT",
+            "robustness": "NOT_APPLICABLE"
+          },
+          {
+            "sellPriceGrossRon": 35.99,
+            "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": false,
+            "maxAdditionalLandedHeadroomRon": -773.98,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": -795.69,
+            "remainingImportCostAllowancePerUnitRon": -2.65,
             "status": "REJECT_PRICE_BEFORE_FREIGHT",
             "robustness": "NOT_APPLICABLE"
           },
@@ -690,6 +734,20 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": -510.69,
             "remainingImportCostAllowancePerUnitRon": -1.7,
+            "status": "REJECT_PRICE_BEFORE_FREIGHT",
+            "robustness": "NOT_APPLICABLE"
+          },
+          {
+            "sellPriceGrossRon": 39.37,
+            "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": false,
+            "maxAdditionalLandedHeadroomRon": -455.98,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": -477.69,
+            "remainingImportCostAllowancePerUnitRon": -1.59,
             "status": "REJECT_PRICE_BEFORE_FREIGHT",
             "robustness": "NOT_APPLICABLE"
           },
@@ -710,16 +768,30 @@
           {
             "sellPriceGrossRon": 49.99,
             "observedMarketPrice": false,
-            "marketRangeScenario": false,
-            "insideObservedMarketRange": false,
-            "stretchScenario": true,
+            "marketRangeScenario": true,
+            "insideObservedMarketRange": true,
+            "stretchScenario": false,
             "goodsOnlyEligible": true,
             "maxAdditionalLandedHeadroomRon": 546.02,
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": 524.31,
             "remainingImportCostAllowancePerUnitRon": 1.75,
             "status": "SCREENING_CANDIDATE",
-            "robustness": "STRETCH_PRICE_REQUIRES_MARKET_VALIDATION"
+            "robustness": "HEALTHY_MARKET_RANGE_SCREENING_BUFFER"
+          },
+          {
+            "sellPriceGrossRon": 67.9,
+            "observedMarketPrice": true,
+            "marketRangeScenario": false,
+            "insideObservedMarketRange": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": true,
+            "maxAdditionalLandedHeadroomRon": 2238.02,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": 2216.31,
+            "remainingImportCostAllowancePerUnitRon": 7.39,
+            "status": "SCREENING_CANDIDATE",
+            "robustness": "HEALTHY_SCREENING_BUFFER"
           }
         ],
         "purchaseAuthorized": false,
