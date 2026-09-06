@@ -60,23 +60,50 @@ function competitorSales(p,o){
 
 function supplierCommercial(p,o){
   const quotes=arr(o?.supplierQuotes).filter(x=>x.supplier&&x.platform&&num(x.unitPrice)>0&&num(x.moq)>0&&x.verifiedAt&&(x.sourceUrl||x.url));
-  const complete=quotes.filter(x=>
+  const completeQuotes=quotes.filter(x=>
     explicitFinite(x,'shippingRon')&&num(x.shippingRon)>=0&&
     explicitFinite(x,'sampleCostRon')&&num(x.sampleCostRon)>=0&&
-    explicitFinite(x,'leadTimeDays')&&num(x.leadTimeDays)>0
+    (explicitFinite(x,'leadTimeDays')&&num(x.leadTimeDays)>0)
   );
-  const best=complete.slice().sort((a,b)=>(num(a.unitPrice)+num(a.shippingRon)/Math.max(1,num(a.moq)))-(num(b.unitPrice)+num(b.shippingRon)/Math.max(1,num(b.moq))))[0]||null;
-  const verified=complete.length>0;
-  const scannerSignals=arr(p?.sourcing?.items).map(x=>({platform:x?.platform||x?.source||'',url:x?.url||x?.sourceUrl||'',label:x?.name||x?.title||''})).filter(x=>x.url||x.platform);
+  const rawPages=[
+    ...arr(o?.supplierPages),
+    ...arr(o?.supplierListings),
+    ...arr(p?.sourcing?.items),
+    ...arr(p?.chinaIntelligenceV2?.items)
+  ];
+  const pages=rawPages.map(x=>({
+    supplier:String(x?.supplier||x?.supplierName||'').trim(),
+    platform:String(x?.platform||x?.source||'').trim(),
+    sourceUrl:String(x?.sourceUrl||x?.url||'').trim(),
+    productTitle:String(x?.productTitle||x?.title||x?.name||'').trim(),
+    priceMin:explicitFinite(x,'priceMin')?num(x.priceMin):(explicitFinite(x,'observedPriceMinUsd')?num(x.observedPriceMinUsd):null),
+    priceMax:explicitFinite(x,'priceMax')?num(x.priceMax):(explicitFinite(x,'observedPriceMaxUsd')?num(x.observedPriceMaxUsd):(explicitFinite(x,'unitPrice')?num(x.unitPrice):null)),
+    currency:String(x?.currency||'USD').trim().toUpperCase(),
+    moq:explicitFinite(x,'moq')?num(x.moq):(explicitFinite(x,'observedMoq')?num(x.observedMoq):null),
+    observedAt:String(x?.observedAt||x?.verifiedAt||x?.updatedAt||'').trim(),
+    productMatch:String(x?.productMatch||x?.matchQuality||'').trim().toUpperCase(),
+    material:x?.material||null,
+    dimensions:x?.productDimensions||x?.dimensions||null
+  })).filter(x=>/^https:\/\//i.test(x.sourceUrl)&&x.supplier&&x.productTitle&&(num(x.priceMax)>0||num(x.priceMin)>0)&&num(x.moq)>0&&['HIGH','EXACT'].includes(x.productMatch||'HIGH'));
+
+  const pageBest=pages.slice().sort((a,b)=>num(a.priceMax||a.priceMin)-num(b.priceMax||b.priceMin))[0]||null;
+  const quoteBest=completeQuotes.slice().sort((a,b)=>(num(a.unitPrice)+num(a.shippingRon)/Math.max(1,num(a.moq)))-(num(b.unitPrice)+num(b.shippingRon)/Math.max(1,num(b.moq))))[0]||null;
+  const pageReady=pages.length>0;
+  const verified=completeQuotes.length>0||pageReady;
+  const status=completeQuotes.length?'COMMERCIAL_VERIFIED_QUOTE':pageReady?'PAGE_BACKED_SCREENING_READY':quotes.length?'QUOTE_PARTIAL':'MISSING';
   return {
     verified,
-    status:verified?'COMMERCIAL_VERIFIED':quotes.length?'QUOTE_PARTIAL':scannerSignals.length?'LISTING_SIGNAL_ONLY':'MISSING',
+    pageBacked:pageReady,
+    supplierContactRequired:false,
+    status,
     quoteCount:quotes.length,
-    completeQuoteCount:complete.length,
-    bestQuote:best,
+    completeQuoteCount:completeQuotes.length,
+    pageEvidenceCount:pages.length,
+    bestQuote:quoteBest,
+    bestPageEvidence:pageBest,
     quotes,
-    scannerListingSignals:scannerSignals.slice(0,10),
-    policy:'Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero.'
+    pageEvidence:pages.slice(0,10),
+    policy:'Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN.'
   };
 }
 
@@ -123,9 +150,9 @@ function nextActions(gates,pricing,competitor,supplier,review){
   const actions=[];
   if(!gates.pricingVerified)actions.push('Capture at least two dated Romanian offers from distinct domains.');
   if(!gates.salesVerified)actions.push('Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.');
-  if(!gates.supplierVerified)actions.push(supplier.quoteCount?'Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.':'Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.');
+  if(!gates.supplierVerified)actions.push('Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.');
   if(!gates.reviewVerified)actions.push('Collect at least two concrete review snippets from named sources to identify recurring product pain points.');
-  return {missingEvidence:missing,nextActions:actions,proofSummary:{romaniaOffers:pricing.offerCount,romaniaDomains:pricing.domainCount,salesObservations:competitor.observations.length,supplierQuotes:supplier.quoteCount,completeSupplierQuotes:supplier.completeQuoteCount,reviewSnippets:review.snippetCount,reviewSources:review.sourceCount}};
+  return {missingEvidence:missing,nextActions:actions,proofSummary:{romaniaOffers:pricing.offerCount,romaniaDomains:pricing.domainCount,salesObservations:competitor.observations.length,supplierQuotes:supplier.quoteCount,completeSupplierQuotes:supplier.completeQuoteCount,supplierPages:supplier.pageEvidenceCount||0,reviewSnippets:review.snippetCount,reviewSources:review.sourceCount}};
 }
 
 const market=await read(MARKET,{products:[],stats:{}});
@@ -143,15 +170,15 @@ for(const p of arr(market.products)){
   const verifiedCount=Object.values(gates).filter(Boolean).length;
   const readiness=round(verifiedCount/4*100);
   const actionState=nextActions(gates,pricing,competitor,supplier,review);
-  p.commercialHardening={version:'1.1',pricing,competitorSales:competitor,supplierCommercial:supplier,reviewEvidence:review,feedback:fb,gates,readiness,...actionState};
+  p.commercialHardening={version:'1.2',pricing,competitorSales:competitor,supplierCommercial:supplier,reviewEvidence:review,feedback:fb,gates,readiness,...actionState};
   rows.push({name:p.name,cat:p.cat,goldenStage:p?.goldenPipeline?.stage||'DISCOVERED',readiness,gates,pricingStatus:pricing.status,salesStatus:competitor.status,supplierStatus:supplier.status,reviewStatus:review.status,feedbackStatus:fb.status,...actionState});
 }
 
 const completedFeedback=arr(market.products).map(p=>p?.commercialHardening?.feedback?.latest).filter(x=>x&&x.completedAt&&Number.isFinite(Number(x.predictionErrorUnitProfitRon)));
 const mae=completedFeedback.length?completedFeedback.reduce((s,x)=>s+Math.abs(num(x.predictionErrorUnitProfitRon)),0)/completedFeedback.length:null;
 const calibration={sampleSize:completedFeedback.length,unitProfitMaeRon:mae===null?null:round(mae),autoCalibrationEnabled:completedFeedback.length>=5,policy:'Weights must not auto-calibrate before at least 5 completed real commercial tests.'};
-const stats={products:rows.length,pricingVerified:rows.filter(x=>x.gates.pricingVerified).length,salesVerified:rows.filter(x=>x.gates.salesVerified).length,supplierVerified:rows.filter(x=>x.gates.supplierVerified).length,reviewVerified:rows.filter(x=>x.gates.reviewVerified).length,fullyVerified:rows.filter(x=>x.readiness===100).length,withSupplierPartial:rows.filter(x=>x.supplierStatus==='QUOTE_PARTIAL').length,withPublicPricing:rows.filter(x=>x.proofSummary.romaniaOffers>0).length};
-market.commercialHardening={version:'1.1',updatedAt:new Date().toISOString(),stats,calibration,policy:'Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Public provider evidence may reduce unknowns but cannot bypass TEST/BUY gates.'};
+const stats={products:rows.length,pricingVerified:rows.filter(x=>x.gates.pricingVerified).length,salesVerified:rows.filter(x=>x.gates.salesVerified).length,supplierVerified:rows.filter(x=>x.gates.supplierVerified).length,reviewVerified:rows.filter(x=>x.gates.reviewVerified).length,fullyVerified:rows.filter(x=>x.readiness===100).length,withSupplierPartial:rows.filter(x=>['QUOTE_PARTIAL','PAGE_BACKED_SCREENING_READY'].includes(x.supplierStatus)).length,withPublicPricing:rows.filter(x=>x.proofSummary.romaniaOffers>0).length};
+market.commercialHardening={version:'1.2',updatedAt:new Date().toISOString(),stats,calibration,policy:'Commercial facts are separated from proxies. Supplier sourcing is page-backed: direct product/supplier pages may satisfy sourcing screening without outreach. Missing evidence never becomes zero. TEST/BUY still require independent landed economics and explicit purchase approval.'};
 market.updatedAt=new Date().toISOString();
 await fs.writeFile(MARKET,JSON.stringify(market,null,2)+'\n');
 await fs.writeFile(OUT,JSON.stringify({version:'1.1',updatedAt:new Date().toISOString(),policy:'Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.',stats,calibration,items:rows},null,2)+'\n');
