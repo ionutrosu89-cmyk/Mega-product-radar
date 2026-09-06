@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "MPR_CONSOLIDATION_BASKET_LIVE_V1",
+  "updatedAt": "2026-09-06T13:27:22.995Z",
+  "status": "SCREENING_BASKET_AVAILABLE",
+  "targetMeasure": 1,
+  "benchmark1M3Ron": 1034.84,
+  "finalistCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "selected": {
+    "fillerCanonicalKey": "car-cup-holder-expander-adjustable",
+    "fillerTitle": "Car cup holder expander adjustable",
+    "fillerStage": "VALIDATE",
+    "result": {
+      "schemaVersion": "MPR_TWO_SKU_FILL_V1",
+      "status": "SCREENING_READY",
+      "qtyA": 300,
+      "qtyB": 303,
+      "totalMeasure": 1.000902,
+      "overshootMeasure": 0.000902,
+      "estimatedGoodsCapitalRon": 5125.57,
+      "policy": "Optimizes minimum billable measure using public logistics floors. It does not prove commercial demand or authorize quantity/order."
+    },
+    "finalistLogisticsEvidence": {
+      "supplier": "Ma'anshan Jiuyan Trading Co., Ltd.",
+      "sourceUrl": "https://www.alibaba.com/product-detail/Multifunctional-Car-Interior-Pu-Leather-Sunglasses_1601398941685.html",
+      "dimensions": {
+        "lengthCm": 10,
+        "widthCm": 3.5,
+        "heightCm": 2
+      },
+      "truth": "HIGH_MATCH_COMPARABLE_VOLUME_FLOOR"
+    },
+    "fillerLogisticsEvidence": {
+      "supplier": "Guangzhou Shangyazhi Trading Co., Ltd.",
+      "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+      "dimensions": {
+        "lengthCm": 21,
+        "widthCm": 11,
+        "heightCm": 14
+      },
+      "unitGrossWeightKg": null,
+      "truth": "DIRECT_PAGE_BACKED"
+    },
+    "benchmark1M3Ron": 1034.8410000000001
+  },
+  "alternatives": [],
+  "supplierOutreachEnabled": false,
+  "purchaseAuthorized": false,
+  "policy": "Basket optimization uses only page-backed logistics evidence and deep-stage SKUs. A VALIDATE filler may be used for logistics screening but is not order-authorized. Final basket quantities require each SKU to pass its own economics/demand gates."
+}
