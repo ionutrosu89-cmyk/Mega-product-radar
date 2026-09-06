@@ -1,10 +1,12 @@
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
+import {activeMarketProfile} from '../market-profiles-v1.js';
 
 function text(v){return String(v??'').trim();}
 function numeric(v){return v!==null&&v!==undefined&&!(typeof v==='string'&&v.trim()==='')&&Number.isFinite(Number(v));}
 
 export function buildLandedInputFromVerifiedQuote(quote={}){
+  const market=activeMarketProfile();
   const blockers=[];
   if(quote?.verified!==true)blockers.push('quote is not verified');
   if(quote?.evidenceStatus!=='MANUALLY_VERIFIED_QUOTE')blockers.push('quote evidence status is not MANUALLY_VERIFIED_QUOTE');
@@ -34,6 +36,20 @@ export function buildLandedInputFromVerifiedQuote(quote={}){
       quantity:Number(quote.quoteQuantity),
       internationalFreightForeign:Number(quote.bulkShippingToRomania),
       incoterm:text(quote.incoterm),
+      marketCode:market.code,
+      importVatRatePct:market.importVatRatePct,
+      sellVatRatePct:market.sellVatRatePct,
+      freightMode:'QUOTE_TOTAL',
+      productLengthCm:numeric(quote.productLengthCm)?Number(quote.productLengthCm):null,
+      productWidthCm:numeric(quote.productWidthCm)?Number(quote.productWidthCm):null,
+      productHeightCm:numeric(quote.productHeightCm)?Number(quote.productHeightCm):null,
+      cartonLengthCm:numeric(quote.cartonLengthCm)?Number(quote.cartonLengthCm):null,
+      cartonWidthCm:numeric(quote.cartonWidthCm)?Number(quote.cartonWidthCm):null,
+      cartonHeightCm:numeric(quote.cartonHeightCm)?Number(quote.cartonHeightCm):null,
+      actualGrossWeightKg:numeric(quote.actualGrossWeightKg)?Number(quote.actualGrossWeightKg):null,
+      volumetricDivisor:null,
+      chargeableWeightKg:null,
+      transportSource:'SUPPLIER_QUOTE',
       fxRate:null,
       internationalFreightRon:null,
       customsDutyRate:null,
@@ -47,6 +63,8 @@ export function buildLandedInputFromVerifiedQuote(quote={}){
       missingForConfirmedLandedCost:[
         'FX rate used for the quote currency',
         'Romania freight converted to RON',
+        'carrier/service volumetric divisor when transport is weight-rated',
+        'chargeable weight when transport is weight-rated',
         'applicable customs duty/rate',
         'customs/brokerage charges',
         'domestic freight where applicable',
@@ -55,7 +73,7 @@ export function buildLandedInputFromVerifiedQuote(quote={}){
         'manual landed-cost verification'
       ]
     },
-    policy:'A verified supplier quote may seed a landed-cost simulation, never a confirmed landed cost. FX, customs and remaining import costs must be explicit and manually verified; missing values are never assumed to be zero.'
+    policy:'A verified supplier quote may seed a Romania landed-cost simulation, never a confirmed landed cost. Romania VAT comes from the active market profile; FX, customs, carrier charging basis and remaining import costs must be explicit and verified. Product dimensions may be sourced from a direct product page, but carton dimensions/weight or a verified total freight quote are required for transport economics. Missing values are never assumed to be zero.'
   };
 }
 
