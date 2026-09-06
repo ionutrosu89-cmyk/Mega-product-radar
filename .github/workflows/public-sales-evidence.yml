@@ -10,6 +10,8 @@ on:
       - 'scripts/commercial-hardening.mjs'
       - 'scripts/test-buy-decision.mjs'
       - 'scripts/finalist-evidence-queue.mjs'
+      - 'scripts/finalist-economics-packet-v1.mjs'
+      - 'freight-mode-viability-v1.js'
       - '.github/workflows/public-sales-evidence.yml'
   workflow_dispatch:
 
@@ -40,6 +42,7 @@ jobs:
           node scripts/test-buy-decision.mjs
           node scripts/golden-product-pipeline.mjs --phase=final
           node scripts/finalist-evidence-queue.mjs
+          node scripts/finalist-economics-packet-v1.mjs
       - name: Verify truth boundary
         run: |
           node <<'NODE'
@@ -54,7 +57,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json
+          git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json finalist-economics-live.json
           if ! git diff --cached --quiet; then
             git commit -m "Persist public sales estimation evidence"
             git push origin main
