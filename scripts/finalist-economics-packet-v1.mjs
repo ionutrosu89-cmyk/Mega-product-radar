@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {freightModeViabilityV1} from '../freight-mode-viability-v1.js';
+import {freightCeilingV1} from '../freight-ceiling-v1.js';
 import {priceStrategyV1} from '../price-strategy-v1.js';
 import {finalistTestGateV1} from '../finalist-test-gate-v1.js';
 
@@ -37,26 +38,26 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
   const prices=offers.map(x=>num(x.priceRon)).sort((a,b)=>a-b);
   const marketProduct=arr(market.products).find(x=>norm(x.name)===norm(g.name))||{};
   const supplierLeader=sp?.bestScreeningCandidate||null;
-  const ceilingPath=`data/screening-economics/${canonical}-quantity-freight-ceiling-2026-09-06.json`;
-  const ceilings=await read(ceilingPath,null);
-  const scenario49=arr(ceilings?.scenarios).filter(x=>Number(x.sellPriceGrossRon)===49.99);
-  const scenario44=arr(ceilings?.scenarios).filter(x=>Number(x.sellPriceGrossRon)===44.74);
   const modes=arr(freight.modes).map(x=>({id:x.id,mode:x.mode,knownMinimumFreightRon:num(x.knownMinimumFreightRon),sourceClass:x.sourceClass,sourceUrl:x.sourceUrl})).filter(x=>num(x.knownMinimumFreightRon)!==null);
-
+  const supplierUnitUsd=num(supplierLeader?.conservativeScreeningUnitPriceUsd);
+  const fxUsdRon=4.5199;
+  const supplierUnitRon=supplierUnitUsd===null?null:supplierUnitUsd*fxUsdRon;
   const quantityScreens={};
-  for(const s of [...scenario44,...scenario49]){
-    const q=Number(s.quantity);
-    const price=Number(s.sellPriceGrossRon);
-    const k=`${price.toFixed(2)}@${q}`;
-    quantityScreens[k]=freightModeViabilityV1({freightCeilingRon:s.maxFreightTotalRon,modes});
+  const freightCeilings=[];
+  if(supplierUnitRon!==null){
+    for(const price of [44.74,49.99]){
+      for(const q of [30,50,100,300]){
+        const ceiling=freightCeilingV1({quantity:q,goodsCostPerUnitRon:supplierUnitRon,sellPriceGrossRon:price});
+        freightCeilings.push({sellPriceGrossRon:price,quantity:q,maxAdditionalLandedHeadroomRon:ceiling.maxEligibleFreightTotalRon,minimumSellPriceGrossAtGoodsOnlyRon:ceiling.minimumSellPriceGrossAtGoodsOnlyRon,status:ceiling.decision});
+        const k=`${price.toFixed(2)}@${q}`;
+        quantityScreens[k]=freightModeViabilityV1({freightCeilingRon:ceiling.maxEligibleFreightTotalRon,modes});
+      }
+    }
   }
 
   const customs=await read(`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`,null);
   const consolidatedFinalist=arr(consolidation?.items).find(x=>key(x.canonicalKey)===canonical)||null;
   const allocatedFreight300=num(consolidatedFinalist?.allocatedBenchmarkLogisticsRon);
-  const supplierUnitUsd=num(supplierLeader?.conservativeScreeningUnitPriceUsd);
-  const fxUsdRon=4.5199;
-  const supplierUnitRon=supplierUnitUsd===null?null:supplierUnitUsd*fxUsdRon;
   const observedPriceList=prices;
   const priceStrategy=supplierUnitRon===null?null:priceStrategyV1({
     quantity:300,
@@ -138,6 +139,7 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
       importRegime:'B2B_STOCK_IMPORT',
       customsDutyStatus:'UNKNOWN_PENDING_CN_TARIC'
     },
+    freightCeilings,
     quantityFreightScreens:quantityScreens,
     consolidationScreen:consolidatedFinalist?{
       allocatedBenchmarkLogisticsRon:allocatedFreight300,
