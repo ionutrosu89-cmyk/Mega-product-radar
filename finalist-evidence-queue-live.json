@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "updatedAt": "2026-09-06T15:38:00+03:00",
+  "version": "1.0",
+  "updatedAt": "2026-09-06T13:21:14.468Z",
   "stats": {
     "validateProducts": 4,
     "finalistProducts": 1,
@@ -23,6 +23,7 @@
       "requiredSupplierEvidence": [],
       "blockers": [
         "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
+        "dovezi piață și competiție suficiente",
         "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
       ]
     },
@@ -30,7 +31,7 @@
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
       "category": "Casă",
-      "goldenRank": 4,
+      "goldenRank": 5,
       "opportunityScore": 35.6,
       "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
       "salesEstimateStatus": "INSUFFICIENT_DATA",
@@ -50,7 +51,7 @@
       "canonicalKey": "car-headrest-hidden-hook-premium",
       "title": "Car headrest hidden hook premium",
       "category": "Auto",
-      "goldenRank": 3,
+      "goldenRank": 4,
       "opportunityScore": 35.5,
       "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
       "salesEstimateStatus": "INSUFFICIENT_DATA",
@@ -68,5 +69,5 @@
     }
   ],
   "nextAction": "Complete independent landed economics for Car sunglasses magnetic visor holder using page-backed supplier cost plus carrier/customs evidence.",
-  "policy": "The evidence queue retains both VALIDATE and FINALIST products. Page-backed Supplier Intelligence is used only when supplier-page evidence is the next gate. FINALIST products advance to independent LANDED_ECONOMICS. No supplier outreach is required; this queue never promotes TEST/BUY or invents landed cost."
+  "policy": "The evidence queue retains both VALIDATE and FINALIST products. Page-backed Supplier Intelligence is authorized only when supplier-page evidence is the next gate. FINALIST products advance to independent LANDED_ECONOMICS. No supplier outreach is required; this queue never promotes TEST/BUY or invents landed cost."
 }

@@ -1,10 +1,8 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T15:38:00+03:00",
+  "updatedAt": "2026-09-06T13:21:14.542Z",
   "finalists": 1,
   "testReady": 0,
-  "supplierOutreachEnabled": false,
-  "purchaseAuthorized": false,
   "items": [
     {
       "canonicalKey": "car-sunglasses-magnetic-visor-holder",
@@ -30,7 +28,104 @@
         "conservativeUnitPriceUsd": 0.75,
         "publicMoq": 2,
         "evidenceClass": "DIRECT_OBSERVED",
-        "contactRequired": false
+        "contactRequired": false,
+        "ranking": {
+          "schemaVersion": "MPR_SUPPLIER_PAGE_RANKING_V1",
+          "status": "RANKED",
+          "ranked": [
+            {
+              "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+              "sourceUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
+              "publicUnitPriceUsd": 0.75,
+              "publicMoq": 2,
+              "score": 82.6,
+              "evidenceConfidencePct": 100,
+              "dimensions": {
+                "price": 98.5,
+                "moq": 100,
+                "maturity": 82,
+                "completeness": 37.5,
+                "match": 100
+              },
+              "decisionClass": "STRONG_PAGE_EVIDENCE",
+              "supplierContactRequired": false,
+              "purchaseAuthorized": false
+            },
+            {
+              "supplierName": "Ma'anshan Jiuyan Trading Co., Ltd.",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Multifunctional-Car-Interior-Pu-Leather-Sunglasses_1601398941685.html",
+              "publicUnitPriceUsd": 0.89,
+              "publicMoq": 50,
+              "score": 78.5,
+              "evidenceConfidencePct": 100,
+              "dimensions": {
+                "price": 87.8,
+                "moq": 65,
+                "maturity": 47,
+                "completeness": 100,
+                "match": 100
+              },
+              "decisionClass": "STRONG_PAGE_EVIDENCE",
+              "supplierContactRequired": false,
+              "purchaseAuthorized": false
+            },
+            {
+              "supplierName": "Shenzhen Xiyuecheng Technology Co., Ltd.",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Cross-Border-Car-Glasses-Holder-Car_1601624885242.html",
+              "publicUnitPriceUsd": 0.73,
+              "publicMoq": 10,
+              "score": 66,
+              "evidenceConfidencePct": 75,
+              "dimensions": {
+                "price": 100,
+                "moq": 90,
+                "maturity": null,
+                "completeness": 0,
+                "match": 100
+              },
+              "decisionClass": "MEDIUM_PAGE_EVIDENCE",
+              "supplierContactRequired": false,
+              "purchaseAuthorized": false
+            },
+            {
+              "supplierName": "Guangzhou Kute Technology Co., Ltd.",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Magnetic-Sunglasses-Holders-for-Car-Visor_1600999597401.html",
+              "publicUnitPriceUsd": 1.65,
+              "publicMoq": 10,
+              "score": 47.5,
+              "evidenceConfidencePct": 75,
+              "dimensions": {
+                "price": 30,
+                "moq": 90,
+                "maturity": null,
+                "completeness": 12.5,
+                "match": 100
+              },
+              "decisionClass": "MEDIUM_PAGE_EVIDENCE",
+              "supplierContactRequired": false,
+              "purchaseAuthorized": false
+            }
+          ],
+          "leader": {
+            "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+            "sourceUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
+            "publicUnitPriceUsd": 0.75,
+            "publicMoq": 2,
+            "score": 82.6,
+            "evidenceConfidencePct": 100,
+            "dimensions": {
+              "price": 98.5,
+              "moq": 100,
+              "maturity": 82,
+              "completeness": 37.5,
+              "match": 100
+            },
+            "decisionClass": "STRONG_PAGE_EVIDENCE",
+            "supplierContactRequired": false,
+            "purchaseAuthorized": false
+          },
+          "policy": "Ranks direct page-backed supplier candidates only. Missing public fields reduce evidence confidence; they are not invented and do not trigger supplier outreach. Ranking never authorizes purchase."
+        }
       },
       "salesEstimate": {
         "status": "ESTIMATED_HIGH_CONFIDENCE",
@@ -40,7 +135,6 @@
         "rangeHigh": 3679,
         "method": "PUBLIC_THIRD_PARTY_PEER_TEMPORAL_ESTIMATE",
         "verifiedCompetitorSales": false,
-        "actualObservedSales": false,
         "sourceProvider": "ASInsight"
       },
       "currentMarketSignals": {
@@ -102,7 +196,13 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "44.74@50": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -149,7 +249,13 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "44.74@100": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -196,7 +302,13 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "44.74@300": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -243,7 +355,14 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN"
+          ],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@30": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -290,7 +409,13 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@50": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -337,7 +462,13 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@100": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -384,7 +515,14 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "potentiallyFeasibleModes": [
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN"
+          ],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@300": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
@@ -431,17 +569,122 @@
               "purchaseAuthorized": false
             }
           ],
-          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Non-rejected modes remain screening-only."
+          "rejectedModes": [
+            "AIR_CARGO_PEK_OTP_45KG_MIN"
+          ],
+          "potentiallyFeasibleModes": [
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
+          ],
+          "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         }
       },
-      "screeningConclusions": {
-        "median39Ron": "REJECT_PRICE_BEFORE_FREIGHT",
-        "minimumGrossSellPriceAtGoodsOnlyRon": 39.79,
-        "publicExpress30": "REJECT",
-        "airCargo45KgMinimum": "REJECT_FOR_30_50_100_300",
-        "seaLclAt300": "POTENTIALLY_FEASIBLE_BEFORE_DESTINATION_IMPORT_FEES",
-        "preferredAutonomousFocus": "SEA_LCL_AT_300PCS_OR_LOWER_COST_CONSOLIDATED_FORWARDER"
+      "consolidationScreen": {
+        "allocatedBenchmarkLogisticsRon": 21.71,
+        "allocatedBenchmarkLogisticsPerUnitRon": 0.0724,
+        "measureBasis": "VOLUME_FLOOR",
+        "sourceFile": "data/consolidation/current-multi-sku-basket-2026-09-06.json",
+        "status": "SCREENING_ONLY"
       },
+      "priceStrategy": {
+        "schemaVersion": "MPR_PRICE_STRATEGY_V1",
+        "status": "SCREENING_PRICE_AVAILABLE",
+        "primaryPrice": {
+          "sellPriceGrossRon": 44.74,
+          "observedMarketPrice": true,
+          "stretchScenario": false,
+          "goodsOnlyEligible": true,
+          "maxAdditionalLandedHeadroomRon": 51.02,
+          "allocatedFreightTotalRon": 21.71,
+          "remainingImportCostAllowanceRon": 29.31,
+          "remainingImportCostAllowancePerUnitRon": 0.1,
+          "status": "SCREENING_CANDIDATE"
+        },
+        "scenarios": [
+          {
+            "sellPriceGrossRon": 10.5,
+            "observedMarketPrice": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": false,
+            "maxAdditionalLandedHeadroomRon": null,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": null,
+            "remainingImportCostAllowancePerUnitRon": null,
+            "status": "REJECT_PRICE_BEFORE_FREIGHT"
+          },
+          {
+            "sellPriceGrossRon": 39,
+            "observedMarketPrice": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": false,
+            "maxAdditionalLandedHeadroomRon": -488.98,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": -510.69,
+            "remainingImportCostAllowancePerUnitRon": -1.7,
+            "status": "REJECT_PRICE_BEFORE_FREIGHT"
+          },
+          {
+            "sellPriceGrossRon": 44.74,
+            "observedMarketPrice": true,
+            "stretchScenario": false,
+            "goodsOnlyEligible": true,
+            "maxAdditionalLandedHeadroomRon": 51.02,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": 29.31,
+            "remainingImportCostAllowancePerUnitRon": 0.1,
+            "status": "SCREENING_CANDIDATE"
+          },
+          {
+            "sellPriceGrossRon": 49.99,
+            "observedMarketPrice": false,
+            "stretchScenario": true,
+            "goodsOnlyEligible": true,
+            "maxAdditionalLandedHeadroomRon": 546.02,
+            "allocatedFreightTotalRon": 21.71,
+            "remainingImportCostAllowanceRon": 524.31,
+            "remainingImportCostAllowancePerUnitRon": 1.75,
+            "status": "SCREENING_CANDIDATE"
+          }
+        ],
+        "purchaseAuthorized": false,
+        "policy": "Prefer a verified observed-market price that leaves positive landed-cost allowance. Stretch prices are scenario-only and never become recommended prices without market evidence."
+      },
+      "customsClassification": {
+        "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
+        "exactCnCode": null,
+        "exactTaricCode": null,
+        "customsDutyRate": null,
+        "sourceFile": "data/customs-classification/car-sunglasses-magnetic-visor-holder-2026-09-06.json"
+      },
+      "testGate": {
+        "schemaVersion": "MPR_FINALIST_TEST_GATE_V1",
+        "status": "TEST_BLOCKED",
+        "gates": {
+          "finalistStage": true,
+          "romaniaDemandReady": true,
+          "salesModelReady": true,
+          "supplierPageReady": true,
+          "customsClassificationReady": false,
+          "freightFullyLoaded": false,
+          "importCostsReady": false,
+          "landedCostConfirmed": false,
+          "economicsHealthy": false,
+          "complianceReady": true
+        },
+        "blockers": [
+          "EXACT_CN_TARIC_CLASSIFICATION_REQUIRED",
+          "FULLY_LOADED_FREIGHT_REQUIRED",
+          "BROKERAGE_DESTINATION_HANDLING_LOCAL_DELIVERY_REQUIRED",
+          "CONFIRMED_LANDED_COST_REQUIRED",
+          "MARGIN_ROI_PROFIT_TARGETS_REQUIRED"
+        ],
+        "testReady": false,
+        "sampleOrOrderApprovalRequired": false,
+        "purchaseAuthorized": false,
+        "supplierContactRequired": false,
+        "policy": "FINALIST is not TEST_READY until customs, fully loaded freight, import costs and landed economics are independently confirmed. Page-backed supplier sourcing is sufficient for sourcing readiness; it never authorizes purchase."
+      },
+      "preferredAutonomousFocus": "SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE",
       "blockers": [
         "EXACT_CN_TARIC_CLASSIFICATION_REQUIRED",
         "FULLY_LOADED_FREIGHT_OR_FORWARDER_COST_REQUIRED",
@@ -452,8 +695,10 @@
       "buyReady": false,
       "supplierContactRequired": false,
       "purchaseAuthorized": false,
-      "policy": "Page-backed sourcing and high-confidence estimated demand may advance FINALIST, but TEST requires independent confirmed landed cost. Unknown customs/freight/import costs never become zero."
+      "policy": "FINALIST packet consolidates screening evidence only. Page-backed supplier sourcing and high-confidence estimated demand may advance FINALIST, but TEST requires independent confirmed landed cost. Unknown customs/freight/import costs never become zero."
     }
   ],
+  "supplierOutreachEnabled": false,
+  "purchaseAuthorized": false,
   "policy": "One evidence packet per FINALIST. No supplier outreach. No purchase authority. TEST requires confirmed landed economics."
 }
