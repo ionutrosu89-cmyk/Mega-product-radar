@@ -1,14 +1,14 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-09-06T13:48:00+03:00",
+  "updatedAt": "2026-09-06T14:45:00+03:00",
   "product": {
     "canonicalKey": "car-sunglasses-magnetic-visor-holder",
     "title": "Car sunglasses magnetic visor holder",
     "goldenStageAtSelection": "VALIDATE",
     "selectionSource": "FINALIST_EVIDENCE_QUEUE",
-    "selectionPolicy": "Supplier candidates are researched only after Romania demand and high-confidence sales evidence are present."
+    "selectionPolicy": "Supplier sourcing uses public product/supplier pages only. No supplier outreach is required. Missing public fields remain UNKNOWN."
   },
-  "status": "CANDIDATE_RESEARCH_ONLY",
+  "status": "PAGE_BACKED_SOURCING_ACTIVE",
   "candidates": [
     {
       "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
@@ -22,14 +22,30 @@
       "supplierYearsObserved": 24,
       "supplierRatingObserved": 4.5,
       "productMatch": "HIGH",
-      "evidenceStatus": "DIRECT_PUBLIC_LISTING_UNVERIFIED_COMMERCIAL_TERMS",
+      "evidenceStatus": "PAGE_BACKED_SCREENING_READY",
       "quoteVerified": false,
       "landedCostEligible": false,
-      "notes": "Direct Alibaba product page found for Ningbo Desheng and exact product concept. Public page confirms supplier/product identity and public price/MOQ only. It does not replace the supplier's direct commercial quote or verified landed cost.",
+      "notes": "Direct product page and supplier profile are sufficient for page-backed sourcing screening. Public price/MOQ and standard supplier data may feed conservative screening. They are not negotiated or guaranteed order terms. Missing product dimensions/material/logistics stay UNKNOWN; no supplier contact is required.",
       "directProductId": "1601595129899",
       "directProductPageObservedAt": "2026-09-06T13:48:00+03:00",
       "directPageSupplierConfirmed": true,
-      "directPageProductMatch": "HIGH"
+      "directPageProductMatch": "HIGH",
+      "pageBackedScreeningReady": true,
+      "supplierContactRequired": false,
+      "screeningUnitPriceUsd": 0.75,
+      "publicPricePolicy": "Use the highest observed public page price as conservative screening unit cost unless an explicit public quantity tier is available.",
+      "supplierProfileUrl": "https://suppliers.alibaba.com/ningbo-desheng-imp-and-exp-co-ltd_17179919693",
+      "supplierPageStandardData": {
+        "establishedDate": "2006-04-10",
+        "exportExperienceYears": 19,
+        "employees": 10,
+        "facilityAreaM2": 65,
+        "verificationAgency": "Intertek",
+        "verificationReport": "482866218_T",
+        "verificationReportValidUntil": "2026-12-08",
+        "supplierRating": 4.4,
+        "reviewCount": 66
+      }
     },
     {
       "supplierName": "Shenzhen Meibo Photoelectric Technology Co., Ltd.",
@@ -47,7 +63,8 @@
       "evidenceStatus": "UNVERIFIED_PUBLIC_LISTING",
       "quoteVerified": false,
       "landedCostEligible": false,
-      "notes": "High observed marketplace sales count and MOQ 1 are positive discovery signals, not proof of current commercial terms."
+      "notes": "High observed marketplace sales count and MOQ 1 are positive discovery signals, not proof of current commercial terms. MPR no longer requests supplier outreach; use only public product/supplier page data and keep missing fields UNKNOWN.",
+      "supplierContactRequired": false
     },
     {
       "supplierName": "Shenzhen New Heng Technology Co., Ltd.",
@@ -64,7 +81,8 @@
       "evidenceStatus": "UNVERIFIED_PUBLIC_LISTING",
       "quoteVerified": false,
       "landedCostEligible": false,
-      "notes": "Good exact concept match and longer observed history. Direct item identity and quote must be confirmed."
+      "notes": "Good exact concept match and longer observed history. Direct item identity and quote must be confirmed. MPR no longer requests supplier outreach; use only public product/supplier page data and keep missing fields UNKNOWN.",
+      "supplierContactRequired": false
     },
     {
       "supplierName": "Guangzhou Zhifu Automobile Products Co., Ltd.",
@@ -82,7 +100,8 @@
       "evidenceStatus": "UNVERIFIED_PUBLIC_LISTING",
       "quoteVerified": false,
       "landedCostEligible": false,
-      "notes": "Low MOQ and observed sales are useful sourcing signals. Current unit price, dimensions and shipping to Romania remain unknown."
+      "notes": "Low MOQ and observed sales are useful sourcing signals. Current unit price, dimensions and shipping to Romania remain unknown. MPR no longer requests supplier outreach; use only public product/supplier page data and keep missing fields UNKNOWN.",
+      "supplierContactRequired": false
     },
     {
       "supplierName": "Guangzhou Ruiling Automotive Products Co., Ltd.",
@@ -100,8 +119,9 @@
       "evidenceStatus": "UNVERIFIED_PUBLIC_LISTING",
       "quoteVerified": false,
       "landedCostEligible": false,
-      "notes": "Attractive observed price but short supplier history increases verification burden."
+      "notes": "Attractive observed price but short supplier history increases verification burden. MPR no longer requests supplier outreach; use only public product/supplier page data and keep missing fields UNKNOWN.",
+      "supplierContactRequired": false
     }
   ],
-  "policy": "Observed marketplace listing data is discovery evidence only. No candidate is a verified supplier, no observed public price is a verified quote, and no candidate may feed confirmed landed cost until a direct quote is manually verified."
+  "policy": "MPR supplier sourcing is page-backed only. Direct product pages and supplier pages may provide public price, MOQ, standard specifications and supplier profile data for screening. Public values are not negotiated quotes. Missing fields stay UNKNOWN and never trigger supplier outreach. TEST/BUY still require evidence-backed landed economics and explicit user approval for any real sample/order."
 }
