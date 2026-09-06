@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "MPR_CONSOLIDATION_OPPORTUNITY_V1",
+  "generatedAt": "2026-09-06T15:38:00+03:00",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "scenario": "300PCS_SEA_LCL_CONSOLIDATION",
+  "productVolumeEvidence": {
+    "sourceClass": "COMPARABLE_DIRECT_PRODUCT_PAGE",
+    "supplier": "Ma'anshan Jiuyan Trading Co., Ltd.",
+    "sourceUrl": "https://www.alibaba.com/product-detail/Multifunctional-Car-Interior-Pu-Leather-Sunglasses_1601398941685.html",
+    "exactLeaderSupplier": false,
+    "productMatch": "HIGH",
+    "unitDimensionsCm": {
+      "length": 10,
+      "width": 3.5,
+      "height": 2
+    },
+    "unitBareVolumeCm3": 70,
+    "quantity": 300,
+    "bareProductVolumeM3": 0.021,
+    "packagingFactor": null,
+    "grossWeightKg": null,
+    "evidenceStatus": "VOLUME_FLOOR_ONLY"
+  },
+  "logisticsBenchmark": {
+    "lane": "Shanghai-Bucharest",
+    "mode": "SEA_LCL",
+    "benchmarkVolumeM3": 1,
+    "logisticsCostEur": 197,
+    "eurRon": 5.253,
+    "logisticsCostRon": 1034.84,
+    "sourceClass": "PUBLIC_ROMANIA_ROUTE_LOGISTICS_BENCHMARK",
+    "sourceUrl": "https://www.ziaruldeiasi.ro/stiri/cat-costa-cu-adevarat-transportul-din-china-in-romania-in-2026-p--1875353.html",
+    "taxesIncluded": false,
+    "customsDutyIncluded": false,
+    "importVatIncluded": false
+  },
+  "soloScenario": {
+    "billableMinimumM3": 1,
+    "knownLogisticsBenchmarkRon": 1034.84,
+    "status": "ECONOMICALLY_TIGHT_OR_REJECTED_BEFORE_IMPORT_TAXES"
+  },
+  "fullySharedMinimumScenario": {
+    "theoreticalAllocatedLogisticsRon": 21.73,
+    "theoreticalSharePct": 2.1,
+    "otherSkuFillRequiredM3": 0.979,
+    "status": "CONSOLIDATION_OPPORTUNITY",
+    "caveat": "Assumes other SKUs fill the remaining minimum billable volume. Packing, gross weight, origin pickup, CFS/destination charges and delivery can increase allocation."
+  },
+  "comparison": {
+    "theoreticalLogisticsSavingRon": 1013.11,
+    "soloVsSharedRatio": 47.6
+  },
+  "recommendedMprBehavior": "Do not optimize this SKU as a standalone 1-CBM LCL shipment. Add it to a multi-SKU consolidation basket and allocate shipment costs by chargeable measure.",
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "This is a consolidation screening opportunity, not a freight quote. Bare product volume from a comparable direct page is a floor; packing and gross weight must be added when public evidence becomes available."
+}
