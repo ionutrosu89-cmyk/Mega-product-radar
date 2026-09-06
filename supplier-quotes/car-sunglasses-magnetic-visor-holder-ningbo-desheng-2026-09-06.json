@@ -5,9 +5,9 @@
   "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
   "contactName": "Davis Liu",
   "platform": "Alibaba",
-  "sourceUrl": null,
+  "sourceUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
   "sourceReference": "USER_PROVIDED_ALIBABA_CHAT_SCREENSHOTS_2026-09-06",
-  "supplierSkuOrModel": null,
+  "supplierSkuOrModel": "Alibaba product 1601595129899",
   "exactProductConfirmed": true,
   "exactProductConfirmationBasis": "User-sent RFQ explicitly named magnetic leather car sun visor sunglasses holder and supplier replied in that thread.",
   "unitPrice": 0.75,
@@ -48,8 +48,7 @@
   "evidenceStatus": "QUOTE_INCOMPLETE",
   "landedCostEligible": false,
   "blockers": [
-    "direct product URL / exact SKU-model reference missing",
-    "MOQ not explicitly confirmed",
+    "MOQ still requires supplier-confirmed commercial terms; public MOQ is discovery evidence only",
     "single lead-time value not confirmed",
     "payment terms missing",
     "inspection acceptance not confirmed",
@@ -58,7 +57,18 @@
     "manual verification record incomplete",
     "DDP freight cannot be treated as independent freight-only evidence for standard buyer-import scenario"
   ],
-  "notes": "Real supplier reply captured from Alibaba chat. The DDP offer is retained as supplier evidence but is not used as verified freight-only cost for MPR's standard Romania import path. MPR may instead use independent DHL/FedEx/UPS/forwarder transport once carrier-ready logistics and applicable service rates are available. No order/sample/payment authority granted.",
+  "notes": "Real supplier reply captured from Alibaba chat. The DDP offer is retained as supplier evidence but is not used as verified freight-only cost for MPR's standard Romania import path. MPR may instead use independent DHL/FedEx/UPS/forwarder transport once carrier-ready logistics and applicable service rates are available. No order/sample/payment authority granted. Exact Alibaba product URL is now bound to the quote identity. Public MOQ/price remain discovery evidence only and do not upgrade the direct supplier reply.",
   "purchaseAuthorized": false,
-  "sampleOrderAuthorized": false
+  "sampleOrderAuthorized": false,
+  "directProductPageEvidence": {
+    "observedAt": "2026-09-06T13:48:00+03:00",
+    "publicPriceRangeUsd": [
+      0.64,
+      0.75
+    ],
+    "publicMoq": 2,
+    "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+    "evidenceClass": "DIRECT_OBSERVED_PUBLIC_LISTING",
+    "commercialQuoteSubstitute": false
+  }
 }
