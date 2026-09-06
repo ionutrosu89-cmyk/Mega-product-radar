@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "MPR_CONSOLIDATION_BASKET_SCENARIO_V1",
+  "generatedAt": "2026-09-06T16:15:00+03:00",
+  "target": "1 RT / CBM screening basket",
+  "market": "RO",
+  "benchmark": {
+    "mode": "SEA_LCL",
+    "minimumBillableMeasure": 1,
+    "logisticsBenchmarkRon": 1034.84,
+    "sourceClass": "PUBLIC_ROMANIA_ROUTE_LOGISTICS_BENCHMARK",
+    "finalQuote": false
+  },
+  "items": [
+    {
+      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
+      "stage": "FINALIST",
+      "quantity": 300,
+      "publicUnitPriceUsd": 0.75,
+      "publicUnitPriceRon": 3.3899,
+      "unitBareVolumeM3": 0.00007,
+      "totalVolumeM3": 0.021,
+      "measureBasis": "VOLUME_FLOOR",
+      "allocatedBenchmarkLogisticsRon": 21.71,
+      "allocatedBenchmarkLogisticsPerUnitRon": 0.0724,
+      "sourceUrl": "https://www.alibaba.com/product-detail/Multifunctional-Car-Interior-Pu-Leather-Sunglasses_1601398941685.html"
+    },
+    {
+      "canonicalKey": "car-cup-holder-expander-adjustable",
+      "stage": "VALIDATE",
+      "quantity": 303,
+      "publicUnitPriceUsd": 2.8,
+      "publicUnitPriceRon": 12.6557,
+      "unitPackageVolumeM3": 0.003234,
+      "unitGrossWeightKg": 0.5,
+      "totalVolumeM3": 0.979902,
+      "totalGrossWeightKg": 151.5,
+      "measureBasis": "VOLUME_M3",
+      "allocatedBenchmarkLogisticsRon": 1013.13,
+      "allocatedBenchmarkLogisticsPerUnitRon": 3.3437,
+      "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html"
+    }
+  ],
+  "totalVolumeM3": 1.000902,
+  "totalGoodsCapitalRon": 4851.65,
+  "fillStatus": "MINIMUM_FILLED",
+  "overshootM3": 0.000902,
+  "sunglassesFreightAllocation": {
+    "benchmarkRon": 21.71,
+    "theoreticalFreightCeilingAt44_74Ron": 519,
+    "remainingHeadroomBeforeCustomsAndImportFeesRon": 497.29
+  },
+  "blockers": [
+    "FINALIST_PACKAGING_FACTOR_UNKNOWN",
+    "FINALIST_GROSS_WEIGHT_UNKNOWN",
+    "EXACT_CN_TARIC_CLASSIFICATION_REQUIRED",
+    "DESTINATION_HANDLING_BROKERAGE_LOCAL_DELIVERY_REQUIRED",
+    "BASKET_QUANTITIES_NOT_PURCHASE_AUTHORIZED"
+  ],
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "This basket demonstrates consolidation economics only. Quantities are selected to fill a published LCL minimum and are not order recommendations. The FINALIST volume is a bare-product floor based on a high-match direct page; packing and gross weight may increase its measure."
+}
