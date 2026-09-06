@@ -33,9 +33,16 @@ test('missing compliance evidence blocks when supplier says evidence is provided
   assert.ok(result.blockers.includes('compliance evidence files/references'));
 });
 
-test('missing or estimated shipping cannot be inferred',()=>{
-  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null});
+test('supplier freight may be omitted when carrier-ready carton logistics are verified',()=>{
+  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null});
+  assert.equal(result.verified,true);
+  assert.equal(result.landedCostEligible,true);
+});
+
+test('missing supplier freight and missing carrier-ready logistics fail closed',()=>{
+  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null,cartonGrossWeightKg:null});
   assert.equal(result.verified,false);
   assert.equal(result.landedCostEligible,false);
-  assert.ok(result.blockers.includes('bulk shipping to Romania'));
+  assert.ok(result.blockers.includes('carton gross weight'));
+  assert.ok(result.blockers.includes('supplier freight quote or carrier-ready logistics'));
 });
