@@ -36,14 +36,15 @@ export function buildLandedEconomicsPacket(input = {}) {
 
   const landed = Number(input.landedUnitCost);
   const sell = Number(input.sellPrice);
+  const netRevenue = sell / (1 + Number(input.vatRate));
+  const vat = sell - netRevenue;
   const commission = sell * Number(input.marketplaceCommissionRate);
-  const vat = sell * Number(input.vatRate);
   const ads = sell * Number(input.adsRate);
   const returnsReserve = sell * Number(input.returnsReserveRate);
   const fulfilment = Number(input.fulfilmentCostPerUnit);
-  const totalVariableCost = landed + commission + vat + ads + returnsReserve + fulfilment;
-  const profitPerUnit = sell - totalVariableCost;
-  const marginPct = sell > 0 ? (profitPerUnit / sell) * 100 : null;
+  const totalVariableCost = landed + commission + ads + returnsReserve + fulfilment;
+  const profitPerUnit = netRevenue - totalVariableCost;
+  const marginPct = netRevenue > 0 ? (profitPerUnit / netRevenue) * 100 : null;
   const roiPct = landed > 0 ? (profitPerUnit / landed) * 100 : null;
   const fixedTestCost = nonNegative(input.fixedTestCost) ? Number(input.fixedTestCost) : 0;
   const breakEvenUnits = profitPerUnit > 0 ? Math.ceil(fixedTestCost / profitPerUnit) : null;
@@ -51,7 +52,7 @@ export function buildLandedEconomicsPacket(input = {}) {
   return {
     version:'1.0', status:'CONFIRMED', confirmed:true, blockers:[],
     currency: input.baseCurrency || input.currency || null,
-    economics:{landedUnitCost:landed,sellPrice:sell,commission,vat,ads,returnsReserve,fulfilment,totalVariableCost,profitPerUnit,marginPct,roiPct,breakEvenUnits},
+    economics:{landedUnitCost:landed,sellPriceGross:sell,netRevenue,commission,vat,ads,returnsReserve,fulfilment,totalVariableCost,profitPerUnit,marginPct,roiPct,breakEvenUnits},
     evidence:{landedCostEvidenceRef:input.landedCostEvidenceRef,sellPriceEvidenceRef:input.sellPriceEvidenceRef,fxSource:input.fxSource ?? null,fxRate:input.fxRate ?? null},
     purchaseAuthorized:false
   };
