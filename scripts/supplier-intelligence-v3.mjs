@@ -9,7 +9,7 @@ const queue=await readJson(QUEUE,{candidates:[]});
 const candidates=Array.isArray(queue.candidates)?queue.candidates:[];
 
 const authorized=candidates
-  .filter(x=>x?.supplierIntelligenceAuthorized===true&&x?.nextGate==='SUPPLIER_QUOTE')
+  .filter(x=>x?.supplierIntelligenceAuthorized===true&&['SUPPLIER_QUOTE','SUPPLIER_PAGE_EVIDENCE','SUPPLIER_SCREENING'].includes(x?.nextGate))
   .slice(0,3);
 
 function caseFor(p){
@@ -18,26 +18,24 @@ function caseFor(p){
     title:p.title,
     category:p.category||null,
     goldenRank:p.goldenRank??null,
-    status:'AWAITING_REAL_QUOTES',
+    status:'PAGE_BACKED_COLLECTION',
     targetOfferCount:5,
     minimumComparableOffers:3,
-    evidencePolicy:'Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.',
+    evidencePolicy:'Use direct product pages and supplier pages only. Public price, MOQ, standard specifications and supplier profile data may advance screening. Missing public fields remain UNKNOWN. Supplier outreach is disabled.',
     requiredFields:[
-      'supplier_name','platform','direct_source_url','unit_price','currency','moq','sample_cost','lead_time_days','incoterm','shipping_quote_or_terms_to_romania','certifications_or_compliance_docs_when_applicable','quoted_at','manual_verification_at'
+      'supplier_name','platform','direct_product_url','public_unit_price_or_range','currency','public_moq','standard_material_when_public','standard_dimensions_when_public','supplier_profile_url','supplier_history_when_public'
     ],
     comparisonDimensions:[
-      'unit_price','moq','sample_cost','lead_time_days','shipping_to_romania','incoterm','supplier_history','trade_assurance_or_equivalent','certification_fit','communication_quality'
+      'public_unit_price','public_moq','product_match','supplier_history','supplier_rating','public_sales_or_review_signal','standard_material','standard_dimensions','page_completeness'
     ],
     hardBlocks:[
-      'missing direct supplier source URL',
-      'missing quoted unit price/currency',
-      'missing MOQ',
-      'missing Romania shipping terms or quote',
-      'missing lead time',
-      'required compliance evidence missing where applicable',
-      'quote not manually verified'
+      'missing direct product page URL',
+      'missing public price/currency',
+      'missing public MOQ',
+      'product match not high confidence'
     ],
     landedCostEligible:false,
+    screeningEconomicsEligible:true,
     testGateEligible:false,
     buyGateEligible:false
   };
@@ -48,11 +46,11 @@ const out={
   version:'3.0',
   updatedAt:now,
   source:'FINALIST_EVIDENCE_QUEUE',
-  status:cases.length?'READY_FOR_REAL_SUPPLIER_COLLECTION':'BLOCKED_NO_AUTHORIZED_FINALIST',
+  status:cases.length?'READY_FOR_PAGE_BACKED_SUPPLIER_COLLECTION':'BLOCKED_NO_AUTHORIZED_FINALIST',
   stats:{queueCandidates:candidates.length,authorizedProducts:authorized.length,openSupplierCases:cases.length,targetOffers:cases.reduce((s,x)=>s+x.targetOfferCount,0)},
   cases,
-  nextAction:cases.length?`Collect 3–5 real comparable supplier quotes for ${cases[0].title}; do not calculate confirmed landed cost until at least one complete quote is manually verified.`:'Do not start supplier sourcing yet. Wait for a VALIDATE product with Romania demand ready and sales confidence >=75.',
-  policy:'Supplier Intelligence V3 never fabricates suppliers, quotes, certifications, shipping or landed cost. It cannot promote TEST or BUY. Confirmed landed cost remains blocked until a complete real supplier quote is manually verified.'
+  nextAction:cases.length?`Collect 3–5 comparable direct product/supplier pages for ${cases[0].title}. Use public standard data only; do not contact suppliers. Missing fields remain UNKNOWN.`:'Do not start supplier sourcing yet. Wait for a VALIDATE product with Romania demand ready and sales confidence >=75.',
+  policy:'Supplier Intelligence V3 is page-backed only: no supplier outreach. It never fabricates suppliers, prices, specifications, shipping or landed cost. Public page values may feed conservative screening economics; confirmed TEST/BUY remains governed by independent landed-cost and approval gates.'
 };
 
 await fs.writeFile(OUT,JSON.stringify(out,null,2)+'\n');
