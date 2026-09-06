@@ -31,6 +31,7 @@ async function load(){
     $('#goal').value=p.goal||'FIND_PRODUCTS';
     $('#risk').value=p.risk_profile||'BALANCED';
     $('#sourcing').value=p.sourcing_preference||'CHINA';
+    $('#importVatTreatment').value=p.import_vat_treatment||'UNKNOWN';
     setSelected($('#marketplaces'),p.marketplaces?.length?p.marketplaces:['EMAG_RO']);
     setSelected($('#categories'),p.categories||[]);
     try{const saved=JSON.parse(localStorage.getItem('mpr_plan_finder_v1')||'{}');if(saved.decisionNeed)$('#decisionNeed').value=saved.decisionNeed;if(saved.chinaAgent)$('#chinaAgent').value=saved.chinaAgent;}catch{}
@@ -44,12 +45,12 @@ $('#form').addEventListener('submit',async e=>{
   $('#status').textContent='Salvăm profilul și calculăm recomandarea…';
   $('#save').disabled=true;
   try{
-    const profile={experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))};
+    const profile={experience_level:$('#experience').value,monthly_budget_ron:Number($('#budget').value||0),goal:$('#goal').value,risk_profile:$('#risk').value,sourcing_preference:$('#sourcing').value,import_vat_treatment:$('#importVatTreatment').value,marketplaces:selected($('#marketplaces')),categories:selected($('#categories'))};
     const decisionNeed=$('#decisionNeed').value,chinaAgent=$('#chinaAgent').value;
     await saveSellerPreferences(profile);
     const rec=planRecommendation(profile,decisionNeed,chinaAgent);
     localStorage.setItem('mpr_plan_finder_v1',JSON.stringify({decisionNeed,chinaAgent,recommendedPlan:rec.code,updatedAt:new Date().toISOString()}));
-    await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length});
+    await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length,importVatTreatment:profile.import_vat_treatment});
     await trackJourneyEvent('PLAN_RECOMMENDED',{plan:rec.code,decisionNeed,chinaAgent:chinaAgent==='YES',budget:profile.monthly_budget_ron});
     $('#status').textContent='Profil salvat. Am calculat recomandarea potrivită pentru nevoile tale.';
     showRecommendation(rec);
