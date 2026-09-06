@@ -22,6 +22,14 @@ export function priceStrategyV1({
     });
     const freight=finite(allocatedFreightTotalRon)?Number(allocatedFreightTotalRon):null;
     const remaining=ceiling.maxEligibleFreightTotalRon===null||freight===null?null:ceiling.maxEligibleFreightTotalRon-freight;
+    const perUnit=remaining===null?null:remaining/Number(quantity);
+    const baseStatus=!ceiling.currentPriceEligibleBeforeFreight?'REJECT_PRICE_BEFORE_FREIGHT':remaining!==null&&remaining<0?'REJECT_AFTER_ALLOCATED_FREIGHT':'SCREENING_CANDIDATE';
+    const robustness=baseStatus!=='SCREENING_CANDIDATE'?'NOT_APPLICABLE'
+      :!observed.includes(price)?'STRETCH_PRICE_REQUIRES_MARKET_VALIDATION'
+      :perUnit===null?'UNKNOWN_IMPORT_BUFFER'
+      :perUnit<0.5?'VERY_TIGHT_UNKNOWN_COST_BUFFER'
+      :perUnit<1.5?'TIGHT_UNKNOWN_COST_BUFFER'
+      :'HEALTHY_SCREENING_BUFFER';
     return Object.freeze({
       sellPriceGrossRon:price,
       observedMarketPrice:observed.includes(price),
@@ -30,8 +38,9 @@ export function priceStrategyV1({
       maxAdditionalLandedHeadroomRon:ceiling.maxEligibleFreightTotalRon,
       allocatedFreightTotalRon:freight,
       remainingImportCostAllowanceRon:remaining===null?null:round(remaining),
-      remainingImportCostAllowancePerUnitRon:remaining===null?null:round(remaining/Number(quantity)),
-      status:!ceiling.currentPriceEligibleBeforeFreight?'REJECT_PRICE_BEFORE_FREIGHT':remaining!==null&&remaining<0?'REJECT_AFTER_ALLOCATED_FREIGHT':'SCREENING_CANDIDATE'
+      remainingImportCostAllowancePerUnitRon:perUnit===null?null:round(perUnit),
+      status:baseStatus,
+      robustness
     });
   });
   const observedCandidates=rows.filter(x=>x.observedMarketPrice&&x.status==='SCREENING_CANDIDATE'&&x.remainingImportCostAllowanceRon>0);
@@ -43,6 +52,6 @@ export function priceStrategyV1({
     primaryPrice:primary||fallback,
     scenarios:Object.freeze(rows),
     purchaseAuthorized:false,
-    policy:'Prefer a verified observed-market price that leaves positive landed-cost allowance. Stretch prices are scenario-only and never become recommended prices without market evidence.'
+    policy:'Prefer verified observed-market prices, but expose robustness separately. A mathematically positive price with a very small unknown-import-cost buffer is not commercially robust. Stretch prices remain scenario-only until market evidence exists.'
   });
 }
