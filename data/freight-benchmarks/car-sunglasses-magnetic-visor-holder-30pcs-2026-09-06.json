@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "MPR_FREIGHT_BENCHMARK_V1",
+  "generatedAt": "2026-09-06T13:48:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "shipment": {
+    "quantity": 30,
+    "originCountry": "CN",
+    "destinationCountry": "RO",
+    "destinationCity": "Bucharest",
+    "actualGrossWeightKg": 1.7,
+    "carton": {
+      "lengthCm": 30,
+      "widthCm": 20,
+      "heightCm": 10,
+      "cartons": 1
+    },
+    "volumetricDivisor": 5000,
+    "volumetricWeightKg": 1.2,
+    "chargeableWeightKg": 1.7,
+    "billingBracketKg": 2
+  },
+  "options": [
+    {
+      "carrier": "FedEx",
+      "service": "FedEx International Economy",
+      "sourceClass": "OFFICIAL_CARRIER_PUBLISHED_LIST_RATE",
+      "rateGuideEffectiveFrom": "2026-01-05",
+      "originZone": "F",
+      "baseListRateRon": 691.66,
+      "inboundProcessingFeeRon": 12,
+      "basePlusKnownFixedFeesRon": 703.66,
+      "fuelSurchargePct": null,
+      "otherApplicableSurchargesRon": null,
+      "customsBrokerageRon": null,
+      "transportVatRon": null,
+      "fullyLoadedFreightRon": null,
+      "evidenceRefs": [
+        "FedEx Romania 2026 import rate guide: China = Zone F",
+        "FedEx Romania import processing fee effective 2026-08-03"
+      ],
+      "evidenceUrls": [
+        "https://www.fedex.com/content/dam/fedex/international/rates/new-offer-rates-import-ro-ro.pdf",
+        "https://www.fedex.com/ro-ro/shipping/rates/fedex-rates.html"
+      ],
+      "usableForDecision": false,
+      "blockers": [
+        "CURRENT_INTERNATIONAL_FUEL_SURCHARGE_REQUIRED",
+        "ANY_APPLICABLE_ADDRESS_OR_HANDLING_SURCHARGES_REQUIRED",
+        "CUSTOMS_CLEARANCE/BROKERAGE_COST_REQUIRED_WHERE_APPLICABLE",
+        "FINAL_SERVICE_AVAILABILITY_AND_QUOTE_REQUIRED"
+      ],
+      "policy": "Official list-rate benchmark only. Do not treat as a live quote or final freight cost."
+    }
+  ],
+  "purchaseAuthorized": false,
+  "policy": "Freight benchmark may inform screening, but TEST/BUY economics require a fully loaded, evidence-backed freight cost or live carrier/forwarder quote. Unknown surcharges never become zero."
+}
