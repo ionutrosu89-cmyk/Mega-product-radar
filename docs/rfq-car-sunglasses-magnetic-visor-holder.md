@@ -25,7 +25,7 @@ Please quote the exact magnetic car sun-visor sunglasses holder shown in your li
 
 Please provide current terms for the exact item above:
 
-1. Unit price and currency for 20 / 50 / 100 / 300 pieces.
+1. Unit price and currency for 30 / 50 / 100 / 300 pieces.
 2. MOQ for the standard product.
 3. Sample unit cost.
 4. Sample shipping cost to Romania.
