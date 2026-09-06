@@ -19,6 +19,7 @@ const CONSOLIDATION='data/consolidation/current-multi-sku-basket-2026-09-06.json
 const CUSTOMS_DIR='data/customs-classification';
 const LCL_RANGE='data/freight-benchmarks/china-romania-lcl-public-range-2026-09-06.json';
 const IMPORT_PROCESSING='data/import-processing/romania-public-import-processing-2026-09-06.json';
+const ROMANIA_PRICE_DIR='data/romania-pricing';
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 const key=s=>norm(s).replace(/\s+/g,'-');
 const arr=v=>Array.isArray(v)?v:[];
@@ -65,13 +66,17 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
   const customs=await read(`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`,null);
   const consolidatedFinalist=arr(consolidation?.items).find(x=>key(x.canonicalKey)===canonical)||null;
   const allocatedFreight300=num(consolidatedFinalist?.allocatedBenchmarkLogisticsRon);
-  const observedPriceList=prices;
+  const currentPriceEvidence=await read(`${ROMANIA_PRICE_DIR}/${canonical}-2026-09-06.json`,null);
+  const currentHighMatchPrices=arr(currentPriceEvidence?.exactOrHighMatchOffers).map(x=>num(x.priceRon)).filter(x=>x!==null);
+  const observedPriceList=[...new Set([...prices,...currentHighMatchPrices])].sort((a,b)=>a-b);
   const priceStrategy=supplierUnitRon===null?null:priceStrategyV1({
     quantity:300,
     goodsCostPerUnitRon:supplierUnitRon,
     observedPricesRon:observedPriceList,
     allocatedFreightTotalRon:allocatedFreight300,
-    stretchPricesRon:[49.99]
+    stretchPricesRon:[49.99],
+    marketRangeMinRon:num(currentPriceEvidence?.highMatchObservedMinRon),
+    marketRangeMaxRon:num(currentPriceEvidence?.highMatchObservedMaxRon)
   });
   const screeningFreightPerUnit300=allocatedFreight300===null?null:allocatedFreight300/300;
   const importCostStress=supplierUnitRon===null||screeningFreightPerUnit300===null?null:importCostStressV1({
@@ -144,9 +149,12 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     romaniaPricing:{
       verifiedOfferCount:offers.length,
       observedPricesRon:prices,
-      minRon:prices[0]??null,
-      medianRon:prices.length?prices[Math.floor(prices.length/2)]:null,
-      maxRon:prices.at(-1)??null
+      currentHighMatchPricesRon:currentHighMatchPrices,
+      combinedObservedPricesRon:observedPriceList,
+      minRon:observedPriceList[0]??null,
+      medianRon:observedPriceList.length?observedPriceList[Math.floor(observedPriceList.length/2)]:null,
+      maxRon:observedPriceList.at(-1)??null,
+      currentPriceEvidenceFile:currentPriceEvidence?`${ROMANIA_PRICE_DIR}/${canonical}-2026-09-06.json`:null
     },
     supplierPage:{
       leader:supplierLeader?.supplierName||null,
