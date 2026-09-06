@@ -38,6 +38,8 @@ for(const file of files){
       publicPriceMaxUsd:priceMax,
       conservativeScreeningUnitPriceUsd:priceMax??priceMin,
       publicMoq:moq,
+      publicPriceTiers:Array.isArray(x?.publicPriceTiers)?x.publicPriceTiers:null,
+      unitGrossWeightKg:finite(x?.unitGrossWeightKg)?Number(x.unitGrossWeightKg):null,
       supplierYears:finite(x?.supplierYearsObserved)?Number(x.supplierYearsObserved):(finite(x?.supplierPageStandardData?.exportExperienceYears)?Number(x.supplierPageStandardData.exportExperienceYears):null),
       supplierRating:finite(x?.supplierRatingObserved)?Number(x.supplierRatingObserved):(finite(x?.supplierPageStandardData?.supplierRating)?Number(x.supplierPageStandardData.supplierRating):null),
       observedSalesCount:finite(x?.observedSalesCount)?Number(x.observedSalesCount):null,
