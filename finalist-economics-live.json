@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T17:48:13.608Z",
+  "updatedAt": "2026-09-06T17:49:48.407Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -2614,6 +2614,40 @@
         "purchaseAuthorized": false,
         "blockers": [],
         "policy": "A positive FINALIST screening verdict means the conservative public-evidence economics remain plausible. It is never TEST_READY and cannot replace exact customs classification, fully-loaded freight, local import charges or confirmed landed cost."
+      },
+      "screeningVerdictsByVatTreatment": {
+        "NON_RECOVERABLE": {
+          "schemaVersion": "MPR_FINALIST_SCREENING_VERDICT_V1",
+          "status": "CALCULATED_SCREENING",
+          "verdict": "PROMISING_BUT_LOCAL_COST_BUFFER_TIGHT",
+          "quantity": 300,
+          "screeningPriceRon": 49.99,
+          "priceInsideObservedMarketRange": true,
+          "conservativeWorstCasePass": true,
+          "residualLocalCostCeilingPerUnitRon": 0.61,
+          "economicallyPromising": true,
+          "robustScreeningBuffer": false,
+          "testReady": false,
+          "purchaseAuthorized": false,
+          "blockers": [],
+          "policy": "A positive FINALIST screening verdict means the conservative public-evidence economics remain plausible. It is never TEST_READY and cannot replace exact customs classification, fully-loaded freight, local import charges or confirmed landed cost."
+        },
+        "RECOVERABLE": {
+          "schemaVersion": "MPR_FINALIST_SCREENING_VERDICT_V1",
+          "status": "CALCULATED_SCREENING",
+          "verdict": "PROMISING_ROBUST_SCREENING",
+          "quantity": 300,
+          "screeningPriceRon": 49.99,
+          "priceInsideObservedMarketRange": true,
+          "conservativeWorstCasePass": true,
+          "residualLocalCostCeilingPerUnitRon": 1.41,
+          "economicallyPromising": true,
+          "robustScreeningBuffer": true,
+          "testReady": false,
+          "purchaseAuthorized": false,
+          "blockers": [],
+          "policy": "A positive FINALIST screening verdict means the conservative public-evidence economics remain plausible. It is never TEST_READY and cannot replace exact customs classification, fully-loaded freight, local import charges or confirmed landed cost."
+        }
       },
       "customsClassification": {
         "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
