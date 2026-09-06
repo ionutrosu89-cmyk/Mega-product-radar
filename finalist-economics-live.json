@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T14:56:10.842Z",
+  "updatedAt": "2026-09-06T14:56:26.151Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -2286,6 +2286,46 @@
         "carrier": "DHL Express",
         "lclLocalChargesStatus": "UNKNOWN_NOT_PUBLICLY_COMPLETE",
         "policy": "DHL Express processing fees are carrier-specific and must not be reused as LCL maritime local charges. Unknown LCL local charges remain UNKNOWN, never zero."
+      },
+      "customsDutySensitivity": {
+        "schemaVersion": "MPR_CUSTOMS_DUTY_SENSITIVITY_V1",
+        "status": "CALCULATED_SCREENING",
+        "quantity": 300,
+        "sellPriceGrossRon": 49.99,
+        "rows": [
+          {
+            "dutyRateScenarioPct": 3,
+            "customsDutyPerUnitRon": 0.1039,
+            "screeningLandedPerUnitRon": 5.0662,
+            "profitPerUnitRon": 10.15,
+            "marginPct": 20.31,
+            "roiPct": 200.37,
+            "passesTargets": true,
+            "truth": "CLASSIFICATION_SENSITIVITY_SCENARIO_NOT_APPLICABLE_DUTY"
+          },
+          {
+            "dutyRateScenarioPct": 6.5,
+            "customsDutyPerUnitRon": 0.225,
+            "screeningLandedPerUnitRon": 5.1873,
+            "profitPerUnitRon": 10.03,
+            "marginPct": 20.06,
+            "roiPct": 193.35,
+            "passesTargets": true,
+            "truth": "CLASSIFICATION_SENSITIVITY_SCENARIO_NOT_APPLICABLE_DUTY"
+          },
+          {
+            "dutyRateScenarioPct": 10,
+            "customsDutyPerUnitRon": 0.3462,
+            "screeningLandedPerUnitRon": 5.3085,
+            "profitPerUnitRon": 9.91,
+            "marginPct": 19.82,
+            "roiPct": 186.66,
+            "passesTargets": false,
+            "truth": "CLASSIFICATION_SENSITIVITY_SCENARIO_NOT_APPLICABLE_DUTY"
+          }
+        ],
+        "purchaseAuthorized": false,
+        "policy": "Duty rates are sensitivity scenarios derived from plausible research headings, not a tariff classification. They never replace CN/TARIC evidence."
       },
       "customsClassification": {
         "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
