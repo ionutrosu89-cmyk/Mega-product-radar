@@ -6,16 +6,18 @@ import {markRfqReplied,markRfqSent,seedRfqRecords,validateRfqRecord} from '../rf
 const queue=JSON.parse(fs.readFileSync('supplier-rfq-dispatch/car-sunglasses-magnetic-visor-holder.json','utf8'));
 const candidates=JSON.parse(fs.readFileSync('supplier-candidates/car-sunglasses-magnetic-visor-holder.json','utf8'));
 
-test('public RFQ seed remains truthful NOT_SENT for all five candidates',()=>{
+test('RFQ seed preserves evidenced reply state and remains valid for all five candidates',()=>{
   assert.equal(queue.entries.length,5);
-  assert.ok(queue.entries.every(x=>x.status==='NOT_SENT'&&x.sentAt===null&&x.responseReceivedAt===null&&x.responseReference===null));
+  assert.equal(queue.entries[0].status,'REPLIED');
+  assert.ok(queue.entries[0].responseReference);
+  assert.ok(queue.entries.slice(1).every(x=>x.status==='NOT_SENT'&&x.sentAt===null&&x.responseReceivedAt===null&&x.responseReference===null));
   const seeded=seedRfqRecords(queue,candidates);
   assert.equal(seeded.length,5);
   assert.ok(seeded.every(x=>validateRfqRecord(x).valid));
 });
 
 test('SENT requires explicit human confirmation, sender and channel',()=>{
-  const r=seedRfqRecords(queue,candidates)[0];
+  const r=seedRfqRecords(queue,candidates)[1];
   assert.equal(markRfqSent(r,{sentBy:'Ionut',channel:'Alibaba'}).ok,false);
   assert.equal(markRfqSent(r,{confirmedRealDispatch:true,channel:'Alibaba'}).ok,false);
   const sent=markRfqSent(r,{confirmedRealDispatch:true,sentBy:'Ionut',channel:'Alibaba',sentAt:'2026-08-24T06:00:00Z'});
@@ -24,7 +26,7 @@ test('SENT requires explicit human confirmation, sender and channel',()=>{
 });
 
 test('REPLIED cannot skip SENT and requires a real response reference',()=>{
-  const r=seedRfqRecords(queue,candidates)[0];
+  const r=seedRfqRecords(queue,candidates)[1];
   assert.equal(markRfqReplied(r,{confirmedRealResponse:true,responseReference:'thread-1'}).ok,false);
   const sent=markRfqSent(r,{confirmedRealDispatch:true,sentBy:'Ionut',channel:'Alibaba',sentAt:'2026-08-24T06:00:00Z'}).record;
   assert.equal(markRfqReplied(sent,{confirmedRealResponse:true}).ok,false);
