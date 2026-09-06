@@ -1,0 +1,58 @@
+name: Public Sales Evidence V1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/public-sales-evidence/**'
+      - 'public-sales-estimation-v1.js'
+      - 'scripts/public-sales-evidence.mjs'
+      - '.github/workflows/public-sales-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-sales-evidence-v1
+  cancel-in-progress: true
+
+jobs:
+  apply-public-sales:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Apply public third-party sales estimates
+        run: node scripts/public-sales-evidence.mjs
+      - name: Rebuild downstream gates
+        run: |
+          node scripts/commercial-hardening.mjs
+          node scripts/test-buy-decision.mjs
+          node scripts/golden-product-pipeline.mjs --phase=final
+          node scripts/finalist-evidence-queue.mjs
+      - name: Verify truth boundary
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const d=JSON.parse(fs.readFileSync('public-sales-estimation-live.json','utf8'));
+          for(const x of d.items||[]){
+            if(x.verifiedCompetitorSales===true||x.actualObservedSales===true)throw new Error('PUBLIC_ESTIMATE_PROMOTED_TO_VERIFIED_SALES');
+            if(x.status==='ESTIMATED_HIGH_CONFIDENCE'&&Number(x.confidence||0)<75)throw new Error('HIGH_CONFIDENCE_BELOW_THRESHOLD');
+          }
+          NODE
+      - name: Persist public sales evidence outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist public sales estimation evidence"
+            git push origin main
+          fi
