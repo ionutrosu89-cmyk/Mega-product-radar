@@ -46,3 +46,9 @@ test('missing supplier freight and missing carrier-ready logistics fail closed',
   assert.ok(result.blockers.includes('carton gross weight'));
   assert.ok(result.blockers.includes('supplier freight quote or carrier-ready logistics'));
 });
+
+
+test('explicit lead-time range is accepted when exact days are not provided',()=>{
+  const result=verifySupplierQuote({...complete,leadTimeDays:null,leadTimeDaysMin:7,leadTimeDaysMax:20});
+  assert.equal(result.verified,true);
+});
