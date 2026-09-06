@@ -18,21 +18,23 @@ function buildDecision(p){
   const trend=String(p.trendIntelligence?.status||'INSUFICIENT').toUpperCase();
   const economics=p.economics||{};
 
-  const demandVerified=kd.verifiedSearchVolume===true && num(kd.searchVolume)>0;
-  const pricingVerified=profit.pricingVerified===true || economics.pricingVerified===true;
-  const supplierObserved=num(china.sources||sourcing.sources)>0;
-  const supplierCommerciallyChecked=sourcing.requiresManualCommercialCheck===false;
-  const supplierReady=supplierObserved && supplierCommerciallyChecked;
+  const demandVerified=(kd.verifiedSearchVolume===true && num(kd.searchVolume)>0) || p?.romaniaDemand?.readyForTestDemandGate===true;
+  const pricingVerified=profit.pricingVerified===true || economics.pricingVerified===true || p?.commercialHardening?.gates?.pricingVerified===true;
+  const supplierReady=p?.commercialHardening?.gates?.supplierVerified===true;
+  const salesModelReady=['ACTUAL_OBSERVED','ESTIMATED_HIGH_CONFIDENCE'].includes(String(p?.salesEstimation?.status||'')) && num(p?.salesEstimation?.confidence)>=75;
+  const landedCostConfirmed=p?.landedCost?.confirmed===true || p?.profitEngineV2?.landedCostConfirmed===true;
   const reviewEvidence=num(reviews.sourceCount)>0 && num(reviews.snippetCount)>=2;
   const marketEvidence=Boolean(p.launchScore?.enoughEvidence) && num(p.competitors?.evidenceMarkets)>0;
-  const economicsHealthy=num(economics.margin)>=20 && num(economics.roi)>=45 && num(economics.profit)>0;
+  const economicsHealthy=landedCostConfirmed && num(economics.margin)>=20 && num(economics.roi)>=45 && num(economics.profit)>0;
   const confidenceReady=num(conf.overall)>=50;
   const trendSafe=trend!=='DECLINING';
 
   const gates={
     demandVerified,
     pricingVerified,
+    salesModelReady,
     supplierReady,
+    landedCostConfirmed,
     reviewEvidence,
     marketEvidence,
     economicsHealthy,
@@ -42,8 +44,10 @@ function buildDecision(p){
 
   const labels={
     demandVerified:'cerere România verificată',
-    pricingVerified:'preț de vânzare și landed cost verificate',
-    supplierReady:'furnizor + MOQ/preț/transport confirmate comercial',
+    pricingVerified:'preț de vânzare România verificat',
+    salesModelReady:'sales estimate cu confidence ≥75 sau vânzări observate',
+    supplierReady:'sourcing furnizor page-backed suficient',
+    landedCostConfirmed:'landed cost confirmat independent (transport + vamă + TVA + costuri import)',
     reviewEvidence:'review evidence suficient',
     marketEvidence:'dovezi piață și competiție suficiente',
     economicsHealthy:'marjă ≥20%, ROI ≥45% și profit/unitate pozitiv',
@@ -86,7 +90,7 @@ function buildDecision(p){
     gates,
     blockers,
     nextAction:blockers[0]||'Comandă lotul de test și urmărește conversia, retururile și viteza de vânzare.',
-    policy:'Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți.'
+    policy:'Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți.'
   };
 }
 
@@ -96,7 +100,7 @@ data.testBuyEngine={
   version:'1.0',
   updatedAt:new Date().toISOString(),
   readyProducts:ready.length,
-  policy:'Loturile de test sunt limitate la 20–30 bucăți și necesită toate gate-urile comerciale.'
+  policy:'Loturile de test sunt limitate la 20–30 bucăți. Page-backed sourcing may satisfy supplier readiness, but independent confirmed landed cost remains mandatory.'
 };
 data.stats={...(data.stats||{}),testBuyReady:ready.length};
 data.updatedAt=new Date().toISOString();
