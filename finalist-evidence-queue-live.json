@@ -1,31 +1,12 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-09-02T09:48:21.768Z",
+  "updatedAt": "2026-09-06T12:56:17.519Z",
   "stats": {
-    "validateProducts": 5,
+    "validateProducts": 4,
     "queueSize": 3,
     "supplierAuthorized": 0
   },
   "candidates": [
-    {
-      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
-      "title": "Car sunglasses magnetic visor holder",
-      "category": "Auto",
-      "goldenRank": 1,
-      "opportunityScore": 38.8,
-      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
-      "salesEstimateStatus": "INSUFFICIENT_DATA",
-      "salesEstimateConfidence": 35,
-      "nextGate": "SALES_EVIDENCE",
-      "supplierIntelligenceAuthorized": false,
-      "requiredSupplierEvidence": [],
-      "blockers": [
-        "sales estimate cu confidence ≥75 sau vânzări observate",
-        "ofertă furnizor completă și verificată",
-        "market evidence concret suficient",
-        "marjă ≥20%, ROI ≥45%, profit pozitiv"
-      ]
-    },
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
@@ -39,11 +20,11 @@
       "supplierIntelligenceAuthorized": false,
       "requiredSupplierEvidence": [],
       "blockers": [
-        "sales estimate cu confidence ≥75 sau vânzări observate",
-        "ofertă furnizor completă și verificată",
-        "review evidence verificat",
-        "market evidence concret suficient",
-        "marjă ≥20%, ROI ≥45%, profit pozitiv"
+        "cerere România verificată",
+        "furnizor + MOQ/preț/transport confirmate comercial",
+        "review evidence suficient",
+        "dovezi piață și competiție suficiente",
+        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
       ]
     },
     {
@@ -59,11 +40,30 @@
       "supplierIntelligenceAuthorized": false,
       "requiredSupplierEvidence": [],
       "blockers": [
-        "sales estimate cu confidence ≥75 sau vânzări observate",
-        "ofertă furnizor completă și verificată",
-        "review evidence verificat",
-        "market evidence concret suficient",
-        "marjă ≥20%, ROI ≥45%, profit pozitiv"
+        "cerere România verificată",
+        "furnizor + MOQ/preț/transport confirmate comercial",
+        "review evidence suficient",
+        "dovezi piață și competiție suficiente",
+        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
+      ]
+    },
+    {
+      "canonicalKey": "under-desk-headphone-hanger-clamp",
+      "title": "Under desk headphone hanger clamp",
+      "category": "Birou",
+      "goldenRank": 2,
+      "opportunityScore": 35.4,
+      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
+      "salesEstimateStatus": "INSUFFICIENT_DATA",
+      "salesEstimateConfidence": 30,
+      "nextGate": "SALES_EVIDENCE",
+      "supplierIntelligenceAuthorized": false,
+      "requiredSupplierEvidence": [],
+      "blockers": [
+        "cerere România verificată",
+        "furnizor + MOQ/preț/transport confirmate comercial",
+        "dovezi piață și competiție suficiente",
+        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
       ]
     }
   ],

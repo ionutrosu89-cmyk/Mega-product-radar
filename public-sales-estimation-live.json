@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-09-06T12:56:17.226Z",
+  "items": [
+    {
+      "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+      "evidenceFile": "data/public-sales-evidence/car-sunglasses-magnetic-visor-holder-asinsight-2026-09-06.json",
+      "schemaVersion": "MPR_PUBLIC_SALES_ESTIMATE_V1",
+      "status": "ESTIMATED_HIGH_CONFIDENCE",
+      "confidence": 82,
+      "estimatedUnits30d": 2725,
+      "rangeLow": 1771,
+      "rangeHigh": 3679,
+      "method": "PUBLIC_THIRD_PARTY_PEER_TEMPORAL_ESTIMATE",
+      "sourceProvider": "ASInsight",
+      "sourceIndependenceCount": 1,
+      "temporalSnapshotCount": 6,
+      "temporalConsistencyPct": 77.8,
+      "anchorMedianEstimatedUnits30d": 9000,
+      "categoryTop10MedianEstimatedUnits30d": 2450,
+      "comparablePeerMedianEstimatedUnits30d": 3000,
+      "verifiedCompetitorSales": false,
+      "actualObservedSales": false,
+      "policy": "High confidence here means high confidence in peer/category demand estimation, not verified competitor sales. Third-party monthly sales estimates never become actual observed sales and cannot independently authorize BUY."
+    }
+  ],
+  "policy": "Public third-party sales estimates can raise estimated demand confidence but never create verified competitor sales."
+}
