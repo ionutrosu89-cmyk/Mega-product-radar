@@ -25,6 +25,9 @@ test('verified quote seeds simulation only and never confirmed landed cost',()=>
   assert.equal(result.landedInput.confirmed,false);
   assert.equal(result.landedInput.fxRate,null);
   assert.equal(result.landedInput.customsDutyRate,null);
+  assert.equal(result.landedInput.marketCode,'RO');
+  assert.equal(result.landedInput.importVatRatePct,21);
+  assert.equal(result.landedInput.freightMode,'QUOTE_TOTAL');
   assert.ok(result.landedInput.missingForConfirmedLandedCost.length>=5);
 });
 
