@@ -1,8 +1,8 @@
-# RFQ — Car sunglasses magnetic visor holder
+# RFQ — ARCHIVED — Car sunglasses magnetic visor holder
 
-Status: TEMPLATE — NOT SENT
+Status: DO_NOT_SEND — PAGE_BACKED_SOURCING_POLICY
 
-This RFQ is for supplier verification after a public marketplace candidate has been observed. A public listing, marketplace badge, displayed price or sales count is discovery evidence only and does not verify a supplier or commercial quote.
+Historical template only. MPR no longer contacts suppliers for standard sourcing data. Use direct product pages and supplier pages. Public price, MOQ and standard specifications may be used for conservative screening; missing fields remain UNKNOWN.
 
 ## Exact product specification to confirm
 
@@ -49,3 +49,8 @@ The response remains `QUOTE_INCOMPLETE` until all commercially material fields a
 Missing values remain UNKNOWN. Public listing prices, estimated shipping and inferred commercial terms must never be substituted for supplier-confirmed values. The supplier is not expected to determine Romanian VAT or customs duty. MPR sources VAT, customs and carrier/forwarder charges independently. A supplier freight quote is optional when complete carrier-ready carton dimensions and gross weight are verified.
 
 Confirmed landed cost remains blocked until at least one complete supplier quote passes the MPR quote verifier. TEST and BUY remain governed by the normal MPR commercial gates.
+
+
+## Current sourcing policy
+
+Supplier outreach is disabled. This file is retained only for history and must not generate an intervention task. MPR uses page-backed standard data and independent transport/tax evidence instead.
