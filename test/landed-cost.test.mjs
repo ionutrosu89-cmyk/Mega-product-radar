@@ -13,16 +13,21 @@ test('landed cost record normalizes currency and numeric fields',()=>{
   assert.equal(r.unitPriceForeign,10);
   assert.equal(r.quantity,100);
   assert.equal(r.customsDutyRate,3);
+  assert.equal(r.marketCode,'RO');
+  assert.equal(r.importVatRatePct,21);
   assert.equal(r.decisionEligible,false);
 });
 
 test('landed cost calculates goods, freight, duty and fixed costs per unit',()=>{
-  const c=calculateLandedCost({currency:'USD',fxRate:5,unitPriceForeign:10,quantity:100,internationalFreight:1000,customsDutyRate:5,brokerage:200,domesticFreight:300,inspection:100,labelsPackaging:400,otherFixed:0});
+  const c=calculateLandedCost({currency:'USD',fxRate:5,unitPriceForeign:10,quantity:100,internationalFreight:1000,customsDutyRate:5,brokerage:200,domesticFreight:300,inspection:100,labelsPackaging:400,otherFixed:0,importVatRatePct:21,importVatRecoverable:true});
   assert.equal(c.goodsRon,5000);
   assert.equal(c.duty,300);
   assert.equal(c.fixed,1000);
+  assert.equal(c.importVat,1365);
+  assert.equal(c.cashTotal,8665);
   assert.equal(c.total,7300);
   assert.equal(c.perUnit,73);
+  assert.equal(c.cashPerUnit,86.65);
 });
 
 test('landed cost cannot be confirmed without price, rate and quantity',()=>{
