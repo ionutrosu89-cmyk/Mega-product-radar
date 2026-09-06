@@ -10,6 +10,7 @@ import {lclScreeningRangeV1,localChargeScopeGuardV1} from '../lcl-local-charge-g
 import {conservativeLandedEnvelopeV1} from '../conservative-landed-envelope-v1.js';
 import {residualLocalCostCeilingV1} from '../residual-local-cost-ceiling-v1.js';
 import {customsDutySensitivityV1} from '../customs-duty-sensitivity-v1.js';
+import {finalistScreeningVerdictV1} from '../finalist-screening-verdict-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
 const SUPPLIERS='supplier-page-evidence-live.json';
@@ -158,6 +159,17 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     fixedShipmentCostRon:300,
     dutyRateScenariosPct:arr(customs?.dutySensitivityScenariosPct).length?customs.dutySensitivityScenariosPct:[3,6.5,10]
   });
+  const worstCaseEnvelopePass=Boolean(worstCaseEnvelopeRow?.passesTargets);
+  const screeningVerdict=finalistScreeningVerdictV1({
+    stage:g.stage,
+    quantity:300,
+    screeningPriceRon:num(priceStrategy?.primaryPrice?.sellPriceGrossRon),
+    residualLocalCostCeilingPerUnitRon:num(residualLocalCostCeiling?.maxAdditionalLocalImportCostPerUnitRon),
+    conservativeWorstCasePass:worstCaseEnvelopePass,
+    priceInsideObservedMarketRange:priceStrategy?.primaryPrice?.insideObservedMarketRange===true,
+    salesReady:se?.status==='ESTIMATED_HIGH_CONFIDENCE'&&num(se?.confidence)>=75,
+    supplierPageReady:Boolean(supplierLeader)
+  });
   const customsReady=Boolean(customs?.exactCnCode)&&Boolean(customs?.customsDutyRate!==null&&customs?.customsDutyRate!==undefined)&&String(customs?.status||'').startsWith('VERIFIED');
   const testGate=finalistTestGateV1({
     stage:g.stage,
@@ -257,6 +269,7 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
       policy:importProcessingEvidence.policy
     }:null,
     customsDutySensitivity,
+    screeningVerdict,
     customsClassification:customs?{status:customs.status,exactCnCode:customs.exactCnCode,exactTaricCode:customs.exactTaricCode,customsDutyRate:customs.customsDutyRate,sourceFile:`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`}:null,
     testGate,
     preferredAutonomousFocus:'SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE',
