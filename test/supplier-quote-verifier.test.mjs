@@ -23,7 +23,7 @@ test('public price-like data without quote evidence fails closed',()=>{
   assert.equal(result.verified,false);
   assert.equal(result.landedCostEligible,false);
   assert.ok(result.blockers.includes('direct source URL'));
-  assert.ok(result.blockers.includes('bulk shipping to Romania'));
+  assert.ok(result.blockers.includes('supplier freight quote or carrier-ready logistics'));
   assert.ok(result.blockers.includes('manual verification timestamp'));
 });
 
