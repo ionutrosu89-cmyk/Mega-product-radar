@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T13:22:09.580Z",
+  "updatedAt": "2026-09-06T13:23:22.360Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -150,11 +150,69 @@
         "importRegime": "B2B_STOCK_IMPORT",
         "customsDutyStatus": "UNKNOWN_PENDING_CN_TARIC"
       },
+      "freightCeilings": [
+        {
+          "sellPriceGrossRon": 44.74,
+          "quantity": 30,
+          "maxAdditionalLandedHeadroomRon": 5.1,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 44.74,
+          "quantity": 50,
+          "maxAdditionalLandedHeadroomRon": 8.5,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 44.74,
+          "quantity": 100,
+          "maxAdditionalLandedHeadroomRon": 17.01,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 44.74,
+          "quantity": 300,
+          "maxAdditionalLandedHeadroomRon": 51.02,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 49.99,
+          "quantity": 30,
+          "maxAdditionalLandedHeadroomRon": 54.6,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 49.99,
+          "quantity": 50,
+          "maxAdditionalLandedHeadroomRon": 91,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 49.99,
+          "quantity": 100,
+          "maxAdditionalLandedHeadroomRon": 182.01,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        },
+        {
+          "sellPriceGrossRon": 49.99,
+          "quantity": 300,
+          "maxAdditionalLandedHeadroomRon": 546.02,
+          "minimumSellPriceGrossAtGoodsOnlyRon": 44.18,
+          "status": "FREIGHT_CEILING_AVAILABLE"
+        }
+      ],
       "quantityFreightScreens": {
         "44.74@30": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 51.9,
+          "freightCeilingRon": 5.1,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -163,9 +221,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 51.9,
-              "headroomRon": -1793.1,
-              "headroomPct": -3454.91,
+              "freightCeilingRon": 5.1,
+              "headroomRon": -1839.9,
+              "headroomPct": -36076.47,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -176,9 +234,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 51.9,
-              "headroomRon": -296.13,
-              "headroomPct": -570.58,
+              "freightCeilingRon": 5.1,
+              "headroomRon": -342.93,
+              "headroomPct": -6724.12,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -189,9 +247,9 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 51.9,
-              "headroomRon": -987.68,
-              "headroomPct": -1903.04,
+              "freightCeilingRon": 5.1,
+              "headroomRon": -1034.48,
+              "headroomPct": -20283.92,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
@@ -207,7 +265,7 @@
         "44.74@50": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 86.5,
+          "freightCeilingRon": 8.5,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -216,9 +274,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 86.5,
-              "headroomRon": -1758.5,
-              "headroomPct": -2032.95,
+              "freightCeilingRon": 8.5,
+              "headroomRon": -1836.5,
+              "headroomPct": -21605.88,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -229,9 +287,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 86.5,
-              "headroomRon": -261.53,
-              "headroomPct": -302.35,
+              "freightCeilingRon": 8.5,
+              "headroomRon": -339.53,
+              "headroomPct": -3994.47,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -242,9 +300,9 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 86.5,
-              "headroomRon": -953.08,
-              "headroomPct": -1101.83,
+              "freightCeilingRon": 8.5,
+              "headroomRon": -1031.08,
+              "headroomPct": -12130.35,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
@@ -260,7 +318,7 @@
         "44.74@100": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 173,
+          "freightCeilingRon": 17.01,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -269,9 +327,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 173,
-              "headroomRon": -1672,
-              "headroomPct": -966.47,
+              "freightCeilingRon": 17.01,
+              "headroomRon": -1827.99,
+              "headroomPct": -10746.56,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -282,9 +340,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 173,
-              "headroomRon": -175.03,
-              "headroomPct": -101.17,
+              "freightCeilingRon": 17.01,
+              "headroomRon": -331.02,
+              "headroomPct": -1946.03,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -295,9 +353,9 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 173,
-              "headroomRon": -866.58,
-              "headroomPct": -500.91,
+              "freightCeilingRon": 17.01,
+              "headroomRon": -1022.57,
+              "headroomPct": -6011.58,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
@@ -313,7 +371,7 @@
         "44.74@300": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 519,
+          "freightCeilingRon": 51.02,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -322,9 +380,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 519,
-              "headroomRon": -1326,
-              "headroomPct": -255.49,
+              "freightCeilingRon": 51.02,
+              "headroomRon": -1793.98,
+              "headroomPct": -3516.23,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -334,11 +392,11 @@
               "knownMinimumFreightRon": 348.03,
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
-              "status": "POTENTIALLY_FEASIBLE",
-              "freightCeilingRon": 519,
-              "headroomRon": 170.97,
-              "headroomPct": 32.94,
-              "decisionUsable": false,
+              "status": "REJECT_MINIMUM_CHARGE",
+              "freightCeilingRon": 51.02,
+              "headroomRon": -297.01,
+              "headroomPct": -582.14,
+              "decisionUsable": true,
               "purchaseAuthorized": false
             },
             {
@@ -348,26 +406,25 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 519,
-              "headroomRon": -520.58,
-              "headroomPct": -100.3,
+              "freightCeilingRon": 51.02,
+              "headroomRon": -988.56,
+              "headroomPct": -1937.59,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
           ],
           "rejectedModes": [
             "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
             "RAIL_LCL_CN_RO_1CBM_MIN"
           ],
-          "potentiallyFeasibleModes": [
-            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN"
-          ],
+          "potentiallyFeasibleModes": [],
           "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@30": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 106.8,
+          "freightCeilingRon": 54.6,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -376,9 +433,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 106.8,
-              "headroomRon": -1738.2,
-              "headroomPct": -1627.53,
+              "freightCeilingRon": 54.6,
+              "headroomRon": -1790.4,
+              "headroomPct": -3279.12,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -389,9 +446,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 106.8,
-              "headroomRon": -241.23,
-              "headroomPct": -225.87,
+              "freightCeilingRon": 54.6,
+              "headroomRon": -293.43,
+              "headroomPct": -537.42,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -402,9 +459,9 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 106.8,
-              "headroomRon": -932.78,
-              "headroomPct": -873.39,
+              "freightCeilingRon": 54.6,
+              "headroomRon": -984.98,
+              "headroomPct": -1803.99,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
@@ -420,7 +477,7 @@
         "49.99@50": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 178,
+          "freightCeilingRon": 91,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -429,9 +486,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 178,
-              "headroomRon": -1667,
-              "headroomPct": -936.52,
+              "freightCeilingRon": 91,
+              "headroomRon": -1754,
+              "headroomPct": -1927.47,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -442,9 +499,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 178,
-              "headroomRon": -170.03,
-              "headroomPct": -95.52,
+              "freightCeilingRon": 91,
+              "headroomRon": -257.03,
+              "headroomPct": -282.45,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -455,9 +512,9 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 178,
-              "headroomRon": -861.58,
-              "headroomPct": -484.03,
+              "freightCeilingRon": 91,
+              "headroomRon": -948.58,
+              "headroomPct": -1042.4,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
@@ -473,7 +530,7 @@
         "49.99@100": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 356,
+          "freightCeilingRon": 182.01,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -482,9 +539,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 356,
-              "headroomRon": -1489,
-              "headroomPct": -418.26,
+              "freightCeilingRon": 182.01,
+              "headroomRon": -1662.99,
+              "headroomPct": -913.68,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -494,11 +551,11 @@
               "knownMinimumFreightRon": 348.03,
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
-              "status": "VERY_TIGHT_HEADROOM",
-              "freightCeilingRon": 356,
-              "headroomRon": 7.97,
-              "headroomPct": 2.24,
-              "decisionUsable": false,
+              "status": "REJECT_MINIMUM_CHARGE",
+              "freightCeilingRon": 182.01,
+              "headroomRon": -166.02,
+              "headroomPct": -91.21,
+              "decisionUsable": true,
               "purchaseAuthorized": false
             },
             {
@@ -508,26 +565,25 @@
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 356,
-              "headroomRon": -683.58,
-              "headroomPct": -192.02,
+              "freightCeilingRon": 182.01,
+              "headroomRon": -857.57,
+              "headroomPct": -471.17,
               "decisionUsable": true,
               "purchaseAuthorized": false
             }
           ],
           "rejectedModes": [
             "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
             "RAIL_LCL_CN_RO_1CBM_MIN"
           ],
-          "potentiallyFeasibleModes": [
-            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN"
-          ],
+          "potentiallyFeasibleModes": [],
           "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         },
         "49.99@300": {
           "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_ENGINE_V1",
           "status": "CALCULATED_SCREENING",
-          "freightCeilingRon": 1068,
+          "freightCeilingRon": 546.02,
           "modes": [
             {
               "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
@@ -536,9 +592,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
               "status": "REJECT_MINIMUM_CHARGE",
-              "freightCeilingRon": 1068,
-              "headroomRon": -777,
-              "headroomPct": -72.75,
+              "freightCeilingRon": 546.02,
+              "headroomRon": -1298.98,
+              "headroomPct": -237.9,
               "decisionUsable": true,
               "purchaseAuthorized": false
             },
@@ -549,9 +605,9 @@
               "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
               "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
               "status": "POTENTIALLY_FEASIBLE",
-              "freightCeilingRon": 1068,
-              "headroomRon": 719.97,
-              "headroomPct": 67.41,
+              "freightCeilingRon": 546.02,
+              "headroomRon": 197.99,
+              "headroomPct": 36.26,
               "decisionUsable": false,
               "purchaseAuthorized": false
             },
@@ -561,20 +617,20 @@
               "knownMinimumFreightRon": 1039.58,
               "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
               "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
-              "status": "VERY_TIGHT_HEADROOM",
-              "freightCeilingRon": 1068,
-              "headroomRon": 28.42,
-              "headroomPct": 2.66,
-              "decisionUsable": false,
+              "status": "REJECT_MINIMUM_CHARGE",
+              "freightCeilingRon": 546.02,
+              "headroomRon": -493.56,
+              "headroomPct": -90.39,
+              "decisionUsable": true,
               "purchaseAuthorized": false
             }
           ],
           "rejectedModes": [
-            "AIR_CARGO_PEK_OTP_45KG_MIN"
+            "AIR_CARGO_PEK_OTP_45KG_MIN",
+            "RAIL_LCL_CN_RO_1CBM_MIN"
           ],
           "potentiallyFeasibleModes": [
-            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
-            "RAIL_LCL_CN_RO_1CBM_MIN"
+            "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN"
           ],
           "policy": "A mode is safely rejectable when its published minimum freight charge already exceeds the product freight ceiling. Any non-rejected mode remains screening-only until full carrier/forwarder, customs, brokerage and local-delivery costs are known."
         }
