@@ -12,6 +12,13 @@ on:
       - 'scripts/finalist-evidence-queue.mjs'
       - 'scripts/finalist-economics-packet-v1.mjs'
       - 'freight-mode-viability-v1.js'
+      - 'consolidation-engine-v1.js'
+      - 'consolidation-basket-v1.js'
+      - 'price-strategy-v1.js'
+      - 'finalist-test-gate-v1.js'
+      - 'data/consolidation/**'
+      - 'data/customs-classification/**'
+      - 'supplier-candidates/**'
       - '.github/workflows/public-sales-evidence.yml'
   workflow_dispatch:
 
@@ -38,6 +45,7 @@ jobs:
         run: node scripts/public-sales-evidence.mjs
       - name: Rebuild downstream gates
         run: |
+          node scripts/supplier-page-evidence-collector.mjs
           node scripts/commercial-hardening.mjs
           node scripts/test-buy-decision.mjs
           node scripts/golden-product-pipeline.mjs --phase=final
