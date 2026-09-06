@@ -1,7 +1,7 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-09-06T12:56:17.462Z",
+  "updatedAt": "2026-09-06T13:00:56.246Z",
   "sourceUpdatedAt": "2026-09-02T09:48:10.521Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc doar dovezi observate. Dated public pricing/review observations may improve evidence completeness, but never become verified sales or verified supplier quotes.",
@@ -667,7 +667,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 1,
         "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T12:56:17.461Z"
+        "updatedAt": "2026-09-06T13:00:56.245Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -1243,7 +1243,7 @@
         "version": "PUBLIC_1.0",
         "evidenceFile": "data/public-sales-evidence/car-sunglasses-magnetic-visor-holder-asinsight-2026-09-06.json",
         "sourceClass": "THIRD_PARTY_ESTIMATED_MONTHLY_SALES",
-        "updatedAt": "2026-09-06T12:56:17.201Z"
+        "updatedAt": "2026-09-06T13:00:55.988Z"
       },
       "romaniaDemand": {
         "version": "1.0",
@@ -1327,13 +1327,15 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
+        "demandSearchVolume": 0,
         "confidence": "MEDIE",
         "confidenceScore": 55.9,
         "gates": {
-          "demandVerified": false,
+          "demandVerified": true,
           "pricingVerified": true,
-          "supplierReady": false,
+          "salesModelReady": true,
+          "supplierReady": true,
+          "landedCostConfirmed": false,
           "reviewEvidence": true,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -1341,13 +1343,12 @@
           "trendSafe": true
         },
         "blockers": [
-          "cerere România verificată",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
         ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "nextAction": "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -1919,7 +1920,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 4,
         "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -2434,13 +2435,15 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
+        "demandSearchVolume": 0,
         "confidence": "SCĂZUTĂ",
         "confidenceScore": 46.3,
         "gates": {
-          "demandVerified": false,
+          "demandVerified": true,
           "pricingVerified": true,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -2448,15 +2451,16 @@
           "trendSafe": true
         },
         "blockers": [
-          "cerere România verificată",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -3028,7 +3032,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 3,
         "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.245Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -3543,13 +3547,15 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
+        "demandSearchVolume": 0,
         "confidence": "SCĂZUTĂ",
         "confidenceScore": 46.3,
         "gates": {
-          "demandVerified": false,
+          "demandVerified": true,
           "pricingVerified": true,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -3557,15 +3563,16 @@
           "trendSafe": true
         },
         "blockers": [
-          "cerere România verificată",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -4140,7 +4147,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 2,
         "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T12:56:17.461Z"
+        "updatedAt": "2026-09-06T13:00:56.245Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -4700,13 +4707,15 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
+        "demandSearchVolume": 0,
         "confidence": "MEDIE",
         "confidenceScore": 51.3,
         "gates": {
-          "demandVerified": false,
+          "demandVerified": true,
           "pricingVerified": true,
-          "supplierReady": false,
+          "salesModelReady": false,
+          "supplierReady": true,
+          "landedCostConfirmed": false,
           "reviewEvidence": true,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -4714,13 +4723,13 @@
           "trendSafe": true
         },
         "blockers": [
-          "cerere România verificată",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
         ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -5292,7 +5301,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 5,
         "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -5800,13 +5809,15 @@
         "testBudget": 0,
         "expectedRevenue": 0,
         "expectedGrossProfit": 0,
-        "demandSearchVolume": null,
+        "demandSearchVolume": 0,
         "confidence": "SCĂZUTĂ",
         "confidenceScore": 46.3,
         "gates": {
-          "demandVerified": false,
+          "demandVerified": true,
           "pricingVerified": true,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -5814,15 +5825,16 @@
           "trendSafe": true
         },
         "blockers": [
-          "cerere România verificată",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
-        "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -6330,7 +6342,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -6832,7 +6844,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -6841,15 +6855,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -7357,7 +7373,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "COOLING",
@@ -7859,7 +7875,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -7868,15 +7886,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -8384,7 +8404,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -8886,7 +8906,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -8895,15 +8917,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -9411,7 +9435,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -9913,7 +9937,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -9922,15 +9948,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -10438,7 +10466,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -10940,7 +10968,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -10949,15 +10979,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -11465,7 +11497,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -11961,7 +11993,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -11970,15 +12004,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -12486,7 +12522,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -12982,7 +13018,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -12991,15 +13029,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -13507,7 +13547,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -14003,7 +14043,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -14012,15 +14054,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -14528,7 +14572,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -15024,7 +15068,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -15033,15 +15079,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -15549,7 +15597,7 @@
         "paidDataEligible": true,
         "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -16045,7 +16093,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -16054,15 +16104,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -16570,7 +16622,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -17066,7 +17118,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -17075,15 +17129,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -17591,7 +17647,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18083,7 +18139,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -18092,15 +18150,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -18608,7 +18668,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19100,7 +19160,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -19109,15 +19171,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -19625,7 +19689,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20117,7 +20181,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -20126,15 +20192,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -20642,7 +20710,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21134,7 +21202,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -21143,15 +21213,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -21659,7 +21731,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22151,7 +22223,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -22160,15 +22234,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -22676,7 +22752,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23168,7 +23244,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -23177,15 +23255,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -23693,7 +23773,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24185,7 +24265,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -24194,15 +24276,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -24710,7 +24794,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25202,7 +25286,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -25211,15 +25297,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -25727,7 +25815,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26219,7 +26307,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -26228,15 +26318,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -26744,7 +26836,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27236,7 +27328,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -27245,15 +27339,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -27761,7 +27857,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28253,7 +28349,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -28262,15 +28360,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -28778,7 +28878,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29270,7 +29370,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -29279,15 +29381,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -29795,7 +29899,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30287,7 +30391,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -30296,15 +30402,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -30812,7 +30920,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31304,7 +31412,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -31313,15 +31423,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -31829,7 +31941,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32321,7 +32433,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -32330,15 +32444,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -32846,7 +32962,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33338,7 +33454,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -33347,15 +33465,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -33863,7 +33983,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34355,7 +34475,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -34364,15 +34486,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -34880,7 +35004,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -35372,7 +35496,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -35381,15 +35507,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -35897,7 +36025,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -36389,7 +36517,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -36398,15 +36528,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -36914,7 +37046,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -37406,7 +37538,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -37415,15 +37549,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -37931,7 +38067,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -38423,7 +38559,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -38432,15 +38570,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -38948,7 +39088,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -39440,7 +39580,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -39449,15 +39591,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -39965,7 +40109,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -40457,7 +40601,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -40466,15 +40612,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -40982,7 +41130,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -41474,7 +41622,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -41483,15 +41633,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -41999,7 +42151,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -42491,7 +42643,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -42500,15 +42654,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -43016,7 +43172,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -43508,7 +43664,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -43517,15 +43675,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -44033,7 +44193,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -44525,7 +44685,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -44534,15 +44696,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -45050,7 +45214,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -45542,7 +45706,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -45551,15 +45717,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -46067,7 +46235,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -46559,7 +46727,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -46568,15 +46738,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -47084,7 +47256,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -47576,7 +47748,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -47585,15 +47759,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -48101,7 +48277,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -48593,7 +48769,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -48602,15 +48780,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -49118,7 +49298,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -49610,7 +49790,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -49619,15 +49801,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -50135,7 +50319,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -50627,7 +50811,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -50636,15 +50822,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -51152,7 +51340,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -51644,7 +51832,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -51653,15 +51843,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -52169,7 +52361,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -52661,7 +52853,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -52670,15 +52864,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -53186,7 +53382,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -53678,7 +53874,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -53687,15 +53885,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -54203,7 +54403,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -54695,7 +54895,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -54704,15 +54906,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -55220,7 +55424,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -55712,7 +55916,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -55721,15 +55927,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -56237,7 +56445,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -56729,7 +56937,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -56738,15 +56948,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -57254,7 +57466,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -57746,7 +57958,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -57755,15 +57969,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -58271,7 +58487,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -58763,7 +58979,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -58772,15 +58990,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -59288,7 +59508,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -59780,7 +60000,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -59789,15 +60011,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -60305,7 +60529,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -60797,7 +61021,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -60806,15 +61032,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -61322,7 +61550,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -61814,7 +62042,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -61823,15 +62053,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -62339,7 +62571,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -62831,7 +63063,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -62840,15 +63074,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -63356,7 +63592,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -63826,7 +64062,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -63835,15 +64073,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -64351,7 +64591,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -64821,7 +65061,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -64830,15 +65072,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -65346,7 +65590,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -65816,7 +66060,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -65825,15 +66071,17 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     },
     {
@@ -66341,7 +66589,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T12:56:17.462Z"
+        "updatedAt": "2026-09-06T13:00:56.246Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -66811,7 +67059,9 @@
         "gates": {
           "demandVerified": false,
           "pricingVerified": false,
+          "salesModelReady": false,
           "supplierReady": false,
+          "landedCostConfirmed": false,
           "reviewEvidence": false,
           "marketEvidence": false,
           "economicsHealthy": false,
@@ -66820,22 +67070,24 @@
         },
         "blockers": [
           "cerere România verificată",
-          "preț de vânzare și landed cost verificate",
-          "furnizor + MOQ/preț/transport confirmate comercial",
+          "preț de vânzare România verificat",
+          "sales estimate cu confidence ≥75 sau vânzări observate",
+          "sourcing furnizor page-backed suficient",
+          "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
           "review evidence suficient",
           "dovezi piață și competiție suficiente",
           "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv",
           "Data Confidence minimum MEDIE"
         ],
         "nextAction": "cerere România verificată",
-        "policy": "Recomandarea TEST se emite numai după confirmarea cererii, pricingului, furnizorului, review-urilor, dovezilor de piață și economiei. Cantitatea este limitată la 20–30 bucăți."
+        "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
       }
     }
   ],
   "goldenPipeline": {
     "version": "2.5",
     "phase": "final",
-    "updatedAt": "2026-09-06T12:56:17.462Z",
+    "updatedAt": "2026-09-06T13:00:56.246Z",
     "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence + Romania demand + high-confidence sales model are credible → TEST_READY after all TEST gates → BUY_READY only after a successful real test.",
     "quotas": {
       "promising": 15,
@@ -66911,7 +67163,7 @@
   },
   "commercialHardening": {
     "version": "1.2",
-    "updatedAt": "2026-09-06T12:56:17.300Z",
+    "updatedAt": "2026-09-06T13:00:56.086Z",
     "stats": {
       "products": 65,
       "pricingVerified": 5,
@@ -66959,13 +67211,13 @@
   },
   "testBuyEngine": {
     "version": "1.0",
-    "updatedAt": "2026-09-06T12:56:17.383Z",
+    "updatedAt": "2026-09-06T13:00:56.167Z",
     "readyProducts": 0,
-    "policy": "Loturile de test sunt limitate la 20–30 bucăți și necesită toate gate-urile comerciale."
+    "policy": "Loturile de test sunt limitate la 20–30 bucăți. Page-backed sourcing may satisfy supplier readiness, but independent confirmed landed cost remains mandatory."
   },
   "publicSalesEstimation": {
     "version": "1.0",
-    "updatedAt": "2026-09-06T12:56:17.201Z",
+    "updatedAt": "2026-09-06T13:00:55.989Z",
     "items": 1,
     "highConfidence": 1,
     "policy": "Public third-party sales estimates can raise estimated demand confidence but never create verified competitor sales."

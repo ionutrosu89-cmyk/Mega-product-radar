@@ -1,12 +1,32 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-09-06T12:56:17.519Z",
+  "updatedAt": "2026-09-06T13:00:56.306Z",
   "stats": {
     "validateProducts": 4,
+    "finalistProducts": 1,
     "queueSize": 3,
-    "supplierAuthorized": 0
+    "supplierAuthorized": 0,
+    "landedEconomicsReady": 1
   },
   "candidates": [
+    {
+      "canonicalKey": "car-sunglasses-magnetic-visor-holder",
+      "title": "Car sunglasses magnetic visor holder",
+      "category": "Auto",
+      "goldenRank": 1,
+      "opportunityScore": 38.8,
+      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
+      "salesEstimateStatus": "ESTIMATED_HIGH_CONFIDENCE",
+      "salesEstimateConfidence": 82,
+      "nextGate": "LANDED_ECONOMICS",
+      "supplierIntelligenceAuthorized": false,
+      "requiredSupplierEvidence": [],
+      "blockers": [
+        "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
+        "dovezi piață și competiție suficiente",
+        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
+      ]
+    },
     {
       "canonicalKey": "reusable-furniture-moving-sliders-kit",
       "title": "Reusable furniture moving sliders kit",
@@ -20,11 +40,11 @@
       "supplierIntelligenceAuthorized": false,
       "requiredSupplierEvidence": [],
       "blockers": [
-        "cerere România verificată",
-        "furnizor + MOQ/preț/transport confirmate comercial",
+        "sales estimate cu confidence ≥75 sau vânzări observate",
+        "sourcing furnizor page-backed suficient",
+        "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
         "review evidence suficient",
-        "dovezi piață și competiție suficiente",
-        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
+        "dovezi piață și competiție suficiente"
       ]
     },
     {
@@ -40,33 +60,14 @@
       "supplierIntelligenceAuthorized": false,
       "requiredSupplierEvidence": [],
       "blockers": [
-        "cerere România verificată",
-        "furnizor + MOQ/preț/transport confirmate comercial",
+        "sales estimate cu confidence ≥75 sau vânzări observate",
+        "sourcing furnizor page-backed suficient",
+        "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
         "review evidence suficient",
-        "dovezi piață și competiție suficiente",
-        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
-      ]
-    },
-    {
-      "canonicalKey": "under-desk-headphone-hanger-clamp",
-      "title": "Under desk headphone hanger clamp",
-      "category": "Birou",
-      "goldenRank": 2,
-      "opportunityScore": 35.4,
-      "romaniaDemandStatus": "MARKET_EVIDENCE_READY",
-      "salesEstimateStatus": "INSUFFICIENT_DATA",
-      "salesEstimateConfidence": 30,
-      "nextGate": "SALES_EVIDENCE",
-      "supplierIntelligenceAuthorized": false,
-      "requiredSupplierEvidence": [],
-      "blockers": [
-        "cerere România verificată",
-        "furnizor + MOQ/preț/transport confirmate comercial",
-        "dovezi piață și competiție suficiente",
-        "marjă ≥20%, ROI ≥45% și profit/unitate pozitiv"
+        "dovezi piață și competiție suficiente"
       ]
     }
   ],
-  "nextAction": "Do not spend on supplier sourcing yet. Resolve the highest-value RO demand or sales-evidence blocker first.",
-  "policy": "Supplier Intelligence is authorized only for VALIDATE products that have Romania demand ready and sales confidence >=75 (or actual observed sales). This queue never promotes TEST/BUY, never invents supplier quotes, and never confirms landed cost."
+  "nextAction": "Complete independent landed economics for Car sunglasses magnetic visor holder using page-backed supplier cost plus carrier/customs evidence.",
+  "policy": "The evidence queue retains both VALIDATE and FINALIST products. Page-backed Supplier Intelligence is authorized only when supplier-page evidence is the next gate. FINALIST products advance to independent LANDED_ECONOMICS. No supplier outreach is required; this queue never promotes TEST/BUY or invents landed cost."
 }
