@@ -1,7 +1,7 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-09-02T09:48:21.694Z",
+  "updatedAt": "2026-09-06T12:49:27.348Z",
   "sourceUpdatedAt": "2026-09-02T09:48:10.521Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc doar dovezi observate. Dated public pricing/review observations may improve evidence completeness, but never become verified sales or verified supplier quotes.",
@@ -970,7 +970,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
@@ -1027,11 +1027,29 @@
           "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
-          "verified": false,
-          "status": "QUOTE_PARTIAL",
+          "verified": true,
+          "pageBacked": true,
+          "supplierContactRequired": false,
+          "status": "PAGE_BACKED_SCREENING_READY",
           "quoteCount": 1,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 4,
           "bestQuote": null,
+          "bestPageEvidence": {
+            "supplier": "Shenzhen Xiyuecheng Technology Co., Ltd.",
+            "platform": "Alibaba",
+            "sourceUrl": "https://www.alibaba.com/product-detail/Cross-Border-Car-Glasses-Holder-Car_1601624885242.html",
+            "productTitle": "Cross-Border Car Glasses Holder Car Sun Visor Eye Holder Magnetic Sunglasses Storage Clip Interior Kits",
+            "priceMin": 0.65,
+            "priceMax": 0.73,
+            "currency": "USD",
+            "moq": 10,
+            "observedAt": "",
+            "productMatch": "HIGH",
+            "material": null,
+            "dimensions": null,
+            "pageBackedScreeningReady": true
+          },
           "quotes": [
             {
               "supplier": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
@@ -1044,8 +1062,73 @@
               "note": "Public magnetic leather visor glasses holder listing; shipping/sample/lead time incomplete."
             }
           ],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [
+            {
+              "supplier": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
+              "productTitle": "Magnetic Leather Multi Functional Car Sun Visor Card Glasses Eyeglass Ticket Holder Clip Case Car Sunglass Clips for Car Visor",
+              "priceMin": 0.64,
+              "priceMax": 0.75,
+              "currency": "USD",
+              "moq": 2,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": null,
+              "dimensions": null,
+              "pageBackedScreeningReady": true
+            },
+            {
+              "supplier": "Ma'anshan Jiuyan Trading Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Multifunctional-Car-Interior-Pu-Leather-Sunglasses_1601398941685.html",
+              "productTitle": "Multifunctional Car Interior Pu Leather Sunglasses Holder Creative Car Visor Storage Clip Luxury Glasses Clip Car Accessories",
+              "priceMin": 0.69,
+              "priceMax": 0.89,
+              "currency": "USD",
+              "moq": 50,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": "PU Leather",
+              "dimensions": {
+                "lengthCm": 10,
+                "widthCm": 3.5,
+                "heightCm": 2
+              },
+              "pageBackedScreeningReady": true
+            },
+            {
+              "supplier": "Shenzhen Xiyuecheng Technology Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Cross-Border-Car-Glasses-Holder-Car_1601624885242.html",
+              "productTitle": "Cross-Border Car Glasses Holder Car Sun Visor Eye Holder Magnetic Sunglasses Storage Clip Interior Kits",
+              "priceMin": 0.65,
+              "priceMax": 0.73,
+              "currency": "USD",
+              "moq": 10,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": null,
+              "dimensions": null,
+              "pageBackedScreeningReady": true
+            },
+            {
+              "supplier": "Guangzhou Kute Technology Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Magnetic-Sunglasses-Holders-for-Car-Visor_1600999597401.html",
+              "productTitle": "Magnetic Sunglasses Holders for Car Visor - Magnetic Leather Sunglasses Holder and Ticket Card Clip - Car Visor Accessories",
+              "priceMin": 1.53,
+              "priceMax": 1.65,
+              "currency": "USD",
+              "moq": 10,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": "Leather",
+              "dimensions": null,
+              "pageBackedScreeningReady": true
+            }
+          ],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": true,
@@ -1102,17 +1185,15 @@
         "gates": {
           "pricingVerified": true,
           "salesVerified": false,
-          "supplierVerified": false,
+          "supplierVerified": true,
           "reviewVerified": true
         },
-        "readiness": 50,
+        "readiness": 75,
         "missingEvidence": [
-          "salesVerified",
-          "supplierVerified"
+          "salesVerified"
         ],
         "nextActions": [
-          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts."
         ],
         "proofSummary": {
           "romaniaOffers": 3,
@@ -1120,6 +1201,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
+          "supplierPages": 4,
           "reviewSnippets": 6,
           "reviewSources": 2
         }
@@ -2155,7 +2237,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
@@ -2202,10 +2284,14 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "QUOTE_PARTIAL",
           "quoteCount": 1,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [
             {
               "supplier": "Quankai Housewares (Xiamen) Co., Ltd.",
@@ -2218,8 +2304,8 @@
               "note": "Public reusable furniture slider listing; shipping/sample/lead time incomplete."
             }
           ],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -2250,7 +2336,7 @@
         ],
         "nextActions": [
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -2259,6 +2345,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -3284,7 +3371,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
@@ -3331,10 +3418,14 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "QUOTE_PARTIAL",
           "quoteCount": 1,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [
             {
               "supplier": "Guangzhou Changdao Information Technology Co., Ltd.",
@@ -3347,8 +3438,8 @@
               "note": "Public hidden 2-in-1 headrest hook listing; shipping/sample/lead time incomplete."
             }
           ],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -3379,7 +3470,7 @@
         ],
         "nextActions": [
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -3388,6 +3479,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -4407,7 +4499,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
@@ -4453,11 +4545,29 @@
           "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
-          "verified": false,
-          "status": "QUOTE_PARTIAL",
+          "verified": true,
+          "pageBacked": true,
+          "supplierContactRequired": false,
+          "status": "PAGE_BACKED_SCREENING_READY",
           "quoteCount": 1,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 1,
           "bestQuote": null,
+          "bestPageEvidence": {
+            "supplier": "Shenzhen Vazio Technology Co., Ltd.",
+            "platform": "Alibaba",
+            "sourceUrl": "https://www.alibaba.com/pla/Universal-Portable-Foldable-Aluminum-Under-Desk_1601044263360.html",
+            "productTitle": "Universal Portable Foldable Aluminum Under Desk Gaming Headphone Hook Headset Clamp Holder Stand",
+            "priceMin": 3.8,
+            "priceMax": 3.99,
+            "currency": "USD",
+            "moq": 1,
+            "observedAt": "",
+            "productMatch": "HIGH",
+            "material": null,
+            "dimensions": null,
+            "pageBackedScreeningReady": true
+          },
           "quotes": [
             {
               "supplier": "Shenzhen Yaika Electronic CO., Ltd.",
@@ -4470,8 +4580,24 @@
               "note": "Public listing range starts at USD 0.50; shipping, sample cost and lead time not fully confirmed."
             }
           ],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [
+            {
+              "supplier": "Shenzhen Vazio Technology Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/pla/Universal-Portable-Foldable-Aluminum-Under-Desk_1601044263360.html",
+              "productTitle": "Universal Portable Foldable Aluminum Under Desk Gaming Headphone Hook Headset Clamp Holder Stand",
+              "priceMin": 3.8,
+              "priceMax": 3.99,
+              "currency": "USD",
+              "moq": 1,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": null,
+              "dimensions": null,
+              "pageBackedScreeningReady": true
+            }
+          ],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": true,
@@ -4513,17 +4639,15 @@
         "gates": {
           "pricingVerified": true,
           "salesVerified": false,
-          "supplierVerified": false,
+          "supplierVerified": true,
           "reviewVerified": true
         },
-        "readiness": 50,
+        "readiness": 75,
         "missingEvidence": [
-          "salesVerified",
-          "supplierVerified"
+          "salesVerified"
         ],
         "nextActions": [
-          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+          "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts."
         ],
         "proofSummary": {
           "romaniaOffers": 2,
@@ -4531,6 +4655,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
+          "supplierPages": 1,
           "reviewSnippets": 4,
           "reviewSources": 2
         }
@@ -5553,7 +5678,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": true,
           "status": "VERIFIED",
@@ -5600,10 +5725,14 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "QUOTE_PARTIAL",
           "quoteCount": 1,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [
             {
               "supplier": "Yiwu Nice Show Accessories Co., Ltd.",
@@ -5616,8 +5745,8 @@
               "note": "Public adjustable cup-holder expander listing; shipping/sample/lead time incomplete."
             }
           ],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -5648,7 +5777,7 @@
         ],
         "nextActions": [
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -5657,6 +5786,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -6628,7 +6758,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -6655,13 +6785,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -6694,7 +6828,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -6703,6 +6837,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -7676,7 +7811,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -7703,13 +7838,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -7742,7 +7881,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -7751,6 +7890,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -8724,7 +8864,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -8751,13 +8891,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -8790,7 +8934,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -8799,6 +8943,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -9772,7 +9917,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -9799,13 +9944,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -9838,7 +9987,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -9847,6 +9996,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -10820,7 +10970,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -10847,13 +10997,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -10886,7 +11040,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -10895,6 +11049,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -11862,7 +12017,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -11889,13 +12044,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -11928,7 +12087,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -11937,6 +12096,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -12904,7 +13064,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -12931,13 +13091,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -12970,7 +13134,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -12979,6 +13143,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -13946,7 +14111,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -13973,13 +14138,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -14012,7 +14181,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -14021,6 +14190,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -14988,7 +15158,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -15015,13 +15185,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -15054,7 +15228,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -15063,6 +15237,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -16030,7 +16205,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -16057,13 +16232,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -16096,7 +16275,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -16105,6 +16284,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -17072,7 +17252,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -17099,13 +17279,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -17138,7 +17322,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -17147,6 +17331,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -18110,7 +18295,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -18137,13 +18322,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -18176,7 +18365,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -18185,6 +18374,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -19148,7 +19338,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -19175,13 +19365,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -19214,7 +19408,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -19223,6 +19417,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -20186,7 +20381,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -20213,13 +20408,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -20252,7 +20451,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -20261,6 +20460,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -21224,7 +21424,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -21251,13 +21451,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -21290,7 +21494,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -21299,6 +21503,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -22262,7 +22467,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -22289,13 +22494,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -22328,7 +22537,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -22337,6 +22546,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -23300,7 +23510,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -23327,13 +23537,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -23366,7 +23580,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -23375,6 +23589,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -24338,7 +24553,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -24365,13 +24580,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -24404,7 +24623,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -24413,6 +24632,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -25376,7 +25596,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -25403,13 +25623,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -25442,7 +25666,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -25451,6 +25675,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -26414,7 +26639,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -26441,13 +26666,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -26480,7 +26709,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -26489,6 +26718,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -27452,7 +27682,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -27479,13 +27709,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -27518,7 +27752,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -27527,6 +27761,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -28490,7 +28725,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -28517,13 +28752,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -28556,7 +28795,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -28565,6 +28804,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -29528,7 +29768,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -29555,13 +29795,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -29594,7 +29838,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -29603,6 +29847,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -30566,7 +30811,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -30593,13 +30838,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -30632,7 +30881,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -30641,6 +30890,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -31604,7 +31854,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -31631,13 +31881,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -31670,7 +31924,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -31679,6 +31933,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -32642,7 +32897,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -32669,13 +32924,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -32708,7 +32967,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -32717,6 +32976,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -33680,7 +33940,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -33707,13 +33967,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -33746,7 +34010,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -33755,6 +34019,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -34718,7 +34983,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -34745,13 +35010,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -34784,7 +35053,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -34793,6 +35062,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -35756,7 +36026,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -35783,13 +36053,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -35822,7 +36096,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -35831,6 +36105,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -36794,7 +37069,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -36821,13 +37096,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -36860,7 +37139,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -36869,6 +37148,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -37832,7 +38112,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -37859,13 +38139,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -37898,7 +38182,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -37907,6 +38191,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -38870,7 +39155,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -38897,13 +39182,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -38936,7 +39225,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -38945,6 +39234,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -39908,7 +40198,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -39935,13 +40225,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -39974,7 +40268,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -39983,6 +40277,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -40946,7 +41241,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -40973,13 +41268,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -41012,7 +41311,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -41021,6 +41320,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -41984,7 +42284,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -42011,13 +42311,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -42050,7 +42354,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -42059,6 +42363,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -43022,7 +43327,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -43049,13 +43354,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -43088,7 +43397,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -43097,6 +43406,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -44060,7 +44370,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -44087,13 +44397,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -44126,7 +44440,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -44135,6 +44449,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -45098,7 +45413,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -45125,13 +45440,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -45164,7 +45483,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -45173,6 +45492,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -46136,7 +46456,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -46163,13 +46483,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -46202,7 +46526,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -46211,6 +46535,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -47174,7 +47499,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -47201,13 +47526,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -47240,7 +47569,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -47249,6 +47578,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -48212,7 +48542,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -48239,13 +48569,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -48278,7 +48612,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -48287,6 +48621,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -49250,7 +49585,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -49277,13 +49612,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -49316,7 +49655,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -49325,6 +49664,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -50288,7 +50628,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -50315,13 +50655,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -50354,7 +50698,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -50363,6 +50707,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -51326,7 +51671,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -51353,13 +51698,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -51392,7 +51741,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -51401,6 +51750,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -52364,7 +52714,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -52391,13 +52741,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -52430,7 +52784,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -52439,6 +52793,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -53402,7 +53757,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -53429,13 +53784,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -53468,7 +53827,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -53477,6 +53836,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -54440,7 +54800,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -54467,13 +54827,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -54506,7 +54870,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -54515,6 +54879,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -55478,7 +55843,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -55505,13 +55870,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -55544,7 +55913,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -55553,6 +55922,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -56516,7 +56886,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -56543,13 +56913,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -56582,7 +56956,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -56591,6 +56965,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -57554,7 +57929,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -57581,13 +57956,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -57620,7 +57999,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -57629,6 +58008,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -58592,7 +58972,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -58619,13 +58999,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -58658,7 +59042,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -58667,6 +59051,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -59630,7 +60015,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -59657,13 +60042,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -59696,7 +60085,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -59705,6 +60094,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -60668,7 +61058,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -60695,13 +61085,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -60734,7 +61128,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -60743,6 +61137,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -61706,7 +62101,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -61733,13 +62128,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -61772,7 +62171,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -61781,6 +62180,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -62744,7 +63144,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -62771,13 +63171,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -62810,7 +63214,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -62819,6 +63223,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -63782,7 +64187,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -63809,13 +64214,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -63848,7 +64257,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -63857,6 +64266,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -64798,7 +65208,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -64825,13 +65235,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -64864,7 +65278,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -64873,6 +65287,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -65814,7 +66229,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -65841,13 +66256,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -65880,7 +66299,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -65889,6 +66308,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -66830,7 +67250,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -66857,13 +67277,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -66896,7 +67320,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -66905,6 +67329,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -67846,7 +68271,7 @@
         }
       ],
       "commercialHardening": {
-        "version": "1.1",
+        "version": "1.2",
         "pricing": {
           "verified": false,
           "status": "MISSING",
@@ -67873,13 +68298,17 @@
         },
         "supplierCommercial": {
           "verified": false,
+          "pageBacked": false,
+          "supplierContactRequired": false,
           "status": "MISSING",
           "quoteCount": 0,
           "completeQuoteCount": 0,
+          "pageEvidenceCount": 0,
           "bestQuote": null,
+          "bestPageEvidence": null,
           "quotes": [],
-          "scannerListingSignals": [],
-          "policy": "Supplier is commercially verified only when a dated source-linked quote explicitly includes unit price, MOQ, shippingRon, sampleCostRon and a positive leadTimeDays. Missing numeric fields are never coerced to zero."
+          "pageEvidence": [],
+          "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
           "verified": false,
@@ -67912,7 +68341,7 @@
         "nextActions": [
           "Capture at least two dated Romanian offers from distinct domains.",
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -67921,6 +68350,7 @@
           "salesObservations": 0,
           "supplierQuotes": 0,
           "completeSupplierQuotes": 0,
+          "supplierPages": 0,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -68163,13 +68593,13 @@
     "policy": "Toate modulele gratuite folosesc doar date deja observate/derivate și nu modifică pragurile TEST/CUMPĂRĂ."
   },
   "commercialHardening": {
-    "version": "1.1",
-    "updatedAt": "2026-09-02T09:48:21.250Z",
+    "version": "1.2",
+    "updatedAt": "2026-09-06T12:49:27.348Z",
     "stats": {
       "products": 65,
       "pricingVerified": 5,
       "salesVerified": 0,
-      "supplierVerified": 0,
+      "supplierVerified": 2,
       "reviewVerified": 2,
       "fullyVerified": 0,
       "withSupplierPartial": 5,
@@ -68181,7 +68611,8 @@
       "autoCalibrationEnabled": false,
       "policy": "Weights must not auto-calibrate before at least 5 completed real commercial tests."
     },
-    "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Public provider evidence may reduce unknowns but cannot bypass TEST/BUY gates."
+    "supplierPageRegistryStatus": "READY",
+    "policy": "Commercial facts are separated from proxies. Supplier sourcing is page-backed: direct product/supplier pages may satisfy sourcing screening without outreach. Missing evidence never becomes zero. TEST/BUY still require independent landed economics and explicit purchase approval."
   },
   "intelligenceEcosystem": {
     "version": "2.5",

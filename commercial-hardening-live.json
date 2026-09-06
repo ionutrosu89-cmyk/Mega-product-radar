@@ -1,12 +1,12 @@
 {
   "version": "1.1",
-  "updatedAt": "2026-09-02T09:48:21.272Z",
+  "updatedAt": "2026-09-06T12:49:27.373Z",
   "policy": "Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.",
   "stats": {
     "products": 65,
     "pricingVerified": 5,
     "salesVerified": 0,
-    "supplierVerified": 0,
+    "supplierVerified": 2,
     "reviewVerified": 2,
     "fullyVerified": 0,
     "withSupplierPartial": 5,
@@ -22,26 +22,24 @@
     {
       "name": "Car sunglasses magnetic visor holder",
       "cat": "Auto",
-      "goldenStage": "PROMISING",
-      "readiness": 50,
+      "goldenStage": "VALIDATE",
+      "readiness": 75,
       "gates": {
         "pricingVerified": true,
         "salesVerified": false,
-        "supplierVerified": false,
+        "supplierVerified": true,
         "reviewVerified": true
       },
       "pricingStatus": "VERIFIED",
       "salesStatus": "PROXY_ONLY",
-      "supplierStatus": "QUOTE_PARTIAL",
+      "supplierStatus": "PAGE_BACKED_SCREENING_READY",
       "reviewStatus": "EVIDENCE_READY",
       "feedbackStatus": "NO_REAL_TEST",
       "missingEvidence": [
-        "salesVerified",
-        "supplierVerified"
+        "salesVerified"
       ],
       "nextActions": [
-        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts."
       ],
       "proofSummary": {
         "romaniaOffers": 3,
@@ -49,6 +47,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
+        "supplierPages": 4,
         "reviewSnippets": 6,
         "reviewSources": 2
       }
@@ -56,7 +55,7 @@
     {
       "name": "Reusable furniture moving sliders kit",
       "cat": "Casă",
-      "goldenStage": "PROMISING",
+      "goldenStage": "VALIDATE",
       "readiness": 25,
       "gates": {
         "pricingVerified": true,
@@ -76,7 +75,7 @@
       ],
       "nextActions": [
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -85,6 +84,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -92,7 +92,7 @@
     {
       "name": "Car headrest hidden hook premium",
       "cat": "Auto",
-      "goldenStage": "PROMISING",
+      "goldenStage": "VALIDATE",
       "readiness": 25,
       "gates": {
         "pricingVerified": true,
@@ -112,7 +112,7 @@
       ],
       "nextActions": [
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -121,6 +121,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -128,26 +129,24 @@
     {
       "name": "Under desk headphone hanger clamp",
       "cat": "Birou",
-      "goldenStage": "PROMISING",
-      "readiness": 50,
+      "goldenStage": "VALIDATE",
+      "readiness": 75,
       "gates": {
         "pricingVerified": true,
         "salesVerified": false,
-        "supplierVerified": false,
+        "supplierVerified": true,
         "reviewVerified": true
       },
       "pricingStatus": "VERIFIED",
       "salesStatus": "PROXY_ONLY",
-      "supplierStatus": "QUOTE_PARTIAL",
+      "supplierStatus": "PAGE_BACKED_SCREENING_READY",
       "reviewStatus": "EVIDENCE_READY",
       "feedbackStatus": "NO_REAL_TEST",
       "missingEvidence": [
-        "salesVerified",
-        "supplierVerified"
+        "salesVerified"
       ],
       "nextActions": [
-        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays."
+        "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts."
       ],
       "proofSummary": {
         "romaniaOffers": 2,
@@ -155,6 +154,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
+        "supplierPages": 1,
         "reviewSnippets": 4,
         "reviewSources": 2
       }
@@ -162,7 +162,7 @@
     {
       "name": "Car cup holder expander adjustable",
       "cat": "Auto",
-      "goldenStage": "PROMISING",
+      "goldenStage": "VALIDATE",
       "readiness": 25,
       "gates": {
         "pricingVerified": true,
@@ -182,7 +182,7 @@
       ],
       "nextActions": [
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Complete supplier quote with explicit shippingRon, sampleCostRon and leadTimeDays.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -191,6 +191,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -220,7 +221,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -229,6 +230,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -258,7 +260,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -267,6 +269,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -296,7 +299,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -305,6 +308,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -334,7 +338,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -343,6 +347,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -372,7 +377,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -381,6 +386,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -410,7 +416,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -419,6 +425,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -448,7 +455,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -457,6 +464,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -464,7 +472,7 @@
     {
       "name": "Dog car door protector set",
       "cat": "Pet",
-      "goldenStage": "DISCOVERED",
+      "goldenStage": "PROMISING",
       "readiness": 0,
       "gates": {
         "pricingVerified": false,
@@ -486,7 +494,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -495,6 +503,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -524,7 +533,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -533,6 +542,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -562,7 +572,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -571,6 +581,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -578,7 +589,7 @@
     {
       "name": "Kids reusable sticker activity book",
       "cat": "Kids 3–6 • Educațional",
-      "goldenStage": "PROMISING",
+      "goldenStage": "DISCOVERED",
       "readiness": 0,
       "gates": {
         "pricingVerified": false,
@@ -600,7 +611,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -609,6 +620,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -638,7 +650,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -647,6 +659,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -676,7 +689,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -685,6 +698,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -714,7 +728,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -723,6 +737,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -752,7 +767,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -761,6 +776,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -790,7 +806,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -799,6 +815,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -828,7 +845,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -837,6 +854,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -866,7 +884,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -875,6 +893,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -904,7 +923,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -913,6 +932,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -942,7 +962,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -951,6 +971,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -980,7 +1001,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -989,6 +1010,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1018,7 +1040,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1027,6 +1049,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1056,7 +1079,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1065,6 +1088,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1094,7 +1118,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1103,6 +1127,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1132,7 +1157,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1141,6 +1166,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1170,7 +1196,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1179,6 +1205,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1208,7 +1235,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1217,6 +1244,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1246,7 +1274,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1255,6 +1283,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1284,7 +1313,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1293,6 +1322,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1322,7 +1352,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1331,6 +1361,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1360,7 +1391,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1369,6 +1400,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1398,7 +1430,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1407,6 +1439,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1436,7 +1469,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1445,6 +1478,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1474,7 +1508,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1483,6 +1517,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1512,7 +1547,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1521,6 +1556,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1550,7 +1586,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1559,6 +1595,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1588,7 +1625,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1597,6 +1634,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1626,7 +1664,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1635,6 +1673,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1664,7 +1703,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1673,6 +1712,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1702,7 +1742,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1711,6 +1751,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1740,7 +1781,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1749,6 +1790,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1778,7 +1820,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1787,6 +1829,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1816,7 +1859,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1825,6 +1868,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1854,7 +1898,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1863,6 +1907,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1892,7 +1937,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1901,6 +1946,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1930,7 +1976,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1939,6 +1985,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -1968,7 +2015,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -1977,6 +2024,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2006,7 +2054,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2015,6 +2063,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2044,7 +2093,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2053,6 +2102,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2082,7 +2132,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2091,6 +2141,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2120,7 +2171,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2129,6 +2180,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2158,7 +2210,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2167,6 +2219,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2196,7 +2249,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2205,6 +2258,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2234,7 +2288,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2243,6 +2297,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2272,7 +2327,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2281,6 +2336,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2310,7 +2366,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2319,6 +2375,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2348,7 +2405,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2357,6 +2414,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2386,7 +2444,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2395,6 +2453,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2424,7 +2483,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2433,6 +2492,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
@@ -2462,7 +2522,7 @@
       "nextActions": [
         "Capture at least two dated Romanian offers from distinct domains.",
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a source-linked supplier quote with unit price and MOQ, then complete logistics/sample terms.",
+        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -2471,6 +2531,7 @@
         "salesObservations": 0,
         "supplierQuotes": 0,
         "completeSupplierQuotes": 0,
+        "supplierPages": 0,
         "reviewSnippets": 0,
         "reviewSources": 0
       }
