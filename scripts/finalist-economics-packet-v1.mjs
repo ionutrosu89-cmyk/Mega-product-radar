@@ -8,6 +8,7 @@ import {importCostStressV1} from '../import-cost-stress-v1.js';
 import {shipmentFixedCostStressV1} from '../shipment-fixed-cost-stress-v1.js';
 import {lclScreeningRangeV1,localChargeScopeGuardV1} from '../lcl-local-charge-guard-v1.js';
 import {conservativeLandedEnvelopeV1} from '../conservative-landed-envelope-v1.js';
+import {residualLocalCostCeilingV1} from '../residual-local-cost-ceiling-v1.js';
 import {customsDutySensitivityV1} from '../customs-duty-sensitivity-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
@@ -142,6 +143,12 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     unit:'per container',
     explicitLclAllocation:false
   }):null;
+  const worstCaseEnvelopeRow=conservativeLandedEnvelope?.rows?.find(x=>x.dutyRateScenarioPct===10&&x.vatTreatment==='NON_RECOVERABLE'&&x.sellPriceGrossRon===49.99)||null;
+  const residualLocalCostCeiling=worstCaseEnvelopeRow?residualLocalCostCeilingV1({
+    quantity:300,
+    baseEconomicLandedPerUnitRon:worstCaseEnvelopeRow.economicLandedPerUnitRon,
+    sellPriceGrossRon:49.99
+  }):null;
   const customsDutySensitivity=supplierUnitRon===null||screeningFreightPerUnit300===null?null:customsDutySensitivityV1({
     quantity:300,
     sellPriceGrossRon:49.99,
@@ -241,6 +248,7 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     fixedShipmentCostStress,
     publicLclRange,
     conservativeLandedEnvelope,
+    residualLocalCostCeiling,
     localChargeScopeGuard:fclToLclScopeGuard,
     importProcessingEvidence:importProcessingEvidence?{
       sourceFile:IMPORT_PROCESSING,
