@@ -8,6 +8,7 @@ test('commercial product detail exposes FINALIST economics without purchase auth
   assert.match(js,/finalist-economics-live\.json/);
   assert.match(js,/TVA import nerecuperabil/);
   assert.match(js,/TVA import recuperabil/);
+  assert.match(js,/screeningVerdictsByVatTreatment/);
   assert.match(js,/Brokeraj LCL public direct/);
   assert.match(js,/purchaseAuthorized=false/);
 });
