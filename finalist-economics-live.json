@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T14:52:41.683Z",
+  "updatedAt": "2026-09-06T14:53:23.648Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -662,20 +662,20 @@
         "schemaVersion": "MPR_PRICE_STRATEGY_V1",
         "status": "SCREENING_PRICE_AVAILABLE",
         "primaryPrice": {
-          "sellPriceGrossRon": 67.9,
-          "observedMarketPrice": true,
-          "marketRangeScenario": false,
+          "sellPriceGrossRon": 49.99,
+          "observedMarketPrice": false,
+          "marketRangeScenario": true,
           "insideObservedMarketRange": true,
           "stretchScenario": false,
           "goodsOnlyEligible": true,
-          "maxAdditionalLandedHeadroomRon": 2238.02,
+          "maxAdditionalLandedHeadroomRon": 546.02,
           "allocatedFreightTotalRon": 21.71,
-          "remainingImportCostAllowanceRon": 2216.31,
-          "remainingImportCostAllowancePerUnitRon": 7.39,
+          "remainingImportCostAllowanceRon": 524.31,
+          "remainingImportCostAllowancePerUnitRon": 1.75,
           "status": "SCREENING_CANDIDATE",
-          "robustness": "HEALTHY_SCREENING_BUFFER"
+          "robustness": "HEALTHY_MARKET_RANGE_SCREENING_BUFFER"
         },
-        "recommendedEvidenceClass": "EXACT_OBSERVED_MARKET_PRICE",
+        "recommendedEvidenceClass": "MARKET_RANGE_SCENARIO_NOT_EXACT_OFFER",
         "observedMarketRange": {
           "minRon": 19.04,
           "maxRon": 67.9
@@ -795,7 +795,7 @@
           }
         ],
         "purchaseAuthorized": false,
-        "policy": "Prefer a healthy exact observed price. If exact observed prices are too tight, a price inside the current high-match observed market range may be used as a screening scenario, explicitly marked as not an exact observed offer. Prices outside the observed range remain stretch scenarios."
+        "policy": "Choose the lowest commercially robust price supported by the current observed market range. Exact observed offers have stronger evidence, but a lower in-range screening price may be preferred when it materially improves competitiveness while preserving robustness. Prices outside the observed range remain stretch scenarios."
       },
       "importCostStress": {
         "schemaVersion": "MPR_IMPORT_COST_STRESS_V1",
