@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "MPR_FREIGHT_MODE_VIABILITY_V1",
+  "generatedAt": "2026-09-06T15:38:00+03:00",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "market": "RO",
+  "conservativeSupplierUnitPriceUsd": 0.75,
+  "priceScenarios": [
+    {
+      "sellPriceGrossRon": 44.74,
+      "quantities": [
+        {
+          "quantity": 30,
+          "freightCeilingRon": 51.9,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "REJECT_MINIMUM_CHARGE",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 50,
+          "freightCeilingRon": 86.5,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "REJECT_MINIMUM_CHARGE",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 100,
+          "freightCeilingRon": 173,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "REJECT_MINIMUM_CHARGE",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 300,
+          "freightCeilingRon": 519,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "POTENTIALLY_FEASIBLE_BEFORE_LOCAL_FEES",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        }
+      ]
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "quantities": [
+        {
+          "quantity": 30,
+          "freightCeilingRon": 106.8,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "REJECT_MINIMUM_CHARGE",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 50,
+          "freightCeilingRon": 178,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "REJECT_MINIMUM_CHARGE",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 100,
+          "freightCeilingRon": 356,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "VERY_TIGHT_HEADROOM_BEFORE_LOCAL_FEES",
+          "railLcl": "REJECT_MINIMUM_CHARGE"
+        },
+        {
+          "quantity": 300,
+          "freightCeilingRon": 1068,
+          "airCargo": "REJECT_MINIMUM_CHARGE",
+          "seaLcl": "POTENTIALLY_FEASIBLE_BEFORE_LOCAL_FEES",
+          "railLcl": "VERY_TIGHT_HEADROOM_BEFORE_LOCAL_FEES"
+        }
+      ]
+    }
+  ],
+  "knownMinimumsRon": {
+    "airCargo45Kg": 1845,
+    "seaLcl1Cbm": 348.03,
+    "railLcl1Cbm": 1039.58
+  },
+  "recommendedScreeningFocus": "SEA_LCL_AT_300PCS",
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "A freight mode is safely rejected when its published minimum charge already exceeds the theoretical freight ceiling. Potentially feasible means only that the minimum freight floor fits; customs, destination handling, brokerage and delivery still need evidence."
+}
