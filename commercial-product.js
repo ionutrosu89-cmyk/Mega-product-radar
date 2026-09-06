@@ -22,13 +22,16 @@ function finalistEconomicsCard(packet){
   const vatNon=packet?.residualLocalCostCeilingsByVatTreatment?.NON_RECOVERABLE;
   const vatRec=packet?.residualLocalCostCeilingsByVatTreatment?.RECOVERABLE;
   const gate=packet?.testGate;
+  const verdictByVat=packet?.screeningVerdictsByVatTreatment||{};
   const broker=packet?.customsRepresentationHeadroom;
   const blockers=Array.isArray(gate?.blockers)?gate.blockers:[];
   return `<section class="card"><h2 class="section-title">FINALIST Economics</h2>
     ${row('Verdict screening',verdict?.verdict||'UNKNOWN')}
     ${row('Preț screening',price?.sellPriceGrossRon!=null?`${Number(price.sellPriceGrossRon).toFixed(2)} RON`:'UNKNOWN')}
     ${row('Poziție în piață',price?.insideObservedMarketRange===true?'ÎN INTERVALUL OBSERVAT':'NECONFIRMATĂ')}
+    ${row('TVA import nerecuperabil · verdict',verdictByVat?.NON_RECOVERABLE?.verdict||verdict?.verdict||'UNKNOWN')}
     ${row('TVA import nerecuperabil · buffer local',vatNon?.maxAdditionalLocalImportCostPerUnitRon!=null?`${Number(vatNon.maxAdditionalLocalImportCostPerUnitRon).toFixed(2)} RON/buc. · ${Number(vatNon.maxAdditionalLocalImportCostTotalRon||0).toFixed(0)} RON total`:'UNKNOWN')}
+    ${row('TVA import recuperabil · verdict',verdictByVat?.RECOVERABLE?.verdict||'UNKNOWN')}
     ${row('TVA import recuperabil · buffer local',vatRec?.maxAdditionalLocalImportCostPerUnitRon!=null?`${Number(vatRec.maxAdditionalLocalImportCostPerUnitRon).toFixed(2)} RON/buc. · ${Number(vatRec.maxAdditionalLocalImportCostTotalRon||0).toFixed(0)} RON total`:'UNKNOWN')}
     ${row('Brokeraj LCL public direct',broker?.directSeaLclBenchmarkAvailable?'DA':'NU · rămâne UNKNOWN')}
     ${row('TEST gate',gate?.status||'UNKNOWN')}
