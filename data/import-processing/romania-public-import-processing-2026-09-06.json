@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "MPR_ROMANIA_IMPORT_PROCESSING_PUBLIC_V1",
+  "observedAt": "2026-09-06T17:40:00+03:00",
+  "market": "RO",
+  "carrier": "DHL Express",
+  "sourceClass": "OFFICIAL_CARRIER_PUBLISHED_FEES",
+  "effectiveFrom": "2026-01-01",
+  "fees": [
+    {
+      "id": "DHL_DUTY_TAX_PROCESSING_ACCOUNT",
+      "label": "Procesare taxe vamale - titulari de cont",
+      "amountRon": 77,
+      "percentageOfDutyTax": 2,
+      "chargingRule": "MAX_FIXED_OR_PERCENT",
+      "per": "SHIPMENT",
+      "sourceUrl": "https://www.dhl.com/ro-ro/home/express/products-and-solutions/products-and-services-overview/customs-services.html"
+    },
+    {
+      "id": "DHL_DUTY_TAX_PROCESSING_NON_ACCOUNT",
+      "label": "Procesare taxe vamale - destinatari fara cont",
+      "amountRon": 59,
+      "percentageOfDutyTax": 2,
+      "chargingRule": "MAX_FIXED_OR_PERCENT",
+      "per": "SHIPMENT",
+      "sourceUrl": "https://www.dhl.com/ro-ro/home/express/products-and-solutions/products-and-services-overview/customs-services.html"
+    }
+  ],
+  "lowValueCommercialImportRule2026": {
+    "effectiveFrom": "2026-07-01",
+    "commercialImportsDutyApplicableRegardlessOfValue": true,
+    "b2bUnder150SimplifiedDeclarationUnavailable": true,
+    "importVatStillApplies": true,
+    "sourceUrl": "https://www.dhl.com/ro-ro/home/informatii-importante/2026/new-customs-rules.html"
+  },
+  "lclLocalCharges": {
+    "status": "UNKNOWN_NOT_PUBLICLY_COMPLETE",
+    "note": "No complete public Romania LCL destination CFS/documentation/brokerage/local-delivery schedule found that can safely be treated as fully-loaded landed-cost evidence."
+  },
+  "policy": "DHL Express processing fees are carrier-specific and must not be reused as LCL maritime local charges. Unknown LCL local charges remain UNKNOWN, never zero."
+}
