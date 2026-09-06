@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "MPR_LCL_PUBLIC_RANGE_EVIDENCE_V1",
+  "observedAt": "2026-09-06T17:47:00+03:00",
+  "lane": "China-Romania",
+  "destination": "Constanta/Bucharest",
+  "sources": [
+    {
+      "source": "UpFreights",
+      "observedPeriod": "2026-06",
+      "sourceUrl": "https://upfreights.com/shipping-china-to-romania",
+      "sourceClass": "PUBLIC_FORWARDER_CURRENT_INDICATIVE",
+      "lclSeaFreightUsdPerCbmMin": 40,
+      "lclSeaFreightUsdPerCbmMax": 95,
+      "includesCustomsClearanceFee": false,
+      "includesDuty": false,
+      "includesImportVat": false,
+      "notes": "Current 2026 indicative LCL sea-freight range only."
+    },
+    {
+      "source": "Dantful",
+      "observedPeriod": "2025-06",
+      "sourceUrl": "https://www.dantful.com/shipping-rates-from-china-to-romania/",
+      "sourceClass": "PUBLIC_FORWARDER_HISTORICAL_INDICATIVE",
+      "oneCbmScenario": {
+        "freightUsd": 85,
+        "originDestinationChargesUsd": 120,
+        "insuranceUsd": 10,
+        "totalBeforeDutyVatUsd": 215
+      },
+      "includesDuty": false,
+      "includesImportVat": false,
+      "notes": "Historical 1-CBM worked example; retained as secondary benchmark only."
+    }
+  ],
+  "officialRomaniaContainerChargeContext": {
+    "source": "Hapag-Lloyd Romania",
+    "sourceUrl": "https://www.hapag-lloyd.com/content/dam/website/downloads/pdf/Romania_Local_Charge_Service_fees_JUL26.pdf",
+    "effectiveDate": "2026-05-20",
+    "importDry20ft": {
+      "terminalHandlingEur": 140,
+      "portChargeDestinationEur": 235,
+      "equipmentInterchangeReceiptEur": 80,
+      "inspectionFeeDestinationEur": 25
+    },
+    "scope": "CONTAINER_FCL_CONTEXT_ONLY",
+    "usableForLclAllocation": false,
+    "reason": "Published charges are per container/BX and do not establish the consolidator's LCL deconsolidation allocation to one house shipment."
+  },
+  "lclFullyLoadedStatus": "UNKNOWN",
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "Use forwarder figures only as screening ranges. Official per-container/FCL local charges must never be allocated directly to an LCL SKU unless the consolidator's allocation rule is explicitly evidenced. Customs duty, VAT, brokerage and final delivery remain separate."
+}
