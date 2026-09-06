@@ -21,7 +21,10 @@ for(const file of files){
     const priceMin=finite(x?.observedPriceMinUsd)?Number(x.observedPriceMinUsd):null;
     const priceMax=finite(x?.observedPriceMaxUsd)?Number(x.observedPriceMaxUsd):null;
     const moq=finite(x?.observedMoq)?Number(x.observedMoq):null;
-    const pageBacked=directUrl(x?.sourceUrl)&&text(x?.supplierName)&&text(x?.productTitle)&&(priceMin!==null||priceMax!==null)&&moq>0&&String(x?.productMatch||'').toUpperCase()==='HIGH';
+    const sourceType=String(x?.sourceType||'').toUpperCase();
+    const directProductPage=sourceType==='DIRECT_PUBLIC_PRODUCT_PAGE'||/\/pla\//i.test(text(x?.sourceUrl))||/product[_\/-]?id[=/]/i.test(text(x?.sourceUrl));
+    const supplierPage=sourceType==='DIRECT_SUPPLIER_PAGE'||Boolean(text(x?.supplierProfileUrl));
+    const pageBacked=(directProductPage||supplierPage)&&directUrl(x?.sourceUrl)&&text(x?.supplierName)&&text(x?.productTitle)&&(priceMin!==null||priceMax!==null)&&moq>0&&String(x?.productMatch||'').toUpperCase()==='HIGH';
     return {
       rank:index+1,
       supplierName:text(x?.supplierName)||null,
@@ -41,7 +44,10 @@ for(const file of files){
       productDimensions:x?.productDimensions??null,
       pageBackedScreeningReady:pageBacked,
       supplierContactRequired:false,
-      evidenceClass:pageBacked?'DIRECT_OBSERVED':'UNKNOWN'
+      sourceType:String(x?.sourceType||'').toUpperCase()||null,
+      directProductPage,
+      supplierPage,
+      evidenceClass:pageBacked?'DIRECT_OBSERVED':'DISCOVERY_ONLY'
     };
   });
   products.push({
@@ -66,7 +72,7 @@ const out={
   },
   supplierOutreachEnabled:false,
   purchaseAuthorized:false,
-  policy:'Page-backed sourcing only. Public product/supplier page data may feed conservative screening. Missing fields remain UNKNOWN. No supplier outreach is required.'
+  policy:'Page-backed sourcing only. Only direct product pages or direct supplier pages may satisfy sourcing screening. Wholesale/search/category result pages are discovery-only. Missing fields remain UNKNOWN. No supplier outreach is required.'
 };
 await fs.writeFile(OUT,JSON.stringify(out,null,2)+'\n');
 console.log(`Supplier page evidence: ${out.stats.pageBackedReady}/${out.stats.products} products page-backed ready.`);
