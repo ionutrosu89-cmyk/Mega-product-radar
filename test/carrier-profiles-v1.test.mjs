@@ -9,7 +9,7 @@ test('Romania carrier profiles expose official dimensional divisor references',(
     assert.equal(p.market,'RO');
     assert.equal(p.volumetricDivisorCm3PerKg,5000);
     assert.equal(p.sourceClass,'OFFICIAL_CARRIER');
-    assert.match(p.sourceUrl,/^https:///);
+    assert.match(p.sourceUrl,/^https:\/\//);
   }
 });
 
