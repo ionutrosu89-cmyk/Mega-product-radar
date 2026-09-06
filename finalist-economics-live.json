@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T13:28:57.593Z",
+  "updatedAt": "2026-09-06T13:31:41.689Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -654,7 +654,8 @@
           "allocatedFreightTotalRon": 21.71,
           "remainingImportCostAllowanceRon": 29.31,
           "remainingImportCostAllowancePerUnitRon": 0.1,
-          "status": "SCREENING_CANDIDATE"
+          "status": "SCREENING_CANDIDATE",
+          "robustness": "VERY_TIGHT_UNKNOWN_COST_BUFFER"
         },
         "scenarios": [
           {
@@ -666,7 +667,8 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": null,
             "remainingImportCostAllowancePerUnitRon": null,
-            "status": "REJECT_PRICE_BEFORE_FREIGHT"
+            "status": "REJECT_PRICE_BEFORE_FREIGHT",
+            "robustness": "NOT_APPLICABLE"
           },
           {
             "sellPriceGrossRon": 39,
@@ -677,7 +679,8 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": -510.69,
             "remainingImportCostAllowancePerUnitRon": -1.7,
-            "status": "REJECT_PRICE_BEFORE_FREIGHT"
+            "status": "REJECT_PRICE_BEFORE_FREIGHT",
+            "robustness": "NOT_APPLICABLE"
           },
           {
             "sellPriceGrossRon": 44.74,
@@ -688,7 +691,8 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": 29.31,
             "remainingImportCostAllowancePerUnitRon": 0.1,
-            "status": "SCREENING_CANDIDATE"
+            "status": "SCREENING_CANDIDATE",
+            "robustness": "VERY_TIGHT_UNKNOWN_COST_BUFFER"
           },
           {
             "sellPriceGrossRon": 49.99,
@@ -699,11 +703,12 @@
             "allocatedFreightTotalRon": 21.71,
             "remainingImportCostAllowanceRon": 524.31,
             "remainingImportCostAllowancePerUnitRon": 1.75,
-            "status": "SCREENING_CANDIDATE"
+            "status": "SCREENING_CANDIDATE",
+            "robustness": "STRETCH_PRICE_REQUIRES_MARKET_VALIDATION"
           }
         ],
         "purchaseAuthorized": false,
-        "policy": "Prefer a verified observed-market price that leaves positive landed-cost allowance. Stretch prices are scenario-only and never become recommended prices without market evidence."
+        "policy": "Prefer verified observed-market prices, but expose robustness separately. A mathematically positive price with a very small unknown-import-cost buffer is not commercially robust. Stretch prices remain scenario-only until market evidence exists."
       },
       "customsClassification": {
         "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
