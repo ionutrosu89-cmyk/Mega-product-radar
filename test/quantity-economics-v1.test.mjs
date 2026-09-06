@@ -15,7 +15,7 @@ const base={
   {quantity:100,totalFreightRon:300,verified:true,evidenceRef:'f100'},
   {quantity:300,totalFreightRon:600,verified:true,evidenceRef:'f300'}
  ],
- customsDutyRate:.05,importVatRate:.21,importVatRecoverable:true,sellPriceGrossRon:49.99
+ customsDutyRate:.05,importVatRate:.21,importVatRecoverable:true,sellPriceGrossRon:79.99
 };
 
 test('calculates 30 50 100 300 scenarios and recommends lowest-capital passing lot',()=>{
