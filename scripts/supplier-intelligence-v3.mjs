@@ -18,10 +18,10 @@ function caseFor(p){
     title:p.title,
     category:p.category||null,
     goldenRank:p.goldenRank??null,
-    status:'AWAITING_REAL_QUOTES',
+    status:'READY_FOR_SUPPLIER_PAGE_SCREENING',
     targetOfferCount:5,
     minimumComparableOffers:3,
-    evidencePolicy:'Only direct supplier evidence and manually verified commercial terms may advance this case. Search pages, estimates and inferred values never count as a verified quote.',
+    evidencePolicy:'Exact supplier product-page data may be used for screening and estimated landed economics without waiting for a supplier reply. It never becomes a verified quote and cannot satisfy the strict Supplier Gate.',
     requiredFields:[
       'supplier_name','platform','direct_source_url','unit_price','currency','moq','sample_cost','lead_time_days','incoterm','shipping_quote_or_terms_to_romania','certifications_or_compliance_docs_when_applicable','quoted_at','manual_verification_at'
     ],
@@ -38,6 +38,10 @@ function caseFor(p){
       'quote not manually verified'
     ],
     landedCostEligible:false,
+    pageBackedScreeningEligible:true,
+    pageEvidenceClass:'SUPPLIER_PAGE_OBSERVED',
+    commercialConfirmationRequiredForScreening:false,
+    commercialApprovalRequiredBeforeSampleOrOrder:true,
     testGateEligible:false,
     buyGateEligible:false
   };
@@ -45,14 +49,14 @@ function caseFor(p){
 
 const cases=authorized.map(caseFor);
 const out={
-  version:'3.0',
+  version:'3.1',
   updatedAt:now,
   source:'FINALIST_EVIDENCE_QUEUE',
-  status:cases.length?'READY_FOR_REAL_SUPPLIER_COLLECTION':'BLOCKED_NO_AUTHORIZED_FINALIST',
+  status:cases.length?'READY_FOR_PAGE_BACKED_SUPPLIER_SCREENING':'BLOCKED_NO_AUTHORIZED_FINALIST',
   stats:{queueCandidates:candidates.length,authorizedProducts:authorized.length,openSupplierCases:cases.length,targetOffers:cases.reduce((s,x)=>s+x.targetOfferCount,0)},
   cases,
-  nextAction:cases.length?`Collect 3–5 real comparable supplier quotes for ${cases[0].title}; do not calculate confirmed landed cost until at least one complete quote is manually verified.`:'Do not start supplier sourcing yet. Wait for a VALIDATE product with Romania demand ready and sales confidence >=75.',
-  policy:'Supplier Intelligence V3 never fabricates suppliers, quotes, certifications, shipping or landed cost. It cannot promote TEST or BUY. Confirmed landed cost remains blocked until a complete real supplier quote is manually verified.'
+  nextAction:cases.length?`Capture exact supplier-page evidence for ${cases[0].title} and continue screening. Direct supplier confirmation is required only for the strict Supplier Gate or a real commercial action.`:'Do not start supplier sourcing yet. Wait for a VALIDATE product with Romania demand ready and sales confidence >=75.',
+  policy:'Supplier Intelligence V3.1 never fabricates suppliers, quotes, certifications, shipping or landed cost. Exact supplier-page data can support labelled screening estimates, but it never promotes itself into a verified quote, TEST or BUY. Any sample, negotiation, order or purchase requires explicit user approval.'
 };
 
 await fs.writeFile(OUT,JSON.stringify(out,null,2)+'\n');
