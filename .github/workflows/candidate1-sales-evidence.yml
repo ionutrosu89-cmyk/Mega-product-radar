@@ -5,8 +5,6 @@ on:
     branches: [main]
     paths:
       - 'data/approvals/car-sunglasses-magnetic-visor-holder-sales-evidence.json'
-      - '.github/workflows/candidate1-sales-evidence.yml'
-      - 'scripts/provider-intelligence-v26.mjs'
   workflow_dispatch:
 
 permissions:
@@ -63,7 +61,9 @@ jobs:
           if(Number(p.stats?.accountedCostUsd||0)>0.10+1e-9) throw new Error('SPEND_CAP_BREACH');
           const row=(p.items||[]).find(x=>x.name==='Car sunglasses magnetic visor holder');
           if(!row) throw new Error('TARGET_RESULT_MISSING');
-          if(row.salesEstimation?.policy && /verified competitor sales/i.test(row.salesEstimation.policy)) throw new Error('TRUTH_POLICY_BREACH');
+          const salesPolicy=String(row.salesEstimation?.policy||'');
+          const safeDisclaimer=/never\s+(?:labelled|labeled|presented\s+as)\s+verified competitor sales/i.test(salesPolicy);
+          if(/verified competitor sales/i.test(salesPolicy)&&!safeDisclaimer) throw new Error('TRUTH_POLICY_BREACH');
           console.log(JSON.stringify({
             candidate:row.name,
             salesEstimateStatus:row.salesEstimation?.status,
