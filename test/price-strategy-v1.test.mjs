@@ -16,3 +16,21 @@ test('price that fails before freight is rejected',()=>{
  const r=priceStrategyV1({quantity:300,goodsCostPerUnitRon:3.3899,observedPricesRon:[39],allocatedFreightTotalRon:0});
  assert.equal(r.scenarios[0].status,'REJECT_PRICE_BEFORE_FREIGHT');
 });
+
+
+test('chooses the lowest robust in-range price instead of jumping to the highest observed comparable',()=>{
+ const r=priceStrategyV1({
+   quantity:300,
+   goodsCostPerUnitRon:3.3899,
+   observedPricesRon:[19.04,35.99,39.37,44.74,67.90],
+   allocatedFreightTotalRon:21.71,
+   stretchPricesRon:[49.99],
+   marketRangeMinRon:19.04,
+   marketRangeMaxRon:67.90
+ });
+ assert.equal(r.status,'SCREENING_PRICE_AVAILABLE');
+ assert.equal(r.primaryPrice.sellPriceGrossRon,49.99);
+ assert.equal(r.primaryPrice.marketRangeScenario,true);
+ assert.equal(r.recommendedEvidenceClass,'MARKET_RANGE_SCENARIO_NOT_EXACT_OFFER');
+ assert.equal(r.primaryPrice.robustness,'HEALTHY_MARKET_RANGE_SCREENING_BUFFER');
+});
