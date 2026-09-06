@@ -50,5 +50,46 @@
   ],
   "supplierContactRequired": false,
   "purchaseAuthorized": false,
-  "policy": "Research headings are never converted into CN/TARIC codes or duty rates without sufficient official classification evidence. Unknown customs duty never becomes zero."
+  "policy": "Research headings and duty scenarios are not tariff classification. Exact CN/TARIC and applicable duty remain UNKNOWN until sufficient official classification evidence exists. The 10% scenario is an adverse stress case only.",
+  "updatedAt": "2026-09-06T17:47:00+03:00",
+  "researchEvidence": [
+    {
+      "heading": "4202",
+      "confidence": "MEDIUM_HIGH_RESEARCH_ONLY",
+      "evidence": [
+        {
+          "description": "High-match leather/suede car visor sunglasses holder",
+          "reportedHsCode": "4202920000",
+          "sourceUrl": "https://www.made-in-china.com/showroom/livenluo/product-detailgfLUkdxVazWc/China-Car-Accessories-Universal-Sun-Visor-Storage-Bracket-Glasses-Clip-Organizer-Car-Sunglasses-Holder.html"
+        },
+        {
+          "description": "High-match magnetic leather visor sunglasses holder",
+          "reportedHsCode": "420221009",
+          "sourceUrl": "https://freshdi.com/product/Car-Sunshade-Double-Clip-Sunglasses-Holder-Magnetic-Leather-Glasses-Eyeglass-Hanger-Clip"
+        }
+      ],
+      "euResearchDutyScenarioPct": 3,
+      "dutyScenarioSource": "https://www.tarifflexicon.com/cn/42023100",
+      "classificationApplied": false
+    },
+    {
+      "heading": "3926",
+      "confidence": "MEDIUM_RESEARCH_ONLY",
+      "evidence": [
+        {
+          "description": "Plastic car visor sunglasses holder",
+          "reportedHsCode": "3926909090",
+          "sourceUrl": "https://ezfocus2.en.made-in-china.com/product/KdTawOCBkYAu/China-Universal-Car-Visor-Sunglasses-Holder-Eyeglasses-Mount-with-Ticket-Card-Clip-Bl12900.html"
+        }
+      ],
+      "euResearchDutyScenarioPct": 6.5,
+      "dutyScenarioSource": "https://www.tariffs.help/codes/39269097/",
+      "classificationApplied": false
+    }
+  ],
+  "dutySensitivityScenariosPct": [
+    3,
+    6.5,
+    10
+  ]
 }
