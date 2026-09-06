@@ -1,7 +1,7 @@
 import {getSupabaseClient,getCurrentSession} from './supabase-client.js';
 import {ensurePersonalWorkspace} from './workspace-client.js';
 
-export const DEFAULT_SELLER_PREFERENCES=Object.freeze({experience_level:'BEGINNER',monthly_budget_ron:3000,categories:[],marketplaces:['EMAG_RO'],sourcing_preference:'CHINA',risk_profile:'BALANCED',goal:'FIND_PRODUCTS',onboarding_completed:false});
+export const DEFAULT_SELLER_PREFERENCES=Object.freeze({experience_level:'BEGINNER',monthly_budget_ron:3000,categories:[],marketplaces:['EMAG_RO'],sourcing_preference:'CHINA',risk_profile:'BALANCED',goal:'FIND_PRODUCTS',import_vat_treatment:'UNKNOWN',onboarding_completed:false});
 
 export async function loadSellerPreferences(){
   const session=await getCurrentSession();
@@ -27,6 +27,7 @@ export async function saveSellerPreferences(input={}){
     sourcing_preference:String(input.sourcing_preference||'CHINA'),
     risk_profile:String(input.risk_profile||'BALANCED'),
     goal:String(input.goal||'FIND_PRODUCTS'),
+    import_vat_treatment:['RECOVERABLE','NON_RECOVERABLE'].includes(String(input.import_vat_treatment||'').toUpperCase())?String(input.import_vat_treatment).toUpperCase():'UNKNOWN',
     onboarding_completed:true,
     updated_at:new Date().toISOString()
   };
