@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Optimizer loturi MPR</title>
+<link rel="stylesheet" href="premium-ui.css">
+<style>
+body{padding-bottom:70px}.wrap,main{max-width:1180px;margin:auto;padding:14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card,.toolbar,.result{padding:14px;border:1px solid #d0d5dd;border-radius:12px;margin:10px 0}.formgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}input{width:100%;min-height:40px;border:1px solid #d0d5dd;border-radius:8px;padding:8px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:8px;border-bottom:1px solid #e5e7eb;text-align:right}.table th:first-child,.table td:first-child{text-align:left}.ok{color:#067647}.warn{color:#b54708}@media(max-width:850px){.grid,.formgrid{grid-template-columns:1fr 1fr}.table{font-size:12px}}@media(max-width:560px){.grid,.formgrid{grid-template-columns:1fr}.table{display:block;overflow:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">ECONOMICS • ROMÂNIA</div><h1>Optimizer loturi <span>30 / 50 / 100 / 300</span></h1><p>Compară capitalul, landed cost-ul, profitul, marja și ROI-ul fără a transforma valori lipsă în zero.</p><nav><a href="landed-cost.html">Cost import</a> · <a href="purchase-manager.html">Achiziții</a> · <a href="index.html">Centru de comandă</a></nav></div></header>
+<main>
+<section class="toolbar">
+<div class="formgrid">
+<label>Preț vânzare brut RON<input id="sell" type="number" step="0.01"></label>
+<label>Taxă vamală %<input id="duty" type="number" step="0.01"></label>
+<label>TVA import %<input id="vat" type="number" value="21" step="0.1"></label>
+<label><input id="vatRecoverable" type="checkbox"> TVA import recuperabil</label>
+<label>Comision marketplace %<input id="marketplace" type="number" value="17" step="0.1"></label>
+<label>Ads %<input id="ads" type="number" value="8" step="0.1"></label>
+<label>Retururi %<input id="returns" type="number" value="4" step="0.1"></label>
+<label>Fulfillment/buc. RON<input id="fulfillment" type="number" value="6" step="0.01"></label>
+</div>
+</section>
+<section class="grid" id="lots"></section>
+<section class="result"><button id="calculate">Calculează scenariile</button><div id="summary"></div><div style="overflow:auto"><table class="table"><thead><tr><th>Lot</th><th>Cost furnizor/buc.</th><th>Transport/buc.</th><th>Landed/buc.</th><th>Cash necesar</th><th>Profit/buc.</th><th>Marjă</th><th>ROI</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<p class="warn"><b>Fail closed:</b> fiecare lot are nevoie de preț furnizor și transport verificat. Taxa vamală trebuie să provină din clasificarea HS/CN/TARIC; MPR nu o ghicește. Acest optimizer nu autorizează nicio comandă.</p>
+</main>
+<script type="module" src="quantity-optimizer.js"></script>
+</body></html>
