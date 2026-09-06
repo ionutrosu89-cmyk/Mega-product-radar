@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "MPR_PRODUCT_SCREENING_LOWER_BOUND_V1",
+  "generatedAt": "2026-09-06T15:38:00+03:00",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "market": "RO",
+  "quantity": 30,
+  "supplierEvidence": {
+    "supplier": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+    "directProductUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
+    "publicPriceUsdRange": [
+      0.64,
+      0.75
+    ],
+    "conservativeUnitPriceUsd": 0.75,
+    "publicMoq": 2,
+    "evidenceClass": "DIRECT_OBSERVED"
+  },
+  "salePriceEvidence": {
+    "selectedGrossSellPriceRon": 39,
+    "basis": "MEDIAN_OF_3_EXISTING_ROMANIA_PUBLIC_OFFERS",
+    "observedOffersRon": [
+      10.5,
+      39,
+      44.74
+    ],
+    "policy": "Existing MPR Romania pricing evidence; median used for screening. This is not a guaranteed realized selling price."
+  },
+  "fxEvidence": {
+    "usdRon": 4.5199,
+    "referenceDate": "2026-09-04",
+    "source": "ECB cross-rate EUR/RON ÷ EUR/USD",
+    "sourceUrl": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+  },
+  "carrierFloors": [
+    {
+      "carrier": "FedEx",
+      "service": "International Economy",
+      "knownFreightFloorRon": 703.66,
+      "floorIncludes": "published base list rate + known fixed import processing fee",
+      "excludedUnknownPositiveCosts": [
+        "fuel surcharge",
+        "other applicable carrier surcharges",
+        "customs/brokerage",
+        "duty",
+        "import VAT if non-recoverable",
+        "local delivery"
+      ],
+      "decision": "REJECT_TRANSPORT_METHOD_AT_CURRENT_PRICE",
+      "reason": "Even before adding excluded positive costs, seller economics are negative at the current median Romania selling price."
+    },
+    {
+      "carrier": "UPS",
+      "service": "Express Saver",
+      "knownBaseRateEur": 226.3,
+      "eurRon": 5.253,
+      "knownFreightFloorRon": 1188.1539,
+      "excludedUnknownPositiveCosts": [
+        "weekly fuel surcharge",
+        "other applicable carrier surcharges",
+        "customs/brokerage",
+        "duty",
+        "import VAT if non-recoverable",
+        "local delivery"
+      ],
+      "decision": "REJECT_TRANSPORT_METHOD_AT_CURRENT_PRICE",
+      "reason": "Even before adding excluded positive costs, seller economics are negative at the current median Romania selling price."
+    },
+    {
+      "carrier": "DHL Express",
+      "service": "Time Definite International / Import",
+      "knownFreightFloorRon": null,
+      "decision": "UNKNOWN_NO_BASE_RATE",
+      "reason": "Current fuel surcharge is known but no public/live base transport rate was found for this shipment."
+    }
+  ],
+  "overallStatus": "EXPRESS_PUBLIC_LIST_RATES_NOT_ECONOMIC_FOR_30PCS_AT_39_RON",
+  "nextAutonomousAction": "Search for lower-cost public carrier/forwarder or non-express air/rail/sea pricing that can be evaluated without supplier contact.",
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false
+}
