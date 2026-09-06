@@ -1,15 +1,17 @@
 {
-  "version": "3.0",
-  "updatedAt": "2026-09-06T11:47:27.918Z",
+  "version": "3.1",
+  "updatedAt": "2026-09-06T14:45:00+03:00",
   "source": "FINALIST_EVIDENCE_QUEUE",
-  "status": "BLOCKED_NO_AUTHORIZED_FINALIST",
+  "status": "PAGE_BACKED_POLICY_ACTIVE",
   "stats": {
     "queueCandidates": 3,
     "authorizedProducts": 0,
     "openSupplierCases": 0,
-    "targetOffers": 0
+    "targetOffers": 0,
+    "supplierOutreachEnabled": false,
+    "pageBackedSourcing": true
   },
   "cases": [],
-  "nextAction": "Do not start supplier sourcing yet. Wait for a VALIDATE product with Romania demand ready and sales confidence >=75.",
-  "policy": "Supplier Intelligence V3 is page-backed only: no supplier outreach. It never fabricates suppliers, prices, specifications, shipping or landed cost. Public page values may feed conservative screening economics; confirmed TEST/BUY remains governed by independent landed-cost and approval gates."
+  "nextAction": "Use direct product pages and supplier pages for sourcing evidence. Do not contact suppliers. Missing public fields remain UNKNOWN.",
+  "policy": "Supplier Intelligence is page-backed only. No supplier outreach is required for standard sourcing data. Public price/MOQ/specifications and supplier profile data may support conservative screening; missing fields remain UNKNOWN. TEST/BUY still require independent landed economics and explicit approval for any sample/order."
 }
