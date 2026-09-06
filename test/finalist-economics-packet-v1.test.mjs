@@ -19,6 +19,12 @@ test('FINALIST economics packet preserves no-contact and landed-cost gates',asyn
  assert.equal(x.salesEstimate.verifiedCompetitorSales,false);
  assert.ok(x.blockers.includes('EXACT_CN_TARIC_CLASSIFICATION_REQUIRED'));
  assert.ok(x.blockers.includes('CONFIRMED_LANDED_COST_REQUIRED'));
+ assert.ok(x.screeningVerdict);
+ assert.equal(x.screeningVerdict.testReady,false);
+ assert.ok(x.residualLocalCostCeilingsByVatTreatment?.NON_RECOVERABLE);
+ assert.ok(x.residualLocalCostCeilingsByVatTreatment?.RECOVERABLE);
+ assert.ok(x.customsRepresentationHeadroom);
+ assert.equal(x.customsRepresentationHeadroom.directSeaLclConclusion,'UNKNOWN_NO_DIRECT_LCL_BENCHMARK');
  assert.equal(x.testReady,false);
  assert.equal(x.purchaseAuthorized,false);
 });
