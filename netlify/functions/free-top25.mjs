@@ -17,7 +17,7 @@ async function readBundledJson(filename){
   for(const file of candidates){try{return JSON.parse(await readFile(file,'utf8'));}catch(error){lastError=error;}}
   throw lastError||new Error(`Bundled source unavailable: ${filename}`);
 }
-async function loadSource(fetchImpl,requestUrl,filename){
+export async function loadFreeTop25Source(fetchImpl,requestUrl,filename){
   const url=new URL(`/${filename}`,requestUrl);
   try{return {data:await fetchJson(fetchImpl,url),via:'HTTP'};}catch(httpError){
     try{return {data:await readBundledJson(filename),via:'BUNDLED_FILE'};}catch(fileError){return {data:null,via:'UNAVAILABLE',error:`HTTP:${String(httpError?.message||httpError)}; FILE:${String(fileError?.message||fileError)}`};}
@@ -84,16 +84,22 @@ export async function loadExpandedTop25Niches({env=process.env,fetchImpl=fetch}=
   });
 }
 
-export function createFreeTop25Handler({fetch:fetchImpl=fetch,env=process.env}={}){
+export function createFreeTop25Handler({
+  fetch:fetchImpl=fetch,
+  env=process.env,
+  rateLimitImpl=enforceRateLimit,
+  loadSourceImpl=loadFreeTop25Source,
+  loadExpandedImpl=loadExpandedTop25Niches
+}={}){
   return async request=>{
     try{
-      const rate=await enforceRateLimit(request,{route:'free-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
+      const rate=await rateLimitImpl(request,{route:'free-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
 
       const [discovery,organic,expandedNiches]=await Promise.all([
-        loadSource(fetchImpl,request.url,'discovery-live.json'),
-        loadSource(fetchImpl,request.url,'organic-rising-live.json'),
-        loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[])
+        loadSourceImpl(fetchImpl,request.url,'discovery-live.json'),
+        loadSourceImpl(fetchImpl,request.url,'organic-rising-live.json'),
+        loadExpandedImpl({env,fetchImpl}).catch(()=>[])
       ]);
 
       // Public Free must fail closed on unlicensed live data, but remain available
