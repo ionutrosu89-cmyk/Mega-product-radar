@@ -1,7 +1,7 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-09-06T13:04:35.747Z",
+  "updatedAt": "2026-09-06T13:18:22.989Z",
   "sourceUpdatedAt": "2026-09-02T09:48:10.521Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc doar dovezi observate. Dated public pricing/review observations may improve evidence completeness, but never become verified sales or verified supplier quotes.",
@@ -5635,15 +5635,33 @@
           "policy": "Proxy demand, result counts, ratings and lifetime sold counts are never presented as 30-day sales. VERIFIED_SALES requires a dated observation with actual units30d or revenue30d from a named source."
         },
         "supplierCommercial": {
-          "verified": false,
-          "pageBacked": false,
+          "verified": true,
+          "pageBacked": true,
           "supplierContactRequired": false,
-          "status": "QUOTE_PARTIAL",
+          "status": "PAGE_BACKED_SCREENING_READY",
           "quoteCount": 1,
           "completeQuoteCount": 0,
-          "pageEvidenceCount": 0,
+          "pageEvidenceCount": 1,
           "bestQuote": null,
-          "bestPageEvidence": null,
+          "bestPageEvidence": {
+            "supplier": "Guangzhou Shangyazhi Trading Co., Ltd.",
+            "platform": "Alibaba",
+            "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+            "productTitle": "Cup Holders 360 Rotating Adjustable Extendable One-in-two Car Water Cup Drinking Bottle Car Cup Holder",
+            "priceMin": 2.5,
+            "priceMax": 3,
+            "currency": "USD",
+            "moq": 1,
+            "observedAt": "",
+            "productMatch": "HIGH",
+            "material": "ABS",
+            "dimensions": {
+              "packageLengthCm": 21,
+              "packageWidthCm": 11,
+              "packageHeightCm": 14
+            },
+            "pageBackedScreeningReady": true
+          },
           "quotes": [
             {
               "supplier": "Yiwu Nice Show Accessories Co., Ltd.",
@@ -5656,7 +5674,27 @@
               "note": "Public adjustable cup-holder expander listing; shipping/sample/lead time incomplete."
             }
           ],
-          "pageEvidence": [],
+          "pageEvidence": [
+            {
+              "supplier": "Guangzhou Shangyazhi Trading Co., Ltd.",
+              "platform": "Alibaba",
+              "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+              "productTitle": "Cup Holders 360 Rotating Adjustable Extendable One-in-two Car Water Cup Drinking Bottle Car Cup Holder",
+              "priceMin": 2.5,
+              "priceMax": 3,
+              "currency": "USD",
+              "moq": 1,
+              "observedAt": "",
+              "productMatch": "HIGH",
+              "material": "ABS",
+              "dimensions": {
+                "packageLengthCm": 21,
+                "packageWidthCm": 11,
+                "packageHeightCm": 14
+              },
+              "pageBackedScreeningReady": true
+            }
+          ],
           "policy": "Supplier screening is page-backed by default. A direct product/supplier page with public price, MOQ and high product match may satisfy the sourcing-screening gate without supplier outreach. Public page terms are conservative screening evidence, not negotiated/guaranteed order terms. Missing standard fields remain UNKNOWN."
         },
         "reviewEvidence": {
@@ -5677,18 +5715,16 @@
         "gates": {
           "pricingVerified": true,
           "salesVerified": false,
-          "supplierVerified": false,
+          "supplierVerified": true,
           "reviewVerified": false
         },
-        "readiness": 25,
+        "readiness": 50,
         "missingEvidence": [
           "salesVerified",
-          "supplierVerified",
           "reviewVerified"
         ],
         "nextActions": [
           "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-          "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
           "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
         ],
         "proofSummary": {
@@ -5697,7 +5733,7 @@
           "salesObservations": 0,
           "supplierQuotes": 1,
           "completeSupplierQuotes": 0,
-          "supplierPages": 0,
+          "supplierPages": 1,
           "reviewSnippets": 0,
           "reviewSources": 0
         }
@@ -67163,12 +67199,12 @@
   },
   "commercialHardening": {
     "version": "1.2",
-    "updatedAt": "2026-09-06T13:04:35.746Z",
+    "updatedAt": "2026-09-06T13:18:22.989Z",
     "stats": {
       "products": 65,
       "pricingVerified": 5,
       "salesVerified": 0,
-      "supplierVerified": 2,
+      "supplierVerified": 3,
       "reviewVerified": 2,
       "fullyVerified": 0,
       "withSupplierPartial": 5,

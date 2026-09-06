@@ -1,13 +1,13 @@
 {
   "version": "1.2",
-  "updatedAt": "2026-09-06T13:04:35.772Z",
+  "updatedAt": "2026-09-06T13:18:23.012Z",
   "policy": "Commercial facts are separated from proxies. Supplier sourcing is page-backed: direct product/supplier pages may satisfy sourcing screening without outreach. Sales estimates remain distinct from verified sales. Missing evidence never becomes zero; TEST/BUY still require independent landed economics.",
   "supplierPageRegistryStatus": "READY",
   "stats": {
     "products": 65,
     "pricingVerified": 5,
     "salesVerified": 0,
-    "supplierVerified": 2,
+    "supplierVerified": 3,
     "reviewVerified": 2,
     "fullyVerified": 0,
     "withSupplierPartial": 5,
@@ -164,26 +164,24 @@
       "name": "Car cup holder expander adjustable",
       "cat": "Auto",
       "goldenStage": "VALIDATE",
-      "readiness": 25,
+      "readiness": 50,
       "gates": {
         "pricingVerified": true,
         "salesVerified": false,
-        "supplierVerified": false,
+        "supplierVerified": true,
         "reviewVerified": false
       },
       "pricingStatus": "VERIFIED",
       "salesStatus": "PROXY_ONLY",
-      "supplierStatus": "QUOTE_PARTIAL",
+      "supplierStatus": "PAGE_BACKED_SCREENING_READY",
       "reviewStatus": "MISSING",
       "feedbackStatus": "NO_REAL_TEST",
       "missingEvidence": [
         "salesVerified",
-        "supplierVerified",
         "reviewVerified"
       ],
       "nextActions": [
         "Obtain actual dated 30-day units or revenue from a legitimate provider/source; do not substitute reviews or result counts.",
-        "Capture a direct product page and supplier page with public price, MOQ and high-confidence product match. Do not contact the supplier; missing standard fields remain UNKNOWN.",
         "Collect at least two concrete review snippets from named sources to identify recurring product pain points."
       ],
       "proofSummary": {
@@ -192,7 +190,7 @@
         "salesObservations": 0,
         "supplierQuotes": 1,
         "completeSupplierQuotes": 0,
-        "supplierPages": 0,
+        "supplierPages": 1,
         "reviewSnippets": 0,
         "reviewSources": 0
       }

@@ -1,8 +1,115 @@
 {
   "schemaVersion": "MPR_SUPPLIER_PAGE_EVIDENCE_LIVE_V1",
-  "updatedAt": "2026-09-06T13:04:35.633Z",
+  "updatedAt": "2026-09-06T13:18:22.865Z",
   "status": "READY",
   "products": [
+    {
+      "canonicalKey": "car-cup-holder-expander-adjustable",
+      "title": "Car cup holder expander adjustable",
+      "sourceFile": "supplier-candidates/car-cup-holder-expander-adjustable.json",
+      "status": "PAGE_BACKED_SCREENING_READY",
+      "candidates": [
+        {
+          "rank": 1,
+          "supplierName": "Guangzhou Shangyazhi Trading Co., Ltd.",
+          "platform": "Alibaba",
+          "productTitle": "Cup Holders 360 Rotating Adjustable Extendable One-in-two Car Water Cup Drinking Bottle Car Cup Holder",
+          "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+          "supplierProfileUrl": null,
+          "productMatch": "HIGH",
+          "publicPriceMinUsd": 2.5,
+          "publicPriceMaxUsd": 3,
+          "conservativeScreeningUnitPriceUsd": 3,
+          "publicMoq": 1,
+          "supplierYears": 5,
+          "supplierRating": 4.7,
+          "observedSalesCount": null,
+          "material": "ABS",
+          "productDimensions": {
+            "packageLengthCm": 21,
+            "packageWidthCm": 11,
+            "packageHeightCm": 14
+          },
+          "pageBackedScreeningReady": true,
+          "supplierContactRequired": false,
+          "sourceType": "DIRECT_PUBLIC_PRODUCT_PAGE",
+          "directProductPage": true,
+          "supplierPage": false,
+          "evidenceClass": "DIRECT_OBSERVED"
+        }
+      ],
+      "supplierPageRanking": {
+        "schemaVersion": "MPR_SUPPLIER_PAGE_RANKING_V1",
+        "status": "RANKED",
+        "ranked": [
+          {
+            "supplierName": "Guangzhou Shangyazhi Trading Co., Ltd.",
+            "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+            "publicUnitPriceUsd": 3,
+            "publicMoq": 1,
+            "score": 78.4,
+            "evidenceConfidencePct": 100,
+            "dimensions": {
+              "price": 80,
+              "moq": 100,
+              "maturity": 63.5,
+              "completeness": 62.5,
+              "match": 100
+            },
+            "decisionClass": "STRONG_PAGE_EVIDENCE",
+            "supplierContactRequired": false,
+            "purchaseAuthorized": false
+          }
+        ],
+        "leader": {
+          "supplierName": "Guangzhou Shangyazhi Trading Co., Ltd.",
+          "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+          "publicUnitPriceUsd": 3,
+          "publicMoq": 1,
+          "score": 78.4,
+          "evidenceConfidencePct": 100,
+          "dimensions": {
+            "price": 80,
+            "moq": 100,
+            "maturity": 63.5,
+            "completeness": 62.5,
+            "match": 100
+          },
+          "decisionClass": "STRONG_PAGE_EVIDENCE",
+          "supplierContactRequired": false,
+          "purchaseAuthorized": false
+        },
+        "policy": "Ranks direct page-backed supplier candidates only. Missing public fields reduce evidence confidence; they are not invented and do not trigger supplier outreach. Ranking never authorizes purchase."
+      },
+      "bestScreeningCandidate": {
+        "rank": 1,
+        "supplierName": "Guangzhou Shangyazhi Trading Co., Ltd.",
+        "platform": "Alibaba",
+        "productTitle": "Cup Holders 360 Rotating Adjustable Extendable One-in-two Car Water Cup Drinking Bottle Car Cup Holder",
+        "sourceUrl": "https://www.alibaba.com/product-detail/Cup-Holders-360-Rotating-Adjustable-Extendable_1600983300633.html",
+        "supplierProfileUrl": null,
+        "productMatch": "HIGH",
+        "publicPriceMinUsd": 2.5,
+        "publicPriceMaxUsd": 3,
+        "conservativeScreeningUnitPriceUsd": 3,
+        "publicMoq": 1,
+        "supplierYears": 5,
+        "supplierRating": 4.7,
+        "observedSalesCount": null,
+        "material": "ABS",
+        "productDimensions": {
+          "packageLengthCm": 21,
+          "packageWidthCm": 11,
+          "packageHeightCm": 14
+        },
+        "pageBackedScreeningReady": true,
+        "supplierContactRequired": false,
+        "sourceType": "DIRECT_PUBLIC_PRODUCT_PAGE",
+        "directProductPage": true,
+        "supplierPage": false,
+        "evidenceClass": "DIRECT_OBSERVED"
+      }
+    },
     {
       "canonicalKey": "car-sunglasses-magnetic-visor-holder",
       "title": "Car sunglasses magnetic visor holder",
@@ -394,9 +501,9 @@
     }
   ],
   "stats": {
-    "products": 2,
-    "pageBackedReady": 2,
-    "candidatePages": 10
+    "products": 3,
+    "pageBackedReady": 3,
+    "candidatePages": 11
   },
   "supplierOutreachEnabled": false,
   "purchaseAuthorized": false,
