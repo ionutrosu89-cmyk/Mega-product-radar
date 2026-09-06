@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T16:39:04.648Z",
+  "updatedAt": "2026-09-06T16:40:36.846Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -2464,6 +2464,22 @@
         ],
         "purchaseAuthorized": false,
         "policy": "Uses a public all-in-before-duty/VAT shipment benchmark allocated by chargeable measure. Duty rates are sensitivity scenarios unless TARIC is verified. VAT recoverability is shown as separate economic/cash treatments. This is never confirmed landed cost."
+      },
+      "residualLocalCostCeiling": {
+        "schemaVersion": "MPR_RESIDUAL_LOCAL_COST_CEILING_V1",
+        "status": "CALCULATED_SCREENING",
+        "quantity": 300,
+        "baseEconomicLandedPerUnitRon": 4.6024,
+        "sellPriceGrossRon": 49.99,
+        "maxAdditionalLocalImportCostPerUnitRon": 0.61,
+        "maxAdditionalLocalImportCostTotalRon": 183,
+        "economicsAtCeiling": {
+          "profitPerUnitRon": 10,
+          "marginPct": 20.01,
+          "roiPct": 191.94
+        },
+        "purchaseAuthorized": false,
+        "policy": "This is the remaining economic headroom for still-unknown local import charges after the selected screening envelope. It is not an assumed local charge and never confirms landed cost."
       },
       "localChargeScopeGuard": {
         "schemaVersion": "MPR_LOCAL_CHARGE_SCOPE_GUARD_V1",
