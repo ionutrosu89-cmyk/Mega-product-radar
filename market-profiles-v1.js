@@ -16,6 +16,7 @@ export const MARKET_PROFILES_V1=freeze({
     customsTaricUrl:'https://taxation-customs.ec.europa.eu/online-services/online-services-and-databases-customs/eu-customs-tariff-taric_en',
     customsClassificationUrl:'https://taxation-customs.ec.europa.eu/customs/common-customs-tariff-cct/tariff-classification-goods_en',
     customsVerifiedAt:'2026-09-06',
+    defaultImportRegime:'B2B_STOCK_IMPORT',
     policy:'IMPORT_VAT_RATE_IS_MARKET_CONFIG; CUSTOMS_DUTY_IS NEVER INFERRED FROM COUNTRY ALONE; VERIFY HS/CN AND ORIGIN BEFORE CONFIRMED ECONOMICS.'
   }),
   DE:freeze({code:'DE',name:'Germany',active:false,currency:'EUR',importVatRatePct:null,sellVatRatePct:null,vatSourceStatus:'NEEDS_VERIFICATION_BEFORE_ACTIVATION'}),
