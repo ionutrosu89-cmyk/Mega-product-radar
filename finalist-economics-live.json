@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T17:45:01.131Z",
+  "updatedAt": "2026-09-06T17:46:01.678Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -2480,6 +2480,69 @@
         },
         "purchaseAuthorized": false,
         "policy": "This is the remaining economic headroom for still-unknown local import charges after the selected screening envelope. It is not an assumed local charge and never confirms landed cost."
+      },
+      "residualLocalCostCeilingsByVatTreatment": {
+        "NON_RECOVERABLE": {
+          "schemaVersion": "MPR_RESIDUAL_LOCAL_COST_CEILING_V1",
+          "status": "CALCULATED_SCREENING",
+          "quantity": 300,
+          "baseEconomicLandedPerUnitRon": 4.6024,
+          "sellPriceGrossRon": 49.99,
+          "maxAdditionalLocalImportCostPerUnitRon": 0.61,
+          "maxAdditionalLocalImportCostTotalRon": 183,
+          "economicsAtCeiling": {
+            "profitPerUnitRon": 10,
+            "marginPct": 20.01,
+            "roiPct": 191.94
+          },
+          "purchaseAuthorized": false,
+          "policy": "This is the remaining economic headroom for still-unknown local import charges after the selected screening envelope. It is not an assumed local charge and never confirms landed cost."
+        },
+        "RECOVERABLE": {
+          "schemaVersion": "MPR_RESIDUAL_LOCAL_COST_CEILING_V1",
+          "status": "CALCULATED_SCREENING",
+          "quantity": 300,
+          "baseEconomicLandedPerUnitRon": 3.8037,
+          "sellPriceGrossRon": 49.99,
+          "maxAdditionalLocalImportCostPerUnitRon": 1.41,
+          "maxAdditionalLocalImportCostTotalRon": 423,
+          "economicsAtCeiling": {
+            "profitPerUnitRon": 10,
+            "marginPct": 20.01,
+            "roiPct": 191.87
+          },
+          "purchaseAuthorized": false,
+          "policy": "This is the remaining economic headroom for still-unknown local import charges after the selected screening envelope. It is not an assumed local charge and never confirms landed cost."
+        }
+      },
+      "customsRepresentationHeadroom": {
+        "schemaVersion": "MPR_CUSTOMS_REPRESENTATION_HEADROOM_V1",
+        "status": "CALCULATED_REFERENCE",
+        "residualLocalCostCeilingTotalRon": 183,
+        "rows": [
+          {
+            "provider": "Posta Romana",
+            "serviceScope": "POSTAL_CUSTOMS_REPRESENTATION_H1",
+            "publicBenchmarkRon": 170,
+            "applicableDirectlyToSeaLcl": false,
+            "residualAfterBenchmarkRon": 13,
+            "fitsWithinCeiling": true,
+            "truth": "CROSS_SERVICE_REFERENCE_ONLY"
+          },
+          {
+            "provider": "DHL Express",
+            "serviceScope": "EXPRESS_CLEARANCE_PROCESSING",
+            "publicBenchmarkRon": 49,
+            "applicableDirectlyToSeaLcl": false,
+            "residualAfterBenchmarkRon": 134,
+            "fitsWithinCeiling": true,
+            "truth": "CROSS_SERVICE_REFERENCE_ONLY"
+          }
+        ],
+        "directSeaLclBenchmarkAvailable": false,
+        "directSeaLclConclusion": "UNKNOWN_NO_DIRECT_LCL_BENCHMARK",
+        "purchaseAuthorized": false,
+        "policy": "Cross-service customs representation tariffs are context only. They may reveal a tight residual budget, but cannot confirm or reject sea-LCL economics unless the service scope is explicitly compatible."
       },
       "localChargeScopeGuard": {
         "schemaVersion": "MPR_LOCAL_CHARGE_SCOPE_GUARD_V1",
