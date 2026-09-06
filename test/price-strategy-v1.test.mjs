@@ -8,6 +8,8 @@ test('prefers highest viable observed market price over invented stretch price',
  assert.equal(r.primaryPrice.sellPriceGrossRon,44.74);
  assert.equal(r.primaryPrice.observedMarketPrice,true);
  assert.ok(r.primaryPrice.remainingImportCostAllowanceRon>0);
+ assert.equal(r.primaryPrice.robustness,'VERY_TIGHT_UNKNOWN_COST_BUFFER');
+ assert.equal(r.scenarios.find(x=>x.sellPriceGrossRon===49.99).robustness,'STRETCH_PRICE_REQUIRES_MARKET_VALIDATION');
 });
 
 test('price that fails before freight is rejected',()=>{
