@@ -24,13 +24,15 @@ export function verifySupplierQuote(input={}){
   requireNonNegative('sampleShippingToRomania','sample shipping to Romania');
   requirePositive('leadTimeDays','lead time');
   requireText('incoterm','Incoterm');
-  requireNonNegative('bulkShippingToRomania','bulk shipping to Romania');
-  requireText('shippingCurrency','shipping currency');
+  const supplierFreightQuoted=nonNegative(input.bulkShippingToRomania);
+  if(supplierFreightQuoted) requireText('shippingCurrency','shipping currency');
   requirePositive('cartonQuantity','carton quantity');
   requirePositive('cartonGrossWeightKg','carton gross weight');
   requirePositive('cartonLengthCm','carton length');
   requirePositive('cartonWidthCm','carton width');
   requirePositive('cartonHeightCm','carton height');
+  const carrierReadyLogistics=positive(input.cartonGrossWeightKg)&&positive(input.cartonLengthCm)&&positive(input.cartonWidthCm)&&positive(input.cartonHeightCm)&&positive(input.cartonQuantity);
+  if(!supplierFreightQuoted&&!carrierReadyLogistics)blockers.push('supplier freight quote or carrier-ready logistics');
   requireText('paymentTerms','payment terms');
   if(typeof input.tradeAssuranceOrEquivalent!=='boolean')blockers.push('order protection status');
   if(input.inspectionAccepted!==true)blockers.push('inspection acceptance');
@@ -52,6 +54,6 @@ export function verifySupplierQuote(input={}){
     evidenceStatus:verified?'MANUALLY_VERIFIED_QUOTE':'QUOTE_INCOMPLETE',
     landedCostEligible:verified,
     blockers,
-    policy:'Fail closed. Only a complete, directly sourced, manually verified commercial quote may become landed-cost eligible. Missing fields remain unknown and are never inferred from public listing data. NOT_APPLICABLE compliance requires an explicit reviewed basis; a dropdown selection alone is never evidence.'
+    policy:'Fail closed. A complete directly sourced manually verified supplier quote may become landed-cost eligible when commercial terms are complete and either supplier freight is quoted or carrier-ready carton logistics are verified. Freight, duty and VAT may then be sourced independently by MPR. Missing fields remain unknown and are never inferred from public listing data. NOT_APPLICABLE compliance requires an explicit reviewed basis; a dropdown selection alone is never evidence.'
   };
 }
