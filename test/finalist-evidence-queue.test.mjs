@@ -14,7 +14,7 @@ test('Finalist Evidence Queue authorizes page-backed supplier work only after RO
   assert.match(src,/requiredSupplierEvidence/);
   assert.match(src,/do not contact suppliers/);
   assert.match(src,/never promotes TEST\/BUY/);
-  assert.match(src,/invent landed cost/);
+  assert.match(src,/invents landed cost/);
 });
 
 test('Finalist Evidence Queue workflow is zero-cost and cannot trigger Radar Scan',async()=>{
