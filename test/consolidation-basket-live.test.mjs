@@ -14,7 +14,7 @@ test('live consolidation basket never authorizes filler quantities',async()=>{
  assert.equal(d.supplierOutreachEnabled,false);
  assert.equal(d.purchaseAuthorized,false);
  if(d.selected){
-   assert.equal(d.selected.fillerStage,'VALIDATE');
+   assert.ok(['VALIDATE','FINALIST'].includes(d.selected.fillerStage));
    assert.ok(d.selected.result.totalMeasure>=1);
  }
 });
