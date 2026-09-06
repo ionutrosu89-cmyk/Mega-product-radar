@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "MPR_FREIGHT_BENCHMARK_REGISTRY_V1",
+  "updatedAt": "2026-09-06T14:36:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "quantity": 30,
+  "shipmentTruth": {
+    "actualGrossWeightKg": 1.7,
+    "cartonLengthCm": 30,
+    "cartonWidthCm": 20,
+    "cartonHeightCm": 10,
+    "volumetricDivisor": 5000,
+    "volumetricWeightKg": 1.2
+  },
+  "carriers": [
+    {
+      "carrier": "FedEx",
+      "status": "PARTIAL_BENCHMARK_ONLY",
+      "decisionUsable": false,
+      "sourceFile": "data/freight-benchmarks/car-sunglasses-magnetic-visor-holder-30pcs-2026-09-06.json",
+      "baseRateKnown": true,
+      "fuelKnown": false,
+      "otherSurchargesKnown": false,
+      "liveQuoteKnown": false
+    },
+    {
+      "carrier": "UPS",
+      "status": "PARTIAL_BENCHMARK_ONLY",
+      "decisionUsable": false,
+      "sourceFile": "data/freight-benchmarks/car-sunglasses-magnetic-visor-holder-30pcs-ups-2026-09-06.json",
+      "baseRateKnown": true,
+      "fuelKnown": false,
+      "otherSurchargesKnown": false,
+      "liveQuoteKnown": false
+    },
+    {
+      "carrier": "DHL Express",
+      "status": "PARTIAL_BENCHMARK_ONLY",
+      "decisionUsable": false,
+      "sourceFile": "data/freight-benchmarks/car-sunglasses-magnetic-visor-holder-30pcs-dhl-2026-09-06.json",
+      "baseRateKnown": false,
+      "fuelKnown": false,
+      "otherSurchargesKnown": false,
+      "liveQuoteKnown": false
+    }
+  ],
+  "cheapestDecisionUsable": null,
+  "decisionStatus": "FREIGHT_NOT_CONFIRMED",
+  "blockers": [
+    "NO_FULLY_LOADED_LIVE_OR_COMPLETE_CARRIER_RATE",
+    "CURRENT_FUEL_SURCHARGES_REQUIRED",
+    "APPLICABLE_ACCESSORIAL/CLEARANCE_FEES_REQUIRED"
+  ],
+  "purchaseAuthorized": false,
+  "policy": "Carrier benchmarks may rank screening options but cannot feed confirmed landed cost until a fully loaded evidence-backed freight cost is available."
+}
