@@ -89,22 +89,33 @@ export function createFreeTop25Handler({fetch:fetchImpl=fetch,env=process.env}={
     try{
       const rate=await enforceRateLimit(request,{route:'free-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
-      const discovery=await loadSource(fetchImpl,request.url,'discovery-live.json');
-      const organic=await loadSource(fetchImpl,request.url,'organic-rising-live.json');
-      if(!discovery.data&&!organic.data)return Response.json({ok:false,error:'Free Top25 live sources unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});
+
+      const [discovery,organic,expandedNiches]=await Promise.all([
+        loadSource(fetchImpl,request.url,'discovery-live.json'),
+        loadSource(fetchImpl,request.url,'organic-rising-live.json'),
+        loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[])
+      ]);
+
+      // Public Free must fail closed on unlicensed live data, but remain available
+      // when the complete licensed historical 25x25 archive is healthy.
+      if(!discovery.data&&!organic.data&&expandedNiches.length!==25){
+        return Response.json({ok:false,error:'Free Top25 sources unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});
+      }
+
       const universe=buildFreeTop25LiveUniverse({
         discoveryProducts:Array.isArray(discovery.data?.products)?discovery.data.products:[],
         organicProducts:Array.isArray(organic.data?.products)?organic.data.products:[]
       });
-      const expandedNiches=await loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[]);
       const publishedNiches=expandedNiches.length===25?expandedNiches:[...universe.niches,...expandedNiches].slice(0,25);
       const expandedUpdatedAt=expandedNiches.map(niche=>niche.reviewedAt).filter(Boolean).sort().at(-1)||null;
+      const mode=expandedNiches.length===25&&!discovery.data&&!organic.data?'LICENSED_HISTORICAL_ONLY':universe.mode;
       return Response.json({
         ok:true,
         ...universe,
-        stats:{...universe.stats,completeNicheCount:publishedNiches.length,expandedNicheCount:expandedNiches.length,expandedProductCount:expandedNiches.length*25,publishedNicheCount:publishedNiches.length,publishedProductCount:publishedNiches.length*25},
+        mode,
+        stats:{...universe.stats,completeNicheCount:publishedNiches.length,expandedNicheCount:expandedNiches.length,expandedProductCount:expandedNiches.length*25,publishedNicheCount:publishedNiches.length,publishedProductCount:publishedNiches.reduce((sum,niche)=>sum+(Array.isArray(niche?.products)?niche.products.length:0),0)},
         niches:publishedNiches,
-        sourceDiagnostics:{discovery:discovery.via,organic:organic.via},
+        sourceDiagnostics:{discovery:discovery.via,organic:organic.via,historical:expandedNiches.length===25?'COMPLETE':'INCOMPLETE'},
         updatedAt:[discovery.data?.updatedAt,organic.data?.updatedAt,expandedUpdatedAt].filter(Boolean).sort().at(-1)||null
       },{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});
     }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});}
