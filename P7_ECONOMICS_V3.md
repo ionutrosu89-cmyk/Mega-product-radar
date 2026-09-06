@@ -52,3 +52,40 @@ Economics never authorizes purchase and cannot independently promote FINALIST / 
 ## Integration verification
 
 This stacked PR is retargeted to `main` only after Supplier Intelligence V2 is merged and green. Integration must preserve explicit cost evidence, canonical quote binding, fail-closed unknowns, and zero purchase authority.
+
+
+## Romania market profile and transport economics
+
+The launch market is Romania. Import VAT is supplied by the active market profile and is currently configured at 21%; the value is configuration, not a formula constant. Inactive future country profiles remain unverified until explicitly activated.
+
+Transport economics must use one of two evidence-backed paths:
+
+- a verified total freight quote; or
+- a carrier/service rate with packaging geometry and actual gross weight.
+
+For weight-rated express/air/rail transport, chargeable weight is the greater of actual gross weight and volumetric weight. Volumetric weight requires the carrier/service divisor as evidence; MPR must never assume one universal divisor.
+
+For sea freight, CBM is calculated from carton dimensions and carton count. Product dimensions may come from a direct product page, but transport confirmation requires carton/package dimensions or a verified total freight quote.
+
+Customs duty is product-specific and remains UNKNOWN until HS/CN classification, origin and the applicable official tariff evidence are known. A supplier's estimate must not become verified customs duty.
+
+Import VAT is calculated separately from customs duty. Cash landed cost includes import VAT. Economic landed cost may exclude recoverable import VAT only when the VAT treatment is explicitly verified.
+
+## Seller economics consistency
+
+Selling prices are treated as gross consumer prices when gross-price fields are used. VAT must be extracted as gross minus net revenue; it must not be calculated as gross price multiplied by the VAT rate and then subtracted again.
+
+Seller economics should expose at minimum:
+- gross selling price
+- net revenue
+- marketplace commission
+- ads reserve
+- returns reserve
+- fulfilment
+- payment/warranty/overhead reserves where applicable
+- profit per unit
+- margin
+- ROI
+- break-even selling price
+
+All decision-critical economics must use the same VAT and landed-cost semantics as the customer-facing calculator.
