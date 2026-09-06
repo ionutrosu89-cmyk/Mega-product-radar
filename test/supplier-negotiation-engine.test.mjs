@@ -10,7 +10,7 @@ const baseQuote={
 };
 
 test('incomplete quote never reaches economics screening',()=>{
-  const x=evaluateQuoteNegotiation({...baseQuote,bulkShippingToRomania:null},{sellPriceRon:44.74,fxToRon:{USD:4.6}});
+  const x=evaluateQuoteNegotiation({...baseQuote,bulkShippingToRomania:null,shippingCurrency:null,cartonGrossWeightKg:null},{sellPriceRon:44.74,fxToRon:{USD:4.6}});
   assert.equal(x.status,'QUOTE_INCOMPLETE');
   assert.equal(x.confirmedLandedCost,false);
   assert.equal(x.testPermission,false);
