@@ -20,9 +20,9 @@ test('priority car sunglasses pilot contains 3–5 unverified public candidates 
 test('car sunglasses RFQ requires exact product identity and Romania commercial terms',async()=>{
   const rfq=await fs.readFile('docs/rfq-car-sunglasses-magnetic-visor-holder.md','utf8');
   assert.match(rfq,/Status: TEMPLATE — NOT SENT/);
-  assert.match(rfq,/20 \/ 50 \/ 100 \/ 300 pieces/);
+  assert.match(rfq,/30 \/ 50 \/ 100 \/ 300 pieces/);
   assert.match(rfq,/Sample shipping cost to Romania/);
-  assert.match(rfq,/DDP Romania/);
+  assert.match(rfq,/EXW \/ FOB \/ FCA/);
   assert.match(rfq,/Incoterm/);
   assert.match(rfq,/Direct product URL and exact SKU\/model reference/);
   assert.match(rfq,/manual verification timestamp/i);
