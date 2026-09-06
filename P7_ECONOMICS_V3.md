@@ -89,3 +89,23 @@ Seller economics should expose at minimum:
 - break-even selling price
 
 All decision-critical economics must use the same VAT and landed-cost semantics as the customer-facing calculator.
+
+
+## Page-backed supplier sourcing policy
+
+For the Romania launch, MPR does not require supplier outreach for standard sourcing data.
+
+Accepted public supplier evidence:
+- direct product page identity
+- public price or price range
+- public MOQ
+- material, dimensions, weight and packaging data when explicitly shown
+- supplier profile/history, rating, verification and public sales/review signals when explicitly shown
+
+A conservative screening unit cost may use the highest observed public price from the direct product page when no explicit public quantity tier is available. This is DIRECT_OBSERVED screening evidence, not a negotiated or guaranteed purchase price.
+
+Missing supplier-page fields remain UNKNOWN. They do not create an outreach task. Supplier contact is not required for screening economics.
+
+Transport, customs duty and Romanian VAT are sourced independently from carrier/forwarder and official fiscal/customs sources.
+
+A real sample/order still requires explicit user approval. Page-backed sourcing never authorizes purchase.
