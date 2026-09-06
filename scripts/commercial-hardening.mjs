@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 const MARKET='market-intelligence-live.json';
 const OBS='commercial-observations.json';
 const OUT='commercial-hardening-live.json';
+const SUPPLIER_PAGES='supplier-page-evidence-live.json';
 const num=v=>Number.isFinite(Number(v))?Number(v):0;
 const round=v=>Math.round(num(v)*10)/10;
 const clamp=(v,min=0,max=100)=>Math.max(min,Math.min(max,num(v)));
@@ -58,7 +59,7 @@ function competitorSales(p,o){
   };
 }
 
-function supplierCommercial(p,o){
+function supplierCommercial(p,o,pageProduct=null){
   const quotes=arr(o?.supplierQuotes).filter(x=>x.supplier&&x.platform&&num(x.unitPrice)>0&&num(x.moq)>0&&x.verifiedAt&&(x.sourceUrl||x.url));
   const completeQuotes=quotes.filter(x=>
     explicitFinite(x,'shippingRon')&&num(x.shippingRon)>=0&&
@@ -66,6 +67,7 @@ function supplierCommercial(p,o){
     (explicitFinite(x,'leadTimeDays')&&num(x.leadTimeDays)>0)
   );
   const rawPages=[
+    ...arr(pageProduct?.candidates),
     ...arr(o?.supplierPages),
     ...arr(o?.supplierListings),
     ...arr(p?.sourcing?.items),
@@ -157,13 +159,15 @@ function nextActions(gates,pricing,competitor,supplier,review){
 
 const market=await read(MARKET,{products:[],stats:{}});
 const observations=await read(OBS,{version:'1.0',products:{}});
+const supplierPageRegistry=await read(SUPPLIER_PAGES,{products:[]});
 const byName=observations.products&&typeof observations.products==='object'?observations.products:{};
 const rows=[];
 for(const p of arr(market.products)){
   const o=byName[norm(p.name)]||byName[p.name]||{};
   const pricing=verifiedPricing(p,o);
   const competitor=competitorSales(p,o);
-  const supplier=supplierCommercial(p,o);
+  const pageProduct=arr(supplierPageRegistry.products).find(x=>norm(x.canonicalKey)===norm(p?.canonicalKey||p?.name)||norm(x.title)===norm(p?.name))||null;
+  const supplier=supplierCommercial(p,o,pageProduct);
   const review=reviews(p,o);
   const fb=feedback(p,o);
   const gates={pricingVerified:pricing.verified,salesVerified:competitor.salesVerified,supplierVerified:supplier.verified,reviewVerified:review.verified};
@@ -178,7 +182,7 @@ const completedFeedback=arr(market.products).map(p=>p?.commercialHardening?.feed
 const mae=completedFeedback.length?completedFeedback.reduce((s,x)=>s+Math.abs(num(x.predictionErrorUnitProfitRon)),0)/completedFeedback.length:null;
 const calibration={sampleSize:completedFeedback.length,unitProfitMaeRon:mae===null?null:round(mae),autoCalibrationEnabled:completedFeedback.length>=5,policy:'Weights must not auto-calibrate before at least 5 completed real commercial tests.'};
 const stats={products:rows.length,pricingVerified:rows.filter(x=>x.gates.pricingVerified).length,salesVerified:rows.filter(x=>x.gates.salesVerified).length,supplierVerified:rows.filter(x=>x.gates.supplierVerified).length,reviewVerified:rows.filter(x=>x.gates.reviewVerified).length,fullyVerified:rows.filter(x=>x.readiness===100).length,withSupplierPartial:rows.filter(x=>['QUOTE_PARTIAL','PAGE_BACKED_SCREENING_READY'].includes(x.supplierStatus)).length,withPublicPricing:rows.filter(x=>x.proofSummary.romaniaOffers>0).length};
-market.commercialHardening={version:'1.2',updatedAt:new Date().toISOString(),stats,calibration,policy:'Commercial facts are separated from proxies. Supplier sourcing is page-backed: direct product/supplier pages may satisfy sourcing screening without outreach. Missing evidence never becomes zero. TEST/BUY still require independent landed economics and explicit purchase approval.'};
+market.commercialHardening={version:'1.2',updatedAt:new Date().toISOString(),stats,calibration,supplierPageRegistryStatus:supplierPageRegistry.status||'UNKNOWN',policy:'Commercial facts are separated from proxies. Supplier sourcing is page-backed: direct product/supplier pages may satisfy sourcing screening without outreach. Missing evidence never becomes zero. TEST/BUY still require independent landed economics and explicit purchase approval.'};
 market.updatedAt=new Date().toISOString();
 await fs.writeFile(MARKET,JSON.stringify(market,null,2)+'\n');
 await fs.writeFile(OUT,JSON.stringify({version:'1.1',updatedAt:new Date().toISOString(),policy:'Commercial facts are separated from proxies. Missing evidence never becomes zero or verified. Supplier completeness requires explicit fields; public evidence cannot invent sales.',stats,calibration,items:rows},null,2)+'\n');
