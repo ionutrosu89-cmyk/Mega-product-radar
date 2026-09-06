@@ -9,10 +9,11 @@ test('priority car sunglasses pilot uses page-backed public candidates only',asy
   assert.equal(data.status,'PAGE_BACKED_SOURCING_ACTIVE');
   assert.ok(data.candidates.length>=3&&data.candidates.length<=5);
   for(const candidate of data.candidates){
-    assert.ok(['UNVERIFIED_PUBLIC_LISTING','DIRECT_PUBLIC_LISTING_UNVERIFIED_COMMERCIAL_TERMS','PAGE_BACKED_SCREENING_READY'].includes(candidate.evidenceStatus));
+    assert.ok(['UNVERIFIED_PUBLIC_LISTING','DIRECT_PUBLIC_LISTING_UNVERIFIED_COMMERCIAL_TERMS','PAGE_BACKED_SCREENING_READY','DIRECT_PAGE_COMPARABLE_VARIANT'].includes(candidate.evidenceStatus));
     assert.equal(candidate.quoteVerified,false);
     assert.equal(candidate.landedCostEligible,false);
     assert.equal(candidate.supplierContactRequired,false);
+    assert.match(candidate.sourceUrl,/alibaba\.com\/(?:pla|product-detail)\//);
     assert.match(candidate.sourceUrl,/^https:\/\//);
     assert.ok(Number(candidate.observedMoq)>0);
   }
