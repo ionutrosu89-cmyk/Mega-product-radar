@@ -11,6 +11,7 @@ import {conservativeLandedEnvelopeV1} from '../conservative-landed-envelope-v1.j
 import {residualLocalCostCeilingV1} from '../residual-local-cost-ceiling-v1.js';
 import {customsDutySensitivityV1} from '../customs-duty-sensitivity-v1.js';
 import {finalistScreeningVerdictV1} from '../finalist-screening-verdict-v1.js';
+import {customsRepresentationHeadroomV1} from '../customs-representation-headroom-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
 const SUPPLIERS='supplier-page-evidence-live.json';
@@ -145,10 +146,29 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     explicitLclAllocation:false
   }):null;
   const worstCaseEnvelopeRow=conservativeLandedEnvelope?.rows?.find(x=>x.dutyRateScenarioPct===10&&x.vatTreatment==='NON_RECOVERABLE'&&x.sellPriceGrossRon===49.99)||null;
+  const recoverableWorstCaseEnvelopeRow=conservativeLandedEnvelope?.rows?.find(x=>x.dutyRateScenarioPct===10&&x.vatTreatment==='RECOVERABLE'&&x.sellPriceGrossRon===49.99)||null;
   const residualLocalCostCeiling=worstCaseEnvelopeRow?residualLocalCostCeilingV1({
     quantity:300,
     baseEconomicLandedPerUnitRon:worstCaseEnvelopeRow.economicLandedPerUnitRon,
     sellPriceGrossRon:49.99
+  }):null;
+  const residualLocalCostCeilingRecoverableVat=recoverableWorstCaseEnvelopeRow?residualLocalCostCeilingV1({
+    quantity:300,
+    baseEconomicLandedPerUnitRon:recoverableWorstCaseEnvelopeRow.economicLandedPerUnitRon,
+    sellPriceGrossRon:49.99
+  }):null;
+  const publicBrokerBenchmarks=arr(importProcessingEvidence?.publicCustomsRepresentationBenchmarks).map(x=>{
+    const amount=num(x.primaryDeclarationOneArticleRon)??num(x.clearanceProcessingRon);
+    return amount===null?null:{
+      provider:x.provider,
+      serviceScope:x.serviceScope,
+      amountRon:amount,
+      applicableDirectlyToSeaLcl:x.applicableDirectlyToSeaLcl===true
+    };
+  }).filter(Boolean);
+  const customsRepresentationHeadroom=residualLocalCostCeiling?customsRepresentationHeadroomV1({
+    residualLocalCostCeilingTotalRon:residualLocalCostCeiling.maxAdditionalLocalImportCostTotalRon,
+    publicBenchmarks:publicBrokerBenchmarks
   }):null;
   const customsDutySensitivity=supplierUnitRon===null||screeningFreightPerUnit300===null?null:customsDutySensitivityV1({
     quantity:300,
@@ -261,6 +281,11 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     publicLclRange,
     conservativeLandedEnvelope,
     residualLocalCostCeiling,
+    residualLocalCostCeilingsByVatTreatment:{
+      NON_RECOVERABLE:residualLocalCostCeiling,
+      RECOVERABLE:residualLocalCostCeilingRecoverableVat
+    },
+    customsRepresentationHeadroom,
     localChargeScopeGuard:fclToLclScopeGuard,
     importProcessingEvidence:importProcessingEvidence?{
       sourceFile:IMPORT_PROCESSING,
