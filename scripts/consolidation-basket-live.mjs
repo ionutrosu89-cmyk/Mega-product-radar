@@ -28,6 +28,10 @@ function leader(product){
 function stageFor(productKey){
   return arr(golden.items).find(x=>key(x.name)===key(productKey))?.stage||'DISCOVERED';
 }
+function tierPriceUsd(candidate,qty){
+  const tiers=arr(candidate?.publicPriceTiers).filter(x=>num(x.minQty)!==null&&num(x.unitPriceUsd)!==null&&qty>=Number(x.minQty)&&(x.maxQty===null||x.maxQty===undefined||qty<=Number(x.maxQty))).sort((a,b)=>Number(b.minQty)-Number(a.minQty));
+  return tiers[0]?Number(tiers[0].unitPriceUsd):num(candidate?.conservativeScreeningUnitPriceUsd);
+}
 function packageDims(c){
   const d=c?.productDimensions||{};
   return {
@@ -61,11 +65,15 @@ for(const fp of fillerProducts){
     stepA:300,stepB:1
   });
   if(result.status!=='SCREENING_READY')continue;
+  const finalistTierUsd=tierPriceUsd(finalistLeader,result.qtyA);
+  const fillerTierUsd=tierPriceUsd(flog,result.qtyB);
+  const repricedGoodsCapitalRon=(finalistTierUsd||0)*usdRon*result.qtyA+(fillerTierUsd||0)*usdRon*result.qtyB;
+  const repricedResult={...result,estimatedGoodsCapitalRon:Number(repricedGoodsCapitalRon.toFixed(2)),pricingBasis:'PUBLIC_QUANTITY_TIER_WHEN_AVAILABLE',finalistUnitPriceUsd:finalistTierUsd,fillerUnitPriceUsd:fillerTierUsd};
   candidates.push({
     fillerCanonicalKey:fp.canonicalKey,
     fillerTitle:fp.title,
     fillerStage:stageFor(fp.canonicalKey),
-    result,
+    result:repricedResult,
     finalistLogisticsEvidence:{supplier:finalistLog.supplierName,sourceUrl:finalistLog.sourceUrl,dimensions:packageDims(finalistLog),truth:'HIGH_MATCH_COMPARABLE_VOLUME_FLOOR'},
     fillerLogisticsEvidence:{supplier:flog.supplierName,sourceUrl:flog.sourceUrl,dimensions:packageDims(flog),unitGrossWeightKg:num(flog.unitGrossWeightKg),truth:'DIRECT_PAGE_BACKED'},
     benchmark1M3Ron
