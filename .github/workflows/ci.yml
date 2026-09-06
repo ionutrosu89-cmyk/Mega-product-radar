@@ -34,14 +34,14 @@ jobs:
       - name: Syntax check V2 engines
         run: |
           for f in app.js market-trend-ui.js free-intelligence-ui.js product-ro.js intelligence-ecosystem.js \
-            commercial-decision-engine.js commercial-decision-client.js commercial-validation.js supplier-intelligence.js landed-cost.js \
+            commercial-decision-engine.js commercial-decision-client.js commercial-validation.js supplier-intelligence.js supplier-page-evidence-v1.js landed-cost.js \
             data-pipeline-core-v1.js ingestion-pipeline-v1.js operational-scale-observability-v1.js production-readiness-harness-v1.js persistence-telemetry-adapters-v1.js \
             ranking-eligibility-v1.js ranking-signal-ingestion-v1.js ranking-signal-resolution-v1.js ranking-signal-history-v1.js ranking-history-store-v1.js ranking-history-orchestrator-v1.js ranking-live-handoff-v1.js live-observation-inbox-v1.js \
             scripts/web-radar-scan.mjs scripts/discovery-v6-expand.mjs \
             scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
             scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
             scripts/free-intelligence-suite.mjs scripts/test-buy-decision.mjs \
-            scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
+            scripts/supplier-page-evidence-collector.mjs scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
             scripts/commercial-final-decision.mjs scripts/golden-product-pipeline.mjs \
             scripts/category-radar-postprocess.mjs scripts/watchlist-postprocess.mjs \
             scripts/free-readiness-audit.mjs scripts/dataforseo-keywords.mjs scripts/dataforseo-total-budget.mjs \
@@ -118,6 +118,7 @@ jobs:
           node scripts/market-trend-postprocess.mjs
           node scripts/opportunity-ranking-v2.mjs
           node scripts/free-intelligence-suite.mjs
+          node scripts/supplier-page-evidence-collector.mjs
           node scripts/commercial-hardening.mjs
           node scripts/intelligence-ecosystem-v25.mjs
           DATAFORSEO_V26_PAID_ENABLED=false node scripts/provider-intelligence-v26.mjs
