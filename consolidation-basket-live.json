@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_CONSOLIDATION_BASKET_LIVE_V1",
-  "updatedAt": "2026-09-06T13:27:22.995Z",
+  "updatedAt": "2026-09-06T13:28:57.480Z",
   "status": "SCREENING_BASKET_AVAILABLE",
   "targetMeasure": 1,
   "benchmark1M3Ron": 1034.84,
@@ -16,8 +16,11 @@
       "qtyB": 303,
       "totalMeasure": 1.000902,
       "overshootMeasure": 0.000902,
-      "estimatedGoodsCapitalRon": 5125.57,
-      "policy": "Optimizes minimum billable measure using public logistics floors. It does not prove commercial demand or authorize quantity/order."
+      "estimatedGoodsCapitalRon": 4851.66,
+      "policy": "Optimizes minimum billable measure using public logistics floors. It does not prove commercial demand or authorize quantity/order.",
+      "pricingBasis": "PUBLIC_QUANTITY_TIER_WHEN_AVAILABLE",
+      "finalistUnitPriceUsd": 0.75,
+      "fillerUnitPriceUsd": 2.8
     },
     "finalistLogisticsEvidence": {
       "supplier": "Ma'anshan Jiuyan Trading Co., Ltd.",
@@ -37,7 +40,7 @@
         "widthCm": 11,
         "heightCm": 14
       },
-      "unitGrossWeightKg": null,
+      "unitGrossWeightKg": 0.5,
       "truth": "DIRECT_PAGE_BACKED"
     },
     "benchmark1M3Ron": 1034.8410000000001
