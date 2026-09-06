@@ -52,12 +52,13 @@ export function priceStrategyV1({
     });
   });
   const observedCandidates=rows.filter(x=>x.observedMarketPrice&&x.status==='SCREENING_CANDIDATE'&&x.remainingImportCostAllowanceRon>0);
-  const healthyObserved=observedCandidates.filter(x=>x.robustness==='HEALTHY_SCREENING_BUFFER').sort((a,b)=>a.sellPriceGrossRon-b.sellPriceGrossRon)[0]||null;
+  const healthyObserved=observedCandidates.filter(x=>x.robustness==='HEALTHY_SCREENING_BUFFER');
   const marketRangeCandidates=rows.filter(x=>x.marketRangeScenario&&x.status==='SCREENING_CANDIDATE'&&x.remainingImportCostAllowanceRon>0);
-  const healthyMarketRange=marketRangeCandidates.filter(x=>x.robustness==='HEALTHY_MARKET_RANGE_SCREENING_BUFFER').sort((a,b)=>a.sellPriceGrossRon-b.sellPriceGrossRon)[0]||null;
+  const healthyMarketRange=marketRangeCandidates.filter(x=>x.robustness==='HEALTHY_MARKET_RANGE_SCREENING_BUFFER');
+  const healthyAny=[...healthyObserved,...healthyMarketRange].sort((a,b)=>a.sellPriceGrossRon-b.sellPriceGrossRon||Number(b.observedMarketPrice)-Number(a.observedMarketPrice))[0]||null;
   const bestObserved=observedCandidates.sort((a,b)=>b.remainingImportCostAllowanceRon-a.remainingImportCostAllowanceRon)[0]||null;
   const fallback=rows.filter(x=>x.status==='SCREENING_CANDIDATE'&&x.remainingImportCostAllowanceRon>0).sort((a,b)=>a.sellPriceGrossRon-b.sellPriceGrossRon)[0]||null;
-  const recommended=healthyObserved||healthyMarketRange||bestObserved||fallback;
+  const recommended=healthyAny||bestObserved||fallback;
   return Object.freeze({
     schemaVersion:'MPR_PRICE_STRATEGY_V1',
     status:recommended?'SCREENING_PRICE_AVAILABLE':'NO_ELIGIBLE_PRICE',
@@ -66,6 +67,6 @@ export function priceStrategyV1({
     observedMarketRange:rangeMin!==null&&rangeMax!==null?Object.freeze({minRon:rangeMin,maxRon:rangeMax}):null,
     scenarios:Object.freeze(rows),
     purchaseAuthorized:false,
-    policy:'Prefer a healthy exact observed price. If exact observed prices are too tight, a price inside the current high-match observed market range may be used as a screening scenario, explicitly marked as not an exact observed offer. Prices outside the observed range remain stretch scenarios.'
+    policy:'Choose the lowest commercially robust price supported by the current observed market range. Exact observed offers have stronger evidence, but a lower in-range screening price may be preferred when it materially improves competitiveness while preserving robustness. Prices outside the observed range remain stretch scenarios.'
   });
 }
