@@ -9,7 +9,7 @@ test('priority car sunglasses pilot contains 3–5 unverified public candidates 
   assert.equal(data.status,'CANDIDATE_RESEARCH_ONLY');
   assert.ok(data.candidates.length>=3&&data.candidates.length<=5);
   for(const candidate of data.candidates){
-    assert.equal(candidate.evidenceStatus,'UNVERIFIED_PUBLIC_LISTING');
+    assert.ok(['UNVERIFIED_PUBLIC_LISTING','DIRECT_PUBLIC_LISTING_UNVERIFIED_COMMERCIAL_TERMS'].includes(candidate.evidenceStatus));
     assert.equal(candidate.quoteVerified,false);
     assert.equal(candidate.landedCostEligible,false);
     assert.match(candidate.sourceUrl,/^https:\/\//);
