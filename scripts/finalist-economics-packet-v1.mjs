@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {freightModeViabilityV1} from '../freight-mode-viability-v1.js';
+import {priceStrategyV1} from '../price-strategy-v1.js';
+import {finalistTestGateV1} from '../finalist-test-gate-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
 const SUPPLIERS='supplier-page-evidence-live.json';
@@ -9,6 +11,8 @@ const OBS='commercial-observations.json';
 const MARKET='market-intelligence-live.json';
 const OUT='finalist-economics-live.json';
 const FREIGHT='data/freight-benchmarks/china-romania-public-freight-market-2026-09-06.json';
+const CONSOLIDATION='data/consolidation/current-multi-sku-basket-2026-09-06.json';
+const CUSTOMS_DIR='data/customs-classification';
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 const key=s=>norm(s).replace(/\s+/g,'-');
 const arr=v=>Array.isArray(v)?v:[];
@@ -21,6 +25,7 @@ const sales=await read(SALES,{items:[]});
 const observations=await read(OBS,{products:{}});
 const market=await read(MARKET,{products:[]});
 const freight=await read(FREIGHT,{modes:[]});
+const consolidation=await read(CONSOLIDATION,null);
 const rows=[];
 
 for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
@@ -45,6 +50,39 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     const k=`${price.toFixed(2)}@${q}`;
     quantityScreens[k]=freightModeViabilityV1({freightCeilingRon:s.maxFreightTotalRon,modes});
   }
+
+  const customs=await read(`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`,null);
+  const consolidatedFinalist=arr(consolidation?.items).find(x=>key(x.canonicalKey)===canonical)||null;
+  const allocatedFreight300=num(consolidatedFinalist?.allocatedBenchmarkLogisticsRon);
+  const supplierUnitUsd=num(supplierLeader?.conservativeScreeningUnitPriceUsd);
+  const fxUsdRon=4.5199;
+  const supplierUnitRon=supplierUnitUsd===null?null:supplierUnitUsd*fxUsdRon;
+  const observedPriceList=prices;
+  const priceStrategy=supplierUnitRon===null?null:priceStrategyV1({
+    quantity:300,
+    goodsCostPerUnitRon:supplierUnitRon,
+    observedPricesRon:observedPriceList,
+    allocatedFreightTotalRon:allocatedFreight300,
+    stretchPricesRon:[49.99]
+  });
+  const customsReady=Boolean(customs?.exactCnCode)&&Boolean(customs?.customsDutyRate!==null&&customs?.customsDutyRate!==undefined)&&String(customs?.status||'').startsWith('VERIFIED');
+  const testGate=finalistTestGateV1({
+    stage:g.stage,
+    romaniaDemandReady:['PROVIDER_VERIFIED','MARKET_EVIDENCE_READY'].includes(String(g.romaniaDemandStatus||'')),
+    salesStatus:se?.status,
+    salesConfidence:se?.confidence,
+    supplierPageReady:Boolean(supplierLeader),
+    cnCode:customs?.exactCnCode||null,
+    taricStatus:customsReady?'VERIFIED':'UNKNOWN',
+    customsDutyRateVerified:customsReady,
+    freightFullyLoaded:false,
+    freightTotalRon:null,
+    importCostsReady:false,
+    landedCostConfirmed:false,
+    landedCostPerUnitRon:null,
+    marginPct:null,roiPct:null,profitPerUnitRon:null,
+    complianceReady:true
+  });
 
   const blockers=[];
   if(!supplierLeader)blockers.push('DIRECT_SUPPLIER_PAGE_EVIDENCE_REQUIRED');
@@ -101,9 +139,19 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
       customsDutyStatus:'UNKNOWN_PENDING_CN_TARIC'
     },
     quantityFreightScreens:quantityScreens,
-    preferredAutonomousFocus:'SEA_LCL_AT_LARGER_LOT_OR_OTHER_LOW_COST_CONSOLIDATED_FORWARDER',
+    consolidationScreen:consolidatedFinalist?{
+      allocatedBenchmarkLogisticsRon:allocatedFreight300,
+      allocatedBenchmarkLogisticsPerUnitRon:num(consolidatedFinalist.allocatedBenchmarkLogisticsPerUnitRon),
+      measureBasis:consolidatedFinalist.measureBasis,
+      sourceFile:CONSOLIDATION,
+      status:'SCREENING_ONLY'
+    }:null,
+    priceStrategy,
+    customsClassification:customs?{status:customs.status,exactCnCode:customs.exactCnCode,exactTaricCode:customs.exactTaricCode,customsDutyRate:customs.customsDutyRate,sourceFile:`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`}:null,
+    testGate,
+    preferredAutonomousFocus:'SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE',
     blockers,
-    testReady:false,
+    testReady:testGate.testReady,
     buyReady:false,
     supplierContactRequired:false,
     purchaseAuthorized:false,
