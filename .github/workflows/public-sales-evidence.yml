@@ -14,6 +14,7 @@ on:
       - 'freight-mode-viability-v1.js'
       - 'consolidation-engine-v1.js'
       - 'consolidation-basket-v1.js'
+      - 'scripts/consolidation-basket-live.mjs'
       - 'price-strategy-v1.js'
       - 'finalist-test-gate-v1.js'
       - 'data/consolidation/**'
@@ -50,6 +51,7 @@ jobs:
           node scripts/test-buy-decision.mjs
           node scripts/golden-product-pipeline.mjs --phase=final
           node scripts/finalist-evidence-queue.mjs
+          node scripts/consolidation-basket-live.mjs
           node scripts/finalist-economics-packet-v1.mjs
       - name: Verify truth boundary
         run: |
@@ -65,7 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json finalist-economics-live.json
+          git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json consolidation-basket-live.json finalist-economics-live.json
           if ! git diff --cached --quiet; then
             git commit -m "Persist public sales estimation evidence"
             git push origin main
