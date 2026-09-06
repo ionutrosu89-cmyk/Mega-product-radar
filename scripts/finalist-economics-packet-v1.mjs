@@ -4,6 +4,7 @@ import {freightModeViabilityV1} from '../freight-mode-viability-v1.js';
 import {freightCeilingV1} from '../freight-ceiling-v1.js';
 import {priceStrategyV1} from '../price-strategy-v1.js';
 import {finalistTestGateV1} from '../finalist-test-gate-v1.js';
+import {importCostStressV1} from '../import-cost-stress-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
 const SUPPLIERS='supplier-page-evidence-live.json';
@@ -65,6 +66,14 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     observedPricesRon:observedPriceList,
     allocatedFreightTotalRon:allocatedFreight300,
     stretchPricesRon:[49.99]
+  });
+  const screeningFreightPerUnit300=allocatedFreight300===null?null:allocatedFreight300/300;
+  const importCostStress=supplierUnitRon===null||screeningFreightPerUnit300===null?null:importCostStressV1({
+    quantities:[30,50,100,300],
+    sellPricesRon:[44.74,49.99],
+    goodsCostPerUnitRon:supplierUnitRon,
+    screeningFreightPerUnitRon:screeningFreightPerUnit300,
+    unknownImportCostPerUnitScenariosRon:[0.1,0.5,1,1.5,2,3]
   });
   const customsReady=Boolean(customs?.exactCnCode)&&Boolean(customs?.customsDutyRate!==null&&customs?.customsDutyRate!==undefined)&&String(customs?.status||'').startsWith('VERIFIED');
   const testGate=finalistTestGateV1({
@@ -149,6 +158,7 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
       status:'SCREENING_ONLY'
     }:null,
     priceStrategy,
+    importCostStress,
     customsClassification:customs?{status:customs.status,exactCnCode:customs.exactCnCode,exactTaricCode:customs.exactTaricCode,customsDutyRate:customs.customsDutyRate,sourceFile:`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`}:null,
     testGate,
     preferredAutonomousFocus:'SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE',
