@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "MPR_CUSTOMS_CLASSIFICATION_RESEARCH_V1",
+  "observedAt": "2026-09-06T16:15:00+03:00",
+  "market": "RO",
+  "importRegime": "B2B_STOCK_IMPORT",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "productDescription": "Magnetic leather/PU car sun visor sunglasses/ticket holder clip",
+  "exactCnCode": null,
+  "exactTaricCode": null,
+  "customsDutyRate": null,
+  "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
+  "officialSources": [
+    {
+      "name": "EU Tariff classification of goods",
+      "url": "https://taxation-customs.ec.europa.eu/customs/common-customs-tariff-cct/tariff-classification-goods_en",
+      "purpose": "CN/TARIC classification rules"
+    },
+    {
+      "name": "EU CLASS",
+      "url": "https://taxation-customs.ec.europa.eu/online-services/online-services-and-databases-customs/classification-information-system-class_en",
+      "purpose": "Official classification research"
+    },
+    {
+      "name": "European Binding Tariff Information",
+      "url": "https://taxation-customs.ec.europa.eu/online-services/online-services-and-databases-customs/european-binding-tariff-information-ebti_en",
+      "purpose": "Binding legal classification decisions"
+    }
+  ],
+  "candidateHeadings": [
+    {
+      "heading": "4202",
+      "researchOnly": true,
+      "rationale": "Potentially relevant only if the article is legally treated as a spectacle-type case/container. Product is also a visor-mounted clip, so heading cannot be assumed."
+    },
+    {
+      "heading": "3926",
+      "researchOnly": true,
+      "rationale": "Potentially relevant for other articles of plastics when plastic character dominates, but current product is described as leather/PU with magnetic clip, so cannot be assumed."
+    },
+    {
+      "heading": "8305/8308/other metal articles",
+      "researchOnly": true,
+      "rationale": "Metal/magnetic clip functionality may affect classification depending on essential character and construction. Exact heading cannot be assumed."
+    }
+  ],
+  "evidenceGap": [
+    "exact material composition by percentage/layer",
+    "construction and essential-character determination",
+    "official comparable BTI or classification regulation"
+  ],
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "Research headings are never converted into CN/TARIC codes or duty rates without sufficient official classification evidence. Unknown customs duty never becomes zero."
+}
