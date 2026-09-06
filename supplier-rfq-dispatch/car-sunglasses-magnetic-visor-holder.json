@@ -1,22 +1,24 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-08-23T20:09:00Z",
+  "updatedAt": "2026-09-06T10:52:00+03:00",
   "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
   "productTitle": "Car sunglasses magnetic visor holder",
   "rfqTemplate": "docs/rfq-car-sunglasses-magnetic-visor-holder.md",
-  "policy": "This queue records outreach state only. Creating or editing a queue entry never means a supplier was contacted. SENT requires a real human/agent dispatch timestamp; REPLIED requires a real supplier response reference.",
+  "policy": "This queue records outreach state only. REPLIED means a real supplier reply was evidenced by the user; timestamps may represent the latest confirmed observation time when the exact platform timestamp is not available. A reply does not mean the quote is commercially complete or landed-cost eligible.",
   "entries": [
     {
       "priority": 1,
       "supplierName": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
       "platform": "Alibaba",
       "candidateSource": "supplier-candidates/car-sunglasses-magnetic-visor-holder.json",
-      "status": "NOT_SENT",
-      "sentAt": null,
-      "sentBy": null,
-      "responseReceivedAt": null,
-      "responseReference": null,
-      "quoteFile": null
+      "status": "REPLIED",
+      "sentAt": "2026-09-06T10:52:00+03:00",
+      "sentBy": "USER",
+      "responseReceivedAt": "2026-09-06T10:52:00+03:00",
+      "responseReference": "USER_PROVIDED_ALIBABA_CHAT_SCREENSHOTS_2026-09-06",
+      "quoteFile": "supplier-quotes/car-sunglasses-magnetic-visor-holder-ningbo-desheng-2026-09-06.json",
+      "sentAtBasis": "LATEST_CONFIRMED_BY_USER_CHAT_EVIDENCE",
+      "responseReceivedAtBasis": "LATEST_CONFIRMED_BY_USER_CHAT_EVIDENCE"
     },
     {
       "priority": 2,
