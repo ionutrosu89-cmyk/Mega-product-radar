@@ -22,7 +22,7 @@
     "carrier": "DHL Express",
     "service": "Time Definite International / Import",
     "baseRateRon": null,
-    "fuelSurchargePct": null,
+    "fuelSurchargePct": 43.25,
     "demandSurchargeRonPerKg": 0,
     "demandSurchargePeriodChecked": "2026-09-06",
     "futureDemandSurcharge": {
@@ -38,10 +38,13 @@
     "usableForDecision": false,
     "blockers": [
       "LIVE_DHL_BASE_RATE_REQUIRED",
-      "CURRENT_DHL_FUEL_SURCHARGE_REQUIRED",
       "ANY_APPLICABLE_CLEARANCE_OR_OPTIONAL_SERVICE_CHARGES_REQUIRED"
     ],
-    "policy": "DHL benchmark records official chargeable-weight and surcharge rules only. Without a live base rate it is not a freight quote."
+    "policy": "DHL benchmark has current fuel and demand-surcharge rules for 2026-09-06, but without a live/base transport rate and applicable clearance/optional-service charges it is not a complete freight quote.",
+    "fuelSurchargePeriod": "2026-08-31/2026-09-06",
+    "fuelSurchargeEvidenceClass": "OFFICIAL_CURRENT_CARRIER_SURCHARGE",
+    "fuelSurchargeEvidenceUrl": "https://www.dhl.com/ro-ro/home/express/products-and-solutions/products-and-services-overview/surcharges.html",
+    "demandSurchargeStatus": "NOT_ACTIVE_ON_2026-09-06"
   },
   "purchaseAuthorized": false
 }
