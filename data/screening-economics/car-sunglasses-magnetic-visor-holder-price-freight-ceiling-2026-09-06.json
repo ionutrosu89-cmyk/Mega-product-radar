@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "MPR_PRICE_FREIGHT_CEILING_SCREEN_V1",
+  "generatedAt": "2026-09-06T15:38:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "supplierPublicEvidence": {
+    "supplier": "Ningbo Desheng Imp. & Exp. Co., Ltd.",
+    "conservativeUnitPriceUsd": 0.75,
+    "usdRon": 4.5199,
+    "goodsCostPerUnitRon": 3.3899,
+    "sourceUrl": "https://www.alibaba.com/pla/Magnetic-Leather-Multi-Functional-Car-Sun_1601595129899.html",
+    "evidenceClass": "DIRECT_OBSERVED"
+  },
+  "sellerTargets": {
+    "minMarginPct": 20,
+    "minRoiPct": 45
+  },
+  "priceScenarios": [
+    {
+      "sellPriceGrossRon": 39,
+      "sourceBasis": "Median of existing Romania public offers",
+      "goodsOnlyProfitPerUnitRon": 6.17,
+      "goodsOnlyMarginPct": 19.15,
+      "goodsOnlyRoiPct": 182.11,
+      "maxEligibleFreightTotalRon": -8.4,
+      "status": "CURRENT_PRICE_TOO_LOW_BEFORE_FREIGHT"
+    },
+    {
+      "sellPriceGrossRon": 44.74,
+      "sourceBasis": "Upper existing comparable Romania public offer",
+      "goodsOnlyProfitPerUnitRon": 9.13,
+      "goodsOnlyMarginPct": 24.68,
+      "goodsOnlyRoiPct": 269.22,
+      "maxEligibleFreightTotalRon": 51.9,
+      "status": "FREIGHT_CEILING_AVAILABLE_BUT_TIGHT"
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "sourceBasis": "Strategic test price scenario, not observed sale evidence",
+      "goodsOnlyProfitPerUnitRon": 11.83,
+      "goodsOnlyMarginPct": 28.63,
+      "goodsOnlyRoiPct": 348.89,
+      "maxEligibleFreightTotalRon": 106.8,
+      "status": "FREIGHT_CEILING_AVAILABLE"
+    }
+  ],
+  "minimumGrossSellPriceAtGoodsOnlyRon": 39.79,
+  "interpretation": {
+    "currentMedian39Ron": "Fails the 20% margin target even before freight/customs.",
+    "observed44_74Ron": "Passes goods-only targets, but total freight headroom for 30 units is only about 51.90 RON before customs/brokerage.",
+    "strategic49_99Ron": "Creates about 106.80 RON freight headroom before customs/brokerage; still requires real public carrier economics."
+  },
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "This is screening only. Negative freight headroom is a safe reject signal. Positive headroom is not proof of viability because customs, brokerage, import VAT treatment and carrier surcharges may reduce it."
+}
