@@ -18,7 +18,7 @@ jobs:
       APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
       MPR_APIFY_DETAIL_AUTHORIZATION: USER_APPROVED_APIFY_SUPPLIER_DETAIL_PILOT_2026_08_29
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
