@@ -34,7 +34,31 @@
   },
   "lclLocalCharges": {
     "status": "UNKNOWN_NOT_PUBLICLY_COMPLETE",
-    "note": "No complete public Romania LCL destination CFS/documentation/brokerage/local-delivery schedule found that can safely be treated as fully-loaded landed-cost evidence."
+    "publicCrossServiceReferenceAvailable": true,
+    "note": "No complete public Romania LCL consolidator schedule found for CFS/deconsolidation/documentation/brokerage/local delivery. Postal and express customs-representation tariffs are retained only as cross-service benchmarks and never applied directly to sea LCL."
   },
-  "policy": "DHL Express processing fees are carrier-specific and must not be reused as LCL maritime local charges. Unknown LCL local charges remain UNKNOWN, never zero."
+  "policy": "Provider customs tariffs remain service-scoped. Posta H1 and DHL Express clearance figures may be used only as public order-of-magnitude benchmarks; they are not sea-LCL charges. Unknown LCL local charges remain UNKNOWN, never zero.",
+  "updatedAt": "2026-09-06T20:41:00+03:00",
+  "publicCustomsRepresentationBenchmarks": [
+    {
+      "provider": "Posta Romana",
+      "serviceScope": "POSTAL_CUSTOMS_REPRESENTATION_H1",
+      "customerType": "LEGAL_ENTITY_OR_PFA",
+      "primaryDeclarationOneArticleRon": 170,
+      "additionalArticleRon": 30,
+      "vatIncluded": true,
+      "sourceClass": "OFFICIAL_PUBLIC_PROVIDER_TARIFF",
+      "sourceUrl": "https://www.posta-romana.ro/cnpr-data/_editor/files/Tarife%20comisionariat%20vamal%2001_01_2026%20%28rebranding%29.pdf",
+      "applicableDirectlyToSeaLcl": false
+    },
+    {
+      "provider": "DHL Express",
+      "serviceScope": "EXPRESS_CLEARANCE_PROCESSING",
+      "clearanceProcessingRon": 49,
+      "nonRoutineEntryRon": 220,
+      "sourceClass": "OFFICIAL_PUBLIC_PROVIDER_TARIFF",
+      "sourceUrl": "https://mydhl.express.dhl/content/dam/downloads/ro/en/rate-guide/service_and_rate_guide_ro_en_2026.pdf.coredownload.pdf",
+      "applicableDirectlyToSeaLcl": false
+    }
+  ]
 }
