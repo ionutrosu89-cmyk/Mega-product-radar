@@ -190,6 +190,17 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     salesReady:se?.status==='ESTIMATED_HIGH_CONFIDENCE'&&num(se?.confidence)>=75,
     supplierPageReady:Boolean(supplierLeader)
   });
+  const recoverableWorstCasePass=Boolean(recoverableWorstCaseEnvelopeRow?.passesTargets);
+  const screeningVerdictRecoverableVat=finalistScreeningVerdictV1({
+    stage:g.stage,
+    quantity:300,
+    screeningPriceRon:num(priceStrategy?.primaryPrice?.sellPriceGrossRon),
+    residualLocalCostCeilingPerUnitRon:num(residualLocalCostCeilingRecoverableVat?.maxAdditionalLocalImportCostPerUnitRon),
+    conservativeWorstCasePass:recoverableWorstCasePass,
+    priceInsideObservedMarketRange:priceStrategy?.primaryPrice?.insideObservedMarketRange===true,
+    salesReady:se?.status==='ESTIMATED_HIGH_CONFIDENCE'&&num(se?.confidence)>=75,
+    supplierPageReady:Boolean(supplierLeader)
+  });
   const customsReady=Boolean(customs?.exactCnCode)&&Boolean(customs?.customsDutyRate!==null&&customs?.customsDutyRate!==undefined)&&String(customs?.status||'').startsWith('VERIFIED');
   const testGate=finalistTestGateV1({
     stage:g.stage,
@@ -295,6 +306,10 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     }:null,
     customsDutySensitivity,
     screeningVerdict,
+    screeningVerdictsByVatTreatment:{
+      NON_RECOVERABLE:screeningVerdict,
+      RECOVERABLE:screeningVerdictRecoverableVat
+    },
     customsClassification:customs?{status:customs.status,exactCnCode:customs.exactCnCode,exactTaricCode:customs.exactTaricCode,customsDutyRate:customs.customsDutyRate,sourceFile:`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`}:null,
     testGate,
     preferredAutonomousFocus:'SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE',
