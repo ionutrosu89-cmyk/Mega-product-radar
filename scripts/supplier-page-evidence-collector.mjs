@@ -1,3 +1,4 @@
+import {rankSupplierPagesV1} from '../supplier-page-ranking-v1.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -50,13 +51,16 @@ for(const file of files){
       evidenceClass:pageBacked?'DIRECT_OBSERVED':'DISCOVERY_ONLY'
     };
   });
+  const ranking=rankSupplierPagesV1(arr(data?.candidates));
+  const leaderName=ranking.leader?.supplierName||null;
   products.push({
     canonicalKey:productKey,
     title:productTitle,
     sourceFile:path.join(DIR,file),
     status:candidates.some(x=>x.pageBackedScreeningReady)?'PAGE_BACKED_SCREENING_READY':'PAGE_EVIDENCE_INCOMPLETE',
     candidates,
-    bestScreeningCandidate:candidates.filter(x=>x.pageBackedScreeningReady).sort((a,b)=>(a.conservativeScreeningUnitPriceUsd??Infinity)-(b.conservativeScreeningUnitPriceUsd??Infinity))[0]||null
+    supplierPageRanking:ranking,
+    bestScreeningCandidate:leaderName?candidates.find(x=>x.supplierName===leaderName)||null:null
   });
 }
 
