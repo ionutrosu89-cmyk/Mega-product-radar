@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "MPR_QUANTITY_FREIGHT_CEILING_V1",
+  "generatedAt": "2026-09-06T15:38:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "supplierPublicUnitPriceUsd": 0.75,
+  "usdRon": 4.5199,
+  "goodsCostPerUnitRon": 3.3899,
+  "targets": {
+    "minMarginPct": 20,
+    "minRoiPct": 45
+  },
+  "scenarios": [
+    {
+      "sellPriceGrossRon": 39,
+      "quantity": 30,
+      "maxFreightTotalRon": -8.4,
+      "status": "PRICE_TOO_LOW_BEFORE_FREIGHT"
+    },
+    {
+      "sellPriceGrossRon": 39,
+      "quantity": 50,
+      "maxFreightTotalRon": -14,
+      "status": "PRICE_TOO_LOW_BEFORE_FREIGHT"
+    },
+    {
+      "sellPriceGrossRon": 39,
+      "quantity": 100,
+      "maxFreightTotalRon": -28,
+      "status": "PRICE_TOO_LOW_BEFORE_FREIGHT"
+    },
+    {
+      "sellPriceGrossRon": 39,
+      "quantity": 300,
+      "maxFreightTotalRon": -84,
+      "status": "PRICE_TOO_LOW_BEFORE_FREIGHT"
+    },
+    {
+      "sellPriceGrossRon": 44.74,
+      "quantity": 30,
+      "maxFreightTotalRon": 51.9,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 44.74,
+      "quantity": 50,
+      "maxFreightTotalRon": 86.5,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 44.74,
+      "quantity": 100,
+      "maxFreightTotalRon": 173,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 44.74,
+      "quantity": 300,
+      "maxFreightTotalRon": 519,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "quantity": 30,
+      "maxFreightTotalRon": 106.8,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "quantity": 50,
+      "maxFreightTotalRon": 178,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "quantity": 100,
+      "maxFreightTotalRon": 356,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    },
+    {
+      "sellPriceGrossRon": 49.99,
+      "quantity": 300,
+      "maxFreightTotalRon": 1068,
+      "status": "FREIGHT_HEADROOM_AVAILABLE"
+    }
+  ],
+  "minimumGrossSellPriceAtGoodsOnlyRon": 39.79,
+  "supplierContactRequired": false,
+  "purchaseAuthorized": false,
+  "policy": "Freight headroom is a theoretical maximum before customs/brokerage/import-cost additions. Negative headroom safely rejects the price point. Positive headroom must still be reduced by all applicable import costs."
+}
