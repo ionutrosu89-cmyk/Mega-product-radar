@@ -70,5 +70,7 @@ jobs:
           git add market-intelligence-live.json public-sales-estimation-live.json commercial-hardening-live.json golden-pipeline-live.json finalist-evidence-queue-live.json consolidation-basket-live.json finalist-economics-live.json
           if ! git diff --cached --quiet; then
             git commit -m "Persist public sales estimation evidence"
+            git fetch origin main
+            git rebase origin/main
             git push origin main
           fi
