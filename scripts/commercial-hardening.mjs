@@ -78,15 +78,15 @@ function supplierCommercial(p,o,pageProduct=null){
     platform:String(x?.platform||x?.source||'').trim(),
     sourceUrl:String(x?.sourceUrl||x?.url||'').trim(),
     productTitle:String(x?.productTitle||x?.title||x?.name||'').trim(),
-    priceMin:explicitFinite(x,'priceMin')?num(x.priceMin):(explicitFinite(x,'observedPriceMinUsd')?num(x.observedPriceMinUsd):null),
-    priceMax:explicitFinite(x,'priceMax')?num(x.priceMax):(explicitFinite(x,'observedPriceMaxUsd')?num(x.observedPriceMaxUsd):(explicitFinite(x,'unitPrice')?num(x.unitPrice):null)),
+    priceMin:explicitFinite(x,'priceMin')?num(x.priceMin):(explicitFinite(x,'publicPriceMinUsd')?num(x.publicPriceMinUsd):(explicitFinite(x,'observedPriceMinUsd')?num(x.observedPriceMinUsd):null)),
+    priceMax:explicitFinite(x,'priceMax')?num(x.priceMax):(explicitFinite(x,'publicPriceMaxUsd')?num(x.publicPriceMaxUsd):(explicitFinite(x,'observedPriceMaxUsd')?num(x.observedPriceMaxUsd):(explicitFinite(x,'unitPrice')?num(x.unitPrice):null))),
     currency:String(x?.currency||'USD').trim().toUpperCase(),
-    moq:explicitFinite(x,'moq')?num(x.moq):(explicitFinite(x,'observedMoq')?num(x.observedMoq):null),
+    moq:explicitFinite(x,'moq')?num(x.moq):(explicitFinite(x,'publicMoq')?num(x.publicMoq):(explicitFinite(x,'observedMoq')?num(x.observedMoq):null)),
     observedAt:String(x?.observedAt||x?.verifiedAt||x?.updatedAt||'').trim(),
     productMatch:String(x?.productMatch||x?.matchQuality||'').trim().toUpperCase(),
     material:x?.material||null,
     dimensions:x?.productDimensions||x?.dimensions||null
-  })).filter(x=>/^https:\/\//i.test(x.sourceUrl)&&x.supplier&&x.productTitle&&(num(x.priceMax)>0||num(x.priceMin)>0)&&num(x.moq)>0&&['HIGH','EXACT'].includes(x.productMatch||'HIGH'));
+  })).filter(x=>/^https:\/\//i.test(x.sourceUrl)&&x.supplier&&x.productTitle&&(num(x.priceMax)>0||num(x.priceMin)>0)&&num(x.moq)>0&&['HIGH','EXACT'].includes(x.productMatch||'HIGH')&&x?.pageBackedScreeningReady!==false);
 
   const pageBest=pages.slice().sort((a,b)=>num(a.priceMax||a.priceMin)-num(b.priceMax||b.priceMin))[0]||null;
   const quoteBest=completeQuotes.slice().sort((a,b)=>(num(a.unitPrice)+num(a.shippingRon)/Math.max(1,num(a.moq)))-(num(b.unitPrice)+num(b.shippingRon)/Math.max(1,num(b.moq))))[0]||null;
