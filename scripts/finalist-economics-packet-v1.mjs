@@ -7,6 +7,7 @@ import {finalistTestGateV1} from '../finalist-test-gate-v1.js';
 import {importCostStressV1} from '../import-cost-stress-v1.js';
 import {shipmentFixedCostStressV1} from '../shipment-fixed-cost-stress-v1.js';
 import {lclScreeningRangeV1,localChargeScopeGuardV1} from '../lcl-local-charge-guard-v1.js';
+import {conservativeLandedEnvelopeV1} from '../conservative-landed-envelope-v1.js';
 import {customsDutySensitivityV1} from '../customs-duty-sensitivity-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
@@ -107,6 +108,20 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
       }
     ]
   }):null;
+  const finalistBareMeasure=consolidation?.selected?.finalistLogisticsEvidence?.dimensions
+    ?(Number(consolidation.selected.finalistLogisticsEvidence.dimensions.lengthCm||0)*Number(consolidation.selected.finalistLogisticsEvidence.dimensions.widthCm||0)*Number(consolidation.selected.finalistLogisticsEvidence.dimensions.heightCm||0)/1_000_000)*300
+    :null;
+  const conservativeLandedEnvelope=supplierUnitRon===null||!publicLclRange?.historicalAllInBeforeDutyVatRonMax||!num(consolidation?.selected?.result?.totalMeasure)||!finalistBareMeasure?null:conservativeLandedEnvelopeV1({
+    quantity:300,
+    unitGoodsCostRon:supplierUnitRon,
+    skuChargeableMeasure:finalistBareMeasure,
+    consolidatedTotalMeasure:num(consolidation.selected.result.totalMeasure),
+    shipmentLogisticsBeforeDutyVatRon:publicLclRange.historicalAllInBeforeDutyVatRonMax,
+    dutyRateScenariosPct:[3,6.5,10],
+    importVatRatePct:21,
+    vatRecoverableModes:['RECOVERABLE','NON_RECOVERABLE'],
+    sellPricesRon:[44.74,49.99]
+  });
   const fclToLclScopeGuard=lclRangeEvidence?.officialRomaniaContainerChargeContext?localChargeScopeGuardV1({
     shipmentMode:'SEA_LCL',
     chargeScope:lclRangeEvidence.officialRomaniaContainerChargeContext.scope,
@@ -211,6 +226,7 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     importCostStress,
     fixedShipmentCostStress,
     publicLclRange,
+    conservativeLandedEnvelope,
     localChargeScopeGuard:fclToLclScopeGuard,
     importProcessingEvidence:importProcessingEvidence?{
       sourceFile:IMPORT_PROCESSING,
