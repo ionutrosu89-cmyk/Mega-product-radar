@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_SUPPLIER_PAGE_EVIDENCE_LIVE_V1",
-  "updatedAt": "2026-09-06T13:27:22.625Z",
+  "updatedAt": "2026-09-06T13:28:30.387Z",
   "status": "READY",
   "products": [
     {
@@ -21,6 +21,24 @@
           "publicPriceMaxUsd": 3,
           "conservativeScreeningUnitPriceUsd": 3,
           "publicMoq": 1,
+          "publicPriceTiers": [
+            {
+              "minQty": 1,
+              "maxQty": 59,
+              "unitPriceUsd": 3
+            },
+            {
+              "minQty": 60,
+              "maxQty": 999,
+              "unitPriceUsd": 2.8
+            },
+            {
+              "minQty": 1000,
+              "maxQty": null,
+              "unitPriceUsd": 2.5
+            }
+          ],
+          "unitGrossWeightKg": 0.5,
           "supplierYears": 5,
           "supplierRating": 4.7,
           "observedSalesCount": null,
@@ -93,6 +111,24 @@
         "publicPriceMaxUsd": 3,
         "conservativeScreeningUnitPriceUsd": 3,
         "publicMoq": 1,
+        "publicPriceTiers": [
+          {
+            "minQty": 1,
+            "maxQty": 59,
+            "unitPriceUsd": 3
+          },
+          {
+            "minQty": 60,
+            "maxQty": 999,
+            "unitPriceUsd": 2.8
+          },
+          {
+            "minQty": 1000,
+            "maxQty": null,
+            "unitPriceUsd": 2.5
+          }
+        ],
+        "unitGrossWeightKg": 0.5,
         "supplierYears": 5,
         "supplierRating": 4.7,
         "observedSalesCount": null,
@@ -128,6 +164,8 @@
           "publicPriceMaxUsd": 0.75,
           "conservativeScreeningUnitPriceUsd": 0.75,
           "publicMoq": 2,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 24,
           "supplierRating": 4.4,
           "observedSalesCount": null,
@@ -152,6 +190,24 @@
           "publicPriceMaxUsd": 0.89,
           "conservativeScreeningUnitPriceUsd": 0.89,
           "publicMoq": 50,
+          "publicPriceTiers": [
+            {
+              "minQty": 50,
+              "maxQty": 499,
+              "unitPriceUsd": 0.89
+            },
+            {
+              "minQty": 500,
+              "maxQty": 4999,
+              "unitPriceUsd": 0.79
+            },
+            {
+              "minQty": 5000,
+              "maxQty": null,
+              "unitPriceUsd": 0.69
+            }
+          ],
+          "unitGrossWeightKg": null,
           "supplierYears": 2,
           "supplierRating": 4.7,
           "observedSalesCount": null,
@@ -180,6 +236,8 @@
           "publicPriceMaxUsd": 0.97,
           "conservativeScreeningUnitPriceUsd": 0.97,
           "publicMoq": 60,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": null,
           "supplierRating": null,
           "observedSalesCount": null,
@@ -204,6 +262,8 @@
           "publicPriceMaxUsd": 0.73,
           "conservativeScreeningUnitPriceUsd": 0.73,
           "publicMoq": 10,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": null,
           "supplierRating": null,
           "observedSalesCount": null,
@@ -228,6 +288,8 @@
           "publicPriceMaxUsd": 1.65,
           "conservativeScreeningUnitPriceUsd": 1.65,
           "publicMoq": 10,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": null,
           "supplierRating": null,
           "observedSalesCount": null,
@@ -350,6 +412,8 @@
         "publicPriceMaxUsd": 0.75,
         "conservativeScreeningUnitPriceUsd": 0.75,
         "publicMoq": 2,
+        "publicPriceTiers": null,
+        "unitGrossWeightKg": null,
         "supplierYears": 24,
         "supplierRating": 4.4,
         "observedSalesCount": null,
@@ -381,6 +445,8 @@
           "publicPriceMaxUsd": 3.99,
           "conservativeScreeningUnitPriceUsd": 3.99,
           "publicMoq": 1,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 17,
           "supplierRating": 4.7,
           "observedSalesCount": null,
@@ -405,6 +471,8 @@
           "publicPriceMaxUsd": 0.11,
           "conservativeScreeningUnitPriceUsd": 0.11,
           "publicMoq": 20,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 6,
           "supplierRating": 4.6,
           "observedSalesCount": null,
@@ -429,6 +497,8 @@
           "publicPriceMaxUsd": 1.19,
           "conservativeScreeningUnitPriceUsd": 1.19,
           "publicMoq": 10,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 8,
           "supplierRating": 4.4,
           "observedSalesCount": null,
@@ -453,6 +523,8 @@
           "publicPriceMaxUsd": 0.94,
           "conservativeScreeningUnitPriceUsd": 0.94,
           "publicMoq": 10,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 1,
           "supplierRating": 5,
           "observedSalesCount": null,
@@ -477,6 +549,8 @@
           "publicPriceMaxUsd": 3.4,
           "conservativeScreeningUnitPriceUsd": 3.4,
           "publicMoq": 1,
+          "publicPriceTiers": null,
+          "unitGrossWeightKg": null,
           "supplierYears": 4,
           "supplierRating": 4.9,
           "observedSalesCount": null,
