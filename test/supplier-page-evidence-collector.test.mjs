@@ -19,4 +19,7 @@ test('supplier page collector emits no-contact page-backed registry',async()=>{
  assert.equal(p.bestScreeningCandidate.supplierContactRequired,false);
  assert.equal(p.bestScreeningCandidate.evidenceClass,'DIRECT_OBSERVED');
  assert.ok(p.bestScreeningCandidate.conservativeScreeningUnitPriceUsd>0);
+ assert.equal(p.bestScreeningCandidate.supplierName,'Ningbo Desheng Imp. & Exp. Co., Ltd.');
+ assert.equal(p.bestScreeningCandidate.directProductPage,true);
+ assert.ok(p.candidates.filter(x=>/wholesale/i.test(x.sourceUrl||'')).every(x=>x.pageBackedScreeningReady===false));
 });
