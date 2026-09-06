@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "MPR_PUBLIC_FREIGHT_MARKET_BENCHMARK_V1",
+  "observedAt": "2026-09-06T15:38:00+03:00",
+  "lane": "CN-RO",
+  "destination": "Romania",
+  "fxUsdRon": 4.5199,
+  "modes": [
+    {
+      "id": "AIR_CARGO_PEK_OTP_45KG_MIN",
+      "mode": "AIR_CARGO",
+      "origin": "Beijing PKX",
+      "destination": "Bucharest OTP",
+      "rateRonPerKg": 41,
+      "minimumChargeableKg": 45,
+      "knownMinimumFreightRon": 1845,
+      "transitDays": "3-5",
+      "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
+      "sourceUrl": "https://goodhopefreight.com/freight/freight-price-list-from-china-to-romania.html",
+      "finalQuote": false
+    },
+    {
+      "id": "SEA_LCL_NINGBO_CONSTANTA_1CBM_MIN",
+      "mode": "SEA_LCL",
+      "origin": "Ningbo",
+      "destination": "Constanta",
+      "rateUsdPerCbm": 77,
+      "minimumBillableCbm": 1,
+      "knownMinimumFreightUsd": 77,
+      "knownMinimumFreightRon": 348.03,
+      "transitDays": 26,
+      "sourceClass": "PUBLIC_FORWARDER_PUBLISHED_RATE",
+      "sourceUrl": "https://goodhopefreight.com/romania/lcl.html",
+      "finalQuote": false
+    },
+    {
+      "id": "RAIL_LCL_CN_RO_1CBM_MIN",
+      "mode": "RAIL_LCL",
+      "origin": "China",
+      "destination": "Bucharest/Timisoara",
+      "rateUsdPerCbm": 230,
+      "minimumBillableCbm": 1,
+      "knownMinimumFreightUsd": 230,
+      "knownMinimumFreightRon": 1039.58,
+      "transitDays": "28-35 terminal-to-terminal",
+      "sourceClass": "PUBLIC_FORWARDER_INDICATIVE_RATE",
+      "sourceUrl": "https://www.sinoeurorailway.com/service/china-to-romania-by-railway-freight/",
+      "finalQuote": false
+    }
+  ],
+  "taxClaimsIgnored": true,
+  "policy": "Only published freight rate/billing-basis fields are retained. Any tax/VAT statements on forwarder pages are ignored; MPR uses its Romania market profile and official customs sources. These are screening floors, not final freight quotes."
+}
