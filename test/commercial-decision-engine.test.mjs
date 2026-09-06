@@ -25,3 +25,29 @@ test('incomplete supplier data never passes supplier gate',()=>{const s=state();
 test('high-confidence sales estimate satisfies sales gate without pretending it is actual sales',()=>{const d=evaluateCommercialDecision(product(),state());assert.equal(d.gates.estimatedSalesReady,true);assert.equal(d.estimationEvidence.actualCompetitorSalesObserved,false);assert.equal(d.estimationEvidence.salesEstimateStatus,'ESTIMATED_HIGH_CONFIDENCE');});
 
 test('missing trend evidence fails closed instead of passing Trend by default',()=>{const p=product();delete p.trendIntelligence;const d=evaluateCommercialDecision(p,state());assert.equal(d.gates.trendSafe,false);assert.equal(d.status,'HOLD');assert.match(d.blockers.join(' '),/trend verificat/i);});
+
+
+test('Commercial Score is derived only and never overrides HOLD gates',()=>{
+  const p=product();
+  p.romaniaDemand.score=82;
+  p.marketGap={score:78};
+  const s=state();
+  const key=normalizeProductKey(p.name);
+  s.quantityEconomics={
+    [key]:{
+      status:'CALCULATED',
+      recommendation:{quantity:30},
+      rows:[{quantity:30,status:'CALCULATED',marginPct:30,roiPct:75,capitalRequiredRon:900}]
+    }
+  };
+  const ready=evaluateCommercialDecision(p,s);
+  assert.equal(ready.commercialScore.status,'CALCULATED');
+  assert.ok(ready.commercialScore.score>0);
+  const blockedState=state();
+  blockedState.landedCosts={};
+  blockedState.quantityEconomics=s.quantityEconomics;
+  const blocked=evaluateCommercialDecision(p,blockedState);
+  assert.equal(blocked.status,'HOLD');
+  assert.equal(blocked.commercialAction,'HOLD');
+  assert.equal(blocked.commercialScore.purchaseAuthorized,false);
+});
