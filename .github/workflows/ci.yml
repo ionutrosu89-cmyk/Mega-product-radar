@@ -41,7 +41,7 @@ jobs:
             scripts/market-intelligence-postprocess.mjs scripts/market-intelligence-history.mjs \
             scripts/market-trend-postprocess.mjs scripts/opportunity-ranking-v2.mjs \
             scripts/free-intelligence-suite.mjs scripts/test-buy-decision.mjs \
-            scripts/supplier-page-evidence-collector.mjs scripts/public-sales-evidence.mjs scripts/commercial-hardening.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
+            scripts/supplier-page-evidence-collector.mjs scripts/public-sales-evidence.mjs scripts/commercial-hardening.mjs scripts/finalist-economics-packet-v1.mjs scripts/intelligence-ecosystem-v25.mjs scripts/provider-intelligence-v26.mjs \
             scripts/commercial-final-decision.mjs scripts/golden-product-pipeline.mjs \
             scripts/category-radar-postprocess.mjs scripts/watchlist-postprocess.mjs \
             scripts/free-readiness-audit.mjs scripts/dataforseo-keywords.mjs scripts/dataforseo-total-budget.mjs \
@@ -126,6 +126,8 @@ jobs:
           node scripts/test-buy-decision.mjs
           node scripts/commercial-final-decision.mjs
           node scripts/golden-product-pipeline.mjs --phase=final
+          node scripts/finalist-evidence-queue.mjs
+          node scripts/finalist-economics-packet-v1.mjs
           node scripts/category-radar-postprocess.mjs
           node scripts/watchlist-postprocess.mjs
           node scripts/free-readiness-audit.mjs
