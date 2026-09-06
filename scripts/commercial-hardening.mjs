@@ -85,7 +85,8 @@ function supplierCommercial(p,o,pageProduct=null){
     observedAt:String(x?.observedAt||x?.verifiedAt||x?.updatedAt||'').trim(),
     productMatch:String(x?.productMatch||x?.matchQuality||'').trim().toUpperCase(),
     material:x?.material||null,
-    dimensions:x?.productDimensions||x?.dimensions||null
+    dimensions:x?.productDimensions||x?.dimensions||null,
+    pageBackedScreeningReady:x?.pageBackedScreeningReady===true
   })).filter(x=>/^https:\/\//i.test(x.sourceUrl)&&x.supplier&&x.productTitle&&(num(x.priceMax)>0||num(x.priceMin)>0)&&num(x.moq)>0&&['HIGH','EXACT'].includes(x.productMatch||'HIGH')&&x?.pageBackedScreeningReady!==false);
 
   const pageBest=pages.slice().sort((a,b)=>num(a.priceMax||a.priceMin)-num(b.priceMax||b.priceMin))[0]||null;
