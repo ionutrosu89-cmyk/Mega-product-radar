@@ -1,5 +1,7 @@
 import {analyzeQuantityEconomics} from './quantity-economics-v1.js';
 const Q=[30,50,100,300];
+const STORE='megaRadarQuantityEconomicsV1';
+const keyOf=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 const n=id=>{const v=document.querySelector(id)?.value;return v===''?null:Number(v);};
 const lots=document.querySelector('#lots');
 lots.innerHTML=Q.map(q=>`<article class="card"><h3>${q} buc.</h3><label>Preț furnizor/buc. RON<input id="price-${q}" type="number" step="0.0001"></label><label>Ref. ofertă<input id="priceRef-${q}"></label><label>Transport total RON<input id="freight-${q}" type="number" step="0.01"></label><label>Ref. transport<input id="freightRef-${q}"></label><label>Brokeraj total RON<input id="broker-${q}" type="number" step="0.01" value="0"></label><label>Ref. brokeraj<input id="brokerRef-${q}"></label></article>`).join('');
@@ -17,5 +19,7 @@ document.querySelector('#calculate').addEventListener('click',()=>{
   sellerSettings:{vatRate:21,marketplaceRate:n('#marketplace')??17,adsRate:n('#ads')??8,returnsReserveRate:n('#returns')??4,fulfillmentPerUnit:n('#fulfillment')??6}
  });
  document.querySelector('#rows').innerHTML=r.rows.map(x=>x.status==='CALCULATED'?`<tr><td>${x.quantity}</td><td>${x.supplierUnitPriceRon.toFixed(2)}</td><td>${x.freightPerUnitRon.toFixed(2)}</td><td>${x.landedCostPerUnitRon.toFixed(2)}</td><td>${x.capitalRequiredRon.toFixed(2)}</td><td>${x.profitPerUnitRon.toFixed(2)}</td><td>${x.marginPct.toFixed(1)}%</td><td>${x.roiPct.toFixed(1)}%</td><td class="${x.passesTargets?'ok':'warn'}">${x.passesTargets?'PASS':'REVIEW'}</td></tr>`:`<tr><td>${x.quantity}</td><td colspan="7">UNKNOWN: ${x.blockers.join(' · ')}</td><td class="warn">BLOCKED</td></tr>`).join('');
+ const productName=document.querySelector('#productName').value.trim();
+ if(productName){try{const all=JSON.parse(localStorage.getItem(STORE)||'{}')||{};all[keyOf(productName)]={...r,productName,updatedAt:new Date().toISOString()};localStorage.setItem(STORE,JSON.stringify(all));}catch{}}
  document.querySelector('#summary').innerHTML=r.recommendation?`<p class="ok"><b>Lot minim care trece pragurile:</b> ${r.recommendation.quantity} buc. · motiv: capital minim cu marjă și ROI conforme.</p><p>Lot cu ROI maxim: <b>${r.bestRoiQuantity??'—'}</b></p>`:'<p class="warn"><b>Niciun lot nu este încă recomandabil.</b> Completează dovezile lipsă sau verifică economia.</p>';
 });
