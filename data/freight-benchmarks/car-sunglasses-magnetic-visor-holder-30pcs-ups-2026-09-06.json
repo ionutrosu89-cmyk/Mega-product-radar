@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "MPR_FREIGHT_BENCHMARK_V1",
+  "generatedAt": "2026-09-06T14:36:00+03:00",
+  "market": "RO",
+  "productCanonicalKey": "car-sunglasses-magnetic-visor-holder",
+  "shipment": {
+    "quantity": 30,
+    "originCountry": "CN",
+    "destinationCountry": "RO",
+    "actualGrossWeightKg": 1.7,
+    "carton": {
+      "lengthCm": 30,
+      "widthCm": 20,
+      "heightCm": 10,
+      "cartons": 1
+    },
+    "volumetricDivisor": 5000,
+    "volumetricWeightKg": 1.2,
+    "roundedActualWeightKg": 2,
+    "roundedDimensionalWeightKg": 1.5,
+    "chargeableWeightKg": 2
+  },
+  "option": {
+    "carrier": "UPS",
+    "service": "UPS Express Saver",
+    "rateGuideEffectiveFrom": "2026-06-07",
+    "billingCountry": "RO",
+    "billingDirection": "RECEIVING_IMPORT",
+    "originCountry": "CN",
+    "originZoneForReceivingService": 10,
+    "publishedBaseRateEur": 226.3,
+    "currency": "EUR",
+    "baseRateEvidenceClass": "OFFICIAL_PUBLISHED",
+    "fuelSurchargePct": null,
+    "otherSurchargesEur": null,
+    "customsBrokerageEur": null,
+    "fullyLoadedFreightEur": null,
+    "evidenceRefs": [
+      "UPS Romania 2026 Rate Guide effective 7 June 2026: China receiving zone for Express/Express Saver = 10",
+      "UPS Express Saver receiving parcel 2.0 kg, zone 10 = EUR 226.30",
+      "UPS Romania dimensional weight: cm3 / 5000; round to next 0.5 kg; chargeable = greater of actual and dimensional"
+    ],
+    "evidenceUrls": [
+      "https://assets.ups.com/adobe/assets/urn:aaid:aem:885ef80e-55d8-4a00-a1c2-5ddb9a5f228c/original/as/rate-guide-ro-en.pdf",
+      "https://www.ups.com/ro/ro/support/shipping-support/shipping-dimensions-weight",
+      "https://www.ups.com/ro/en/support/shipping-support/shipping-costs-rates/fuel-surcharges"
+    ],
+    "usableForDecision": false,
+    "blockers": [
+      "CURRENT_WEEKLY_FUEL_SURCHARGE_REQUIRED",
+      "ANY_APPLICABLE_ACCESSORIAL_SURCHARGES_REQUIRED",
+      "CUSTOMS_CLEARANCE/BROKERAGE_COST_REQUIRED_WHERE_APPLICABLE",
+      "EUR_RON_FX_RATE_WITH_SOURCE_REQUIRED",
+      "FINAL_LIVE_QUOTE_REQUIRED_FOR_CONFIRMED_FREIGHT"
+    ],
+    "policy": "Official UPS published list-rate benchmark only; rates exclude VAT, customs duties and additional charges."
+  },
+  "purchaseAuthorized": false
+}
