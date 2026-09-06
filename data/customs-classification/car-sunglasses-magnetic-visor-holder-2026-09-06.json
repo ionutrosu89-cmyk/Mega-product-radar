@@ -46,12 +46,13 @@
   "evidenceGap": [
     "exact material composition by percentage/layer",
     "construction and essential-character determination",
-    "official comparable BTI or classification regulation"
+    "official comparable BTI or classification regulation",
+    "official EU comparable BTI/classification for magnetic leather visor-mounted holder"
   ],
   "supplierContactRequired": false,
   "purchaseAuthorized": false,
-  "policy": "Research headings and duty scenarios are not tariff classification. Exact CN/TARIC and applicable duty remain UNKNOWN until sufficient official classification evidence exists. The 10% scenario is an adverse stress case only.",
-  "updatedAt": "2026-09-06T17:47:00+03:00",
+  "policy": "External trade/product HS codes are research evidence only. Divergent comparable classifications increase uncertainty and must not be converted into an EU CN/TARIC code or duty rate. Exact customs classification remains fail-closed.",
+  "updatedAt": "2026-09-06T20:41:00+03:00",
   "researchEvidence": [
     {
       "heading": "4202",
@@ -91,5 +92,36 @@
     3,
     6.5,
     10
-  ]
+  ],
+  "externalTradeClassificationEvidence": [
+    {
+      "code": "3926909090",
+      "description": "Plastic car visor glasses holder / sunglasses clip",
+      "match": "MEDIUM_DIFFERENT_MATERIAL",
+      "sourceClass": "PUBLIC_PRODUCT_EXPORT_DECLARATION_REFERENCE",
+      "sourceUrl": "https://nbeasyget.en.made-in-china.com/product/pvcmkMRzVQfI/China-Glasses-Holder-for-Car-Sun-Visor-Sunglasses-Eyeglasses-Mount-Ticket-Clip-Esg12900.html",
+      "officialEuClassification": false
+    },
+    {
+      "code": "4202320000/420239",
+      "description": "Car visor sunglasses holder case / leather sunglass holder trade declarations",
+      "match": "HIGH_FUNCTIONAL_MATCH",
+      "sourceClass": "THIRD_PARTY_TRADE_DATA",
+      "sourceUrl": "https://www.volza.com/hs-codes/search/sunglass-holder/united-states/",
+      "officialEuClassification": false
+    },
+    {
+      "code": "8505190000",
+      "description": "Leather car visor sunglasses holder reported as permanent magnet article in trade data",
+      "match": "HIGH_MAGNETIC_FUNCTION_MATCH",
+      "sourceClass": "THIRD_PARTY_TRADE_DATA",
+      "sourceUrl": "https://www.volza.com/hs-codes/search/sunglass-holder/united-states/",
+      "officialEuClassification": false
+    }
+  ],
+  "classificationConflict": {
+    "status": "MULTIPLE_PLAUSIBLE_HEADINGS_OBSERVED",
+    "implication": "DO_NOT_AUTO_ASSIGN_CN_TARIC",
+    "reason": "Comparable trade records diverge by material and essential character. Exact EU classification needs stronger official evidence."
+  }
 }
