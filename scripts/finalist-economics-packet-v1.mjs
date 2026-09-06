@@ -66,8 +66,22 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
   }
 
   const customs=await read(`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`,null);
-  const consolidatedFinalist=arr(consolidation?.items).find(x=>key(x.canonicalKey)===canonical)||null;
-  const allocatedFreight300=num(consolidatedFinalist?.allocatedBenchmarkLogisticsRon);
+  const selectedConsolidation=consolidation?.selected||null;
+  const selectedDims=selectedConsolidation?.finalistLogisticsEvidence?.dimensions||null;
+  const selectedFinalistMeasure=selectedDims
+    ?(Number(selectedDims.lengthCm||0)*Number(selectedDims.widthCm||0)*Number(selectedDims.heightCm||0)/1_000_000)*300
+    :null;
+  const selectedTotalMeasure=num(selectedConsolidation?.result?.totalMeasure);
+  const selectedShipmentBenchmark=num(consolidation?.benchmark1M3Ron);
+  const allocatedFreight300=selectedFinalistMeasure&&selectedTotalMeasure&&selectedShipmentBenchmark
+    ?selectedShipmentBenchmark*(selectedFinalistMeasure/selectedTotalMeasure)
+    :null;
+  const consolidatedFinalist=selectedFinalistMeasure?{
+    allocatedBenchmarkLogisticsRon:allocatedFreight300,
+    allocatedBenchmarkLogisticsPerUnitRon:allocatedFreight300/300,
+    measureBasis:'VOLUME_FLOOR',
+    canonicalKey:canonical
+  }:null;
   const currentPriceEvidence=await read(`${ROMANIA_PRICE_DIR}/${canonical}-2026-09-06.json`,null);
   const currentHighMatchPrices=arr(currentPriceEvidence?.exactOrHighMatchOffers).map(x=>num(x.priceRon)).filter(x=>x!==null);
   const observedPriceList=[...new Set([...prices,...currentHighMatchPrices])].sort((a,b)=>a-b);
