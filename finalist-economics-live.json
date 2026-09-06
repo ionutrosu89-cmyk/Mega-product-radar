@@ -1,6 +1,6 @@
 {
   "schemaVersion": "MPR_FINALIST_ECONOMICS_LIVE_V1",
-  "updatedAt": "2026-09-06T14:45:23.530Z",
+  "updatedAt": "2026-09-06T14:50:52.899Z",
   "finalists": 1,
   "testReady": 0,
   "items": [
@@ -2172,6 +2172,33 @@
         },
         "purchaseAuthorized": false,
         "policy": "Fixed shipment charges are hypothetical stress scenarios, not quotes. This module measures dilution by quantity and never replaces actual brokerage, CFS, documentation or local delivery evidence."
+      },
+      "publicLclRange": {
+        "schemaVersion": "MPR_LCL_SCREENING_RANGE_V1",
+        "status": "SCREENING_RANGE_READY",
+        "seaFreightUsdPerCbmMin": 40,
+        "seaFreightUsdPerCbmMax": 95,
+        "historicalAllInBeforeDutyVatUsdMin": 215,
+        "historicalAllInBeforeDutyVatUsdMax": 215,
+        "historicalAllInBeforeDutyVatRonMin": 971.78,
+        "historicalAllInBeforeDutyVatRonMax": 971.78,
+        "purchaseAuthorized": false,
+        "policy": "Sea-freight-only and all-in-before-duty/VAT figures stay distinct. Historical all-in examples are secondary screening evidence, not current quotes."
+      },
+      "localChargeScopeGuard": {
+        "schemaVersion": "MPR_LOCAL_CHARGE_SCOPE_GUARD_V1",
+        "status": "BLOCKED_SCOPE_MISMATCH",
+        "usable": false,
+        "blockers": [
+          "FCL_CONTAINER_CHARGE_CANNOT_BE_DIRECTLY_ALLOCATED_TO_LCL"
+        ],
+        "policy": "Per-container/FCL charges cannot be converted into LCL house-shipment charges without explicit consolidator allocation evidence."
+      },
+      "importProcessingEvidence": {
+        "sourceFile": "data/import-processing/romania-public-import-processing-2026-09-06.json",
+        "carrier": "DHL Express",
+        "lclLocalChargesStatus": "UNKNOWN_NOT_PUBLICLY_COMPLETE",
+        "policy": "DHL Express processing fees are carrier-specific and must not be reused as LCL maritime local charges. Unknown LCL local charges remain UNKNOWN, never zero."
       },
       "customsClassification": {
         "status": "UNKNOWN_PENDING_EXACT_CLASSIFICATION",
