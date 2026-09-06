@@ -6,6 +6,7 @@ import {priceStrategyV1} from '../price-strategy-v1.js';
 import {finalistTestGateV1} from '../finalist-test-gate-v1.js';
 import {importCostStressV1} from '../import-cost-stress-v1.js';
 import {shipmentFixedCostStressV1} from '../shipment-fixed-cost-stress-v1.js';
+import {lclScreeningRangeV1,localChargeScopeGuardV1} from '../lcl-local-charge-guard-v1.js';
 
 const GOLDEN='golden-pipeline-live.json';
 const SUPPLIERS='supplier-page-evidence-live.json';
@@ -16,6 +17,8 @@ const OUT='finalist-economics-live.json';
 const FREIGHT='data/freight-benchmarks/china-romania-public-freight-market-2026-09-06.json';
 const CONSOLIDATION='data/consolidation/current-multi-sku-basket-2026-09-06.json';
 const CUSTOMS_DIR='data/customs-classification';
+const LCL_RANGE='data/freight-benchmarks/china-romania-lcl-public-range-2026-09-06.json';
+const IMPORT_PROCESSING='data/import-processing/romania-public-import-processing-2026-09-06.json';
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 const key=s=>norm(s).replace(/\s+/g,'-');
 const arr=v=>Array.isArray(v)?v:[];
@@ -29,6 +32,8 @@ const observations=await read(OBS,{products:{}});
 const market=await read(MARKET,{products:[]});
 const freight=await read(FREIGHT,{modes:[]});
 const consolidation=await read(CONSOLIDATION,null);
+const lclRangeEvidence=await read(LCL_RANGE,null);
+const importProcessingEvidence=await read(IMPORT_PROCESSING,null);
 const rows=[];
 
 for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
@@ -84,6 +89,24 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     variableUnknownImportCostPerUnitRon:0.5,
     fixedShipmentCostScenariosRon:[50,100,200,300,500,750,1000]
   });
+  const publicLclRange=lclRangeEvidence?lclScreeningRangeV1({
+    usdRon:fxUsdRon,
+    sources:[
+      {
+        lclSeaFreightUsdPerCbmMin:num(lclRangeEvidence?.sources?.[0]?.lclSeaFreightUsdPerCbmMin),
+        lclSeaFreightUsdPerCbmMax:num(lclRangeEvidence?.sources?.[0]?.lclSeaFreightUsdPerCbmMax)
+      },
+      {
+        totalBeforeDutyVatUsd:num(lclRangeEvidence?.sources?.[1]?.oneCbmScenario?.totalBeforeDutyVatUsd)
+      }
+    ]
+  }):null;
+  const fclToLclScopeGuard=lclRangeEvidence?.officialRomaniaContainerChargeContext?localChargeScopeGuardV1({
+    shipmentMode:'SEA_LCL',
+    chargeScope:lclRangeEvidence.officialRomaniaContainerChargeContext.scope,
+    unit:'per container',
+    explicitLclAllocation:false
+  }):null;
   const customsReady=Boolean(customs?.exactCnCode)&&Boolean(customs?.customsDutyRate!==null&&customs?.customsDutyRate!==undefined)&&String(customs?.status||'').startsWith('VERIFIED');
   const testGate=finalistTestGateV1({
     stage:g.stage,
@@ -169,6 +192,14 @@ for(const g of arr(golden.items).filter(x=>x.stage==='FINALIST')){
     priceStrategy,
     importCostStress,
     fixedShipmentCostStress,
+    publicLclRange,
+    localChargeScopeGuard:fclToLclScopeGuard,
+    importProcessingEvidence:importProcessingEvidence?{
+      sourceFile:IMPORT_PROCESSING,
+      carrier:importProcessingEvidence.carrier,
+      lclLocalChargesStatus:importProcessingEvidence?.lclLocalCharges?.status||'UNKNOWN',
+      policy:importProcessingEvidence.policy
+    }:null,
     customsClassification:customs?{status:customs.status,exactCnCode:customs.exactCnCode,exactTaricCode:customs.exactTaricCode,customsDutyRate:customs.customsDutyRate,sourceFile:`${CUSTOMS_DIR}/${canonical}-2026-09-06.json`}:null,
     testGate,
     preferredAutonomousFocus:'SEA_LCL_MULTI_SKU_CONSOLIDATION_AND_PUBLIC_IMPORT_COST_EVIDENCE',
