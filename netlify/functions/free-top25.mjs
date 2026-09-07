@@ -57,6 +57,19 @@ function safeExpandedProduct(product,index){
   };
 }
 
+function sanitizeEligibleSnapshot(row){
+  const raw=Array.isArray(row?.products)?row.products:[];
+  if(raw.length!==25)return null;
+  const products=raw.map(safeExpandedProduct);
+  if(products.some(product=>product===null))return null;
+  const uniqueAsins=new Set(products.map(product=>product.asin));
+  if(uniqueAsins.size!==25)return null;
+  return {
+    reviewedAt:String(row?.reviewed_at||''),
+    products
+  };
+}
+
 export async function loadExpandedTop25Niches({env=process.env,fetchImpl=fetch}={}){
   const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
   const serviceRole=env.SUPABASE_SERVICE_ROLE_KEY;
@@ -65,22 +78,24 @@ export async function loadExpandedTop25Niches({env=process.env,fetchImpl=fetch}=
   const url=new URL(`${supabaseUrl}/rest/v1/top25_snapshots`);
   url.searchParams.set('select','niche_id,reviewed_at,products');
   url.searchParams.set('niche_id',`in.(${ids})`);
-  url.searchParams.set('order','reviewed_at.desc');
+  url.searchParams.set('order','reviewed_at.desc,created_at.desc');
   url.searchParams.set('limit','100');
   const response=await fetchImpl(url,{headers:supabaseHeaders(serviceRole)});
   if(!response.ok)return [];
   const rows=await response.json();
-  const latestById=new Map();
+
+  const eligibleById=new Map();
   for(const row of Array.isArray(rows)?rows:[]){
     const id=String(row?.niche_id||'');
-    const current=latestById.get(id);
-    if(!current||String(row?.reviewed_at||'')>String(current?.reviewed_at||''))latestById.set(id,row);
+    if(!id||eligibleById.has(id))continue;
+    const sanitized=sanitizeEligibleSnapshot(row);
+    if(sanitized)eligibleById.set(id,sanitized);
   }
+
   return FREE_TOP25_EXPANDED_REGISTRY.flatMap(meta=>{
-    const row=latestById.get(meta.id);
-    const products=(Array.isArray(row?.products)?row.products:[]).slice(0,25).map(safeExpandedProduct).filter(Boolean);
-    if(products.length!==25)return [];
-    return [{...meta,mode:'LICENSED_HISTORICAL_EVIDENCE',reviewedAt:String(row.reviewed_at||''),products,eligibleProductCount:25}];
+    const eligible=eligibleById.get(meta.id);
+    if(!eligible)return [];
+    return [{...meta,mode:'LICENSED_HISTORICAL_EVIDENCE',reviewedAt:eligible.reviewedAt,products:eligible.products,eligibleProductCount:25}];
   });
 }
 
@@ -89,23 +104,31 @@ export function createFreeTop25Handler({fetch:fetchImpl=fetch,env=process.env}={
     try{
       const rate=await enforceRateLimit(request,{route:'free-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
+
+      const expandedNiches=await loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[]);
+      if(expandedNiches.length!==25){
+        return Response.json({
+          ok:false,
+          error:'Free Top25 public evidence gate incomplete',
+          code:'FREE_TOP25_PUBLIC_EVIDENCE_INCOMPLETE',
+          stats:{requiredNicheCount:25,eligibleNicheCount:expandedNiches.length,requiredProductCount:625,eligibleProductCount:expandedNiches.length*25}
+        },{status:503,headers:{'Cache-Control':'no-store'}});
+      }
+
       const discovery=await loadSource(fetchImpl,request.url,'discovery-live.json');
       const organic=await loadSource(fetchImpl,request.url,'organic-rising-live.json');
-      if(!discovery.data&&!organic.data)return Response.json({ok:false,error:'Free Top25 live sources unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});
       const universe=buildFreeTop25LiveUniverse({
         discoveryProducts:Array.isArray(discovery.data?.products)?discovery.data.products:[],
         organicProducts:Array.isArray(organic.data?.products)?organic.data.products:[]
       });
-      const expandedNiches=await loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[]);
-      const publishedNiches=expandedNiches.length===25?expandedNiches:[...universe.niches,...expandedNiches].slice(0,25);
       const expandedUpdatedAt=expandedNiches.map(niche=>niche.reviewedAt).filter(Boolean).sort().at(-1)||null;
       return Response.json({
         ok:true,
         ...universe,
-        stats:{...universe.stats,completeNicheCount:publishedNiches.length,expandedNicheCount:expandedNiches.length,expandedProductCount:expandedNiches.length*25,publishedNicheCount:publishedNiches.length,publishedProductCount:publishedNiches.length*25},
-        niches:publishedNiches,
-        sourceDiagnostics:{discovery:discovery.via,organic:organic.via},
-        updatedAt:[discovery.data?.updatedAt,organic.data?.updatedAt,expandedUpdatedAt].filter(Boolean).sort().at(-1)||null
+        stats:{...universe.stats,completeNicheCount:25,expandedNicheCount:25,expandedProductCount:625,publishedNicheCount:25,publishedProductCount:625},
+        niches:expandedNiches,
+        sourceDiagnostics:{publicCatalog:'LICENSED_HISTORICAL_EVIDENCE',discovery:discovery.via,organic:organic.via},
+        updatedAt:expandedUpdatedAt
       },{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});
     }catch(error){return Response.json({ok:false,error:String(error?.message||error)},{status:500,headers:{'Cache-Control':'no-store'}});}
   };
