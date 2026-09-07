@@ -1,0 +1,73 @@
+name: Google Trends RO Current V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/google-trends-ro-rss-current.mjs'
+      - 'current-search-product-signal-v1.js'
+      - 'supabase/functions/github-oidc-current-search-signals-v1/index.ts'
+      - '.github/workflows/google-trends-ro-current-v1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/google-trends-ro-rss-current.mjs'
+      - 'current-search-product-signal-v1.js'
+      - 'supabase/functions/github-oidc-current-search-signals-v1/index.ts'
+      - '.github/workflows/google-trends-ro-current-v1.yml'
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate collector contracts
+        run: |
+          node --check scripts/google-trends-ro-rss-current.mjs
+          node --test test/current-search-product-signal-v1.test.mjs
+          grep -q 'SEARCH_INTEREST_NOT_SALES' scripts/google-trends-ro-rss-current.mjs
+          grep -q 'providerSpendEur:0' scripts/google-trends-ro-rss-current.mjs
+
+  collect:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect official Google Trends RSS Romania
+        run: node scripts/google-trends-ro-rss-current.mjs --out=artifacts/google-trends-ro-current.json
+      - name: Mint scoped GitHub OIDC token
+        id: oidc
+        shell: bash
+        run: |
+          TOKEN_JSON="$(curl --fail-with-body -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mpr-current-search-signals")"
+          echo "token=$(jq -r '.value' <<<"$TOKEN_JSON")" >> "$GITHUB_OUTPUT"
+      - name: Persist product-relevant search signals
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          jq -n --arg expectedSha "$GITHUB_SHA" --slurpfile x artifacts/google-trends-ro-current.json '{action:"persist",expectedSha:$expectedSha,rows:($x[0].signals|map({source_key:.sourceKey,market:.market,window_days:.windowDays,observed_at:.observedAt,query_text:.queryText,normalized_query:.normalizedQuery,signal_type:.signalType,rank:.rank,search_volume_lower_bound:.searchVolumeLowerBound,growth_percent:.growthPercent,source_url:.sourceUrl,evidence_class:.evidenceClass,rights_status:.rightsStatus,payload:{nicheMatches:.nicheMatches,salesEvidenceClass:.salesEvidenceClass}}))}' >/tmp/persist.json
+          curl --fail-with-body -sS -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' --data-binary @/tmp/persist.json \
+            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-current-search-signals-v1' | tee artifacts/google-trends-ro-persist-receipt.json
+          jq -e '.ok == true and .schema == "MPR_CURRENT_SEARCH_SIGNAL_RECEIPT_V1" and .policy.verifiedSales == false' artifacts/google-trends-ro-persist-receipt.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: google-trends-ro-current-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14
