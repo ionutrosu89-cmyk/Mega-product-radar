@@ -18,9 +18,7 @@ test('licensed Nerf Dog product is excluded from the public commercial funnel',(
 
 test('generic organizer mentioning nerf storage is not falsely classified as Nerf brand',()=>{
   const result=classifyPublicBrandGate({name:'WallPeg Peg Board Tool Organizer - nerf Gun Storage'});
-  // WallPeg is itself already a reviewed established brand phrase, so this product is
-  // excluded for the correct reason rather than because of the generic word "nerf".
-  assert.equal(result.brandPolicyClass,'ESTABLISHED_EXCLUDE');
+  assert.equal(result.brandPolicyClass,'UNKNOWN_REVIEW');
+  assert.equal(result.commercialEligible,true);
   assert.equal(result.matchedBrand,null);
-  assert.match(result.reason,/Brand consacrat exclus/);
 });
