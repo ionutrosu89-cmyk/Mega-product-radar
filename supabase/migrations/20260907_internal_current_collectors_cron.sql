@@ -60,11 +60,11 @@ grant execute on function private.invoke_amazon_current_refresh_collector_v1() t
 
 do $$ declare r record; begin
   for r in select jobid from cron.job where jobname='mpr_google_trends_ro_hourly' loop perform cron.unschedule(r.jobid); end loop;
-  for r in select jobid from cron.job where jobname='mpr_amazon_current_refresh_6h' loop perform cron.unschedule(r.jobid); end loop;
+  for r in select jobid from cron.job where jobname in ('mpr_amazon_current_refresh_6h','mpr_amazon_current_refresh_2h') loop perform cron.unschedule(r.jobid); end loop;
 end $$;
 
 select cron.schedule('mpr_google_trends_ro_hourly','7 * * * *','select private.invoke_google_trends_ro_collector_v1();');
-select cron.schedule('mpr_amazon_current_refresh_6h','23 */6 * * *','select private.invoke_amazon_current_refresh_collector_v1();');
+select cron.schedule('mpr_amazon_current_refresh_2h','23 */2 * * *','select private.invoke_amazon_current_refresh_collector_v1();');
 
 -- The raw cron tokens are intentionally NOT stored in git. Provision them in Supabase Vault under:
 --   mpr_google_trends_ro_cron_token
