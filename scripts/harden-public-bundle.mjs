@@ -5,7 +5,7 @@ const root=process.cwd();
 const out=path.join(root,'_site');
 await fs.access(out);
 
-for(const publicFile of ['cookies.html','subprocessors.html','account-privacy.js']){
+for(const publicFile of ['cookies.html','subprocessors.html','account-privacy.js','404.html']){
   await fs.copyFile(path.join(root,publicFile),path.join(out,publicFile));
 }
 
@@ -22,4 +22,4 @@ for(const privateFile of ['STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
   await fs.rm(path.join(out,privateFile),{force:true});
 }
 
-console.log('Public bundle hardening PASS: public legal/privacy controls included; internal runbooks/audits excluded.');
+console.log('Public bundle hardening PASS: public legal/privacy/404 controls included; internal runbooks/audits excluded.');
