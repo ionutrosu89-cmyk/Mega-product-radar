@@ -9,12 +9,25 @@ async function readJson(filename){
   for(const file of candidates){try{return JSON.parse(await readFile(file,'utf8'));}catch{}}
   return null;
 }
+const approved=env=>String(env.MPR_FREE_LIVE_NICHES_APPROVED||'').toLowerCase()==='true';
 
 export function createFreeNicheTop25Handler({env=process.env,fetch:fetchImpl=fetch}={}){
   return async request=>{
     try{
       const rate=await enforceRateLimit(request,{route:'free-niche-top25',workspaceId:null,userId:null,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
+
+      // PUBLIC FREE BETA is historical licensed evidence only. Dynamic live niche evidence is
+      // disabled by default because a public URL or collector output is not itself a right to
+      // redistribute that marketplace data. This route opens only after an explicit server-side
+      // rights approval; the approved historical 25x25 experience remains /api/free/top25.
+      if(!approved(env))return Response.json({
+        ok:false,
+        code:'FREE_LIVE_NICHES_RIGHTS_HOLD',
+        error:'Live niche intelligence is not approved for public Free redistribution.',
+        publicAlternative:'/api/free/top25'
+      },{status:503,headers:{'Cache-Control':'no-store'}});
+
       const url=new URL(request.url);
       const [discovery,organic,amazonLive]=await Promise.all([
         readJson('discovery-live.json'),

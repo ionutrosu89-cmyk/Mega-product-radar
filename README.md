@@ -1,28 +1,50 @@
 # Mega Product Radar
 
-Mega Product Radar este o aplicație statică publicată pe GitHub Pages, cu scanare automată zilnică prin GitHub Actions.
+Mega Product Radar este o platformă SaaS de product intelligence pentru selleri și importatori. Arhitectura de producție actuală este **Netlify + Supabase**; documentația canonică este `PRODUCTION_ARCHITECTURE.md`.
+
+## Public Free Beta
+
+Ținta curentă de lansare este Public Free Beta, în regim fail-closed:
+
+- 25 de nișe × Top 25 produse = 625 poziții publice eligibile;
+- Top25 Free folosește dovezi istorice licențiate și este etichetat explicit ca istoric, nu „best sellers 2026”;
+- datele live/dinamice nu devin publice doar pentru că sunt accesibile tehnic;
+- apelurile către furnizori de date plătiți sunt dezactivate implicit;
+- colectarea programată cu cost și Stripe Live sunt dezactivate implicit;
+- lipsa dovezii rămâne `INSUFFICIENT DATA` / HOLD, nu este completată cu cifre inventate.
+
+Endpoint public canonic pentru Top25 istoric: `/api/free/top25`.
 
 ## Arhitectura curentă
 
-- interfața rulează pe GitHub Pages;
-- `products.json` este baza de date fallback;
-- `radar-live.json` conține rezultatele scanării automate;
-- `scan-status.json` păstrează starea ultimei rulări;
-- `scripts/web-radar-scan.mjs` verifică semnale web pentru piețe externe, România și sourcing China;
-- `.github/workflows/radar-scan.yml` rulează scanarea zilnic și redeployează automat aplicația.
+- frontend static construit și publicat pe Netlify;
+- Netlify Functions pentru API și operații server-side;
+- Supabase PostgreSQL + Auth pentru date, workspaces și autentificare;
+- RLS pentru date tenant expuse browserului;
+- `service_role` exclusiv server-side;
+- migration chain în `supabase/migrations`;
+- CI pentru teste, dependency audit, production safety, migration verification, bundle hardening, secret scan și QA mobil.
 
-## Ce verifică radarul
+## Integritate și surse
 
-Radarul folosește semnale de prezență în rezultate web pentru piețe precum Amazon DE, Allegro PL, Trendyol TR, eMAG RO și Alibaba. Aceste semnale sunt folosite pentru recalcularea scorului de oportunitate și pentru prioritizarea produselor.
+MPR separă explicit:
 
-Important: semnalele web indică prezență și diferențe de piață, nu garantează volum de vânzări. Costul China, MOQ, conformitatea și prețul final trebuie reconfirmate înainte de comandă.
+- **VERIFIED** — dovadă directă adecvată afirmației;
+- **DERIVED** — calcul determinist din dovezi;
+- **ESTIMATED** — estimare etichetată cu ipoteze;
+- **INSUFFICIENT DATA** — date insuficiente, fără precizie inventată.
 
-## Automatizare
+Rank-ul, review count-ul, search interest-ul sau viralitatea nu sunt transformate automat în „vânzări verificate”. Prețul public al furnizorului nu este automat landed cost, iar un scor de oportunitate nu autorizează achiziția.
 
-Workflow-ul `Mega Product Radar Scan` rulează:
+## Documente de control
 
-- manual, prin `workflow_dispatch`;
-- automat zilnic la 04:30 UTC;
-- la modificări ale motorului radar.
+- `PRODUCTION_ARCHITECTURE.md` — arhitectura canonică;
+- `PUBLIC_FREE_LAUNCH_AUDIT.md` — auditul și GO/NO-GO gate-ul pentru Public Free Beta;
+- `sources.html` — politica publică de surse și drepturi;
+- `privacy.html`, `cookies.html`, `subprocessors.html`, `terms.html` — documente publice de conformitate.
 
-După fiecare scan reușit, rezultatele sunt salvate în repository și aceeași rulare redeployează GitHub Pages, astfel încât aplicația publică să primească datele actualizate fără intervenție manuală.
+## Regula de release
+
+Build verde nu înseamnă automat lansare. Public Free Beta rămâne **NO-GO** până când fiecare control P0 din `PUBLIC_FREE_LAUNCH_AUDIT.md` este marcat `VERIFIED` cu dovadă.
+
+Referințele vechi la GitHub Pages și la scanarea zilnică automată reprezintă arhitectură legacy și nu trebuie folosite ca model pentru producția curentă.

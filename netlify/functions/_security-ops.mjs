@@ -17,9 +17,11 @@ function hashIp(ip,env){return createHash('sha256').update(`${securityAuditSalt(
 export function requestId(request){return text(request?.headers?.get?.('x-request-id'))||randomUUID();}
 
 function localRateLimit(key,limit,windowSeconds){const now=nowMs(),windowMs=Math.max(1,Number(windowSeconds)||60)*1000;const prior=(localBuckets.get(key)||[]).filter(t=>now-t<windowMs);if(prior.length>=limit)return {ok:false,status:429,retryAfterSeconds:Math.max(1,Math.ceil((windowMs-(now-prior[0]))/1000)),code:'RATE_LIMITED',mode:'LOCAL_FALLBACK'};prior.push(now);localBuckets.set(key,prior);return {ok:true,remaining:Math.max(0,limit-prior.length),mode:'LOCAL_FALLBACK'};}
+function failClosedRateLimit(reason){return {ok:false,status:503,retryAfterSeconds:30,code:'RATE_LIMIT_BACKEND_UNAVAILABLE',mode:'FAIL_CLOSED',sharedStoreError:reason};}
 
 export async function enforceRateLimit(request,{route,workspaceId=null,userId=null,limit=60,windowSeconds=60,env=process.env,fetchImpl=fetch}={}){
-  if(isProduction(env))securityAuditSalt(env);
+  const production=isProduction(env);
+  if(production)securityAuditSalt(env);
   const subject=text(userId||workspaceId||hashIp(clientIp(request)||'unknown',env));
   const key=`${route||'route'}:${subject}`;
   const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl,service=env.SUPABASE_SERVICE_ROLE_KEY;
@@ -27,9 +29,15 @@ export async function enforceRateLimit(request,{route,workspaceId=null,userId=nu
     try{
       const response=await fetchImpl(`${supabaseUrl}/rest/v1/rpc/consume_api_rate_limit`,{method:'POST',headers:{apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',accept:'application/json'},body:JSON.stringify({p_bucket_key:key,p_limit:Math.max(1,Number(limit)||1),p_window_seconds:Math.max(1,Number(windowSeconds)||60)})});
       if(response.ok){const row=await response.json();const value=Array.isArray(row)?row[0]:row;const allowed=value?.allowed===true;return allowed?{ok:true,remaining:Math.max(0,Number(value.limit||limit)-Number(value.hitCount||0)),mode:'DISTRIBUTED_ATOMIC'}:{ok:false,status:429,retryAfterSeconds:Math.max(1,Number(value?.retryAfterSeconds||1)),code:'RATE_LIMITED',mode:'DISTRIBUTED_ATOMIC'};}
+      if(production)return failClosedRateLimit(`HTTP_${response.status}`);
       const fallback=localRateLimit(key,limit,windowSeconds);return {...fallback,sharedStoreError:`HTTP_${response.status}`};
-    }catch(error){const fallback=localRateLimit(key,limit,windowSeconds);return {...fallback,sharedStoreError:String(error?.message||error)};}
+    }catch(error){
+      const reason=String(error?.message||error);
+      if(production)return failClosedRateLimit(reason);
+      const fallback=localRateLimit(key,limit,windowSeconds);return {...fallback,sharedStoreError:reason};
+    }
   }
+  if(production)return failClosedRateLimit('RATE_LIMIT_BACKEND_NOT_CONFIGURED');
   return localRateLimit(key,limit,windowSeconds);
 }
 

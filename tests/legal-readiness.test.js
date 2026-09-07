@@ -10,13 +10,18 @@ const complete={
   LEGAL_SUPPORT_EMAIL:'support@example.ro',
   LEGAL_REFUND_POLICY_APPROVED:'true',
   LEGAL_TERMS_REVIEWED_AT:'2026-08-01',
-  LEGAL_PRIVACY_REVIEWED_AT:'2026-08-01'
+  LEGAL_PRIVACY_REVIEWED_AT:'2026-08-01',
+  LEGAL_COOKIE_VERSION:'2026-09-07',
+  LEGAL_COOKIE_REVIEWED_AT:'2026-09-07',
+  LEGAL_SUBPROCESSORS_VERSION:'2026-09-07',
+  LEGAL_SUBPROCESSORS_REVIEWED_AT:'2026-09-07'
 };
 
 test('legal readiness passes only with complete identity and approvals',()=>{
   const state=assessLegalReadiness(complete);
   assert.equal(state.ready,true);
   assert.equal(state.checks.identityComplete,true);
+  assert.equal(state.checks.policyVersionsComplete,true);
   assert.equal(state.checks.approvalsComplete,true);
 });
 
@@ -48,7 +53,13 @@ test('confirmed RED COMMERCE public identity is the safe default while legal app
   const approved=assessLegalReadiness({
     LEGAL_REFUND_POLICY_APPROVED:'true',
     LEGAL_TERMS_REVIEWED_AT:'2026-09-02',
-    LEGAL_PRIVACY_REVIEWED_AT:'2026-09-02'
+    LEGAL_PRIVACY_REVIEWED_AT:'2026-09-02',
+    LEGAL_COOKIE_VERSION:'2026-09-07',
+    LEGAL_COOKIE_REVIEWED_AT:'2026-09-07',
+    LEGAL_SUBPROCESSORS_VERSION:'2026-09-07',
+    LEGAL_SUBPROCESSORS_REVIEWED_AT:'2026-09-07'
   });
   assert.equal(approved.ready,true);
+  assert.equal(approved.checks.cookiePolicyReviewed,true);
+  assert.equal(approved.checks.subprocessorsReviewed,true);
 });

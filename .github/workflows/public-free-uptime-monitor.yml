@@ -1,0 +1,80 @@
+name: Public Free Uptime Monitor
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: public-free-uptime-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      MPR_BASE_URL: https://mega-product-radar.netlify.app
+      INCIDENT_TITLE: '[MPR MONITOR] Public Free availability incident'
+    steps:
+      - name: Check public surfaces
+        id: probe
+        shell: bash
+        run: |
+          set +e
+          failures=()
+
+          probe() {
+            local name="$1"
+            local url="$2"
+            local expected="$3"
+            local body
+            local status
+            body="$(mktemp)"
+            status="$(curl --silent --show-error --location --max-time 20 --connect-timeout 8 --output "$body" --write-out '%{http_code}' "$url")"
+            rc=$?
+            if [ "$rc" -ne 0 ] || [ "$status" != "$expected" ]; then
+              failures+=("$name:$status:curl=$rc")
+            fi
+            rm -f "$body"
+          }
+
+          probe 'beta-page' "$MPR_BASE_URL/beta.html" '200'
+          probe 'liveness' "$MPR_BASE_URL/api/radar/health" '200'
+          probe 'free-top25' "$MPR_BASE_URL/api/free/top25" '200'
+
+          if [ "${#failures[@]}" -gt 0 ]; then
+            printf 'failure_summary=%s\n' "$(IFS=,; echo "${failures[*]}")" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+      - name: Open or update incident issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILURE_SUMMARY: ${{ steps.probe.outputs.failure_summary }}
+        shell: bash
+        run: |
+          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title $INCIDENT_TITLE" --json number --jq '.[0].number // empty')"
+          body="Automated Public Free monitor detected an availability failure.\n\nFailure: ${FAILURE_SUMMARY:-unknown}\nRun: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\nDetected at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')\n\nDo not mark the release healthy until the failing public surface is restored and this monitor passes again."
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$INCIDENT_TITLE" --body "$body"
+          fi
+
+      - name: Close recovered incident
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title $INCIDENT_TITLE" --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "Automated monitor is healthy again. Recovery observed at $(date -u +'%Y-%m-%dT%H:%M:%SZ'). Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            gh issue close "$existing" --repo "$GITHUB_REPOSITORY" --reason completed
+          fi

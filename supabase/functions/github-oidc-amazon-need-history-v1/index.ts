@@ -4,7 +4,10 @@ import { createRemoteJWKSet, jwtVerify } from "npm:jose@6.1.0";
 const REPO = "ionutrosu89-cmyk/Mega-product-radar";
 const REF = "refs/heads/main";
 const AUD = "mpr-amazon-need-history";
-const WORKFLOW_SUFFIX = "/.github/workflows/amazon-need-history-pilot-v1.yml@refs/heads/main";
+const ALLOWED_WORKFLOWS = new Set([
+  "/.github/workflows/amazon-need-history-pilot-v1.yml@refs/heads/main",
+  "/.github/workflows/amazon-current-refresh-v1.yml@refs/heads/main",
+]);
 const ALLOWED_EVENTS = new Set(["push", "schedule", "workflow_dispatch"]);
 const jwks = createRemoteJWKSet(new URL("https://token.actions.githubusercontent.com/.well-known/jwks"));
 
@@ -44,11 +47,12 @@ Deno.serve(async (req: Request) => {
 
     const workflowRef = String(payload.workflow_ref || "");
     const eventName = String(payload.event_name || "");
+    const workflowAllowed = [...ALLOWED_WORKFLOWS].some(suffix => workflowRef.endsWith(suffix));
     if (
       payload.repository !== REPO ||
       payload.ref !== REF ||
       !ALLOWED_EVENTS.has(eventName) ||
-      !workflowRef.endsWith(WORKFLOW_SUFFIX)
+      !workflowAllowed
     ) {
       return json(403, { error: "GITHUB_OIDC_SCOPE_REJECTED" });
     }
@@ -83,6 +87,31 @@ Deno.serve(async (req: Request) => {
         deploymentSha: String(payload.sha),
         targets,
         policy: { providerSpendEur: 0, paidCallsTriggered: 0, purchaseAuthorized: false, verifiedSales: false },
+      });
+    }
+
+    if (body?.action === "refresh_targets") {
+      const limit = Math.max(1, Math.min(25, Number(body?.limit || 25)));
+      const targets = await rpc(url, key, "amazon_current_refresh_targets_v1", { p_limit: limit });
+      if (!Array.isArray(targets) || targets.length < 1 || targets.length > 25) {
+        return json(409, { error: "REFRESH_TARGET_SCOPE_INVALID", count: Array.isArray(targets) ? targets.length : null });
+      }
+      if (
+        targets.some(
+          (x: any) =>
+            Number(x.live_observation_count) < 1 ||
+            !/^B[A-Z0-9]{9}$/.test(String(x.external_id || "")) ||
+            !String(x.last_live_observed_at || "")
+        )
+      ) {
+        return json(409, { error: "REFRESH_TARGET_CONTENT_INVALID" });
+      }
+      return json(200, {
+        ok: true,
+        schema: "MPR_AMAZON_CURRENT_REFRESH_TARGETS_V1",
+        deploymentSha: String(payload.sha),
+        targets,
+        policy: { providerSpendEur: 0, paidCallsTriggered: 0, purchaseAuthorized: false, verifiedSales: false, purpose: "REPEATED_CURRENT_OBSERVATION" },
       });
     }
 

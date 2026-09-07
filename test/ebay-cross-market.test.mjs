@@ -57,14 +57,22 @@ test('internal refresh makes zero provider calls until access is approved',async
   assert.equal((await response.json()).providerCalls,0);
 });
 
-test('internal refresh persists only a complete 25-product snapshot',async()=>{
+test('internal refresh persists complete daily snapshot plus current 7d and 30d windows',async()=>{
   resetEbayTokenCacheForTests();
   const calls=[];
+  let dailyProducts=null;
   const fetchImpl=async (url,options={})=>{
-    calls.push({url:String(url),options});
-    if(String(url)===EBAY_BUY_AUTH.tokenUrl)return Response.json({access_token:'token',expires_in:7200});
-    if(String(url).startsWith('https://api.ebay.com/buy/marketing/'))return Response.json(payload(25));
-    if(String(url).startsWith('https://db.example/rest/v1/top25_snapshots'))return new Response(null,{status:201});
+    const target=String(url);calls.push({url:target,options});
+    if(target===EBAY_BUY_AUTH.tokenUrl)return Response.json({access_token:'token',expires_in:7200});
+    if(target.startsWith('https://api.ebay.com/buy/marketing/'))return Response.json(payload(25));
+    if(target.startsWith('https://db.example/rest/v1/top25_snapshots')){
+      if(options.method==='POST'){
+        dailyProducts=JSON.parse(options.body)[0].products;
+        return new Response(null,{status:201});
+      }
+      return Response.json([{reviewed_at:'2026-09-04',products:dailyProducts||[]}]);
+    }
+    if(target.startsWith('https://db.example/rest/v1/current_top25_snapshots_v1'))return new Response(null,{status:201});
     return new Response('not found',{status:404});
   };
   const handler=createEbayCrossMarketRefreshHandler({env:approvedEnv,fetchImpl,now:()=>new Date('2026-09-04T06:00:00Z')});
@@ -72,10 +80,24 @@ test('internal refresh persists only a complete 25-product snapshot',async()=>{
   assert.equal(response.status,200);
   const body=await response.json();
   assert.equal(body.published,1);
-  const write=calls.find(call=>call.url.includes('/rest/v1/top25_snapshots'));
-  assert.ok(write);
-  const stored=JSON.parse(write.options.body)[0];
+  assert.equal(body.currentWindowsPersisted,2);
+  assert.equal(body.results[0].windows.length,2);
+  assert.deepEqual(body.results[0].windows.map(row=>row.windowDays),[7,30]);
+  assert.equal(body.results[0].windows.every(row=>row.productCount===25),true);
+  assert.equal(body.results[0].windows.every(row=>row.persisted===true),true);
+
+  const dailyWrite=calls.find(call=>call.url.includes('/rest/v1/top25_snapshots')&&call.options.method==='POST');
+  assert.ok(dailyWrite);
+  const stored=JSON.parse(dailyWrite.options.body)[0];
   assert.equal(stored.niche_id,'XMARKET:EBAY:AUTO');
   assert.equal(stored.reviewed_at,'2026-09-04');
   assert.equal(stored.products.length,25);
+
+  const currentWrites=calls.filter(call=>call.url.includes('/rest/v1/current_top25_snapshots_v1')&&call.options.method==='POST');
+  assert.equal(currentWrites.length,2);
+  const windows=currentWrites.map(call=>JSON.parse(call.options.body)[0]);
+  assert.deepEqual(windows.map(row=>row.window_days),[7,30]);
+  assert.equal(windows.every(row=>row.product_count===25),true);
+  assert.equal(windows.every(row=>row.source_rights_status==='APPROVED_OFFICIAL_API'),true);
+  assert.equal(windows.every(row=>row.source_key==='EBAY_BUY_MARKETING_BEST_SELLING'),true);
 });
