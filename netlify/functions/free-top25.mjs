@@ -5,6 +5,7 @@ import {FREE_TOP25_EXPANDED_REGISTRY} from '../../free-top25-expanded-registry.j
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {enforceRateLimit} from './_security-ops.mjs';
 import {classifyPublicBrandGate} from '../../brand-policy-v1.js';
+import {classifyPublicCategoryRisk} from '../../public-category-risk-policy-v1.js';
 
 async function fetchJson(fetchImpl,url){
   const response=await fetchImpl(url,{headers:{accept:'application/json'},cache:'no-store'});
@@ -35,6 +36,9 @@ function safeExpandedProduct(product,index){
   const metricValue=Number(row?.metric?.value);
   if(!name||!/^([A-Z0-9]{10})$/.test(asin)||row.sourceKey!=='KAGGLE_AMAZON_PRODUCTS_2023')return null;
   const brandGate=classifyPublicBrandGate(row);
+  const categoryRisk=classifyPublicCategoryRisk(row);
+  const commercialEligible=brandGate.commercialEligible&&categoryRisk.commercialEligible;
+  const commercialGate=!brandGate.commercialEligible?'STOP_BRAND_GATE':!categoryRisk.commercialEligible?(categoryRisk.decision==='BLOCK'?'STOP_CATEGORY_GATE':'STOP_CATEGORY_REVIEW'):'BRAND_REVIEW_REQUIRED';
   return {
     name,
     asin,
@@ -50,10 +54,13 @@ function safeExpandedProduct(product,index){
     note:'Produs din catalogul istoric licențiat. Nu reprezintă vânzări curente, disponibilitate live sau recomandare de import.',
     internalRankClass:'DERIVED',
     evidenceClass:'DERIVED',
-    commercialGate:brandGate.commercialEligible?'BRAND_REVIEW_REQUIRED':'STOP_BRAND_GATE',
+    commercialGate,
     brandPolicyClass:brandGate.brandPolicyClass,
-    commercialEligible:brandGate.commercialEligible,
-    brandPolicyReason:brandGate.reason
+    categoryRiskClass:categoryRisk.riskClass,
+    categoryRiskDecision:categoryRisk.decision,
+    commercialEligible,
+    brandPolicyReason:brandGate.reason,
+    categoryRiskReason:categoryRisk.reason
   };
 }
 
@@ -122,10 +129,12 @@ export function createFreeTop25Handler({fetch:fetchImpl=fetch,env=process.env}={
         organicProducts:Array.isArray(organic.data?.products)?organic.data.products:[]
       });
       const expandedUpdatedAt=expandedNiches.map(niche=>niche.reviewedAt).filter(Boolean).sort().at(-1)||null;
+      const categoryReviewCount=expandedNiches.flatMap(niche=>niche.products).filter(product=>product.categoryRiskDecision!=='ALLOW').length;
+      const brandHoldCount=expandedNiches.flatMap(niche=>niche.products).filter(product=>product.brandPolicyClass==='ESTABLISHED_EXCLUDE').length;
       return Response.json({
         ok:true,
         ...universe,
-        stats:{...universe.stats,completeNicheCount:25,expandedNicheCount:25,expandedProductCount:625,publishedNicheCount:25,publishedProductCount:625},
+        stats:{...universe.stats,completeNicheCount:25,expandedNicheCount:25,expandedProductCount:625,publishedNicheCount:25,publishedProductCount:625,categoryReviewCount,brandHoldCount},
         niches:expandedNiches,
         sourceDiagnostics:{publicCatalog:'LICENSED_HISTORICAL_EVIDENCE',discovery:discovery.via,organic:organic.via},
         updatedAt:expandedUpdatedAt
