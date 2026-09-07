@@ -18,7 +18,7 @@
   for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://esm.sh; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://esm.sh https://api.stripe.com; frame-src https://checkout.stripe.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://checkout.stripe.com; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://esm.sh https://challenges.cloudflare.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://esm.sh https://api.stripe.com https://challenges.cloudflare.com https://*.hcaptcha.com; frame-src https://checkout.stripe.com https://challenges.cloudflare.com https://*.hcaptcha.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://checkout.stripe.com; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self)"
     X-Content-Type-Options = "nosniff"
