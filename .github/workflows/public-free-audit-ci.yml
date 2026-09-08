@@ -1,0 +1,35 @@
+name: Public Free audit CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - 'audit/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install exact dependencies
+        run: npm ci
+      - name: Unit and regression tests
+        run: npm test
+      - name: Migration chain
+        run: npm run verify:migrations
+      - name: Production safety gate
+        run: npm run verify:production-safety
+      - name: High/Critical dependency audit
+        run: npm run security:audit
+      - name: Full build gate
+        run: npm run build
