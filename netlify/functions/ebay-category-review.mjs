@@ -3,11 +3,12 @@ import {getEbayCategorySuggestions,getEbayCategoryCoverageReview} from './_ebay-
 
 const clean=value=>String(value??'').trim();
 const safeEqual=(left,right)=>{const a=Buffer.from(clean(left));const b=Buffer.from(clean(right));return a.length>0&&a.length===b.length&&timingSafeEqual(a,b);};
+const internalSecret=env=>clean(env.MPR_INTERNAL_REFRESH_SECRET||env.RADAR_INTERNAL_SECRET);
 
 export function createEbayCategoryReviewHandler({env=process.env,fetchImpl=fetch,now=()=>Date.now()}={}){
   return async request=>{
     if(request.method!=='POST')return Response.json({ok:false,error:'Method not allowed'},{status:405,headers:{allow:'POST','Cache-Control':'no-store'}});
-    if(!safeEqual(request.headers.get('x-mpr-internal-secret'),env.MPR_INTERNAL_REFRESH_SECRET))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
+    if(!safeEqual(request.headers.get('x-mpr-internal-secret'),internalSecret(env)))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
     let payload; try{payload=await request.json();}catch{return Response.json({ok:false,error:'Invalid JSON'},{status:400,headers:{'Cache-Control':'no-store'}});}
     if(String(payload?.mode||'').toUpperCase()==='COVERAGE'){
       const requested=Array.isArray(payload?.marketplaceIds)?payload.marketplaceIds:['EBAY_US','EBAY_DE'];
@@ -24,5 +25,6 @@ export function createEbayCategoryReviewHandler({env=process.env,fetchImpl=fetch
   };
 }
 
+export {internalSecret};
 export default createEbayCategoryReviewHandler();
 export const config={path:'/api/internal/ebay-category-review',method:'POST'};
