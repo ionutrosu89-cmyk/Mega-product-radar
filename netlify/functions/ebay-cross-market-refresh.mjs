@@ -9,6 +9,7 @@ const safeEqual=(left,right)=>{
   const b=Buffer.from(clean(right));
   return a.length>0&&a.length===b.length&&timingSafeEqual(a,b);
 };
+const internalSecret=env=>clean(env.MPR_INTERNAL_REFRESH_SECRET||env.RADAR_INTERNAL_SECRET);
 const serviceHeaders=service=>({apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'resolution=merge-duplicates,return=minimal'});
 
 async function persistSnapshot({env,fetchImpl,nicheId,reviewedAt,products}){
@@ -25,7 +26,7 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
   return async request=>{
     try{
       if(request.method!=='POST')return Response.json({ok:false,error:'Method not allowed'},{status:405,headers:{allow:'POST','Cache-Control':'no-store'}});
-      if(!safeEqual(request.headers.get('x-mpr-internal-secret'),env.MPR_INTERNAL_REFRESH_SECRET))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
+      if(!safeEqual(request.headers.get('x-mpr-internal-secret'),internalSecret(env)))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
       const access=ebayBuyAccessState(env);
       if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
       const targets=parseEbayTargets(env);
@@ -49,6 +50,6 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
   };
 }
 
-export {persistSnapshot};
+export {persistSnapshot,internalSecret};
 export default createEbayCrossMarketRefreshHandler();
 export const config={path:'/api/internal/ebay-cross-market-refresh',method:'POST'};
