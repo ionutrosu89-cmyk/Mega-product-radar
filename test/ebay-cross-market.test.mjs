@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {EBAY_BUY_AUTH,resetEbayTokenCacheForTests} from '../netlify/functions/_ebay-buy-auth.mjs';
 import {collectEbayBestSellingTarget,normalizeEbayBestSelling,parseEbayTargets} from '../netlify/functions/_ebay-best-selling.mjs';
-import {createEbayCrossMarketRefreshHandler} from '../netlify/functions/ebay-cross-market-refresh.mjs';
+import {createEbayCrossMarketRefreshHandler,internalSecret} from '../netlify/functions/ebay-cross-market-refresh.mjs';
 
 const approvedEnv={
   EBAY_CLIENT_ID:'client',EBAY_CLIENT_SECRET:'secret',MPR_EBAY_TERMS_APPROVED:'true',MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'true',
@@ -46,6 +46,20 @@ test('collector uses Buy Marketing scope, category, marketplace and exact limit 
   assert.equal(provider.searchParams.get('metric_name'),'BEST_SELLING');
   assert.equal(provider.searchParams.get('limit'),'25');
   assert.equal(calls[1].options.headers['X-EBAY-C-MARKETPLACE-ID'],'EBAY_US');
+});
+
+test('internal eBay endpoints reuse RADAR_INTERNAL_SECRET when dedicated secret is absent',async()=>{
+  const env={...approvedEnv};
+  delete env.MPR_INTERNAL_REFRESH_SECRET;
+  env.RADAR_INTERNAL_SECRET='radar-secret';
+  assert.equal(internalSecret(env),'radar-secret');
+  let called=0;
+  const handler=createEbayCrossMarketRefreshHandler({env:{...env,MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'false'},fetchImpl:async()=>{called++;return Response.json({});}});
+  const accepted=await handler(new Request('https://mpr.example/api/internal/ebay-cross-market-refresh',{method:'POST',headers:{'x-mpr-internal-secret':'radar-secret'}}));
+  assert.equal(accepted.status,409);
+  assert.equal(called,0);
+  const rejected=await handler(new Request('https://mpr.example/api/internal/ebay-cross-market-refresh',{method:'POST',headers:{'x-mpr-internal-secret':'wrong'}}));
+  assert.equal(rejected.status,401);
 });
 
 test('internal refresh makes zero provider calls until access is approved',async()=>{
