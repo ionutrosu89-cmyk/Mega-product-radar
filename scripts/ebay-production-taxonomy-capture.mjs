@@ -1,5 +1,6 @@
 import {getEbayCategoryCoverageReview} from '../netlify/functions/_ebay-taxonomy-review.mjs';
 import {ebayBuyAccessState} from '../netlify/functions/_ebay-buy-auth.mjs';
+import {classifyEbayTaxonomyPath} from '../ebay-taxonomy-path-policy-v1.js';
 import {SAAS_CONFIG} from '../saas-config.js';
 
 const env=process.env;
@@ -31,8 +32,12 @@ for(const marketplaceId of markets){
       continue;
     }
     const rows=[];
+    let pathMatched=0;
+    let pathRejected=0;
     for(const target of review.targets||[]){
       for(const candidate of target.candidates||[]){
+        const pathGate=classifyEbayTaxonomyPath(target.nicheId,candidate);
+        if(pathGate.accepted)pathMatched++; else pathRejected++;
         rows.push({
           marketplace_id:marketplaceId,
           niche_id:target.nicheId,
@@ -45,7 +50,7 @@ for(const marketplaceId of markets){
           category_path:candidate.path||[],
           review_score:candidate.reviewScore,
           leaf:Boolean(candidate.leaf),
-          review_state:'REVIEW_REQUIRED',
+          review_state:pathGate.accepted?'PATH_VALIDATED_REVIEW_REQUIRED':pathGate.decision,
           activation_eligible:false,
           evidence_class:'EBAY_CATEGORY_TREE_REVIEW_CANDIDATE',
           observed_at:observedAt
@@ -55,12 +60,12 @@ for(const marketplaceId of markets){
     const url=new URL(`${supabaseUrl}/rest/v1/ebay_taxonomy_mapping_candidates_v1`);
     url.searchParams.set('on_conflict','marketplace_id,niche_id,candidate_rank');
     const response=await fetch(url,{method:'POST',headers:{apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows),signal:AbortSignal.timeout(30000)});
-    summary.push({marketplaceId,ok:response.ok,code:response.ok?'CAPTURED':`SUPABASE_HTTP_${response.status}`,providerCalls:Number(review.providerCalls||0),targets:Number(review.targetCount||0),rows:rows.length});
+    summary.push({marketplaceId,ok:response.ok,code:response.ok?'CAPTURED':`SUPABASE_HTTP_${response.status}`,providerCalls:Number(review.providerCalls||0),targets:Number(review.targetCount||0),rows:rows.length,pathMatched,pathRejected});
   }catch(error){
     summary.push({marketplaceId,ok:false,code:String(error?.message||error).slice(0,120),providerCalls:0,rows:0});
   }
 }
 
-console.log(JSON.stringify({capture:'EBAY_TAXONOMY',observedAt,summary,policy:{autoApproval:false,autoActivation:false,productRankingsCollected:false,purchaseAuthorized:false}}));
+console.log(JSON.stringify({capture:'EBAY_TAXONOMY',observedAt,summary,policy:{pathValidation:true,autoApproval:false,autoActivation:false,productRankingsCollected:false,purchaseAuthorized:false}}));
 // Taxonomy capture is operational evidence and must not break unrelated production deploys.
 process.exit(0);
