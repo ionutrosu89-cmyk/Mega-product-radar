@@ -1,3 +1,5 @@
+import {evaluateStageFacts} from './evidence-stage-policy.js';
+import {evidenceFreshness} from './evidence-freshness.js';
 const text=v=>String(v??'').trim();
 const clamp=(n,min=0,max=100)=>Math.max(min,Math.min(max,Number(n)||0));
 
@@ -64,13 +66,20 @@ export function analyzeOpportunityV5({canonicalProductId=null,globalDemand={},tr
   if(allPretestPass&&confidence>=60&&score!==null&&score>=60)recommendation='FINALIST';
   if(components.importability.status==='BLOCKED')recommendation='VALIDATE';
   if(id&&confidence<50&&recommendation!=='DISCOVERED')recommendation='VALIDATE';
+  const canonical=evaluateStageFacts({promising:Boolean(id&&score!==null),marketQualified:Boolean(allPretestPass||statuses.trend==='PASS'&&statuses.romaniaGap==='PASS'),confidence,
+    trendConfirmed:statuses.trend==='PASS'&&trend.signal==='CONFIRMED_ACCELERATION'&&trend.evidenceClass==='FUSED_LONGITUDINAL_PUBLIC_TREND'&&trend.trendEvidenceLevel==='RANK_PLUS_REVIEW_LONGITUDINAL'&&trend.demandEvidenceConfirmed===true,romaniaExact:statuses.romaniaGap==='PASS'&&(romaniaGap.exactComparableCount===true||romaniaGap.romaniaGapExactGateSatisfied===true),
+    supplierVerified:statuses.supplier==='PASS'&&evidenceFreshness(supplier.observedAt,{kind:'supplier'}).status==='CURRENT'&&(supplier.verifiedQuote===true||supplier.evidenceClass==='MANUALLY_VERIFIED'),
+    economicsConfirmed:statuses.economics==='PASS'&&evidenceFreshness(economics.observedAt,{kind:'freight'}).status==='CURRENT'&&economics.landedCostConfirmed===true&&Number(economics.marginPct)>=20&&Number(economics.roiPct)>=45&&Number(economics.profitPerUnit)>0,
+    importabilityPassed:statuses.importability==='PASS'&&evidenceFreshness(importability.observedAt).status==='CURRENT',fresh:identityMismatches.length===0&&Boolean(id)&&['trend','romaniaGap'].every(k=>evidenceFreshness(raw[k].observedAt,{kind:({trend:'trend',romaniaGap:'romania',supplier:'supplier',economics:'freight'})[k]||'marketplace'}).status==='CURRENT')});
+  recommendation=canonical.stage;
+  blockers.push(...canonical.blockers);
 
   return Object.freeze({
-    schemaVersion:'MPR_OPPORTUNITY_V5',canonicalProductId:id,opportunityScore:score,confidence,recommendation,
+    schemaVersion:'MPR_OPPORTUNITY_V5',stagePolicyVersion:canonical.policyVersion,stageFacts:{...canonical.gates,promising:Boolean(id&&score!==null),marketQualified:true,confidence},evidenceObservedAt:Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,v.observedAt||null])),canonicalProductId:id,opportunityScore:score,confidence,recommendation,
     components:Object.freeze(components),weightedComponents:Object.freeze(weighted),knownWeight,missingComponents:Object.freeze(missingComponents),identityMismatches:Object.freeze(identityMismatches),pretestGateStatuses:Object.freeze(statuses),blockers:Object.freeze([...new Set(blockers)]),
     finalistEligible:recommendation==='FINALIST',testReadyEligible:false,buyReadyEligible:false,legacyRecommendationAuthoritative:false,verifiedSales:null,salesEvidenceClass:'NOT_INFERRED_BY_OPPORTUNITY_ENGINE',
     purchaseAuthorized:false,automaticPurchaseAllowed:false,paidCallsTriggered:0,providerSpendEur:0,
-    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; LOW_CONFIDENCE_REMAINS_VALIDATE; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
+    policy:'OPPORTUNITY_SCORE_AND_CONFIDENCE_SEPARATE; LOW_CONFIDENCE_MAX_PROMISING; MISSING_COMPONENTS_NEVER_DEFAULT_TO_ZERO_OR_PASS; ALL_PRETEST_GATES_MUST_PASS_FOR_FINALIST; HARD_BLOCKERS_OVERRIDE_SCORE; CROSS_PRODUCT_EVIDENCE_REJECTED; TEST_READY_AND_BUY_READY_REQUIRE_REAL_TEST_EVIDENCE_AND_CANONICAL_DECISION_AUTHORITY; LEGACY_BUY_NEVER_OVERRIDES_CANONICAL_BLOCKERS'
   });
 }
 

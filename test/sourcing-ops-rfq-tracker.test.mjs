@@ -57,7 +57,9 @@ test('Sourcing Ops stores private state and never implements external message se
 test('Netlify build ships Sourcing Ops UI but excludes private source templates and response data',()=>{
   const build=fs.readFileSync('scripts/build-site.mjs','utf8');
   for(const file of ['sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
-  assert.match(build,/Never copy supplier-candidates\/, supplier-rfq-dispatch\/, supplier-evidence\//);
+  for(const directory of ['supplier-candidates','supplier-rfq-dispatch','supplier-evidence']){
+    assert.ok(build.includes(`'${directory}'`),`Missing private artifact exclusion: ${directory}`);
+  }
   assert.match(build,/PRIVATE_STATIC_ARTIFACT_EXPOSED/);
   assert.doesNotMatch(queue.policy,/response content/i);
 });
