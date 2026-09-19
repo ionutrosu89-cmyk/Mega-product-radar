@@ -3,8 +3,9 @@ begin;
 do $test$
 declare u uuid:=gen_random_uuid();w uuid:=gen_random_uuid();p uuid;s text;r jsonb;n integer;
 begin
- select product_id,source_key into p,s from public.product_observations where observation_type='marketplace_listing_price' order by observed_at desc limit 1;
- if p is null then raise exception 'OBSERVATION_FIXTURE_REQUIRED';end if;
+ p:=gen_random_uuid();s:='transactional-test-'||p;
+ insert into public.data_sources(source_key,provider,collection_method) values(s,'TEST_ONLY','TRANSACTIONAL_FIXTURE');
+ insert into public.canonical_products(id,canonical_key,title) values(p,s,'Transactional fixture, not a real product');
  insert into auth.users(id,email) values(u,'audit-'||u||'@example.invalid');
  insert into public.workspaces(id,name,slug,owner_id) values(w,'Transactional sync test',w::text,u);
  insert into public.workspace_members(workspace_id,user_id,role) values(w,u,'OWNER') on conflict do nothing;
