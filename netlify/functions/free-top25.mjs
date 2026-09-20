@@ -70,17 +70,19 @@ export async function loadExpandedTop25Niches({env=process.env,fetchImpl=fetch}=
   const response=await fetchImpl(url,{headers:supabaseHeaders(serviceRole)});
   if(!response.ok)return [];
   const rows=await response.json();
-  const latestById=new Map();
+  const rowsById=new Map();
   for(const row of Array.isArray(rows)?rows:[]){
     const id=String(row?.niche_id||'');
-    const current=latestById.get(id);
-    if(!current||String(row?.reviewed_at||'')>String(current?.reviewed_at||''))latestById.set(id,row);
+    if(!rowsById.has(id))rowsById.set(id,[]);
+    rowsById.get(id).push(row);
   }
   return FREE_TOP25_EXPANDED_REGISTRY.flatMap(meta=>{
-    const row=latestById.get(meta.id);
-    const products=(Array.isArray(row?.products)?row.products:[]).slice(0,25).map(safeExpandedProduct).filter(Boolean);
-    if(products.length!==25)return [];
-    return [{...meta,mode:'LICENSED_HISTORICAL_EVIDENCE',reviewedAt:String(row.reviewed_at||''),products,eligibleProductCount:25}];
+    const candidates=(rowsById.get(meta.id)||[]).sort((a,b)=>String(b?.reviewed_at||'').localeCompare(String(a?.reviewed_at||'')));
+    for(const row of candidates){
+      const products=(Array.isArray(row?.products)?row.products:[]).slice(0,25).map(safeExpandedProduct).filter(Boolean);
+      if(products.length===25)return [{...meta,mode:'LICENSED_HISTORICAL_EVIDENCE',reviewedAt:String(row.reviewed_at||''),products,eligibleProductCount:25}];
+    }
+    return [];
   });
 }
 

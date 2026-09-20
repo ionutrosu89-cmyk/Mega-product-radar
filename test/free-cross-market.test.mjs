@@ -45,6 +45,19 @@ test('a live platform ranking is published only with exactly 25 fresh valid posi
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,reviewed_at:'2026-08-01'},{now:new Date('2026-09-04T08:00:00Z')}),null);
 });
 
+test('current snapshot rows require approved rights and current freshness',()=>{
+  const products=Array.from({length:25},(_,i)=>product(i+1));
+  const row={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products,source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  assert.equal(normalizeCrossMarketSnapshot(row,{now:new Date('2026-09-04T08:00:00Z')})?.products.length,25);
+  assert.equal(normalizeCrossMarketSnapshot({...row,source_rights_status:'REVIEW_REQUIRED'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,freshness_status:'STALE'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+});
+
+test('demand, advertising and Romanian comparable data remain supporting signals',()=>{
+  const view=buildFreeCrossMarketExperience({accessByPlatform:{GOOGLE:'READY_TO_COLLECT',TIKTOK:'READY_TO_COLLECT',ROMANIA:'READY_TO_COLLECT'}});
+  for(const id of ['GOOGLE','TIKTOK','ROMANIA'])assert.equal(view.platforms.find(row=>row.id===id).status,'SUPPORTING_SIGNAL_ONLY');
+});
+
 test('consensus becomes ready only after 25 concepts match across two independent live platforms',()=>{
   const products=Array.from({length:25},(_,i)=>product(i+1));
   const ebay={niche_id:'XMARKET:EBAY:AUTO',reviewed_at:'2026-09-03',products};
@@ -63,7 +76,7 @@ test('Free Cross-Market endpoint returns archive coverage and fails closed on mi
   const fetchImpl=async url=>{
     const value=String(url);
     if(value.includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
-    if(value.includes('niche_id=like.XMARKET'))return Response.json([]);
+    if(value.includes('/rest/v1/current_top25_snapshots_v1'))return Response.json([]);
     if(value.includes('/rest/v1/top25_snapshots'))return Response.json([]);
     return new Response('not found',{status:404});
   };

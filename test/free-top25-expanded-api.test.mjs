@@ -71,3 +71,14 @@ test('expanded Free plan fails closed without server credentials',async()=>{
   assert.deepEqual(niches,[]);
   assert.equal(called,false);
 });
+
+test('expanded Free plan falls back to the newest eligible licensed snapshot',async()=>{
+  const rows=[];
+  for(const niche of FREE_TOP25_EXPANDED_REGISTRY){
+    rows.push({niche_id:niche.id,reviewed_at:'2026-09-04',products:Array.from({length:25},(_,i)=>({name:`Unlicensed ${i+1}`,sourceKey:'PUBLIC_PAGE'}))});
+    rows.push({niche_id:niche.id,reviewed_at:'2026-09-02',products:Array.from({length:25},(_,i)=>product(i+1))});
+  }
+  const niches=await loadExpandedTop25Niches({env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'server-secret'},fetchImpl:async()=>Response.json(rows)});
+  assert.equal(niches.length,25);
+  assert.ok(niches.every(niche=>niche.reviewedAt==='2026-09-02'));
+});

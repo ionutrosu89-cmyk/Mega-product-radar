@@ -5,7 +5,7 @@ import {collectEbayBestSellingTarget,normalizeEbayBestSelling,parseEbayTargets} 
 import {createEbayCrossMarketRefreshHandler,internalSecret} from '../netlify/functions/ebay-cross-market-refresh.mjs';
 
 const approvedEnv={
-  EBAY_CLIENT_ID:'client',EBAY_CLIENT_SECRET:'secret',MPR_EBAY_TERMS_APPROVED:'true',MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'true',
+  EBAY_CLIENT_ID:'client',EBAY_CLIENT_SECRET:'secret',MPR_EBAY_TERMS_APPROVED:'true',MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'true',MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true',
   MPR_EBAY_CROSS_MARKET_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US'}]),
   MPR_INTERNAL_REFRESH_SECRET:'internal-secret',SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'
 };
@@ -78,7 +78,7 @@ test('internal refresh persists only a complete 25-product snapshot',async()=>{
     calls.push({url:String(url),options});
     if(String(url)===EBAY_BUY_AUTH.tokenUrl)return Response.json({access_token:'token',expires_in:7200});
     if(String(url).startsWith('https://api.ebay.com/buy/marketing/'))return Response.json(payload(25));
-    if(String(url).startsWith('https://db.example/rest/v1/top25_snapshots'))return new Response(null,{status:201});
+    if(String(url).startsWith('https://db.example/rest/v1/current_top25_snapshots_v1'))return new Response(null,{status:201});
     return new Response('not found',{status:404});
   };
   const handler=createEbayCrossMarketRefreshHandler({env:approvedEnv,fetchImpl,now:()=>new Date('2026-09-04T06:00:00Z')});
@@ -86,10 +86,22 @@ test('internal refresh persists only a complete 25-product snapshot',async()=>{
   assert.equal(response.status,200);
   const body=await response.json();
   assert.equal(body.published,1);
-  const write=calls.find(call=>call.url.includes('/rest/v1/top25_snapshots'));
+  const write=calls.find(call=>call.url.includes('/rest/v1/current_top25_snapshots_v1'));
   assert.ok(write);
   const stored=JSON.parse(write.options.body)[0];
-  assert.equal(stored.niche_id,'XMARKET:EBAY:AUTO');
-  assert.equal(stored.reviewed_at,'2026-09-04');
+  assert.equal(stored.niche_id,'AUTO');
+  assert.equal(stored.platform,'EBAY');
+  assert.equal(stored.market,'EBAY_US');
+  assert.equal(stored.source_rights_status,'APPROVED');
+  assert.equal(stored.freshness_status,'CURRENT');
   assert.equal(stored.products.length,25);
+});
+
+test('public refresh makes zero provider calls until display rights are approved',async()=>{
+  let called=0;
+  const handler=createEbayCrossMarketRefreshHandler({env:{...approvedEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'},fetchImpl:async()=>{called++;return Response.json({});}});
+  const response=await handler(new Request('https://mpr.example/api/internal/ebay-cross-market-refresh',{method:'POST',headers:{'x-mpr-internal-secret':'internal-secret'}}));
+  assert.equal(response.status,409);
+  assert.equal(called,0);
+  assert.equal((await response.json()).status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
 });

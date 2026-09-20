@@ -4,13 +4,13 @@ const upper=value=>clean(value).toUpperCase();
 
 export const FREE_CROSS_MARKET_PLATFORMS=Object.freeze([
   Object.freeze({id:'CONSENSUS',label:'Consensus',shortLabel:'Consensus',emoji:'✦',kind:'DERIVED',rankingBasis:'MULTI_PLATFORM_CONFIRMATION',sourceLabel:'Mega Product Radar',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7}),
-  Object.freeze({id:'ALIEXPRESS',label:'AliExpress Hot Products',shortLabel:'AliExpress',emoji:'🛍️',kind:'LIVE',rankingBasis:'HOT_PRODUCTS',sourceLabel:'AliExpress Open Platform',officialUrl:'https://developer.alibaba.com/docs/api.htm?apiId=45794',freshnessDays:7}),
-  Object.freeze({id:'EBAY',label:'eBay Best Selling',shortLabel:'eBay',emoji:'🏷️',kind:'LIVE',rankingBasis:'BEST_SELLING',sourceLabel:'eBay Marketing API',officialUrl:'https://developer.ebay.com/api-docs/buy/marketing/overview.html',freshnessDays:7}),
-  Object.freeze({id:'AMAZON_US',label:'Amazon US Live',shortLabel:'Amazon US',emoji:'🇺🇸',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:7}),
-  Object.freeze({id:'AMAZON_DE',label:'Amazon DE Live',shortLabel:'Amazon DE',emoji:'🇩🇪',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:7}),
-  Object.freeze({id:'TIKTOK',label:'TikTok Shop & Ads',shortLabel:'TikTok',emoji:'♪',kind:'LIVE',rankingBasis:'SHOP_OR_AD_MOMENTUM',sourceLabel:'TikTok official access',officialUrl:'https://developers.tiktok.com/',freshnessDays:3}),
-  Object.freeze({id:'GOOGLE',label:'Google Shopping & Trends',shortLabel:'Google',emoji:'G',kind:'LIVE',rankingBasis:'BEST_SELLERS_OR_SEARCH_ACCELERATION',sourceLabel:'Google Merchant / Trends',officialUrl:'https://developers.google.com/merchant/api',freshnessDays:7}),
-  Object.freeze({id:'ROMANIA',label:'Oferta din România',shortLabel:'România',emoji:'🇷🇴',kind:'LOCAL',rankingBasis:'COMPARABLE_OFFER_COVERAGE',sourceLabel:'MPR Romania evidence',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:14}),
+  Object.freeze({id:'ALIEXPRESS',label:'AliExpress Hot Products',shortLabel:'AliExpress',emoji:'🛍️',kind:'LIVE',rankingBasis:'HOT_PRODUCTS',sourceLabel:'AliExpress Open Platform',officialUrl:'https://developer.alibaba.com/docs/api.htm?apiId=45794',freshnessDays:3}),
+  Object.freeze({id:'EBAY',label:'eBay Best Selling',shortLabel:'eBay',emoji:'🏷️',kind:'LIVE',rankingBasis:'BEST_SELLING',sourceLabel:'eBay Marketing API',officialUrl:'https://developer.ebay.com/api-docs/buy/marketing/overview.html',freshnessDays:3}),
+  Object.freeze({id:'AMAZON_US',label:'Amazon US Live',shortLabel:'Amazon US',emoji:'🇺🇸',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:3}),
+  Object.freeze({id:'AMAZON_DE',label:'Amazon DE Live',shortLabel:'Amazon DE',emoji:'🇩🇪',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:3}),
+  Object.freeze({id:'TIKTOK',label:'TikTok Shop & Ads',shortLabel:'TikTok',emoji:'♪',kind:'SIGNAL',rankingBasis:'AD_MOMENTUM_ONLY',sourceLabel:'TikTok official access',officialUrl:'https://developers.tiktok.com/',freshnessDays:7}),
+  Object.freeze({id:'GOOGLE',label:'Google Search Demand',shortLabel:'Google',emoji:'G',kind:'SIGNAL',rankingBasis:'SEARCH_DEMAND_ONLY',sourceLabel:'Google Ads Keyword Planner',officialUrl:'https://developers.google.com/google-ads/api/docs/keyword-planning/overview',freshnessDays:35}),
+  Object.freeze({id:'ROMANIA',label:'Oferta din România',shortLabel:'România',emoji:'🇷🇴',kind:'SIGNAL',rankingBasis:'COMPARABLE_OFFERS_ONLY',sourceLabel:'MPR Romania evidence',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7}),
   Object.freeze({id:'AMAZON_ARCHIVE',label:'Amazon Historical 2023',shortLabel:'Amazon 2023',emoji:'🗂️',kind:'ARCHIVE',rankingBasis:'MPR_DERIVED_HISTORICAL',sourceLabel:'Kaggle · Amazon Products Dataset 2023',officialUrl:'https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products',freshnessDays:null})
 ]);
 
@@ -25,9 +25,10 @@ export function parseCrossMarketSnapshotKey(value){
 
 function accessState(platform,accessByPlatform={}){
   if(platform.kind==='ARCHIVE')return 'AVAILABLE_ARCHIVE';
+  if(platform.kind==='SIGNAL')return 'SUPPORTING_SIGNAL_ONLY';
   if(platform.id==='CONSENSUS')return 'WAITING_FOR_TWO_LIVE_PLATFORMS';
   const status=upper(accessByPlatform[platform.id]);
-  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
+  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','PUBLIC_DISPLAY_RIGHTS_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
 }
 
 function https(value){try{return new URL(clean(value)).protocol==='https:';}catch{return false;}}
@@ -59,10 +60,12 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
 }
 
 export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
-  const key=parseCrossMarketSnapshotKey(raw?.niche_id);
+  const explicitPlatform=upper(raw?.platform),explicitNiche=upper(raw?.niche_id);
+  const key=BY_ID.has(explicitPlatform)?{platform:explicitPlatform,nicheId:explicitNiche}:parseCrossMarketSnapshotKey(raw?.niche_id);
   if(!key||['CONSENSUS','AMAZON_ARCHIVE'].includes(key.platform))return null;
+  if(explicitPlatform&&(!explicitNiche||raw?.product_count!==25||upper(raw?.source_rights_status)!=='APPROVED'||upper(raw?.freshness_status)!=='CURRENT'))return null;
   const platform=BY_ID.get(key.platform);
-  const reviewedAt=clean(raw?.reviewed_at);
+  const reviewedAt=clean(raw?.window_end||raw?.reviewed_at);
   const reviewedDate=new Date(reviewedAt.length===10?`${reviewedAt}T23:59:59Z`:reviewedAt);
   const ageMs=now.getTime()-reviewedDate.getTime();
   if(!Number.isFinite(ageMs)||ageMs<0||ageMs>platform.freshnessDays*DAY_MS)return null;

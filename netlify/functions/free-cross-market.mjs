@@ -2,21 +2,21 @@ import {SAAS_CONFIG} from '../../saas-config.js';
 import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
 import {loadExpandedTop25Niches} from './free-top25.mjs';
 import {enforceRateLimit,requestId} from './_security-ops.mjs';
-import {ebayBuyAccessState} from './_ebay-buy-auth.mjs';
+import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 
 const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept:'application/json'});
 const present=(env,key)=>Boolean(String(env[key]||'').trim());
 const approved=(env,key)=>String(env[key]||'').toLowerCase()==='true';
-const access=(env,credentials,terms)=>credentials.some(key=>!present(env,key))?'ACCESS_REQUIRED':!approved(env,terms)?'TERMS_REVIEW_REQUIRED':'READY_TO_COLLECT';
+const access=(env,credentials,terms,publicDisplay)=>credentials.some(key=>!present(env,key))?'ACCESS_REQUIRED':!approved(env,terms)?'TERMS_REVIEW_REQUIRED':publicDisplay&&!approved(env,publicDisplay)?'PUBLIC_DISPLAY_RIGHTS_REQUIRED':'READY_TO_COLLECT';
 function buildServerAccessState(env){
   return {
-    ALIEXPRESS:access(env,['ALIEXPRESS_APP_KEY','ALIEXPRESS_APP_SECRET'],'MPR_ALIEXPRESS_TERMS_APPROVED'),
-    EBAY:ebayBuyAccessState(env),
-    AMAZON_US:access(env,['AMAZON_PRODUCT_DATA_ACCESS_TOKEN'],'MPR_AMAZON_DATA_RIGHTS_APPROVED'),
-    AMAZON_DE:access(env,['AMAZON_PRODUCT_DATA_ACCESS_TOKEN'],'MPR_AMAZON_DATA_RIGHTS_APPROVED'),
-    TIKTOK:access(env,['TIKTOK_COMMERCIAL_ACCESS_TOKEN'],'MPR_TIKTOK_COMMERCIAL_TERMS_APPROVED'),
-    GOOGLE:access(env,['GOOGLE_MERCHANT_ACCESS_TOKEN'],'MPR_GOOGLE_MARKET_INSIGHTS_TERMS_APPROVED'),
-    ROMANIA:approved(env,'MPR_ROMANIA_PUBLIC_EVIDENCE_APPROVED')?'READY_TO_COLLECT':'TERMS_REVIEW_REQUIRED'
+    ALIEXPRESS:access(env,['ALIEXPRESS_APP_KEY','ALIEXPRESS_APP_SECRET','ALIEXPRESS_TRACKING_ID'],'MPR_ALIEXPRESS_TERMS_APPROVED','MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED'),
+    EBAY:ebayPublicDisplayAccessState(env),
+    AMAZON_US:access(env,['AMAZON_CREATORS_CREDENTIAL_ID','AMAZON_CREATORS_CREDENTIAL_SECRET','AMAZON_ASSOCIATE_TAG'],'MPR_AMAZON_CREATORS_TERMS_APPROVED','MPR_AMAZON_PUBLIC_DISPLAY_APPROVED'),
+    AMAZON_DE:access(env,['AMAZON_CREATORS_CREDENTIAL_ID','AMAZON_CREATORS_CREDENTIAL_SECRET','AMAZON_ASSOCIATE_TAG'],'MPR_AMAZON_CREATORS_TERMS_APPROVED','MPR_AMAZON_PUBLIC_DISPLAY_APPROVED'),
+    TIKTOK:'SUPPORTING_SIGNAL_ONLY',
+    GOOGLE:'SUPPORTING_SIGNAL_ONLY',
+    ROMANIA:'SUPPORTING_SIGNAL_ONLY'
   };
 }
 
@@ -24,11 +24,13 @@ async function loadCrossMarketSnapshots({fetchImpl,env}){
   const supabaseUrl=env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl;
   const service=env.SUPABASE_SERVICE_ROLE_KEY;
   if(!supabaseUrl||!service)return [];
-  const url=new URL(`${supabaseUrl}/rest/v1/top25_snapshots`);
-  url.searchParams.set('select','niche_id,reviewed_at,products');
-  url.searchParams.set('niche_id','like.XMARKET:*');
-  url.searchParams.set('order','reviewed_at.desc');
-  url.searchParams.set('limit','500');
+  const url=new URL(`${supabaseUrl}/rest/v1/current_top25_snapshots_v1`);
+  url.searchParams.set('select','niche_id,platform,market,window_end,products,product_count,evidence_class,source_key,source_label,source_rights_status,freshness_status');
+  url.searchParams.set('product_count','eq.25');
+  url.searchParams.set('source_rights_status','eq.APPROVED');
+  url.searchParams.set('freshness_status','eq.CURRENT');
+  url.searchParams.set('order','window_end.desc');
+  url.searchParams.set('limit','2000');
   const response=await fetchImpl(url,{headers:headers(service)});
   if(!response.ok)return [];
   const rows=await response.json();

@@ -13,7 +13,7 @@ const normalizeSearch=value=>String(value||'').toLowerCase().normalize('NFD').re
 const fmtDate=value=>{if(!value)return '—';const raw=String(value),date=new Date(raw.length===10?`${raw}T00:00:00`:raw);return Number.isNaN(date.getTime())?raw:new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(date);};
 const fmtMetric=metric=>{if(!metric)return '—';const value=Number(metric.value||0).toLocaleString('ro-RO');if(metric.unit==='searches')return `${value} căutări`;if(metric.unit==='results')return `${value} rezultate`;if(metric.unit==='reviews_historical')return `${value} recenzii istorice`;return `${value}${metric.label?` · ${metric.label}`:''}`;};
 const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',HISTORICAL_PRODUCT:'PRODUS ISTORIC LICENȚIAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
-const statusLabel=status=>({LIVE:'LIVE',AVAILABLE_ARCHIVE:'ARHIVĂ',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',READY_TO_COLLECT:'GATA DE COLECTARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE'}[status]||'ÎN PREGĂTIRE');
+const statusLabel=status=>({LIVE:'LIVE',AVAILABLE_ARCHIVE:'ARHIVĂ',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE'}[status]||'ÎN PREGĂTIRE');
 
 let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='AMAZON_ARCHIVE';
 let shortlist=readFreeShortlist(),comparison=new Set(),shortlistOnly=false,renderToken=0;
@@ -55,7 +55,7 @@ function drawMarketTabs(){
 function drawMarketContext(){
   const platform=currentPlatform(),isArchive=platform.id==='AMAZON_ARCHIVE',isLive=platform.status==='LIVE';
   const descriptions={CONSENSUS:'Se activează numai după ce același concept este confirmat de minimum două platforme live independente.',ALIEXPRESS:'Va folosi Hot Products din accesul oficial AliExpress; nu publicăm rezultate copiate sau volume neverificate.',EBAY:'Va folosi BEST_SELLING din eBay Marketing API. Poziția platformei nu este prezentată ca număr de unități vândute.',AMAZON_US:'Clasament actual pentru SUA, numai din acces oficial sau licențiat și cu dată de observare.',AMAZON_DE:'Confirmare europeană actuală, separată de piața SUA și de arhiva istorică.',TIKTOK:'Semnal de Shop/reclame și accelerație; viralitatea nu este echivalentă cu vânzări.',GOOGLE:'Best Sellers sau accelerarea căutărilor, etichetate separat după tipul dovezii.',ROMANIA:'Numărul ofertelor comparabile și suprafețelor independente din România, nu vânzări locale.',AMAZON_ARCHIVE:'625 de poziții din catalogul istoric licențiat 2023. Arhiva este pentru explorare și nu intră în Consensus Live 2026.'};
-  $('#marketContext').innerHTML=`<div><small>COMPARAȚIE SELECTATĂ</small><b>${esc(platform.emoji)} ${esc(platform.label)}</b><p>${esc(descriptions[platform.id]||'Sursă în pregătire.')}</p></div><div class="market-health ${isLive?'live':isArchive?'archive':'waiting'}"><b>${esc(statusLabel(platform.status))}</b><span>${Number(platform.publishedPositions||0).toLocaleString('ro-RO')} poziții publicate</span></div>${!isLive&&!isArchive?`<button type="button" data-platform-request="${esc(platform.id)}">Vreau acest Top 25</button>`:''}`;
+  $('#marketContext').innerHTML=`<div><small>COMPARAȚIE SELECTATĂ</small><b>${esc(platform.emoji)} ${esc(platform.label)}</b><p>${esc(descriptions[platform.id]||'Sursă în pregătire.')}</p></div><div class="market-health ${isLive?'live':isArchive?'archive':'waiting'}"><b>${esc(statusLabel(platform.status))}</b><span>${Number(platform.publishedPositions||0).toLocaleString('ro-RO')} poziții publicate</span></div>${!isLive&&!isArchive&&platform.status!=='SUPPORTING_SIGNAL_ONLY'?`<button type="button" data-platform-request="${esc(platform.id)}">Vreau acest Top 25</button>`:''}`;
 }
 
 function installMarketTabs(){
@@ -137,7 +137,7 @@ async function loadData(){
   niches=top25.payload.niches.filter(niche=>Array.isArray(niche?.products)&&niche.products.length===25).slice(0,25).map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊',reviewedAt:niche.reviewedAt||top25.payload.updatedAt||TOP25_EVIDENCE_REVIEWED_AT}));current=niches[0]||null;
   const market=crossResult.status==='fulfilled'?crossResult.value:null;
   if(market?.response.ok&&market.payload?.ok&&Array.isArray(market.payload.platforms))crossMarket=market.payload;
-  else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.id==='AMAZON_ARCHIVE'?'AVAILABLE_ARCHIVE':'ACCESS_REQUIRED',publishedPositions:platform.id==='AMAZON_ARCHIVE'?niches.length*25:0})),rankings:[],coverage:{archivePositions:niches.length*25}};
+  else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.id==='AMAZON_ARCHIVE'?'AVAILABLE_ARCHIVE':platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':'ACCESS_REQUIRED',publishedPositions:platform.id==='AMAZON_ARCHIVE'?niches.length*25:0})),rankings:[],coverage:{archivePositions:niches.length*25}};
   return niches.length===25;
 }
 
