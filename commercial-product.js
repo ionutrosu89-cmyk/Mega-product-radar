@@ -1,10 +1,11 @@
+import {listCommercialWatchlist,saveToCommercialWatchlist,productKey} from './commercial-watchlist.js';
 import {evidenceStatusElement} from './evidence-status-ui.js';
 import {getCurrentSession} from './supabase-client.js';
 import {getActiveWorkspace} from './workspace-client.js';
 import {roCategory,roProductName} from './product-ro.js';
 import {trackJourneyEvent} from './journey-events.js';
 import {loadSellerPreferences} from './seller-preferences.js';
-import {normalizeOpportunityUxV1,nextValidationStepV1,opportunityActionStorageKeyV1,isCanonicalFinalistV1,OPPORTUNITY_COMPONENT_ORDER} from './opportunity-ux-v1.js';
+import {normalizeOpportunityUxV1,nextValidationStepV1,isCanonicalFinalistV1,OPPORTUNITY_COMPONENT_ORDER} from './opportunity-ux-v1.js';
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -14,8 +15,10 @@ const pct=v=>finite(v)===null?'UNKNOWN':`${Math.round(Number(v))}%`;
 const statusClass=v=>String(v||'UNKNOWN').toLowerCase().replace(/[^a-z]/g,'');
 const row=(label,value)=>`<div class="row"><span>${esc(label)}</span><b>${esc(value)}</b></div>`;
 
-function savedAction(product,view){const key=opportunityActionStorageKeyV1(product,view);return key?localStorage.getItem(key):null;}
-function setAction(product,view,action){const key=opportunityActionStorageKeyV1(product,view);if(key)localStorage.setItem(key,action);}
+let workActions=new Map();
+const actionByState={WATCHING:'WATCH',VALIDATING:'VALIDATE',PAUSED:'IGNORE'};
+function savedAction(product){return actionByState[workActions.get(productKey(product.name))]||null;}
+async function setAction(product,view,action){const state={WATCH:'WATCHING',VALIDATE:'VALIDATING',IGNORE:'PAUSED'}[action];if(!state)throw new Error('Acțiune invalidă.');const row=await saveToCommercialWatchlist(product,state);workActions.set(row.product_key,row.state);}
 function componentCard(component){return `<div class="component"><div class="component-head"><h3>${esc(component.label)}</h3><span class="badge ${statusClass(component.status)}">${esc(component.status)}</span></div><div class="numbers"><span>Score: <b>${score(component.score)}</b></span><span>Confidence: <b>${pct(component.confidence)}</b></span><span>Evidence: <b>${esc(component.evidenceClass)}</b></span></div></div>`;}
 function finalistEconomicsCard(packet,preferences={}){
   if(!packet)return '';
@@ -63,7 +66,7 @@ function render(product,finalistPacket=null,preferences={}){
 <section class="card"><h2 class="section-title">Beta pulse</h2><div class="muted">Această oportunitate ți se pare utilă pentru o decizie reală? Răspunsul măsoară utilitatea beta și nu schimbă scorul sau gate-urile.</div><div class="actions"><button type="button" data-beta-rating="USEFUL">UTILĂ</button><button type="button" data-beta-rating="FALSE_POSITIVE">FALS POZITIV</button><button type="button" data-beta-rating="UNCLEAR">NECLARĂ</button></div></section>
 <section class="card"><div class="integrity"><b>Decision safety:</b> Opportunity Detail se oprește la FINALIST. TEST_READY și BUY_READY necesită test real și Decision Authority. Legacy BUY nu este autoritate. purchaseAuthorized=false și automaticPurchaseAllowed=false.</div></section>`;
   $('#app').prepend(evidenceStatusElement(product));
-  document.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',event=>{const value=event.currentTarget.dataset.action;setAction(product,view,value);trackJourneyEvent('OPPORTUNITY_WORK_ACTION',{product:product.name,canonicalProductId:view.canonicalProductId||null,action:value,source:'DETAIL'});render(product,finalistPacket,preferences);}));
+  document.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',async event=>{const value=event.currentTarget.dataset.action;const button=event.currentTarget;button.disabled=true;try{await setAction(product,view,value);}catch(error){let message=button.parentNode.querySelector('[role=alert]');if(!message){message=document.createElement('p');message.setAttribute('role','alert');button.parentNode.append(message);}message.textContent='Nu am putut salva acțiunea: '+String(error?.message||error);button.disabled=false;return;}trackJourneyEvent('OPPORTUNITY_WORK_ACTION',{product:product.name,canonicalProductId:view.canonicalProductId||null,action:value,source:'DETAIL'});render(product,finalistPacket,preferences);}));
   document.querySelectorAll('[data-beta-rating]').forEach(button=>button.addEventListener('click',async event=>{const verdict=event.currentTarget.dataset.betaRating;await trackJourneyEvent('BETA_OPPORTUNITY_RATED',{canonicalProductId:view.canonicalProductId||null,useful:verdict==='USEFUL'?true:verdict==='FALSE_POSITIVE'?false:null,falsePositive:verdict==='FALSE_POSITIVE',verdict,source:'OPPORTUNITY_DETAIL'});document.querySelectorAll('[data-beta-rating]').forEach(x=>x.classList.toggle('selected',x===event.currentTarget));}));
 }
 
@@ -85,7 +88,7 @@ async function load(){
         finalistPacket=(Array.isArray(fd.items)?fd.items:[]).find(x=>String(x.title||'').toLowerCase()===String(product.name||'').toLowerCase())||null;
       }
     }catch{}
-    render(product,finalistPacket,preferences);const view=normalizeOpportunityUxV1(product);trackJourneyEvent('OPPORTUNITY_DETAIL_VIEW',{product:product.name,canonicalProductId:view.canonicalProductId||null,recommendation:view.recommendation});
+    workActions=new Map((await listCommercialWatchlist()).map(row=>[row.product_key,row.state]));render(product,finalistPacket,preferences);const view=normalizeOpportunityUxV1(product);trackJourneyEvent('OPPORTUNITY_DETAIL_VIEW',{product:product.name,canonicalProductId:view.canonicalProductId||null,recommendation:view.recommendation});
   }catch(error){$('#app').innerHTML=`<section class="card empty"><h3>Opportunity Detail nu este disponibil</h3><p>${esc(error?.message||error)}</p><a href="commercial-radar.html">Înapoi la Opportunities</a></section>`;}
 }
 load();
