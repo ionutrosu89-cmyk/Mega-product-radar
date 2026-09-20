@@ -9,13 +9,15 @@ await fs.mkdir('artifacts',{recursive:true});
 try{
  if(sql("select to_regclass('public.workspaces') is null;").trim()!=='t')throw new Error('DATABASE_NOT_CLEAN');
  const files=(await fs.readdir('supabase/migrations')).filter(x=>x.endsWith('.sql')).sort();
- // Legacy migrations share day-only prefixes: apply the inbox before its guard.
- // Otherwise the base RPC would overwrite the stricter comparability RPC.
- const guard='20260831_romania_comparability_guard_v2.sql';
- const inbox='20260831_romania_evidence_inbox.sql';
- if(files.indexOf(guard)<files.indexOf(inbox)){
-  files.splice(files.indexOf(guard),1);
-  files.splice(files.indexOf(inbox)+1,0,guard);
+ // Day-only prefixes do not preserve the original dependency order.
+ const {groups}=JSON.parse(await fs.readFile('supabase/legacy-migration-order.json','utf8'));
+ for(const [day,names] of Object.entries(groups)){
+  const positions=files.map((name,index)=>name.startsWith(day+'_')?index:-1).filter(index=>index>=0);
+  const ordered=positions.map(index=>files[index]).sort((a,b)=>{
+   const rank=name=>{const key=name.slice(9,-4);const i=names.indexOf(key);if(i<0)throw new Error(`UNORDERED_LEGACY_MIGRATION:${name}`);return i;};
+   return rank(a)-rank(b);
+  });
+  positions.forEach((index,i)=>{files[index]=ordered[i];});
  }
  for(const name of files){
   const text=await fs.readFile(`supabase/migrations/${name}`,'utf8');
