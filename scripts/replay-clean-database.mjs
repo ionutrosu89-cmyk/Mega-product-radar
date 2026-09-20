@@ -9,6 +9,14 @@ await fs.mkdir('artifacts',{recursive:true});
 try{
  if(sql("select to_regclass('public.workspaces') is null;").trim()!=='t')throw new Error('DATABASE_NOT_CLEAN');
  const files=(await fs.readdir('supabase/migrations')).filter(x=>x.endsWith('.sql')).sort();
+ // Legacy migrations share day-only prefixes: apply the inbox before its guard.
+ // Otherwise the base RPC would overwrite the stricter comparability RPC.
+ const guard='20260831_romania_comparability_guard_v2.sql';
+ const inbox='20260831_romania_evidence_inbox.sql';
+ if(files.indexOf(guard)<files.indexOf(inbox)){
+  files.splice(files.indexOf(guard),1);
+  files.splice(files.indexOf(inbox)+1,0,guard);
+ }
  for(const name of files){
   const text=await fs.readFile(`supabase/migrations/${name}`,'utf8');
   const row={name,sha256:createHash('sha256').update(text).digest('hex'),status:'RUNNING'};report.files.push(row);
