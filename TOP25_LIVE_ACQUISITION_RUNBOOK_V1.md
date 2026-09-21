@@ -14,7 +14,7 @@ Pentru eBay, rulează endpointul intern `POST /api/internal/ebay-category-review
 
 ### eBay
 
-Colectorul direct este implementat. Sunt necesare credențialele aplicației, accesul de producție, revizuirea termenilor și aprobarea explicită pentru afișarea publică. Jobul programat rulează zilnic la 05:30 UTC și nu efectuează apeluri dacă oricare dintre gate-uri lipsește.
+Colectorul direct este implementat. Sunt necesare credențialele aplicației, accesul de producție, revizuirea termenilor și aprobarea explicită pentru afișarea publică. Jobul programat rulează zilnic la 05:30 UTC, marchează automat drept `STALE` snapshoturile mai vechi de 72 de ore și nu efectuează apeluri la provider dacă oricare dintre gate-uri lipsește.
 
 ### Amazon Creators API / Keepa
 
