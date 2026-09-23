@@ -2,6 +2,7 @@ import {SAAS_CONFIG} from '../../saas-config.js';
 import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
 import {enforceRateLimit,requestId} from './_security-ops.mjs';
 import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
+import {aliexpressPublicDisplayAccessState} from './_aliexpress-hot-products.mjs';
 
 const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept:'application/json'});
 const present=(env,key)=>Boolean(String(env[key]||'').trim());
@@ -9,7 +10,7 @@ const approved=(env,key)=>String(env[key]||'').toLowerCase()==='true';
 const access=(env,credentials,terms,publicDisplay)=>credentials.some(key=>!present(env,key))?'ACCESS_REQUIRED':!approved(env,terms)?'TERMS_REVIEW_REQUIRED':publicDisplay&&!approved(env,publicDisplay)?'PUBLIC_DISPLAY_RIGHTS_REQUIRED':'READY_TO_COLLECT';
 function buildServerAccessState(env){
   return {
-    ALIEXPRESS:access(env,['ALIEXPRESS_APP_KEY','ALIEXPRESS_APP_SECRET','ALIEXPRESS_TRACKING_ID'],'MPR_ALIEXPRESS_TERMS_APPROVED','MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED'),
+    ALIEXPRESS:aliexpressPublicDisplayAccessState(env),
     EBAY:ebayPublicDisplayAccessState(env),
     AMAZON_US:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
     AMAZON_DE:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),

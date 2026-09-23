@@ -3,7 +3,7 @@ import test from 'node:test';
 import {createHmac} from 'node:crypto';
 import {aliexpressPublicDisplayAccessState,parseAliExpressTargets,buildAliExpressRequest,normalizeAliExpressHotProducts,collectAliExpressHotProductsTarget} from '../netlify/functions/_aliexpress-hot-products.mjs';
 import {createAliExpressCrossMarketRefreshHandler} from '../netlify/functions/aliexpress-cross-market-refresh.mjs';
-const env={ALIEXPRESS_APP_KEY:'key',ALIEXPRESS_APP_SECRET:'secret',ALIEXPRESS_TRACKING_ID:'tracking',MPR_ALIEXPRESS_TERMS_APPROVED:'true',MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED:'true',MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_ALIEXPRESS_TOP25_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryIds:['123']}]),SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'};
+const env={ALIEXPRESS_APP_KEY:'key',ALIEXPRESS_APP_SECRET:'secret',ALIEXPRESS_TRACKING_ID:'tracking',MPR_ALIEXPRESS_TERMS_APPROVED:'true',MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED:'true',MPR_ALIEXPRESS_API_CURRENT_CONFIRMED:'true',MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_ALIEXPRESS_TOP25_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryIds:['123']}]),SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'};
 const now=()=>new Date('2026-09-23T07:00:00Z');
 const rows=()=>Array.from({length:25},(_,i)=>({product_id:String(i+1),product_title:`Product ${i+1}`,product_detail_url:`https://www.aliexpress.com/item/${i+1}.html`,target_sale_price:'10.50',lastest_volume:100-i}));
 const payload=products=>({aliexpress_affiliate_hotproduct_query_response:{resp_result:{resp_code:200,result:{products:{product:products}}}}});
@@ -12,6 +12,14 @@ test('AliExpress gates make zero calls without display rights',async()=>{
  assert.equal(aliexpressPublicDisplayAccessState({}),'ACCESS_REQUIRED');
  const result=await collectAliExpressHotProductsTarget({env:{...env,MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED:'false'},fetchImpl:async()=>{calls++;}});
  assert.equal(result.ok,false);assert.equal(calls,0);
+});
+test('AliExpress deprecated endpoint needs current provider confirmation',async()=>{
+ let calls=0;
+ const pending={...env,MPR_ALIEXPRESS_API_CURRENT_CONFIRMED:'false'};
+ assert.equal(aliexpressPublicDisplayAccessState(pending),'API_AVAILABILITY_REVIEW_REQUIRED');
+ const result=await collectAliExpressHotProductsTarget({env:pending,fetchImpl:async()=>{calls++;}});
+ assert.equal(result.code,'ALIEXPRESS_ACCESS_NOT_READY');
+ assert.equal(calls,0);
 });
 test('AliExpress request has reproducible signature, category and Shanghai timestamp',()=>{
  const target=parseAliExpressTargets(env)[0];const {body}=buildAliExpressRequest({target,env,now:now()});

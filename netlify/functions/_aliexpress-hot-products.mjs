@@ -12,6 +12,9 @@ export function aliexpressPublicDisplayAccessState(env=process.env){
   if(!clean(env.ALIEXPRESS_APP_KEY)||!clean(env.ALIEXPRESS_APP_SECRET)||!clean(env.ALIEXPRESS_TRACKING_ID))return 'ACCESS_REQUIRED';
   if(!approved(env,'MPR_ALIEXPRESS_TERMS_APPROVED'))return 'TERMS_REVIEW_REQUIRED';
   if(!approved(env,'MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED'))return 'PUBLIC_DISPLAY_RIGHTS_REQUIRED';
+  // The published Hot Products reference is under AliExpress's deprecated API section.
+  // Require explicit confirmation that this endpoint is still available to this app.
+  if(!approved(env,'MPR_ALIEXPRESS_API_CURRENT_CONFIRMED'))return 'API_AVAILABILITY_REVIEW_REQUIRED';
   return 'READY_TO_COLLECT';
 }
 

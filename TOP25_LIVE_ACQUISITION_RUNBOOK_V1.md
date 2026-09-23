@@ -22,7 +22,7 @@ Creators API poate îmbogăți datele de catalog, dar nu este acceptat ca dovad�
 
 ### AliExpress
 
-Colectorul direct Hot Products este implementat pe `POST /api/internal/aliexpress-cross-market-refresh`, protejat cu `x-mpr-internal-secret`. Jobul zilnic îl apelează numai cu cheile, tracking ID, termenii și dreptul de afișare aprobate. Configurați `MPR_ALIEXPRESS_TOP25_TARGETS_JSON` cu mapări revizuite: `[{"nicheId":"AUTO","categoryIds":["ID_APROBAT"],"keywords":"expresie revizuită"}]`. Exemplul nu este o mapare activabilă.
+Colectorul direct Hot Products este implementat pe `POST /api/internal/aliexpress-cross-market-refresh`, protejat cu `x-mpr-internal-secret`. Documentația furnizorului plasează endpointul în secțiunea de API depreciat. Jobul îl apelează numai după confirmarea disponibilității actuale (`MPR_ALIEXPRESS_API_CURRENT_CONFIRMED=true`), a cheilor, tracking ID, termenilor și dreptului de afișare. Configurați `MPR_ALIEXPRESS_TOP25_TARGETS_JSON` numai cu mapări revizuite. Pașii și textul cererii de acces sunt în `docs/TOP25_SOURCE_ACCESS_AND_PILOT.md`.
 
 Sunt păstrate primele 25 de poziții valide din răspunsul Hot Products sortat `LAST_VOLUME_DESC`. O poziție invalidă sau duplicată respinge lista, fără a o înlocui cu rezultate inferioare. Indicatorul furnizorului nu este prezentat ca volum de vânzări verificat independent.
 
