@@ -43,3 +43,9 @@ Pentru fiecare nișă și piață, operatorul verifică în taxonomy-ul oficial 
 ## 5. Dacă accesul este refuzat
 
 Se solicită oferte de la furnizori de feeduri licențiate pentru clasamente pe categorii. Contractul trebuie să permită explicit afișarea în SaaS, stocarea, actualizarea zilnică și derivarea. Până la obținerea unei astfel de surse, pagina Free arată acoperirea reală și nu promite 625 de produse recente.
+
+### Pilot fără EPN
+
+Înscrierea EPN poate fi amânată fără oprirea cercetării. [eBay precizează](https://partnernetwork.ebay.com/page/developer-questionnaire) că Browse API nu necesită aprobare suplimentară, dar [Browse](https://developer.ebay.com/api-docs/buy/api-browse.html) este o sursă de descoperire prin căutare, nu dovadă de vânzări sau rang `BEST_SELLING`. Cheile Production, termenii aplicabili și limitele trebuie totuși verificați înainte de automatizare. Nu se pornește publicarea din rezultate de căutare fără drepturi clare de afișare.
+
+Lotul intern [generic-office-discovery-2026-09-23.json](../data/generic-office-discovery-2026-09-23.json) conține cinci listări publice găsite manual în două nișe de birou. Mențiunea `Unbranded` este declarația vânzătorului din rezultatul indexat; nu este verificare independentă a brandului. Rangul, cererea, comparabilele românești, furnizorul și costul rămân necunoscute. Lotul nu este servit de API-ul public.
