@@ -10,8 +10,7 @@ export const FREE_CROSS_MARKET_PLATFORMS=Object.freeze([
   Object.freeze({id:'AMAZON_DE',label:'Amazon DE Live',shortLabel:'Amazon DE',emoji:'🇩🇪',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:3}),
   Object.freeze({id:'TIKTOK',label:'TikTok Shop & Ads',shortLabel:'TikTok',emoji:'♪',kind:'SIGNAL',rankingBasis:'AD_MOMENTUM_ONLY',sourceLabel:'TikTok official access',officialUrl:'https://developers.tiktok.com/',freshnessDays:7}),
   Object.freeze({id:'GOOGLE',label:'Google Search Demand',shortLabel:'Google',emoji:'G',kind:'SIGNAL',rankingBasis:'SEARCH_DEMAND_ONLY',sourceLabel:'Google Ads Keyword Planner',officialUrl:'https://developers.google.com/google-ads/api/docs/keyword-planning/overview',freshnessDays:35}),
-  Object.freeze({id:'ROMANIA',label:'Oferta din România',shortLabel:'România',emoji:'🇷🇴',kind:'SIGNAL',rankingBasis:'COMPARABLE_OFFERS_ONLY',sourceLabel:'MPR Romania evidence',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7}),
-  Object.freeze({id:'AMAZON_ARCHIVE',label:'Amazon Historical 2023',shortLabel:'Amazon 2023',emoji:'🗂️',kind:'ARCHIVE',rankingBasis:'MPR_DERIVED_HISTORICAL',sourceLabel:'Kaggle · Amazon Products Dataset 2023',officialUrl:'https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products',freshnessDays:null})
+  Object.freeze({id:'ROMANIA',label:'Oferta din România',shortLabel:'România',emoji:'🇷🇴',kind:'SIGNAL',rankingBasis:'COMPARABLE_OFFERS_ONLY',sourceLabel:'MPR Romania evidence',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7})
 ]);
 
 const BY_ID=new Map(FREE_CROSS_MARKET_PLATFORMS.map(platform=>[platform.id,platform]));
@@ -24,7 +23,6 @@ export function parseCrossMarketSnapshotKey(value){
 }
 
 function accessState(platform,accessByPlatform={}){
-  if(platform.kind==='ARCHIVE')return 'AVAILABLE_ARCHIVE';
   if(platform.kind==='SIGNAL')return 'SUPPORTING_SIGNAL_ONLY';
   if(platform.id==='CONSENSUS')return 'WAITING_FOR_TWO_LIVE_PLATFORMS';
   const status=upper(accessByPlatform[platform.id]);
@@ -62,7 +60,7 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
 export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   const explicitPlatform=upper(raw?.platform),explicitNiche=upper(raw?.niche_id);
   const key=BY_ID.has(explicitPlatform)?{platform:explicitPlatform,nicheId:explicitNiche}:parseCrossMarketSnapshotKey(raw?.niche_id);
-  if(!key||['CONSENSUS','AMAZON_ARCHIVE'].includes(key.platform))return null;
+  if(!key||BY_ID.get(key.platform)?.kind!=='LIVE')return null;
   if(explicitPlatform&&(!explicitNiche||raw?.product_count!==25||upper(raw?.source_rights_status)!=='APPROVED'||upper(raw?.freshness_status)!=='CURRENT'))return null;
   const platform=BY_ID.get(key.platform);
   const reviewedAt=clean(raw?.window_end||raw?.reviewed_at);
@@ -70,8 +68,10 @@ export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   const ageMs=now.getTime()-reviewedDate.getTime();
   if(!Number.isFinite(ageMs)||ageMs<0||ageMs>platform.freshnessDays*DAY_MS)return null;
   const source=Array.isArray(raw?.products)?raw.products:[];
-  const products=source.slice(0,25).map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis})).filter(Boolean);
-  if(products.length!==25)return null;
+  if(source.length!==25)return null;
+  const products=source.map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis})).filter(Boolean);
+  if(products.length!==25||new Set(products.map(p=>p.externalId)).size!==25)return null;
+  if(products.some(p=>now.getTime()-Date.parse(p.observedAt)<0||now.getTime()-Date.parse(p.observedAt)>platform.freshnessDays*DAY_MS))return null;
   return {...key,reviewedAt,products,evidenceMode:'LIVE_PLATFORM_EVIDENCE'};
 }
 
@@ -101,7 +101,7 @@ function deriveConsensusRankings(rankings,now){
   return consensus;
 }
 
-export function buildFreeCrossMarketExperience({snapshots=[],archiveNicheCount=0,accessByPlatform={},now=new Date()}={}){
+export function buildFreeCrossMarketExperience({snapshots=[],accessByPlatform={},now=new Date()}={}){
   const normalized=snapshots.map(row=>normalizeCrossMarketSnapshot(row,{now})).filter(Boolean);
   const latest=new Map();
   for(const row of normalized){
@@ -115,8 +115,8 @@ export function buildFreeCrossMarketExperience({snapshots=[],archiveNicheCount=0
   for(const row of rankings)publishedByPlatform[row.platform]=(publishedByPlatform[row.platform]||0)+1;
   const livePlatforms=Object.entries(publishedByPlatform).filter(([id,count])=>id!=='CONSENSUS'&&count>0).map(([id])=>id);
   const platforms=FREE_CROSS_MARKET_PLATFORMS.map(platform=>{
-    const publishedNiches=platform.id==='AMAZON_ARCHIVE'?archiveNicheCount:(publishedByPlatform[platform.id]||0);
-    let status=publishedNiches>0?(platform.kind==='ARCHIVE'?'AVAILABLE_ARCHIVE':'LIVE'):accessState(platform,accessByPlatform);
+    const publishedNiches=publishedByPlatform[platform.id]||0;
+    let status=publishedNiches>0?'LIVE':accessState(platform,accessByPlatform);
     if(platform.id==='CONSENSUS')status=consensusRankings.length>0?'LIVE':'WAITING_FOR_TWO_LIVE_PLATFORMS';
     return {...platform,status,publishedNiches,publishedPositions:publishedNiches*25};
   });
@@ -124,7 +124,7 @@ export function buildFreeCrossMarketExperience({snapshots=[],archiveNicheCount=0
     schema:'MPR_FREE_CROSS_MARKET_V1',generatedAt:now.toISOString(),
     platforms,
     rankings,
-    coverage:{platformCount:platforms.length,livePlatformCount:livePlatforms.length,liveNicheRankings:liveRankings.length,livePositions:liveRankings.length*25,consensusNicheRankings:consensusRankings.length,consensusPositions:consensusRankings.length*25,archiveNiches:archiveNicheCount,archivePositions:archiveNicheCount*25,consensusReady:consensusRankings.length>0},
+    coverage:{platformCount:platforms.length,livePlatformCount:livePlatforms.length,liveNicheRankings:liveRankings.length,livePositions:liveRankings.length*25,consensusNicheRankings:consensusRankings.length,consensusPositions:consensusRankings.length*25,consensusReady:consensusRankings.length>0},
     policy:{noSyntheticRankings:true,minimumProductsPerPublishedRanking:25,liveFreshnessRequired:true,salesClaimsRequireExplicitEvidence:true,establishedBrandsBlockedFromCommercialFunnel:true,paidCallsTriggered:0,purchaseAuthorized:false}
   };
 }

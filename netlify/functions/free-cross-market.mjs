@@ -1,6 +1,5 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
 import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
-import {loadExpandedTop25Niches} from './free-top25.mjs';
 import {enforceRateLimit,requestId} from './_security-ops.mjs';
 import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 
@@ -12,8 +11,8 @@ function buildServerAccessState(env){
   return {
     ALIEXPRESS:access(env,['ALIEXPRESS_APP_KEY','ALIEXPRESS_APP_SECRET','ALIEXPRESS_TRACKING_ID'],'MPR_ALIEXPRESS_TERMS_APPROVED','MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED'),
     EBAY:ebayPublicDisplayAccessState(env),
-    AMAZON_US:access(env,['AMAZON_CREATORS_CREDENTIAL_ID','AMAZON_CREATORS_CREDENTIAL_SECRET','AMAZON_ASSOCIATE_TAG'],'MPR_AMAZON_CREATORS_TERMS_APPROVED','MPR_AMAZON_PUBLIC_DISPLAY_APPROVED'),
-    AMAZON_DE:access(env,['AMAZON_CREATORS_CREDENTIAL_ID','AMAZON_CREATORS_CREDENTIAL_SECRET','AMAZON_ASSOCIATE_TAG'],'MPR_AMAZON_CREATORS_TERMS_APPROVED','MPR_AMAZON_PUBLIC_DISPLAY_APPROVED'),
+    AMAZON_US:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
+    AMAZON_DE:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
     TIKTOK:'SUPPORTING_SIGNAL_ONLY',
     GOOGLE:'SUPPORTING_SIGNAL_ONLY',
     ROMANIA:'SUPPORTING_SIGNAL_ONLY'
@@ -42,11 +41,8 @@ export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.
     try{
       const rate=await enforceRateLimit(request,{route:'free-cross-market',limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests'},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
-      const [archiveNiches,snapshots]=await Promise.all([
-        loadExpandedTop25Niches({env,fetchImpl}).catch(()=>[]),
-        loadCrossMarketSnapshots({env,fetchImpl}).catch(()=>[])
-      ]);
-      const experience=buildFreeCrossMarketExperience({snapshots,archiveNicheCount:archiveNiches.length,accessByPlatform:buildServerAccessState(env),now:now()});
+      const snapshots=await loadCrossMarketSnapshots({env,fetchImpl}).catch(()=>[]);
+      const experience=buildFreeCrossMarketExperience({snapshots,accessByPlatform:buildServerAccessState(env),now:now()});
       return Response.json({ok:true,...experience},{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});
     }catch(error){
       const incidentId=requestId(request);

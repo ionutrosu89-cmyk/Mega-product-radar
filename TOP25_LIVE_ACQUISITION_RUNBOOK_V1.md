@@ -2,7 +2,7 @@
 
 ## Contract public
 
-Free publică un clasament live numai când o nișă are exact 25 de produse distincte, toate observate în fereastra de prospețime și provenite dintr-o sursă cu drept de afișare confirmat. Poziția de platformă nu este prezentată drept număr de unități vândute. Arhiva 2023 rămâne separată.
+Free publică un clasament live numai când o nișă are exact 25 de produse distincte, toate observate în fereastra de prospețime și provenite dintr-o sursă cu drept de afișare confirmat. Poziția de platformă nu este prezentată drept număr de unități vândute. Datele istorice nu sunt publicate și nu sunt utilizate ca rezervă.
 
 ## Taxonomie
 
@@ -16,13 +16,15 @@ Pentru eBay, rulează endpointul intern `POST /api/internal/ebay-category-review
 
 Colectorul direct este implementat. Sunt necesare credențialele aplicației, accesul de producție, revizuirea termenilor și aprobarea explicită pentru afișarea publică. Jobul programat rulează zilnic la 05:30 UTC, marchează automat drept `STALE` snapshoturile mai vechi de 72 de ore și nu efectuează apeluri la provider dacă oricare dintre gate-uri lipsește.
 
-### Amazon Creators API / Keepa
+### Amazon
 
-Folosește SearchItems/GetItems cu Sales Rank sau un feed Keepa Best Sellers licențiat. Datele normalizate se trimit prin `POST /api/internal/top25-live-ingest`. Activarea necesită `MPR_AMAZON_PUBLIC_DISPLAY_APPROVED=true`. Un abonament Keepa nu se cumpără și nu este apelat automat de acest proiect.
+Creators API poate îmbogăți datele de catalog, dar nu este acceptat ca dovadă de clasament. Ingestia acceptă numai `KEEPA_BEST_SELLERS` sau `AMAZON_LICENSED_BEST_SELLERS`, cu aprobarea explicită `MPR_KEEPA_PUBLIC_DISPLAY_APPROVED`. Nu sunt executate automat apeluri plătite.
 
 ### AliExpress
 
-Folosește Hot Products din aplicația afiliată aprobată. Transformă răspunsul în contractul normalizat și trimite snapshoturile prin endpointul intern. Activarea necesită revizuirea termenilor și `MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED=true`.
+Colectorul direct Hot Products este implementat pe `POST /api/internal/aliexpress-cross-market-refresh`, protejat cu `x-mpr-internal-secret`. Jobul zilnic îl apelează numai cu cheile, tracking ID, termenii și dreptul de afișare aprobate. Configurați `MPR_ALIEXPRESS_TOP25_TARGETS_JSON` cu mapări revizuite: `[{"nicheId":"AUTO","categoryIds":["ID_APROBAT"],"keywords":"expresie revizuită"}]`. Exemplul nu este o mapare activabilă.
+
+Sunt păstrate primele 25 de poziții valide din răspunsul Hot Products sortat `LAST_VOLUME_DESC`. O poziție invalidă sau duplicată respinge lista, fără a o înlocui cu rezultate inferioare. Indicatorul furnizorului nu este prezentat ca volum de vânzări verificat independent.
 
 ### Google România
 
@@ -64,3 +66,6 @@ Fiecare snapshot trebuie să aibă exact 25 de produse, rangurile 1–25, identi
 3. Există 25 de snapshoturi curente cu `product_count=25`, `source_rights_status=APPROVED` și `freshness_status=CURRENT`.
 4. `/api/free/cross-market` raportează 25 nișe și 625 poziții pentru platforma activă.
 5. Testul pe preview confirmă sursa, data și lipsa afirmațiilor despre unități vândute.
+
+6. Trei colectări zilnice consecutive reușite pentru toate cele 25 de nișe. Dovezile execuțiilor trebuie revizuite uman înainte de lansare.
+7. Lansarea și plățile necesită decizie umană; acoperirea tehnică nu le activează.

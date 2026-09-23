@@ -31,7 +31,7 @@ test('coverage counts only complete, approved and current snapshots',()=>{
   assert.equal(coverage.coveredNicheCount,1);
   assert.equal(coverage.coveredPositions,25);
   assert.equal(coverage.allNichesCovered,false);
-  assert.equal(publicDisplayApprovalKey('AMAZON_DE'),'MPR_AMAZON_PUBLIC_DISPLAY_APPROVED');
+  assert.equal(publicDisplayApprovalKey('AMAZON_DE'),'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED');
 });
 
 test('supporting signals cannot be published as product rankings',()=>{
@@ -39,4 +39,9 @@ test('supporting signals cannot be published as product rankings',()=>{
     const result=normalizeCurrentTop25Snapshot({nicheId:'AUTO',platform,market:'RO',sourceKey:'SUPPORTING_SIGNAL',products:products()},{now:new Date('2026-09-20T07:00:00Z'),rightsApproved:true});
     assert.equal(result.code,'PLATFORM_NOT_ALLOWED');
   }
+});
+
+test('Creators catalogue enrichment cannot be ingested as an Amazon ranking',()=>{
+ const result=normalizeCurrentTop25Snapshot({nicheId:'AUTO',platform:'AMAZON_US',market:'AMAZON_US',sourceKey:'AMAZON_CREATORS_API',products:products()},{now:new Date('2026-09-20T07:00:00Z'),rightsApproved:true});
+ assert.equal(result.code,'SOURCE_NOT_ALLOWED');
 });

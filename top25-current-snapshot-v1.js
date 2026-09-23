@@ -6,9 +6,9 @@ const iso=value=>Number.isFinite(Date.parse(clean(value)))?new Date(Date.parse(c
 const https=value=>{try{return new URL(clean(value)).protocol==='https:';}catch{return false;}};
 const PLATFORM_POLICY=Object.freeze({
   EBAY:{markets:new Set(['EBAY_US','EBAY_DE']),sourceKeys:new Set(['EBAY_BUY_MARKETING_BEST_SELLING']),rankingBasis:'BEST_SELLING',freshnessHours:72,host:/^(?:www\.)?ebay\.(?:com|de)$/i},
-  AMAZON_US:{markets:new Set(['AMAZON_US']),sourceKeys:new Set(['AMAZON_CREATORS_API','KEEPA_BEST_SELLERS']),rankingBasis:'OFFICIAL_RANK_OR_BSR',freshnessHours:72,host:/^(?:www\.)?amazon\.com$/i},
-  AMAZON_DE:{markets:new Set(['AMAZON_DE']),sourceKeys:new Set(['AMAZON_CREATORS_API','KEEPA_BEST_SELLERS']),rankingBasis:'OFFICIAL_RANK_OR_BSR',freshnessHours:72,host:/^(?:www\.)?amazon\.de$/i},
-  ALIEXPRESS:{markets:new Set(['ALIEXPRESS_GLOBAL']),sourceKeys:new Set(['ALIEXPRESS_HOT_PRODUCTS_API']),rankingBasis:'HOT_PRODUCTS',freshnessHours:72,host:/^(?:[a-z]{2}\.)?(?:www\.)?aliexpress\.com$/i}
+  AMAZON_US:{markets:new Set(['AMAZON_US']),sourceKeys:new Set(['KEEPA_BEST_SELLERS','AMAZON_LICENSED_BEST_SELLERS']),rankingBasis:'LICENSED_BEST_SELLING_RANK',freshnessHours:72,host:/^(?:www\.)?amazon\.com$/i},
+  AMAZON_DE:{markets:new Set(['AMAZON_DE']),sourceKeys:new Set(['KEEPA_BEST_SELLERS','AMAZON_LICENSED_BEST_SELLERS']),rankingBasis:'LICENSED_BEST_SELLING_RANK',freshnessHours:72,host:/^(?:www\.)?amazon\.de$/i},
+  ALIEXPRESS:{markets:new Set(['ALIEXPRESS_GLOBAL']),sourceKeys:new Set(['ALIEXPRESS_HOT_PRODUCTS_API']),rankingBasis:'HOT_PRODUCTS',freshnessHours:72,host:/(^|\.)aliexpress\.com$/i}
 });
 
 function normalizeProduct(raw,index,{platform,market,sourceKey,rankingBasis,nowMs,freshnessHours}){
@@ -42,7 +42,7 @@ function normalizeProduct(raw,index,{platform,market,sourceKey,rankingBasis,nowM
 
 export function publicDisplayApprovalKey(platform){
   const key=upper(platform);
-  if(key.startsWith('AMAZON_'))return 'MPR_AMAZON_PUBLIC_DISPLAY_APPROVED';
+  if(key.startsWith('AMAZON_'))return 'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED';
   return `MPR_${key}_PUBLIC_DISPLAY_APPROVED`;
 }
 

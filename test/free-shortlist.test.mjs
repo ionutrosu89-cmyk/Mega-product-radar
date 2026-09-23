@@ -7,7 +7,7 @@ const memory=()=>{const values=new Map();return {getItem:key=>values.get(key)||n
 test('Free shortlist stores only explicit product keys on the device',()=>{
   const storage=memory();
   const key=freeProductKey({asin:'b012345678'});
-  assert.equal(key,'AMAZON_ARCHIVE:B012345678');
+  assert.equal(key,'LIVE:B012345678');
   const added=toggleFreeShortlist(new Set(),key,storage);
   assert.equal(added.added,true);
   assert.deepEqual([...readFreeShortlist(storage)],[key]);
@@ -24,4 +24,10 @@ test('comparison is session-only and limited to three products',()=>{
   assert.equal(blocked.limitReached,true);
   assert.deepEqual([...blocked.values],['a','b','c']);
   assert.equal(toggleComparison(state,'b').values.has('b'),false);
+});
+
+test('retired product keys are purged while current shortlist entries remain',()=>{
+ const storage=memory();storage.setItem(FREE_SHORTLIST_STORAGE_KEY,JSON.stringify(['AMAZON_ARCHIVE:OLD','EBAY:CURRENT']));
+ assert.deepEqual([...readFreeShortlist(storage)],['EBAY:CURRENT']);
+ assert.deepEqual(JSON.parse(storage.getItem(FREE_SHORTLIST_STORAGE_KEY)),['EBAY:CURRENT']);
 });

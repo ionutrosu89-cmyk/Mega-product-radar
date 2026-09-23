@@ -22,12 +22,12 @@ const product=index=>({
 });
 
 test('Free Cross-Market registry exposes comparison surfaces without leaking credential names',async()=>{
-  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA','AMAZON_ARCHIVE']);
-  const view=buildFreeCrossMarketExperience({archiveNicheCount:25,env:{},now:new Date('2026-09-03T08:00:00Z')});
-  assert.equal(view.coverage.archivePositions,625);
+  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
+  const view=buildFreeCrossMarketExperience({env:{},now:new Date('2026-09-03T08:00:00Z')});
+  assert.equal('archivePositions' in view.coverage,false);
   assert.equal(view.coverage.livePositions,0);
   assert.equal(view.coverage.consensusReady,false);
-  assert.equal(view.platforms.find(x=>x.id==='AMAZON_ARCHIVE').status,'AVAILABLE_ARCHIVE');
+
   assert.equal(view.platforms.find(x=>x.id==='EBAY').status,'ACCESS_REQUIRED');
   assert.equal(JSON.stringify(view).includes('EBAY_OAUTH_TOKEN'),false);
   const browserModule=await fs.readFile(new URL('../free-cross-market-registry.js',import.meta.url),'utf8');
@@ -72,7 +72,7 @@ test('consensus becomes ready only after 25 concepts match across two independen
   assert.deepEqual(consensus.products[0].platformConfirmations,['ALIEXPRESS','EBAY']);
 });
 
-test('Free Cross-Market endpoint returns archive coverage and fails closed on missing live snapshots',async()=>{
+test('Free Cross-Market endpoint returns live coverage and fails closed on missing live snapshots',async()=>{
   const fetchImpl=async url=>{
     const value=String(url);
     if(value.includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);

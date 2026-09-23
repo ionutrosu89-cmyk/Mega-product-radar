@@ -1,7 +1,7 @@
 export const FREE_SHORTLIST_STORAGE_KEY='mpr_free_shortlist_v1';
 const clean=value=>String(value??'').trim();
 
-export function freeProductKey(product={},platform='AMAZON_ARCHIVE'){
+export function freeProductKey(product={},platform='LIVE'){
   const externalId=clean(product.externalId||product.asin||product.productId);
   return externalId?`${clean(platform).toUpperCase()}:${externalId.toUpperCase()}`:null;
 }
@@ -9,7 +9,9 @@ export function freeProductKey(product={},platform='AMAZON_ARCHIVE'){
 export function readFreeShortlist(storage=globalThis.localStorage){
   try{
     const values=JSON.parse(storage.getItem(FREE_SHORTLIST_STORAGE_KEY)||'[]');
-    return new Set(Array.isArray(values)?values.filter(value=>typeof value==='string'&&value.length<=220).slice(0,100):[]);
+    const safe=Array.isArray(values)?values.filter(value=>typeof value==='string'&&value.length<=220&&!value.startsWith('AMAZON_ARCHIVE:')).slice(0,100):[];
+    if(Array.isArray(values)&&safe.length!==values.length){try{storage.setItem(FREE_SHORTLIST_STORAGE_KEY,JSON.stringify(safe));}catch{}}
+    return new Set(safe);
   }catch{return new Set();}
 }
 
