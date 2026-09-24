@@ -22,12 +22,12 @@ const product=index=>({
 });
 
 test('Free Cross-Market registry exposes comparison surfaces without leaking credential names',async()=>{
-  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA','AMAZON_ARCHIVE']);
-  const view=buildFreeCrossMarketExperience({archiveNicheCount:25,env:{},now:new Date('2026-09-03T08:00:00Z')});
-  assert.equal(view.coverage.archivePositions,625);
+  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
+  const view=buildFreeCrossMarketExperience({env:{},now:new Date('2026-09-03T08:00:00Z')});
+  assert.equal('archivePositions' in view.coverage,false);
   assert.equal(view.coverage.livePositions,0);
   assert.equal(view.coverage.consensusReady,false);
-  assert.equal(view.platforms.find(x=>x.id==='AMAZON_ARCHIVE').status,'AVAILABLE_ARCHIVE');
+
   assert.equal(view.platforms.find(x=>x.id==='EBAY').status,'ACCESS_REQUIRED');
   assert.equal(JSON.stringify(view).includes('EBAY_OAUTH_TOKEN'),false);
   const browserModule=await fs.readFile(new URL('../free-cross-market-registry.js',import.meta.url),'utf8');
@@ -45,6 +45,19 @@ test('a live platform ranking is published only with exactly 25 fresh valid posi
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,reviewed_at:'2026-08-01'},{now:new Date('2026-09-04T08:00:00Z')}),null);
 });
 
+test('current snapshot rows require approved rights and current freshness',()=>{
+  const products=Array.from({length:25},(_,i)=>product(i+1));
+  const row={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products,source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  assert.equal(normalizeCrossMarketSnapshot(row,{now:new Date('2026-09-04T08:00:00Z')})?.products.length,25);
+  assert.equal(normalizeCrossMarketSnapshot({...row,source_rights_status:'REVIEW_REQUIRED'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,freshness_status:'STALE'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+});
+
+test('demand, advertising and Romanian comparable data remain supporting signals',()=>{
+  const view=buildFreeCrossMarketExperience({accessByPlatform:{GOOGLE:'READY_TO_COLLECT',TIKTOK:'READY_TO_COLLECT',ROMANIA:'READY_TO_COLLECT'}});
+  for(const id of ['GOOGLE','TIKTOK','ROMANIA'])assert.equal(view.platforms.find(row=>row.id===id).status,'SUPPORTING_SIGNAL_ONLY');
+});
+
 test('consensus becomes ready only after 25 concepts match across two independent live platforms',()=>{
   const products=Array.from({length:25},(_,i)=>product(i+1));
   const ebay={niche_id:'XMARKET:EBAY:AUTO',reviewed_at:'2026-09-03',products};
@@ -59,12 +72,12 @@ test('consensus becomes ready only after 25 concepts match across two independen
   assert.deepEqual(consensus.products[0].platformConfirmations,['ALIEXPRESS','EBAY']);
 });
 
-test('Free Cross-Market endpoint returns archive coverage and fails closed on missing live snapshots',async()=>{
+test('Free Cross-Market endpoint returns live coverage and fails closed on missing live snapshots',async()=>{
+  let snapshotReads=0;
   const fetchImpl=async url=>{
     const value=String(url);
     if(value.includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
-    if(value.includes('niche_id=like.XMARKET'))return Response.json([]);
-    if(value.includes('/rest/v1/top25_snapshots'))return Response.json([]);
+    if(value.includes('/rest/v1/')){snapshotReads++;throw new Error('Public snapshot read forbidden before live-source release');}
     return new Response('not found',{status:404});
   };
   const handler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service',SECURITY_AUDIT_SALT:'salt'},now:()=>new Date('2026-09-03T08:00:00Z')});
@@ -73,5 +86,6 @@ test('Free Cross-Market endpoint returns archive coverage and fails closed on mi
   const body=await response.json();
   assert.equal(body.ok,true);
   assert.equal(body.coverage.livePositions,0);
+  assert.equal(snapshotReads,0);
   assert.equal(body.policy.noSyntheticRankings,true);
 });
