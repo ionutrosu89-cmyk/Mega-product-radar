@@ -3,6 +3,7 @@ import {installFreeDemandTracking,trackFreeDemand} from './free-demand.js';
 import {FREE_CROSS_MARKET_PLATFORMS} from './free-cross-market-registry.js';
 import {freeProductKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from './free-shortlist.js';
 import {classifyPublicBrandGate,publicCommerciallyEligible} from './brand-policy-v1.js';
+import {getCurrentSession} from './supabase-client.js';
 
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -14,7 +15,17 @@ const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'
 const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE'}[status]||'ÎN PREGĂTIRE');
 
 let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='EBAY';
-let shortlist=readFreeShortlist(),comparison=new Set(),shortlistOnly=false;
+let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
+
+async function refreshShortlistScope(){
+  const refreshId=++shortlistRefreshId;
+  let userId=null;
+  try{userId=(await getCurrentSession())?.user?.id||null;}catch{userId='UNAVAILABLE';}
+  if(refreshId!==shortlistRefreshId)return;
+  if(userId===shortlistUserId)return;
+  shortlistUserId=userId;shortlist=readFreeShortlist(undefined,userId);comparison=new Set();
+  if(current)render();
+}
 
 
 const currentPlatform=()=>crossMarket.platforms.find(platform=>platform.id===selectedPlatform)||FREE_CROSS_MARKET_PLATFORMS.find(p=>p.id==='EBAY');
@@ -86,7 +97,8 @@ function card(raw,movement,previousReviewedAt,currentEvidence,currentReviewedAt)
   const movementContext='Observație recentă';
   const reviewedAt=currentReviewedAt||product.evidenceReviewedAt,saved=shortlist.has(key),compared=comparison.has(key);
   const commercialEligible=product.commercialEligible;
-  const actions=commercialEligible?`<div class="quick-actions"><button type="button" data-shortlist class="${saved?'selected':''}" aria-pressed="${saved}">${saved?'★ Salvat':'☆ Salvează'}</button><button type="button" data-compare class="${compared?'selected':''}" aria-pressed="${compared}">${compared?'✓ Compară':'⇄ Compară'}</button></div>`:'<div class="shortlist-note">Brand exclus din analiza comercială.</div>';
+  const saveAction=shortlistUserId==='UNAVAILABLE'?'<span class="shortlist-note">Salvarea este indisponibilă temporar.</span>':`<button type="button" data-shortlist class="${saved?'selected':''}" aria-pressed="${saved}">${saved?'★ Salvat':'☆ Salvează'}</button>`;
+  const actions=commercialEligible?`<div class="quick-actions">${saveAction}<button type="button" data-compare class="${compared?'selected':''}" aria-pressed="${compared}">${compared?'✓ Compară':'⇄ Compară'}</button></div>`:'<div class="shortlist-note">Brand exclus din analiza comercială.</div>';
   const decisionPanel=commercialEligible?`<div class="beta-decision"><small>Decizia ta după această analiză</small><div><button type="button" data-product-decision="INVESTIGATE">Merită investigat</button><button type="button" data-product-decision="HOLD">Nu acum</button><button type="button" data-product-decision="UNKNOWN">Dovezi insuficiente</button></div></div>`:'';
   return `<article class="card" data-product="${esc(product.name)}" data-product-key="${esc(key)}"><div class="rank">#${product.rank}</div><div class="movement ${esc(mv.tone)}"><b>${esc(mv.label)}</b><span>${esc(mv.detail)}</span><small>${esc(movementContext)}</small></div><div class="product"><div class="media" aria-hidden="true"><span class="placeholder">${esc(current.emoji||'📦')}</span></div><div class="copy"><h3>${esc(product.name)}</h3><small>${esc(current.label)} · poziție ${esc(currentPlatform().shortLabel)}</small></div></div>${actions}<div class="stats"><div class="stat"><small>Poziție sursă observată</small><b>${esc(rankSource)}</b></div><div class="stat"><small>Brand gate</small><b>${esc(product.brandPolicyClass==='GENERIC_PRIVATE_LABEL'?'GENERIC':product.brandPolicyClass==='UNKNOWN_REVIEW'?'DE VERIFICAT':'EXCLUS')}</b></div><div class="stat"><small>Tip dovadă</small><b>${esc(evidenceTypeLabel(liveEvidenceType))}</b></div><div class="stat"><small>Statistică publică</small><b>${esc(fmtMetric(product.metric))}</b></div></div><div class="evidence"><div class="src"><small>Sursă · Tier ${esc(product.sourceTier)} · ${esc(product.sourcePeriod)}</small><b>${esc(product.sourceLabel)}</b><small>Revizie dovadă · ${esc(fmtDate(reviewedAt))}</small></div><span class="chip ${String(product.sourceTier).toLowerCase()}">${esc(product.evidenceClass)}</span>${sourceUrl!=='#'?`<a class="source-link" data-product-opened data-product-action="source" href="${esc(sourceUrl)}" target="_blank" rel="noopener noreferrer">Vezi sursa</a>`:''}</div>${decisionPanel}</article>`;
 }
@@ -138,6 +150,9 @@ async function loadData(){
   return niches.length===25;
 }
 
+await refreshShortlistScope();
+window.addEventListener('focus',refreshShortlistScope);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshShortlistScope();});
 const loaded=await loadData();installFreeDemandTracking(document);
 if(loaded){
   installNicheTabs();installMarketTabs();trackFreeDemand('FREE_TOP25_VIEW',{nicheCount:niches.length,productCount:Number(crossMarket.coverage.livePositions||0),offer:'CROSS_MARKET_FREE'});
@@ -151,7 +166,7 @@ if(loaded){
     const cardElement=event.target.closest?.('[data-product]'),emptyRequest=event.target.closest?.('[data-empty-request]');
     if(emptyRequest){emptyRequest.disabled=true;emptyRequest.textContent='Interes înregistrat ✓';trackFreeDemand('FREE_DECISION_REACHED',{nicheId:current.id,nicheLabel:current.label,decision:'REQUEST_PLATFORM',target:`PLATFORM:${emptyRequest.dataset.emptyRequest}`});return;}
     if(!cardElement)return;const productName=cardElement.dataset.product||'',key=cardElement.dataset.productKey;
-    if(event.target.closest('[data-shortlist]')){const result=toggleFreeShortlist(shortlist,key);shortlist=result.values;trackFreeDemand('FREE_DECISION_REACHED',{productName,nicheId:current.id,nicheLabel:current.label,decision:result.added?'SHORTLIST_ADD':'SHORTLIST_REMOVE',target:`PLATFORM:${selectedPlatform}`});render();return;}
+    if(event.target.closest('[data-shortlist]')){const result=toggleFreeShortlist(shortlist,key,undefined,shortlistUserId);shortlist=result.values;trackFreeDemand('FREE_DECISION_REACHED',{productName,nicheId:current.id,nicheLabel:current.label,decision:result.added?'SHORTLIST_ADD':'SHORTLIST_REMOVE',target:`PLATFORM:${selectedPlatform}`});render();return;}
     if(event.target.closest('[data-compare]')){const result=toggleComparison(comparison,key);comparison=result.values;if(result.limitReached){$('#compareHint').textContent='Poți compara maximum 3 produse.';return;}$('#compareHint').textContent=comparison.size<2?'Alege încă un produs pentru comparație.':'Comparația este gata.';render();return;}
     const opened=event.target.closest?.('[data-product-opened]');if(opened){const metadata={productName,nicheId:current.id,nicheLabel:current.label,target:opened.getAttribute('href')||'',label:selectedPlatform};trackJourneyEvent('PRODUCT_OPENED',{product:productName,...metadata});trackFreeDemand(opened.dataset.productAction==='source'?'FREE_SOURCE_OPENED':'FREE_PRODUCT_OPENED',metadata);}
     const decision=event.target.closest?.('[data-product-decision]');if(!decision)return;cardElement.querySelectorAll('[data-product-decision]').forEach(button=>{button.classList.toggle('selected',button===decision);button.setAttribute('aria-pressed',String(button===decision));});

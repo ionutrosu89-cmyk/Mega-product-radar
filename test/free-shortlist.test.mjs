@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {FREE_SHORTLIST_STORAGE_KEY,freeProductKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from '../free-shortlist.js';
+import {FREE_SHORTLIST_STORAGE_KEY,freeProductKey,freeShortlistStorageKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from '../free-shortlist.js';
 
 const memory=()=>{const values=new Map();return {getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value),values};};
 
@@ -30,4 +30,17 @@ test('retired product keys are purged while current shortlist entries remain',()
  const storage=memory();storage.setItem(FREE_SHORTLIST_STORAGE_KEY,JSON.stringify(['AMAZON_ARCHIVE:OLD','EBAY:CURRENT']));
  assert.deepEqual([...readFreeShortlist(storage)],['EBAY:CURRENT']);
  assert.deepEqual(JSON.parse(storage.getItem(FREE_SHORTLIST_STORAGE_KEY)),['EBAY:CURRENT']);
+});
+
+test('shortlists remain separate when two accounts share one browser',()=>{
+ const storage=memory(),a='11111111-1111-4111-8111-111111111111',b='22222222-2222-4222-8222-222222222222';
+ toggleFreeShortlist(new Set(),'EBAY:A',storage,a);
+ toggleFreeShortlist(new Set(),'EBAY:B',storage,b);
+ toggleFreeShortlist(new Set(),'EBAY:GUEST',storage);
+ assert.deepEqual([...readFreeShortlist(storage,a)],['EBAY:A']);
+ assert.deepEqual([...readFreeShortlist(storage,b)],['EBAY:B']);
+ assert.deepEqual([...readFreeShortlist(storage)],['EBAY:GUEST']);
+ assert.notEqual(freeShortlistStorageKey(a),freeShortlistStorageKey(b));
+ assert.throws(()=>freeShortlistStorageKey('invalid-user'));
+ assert.deepEqual([...readFreeShortlist(storage,'invalid-user')],[]);
 });
