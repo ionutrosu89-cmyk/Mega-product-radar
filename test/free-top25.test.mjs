@@ -62,10 +62,10 @@ test('Free Top 25 is free while dynamic Discover remains a paid entitlement',()=
   assert.equal(hasFeature('DISCOVER','TOP_PRODUCTS'),true);
 });
 
-test('Top 25 UI clearly separates archive, live platform rank and evidence confidence',async()=>{
+test('Top 25 UI publishes only current platform evidence',async()=>{
   const html=await fs.readFile(new URL('../top25.html',import.meta.url),'utf8');
   const js=await fs.readFile(new URL('../top25.js',import.meta.url),'utf8');
-  assert.match(html,/Amazon Historical este o arhivă licențiată/i);
+  assert.doesNotMatch(html,/Amazon Historical|Amazon 2023/i);
   assert.match(html,/Rank platformă ≠ unități vândute/i);
   assert.match(html,/Consensus se activează numai.*minimum două platforme/i);
   assert.match(js,/Poziție sursă observată/);
@@ -79,12 +79,12 @@ test('Top 25 UI clearly separates archive, live platform rank and evidence confi
   assert.match(js,/Merită investigat/);
   assert.match(html,/beta-decision/);
   assert.match(html,/id="nicheSearch"/);
-  assert.match(`${html}\n${js}`,/arhivă licențiată 2023|poziții istorice/i);
-  assert.match(js,/AMAZON_ARCHIVE/);
+  assert.doesNotMatch(`${html}\n${js}`,/AMAZON_ARCHIVE/);
+
   assert.match(js,/FREE_CROSS_MARKET_PLATFORMS/);
   assert.match(js,/FAIL-CLOSED/);
   assert.match(js,/FREE_TOP25_VIEW/);
-  assert.match(html,/25 de nișe pentru explorare/i);
+  assert.match(html,/25 de nișe pentru produse recente/i);
   assert.match(html,/Topuri live în pregătire/i);
   assert.match(js,/brand gate/i);
   assert.doesNotMatch(js,/tse\d?\.mm\.bing\.net/i);
