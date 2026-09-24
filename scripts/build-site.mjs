@@ -15,14 +15,14 @@ await writePatched('app.js','app.js',text=>text
   .replace("score>=82?'BUY':score>=76?'TEST':'WATCH'","score>=84?'BUY':score>=76?'TEST':'WATCH'")
   .replace('<small>MEGA 4.2</small>','<small>MEGA 7.0</small>'));
 for(const file of[
-  'beta-study.html','beta-study.js','beta-evidence-gate.js','validation-pilot.html','validation-pilot.js','validation-pilot-live.json','source-inventory-live.json','evidence-stage-policy.js','evidence-freshness.js','product-evidence-decision.js','evidence-status-ui.js','home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json','intervention-watch.js','intervention-watch.css',
+  'home5.js','alerts.js','sw.js','data-quality.js','manifest.json','products.json','radar-live.json','radar-history.json','scan-status.json','intervention-watch.js',
   'v6-core.js','domain-contracts-v1.js','portfolio-store.js','feedback-store.js','source-connectors.js','executive-dashboard.html','executive-ro.html','executive-dashboard.js','supplier-intelligence.html','supplier-intelligence.js','supplier-quote-verifier.js','supplier-page-evidence-v1.js','supplier-page-ranking-v1.js','supplier-negotiation-engine.js','rfq-economics-envelope.js','sourcing-ops.html','sourcing-ops.js','rfq-dispatch-state.js',
   'test-execution.html','test-execution.js','test-execution-engine.js','test-execution-client.js',
   'purchase-manager.html','purchase-manager.js','landed-cost.html','landed-cost.js','landed-cost-evidence.js','quantity-optimizer.html','quantity-optimizer.js','market-profiles-v1.js','import-regimes-v1.js','freight-chargeable-v1.js','carrier-profiles-v1.js','carrier-freight-evidence-v1.js','freight-comparison-v1.js','screening-lower-bound-v1.js','freight-ceiling-v1.js','freight-mode-viability-v1.js','consolidation-engine-v1.js','consolidation-basket-v1.js','price-strategy-v1.js','finalist-test-gate-v1.js','import-cost-stress-v1.js','shipment-fixed-cost-stress-v1.js','lcl-local-charge-guard-v1.js','customs-duty-sensitivity-v1.js','finalist-screening-verdict-v1.js','customs-representation-headroom-v1.js','quantity-economics-v1.js','commercial-score-v1.js','public-sales-estimation-v1.js','discovery-inbox.html','discovery-inbox.js','discovery-engine.js','discovery-live.json','organic-rising-live.json','discovery-history.json','discovery-history.js','review-intelligence.js','data-vault.html','data-vault.js',
-  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','free-beta-mode.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','profit-engine-v2.js','product-ro.js','opportunity-v5.js','opportunity-ux-v1.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-navigation-access.js','customer-shell.js','login.html','login.js','account.html','account.js',
+  'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','free-beta-mode.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','commercial-identity-v1.js','product-evidence-decision.js','evidence-status-ui.js','evidence-stage-policy.js','evidence-freshness.js','deployment-readiness-state.js','market-trend-ui.js','free-intelligence-ui.js','profit-engine-v2.js','product-ro.js','opportunity-v5.js','opportunity-ux-v1.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-navigation-access.js','customer-shell.js','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','finalist-economics-live.json','opportunity-shortlist-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','plan-recommendation-v1.js','seller-preferences.js','journey-events.js','free-demand.js',
-  'top25.html','top25.js','top25-evidence.js','top25-movement.js','free-top25-data.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','brand-policy-v1.js',
+  'top25.html','top25.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','brand-policy-v1.js',
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js','academy.html','academy.js',
   'pricing.html','pricing.js','beta.html','beta.js','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html','sources.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
@@ -47,4 +47,16 @@ for(const entry of await fs.readdir(out)){
   await fs.writeFile(target,html);
 }
 await fs.writeFile(path.join(out,'.nojekyll'),'');
+const missingImports=[];
+for(const entry of await fs.readdir(out)){
+  if(!entry.endsWith('.js'))continue;
+  const source=await fs.readFile(path.join(out,entry),'utf8');
+  for(const match of source.matchAll(/(?:from\s*|import\s*|import\s*\(\s*)['"](\.[^'"]+)['"]/g)){
+    const relative=match[1].split(/[?#]/)[0];
+    const target=path.resolve(out,path.dirname(entry),relative);
+    if(!target.startsWith(out+path.sep))throw new Error(`PUBLIC_MODULE_IMPORT_OUTSIDE_BUNDLE:${entry}:${relative}`);
+    try{await fs.access(target);}catch(error){if(error?.code==='ENOENT')missingImports.push(`${entry}:${relative}`);else throw error;}
+  }
+}
+if(missingImports.length)throw new Error(`PUBLIC_MODULE_IMPORT_MISSING:${missingImports.join(',')}`);
 console.log('Mega Product Radar static site built: Netlify production bundle with private commercial artifacts excluded.');

@@ -93,7 +93,8 @@ test('Top 25 UI publishes only current platform evidence',async()=>{
   assert.doesNotMatch(`${html}\n${js}`,/vânzări confirmate:\s*\d/i);
 });
 
-test('Top 25 pages, evidence policy and dataset are included in the Netlify build',async()=>{
+test('Top 25 build excludes historical product datasets',async()=>{
   const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
-  for(const file of ['top25.html','top25.js','top25-evidence.js','free-top25-data.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','free-demand.js','beta.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+  for(const file of ['top25.html','top25.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','free-demand.js','beta.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+  for(const historical of ['top25-evidence.js','top25-movement.js','free-top25-data.js'])assert.doesNotMatch(build,new RegExp(`'${historical.replace('.','\\.')}'`));
 });
