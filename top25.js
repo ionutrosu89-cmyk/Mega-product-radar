@@ -12,9 +12,9 @@ const normalizeSearch=value=>String(value||'').toLowerCase().normalize('NFD').re
 const fmtDate=value=>{if(!value)return '—';const raw=String(value),date=new Date(raw.length===10?`${raw}T00:00:00`:raw);return Number.isNaN(date.getTime())?raw:new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(date);};
 const fmtMetric=metric=>{if(!metric)return '—';const value=Number(metric.value||0).toLocaleString('ro-RO');if(metric.unit==='searches')return `${value} căutări`;if(metric.unit==='results')return `${value} rezultate`;if(metric.unit==='reviews_historical')return `${value} recenzii istorice`;return `${value}${metric.label?` · ${metric.label}`:''}`;};
 const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',HISTORICAL_PRODUCT:'PRODUS ISTORIC LICENȚIAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
-const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE'}[status]||'ÎN PREGĂTIRE');
+const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE',WAITING_FOR_REVIEWED_GENERIC_LISTS:'AȘTEAPTĂ 25 PRODUSE REVIZUITE'}[status]||'ÎN PREGĂTIRE');
 
-let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='EBAY';
+let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='MPR_GENERIC';
 let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
 
 async function refreshShortlistScope(){
@@ -28,7 +28,7 @@ async function refreshShortlistScope(){
 }
 
 
-const currentPlatform=()=>crossMarket.platforms.find(platform=>platform.id===selectedPlatform)||FREE_CROSS_MARKET_PLATFORMS.find(p=>p.id==='EBAY');
+const currentPlatform=()=>crossMarket.platforms.find(platform=>platform.id===selectedPlatform)||FREE_CROSS_MARKET_PLATFORMS.find(p=>p.id==='MPR_GENERIC');
 const currentRanking=()=>crossMarket.rankings.find(row=>row.platform===selectedPlatform&&row.nicheId===current?.id)||null;
 const platformProducts=()=>currentRanking()?.products||[];
 const eligiblePlatformProducts=()=>platformProducts().filter(publicCommerciallyEligible);
@@ -37,7 +37,7 @@ function drawNicheTabs(){
   const root=$('#tabs'),query=normalizeSearch($('#nicheSearch')?.value);
   const visible=query?niches.filter(niche=>normalizeSearch(`${niche.label} ${niche.id}`).includes(query)):niches;
   root.innerHTML=visible.map(niche=>`<button data-niche="${esc(niche.id)}" class="${niche.id===current?.id?'active':''}">${niche.emoji} ${esc(niche.label)}</button>`).join('')||'<span>Nu am găsit această nișă.</span>';
-  $('#nicheCount').textContent=`${visible.length}/${niches.length} nișe · ${Number(crossMarket.coverage.livePositions||0)} poziții live`;
+  $('#nicheCount').textContent=`${visible.length}/${niches.length} nișe · ${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate`;
 }
 
 function installNicheTabs(){
@@ -52,7 +52,7 @@ function installNicheTabs(){
 }
 
 function drawMarketTabs(){
-  const available=crossMarket.platforms.filter(platform=>platform.status==='LIVE');
+  const available=crossMarket.platforms.filter(platform=>platform.id==='MPR_GENERIC'||platform.status==='LIVE');
   const upcoming=crossMarket.platforms.filter(platform=>!available.includes(platform));
   $('#marketTabs').innerHTML=available.map(platform=>`<button type="button" data-platform="${esc(platform.id)}" class="${platform.id===selectedPlatform?'active':''}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
   $('#upcomingPlatforms').innerHTML=upcoming.map(platform=>`<button type="button" data-platform="${esc(platform.id)}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
@@ -63,7 +63,7 @@ function drawMarketTabs(){
 
 function drawMarketContext(){
   const platform=currentPlatform(),isLive=platform.status==='LIVE';
-  const descriptions={CONSENSUS:'Confirmare pe minimum două platforme independente.',ALIEXPRESS:'Hot Products din API-ul oficial, ordonate după indicatorul platformei.',EBAY:'BEST_SELLING din API-ul oficial. Poziția nu reprezintă unități vândute.',AMAZON_US:'Clasament recent licențiat pentru SUA.',AMAZON_DE:'Clasament recent licențiat pentru Germania.',TIKTOK:'Activitate publicitară pentru validare.',GOOGLE:'Cerere de căutare pentru validare.',ROMANIA:'Oferte comparabile observate în România.'};
+  const descriptions={MPR_GENERIC:'Selecție MPR cu 25 de concepte distincte fără brand consacrat, aprobate manual. Rangul MPR este separat de rangul sursei.',CONSENSUS:'Confirmare pe minimum două platforme independente.',ALIEXPRESS:'Hot Products din API-ul oficial, ordonate după indicatorul platformei.',EBAY:'BEST_SELLING din API-ul oficial. Poziția nu reprezintă unități vândute.',AMAZON_US:'Clasament recent licențiat pentru SUA.',AMAZON_DE:'Clasament recent licențiat pentru Germania.',TIKTOK:'Activitate publicitară pentru validare.',GOOGLE:'Cerere de căutare pentru validare.',ROMANIA:'Oferte comparabile observate în România.'};
   $('#marketContext').innerHTML=`<div><small>COMPARAȚIE SELECTATĂ</small><b>${esc(platform.emoji)} ${esc(platform.label)}</b><p>${esc(descriptions[platform.id]||'Sursă în pregătire.')}</p></div><div class="market-health ${isLive?'live':'waiting'}"><b>${esc(statusLabel(platform.status))}</b><span>${Number(platform.publishedPositions||0).toLocaleString('ro-RO')} poziții publicate</span></div>${!isLive&&platform.status!=='SUPPORTING_SIGNAL_ONLY'?`<button type="button" data-platform-request="${esc(platform.id)}">Vreau acest Top 25</button>`:''}`;
 }
 
@@ -85,7 +85,7 @@ function installMarketTabs(){
 
 function displayProduct(raw){
   const gate=classifyPublicBrandGate(raw);
-  return {...raw,...gate,name:raw.name,rank:raw.rank,sourceUrl:raw.sourceUrl,sourceLabel:raw.sourceLabel,sourceTier:'A',sourcePeriod:`observat ${fmtDate(raw.observedAt)}`,sourceRank:raw.rank,sourceRankObserved:true,evidenceType:'EXACT_RANK',evidenceConfidence:raw.evidenceClass==='DIRECT'?'HIGH':'MEDIUM',evidenceClass:raw.evidenceClass,evidenceReviewedAt:raw.observedAt,metric:raw.sourceMetric||null};
+  return {...raw,...gate,name:raw.name,rank:raw.rank,sourceUrl:raw.sourceUrl,sourceLabel:raw.sourceLabel,sourceTier:'A',sourcePeriod:`observat ${fmtDate(raw.observedAt)}`,sourceRank:raw.sourceRank??raw.rank,sourceRankObserved:true,evidenceType:'EXACT_RANK',evidenceConfidence:raw.evidenceClass==='DIRECT'?'HIGH':'MEDIUM',evidenceClass:raw.evidenceClass,evidenceReviewedAt:raw.observedAt,metric:raw.sourceMetric||null};
 }
 
 function card(raw,movement,previousReviewedAt,currentEvidence,currentReviewedAt){
@@ -122,6 +122,7 @@ function openComparison(){
 
 function emptyState(platform){
   if(shortlistOnly)return '<div class="empty-state"><b>Shortlist-ul este gol pentru această listă.</b><p>Salvează produsele interesante cu butonul „Salvează”. Lista rămâne numai pe dispozitivul tău.</p></div>';
+  if(platform.id==='MPR_GENERIC')return `<div class="empty-state"><b>Nu există încă 25 de oportunități generice aprobate pentru ${esc(current.label)}.</b><p>Lista apare numai după revizia individuală a brandului, nișei și identității fiecărui produs, cu date recente și drept de afișare pentru sursă. Clasamentele brute ale platformelor rămân separate.</p></div>`;
   return `<div class="empty-state"><b>${esc(platform.label)} nu este încă publicat pentru ${esc(current.label)}.</b><p>Nu completăm spațiul cu rezultate inventate. Publicăm lista numai când avem 25 poziții recente, sursă permisă și etichetare corectă a semnalului.</p><button type="button" data-empty-request="${esc(platform.id)}">Anunță interesul pentru această listă</button></div>`;
 }
 
@@ -129,8 +130,10 @@ async function render({trackSearch=false}={}){
   if(!current)return;
   const niche=current,platform=currentPlatform(),allSourceProducts=platformProducts(),sourceProducts=allSourceProducts,excludedCount=allSourceProducts.filter(product=>!publicCommerciallyEligible(product)).length,products=filteredProducts(sourceProducts);
   $('#nicheTitle').textContent=`${niche.emoji} ${platform.shortLabel} · ${niche.label}`;
-  $('#nicheText').textContent=sourceProducts.length?`${sourceProducts.length} produse recente; ${excludedCount} marcate ca excluse din analiza comercială.`:'Publicăm clasamentul când există 25 de produse recente și sursa permite afișarea lor.';
-  $('#coverage').textContent=`${allSourceProducts.length}/25 LIVE`;
+  $('#nicheText').textContent=platform.id==='MPR_GENERIC'
+    ?sourceProducts.length?'25 de concepte distincte aprobate manual; rangul MPR și rangul sursei sunt separate.':'Lista generică așteaptă 25 de produse distincte, revizuite și publicabile.'
+    :sourceProducts.length?`${sourceProducts.length} poziții brute ale sursei; ${excludedCount} branduri marcate ca excluse comercial.`:'Publicăm clasamentul sursei când există 25 de poziții recente și drept de afișare.';
+  $('#coverage').textContent=`${allSourceProducts.length}/25 ${platform.id==='MPR_GENERIC'?'GENERIC':'LIVE'}`;
   $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} marcate ca excluse comercial`:''}`;
   $('#trackingStatus').textContent=`${statusLabel(platform.status)} · prospețime maximă ${platform.freshnessDays||'—'} zile`;
   $('#grid').innerHTML=products.map(raw=>card(raw,null,null,null,raw.observedAt)).join('')||emptyState(platform);
@@ -144,9 +147,9 @@ async function loadData(){
   niches=top25.payload.niches.slice(0,25).map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊'}));current=niches[0]||null;
   const market=crossResult.status==='fulfilled'?crossResult.value:null;
   if(market?.response.ok&&market.payload?.ok&&Array.isArray(market.payload.platforms))crossMarket=market.payload;
-  else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':'ACCESS_REQUIRED',publishedPositions:0})),rankings:[],coverage:{livePositions:0}};
-  selectedPlatform=crossMarket.platforms.find(platform=>platform.status==='LIVE')?.id||'EBAY';
-  document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.livePositions||0)} poziții live publicate · 25 nișe configurate`;
+  else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':platform.kind==='CURATED'?'WAITING_FOR_REVIEWED_GENERIC_LISTS':'ACCESS_REQUIRED',publishedPositions:0})),rankings:[],coverage:{livePositions:0,curatedPositions:0}};
+  selectedPlatform='MPR_GENERIC';
+  document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate · ${Number(crossMarket.coverage.livePositions||0)} poziții brute de sursă · 25 nișe configurate`;
   return niches.length===25;
 }
 

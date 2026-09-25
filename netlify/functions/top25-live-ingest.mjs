@@ -1,5 +1,6 @@
 import {timingSafeEqual} from 'node:crypto';
 import {normalizeCurrentTop25Snapshot,publicDisplayApprovalKey} from '../../top25-current-snapshot-v1.js';
+import {normalizeGenericTop25Snapshot} from '../../top25-generic-snapshot-v1.js';
 import {persistCurrentTop25Snapshot} from './_top25-current-store.mjs';
 
 const clean=value=>String(value??'').trim();
@@ -16,8 +17,11 @@ export function createTop25LiveIngestHandler({env=process.env,fetchImpl=fetch,no
     if(!submitted.length)return Response.json({ok:false,error:'snapshots are required'},{status:400,headers:{'Cache-Control':'no-store'}});
     const results=[];
     for(const raw of submitted){
-      const platform=clean(raw?.platform).toUpperCase(),rightsKey=publicDisplayApprovalKey(platform,raw?.sourceKey||raw?.source_key);
-      const normalized=normalizeCurrentTop25Snapshot(raw,{now:now(),rightsApproved:approved(env,rightsKey)});
+      const platform=clean(raw?.platform).toUpperCase(),sourcePlatform=platform==='MPR_GENERIC'?clean(raw?.sourcePlatform).toUpperCase():platform;
+      const rightsKey=publicDisplayApprovalKey(sourcePlatform,raw?.sourceKey||raw?.source_key);
+      const normalized=platform==='MPR_GENERIC'
+        ?normalizeGenericTop25Snapshot(raw,raw?.reviews,{now:now(),rightsApproved:approved(env,rightsKey)})
+        :normalizeCurrentTop25Snapshot(raw,{now:now(),rightsApproved:approved(env,rightsKey)});
       if(!normalized.ok){results.push({nicheId:clean(raw?.nicheId||raw?.niche_id).toUpperCase(),platform,status:normalized.code,published:false});continue;}
       const persisted=await persistCurrentTop25Snapshot({env,fetchImpl,snapshot:normalized.snapshot});
       results.push({nicheId:normalized.snapshot.niche_id,platform,status:persisted.code,published:persisted.ok});

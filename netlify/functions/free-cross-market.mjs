@@ -1,5 +1,5 @@
 import {SAAS_CONFIG} from '../../saas-config.js';
-import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.js';
+import {buildFreeCrossMarketExperience,curatedSourcePlatform} from '../../free-cross-market-registry.js';
 import {enforceRateLimit,requestId} from './_security-ops.mjs';
 import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 import {aliexpressPublicDisplayAccessState} from './_aliexpress-hot-products.mjs';
@@ -13,8 +13,9 @@ const displayPlatforms=new Set(['ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE']);
 export function filterPublicDisplaySnapshots(snapshots,env){
   return snapshots.filter(row=>{
     const platform=String(row?.platform||'').toUpperCase();
-    if(!displayPlatforms.has(platform))return false;
-    const flag=publicDisplayApprovalKey(platform,row?.source_key);
+    const sourcePlatform=platform==='MPR_GENERIC'?curatedSourcePlatform(row?.market,row?.source_key):platform;
+    if(!displayPlatforms.has(sourcePlatform))return false;
+    const flag=publicDisplayApprovalKey(sourcePlatform,row?.source_key);
     return Boolean(flag&&approved(env,flag));
   });
 }

@@ -35,3 +35,23 @@ test('Keepa approval cannot publish a different licensed Amazon feed',async()=>{
   assert.equal(calls,0);
   assert.equal((await response.json()).results[0].status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
 });
+
+test('curated generic ingest stores MPR rank separately and requires source-specific rights',async()=>{
+  const candidates=Array.from({length:26},(_,index)=>({name:index===0?'Nike shoes':`Desk organizer ${index}`,externalId:`item-${index}`,sourceRank:index+1,nicheId:'BIROU_ORGANIZARE',sourceUrl:`https://www.ebay.com/itm/${index}`,observedAt:'2026-09-20T06:00:00Z'}));
+  const reviews=Object.fromEntries(candidates.map(row=>[row.externalId,{decision:'GENERIC_PRIVATE_LABEL',reviewer:'Analyst',reviewedAt:'2026-09-20T06:00:00Z',evidenceUrl:'https://review.example/brand',nicheId:'BIROU_ORGANIZARE',nicheDecision:'IN_SCOPE',nicheEvidenceUrl:'https://review.example/niche',conceptKey:`CONCEPT_${row.externalId}`} ]));
+  const curated={nicheId:'BIROU_ORGANIZARE',platform:'MPR_GENERIC',sourcePlatform:'EBAY',market:'EBAY_US',sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',candidates,reviews};
+  const request=()=>new Request('https://mpr.example/api/internal/top25-live-ingest',{method:'POST',headers:{'content-type':'application/json','x-mpr-internal-secret':'internal'},body:JSON.stringify({snapshots:[curated]})});
+  const calls=[];
+  const baseEnv={MPR_INTERNAL_REFRESH_SECRET:'internal',SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'};
+  const fetchImpl=async(url,options)=>{calls.push({url:String(url),options});return new Response(null,{status:201});};
+  const denied=createTop25LiveIngestHandler({env:baseEnv,now:()=>new Date('2026-09-20T07:00:00Z'),fetchImpl});
+  assert.equal((await (await denied(request())).json()).results[0].status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
+  assert.equal(calls.length,0);
+  const approved=createTop25LiveIngestHandler({env:{...baseEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'},now:()=>new Date('2026-09-20T07:00:00Z'),fetchImpl});
+  assert.equal((await (await approved(request())).json()).published,1);
+  const stored=JSON.parse(calls[0].options.body)[0];
+  assert.equal(stored.platform,'MPR_GENERIC');
+  assert.equal(stored.products[0].rank,1);
+  assert.equal(stored.products[0].sourceRank,2);
+  assert.equal(stored.products[24].sourceRank,26);
+});

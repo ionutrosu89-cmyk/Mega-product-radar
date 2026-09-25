@@ -8,6 +8,7 @@ import {
   normalizeCrossMarketSnapshot
 } from '../free-cross-market-registry.js';
 import {createFreeCrossMarketHandler,filterPublicDisplaySnapshots} from '../netlify/functions/free-cross-market.mjs';
+import {normalizeGenericTop25Snapshot} from '../top25-generic-snapshot-v1.js';
 
 const product=index=>({
   name:`Generic product ${index}`,
@@ -22,10 +23,11 @@ const product=index=>({
 });
 
 test('Free Cross-Market registry exposes comparison surfaces without leaking credential names',async()=>{
-  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
+  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['MPR_GENERIC','CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
   const view=buildFreeCrossMarketExperience({env:{},now:new Date('2026-09-03T08:00:00Z')});
   assert.equal('archivePositions' in view.coverage,false);
   assert.equal(view.coverage.livePositions,0);
+  assert.equal(view.coverage.curatedPositions,0);
   assert.equal(view.coverage.consensusReady,false);
 
   assert.equal(view.platforms.find(x=>x.id==='EBAY').status,'ACCESS_REQUIRED');
@@ -117,4 +119,12 @@ test('an Amazon licensed feed cannot inherit Keepa display approval',()=>{
   assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[keepa]);
   assert.deepEqual(filterPublicDisplaySnapshots([licensed],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[licensed]);
   assert.deepEqual(filterPublicDisplaySnapshots([{platform:'AMAZON_US'}],env),[]);
+});
+
+test('revoking eBay display approval also hides curated opportunities derived from eBay',()=>{
+  const candidates=Array.from({length:25},(_,index)=>({name:`Desk item ${index}`,externalId:`e${index}`,sourceRank:index+1,nicheId:'BIROU_ORGANIZARE',sourceUrl:`https://www.ebay.com/itm/${index}`,observedAt:'2026-09-03T06:00:00Z'}));
+  const reviews=Object.fromEntries(candidates.map(row=>[row.externalId,{decision:'GENERIC_PRIVATE_LABEL',reviewer:'Analyst',reviewedAt:'2026-09-03T06:00:00Z',evidenceUrl:'https://review.example/brand',nicheId:'BIROU_ORGANIZARE',nicheDecision:'IN_SCOPE',nicheEvidenceUrl:'https://review.example/niche',conceptKey:`CONCEPT_${row.externalId}`} ]));
+  const curated=normalizeGenericTop25Snapshot({nicheId:'BIROU_ORGANIZARE',sourcePlatform:'EBAY',market:'EBAY_US',sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',candidates},reviews,{now:new Date('2026-09-03T08:00:00Z'),rightsApproved:true}).snapshot;
+  assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,25);
+  assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,0);
 });
