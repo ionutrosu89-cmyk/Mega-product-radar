@@ -40,9 +40,13 @@ function normalizeProduct(raw,index,{platform,market,sourceKey,rankingBasis,nowM
   };
 }
 
-export function publicDisplayApprovalKey(platform){
+export function publicDisplayApprovalKey(platform,sourceKey){
   const key=upper(platform);
-  if(key.startsWith('AMAZON_'))return 'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED';
+  if(key.startsWith('AMAZON_')){
+    if(upper(sourceKey)==='KEEPA_BEST_SELLERS')return 'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED';
+    if(upper(sourceKey)==='AMAZON_LICENSED_BEST_SELLERS')return 'MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED';
+    return null;
+  }
   return `MPR_${key}_PUBLIC_DISPLAY_APPROVED`;
 }
 

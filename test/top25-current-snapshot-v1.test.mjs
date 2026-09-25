@@ -31,7 +31,9 @@ test('coverage counts only complete, approved and current snapshots',()=>{
   assert.equal(coverage.coveredNicheCount,1);
   assert.equal(coverage.coveredPositions,25);
   assert.equal(coverage.allNichesCovered,false);
-  assert.equal(publicDisplayApprovalKey('AMAZON_DE'),'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED');
+  assert.equal(publicDisplayApprovalKey('AMAZON_DE','KEEPA_BEST_SELLERS'),'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED');
+  assert.equal(publicDisplayApprovalKey('AMAZON_DE','AMAZON_LICENSED_BEST_SELLERS'),'MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED');
+  assert.equal(publicDisplayApprovalKey('AMAZON_DE'),null);
 });
 
 test('supporting signals cannot be published as product rankings',()=>{

@@ -7,7 +7,7 @@ import {
   crossMarketSnapshotKey,
   normalizeCrossMarketSnapshot
 } from '../free-cross-market-registry.js';
-import {createFreeCrossMarketHandler} from '../netlify/functions/free-cross-market.mjs';
+import {createFreeCrossMarketHandler,filterPublicDisplaySnapshots} from '../netlify/functions/free-cross-market.mjs';
 
 const product=index=>({
   name:`Generic product ${index}`,
@@ -108,4 +108,13 @@ test('revoking the public-display flag removes an approved current snapshot from
   const revoked=await revokedResponse.json();
   assert.equal(revoked.coverage.livePositions,0);
   assert.deepEqual(revoked.rankings,[]);
+});
+
+test('an Amazon licensed feed cannot inherit Keepa display approval',()=>{
+  const keepa={platform:'AMAZON_US',source_key:'KEEPA_BEST_SELLERS'};
+  const licensed={platform:'AMAZON_US',source_key:'AMAZON_LICENSED_BEST_SELLERS'};
+  const env={MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'};
+  assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[keepa]);
+  assert.deepEqual(filterPublicDisplaySnapshots([licensed],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[licensed]);
+  assert.deepEqual(filterPublicDisplaySnapshots([{platform:'AMAZON_US'}],env),[]);
 });

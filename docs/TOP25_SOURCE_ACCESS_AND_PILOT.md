@@ -13,6 +13,8 @@ Stare reverificată la 25 septembrie 2026: **0 conturi/API-uri aprobate pentru a
 
 Cererea către un potențial furnizor trebuie să solicite în scris: (1) acoperirea Amazon.com SUA sau altă piață definită, inclusiv ID-urile categoriilor și minimum 100 candidați/nișă; (2) definiția rangului și frecvența actualizării; (3) dreptul de a afișa titlu, identificator, rang, URL și momentul observației în Free; (4) dreptul de a filtra brandurile consacrate și de a publica un rang editorial MPR separat; (5) retenția, cache-ul, atribuirea, prețul/limita de apel și procedura la revocare. Răspunsul semnat sau contractul se înregistrează înainte de activarea `MPR_*_PUBLIC_DISPLAY_APPROVED`.
 
+Aprobarea este legată de **furnizor**, nu doar de marketplace: `KEEPA_BEST_SELLERS` folosește `MPR_KEEPA_PUBLIC_DISPLAY_APPROVED`, iar un eventual `AMAZON_LICENSED_BEST_SELLERS` folosește separat `MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED`. Înainte de activarea celei de-a doua variabile se identifică furnizorul concret și contractul său; cheia Keepa nu poate autoriza alt feed.
+
 ## 1. Acces eBay
 
 Operatorul creează contul [eBay Developers Program](https://developer.ebay.com/develop/get-started) și contul [eBay Partner Network](https://partnernetwork.ebay.com/solutions/joining-the-ebay-partner-network) pe identitatea firmei. Pentru Buy Marketing API în producție, [eBay cere aprobarea modelului de afaceri și contracte](https://developer.ebay.com/api-docs/buy/buy-requirements.html). Aplicația EPN trebuie să descrie explicit SaaS-ul, publicul din România, afișarea titlului, linkului, rangului și datei, stocarea snapshoturilor și durata de păstrare. Un cont sau chei Sandbox nu reprezintă acces Production.

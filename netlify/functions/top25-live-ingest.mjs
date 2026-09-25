@@ -16,7 +16,7 @@ export function createTop25LiveIngestHandler({env=process.env,fetchImpl=fetch,no
     if(!submitted.length)return Response.json({ok:false,error:'snapshots are required'},{status:400,headers:{'Cache-Control':'no-store'}});
     const results=[];
     for(const raw of submitted){
-      const platform=clean(raw?.platform).toUpperCase(),rightsKey=publicDisplayApprovalKey(platform);
+      const platform=clean(raw?.platform).toUpperCase(),rightsKey=publicDisplayApprovalKey(platform,raw?.sourceKey||raw?.source_key);
       const normalized=normalizeCurrentTop25Snapshot(raw,{now:now(),rightsApproved:approved(env,rightsKey)});
       if(!normalized.ok){results.push({nicheId:clean(raw?.nicheId||raw?.niche_id).toUpperCase(),platform,status:normalized.code,published:false});continue;}
       const persisted=await persistCurrentTop25Snapshot({env,fetchImpl,snapshot:normalized.snapshot});

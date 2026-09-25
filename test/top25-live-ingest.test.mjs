@@ -25,3 +25,13 @@ test('live ingest performs no write without public display approval',async()=>{
   assert.equal(calls,0);
   assert.equal((await response.json()).results[0].status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
 });
+
+test('Keepa approval cannot publish a different licensed Amazon feed',async()=>{
+  let calls=0;
+  const amazon={nicheId:'AUTO',platform:'AMAZON_US',market:'AMAZON_US',sourceKey:'AMAZON_LICENSED_BEST_SELLERS',products:products().map((row,index)=>({...row,externalId:`ASIN-${index+1}`,sourceUrl:`https://www.amazon.com/dp/ASIN-${index+1}`}))};
+  const handler=createTop25LiveIngestHandler({env:{MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'},now:()=>new Date('2026-09-20T07:00:00Z'),fetchImpl:async()=>{calls++;return new Response(null,{status:201});}});
+  const response=await handler(new Request('https://mpr.example/api/internal/top25-live-ingest',{method:'POST',headers:{'content-type':'application/json','x-mpr-internal-secret':'internal'},body:JSON.stringify({snapshots:[amazon]})}));
+  assert.equal(response.status,422);
+  assert.equal(calls,0);
+  assert.equal((await response.json()).results[0].status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
+});

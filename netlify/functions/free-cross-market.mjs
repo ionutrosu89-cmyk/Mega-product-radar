@@ -3,20 +3,18 @@ import {buildFreeCrossMarketExperience} from '../../free-cross-market-registry.j
 import {enforceRateLimit,requestId} from './_security-ops.mjs';
 import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 import {aliexpressPublicDisplayAccessState} from './_aliexpress-hot-products.mjs';
+import {publicDisplayApprovalKey} from '../../top25-current-snapshot-v1.js';
 
 const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept:'application/json'});
 const present=(env,key)=>Boolean(String(env[key]||'').trim());
 const approved=(env,key)=>String(env[key]||'').toLowerCase()==='true';
 const access=(env,credentials,terms,publicDisplay)=>credentials.some(key=>!present(env,key))?'ACCESS_REQUIRED':!approved(env,terms)?'TERMS_REVIEW_REQUIRED':publicDisplay&&!approved(env,publicDisplay)?'PUBLIC_DISPLAY_RIGHTS_REQUIRED':'READY_TO_COLLECT';
-const displayApprovalByPlatform=Object.freeze({
-  ALIEXPRESS:'MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED',
-  EBAY:'MPR_EBAY_PUBLIC_DISPLAY_APPROVED',
-  AMAZON_US:'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED',
-  AMAZON_DE:'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'
-});
+const displayPlatforms=new Set(['ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE']);
 export function filterPublicDisplaySnapshots(snapshots,env){
   return snapshots.filter(row=>{
-    const flag=displayApprovalByPlatform[String(row?.platform||'').toUpperCase()];
+    const platform=String(row?.platform||'').toUpperCase();
+    if(!displayPlatforms.has(platform))return false;
+    const flag=publicDisplayApprovalKey(platform,row?.source_key);
     return Boolean(flag&&approved(env,flag));
   });
 }
