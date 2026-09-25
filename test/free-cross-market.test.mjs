@@ -88,3 +88,24 @@ test('Free Cross-Market endpoint returns live coverage and fails closed on missi
   assert.equal(body.coverage.livePositions,0);
   assert.equal(body.policy.noSyntheticRankings,true);
 });
+
+test('revoking the public-display flag removes an approved current snapshot from the public API',async()=>{
+  const snapshot={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,i)=>product(i+1)),source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  const fetchImpl=async url=>{
+    if(String(url).includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
+    if(String(url).includes('/rest/v1/current_top25_snapshots_v1'))return Response.json([snapshot]);
+    return new Response('not found',{status:404});
+  };
+  const baseEnv={SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service',SECURITY_AUDIT_SALT:'salt'};
+  const request=()=>new Request('https://mpr.example/api/free/cross-market');
+  const now=()=>new Date('2026-09-03T08:00:00Z');
+  const approvedHandler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{...baseEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'},now});
+  const approvedResponse=await approvedHandler(request());
+  assert.equal((await approvedResponse.json()).coverage.livePositions,25);
+  assert.equal(approvedResponse.headers.get('cache-control'),'public, max-age=60');
+  const revokedHandler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{...baseEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'},now});
+  const revokedResponse=await revokedHandler(request());
+  const revoked=await revokedResponse.json();
+  assert.equal(revoked.coverage.livePositions,0);
+  assert.deepEqual(revoked.rankings,[]);
+});

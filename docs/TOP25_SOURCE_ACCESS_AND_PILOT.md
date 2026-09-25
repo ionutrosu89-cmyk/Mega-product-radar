@@ -1,6 +1,17 @@
 # Top 25: acces la surse și pilotul de colectare
 
-Stare la 23 septembrie 2026: **0 conturi/API-uri aprobate**, **0 mapări de categorie aprobate**, **0/25 clasamente live**. Acest document pregătește cererile; nu afirmă că au fost trimise.
+Stare reverificată la 25 septembrie 2026: **0 conturi/API-uri aprobate pentru afișare în SaaS**, **0 mapări de categorie aprobate**, **0/25 clasamente live**. Acest document pregătește cererile; nu afirmă că au fost trimise.
+
+## Decizia de achiziție a datelor
+
+| Rută | Ce poate aduce | Ce trebuie confirmat înainte de publicare |
+| --- | --- | --- |
+| [eBay Buy Marketing](https://developer.ebay.com/api-docs/buy/marketing/overview.html) | Metric `BEST_SELLING` pe categorii și piețe acceptate | Acces Production, contractele cerute de eBay, dreptul pentru aplicația SaaS de cercetare, câmpurile afișabile, atribuirea și retenția. Endpointul este gândit pentru aplicații de cumpărare; nu presupunem că aprobarea acoperă automat modelul nostru. |
+| [Keepa Best Sellers](https://keepa.com/api-docs/best-sellers.html) pentru Amazon.com | Listă de ASIN-uri pe categorie, cu actualizare frecventă | Ofertă și permisiune scrisă pentru afișare către utilizatorii MPR, păstrarea snapshoturilor, derivarea unei liste fără brand consacrat și folosirea titlurilor/linkurilor. Documentația precizează că subcategoriile pot folosi rangul principal și nu reflectă întotdeauna ordinea exactă Amazon; interfața trebuie să numească sursa/rangul corect. |
+| Amazon Associates / PA API | Conținut pentru trimiterea cumpărătorilor spre Amazon | [Licența Amazon Associates](https://affiliate-program.amazon.com/help/operating/policies) limitează scopul la promovarea Amazon și include restricții pentru extragere, agregare și aplicații pentru vânzători. Nu folosim această cale pentru SaaS-ul de cercetare fără aprobare scrisă explicită pentru cazul nostru. |
+| Feed licențiat alternativ | Clasament și metadate pentru 25 nișe | Contract pentru afișare în SaaS, actualizare cel mult la 72 h, rang și piață verificabile, stocare, export, derivare și proces de revocare. O listă de căutare fără bază de rang nu este „bestseller”. |
+
+Cererea către un potențial furnizor trebuie să solicite în scris: (1) acoperirea Amazon.com SUA sau altă piață definită, inclusiv ID-urile categoriilor și minimum 100 candidați/nișă; (2) definiția rangului și frecvența actualizării; (3) dreptul de a afișa titlu, identificator, rang, URL și momentul observației în Free; (4) dreptul de a filtra brandurile consacrate și de a publica un rang editorial MPR separat; (5) retenția, cache-ul, atribuirea, prețul/limita de apel și procedura la revocare. Răspunsul semnat sau contractul se înregistrează înainte de activarea `MPR_*_PUBLIC_DISPLAY_APPROVED`.
 
 ## 1. Acces eBay
 

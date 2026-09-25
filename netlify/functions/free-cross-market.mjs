@@ -8,6 +8,18 @@ const headers=service=>({apikey:service,authorization:`Bearer ${service}`,accept
 const present=(env,key)=>Boolean(String(env[key]||'').trim());
 const approved=(env,key)=>String(env[key]||'').toLowerCase()==='true';
 const access=(env,credentials,terms,publicDisplay)=>credentials.some(key=>!present(env,key))?'ACCESS_REQUIRED':!approved(env,terms)?'TERMS_REVIEW_REQUIRED':publicDisplay&&!approved(env,publicDisplay)?'PUBLIC_DISPLAY_RIGHTS_REQUIRED':'READY_TO_COLLECT';
+const displayApprovalByPlatform=Object.freeze({
+  ALIEXPRESS:'MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED',
+  EBAY:'MPR_EBAY_PUBLIC_DISPLAY_APPROVED',
+  AMAZON_US:'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED',
+  AMAZON_DE:'MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'
+});
+export function filterPublicDisplaySnapshots(snapshots,env){
+  return snapshots.filter(row=>{
+    const flag=displayApprovalByPlatform[String(row?.platform||'').toUpperCase()];
+    return Boolean(flag&&approved(env,flag));
+  });
+}
 function buildServerAccessState(env){
   return {
     ALIEXPRESS:aliexpressPublicDisplayAccessState(env),
@@ -43,8 +55,8 @@ export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.
       const rate=await enforceRateLimit(request,{route:'free-cross-market',limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests'},{status:429,headers:{'Retry-After':String(rate.retryAfterSeconds),'Cache-Control':'no-store'}});
       const snapshots=await loadCrossMarketSnapshots({env,fetchImpl}).catch(()=>[]);
-      const experience=buildFreeCrossMarketExperience({snapshots,accessByPlatform:buildServerAccessState(env),now:now()});
-      return Response.json({ok:true,...experience},{headers:{'Cache-Control':'public, max-age=300, stale-while-revalidate=900'}});
+      const experience=buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots(snapshots,env),accessByPlatform:buildServerAccessState(env),now:now()});
+      return Response.json({ok:true,...experience},{headers:{'Cache-Control':'public, max-age=60'}});
     }catch(error){
       const incidentId=requestId(request);
       logger?.error?.('FREE_CROSS_MARKET_INTERNAL_ERROR',{incidentId,errorName:String(error?.name||'Error'),errorMessage:String(error?.message||'unknown').slice(0,300)});

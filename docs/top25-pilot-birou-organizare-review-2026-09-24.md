@@ -43,3 +43,5 @@ Filtrarea automată este conservatoare: „în așteptare” nu înseamnă eligi
 Filtrul `selectGenericOpportunities` cere acum `nicheId` în opțiuni și, pentru fiecare candidat acceptat, o revizie umană cu `decision: "GENERIC_PRIVATE_LABEL"`, `nicheDecision: "IN_SCOPE"`, `nicheId`, `conceptKey` stabil, revizor, dată și linkuri HTTPS pentru dovezile de brand și nișă. Două listări cu același `conceptKey` contează ca un singur produs în Top25. Aceste aprobări de selecție nu înlocuiesc aprobarea drepturilor sursei și verificările de prospețime ale publicării.
 
 Următoarea execuție verificabilă este revizia manuală a celor 26 de poziții încă în așteptare din CSV-ul intern, cu dovezi individuale; cercetarea celor cinci concepte de mai sus oferă o ordine utilă, dar nu contează ca cinci aprobări.
+
+Specificațiile și cantitățile de referință pentru cererile de ofertă sunt fixate în `pilot-rfq-birou-organizare-2026-09-25.md`. Sunt ținte comerciale alese pentru comparație, nu caracteristici sau costuri confirmate ale listărilor observate.
