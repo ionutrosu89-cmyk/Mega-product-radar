@@ -51,7 +51,7 @@ export function buildFreeBetaStudyEvidence(participants=[],events=[]){
     if(!previous||at>=previous.at)latest.set(event.workspace_id,{at,meta:eventMeta(event)});
   }
   const sessions=[...latest.values()].map(row=>row.meta),participantsCount=sessions.length;
-  const flow=sessions.filter(row=>row.studyVersion==='STABILIZATION_2'&&row.productFlowTested===true&&typeof row.product==='string'&&row.product.trim().length>0);
+  const flow=sessions.filter(row=>row.studyVersion==='STABILIZATION_2'&&row.productFlowTested===true&&typeof row.product==='string'&&row.product.trim().length>0&&['yes','no'].includes(row.watchlistStatus));
   const rate=key=>pct(flow.filter(row=>row[key]===true).length,participantsCount);
   const understandingPct=rate('understoodEvidence'),usefulnessPct=rate('useful'),watchlistPct=rate('completedWatchlist');
   const blockers=[];

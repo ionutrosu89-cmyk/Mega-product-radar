@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import {evaluateBetaEvidence} from '../beta-evidence-gate.js';
-const session=id=>({userId:id,realParticipant:true,productFlowTested:true,understoodEvidence:true,useful:true,completedWatchlist:true});
+import {betaProductFlowTested} from '../beta-study-answers.js';
+const session=id=>({userId:id,realParticipant:true,productFlowTested:true,watchlistStatus:'yes',understoodEvidence:true,useful:true,completedWatchlist:true});
 test('synthetic, duplicate and missing participants cannot open the beta gate',()=>{
  const r=evaluateBetaEvidence({sessions:[session('a'),session('a'),{...session('b'),realParticipant:false}],technicalChecksPassed:true,confirmedProductFlow:true});
  assert.equal(r.metrics.participants,1);assert.equal(r.decision,'CONTINUE_FREE_BETA');assert.equal(r.paidBillingEnabled,false);
@@ -20,4 +22,20 @@ test('sessions with no published product cannot pass the Free launch gate',()=>{
  assert.equal(result.metrics.productFlowSessions,0);
  assert.equal(result.decision,'CONTINUE_FREE_BETA');
  assert.ok(result.blockers.includes('FIVE_PRODUCT_FLOW_SESSIONS_REQUIRED'));
+});
+test('typing a product name without testing the watchlist does not count as a product flow',()=>{
+ assert.equal(betaProductFlowTested('Desk organizer','untested'),false);
+ assert.equal(betaProductFlowTested('Desk organizer','unavailable'),false);
+ assert.equal(betaProductFlowTested('Desk organizer','no'),true);
+ assert.equal(betaProductFlowTested('','yes'),false);
+ const sessions=Array.from({length:5},(_,i)=>({...session(String(i)),watchlistStatus:'untested'}));
+ const result=evaluateBetaEvidence({sessions,technicalChecksPassed:true,confirmedProductFlow:true});
+ assert.equal(result.metrics.productFlowSessions,0);
+ assert.equal(result.decision,'CONTINUE_FREE_BETA');
+});
+test('the Free beta study and its browser modules are included in the deployed bundle',async()=>{
+ const build=await readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
+ for(const file of ['beta-study.html','beta-study.js','beta-study-answers.js'])assert.match(build,new RegExp(file.replace('.','\\.')));
+ const page=await readFile(new URL('../beta-study.html',import.meta.url),'utf8');
+ assert.doesNotMatch(page,/validation-pilot\.html/);
 });

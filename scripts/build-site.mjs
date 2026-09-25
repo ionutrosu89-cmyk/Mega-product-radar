@@ -24,7 +24,7 @@ for(const file of[
   'home.html','home.js','onboarding.html','onboarding.js','account-browser-storage.js','plan-recommendation-v1.js','seller-preferences.js','journey-events.js','free-demand.js',
   'top25.html','top25.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','brand-policy-v1.js',
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js','academy.html','academy.js',
-  'pricing.html','pricing.js','beta.html','beta.js','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html','sources.html',
+  'pricing.html','pricing.js','beta.html','beta.js','beta-study.html','beta-study.js','beta-study-answers.js','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html','sources.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ])await copyIfExists(file);
 

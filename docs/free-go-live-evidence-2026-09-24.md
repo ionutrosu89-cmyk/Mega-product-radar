@@ -19,6 +19,7 @@ This is a dated evidence record, not an automatic launch approval. Keep paid che
 - The 25 September deploy preview passed Netlify and all 21 GitHub workflows. The second account's existing onboarding profile loaded across all four steps after a page reload. No real account profile was submitted during this check. A new transactional `seller-preferences-isolation.sql` test passed against the connected Supabase project: B could not read or update A's synthetic profile, and both profiles kept their distinct values after the operations. The test ended in `ROLLBACK`.
 - The second account displayed a canceled subscription with an end date already in the past but described the cancellation as still scheduled. The local `account.js` copy now avoids promising access until a past date; the preview remains unchanged until the branch is deployed.
 - The local `launch-readiness.html` now labels its Stripe-dependent verdict as **paid launch** and initializes the manual count at 0/8, matching the eight server checks. It is not a Free-beta GO decision.
+- On 25 September, the Free beta study page and its browser modules were added to the Netlify build output; previously the study URL was absent from the deploy bundle. The form no longer treats a typed product name with an untested watchlist as a completed product flow. The launch scorecard rejects that combination as well. Local verification: 1,787 tests passed, `npm run check` and `npm run build` passed. No real participant session or product approval is implied by these tests.
 
 ## Release gates
 

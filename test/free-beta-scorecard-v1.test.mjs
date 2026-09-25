@@ -24,7 +24,7 @@ test('all nine zero-cost validation gates are derived from linked cohort evidenc
   for(let index=0;index<15;index++){
     if(index<10)events.push({workspace_id:`w${index}`,event_name:'ONBOARDING_COMPLETED',created_at:after(1),metadata:{}});
     if(index<8)events.push({workspace_id:`w${index}`,event_name:'TOP25_SEARCHED',created_at:after(2),metadata:{nicheId:'auto'}});
-    if(index<5){events.push({workspace_id:`w${index}`,event_name:'PRODUCT_OPENED',created_at:after(3),metadata:{}});events.push({workspace_id:`w${index}`,event_name:'DECISION_REACHED',created_at:after(4),metadata:{decision:'INVESTIGATE'}});events.push({workspace_id:`w${index}`,user_id:`u${index}`,event_name:'BETA_VALIDATION_SESSION',created_at:after(6),metadata:{studyVersion:'STABILIZATION_2',product:'Test product',productFlowTested:true,understoodEvidence:true,useful:true,completedWatchlist:true}});}
+    if(index<5){events.push({workspace_id:`w${index}`,event_name:'PRODUCT_OPENED',created_at:after(3),metadata:{}});events.push({workspace_id:`w${index}`,event_name:'DECISION_REACHED',created_at:after(4),metadata:{decision:'INVESTIGATE'}});events.push({workspace_id:`w${index}`,user_id:`u${index}`,event_name:'BETA_VALIDATION_SESSION',created_at:after(6),metadata:{studyVersion:'STABILIZATION_2',product:'Test product',productFlowTested:true,watchlistStatus:'yes',understoodEvidence:true,useful:true,completedWatchlist:true}});}
     if(index<5)feedback.push({workspace_id:`w${index}`,user_id:`u${index}`,would_pay:index<3,created_at:after(5),metadata:{decisionChanged:index<3}});
   }
   const scorecard=buildFreeBetaScorecardV1({participants,events,feedback,now:after(10)});
@@ -50,7 +50,7 @@ test('incomplete product studies do not become beta launch evidence',()=>{
 test('latest study session replaces an earlier untested response for the same workspace',()=>{
   const participants=cohort(),events=[
     {workspace_id:'w0',user_id:'u0',event_name:'BETA_VALIDATION_SESSION',created_at:after(1),metadata:{studyVersion:'STABILIZATION_2',product:null,productFlowTested:false}},
-    {workspace_id:'w0',user_id:'u0',event_name:'BETA_VALIDATION_SESSION',created_at:after(2),metadata:{studyVersion:'STABILIZATION_2',product:'Desk organizer',productFlowTested:true,understoodEvidence:true,useful:true,completedWatchlist:true}}
+    {workspace_id:'w0',user_id:'u0',event_name:'BETA_VALIDATION_SESSION',created_at:after(2),metadata:{studyVersion:'STABILIZATION_2',product:'Desk organizer',productFlowTested:true,watchlistStatus:'yes',understoodEvidence:true,useful:true,completedWatchlist:true}}
   ];
   const study=buildFreeBetaStudyEvidence(participants,events);
   assert.equal(study.participants,1);
@@ -59,8 +59,14 @@ test('latest study session replaces an earlier untested response for the same wo
 });
 
 test('another user in the same workspace cannot satisfy a linked participant study',()=>{
-  const study=buildFreeBetaStudyEvidence(cohort(),[{workspace_id:'w0',user_id:'someone-else',event_name:'BETA_VALIDATION_SESSION',created_at:after(2),metadata:{studyVersion:'STABILIZATION_2',product:'Desk organizer',productFlowTested:true,understoodEvidence:true,useful:true,completedWatchlist:true}}]);
+  const study=buildFreeBetaStudyEvidence(cohort(),[{workspace_id:'w0',user_id:'someone-else',event_name:'BETA_VALIDATION_SESSION',created_at:after(2),metadata:{studyVersion:'STABILIZATION_2',product:'Desk organizer',productFlowTested:true,watchlistStatus:'yes',understoodEvidence:true,useful:true,completedWatchlist:true}}]);
   assert.equal(study.participants,0);
+});
+
+test('named product with an untested watchlist cannot satisfy the study',()=>{
+  const study=buildFreeBetaStudyEvidence(cohort(),[{workspace_id:'w0',user_id:'u0',event_name:'BETA_VALIDATION_SESSION',created_at:after(2),metadata:{studyVersion:'STABILIZATION_2',product:'Desk organizer',productFlowTested:true,watchlistStatus:'untested',understoodEvidence:true,useful:true,completedWatchlist:false}}]);
+  assert.equal(study.participants,1);
+  assert.equal(study.productFlowSessions,0);
 });
 
 test('events before activation and workspaces outside the cohort cannot contaminate demand KPIs',()=>{

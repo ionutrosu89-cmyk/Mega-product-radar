@@ -1,8 +1,8 @@
 export function evaluateBetaEvidence({sessions=[],technicalChecksPassed=false,criticalIssues=0,confirmedProductFlow=false}={}){
  const unique=new Map();for(const s of sessions){if(s.userId&&s.realParticipant===true)unique.set(s.userId,s);}
  const rows=[...unique.values()],count=rows.length;
- const productFlowSessions=rows.filter(x=>x.productFlowTested===true);
- const ratio=key=>count?rows.filter(x=>x.productFlowTested===true&&x[key]===true).length/count:null;
+ const productFlowSessions=rows.filter(x=>x.productFlowTested===true&&['yes','no'].includes(x.watchlistStatus));
+ const ratio=key=>count?productFlowSessions.filter(x=>x[key]===true).length/count:null;
  const metrics={participants:count,productFlowSessions:productFlowSessions.length,understanding:ratio('understoodEvidence'),usefulness:ratio('useful'),watchlistSuccess:ratio('completedWatchlist')};
  const blockers=[];if(!technicalChecksPassed)blockers.push('TECHNICAL_ACCEPTANCE_MISSING');if(criticalIssues>0)blockers.push('CRITICAL_ISSUES_OPEN');
  if(!confirmedProductFlow)blockers.push('CONFIRMED_PRODUCT_FLOW_MISSING');if(count<5)blockers.push('FIVE_REAL_PARTICIPANTS_REQUIRED');if(productFlowSessions.length<5)blockers.push('FIVE_PRODUCT_FLOW_SESSIONS_REQUIRED');
