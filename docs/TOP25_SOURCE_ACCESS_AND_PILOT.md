@@ -23,6 +23,10 @@ Text pregătit pentru solicitarea către Keepa (de trimis de operator, nu a fost
 
 [Documentația Keepa](https://keepa.com/api-docs/plans-tokens.html) descrie 50 de tokenuri per cerere Best Sellers și abonamente lunare, dar nu stabilește singură dreptul de afișare pentru modelul nostru. Nu cumpărăm un plan doar pentru a presupune aceste drepturi.
 
+Pilotul ales este **Amazon.com SUA**: în [documentația Keepa Best Sellers](https://keepa.com/api-docs/best-sellers.html), `domain=1` înseamnă `.com`, iar `domain=3` înseamnă `.de`. Planificatoarele locale folosesc implicit `1` și resping codurile de piață neacceptate; ele doar estimează cereri și tokenuri, fără apeluri sau cheltuieli automate.
+
+Parserul de test pentru răspunsul Best Sellers verifică `domainId`, `categoryId` și `lastUpdate` din [formatul Keepa Time](https://keepa.com/api-docs/tracking-object.html). O listă fără timestamp valid, mai veche de 72 h sau din altă piață/categorie este respinsă. Momentul descărcării nu devine automat momentul observației sursei. Parserul pregătește integrarea, dar **nu colectează și nu publică** date fără drepturi și buget aprobate.
+
 ## 1. Acces eBay
 
 Operatorul creează contul [eBay Developers Program](https://developer.ebay.com/develop/get-started) și contul [eBay Partner Network](https://partnernetwork.ebay.com/solutions/joining-the-ebay-partner-network) pe identitatea firmei. Pentru Buy Marketing API în producție, [eBay cere aprobarea modelului de afaceri și contracte](https://developer.ebay.com/api-docs/buy/buy-requirements.html). Aplicația EPN trebuie să descrie explicit SaaS-ul, publicul din România, afișarea titlului, linkului, rangului și datei, stocarea snapshoturilor și durata de păstrare. Un cont sau chei Sandbox nu reprezintă acces Production.
