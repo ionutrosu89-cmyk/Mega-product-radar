@@ -15,6 +15,14 @@ Cererea către un potențial furnizor trebuie să solicite în scris: (1) acoper
 
 Aprobarea este legată de **furnizor**, nu doar de marketplace: `KEEPA_BEST_SELLERS` folosește `MPR_KEEPA_PUBLIC_DISPLAY_APPROVED`, iar un eventual `AMAZON_LICENSED_BEST_SELLERS` folosește separat `MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED`. Înainte de activarea celei de-a doua variabile se identifică furnizorul concret și contractul său; cheia Keepa nu poate autoriza alt feed.
 
+Text pregătit pentru solicitarea către Keepa (de trimis de operator, nu a fost trimis). Pagina oficială de planuri indică `info@keepa.com` ca adresă de contact pentru întrebări de plată; operatorul poate cere acolo redirecționarea către echipa de licențiere:
+
+> Subject: Licensing request — Best Sellers data display in Romanian product research SaaS
+>
+> Hello Keepa team, we operate Mega Product Radar, a Romanian SaaS that helps sellers research generic/private-label product opportunities. We would like to evaluate your Amazon.com Best Sellers API for 25 defined niches, refresh the data at least daily, and display up to 25 reviewed products per niche to our Free users. We would show the source, observed time, ASIN, a short product label, source link and source rank, while separately labeling any MPR editorial ranking. Can you confirm in writing whether your license permits this public SaaS display, retention of dated snapshots, filtering established brands, and derived cross-market comparisons? Please specify required attribution, cache/retention limits, redistribution restrictions, API plan/token needs and any Amazon-origin content restrictions. We will not publish Keepa-sourced data until the permitted scope is clear.
+
+[Documentația Keepa](https://keepa.com/api-docs/plans-tokens.html) descrie 50 de tokenuri per cerere Best Sellers și abonamente lunare, dar nu stabilește singură dreptul de afișare pentru modelul nostru. Nu cumpărăm un plan doar pentru a presupune aceste drepturi.
+
 ## 1. Acces eBay
 
 Operatorul creează contul [eBay Developers Program](https://developer.ebay.com/develop/get-started) și contul [eBay Partner Network](https://partnernetwork.ebay.com/solutions/joining-the-ebay-partner-network) pe identitatea firmei. Pentru Buy Marketing API în producție, [eBay cere aprobarea modelului de afaceri și contracte](https://developer.ebay.com/api-docs/buy/buy-requirements.html). Aplicația EPN trebuie să descrie explicit SaaS-ul, publicul din România, afișarea titlului, linkului, rangului și datei, stocarea snapshoturilor și durata de păstrare. Un cont sau chei Sandbox nu reprezintă acces Production.
