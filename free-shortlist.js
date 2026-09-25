@@ -1,10 +1,8 @@
+import {accountBrowserStorageKey} from './account-browser-storage.js';
 export const FREE_SHORTLIST_STORAGE_KEY='mpr_free_shortlist_v1';
 const clean=value=>String(value??'').trim();
 export function freeShortlistStorageKey(userId){
-  const id=clean(userId).toLowerCase();
-  if(!id)return FREE_SHORTLIST_STORAGE_KEY;
-  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id))throw new TypeError('Invalid shortlist user ID');
-  return `${FREE_SHORTLIST_STORAGE_KEY}:user:${id}`;
+  return accountBrowserStorageKey(FREE_SHORTLIST_STORAGE_KEY,userId);
 }
 
 export function freeProductKey(product={},platform='LIVE'){

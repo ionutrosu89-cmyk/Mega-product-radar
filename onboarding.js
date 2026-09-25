@@ -2,9 +2,10 @@ import {getCurrentSession} from './supabase-client.js';
 import {loadSellerPreferences,saveSellerPreferences} from './seller-preferences.js';
 import {trackJourneyEvent} from './journey-events.js';
 import {recommendMprPlan} from './plan-recommendation-v1.js';
+import {accountBrowserStorageKey} from './account-browser-storage.js';
 
 const $=s=>document.querySelector(s);
-let step=1;
+let step=1,planFinderStorageKey=null;
 function selected(container){return [...container.querySelectorAll('.chip.active')].map(x=>x.dataset.value).filter(Boolean);}
 function setSelected(container,values=[]){const set=new Set(values);container.querySelectorAll('.chip').forEach(x=>{const active=set.has(x.dataset.value);x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));});}
 function installChips(container){container.querySelectorAll('.chip').forEach(x=>x.addEventListener('click',()=>{const active=!x.classList.contains('active');x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active));}));}
@@ -23,6 +24,7 @@ $('#back').addEventListener('click',()=>{if(step>1){step--;renderStep();}});
 async function load(){
   const session=await getCurrentSession();
   if(!session){location.href='login.html?next=onboarding.html';return;}
+  planFinderStorageKey=accountBrowserStorageKey('mpr_plan_finder_v1',session.user.id);
   installChips($('#marketplaces'));installChips($('#categories'));
   try{
     const p=await loadSellerPreferences();
@@ -34,7 +36,7 @@ async function load(){
     $('#importVatTreatment').value=p.import_vat_treatment||'UNKNOWN';
     setSelected($('#marketplaces'),p.marketplaces?.length?p.marketplaces:['EMAG_RO']);
     setSelected($('#categories'),p.categories||[]);
-    try{const saved=JSON.parse(localStorage.getItem('mpr_plan_finder_v1')||'{}');if(saved.decisionNeed)$('#decisionNeed').value=saved.decisionNeed;if(saved.chinaAgent)$('#chinaAgent').value=saved.chinaAgent;}catch{}
+    try{const saved=JSON.parse(localStorage.getItem(planFinderStorageKey)||'{}');if(saved.decisionNeed)$('#decisionNeed').value=saved.decisionNeed;if(saved.chinaAgent)$('#chinaAgent').value=saved.chinaAgent;}catch{}
     trackJourneyEvent('ONBOARDING_VIEW',{completed:Boolean(p.onboarding_completed)});
   }catch(e){$('#status').textContent=`Nu am putut încărca profilul: ${e.message}`;}
   renderStep();
@@ -49,7 +51,8 @@ $('#form').addEventListener('submit',async e=>{
     const decisionNeed=$('#decisionNeed').value,chinaAgent=$('#chinaAgent').value;
     await saveSellerPreferences(profile);
     const rec=planRecommendation(profile,decisionNeed,chinaAgent);
-    localStorage.setItem('mpr_plan_finder_v1',JSON.stringify({decisionNeed,chinaAgent,recommendedPlan:rec.code,updatedAt:new Date().toISOString()}));
+    if(!planFinderStorageKey)throw new Error('Sesiunea nu a fost inițializată. Reîncarcă pagina.');
+    localStorage.setItem(planFinderStorageKey,JSON.stringify({decisionNeed,chinaAgent,recommendedPlan:rec.code,updatedAt:new Date().toISOString()}));
     await trackJourneyEvent('ONBOARDING_COMPLETED',{experience:profile.experience_level,goal:profile.goal,budget:profile.monthly_budget_ron,marketplaceCount:profile.marketplaces.length,categoryCount:profile.categories.length,importVatTreatment:profile.import_vat_treatment});
     await trackJourneyEvent('PLAN_RECOMMENDED',{plan:rec.code,decisionNeed,chinaAgent:chinaAgent==='YES',budget:profile.monthly_budget_ron});
     $('#status').textContent='Profil salvat. Am calculat recomandarea potrivită pentru nevoile tale.';
