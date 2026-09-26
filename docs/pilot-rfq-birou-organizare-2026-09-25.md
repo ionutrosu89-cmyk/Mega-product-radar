@@ -1,6 +1,6 @@
 # Pilot Birou și organizare — specificații pentru cererea de ofertă
 
-Versiune de lucru, 25 septembrie 2026. Acestea sunt **specificații cerute de MPR**, nu caracteristici confirmate ale listărilor observate și nici oferte primite. Fixarea lor permite compararea ofertelor pentru același produs. Nu există comandă autorizată.
+Versiune de lucru, 25 septembrie 2026; notă de revizie 26 septembrie. Acestea sunt **specificații cerute de MPR**, nu caracteristici confirmate ale listărilor observate și nici oferte primite. Fixarea lor permite compararea ofertelor pentru același produs. Nu există comandă autorizată. **BO-03 este suspendat**: listarea de referință este sub marca Marbrasse și declară un brevet de design; nu se solicită o copie pe baza acestei specificații înainte de revizie IP sau înlocuirea conceptului.
 
 ## Baza comună a cererii
 
@@ -26,3 +26,4 @@ Versiune de lucru, 25 septembrie 2026. Acestea sunt **specificații cerute de MP
 Pentru fiecare cod se înregistrează furnizorul și URL-ul, data răspunsului, documentul scris, revizia specificației, cantitatea, moneda, prețurile pe trepte, MOQ, transportul și Incotermul, termenul, ambalajul, greutățile, taxele și costurile locale. Se păstrează separat: (a) semnalul de cerere externă, (b) comparabilele din România pentru **aceeași configurație**, (c) drepturile de afișare a datelor sursă și (d) calculul MPR. Câmpurile fără document rămân `NECONFIRMAT`.
 
 Cele cinci concepte și limitele observațiilor curente sunt documentate în `top25-pilot-birou-organizare-review-2026-09-24.md`. Înainte de aprobarea unui produs, trebuie comparată configurația RFQ cu listarea sursă și cu oferta românească; dacă nu corespund, analiza se reface sau conceptul se respinge.
+
