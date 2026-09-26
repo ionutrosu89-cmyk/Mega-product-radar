@@ -1,6 +1,7 @@
 import {accountBrowserStorageKey} from './account-browser-storage.js';
 export const FREE_SHORTLIST_STORAGE_KEY='mpr_free_shortlist_v1';
 const clean=value=>String(value??'').trim();
+const validKey=value=>typeof value==='string'&&value.trim().length>0&&value.length<=220&&!value.startsWith('AMAZON_ARCHIVE:');
 export function freeShortlistStorageKey(userId){
   return accountBrowserStorageKey(FREE_SHORTLIST_STORAGE_KEY,userId);
 }
@@ -10,30 +11,33 @@ export function freeProductKey(product={},platform='LIVE'){
   return externalId?`${clean(platform).toUpperCase()}:${externalId.toUpperCase()}`:null;
 }
 
-export function readFreeShortlist(storage=globalThis.localStorage,userId=null){
+export function readFreeShortlist(storage,userId=null){
   try{
+    storage=storage??globalThis.localStorage;
     const storageKey=freeShortlistStorageKey(userId),values=JSON.parse(storage.getItem(storageKey)||'[]');
-    const safe=Array.isArray(values)?values.filter(value=>typeof value==='string'&&value.length<=220&&!value.startsWith('AMAZON_ARCHIVE:')).slice(0,100):[];
+    const safe=Array.isArray(values)?values.filter(validKey).slice(0,100):[];
     if(Array.isArray(values)&&safe.length!==values.length){try{storage.setItem(storageKey,JSON.stringify(safe));}catch{}}
     return new Set(safe);
   }catch{return new Set();}
 }
 
-export function writeFreeShortlist(values,storage=globalThis.localStorage,userId=null){
+export function writeFreeShortlist(values,storage,userId=null){
   try{
-    const safe=[...values].filter(value=>typeof value==='string'&&value.length<=220).slice(0,100);
+    storage=storage??globalThis.localStorage;
+    const safe=[...values];
+    if(safe.length>100||!safe.every(validKey))return false;
     storage.setItem(freeShortlistStorageKey(userId),JSON.stringify(safe));
     return true;
   }catch{return false;}
 }
 
-export function toggleFreeShortlist(values,key,storage=globalThis.localStorage,userId=null){
+export function toggleFreeShortlist(values,key,storage,userId=null){
   const next=new Set(values),safe=clean(key);
-  if(!safe)return {values:next,added:false,changed:false};
+  if(!validKey(safe))return {values:next,added:false,changed:false,reason:'INVALID_KEY'};
   const added=!next.has(safe);
-  if(added){if(next.size>=100)return {values:next,added:false,changed:false};next.add(safe);}else next.delete(safe);
-  writeFreeShortlist(next,storage,userId);
-  return {values:next,added,changed:true};
+  if(added){if(next.size>=100)return {values:next,added:false,changed:false,reason:'LIMIT_REACHED'};next.add(safe);}else next.delete(safe);
+  if(!writeFreeShortlist(next,storage,userId))return {values:new Set(values),added:false,changed:false,reason:'STORAGE_UNAVAILABLE'};
+  return {values:next,added,changed:true,reason:null};
 }
 
 export function toggleComparison(values,key,limit=3){

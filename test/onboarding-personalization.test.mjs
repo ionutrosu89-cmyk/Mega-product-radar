@@ -19,7 +19,7 @@ test('plan recommendation choices cannot cross accounts in a shared browser',asy
   assert.notEqual(accountBrowserStorageKey(base,a),base);
   const onboarding=await fs.readFile(new URL('../onboarding.js',import.meta.url),'utf8');
   assert.match(onboarding,/localStorage\.getItem\(planFinderStorageKey\)/);
-  assert.match(onboarding,/localStorage\.setItem\(planFinderStorageKey,/);
+  assert.match(onboarding,/storageKey:planFinderStorageKey/);
 });
 
 test('onboarding persists business profile behind workspace RLS',async()=>{

@@ -169,7 +169,16 @@ if(loaded){
     const cardElement=event.target.closest?.('[data-product]'),emptyRequest=event.target.closest?.('[data-empty-request]');
     if(emptyRequest){emptyRequest.disabled=true;emptyRequest.textContent='Interes înregistrat ✓';trackFreeDemand('FREE_DECISION_REACHED',{nicheId:current.id,nicheLabel:current.label,decision:'REQUEST_PLATFORM',target:`PLATFORM:${emptyRequest.dataset.emptyRequest}`});return;}
     if(!cardElement)return;const productName=cardElement.dataset.product||'',key=cardElement.dataset.productKey;
-    if(event.target.closest('[data-shortlist]')){const result=toggleFreeShortlist(shortlist,key,undefined,shortlistUserId);shortlist=result.values;trackFreeDemand('FREE_DECISION_REACHED',{productName,nicheId:current.id,nicheLabel:current.label,decision:result.added?'SHORTLIST_ADD':'SHORTLIST_REMOVE',target:`PLATFORM:${selectedPlatform}`});render();return;}
+    if(event.target.closest('[data-shortlist]')){
+      const result=toggleFreeShortlist(shortlist,key,undefined,shortlistUserId);
+      if(!result.changed){
+        $('#shortlistStatus').textContent=result.reason==='LIMIT_REACHED'?'Shortlist-ul are maximum 100 de produse. Elimină un produs înainte să adaugi altul.':result.reason==='STORAGE_UNAVAILABLE'?'Browserul nu a putut salva modificarea. Verifică permisiunile de stocare și încearcă din nou.':'Produsul nu poate fi salvat momentan.';
+        return;
+      }
+      shortlist=result.values;
+      $('#shortlistStatus').textContent=result.added?'Produs salvat în shortlist-ul acestui browser.':'Produs eliminat din shortlist.';
+      trackFreeDemand('FREE_DECISION_REACHED',{productName,nicheId:current.id,nicheLabel:current.label,decision:result.added?'SHORTLIST_ADD':'SHORTLIST_REMOVE',target:`PLATFORM:${selectedPlatform}`});render();return;
+    }
     if(event.target.closest('[data-compare]')){const result=toggleComparison(comparison,key);comparison=result.values;if(result.limitReached){$('#compareHint').textContent='Poți compara maximum 3 produse.';return;}$('#compareHint').textContent=comparison.size<2?'Alege încă un produs pentru comparație.':'Comparația este gata.';render();return;}
     const opened=event.target.closest?.('[data-product-opened]');if(opened){const metadata={productName,nicheId:current.id,nicheLabel:current.label,target:opened.getAttribute('href')||'',label:selectedPlatform};trackJourneyEvent('PRODUCT_OPENED',{product:productName,...metadata});trackFreeDemand(opened.dataset.productAction==='source'?'FREE_SOURCE_OPENED':'FREE_PRODUCT_OPENED',metadata);}
     const decision=event.target.closest?.('[data-product-decision]');if(!decision)return;cardElement.querySelectorAll('[data-product-decision]').forEach(button=>{button.classList.toggle('selected',button===decision);button.setAttribute('aria-pressed',String(button===decision));});
