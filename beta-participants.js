@@ -11,6 +11,10 @@ function renderScorecard(data){
   progressByParticipant=new Map((data.participantProgress||[]).map(p=>[String(p.participantId||''),p]));
   const metrics=Object.values(data.metrics||{});
   $('#scorecard').innerHTML=metrics.map(m=>`<div class="metric ${String(m.status||'UNKNOWN').toLowerCase()}"><div class="metricTop"><b>${esc(m.label)}</b><span>${esc(m.status)}</span></div><strong>${esc(metricValue(m))}</strong><small>Țintă ${esc(targetText(m))} · n=${Number(m.samples||0)}</small></div>`).join('')||'<div class="muted">Scorecard indisponibil.</div>';
+  const study=data.study||{},percent=value=>value==null?'—':`${Number(value).toFixed(1)}%`;
+  $('#studyStatus').textContent=study.status||'UNKNOWN';
+  $('#studyMetrics').textContent=`Sesiuni reale ${study.participants??0}/5 · fluxuri cu produs ${study.productFlowSessions??0}/5 · înțelegere ${percent(study.understandingPct)} (țintă 80%) · utilitate ${percent(study.usefulnessPct)} (țintă 60%) · watchlist ${percent(study.watchlistPct)} (țintă 80%)`;
+  $('#studyBlockers').textContent=(study.blockers||[]).length?`Dovezi lipsă: ${study.blockers.join(', ')}`:'Pragurile studiului sunt îndeplinite; revizuirea umană rămâne obligatorie.';
   const unknown=(data.unknown||[]).join(', ')||'niciunul';const failed=(data.failed||[]).join(', ')||'niciunul';$('#scorecardNote').textContent=`Decizie investiție: ${data.investmentDecision||data.status||'UNKNOWN'} · UNKNOWN: ${unknown} · FAIL: ${failed} · lansare automată=false · achiziții autorizate=false`;
 }
 function render(data){const s=data.summary||{},st=s.statuses||{};$('#total').textContent=s.participants??0;$('#activated').textContent=st.ACTIVATED??0;$('#completed').textContent=st.COMPLETED??0;$('#rating').textContent=s.avgRating==null?'—':String(s.avgRating);$('#unlinked').textContent=s.unlinked??0;$('#feedback').textContent=`${s.feedbackCount||0} feedback-uri · would pay: ${s.wouldPay?.YES||0} DA / ${s.wouldPay?.NO||0} NU / ${s.wouldPay?.UNKNOWN||0} necunoscut`;

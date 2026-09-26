@@ -19,6 +19,6 @@ test('manual PASS requires an evidence note and registry remains service-role on
   const source=await readFile(new URL('../netlify/functions/launch-readiness.mjs',import.meta.url),'utf8');const sql=await readFile(new URL('../supabase/migrations/20260822_launch_readiness_checks.sql',import.meta.url),'utf8');assert.match(source,/Evidence note required before PASS/);assert.match(sql,/enable row level security/i);assert.doesNotMatch(sql,/create policy/i);
 });
 
-test('public launch UI requires both live billing and all manual gates',async()=>{
-  const js=await readFile(new URL('../launch-readiness.js',import.meta.url),'utf8');assert.match(js,/manual\.allManualPassed&&billing\.publicLaunchBillingReady/);assert.match(js,/PUBLIC LAUNCH BLOCKED/);
+test('paid launch UI requires both live billing and all manual gates',async()=>{
+  const js=await readFile(new URL('../launch-readiness.js',import.meta.url),'utf8');assert.match(js,/manual\.allManualPassed&&billing\.publicLaunchBillingReady/);assert.match(js,/LANSARE PLĂTITĂ BLOCATĂ/);
 });

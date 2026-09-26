@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {calculateOpportunityV4,buildOpportunityShortlistV4} from '../opportunity-engine-v4.js';
 
 const confirmedFusion={signal:'CONFIRMED_ACCELERATION',evidenceClass:'FUSED_LONGITUDINAL_PUBLIC_TREND',trendEvidenceLevel:'RANK_PLUS_REVIEW_LONGITUDINAL',demandEvidenceConfirmed:true,salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false};
-const strongBase={
+const strongBase={evidenceFreshness:{status:'CURRENT'},importability:{status:'PASS'},
   trend:{score:90,confidence:90},
   amazonTrendFusion:confirmedFusion,
   supplier:{verifiedQuote:true,evidenceClass:'MANUALLY_VERIFIED',quoteCount:3,benchmarkConfidence:85,documentationCoveragePct:90},
@@ -41,13 +41,13 @@ test('exact comparable Romania evidence preserves advanced funnel progression wh
   assert.equal(r.purchaseAuthorized,false);
 });
 
-test('legacy READY Romania Gap remains exact-compatible but still uses confirmed trend gate',()=>{
+test('legacy READY label alone cannot certify exact Romania evidence',()=>{
   const r=calculateOpportunityV4({
     ...strongBase,
     romaniaGap:{status:'READY',score:90}
   });
-  assert.equal(r.romaniaEvidence.exactReady,true);
-  assert.equal(r.funnelStage,'TEST_READY');
+  assert.equal(r.romaniaEvidence.exactReady,false);
+  assert.equal(r.funnelStage,'DISCOVERED');
 });
 
 test('unknown data confidence stays null instead of becoming zero',()=>{

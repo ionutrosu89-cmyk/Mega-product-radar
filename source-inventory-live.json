@@ -1,0 +1,19 @@
+{
+ "auditedAt":"2026-09-19",
+ "scope":"Read-only Supabase inventory; snapshot, not a live availability guarantee",
+ "freshnessWindowsHours":{"marketplace":72,"romania":168,"supplier":720,"freight":168,"trend":72},
+ "sources":[
+  {"key":"amazon_live_public_page_v1","rows":4432,"products":542,"lastObservedAt":"2026-09-19T06:23:02.423Z","schedule":"23 */2 * * * UTC","state":"RECENT_OBSERVATIONS_PRESENT","meaning":"Public price, rating and review observations, not verified sales"},
+  {"key":"brightdata_amazon_public_sample","rows":2997,"products":1000,"lastObservedAt":"2024-07-10T00:00:00Z","schedule":null,"state":"HISTORICAL_ONLY"},
+  {"key":"dataforseo_google_ads_ro","rows":2,"products":2,"lastObservedAt":"2026-08-23T17:48:28Z","schedule":null,"state":"STALE_LIMITED_SAMPLE"},
+  {"key":"mpr_existing_pipeline","rows":596,"products":100,"lastObservedAt":"2026-08-25T17:21:36.878Z","schedule":null,"state":"STALE"},
+  {"key":"the_markup_amazon_searches_2021","rows":6209,"products":2125,"lastObservedAt":"2021-01-21T00:00:00Z","schedule":null,"state":"HISTORICAL_ONLY"},
+  {"key":"EMAG_RO","rows":10067,"lastObservedAt":"2026-09-14T16:38:27.458Z","schedule":null,"state":"WITHIN_7_DAYS_AT_AUDIT_NOT_EXHAUSTIVE"},
+  {"key":"RO_RETAIL_WEB","rows":30,"lastObservedAt":"2026-09-01T12:06:51.302962Z","schedule":null,"state":"STALE"},
+  {"key":"TRENDYOL_RO","rows":22,"lastObservedAt":"2026-08-31T16:33:32.909462Z","schedule":null,"state":"STALE"}
+ ],
+ "verifiedCounts":{"amazonDistinctProductsLast72Hours":229,"supplierQuotes":0,"testExecutionRecords":0,"betaParticipants":0,"betaFeedback":0,"journeyEvents":79},
+ "otherActiveSchedules":[{"name":"mpr_google_trends_ro_hourly","cronUtc":"7 * * * *","note":"Schedule presence alone does not prove successful collection"},{"name":"mpr_v3_refresh_queue_hourly","cronUtc":"5 * * * *"},{"name":"mpr_privacy_retention_daily","cronUtc":"17 3 * * *"}],
+ "refreshPolicy":{"marketplace":"Existing 2-hour job; inspect success and source observation time","romania":"Recheck at least weekly and before a decision; no verified automatic schedule found","supplier":"Reconfirm within 30 days and before any order; actual quote required","freight":"Reconfirm within 7 days and when quantity, route or packaging changes","interventions":"Manual workspace sync; no active cron found"},
+ "historicalDatePrecision":"Dates stored at midnight for historical rows indicate day-level precision; do not infer a precise collection time."
+}

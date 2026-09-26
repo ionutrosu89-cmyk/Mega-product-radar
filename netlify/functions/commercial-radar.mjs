@@ -18,7 +18,7 @@ function scoreOf(p){return n(p?.launchScore?.score||p?.launchScore?.total||p?.op
 const privateHeaders=()=>({'Cache-Control':'private, no-store','Vary':'Authorization, X-MPR-Workspace-Id'});
 async function readBundledJson(filename){const candidates=[path.join(process.cwd(),filename),path.join(process.cwd(),'..',filename),path.join(process.cwd(),'../..',filename)];let lastError=null;for(const file of candidates){try{return JSON.parse(await readFile(file,'utf8'));}catch(error){lastError=error;}}throw lastError||new Error(`Bundled source unavailable: ${filename}`);}
 
-export function createCommercialRadarHandler({fetch:fetchImpl=fetch,env=process.env,readValidation=readBundledJson}={}){
+export function createCommercialRadarHandler({fetch:fetchImpl=fetch,env=process.env,readValidation=readBundledJson,readRadar=readBundledJson}={}){
   return async request=>{
     try{
       const access=await resolveWorkspaceAccess(request,{fetchImpl,env});
@@ -26,9 +26,9 @@ export function createCommercialRadarHandler({fetch:fetchImpl=fetch,env=process.
       if(!hasFeature(access.plan.code,'RADAR'))return Response.json({ok:false,error:'Radar plan required',plan:access.plan.code},{status:403,headers:privateHeaders()});
       const rate=await enforceRateLimit(request,{route:'commercial-radar',workspaceId:access.workspaceId,userId:access.user.id,limit:90,windowSeconds:60,env,fetchImpl});
       if(!rate.ok)return Response.json({ok:false,error:'Too many requests',code:rate.code},{status:429,headers:{...privateHeaders(),'Retry-After':String(rate.retryAfterSeconds)}});
-      const sourceUrl=new URL('/radar-live.json',request.url),sourceResponse=await fetchImpl(sourceUrl,{headers:{accept:'application/json'}});
-      if(!sourceResponse.ok)return Response.json({ok:false,error:'Radar intelligence unavailable'},{status:503,headers:privateHeaders()});
-      const source=await sourceResponse.json();
+      let source;
+      try{source=await readRadar('radar-live.json');}
+      catch{return Response.json({ok:false,error:'Radar intelligence unavailable'},{status:503,headers:privateHeaders()});}
       const products=(Array.isArray(source.products)?source.products:[]).map(cleanDecisionInputs).sort((a,b)=>scoreOf(b)-scoreOf(a)).slice(0,30);
       let validationSource=null,validationSourceStatus='UNAVAILABLE';
       try{validationSource=await readValidation('supplier-validation-live.json');validationSourceStatus='BUNDLED_FILE';}catch{}

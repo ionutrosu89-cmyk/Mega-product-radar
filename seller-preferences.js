@@ -13,9 +13,10 @@ export async function loadSellerPreferences(){
   return {...DEFAULT_SELLER_PREFERENCES,...(data||{}),workspace_id:ws.id};
 }
 
-export async function saveSellerPreferences(input={}){
+export async function saveSellerPreferences(input={},{expectedUserId}={}){
   const session=await getCurrentSession();
   if(!session)throw new Error('Autentificare necesară.');
+  if(expectedUserId&&session.user.id!==expectedUserId)throw new Error('Contul s-a schimbat. Reîncarcă pagina înainte să salvezi profilul.');
   const client=await getSupabaseClient();
   const ws=await ensurePersonalWorkspace('My Radar');
   const row={

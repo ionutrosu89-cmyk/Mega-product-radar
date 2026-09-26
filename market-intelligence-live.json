@@ -1,7 +1,7 @@
 {
   "version": "1.3",
   "engine": "Mega Product Radar Market Intelligence",
-  "updatedAt": "2026-09-06T17:49:48.163Z",
+  "updatedAt": "2026-09-19T12:05:51.698Z",
   "sourceUpdatedAt": "2026-09-02T09:48:10.521Z",
   "mode": "STRICT_EVIDENCE_FIRST",
   "dataPolicy": "Scorurile folosesc doar dovezi observate. Dated public pricing/review observations may improve evidence completeness, but never become verified sales or verified supplier quotes.",
@@ -661,13 +661,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "FINALIST",
+        "stage": "PROMISING",
         "rank": 1,
         "score": 63.2,
         "paidDataEligible": true,
         "paidDataPriority": 1,
-        "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "deepValidationEligible": false,
+        "updatedAt": "2026-09-19T11:58:24.233Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -1349,6 +1349,49 @@
         ],
         "nextAction": "landed cost confirmat independent (transport + vamă + TVA + costuri import)",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "PROMISING",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:43:08.096Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": true,
+          "marketQualified": true,
+          "confidence": 55.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -1914,13 +1957,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "VALIDATE",
+        "stage": "PROMISING",
         "rank": 5,
         "score": 43,
         "paidDataEligible": true,
         "paidDataPriority": 5,
-        "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "deepValidationEligible": false,
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -2461,6 +2504,49 @@
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "PROMISING",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:40.392Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": true,
+          "marketQualified": true,
+          "confidence": 46.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -3026,13 +3112,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "VALIDATE",
+        "stage": "PROMISING",
         "rank": 4,
         "score": 43.6,
         "paidDataEligible": true,
         "paidDataPriority": 4,
-        "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "deepValidationEligible": false,
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "RISING",
@@ -3573,6 +3659,49 @@
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "PROMISING",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:39.774Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": true,
+          "marketQualified": true,
+          "confidence": 46.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -4141,13 +4270,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "VALIDATE",
+        "stage": "PROMISING",
         "rank": 2,
         "score": 54,
         "paidDataEligible": true,
         "paidDataPriority": 2,
-        "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "deepValidationEligible": false,
+        "updatedAt": "2026-09-19T11:58:24.235Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -4730,6 +4859,49 @@
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "PROMISING",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:41:37.965Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": true,
+          "marketQualified": true,
+          "confidence": 51.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -5295,13 +5467,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "VALIDATE",
+        "stage": "PROMISING",
         "rank": 3,
         "score": 44.6,
         "paidDataEligible": true,
         "paidDataPriority": 3,
-        "deepValidationEligible": true,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "deepValidationEligible": false,
+        "updatedAt": "2026-09-19T11:58:24.235Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -5870,6 +6042,49 @@
         ],
         "nextAction": "sales estimate cu confidence ≥75 sau vânzări observate",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "PROMISING",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:25.612Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": true,
+          "marketQualified": true,
+          "confidence": 46.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -6371,13 +6586,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 7,
         "score": 14.2,
         "paidDataEligible": true,
         "paidDataPriority": 7,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -6901,6 +7116,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:01:59.945Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -7402,13 +7660,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 6,
         "score": 15.3,
         "paidDataEligible": true,
         "paidDataPriority": 6,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "COOLING",
@@ -7932,6 +8190,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:43:22.259Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -8433,13 +8734,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 8,
         "score": 14.2,
         "paidDataEligible": true,
         "paidDataPriority": 8,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -8963,6 +9264,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:22.002Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -9464,13 +9808,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 9,
         "score": 14.2,
         "paidDataEligible": true,
         "paidDataPriority": 9,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -9994,6 +10338,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-20T22:55:46.344Z",
+          "ageHours": 709,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -10495,13 +10882,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 10,
         "score": 14.2,
         "paidDataEligible": true,
         "paidDataPriority": 10,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.236Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -11025,6 +11412,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:01:43.632Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -11526,13 +11956,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 11,
         "score": 14.1,
         "paidDataEligible": true,
         "paidDataPriority": 11,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -12050,6 +12480,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:37.772Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -12551,13 +13024,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 14,
         "score": 14,
         "paidDataEligible": true,
         "paidDataPriority": 14,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -13075,6 +13548,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:22.238Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -13576,13 +14092,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 15,
         "score": 14,
         "paidDataEligible": true,
         "paidDataPriority": 15,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -14100,6 +14616,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:51.934Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -14601,13 +15160,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 12,
         "score": 14,
         "paidDataEligible": true,
         "paidDataPriority": 12,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -15125,6 +15684,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-20T22:55:47.228Z",
+          "ageHours": 709,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -15626,13 +16228,13 @@
       "goldenPipeline": {
         "version": "2.5",
         "phase": "final",
-        "stage": "PROMISING",
+        "stage": "DISCOVERED",
         "rank": 13,
         "score": 14,
         "paidDataEligible": true,
         "paidDataPriority": 13,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -16150,6 +16752,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-20T22:56:01.388Z",
+          "ageHours": 709,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -16657,7 +17302,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "STABIL",
@@ -17175,6 +17820,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:01:43.296Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 25.7,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -17682,7 +18370,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -18196,6 +18884,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:38:39.038Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -18703,7 +19434,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -19217,6 +19948,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:24.230Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -19724,7 +20498,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -20238,6 +21012,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:26.230Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -20745,7 +21562,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -21259,6 +22076,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:41:35.755Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -21766,7 +22626,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -22280,6 +23140,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:02:28.269Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -22787,7 +23690,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -23301,6 +24204,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:43:36.420Z",
+          "ageHours": 410.2,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -23808,7 +24754,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -24322,6 +25268,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:10.732Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -24829,7 +25818,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -25343,6 +26332,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:38:31.765Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -25850,7 +26882,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -26364,6 +27396,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:41:37.188Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -26871,7 +27946,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -27385,6 +28460,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:02:14.107Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -27892,7 +29010,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -28406,6 +29524,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:38.423Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -28913,7 +30074,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -29427,6 +30588,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:32:13.149Z",
+          "ageHours": 574.4,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -29934,7 +31138,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -30448,6 +31652,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:07.352Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -30955,7 +32202,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -31469,6 +32716,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:38:31.490Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -31976,7 +33266,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.237Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -32490,6 +33780,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:53.935Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -32997,7 +34330,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -33511,6 +34844,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:39:07.363Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -34018,7 +35394,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -34532,6 +35908,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:24.261Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -35039,7 +36458,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -35553,6 +36972,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:41:52.127Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -36060,7 +37522,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -36574,6 +38036,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:42:06.288Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -37081,7 +38586,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.238Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -37595,6 +39100,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:31:58.987Z",
+          "ageHours": 574.4,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -38102,7 +39650,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -38616,6 +40164,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:30:45.034Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -39123,7 +40714,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -39637,6 +41228,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:09.447Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -40144,7 +41778,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -40658,6 +42292,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:42:20.451Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -41165,7 +42842,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -41679,6 +43356,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:39:08.716Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -42186,7 +43906,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -42700,6 +44420,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:30:47.072Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -43207,7 +44970,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -43721,6 +45484,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:31:30.661Z",
+          "ageHours": 574.4,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -44228,7 +46034,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -44742,6 +46548,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:08.579Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -45249,7 +47098,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -45763,6 +47612,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:23.457Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -46270,7 +48162,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.239Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -46784,6 +48676,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:31:02.339Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -47291,7 +49226,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -47805,6 +49740,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:25.443Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -48312,7 +50290,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -48826,6 +50804,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:31:16.497Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -49333,7 +51354,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -49847,6 +51868,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-20T22:55:45.096Z",
+          "ageHours": 709,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -50354,7 +52418,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -50868,6 +52932,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:39:06.746Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -51375,7 +53482,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -51889,6 +53996,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:30:45.821Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -52396,7 +54546,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -52910,6 +55060,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-25T22:56:23.610Z",
+          "ageHours": 589,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -53417,7 +55610,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -53931,6 +56124,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-01T21:41:35.965Z",
+          "ageHours": 422.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -54438,7 +56674,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.240Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -54952,6 +57188,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:31:44.824Z",
+          "ageHours": 574.4,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -55459,7 +57738,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -55973,6 +58252,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:01:44.925Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -56480,7 +58802,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -56994,6 +59316,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:11.450Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -57501,7 +59866,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -58015,6 +60380,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:54.554Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -58522,7 +60930,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -59036,6 +61444,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-28T22:01:45.783Z",
+          "ageHours": 517.9,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -59543,7 +61994,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -60057,6 +62508,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:09.531Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -60564,7 +63058,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -61078,6 +63572,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:38:53.200Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -61585,7 +64122,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -62099,6 +64636,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-09-02T09:42:09.321Z",
+          "ageHours": 410.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -62606,7 +65186,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -63120,6 +65700,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:39:21.524Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 17.9,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -63627,7 +66250,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -64119,6 +66742,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-29T21:39:35.685Z",
+          "ageHours": 494.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 14.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -64626,7 +67292,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -65118,6 +67784,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-26T13:30:48.180Z",
+          "ageHours": 574.5,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 14.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -65625,7 +68334,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.241Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -66117,6 +68826,49 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-30T21:38:23.999Z",
+          "ageHours": 470.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 14.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     },
     {
@@ -66624,7 +69376,7 @@
         "paidDataEligible": false,
         "paidDataPriority": null,
         "deepValidationEligible": false,
-        "updatedAt": "2026-09-06T17:49:48.163Z"
+        "updatedAt": "2026-09-19T11:58:24.242Z"
       },
       "trendIntelligence": {
         "status": "INSUFICIENT",
@@ -67116,14 +69868,57 @@
         ],
         "nextAction": "cerere România verificată",
         "policy": "Recomandarea TEST se emite numai după cerere România, sales model high-confidence/actual, pricing, sourcing page-backed, landed cost independent, review evidence, market evidence și economics. Supplier contact is not required. Cantitatea este limitată la 20–30 bucăți."
+      },
+      "evidenceDecision": {
+        "stage": "DISCOVERED",
+        "gates": {
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false
+        },
+        "blockers": [
+          "TRENDCONFIRMED_REQUIRED",
+          "ROMANIAEXACT_REQUIRED",
+          "SUPPLIERVERIFIED_REQUIRED",
+          "ECONOMICSCONFIRMED_REQUIRED",
+          "IMPORTABILITYPASSED_REQUIRED",
+          "FRESH_REQUIRED",
+          "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+        ],
+        "policyVersion": "MPR_EVIDENCE_STAGES_V1",
+        "purchaseAuthorized": false,
+        "freshness": {
+          "status": "STALE",
+          "observedAt": "2026-08-31T21:38:52.586Z",
+          "ageHours": 446.3,
+          "maxAgeHours": 72,
+          "source": null,
+          "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+        },
+        "facts": {
+          "promising": false,
+          "marketQualified": true,
+          "confidence": 14.3,
+          "trendConfirmed": false,
+          "romaniaExact": false,
+          "supplierVerified": false,
+          "economicsConfirmed": false,
+          "importabilityPassed": false,
+          "fresh": false,
+          "testGatesPassed": false,
+          "measuredTestPassed": false
+        }
       }
     }
   ],
   "goldenPipeline": {
     "version": "2.5",
     "phase": "final",
-    "updatedAt": "2026-09-06T17:49:48.163Z",
-    "policy": "DISCOVERED → top 15 PROMISING → top 5 VALIDATE → max 3 FINALIST when evidence + Romania demand + high-confidence sales model are credible → TEST_READY after all TEST gates → BUY_READY only after a successful real test.",
+    "updatedAt": "2026-09-19T11:58:24.242Z",
+    "policy": "MPR_EVIDENCE_STAGES_V1: rank never promotes evidence; FINALIST requires confirmed trend, exact Romania, verified supplier, confirmed economics, importability and current evidence; BUY_READY requires measured test.",
     "quotas": {
       "promising": 15,
       "validate": 5,
@@ -67131,14 +69926,14 @@
     },
     "stats": {
       "total": 65,
-      "discovered": 50,
-      "promising": 10,
-      "validate": 4,
-      "finalists": 1,
+      "discovered": 60,
+      "promising": 5,
+      "validate": 0,
+      "finalists": 0,
       "testReady": 0,
       "buyReady": 0,
       "paidEligible": 15,
-      "deepValidationEligible": 5,
+      "deepValidationEligible": 0,
       "highConfidenceSales": 1,
       "romaniaDemandReady": 5
     }
@@ -67246,7 +70041,7 @@
   },
   "testBuyEngine": {
     "version": "1.0",
-    "updatedAt": "2026-09-06T17:49:48.086Z",
+    "updatedAt": "2026-09-19T12:05:51.697Z",
     "readyProducts": 0,
     "policy": "Loturile de test sunt limitate la 20–30 bucăți. Page-backed sourcing may satisfy supplier readiness, but independent confirmed landed cost remains mandatory."
   },
@@ -67256,5 +70051,6 @@
     "items": 1,
     "highConfidence": 1,
     "policy": "Public third-party sales estimates can raise estimated demand confidence but never create verified competitor sales."
-  }
+  },
+  "recalculatedAt": "2026-09-19T11:58:24.242Z"
 }

@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { getStore } from "@netlify/blobs";
 import {freeBetaProviderResponse,paidProviderCallsEnabled} from './_commercial-launch-mode.mjs';
+import {readRadarState,transitionRadarScan,radarStateKey} from './_radar-state.mjs';
 
 const BUCKETS = [
   "home organization, cleaning tools, kitchen non-electric, travel accessories",
@@ -169,9 +170,12 @@ export default async (req) => {
     return new Response("Forbidden", { status: 403 });
   }
 
-  const store = getStore("mega-radar-live");
+  let workspaceId,scanId;
+  try{({workspaceId,scanId}=await req.json());radarStateKey(workspaceId);if(!/^[a-zA-Z0-9-]{1,80}$/.test(scanId||''))throw new Error();}
+  catch{return Response.json({code:'INVALID_SCAN_CONTEXT'},{status:400});}
+  const store = getStore({name:"mega-radar-live",consistency:'strong'});
   const startedAt = new Date().toISOString();
-  await store.set("scan-status", JSON.stringify({ status: "running", startedAt }));
+  if(!await transitionRadarScan(store,workspaceId,scanId,{status:'running',startedAt}))return Response.json({code:'SCAN_NOT_OWNED'},{status:409});
   try {
   const baseUrl = process.env.URL || new URL(req.url).origin;
   const day = Math.floor(Date.now() / 86400000);
@@ -238,7 +242,9 @@ Kids products must be age 3-6 where applicable and should remain compliance-pend
       roUrl: "",
       risk: p.risk,
       score,
-      verdict: score >= 88 ? "TEST BUY" : score >= 80 ? "SAMPLE" : score >= 72 ? "VALIDATE" : "WATCH",
+      verdict: score >= 80 ? "PROMISING" : "DISCOVERED",
+      purchaseAuthorized: false,
+      evidenceClass: "AI_RESEARCH_UNCONFIRMED",
       sourcing: p.sourcing,
       lastChecked: new Date().toISOString(),
       sourceStatus: p.sourceStatus,
@@ -256,8 +262,8 @@ Kids products must be age 3-6 where applicable and should remain compliance-pend
 
   let previous = [];
   try {
-    const raw = await store.get("latest");
-    if (raw) previous = JSON.parse(raw).products || [];
+    const raw = (await readRadarState(store,workspaceId))?.data?.latest;
+    if (raw?.workspaceId===workspaceId) previous = raw.products || [];
   } catch {}
 
   if (!previous.length) previous = await fallbackProducts(baseUrl);
@@ -279,21 +285,19 @@ Kids products must be age 3-6 where applicable and should remain compliance-pend
     newCandidates: fresh.length,
     products: merged
   };
-  await store.set("latest", JSON.stringify(payload), {
-    metadata: { updatedAt: payload.updatedAt, bucket }
-  });
+  const published=await transitionRadarScan(store,workspaceId,scanId,{status:'completed',completedAt:payload.updatedAt,newCandidates:fresh.length},payload);
+  if(!published)return Response.json({code:'SCAN_SUPERSEDED'},{status:409});
 
-  await store.set(`history/${new Date().toISOString().slice(0,10)}`, JSON.stringify({
+  await store.set(`workspaces/${workspaceId}/history/${scanId}`, JSON.stringify({
     updatedAt: payload.updatedAt,
     bucket,
     products: fresh
   }));
 
-  await store.set("scan-status", JSON.stringify({ status: "completed", startedAt, completedAt: payload.updatedAt, newCandidates: fresh.length }));
 
   console.log(`Mega Radar: ${fresh.length} fresh candidates; ${merged.length} total`);
   } catch (error) {
-    await store.set("scan-status", JSON.stringify({ status: "error", startedAt, completedAt: new Date().toISOString(), error: String(error?.message || error) }));
+    await transitionRadarScan(store,workspaceId,scanId,{status:'error',completedAt:new Date().toISOString(),error:'Scanarea a eșuat.'});
     throw error;
   }
 };

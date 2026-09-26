@@ -20,7 +20,7 @@ test('signup preserves validated next destination like login does',async()=>{
   assert.doesNotMatch(source,/if\(data\.session\)location\.href='home\.html'/);
 });
 
-test('pricing Free reflects verified Top 25 coverage',async()=>{
+test('pricing Free reflects only verified Top 25 coverage while the beta remains available',async()=>{
   const pricing=await readFile('pricing.html','utf8');
   const pricingClient=await readFile('pricing.js','utf8');
   const publicPricing=`${pricing}\n${pricingClient}`;
@@ -29,6 +29,8 @@ test('pricing Free reflects verified Top 25 coverage',async()=>{
   assert.match(publicPricing,/Top 25 numai când există 25\/25 poziții validate/);
   assert.match(publicPricing,/Top Sellers \+ Top Brands/);
   assert.match(publicPricing,/Vezi acoperirea actuală/);
+  assert.doesNotMatch(publicPricing,/Free este activ/);
+  assert.doesNotMatch(publicPricing,/<td class="yes">Activ limitat<\/td>/);
   assert.doesNotMatch(publicPricing,/3 vizualizări\/credite/);
   assert.doesNotMatch(pricingClient,/startSubscriptionCheckout/);
   assert.equal(await exists('top25.html'),true);

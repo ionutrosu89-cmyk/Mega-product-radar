@@ -1,0 +1,281 @@
+{
+  "schema": "MPR_TOP25_NICHE_REVIEW_V1",
+  "status": "PROPOSED_HUMAN_REVIEW_REQUIRED",
+  "platformCategoryIdsApproved": 0,
+  "pilotNicheIds": [
+    "BIROU_ORGANIZARE",
+    "CALATORII",
+    "ORGANIZARE_CASA"
+  ],
+  "niches": [
+    {
+      "id": "CASA",
+      "include": "Accesorii generale pentru locuință și bucătărie, fără funcție principală de depozitare.",
+      "exclude": "Organizare, curățenie, laundry, grădină, birou.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "AUTO",
+      "include": "Unelte și produse de întreținere sau siguranță a vehiculului.",
+      "exclude": "Organizatoare, suporturi, confort și accesorii de călătorie auto.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "ELECTRONICE",
+      "include": "Accesorii electronice pentru computer și locuință.",
+      "exclude": "Accesorii dedicate telefonului, aparate cu cerințe speciale de conformitate.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "BEAUTY",
+      "include": "Unelte și accesorii necosmetice de îngrijire personală.",
+      "exclude": "Cosmetice, suplimente, dispozitive medicale, produse pentru copii.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "PET",
+      "include": "Accesorii pentru animale altele decât câini și pisici.",
+      "exclude": "Produse specifice câinilor sau pisicilor; hrană și medicamente.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "SPORT",
+      "include": "Accesorii sportive pentru activități în aer liber sau sală.",
+      "exclude": "Echipament dedicat fitnessului acasă.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "COPII",
+      "include": "Produse uzuale pentru copii peste 3 ani, fără funcție educațională principală.",
+      "exclude": "Produse pentru bebeluși și jucării educaționale.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "BIROU",
+      "include": "Accesorii pentru lucru la birou, ergonomie și suporturi.",
+      "exclude": "Organizatoare de documente, sertare și cabluri.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "ORGANIZARE_CASA",
+      "include": "Depozitare și organizare pentru bucătărie, dulapuri, baie și locuință.",
+      "exclude": "Organizatoare de birou, laundry și bagaje.",
+      "pilot": true,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "CURATENIE",
+      "include": "Unelte de curățare reutilizabile pentru casă.",
+      "exclude": "Detergenți, produse chimice, organizatoare, laundry.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "TELEFON_TECH",
+      "include": "Suporturi, încărcare și accesorii dedicate telefonului.",
+      "exclude": "Electronice generale, accesorii dedicate mașinii.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "FITNESS_ACASA",
+      "include": "Echipament compact și accesorii de exerciții folosite acasă.",
+      "exclude": "Accesorii de sport exterior sau sală.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "GRADINA_BALCON",
+      "include": "Unelte și accesorii pentru plante, grădină și balcon.",
+      "exclude": "Organizare pentru interior și produse auto.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "DIY_SCULE",
+      "include": "Unelte manuale și organizarea sculelor pentru reparații.",
+      "exclude": "Organizare generală a casei și accesorii de birou.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "BABY_ACCESORII",
+      "include": "Accesorii pentru bebeluși sub 3 ani.",
+      "exclude": "Jucării și produse destinate copiilor mai mari; hrană și produse medicale.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "AUTO_ACCESORII",
+      "include": "Organizatoare, suporturi, confort și accesorii de călătorie auto.",
+      "exclude": "Unelte de întreținere, piese auto și produse de siguranță.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "HOBBY_CRAFT",
+      "include": "Unelte și organizare pentru artă, cusut și hobby manual.",
+      "exclude": "Jucării educaționale pentru copii și decorațiuni de petrecere.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "PARTY",
+      "include": "Decorațiuni și accesorii pentru evenimente.",
+      "exclude": "Materiale de hobby general și produse pentru copii cu risc de siguranță.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "BIROU_ORGANIZARE",
+      "include": "Organizatoare pentru documente, sertare, papetărie și cabluri de birou.",
+      "exclude": "Suporturi ergonomice și organizare generală a casei.",
+      "pilot": true,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "amazonUsCategoryCandidates": [
+        {
+          "categoryId": 1069514,
+          "name": "Desk Accessories & Workspace Organizers",
+          "categoryEvidenceUrl": "https://www.amazon.com/gp/bestsellers/office-products/1069514",
+          "checkedAt": "2026-09-26",
+          "status": "PROPOSED_REVIEW_REQUIRED",
+          "limitation": "Categoria include mouse paduri, benzi adezive, suporturi ergonomice și alte produse în afara nișei; fiecare candidat necesită triere."
+        },
+        {
+          "categoryId": 1069540,
+          "name": "Drawer Organizers",
+          "categoryEvidenceUrl": "https://www.amazon.com/gp/bestsellers/office-products/1069540",
+          "checkedAt": "2026-09-26",
+          "status": "PROPOSED_REVIEW_REQUIRED",
+          "limitation": "Subcategoria acoperă numai organizatoarele de sertar, nu întreaga nișă."
+        }
+      ],
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "FASHION_ORGANIZARE",
+      "include": "Organizarea hainelor, pantofilor, bijuteriilor și genților.",
+      "exclude": "Laundry, îngrijire a hainelor și organizatoare de bagaje.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "CAINI_ACCESORII",
+      "include": "Accesorii dedicate câinilor pentru plimbare, îngrijire și călătorie.",
+      "exclude": "Produse pentru pisici sau alte animale; hrană și medicamente.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "PISICI_ACCESORII",
+      "include": "Accesorii dedicate pisicilor pentru joacă, îngrijire și litieră.",
+      "exclude": "Produse pentru câini sau alte animale; hrană și medicamente.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "LAUNDRY",
+      "include": "Uscare, spălare, împăturire și întreținere mecanică a hainelor.",
+      "exclude": "Detergenți, organizatoare de garderobă și bagaje.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "COPII_EDUCATIONAL",
+      "include": "Jucării și kituri cu scop educațional explicit pentru copii peste 3 ani.",
+      "exclude": "Produse pentru bebeluși și accesorii uzuale fără scop educațional.",
+      "pilot": false,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    },
+    {
+      "id": "CALATORII",
+      "include": "Organizatoare de bagaje, confort și accesorii pentru călătorii.",
+      "exclude": "Accesorii auto dedicate și organizatoare de garderobă pentru acasă.",
+      "pilot": true,
+      "mappingStatus": "HUMAN_REVIEW_REQUIRED",
+      "ebayUsCategoryId": null,
+      "ebayDeCategoryId": null,
+      "aliexpressCategoryIds": []
+    }
+  ]
+}
+

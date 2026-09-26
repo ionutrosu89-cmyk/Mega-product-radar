@@ -1,7 +1,8 @@
 import {timingSafeEqual} from 'node:crypto';
-import {SAAS_CONFIG} from '../../saas-config.js';
+import {normalizeCurrentTop25Snapshot} from '../../top25-current-snapshot-v1.js';
 import {collectEbayBestSellingTarget,parseEbayTargets} from './_ebay-best-selling.mjs';
-import {ebayBuyAccessState} from './_ebay-buy-auth.mjs';
+import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
+import {persistCurrentTop25Snapshot} from './_top25-current-store.mjs';
 
 const clean=value=>String(value??'').trim();
 const safeEqual=(left,right)=>{
@@ -10,36 +11,24 @@ const safeEqual=(left,right)=>{
   return a.length>0&&a.length===b.length&&timingSafeEqual(a,b);
 };
 const internalSecret=env=>clean(env.MPR_INTERNAL_REFRESH_SECRET||env.RADAR_INTERNAL_SECRET);
-const serviceHeaders=service=>({apikey:service,authorization:`Bearer ${service}`,'content-type':'application/json',prefer:'resolution=merge-duplicates,return=minimal'});
-
-async function persistSnapshot({env,fetchImpl,nicheId,reviewedAt,products}){
-  const supabaseUrl=clean(env.SUPABASE_URL||SAAS_CONFIG.supabaseUrl);
-  const service=clean(env.SUPABASE_SERVICE_ROLE_KEY);
-  if(!supabaseUrl||!service)return {ok:false,code:'PERSISTENCE_NOT_CONFIGURED'};
-  const url=new URL(`${supabaseUrl}/rest/v1/top25_snapshots`);
-  url.searchParams.set('on_conflict','niche_id,reviewed_at');
-  const response=await fetchImpl(url,{method:'POST',headers:serviceHeaders(service),body:JSON.stringify([{niche_id:nicheId,reviewed_at:reviewedAt,products}])});
-  return response.ok?{ok:true,code:'PERSISTED'}:{ok:false,code:`SUPABASE_HTTP_${response.status}`};
-}
-
 export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=fetch,now=()=>new Date()}={}){
   return async request=>{
     try{
       if(request.method!=='POST')return Response.json({ok:false,error:'Method not allowed'},{status:405,headers:{allow:'POST','Cache-Control':'no-store'}});
       if(!safeEqual(request.headers.get('x-mpr-internal-secret'),internalSecret(env)))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
-      const access=ebayBuyAccessState(env);
+      const access=ebayPublicDisplayAccessState(env);
       if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
       const targets=parseEbayTargets(env);
       if(!targets.length)return Response.json({ok:false,status:'TARGETS_REQUIRED',published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
 
       const timestamp=now();
-      const reviewedAt=timestamp.toISOString().slice(0,10);
       const results=[];
       for(const target of targets){
         const collected=await collectEbayBestSellingTarget({target,env,fetchImpl,now:()=>timestamp});
         if(!collected.ok){results.push({nicheId:target.nicheId,marketplaceId:target.marketplaceId,status:collected.code,published:false});continue;}
-        const nicheId=`XMARKET:EBAY:${target.nicheId}`;
-        const persisted=await persistSnapshot({env,fetchImpl,nicheId,reviewedAt,products:collected.products});
+        const normalized=normalizeCurrentTop25Snapshot({nicheId:target.nicheId,platform:'EBAY',market:target.marketplaceId,sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',sourceLabel:'eBay Buy Marketing API',products:collected.products},{now:timestamp,rightsApproved:true});
+        if(!normalized.ok){results.push({nicheId:target.nicheId,marketplaceId:target.marketplaceId,status:normalized.code,published:false});continue;}
+        const persisted=await persistCurrentTop25Snapshot({env,fetchImpl,snapshot:normalized.snapshot});
         results.push({nicheId:target.nicheId,marketplaceId:target.marketplaceId,status:persisted.code,published:persisted.ok});
       }
       const published=results.filter(row=>row.published).length;
@@ -50,6 +39,6 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
   };
 }
 
-export {persistSnapshot,internalSecret};
+export {persistCurrentTop25Snapshot as persistSnapshot,internalSecret};
 export default createEbayCrossMarketRefreshHandler();
 export const config={path:'/api/internal/ebay-cross-market-refresh',method:'POST'};

@@ -1,6 +1,9 @@
+import {evaluateStageFacts,capStage,STAGE_POLICY_VERSION} from './evidence-stage-policy.js';
+import {evidenceFreshness} from './evidence-freshness.js';
+import {productEvidenceDecision} from './product-evidence-decision.js';
 const text=v=>String(v??'').trim();
 const upper=v=>text(v).toUpperCase();
-const finite=v=>Number.isFinite(Number(v))?Number(v):null;
+const finite=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v):null;
 
 export const OPPORTUNITY_UX_ACTIONS=Object.freeze(['IGNORE','WATCH','VALIDATE']);
 export const OPPORTUNITY_COMPONENT_ORDER=Object.freeze(['globalDemand','trend','romaniaGap','importability','supplier','economics','evidence']);
@@ -22,7 +25,11 @@ export function normalizeOpportunityUxV1(product={}){
   const blockers=Array.isArray(raw?.blockers)?raw.blockers.map(upper).filter(Boolean):[];
   const missing=Array.isArray(raw?.missingComponents)?raw.missingComponents.map(text).filter(Boolean):OPPORTUNITY_COMPONENT_ORDER.filter(name=>components[name].status==='UNKNOWN'&&components[name].score===null);
   const identityMismatches=Array.isArray(raw?.identityMismatches)?raw.identityMismatches.map(text).filter(Boolean):[];
-  const recommendation=raw&&['DISCOVERED','PROMISING','VALIDATE','FINALIST'].includes(upper(raw.recommendation))?upper(raw.recommendation):'VALIDATE';
+  const fresh=raw?.evidenceObservedAt&&['trend','romaniaGap'].every(k=>evidenceFreshness(raw.evidenceObservedAt[k],{kind:({trend:'trend',romaniaGap:'romania',supplier:'supplier',economics:'freight'})[k]||'marketplace'}).status==='CURRENT');
+  const facts=raw?.stageFacts;
+  const canonical=raw?.stagePolicyVersion===STAGE_POLICY_VERSION&&facts?evaluateStageFacts({...facts,confidence:finite(raw.confidence),fresh:Boolean(fresh)&&!identityMismatches.length&&Boolean(canonicalId(product,raw)),trendConfirmed:facts.trendConfirmed&&components.trend.status==='PASS',romaniaExact:facts.romaniaExact&&components.romaniaGap.status==='PASS',supplierVerified:facts.supplierVerified&&evidenceFreshness(raw.evidenceObservedAt?.supplier,{kind:'supplier'}).status==='CURRENT'&&components.supplier.status==='PASS',economicsConfirmed:facts.economicsConfirmed&&evidenceFreshness(raw.evidenceObservedAt?.economics,{kind:'freight'}).status==='CURRENT'&&components.economics.status==='PASS',importabilityPassed:facts.importabilityPassed&&evidenceFreshness(raw.evidenceObservedAt?.importability).status==='CURRENT'&&components.importability.status==='PASS'}):productEvidenceDecision(product);
+  const recommendation=capStage(canonical.stage,'FINALIST');
+  blockers.push(...canonical.blockers);
   const id=canonicalId(product,raw);
   const score=finite(raw?.opportunityScore);
   const confidence=finite(raw?.confidence);

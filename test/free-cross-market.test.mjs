@@ -7,7 +7,8 @@ import {
   crossMarketSnapshotKey,
   normalizeCrossMarketSnapshot
 } from '../free-cross-market-registry.js';
-import {createFreeCrossMarketHandler} from '../netlify/functions/free-cross-market.mjs';
+import {createFreeCrossMarketHandler,filterPublicDisplaySnapshots} from '../netlify/functions/free-cross-market.mjs';
+import {normalizeGenericTop25Snapshot} from '../top25-generic-snapshot-v1.js';
 
 const product=index=>({
   name:`Generic product ${index}`,
@@ -22,10 +23,11 @@ const product=index=>({
 });
 
 test('Free Cross-Market registry exposes comparison surfaces without leaking credential names',async()=>{
-  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
+  assert.deepEqual(FREE_CROSS_MARKET_PLATFORMS.map(x=>x.id),['MPR_GENERIC','CONSENSUS','ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE','TIKTOK','GOOGLE','ROMANIA']);
   const view=buildFreeCrossMarketExperience({env:{},now:new Date('2026-09-03T08:00:00Z')});
   assert.equal('archivePositions' in view.coverage,false);
   assert.equal(view.coverage.livePositions,0);
+  assert.equal(view.coverage.curatedPositions,0);
   assert.equal(view.coverage.consensusReady,false);
 
   assert.equal(view.platforms.find(x=>x.id==='EBAY').status,'ACCESS_REQUIRED');
@@ -73,11 +75,11 @@ test('consensus becomes ready only after 25 concepts match across two independen
 });
 
 test('Free Cross-Market endpoint returns live coverage and fails closed on missing live snapshots',async()=>{
-  let snapshotReads=0;
   const fetchImpl=async url=>{
     const value=String(url);
     if(value.includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
-    if(value.includes('/rest/v1/')){snapshotReads++;throw new Error('Public snapshot read forbidden before live-source release');}
+    if(value.includes('/rest/v1/current_top25_snapshots_v1'))return Response.json([]);
+    if(value.includes('/rest/v1/top25_snapshots'))return Response.json([]);
     return new Response('not found',{status:404});
   };
   const handler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service',SECURITY_AUDIT_SALT:'salt'},now:()=>new Date('2026-09-03T08:00:00Z')});
@@ -86,6 +88,43 @@ test('Free Cross-Market endpoint returns live coverage and fails closed on missi
   const body=await response.json();
   assert.equal(body.ok,true);
   assert.equal(body.coverage.livePositions,0);
-  assert.equal(snapshotReads,0);
   assert.equal(body.policy.noSyntheticRankings,true);
+});
+
+test('revoking the public-display flag removes an approved current snapshot from the public API',async()=>{
+  const snapshot={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,i)=>product(i+1)),source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  const fetchImpl=async url=>{
+    if(String(url).includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
+    if(String(url).includes('/rest/v1/current_top25_snapshots_v1'))return Response.json([snapshot]);
+    return new Response('not found',{status:404});
+  };
+  const baseEnv={SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service',SECURITY_AUDIT_SALT:'salt'};
+  const request=()=>new Request('https://mpr.example/api/free/cross-market');
+  const now=()=>new Date('2026-09-03T08:00:00Z');
+  const approvedHandler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{...baseEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'},now});
+  const approvedResponse=await approvedHandler(request());
+  assert.equal((await approvedResponse.json()).coverage.livePositions,25);
+  assert.equal(approvedResponse.headers.get('cache-control'),'public, max-age=60');
+  const revokedHandler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{...baseEnv,MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'},now});
+  const revokedResponse=await revokedHandler(request());
+  const revoked=await revokedResponse.json();
+  assert.equal(revoked.coverage.livePositions,0);
+  assert.deepEqual(revoked.rankings,[]);
+});
+
+test('an Amazon licensed feed cannot inherit Keepa display approval',()=>{
+  const keepa={platform:'AMAZON_US',source_key:'KEEPA_BEST_SELLERS'};
+  const licensed={platform:'AMAZON_US',source_key:'AMAZON_LICENSED_BEST_SELLERS'};
+  const env={MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'};
+  assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[keepa]);
+  assert.deepEqual(filterPublicDisplaySnapshots([licensed],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[licensed]);
+  assert.deepEqual(filterPublicDisplaySnapshots([{platform:'AMAZON_US'}],env),[]);
+});
+
+test('revoking eBay display approval also hides curated opportunities derived from eBay',()=>{
+  const candidates=Array.from({length:25},(_,index)=>({name:`Desk item ${index}`,externalId:`e${index}`,sourceRank:index+1,nicheId:'BIROU_ORGANIZARE',sourceUrl:`https://www.ebay.com/itm/${index}`,observedAt:'2026-09-03T06:00:00Z'}));
+  const reviews=Object.fromEntries(candidates.map(row=>[row.externalId,{decision:'GENERIC_PRIVATE_LABEL',reviewer:'Analyst',reviewedAt:'2026-09-03T06:00:00Z',evidenceUrl:'https://review.example/brand',nicheId:'BIROU_ORGANIZARE',nicheDecision:'IN_SCOPE',nicheEvidenceUrl:'https://review.example/niche',conceptKey:`CONCEPT_${row.externalId}`} ]));
+  const curated=normalizeGenericTop25Snapshot({nicheId:'BIROU_ORGANIZARE',sourcePlatform:'EBAY',market:'EBAY_US',sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',candidates},reviews,{now:new Date('2026-09-03T08:00:00Z'),rightsApproved:true}).snapshot;
+  assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,25);
+  assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,0);
 });

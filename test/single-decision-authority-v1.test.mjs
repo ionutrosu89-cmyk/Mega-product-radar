@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {buildCanonicalDecision,canLegacySignalPromote} from '../single-decision-authority-v1.js';
 
 const blocked={status:'BLOCKED_BEFORE_VALIDATE',validateEligible:false,finalistEvidenceReady:false,purchaseAuthorized:false};
-const validate={status:'VALIDATE_SUPPORT_READY',validateEligible:true,finalistEvidenceReady:false,purchaseAuthorized:false};
-const finalist={status:'FINALIST_EVIDENCE_READY',validateEligible:true,finalistEvidenceReady:true,purchaseAuthorized:false};
+const validate={confidence:80,gates:{fresh:true,trendConfirmed:true,romaniaGapConfirmed:true},status:'VALIDATE_SUPPORT_READY',validateEligible:true,finalistEvidenceReady:false,purchaseAuthorized:false};
+const finalist={confidence:80,gates:{fresh:true,trendConfirmed:true,romaniaGapConfirmed:true,supplierVerified:true,economicsConfirmed:true,importabilityPassed:true},status:'FINALIST_EVIDENCE_READY',validateEligible:true,finalistEvidenceReady:true,purchaseAuthorized:false};
 
 test('legacy BUY can never override evidence BLOCKED',()=>{
   const r=buildCanonicalDecision({evidenceDecision:blocked,legacySignals:[{source:'legacy-score',recommendation:'BUY',score:99}]});
@@ -29,12 +29,12 @@ test('FINALIST evidence alone never becomes TEST_READY or BUY_READY',()=>{
 test('test stages require measured real-world evidence and FINALIST foundation',()=>{
   const ignored=buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'TEST_READY',testReady:true,measuredRealWorldEvidence:false}});
   assert.equal(ignored.stage,'FINALIST');
-  const accepted=buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'TEST_READY',testReady:true,measuredRealWorldEvidence:true}});
+  const accepted=buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'TEST_READY',testReady:true,testGatesPassed:true,measuredRealWorldEvidence:true}});
   assert.equal(accepted.stage,'TEST_READY');
 });
 
 test('BUY_READY requires measured real-world test evidence but still does not authorize a purchase',()=>{
-  const r=buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'BUY_READY',buyReady:true,measuredRealWorldEvidence:true}});
+  const r=buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'BUY_READY',buyReady:true,testGatesPassed:true,completedRealTest:true,measuredAt:new Date().toISOString(),testOutcome:'TEST_PASS_CANDIDATE',measuredRealWorldEvidence:true}});
   assert.equal(r.stage,'BUY_READY');
   assert.equal(r.purchaseAuthorized,false);
   assert.equal(r.automaticPurchaseAllowed,false);
@@ -48,4 +48,8 @@ test('malformed decision packet claiming purchase authority fails closed',()=>{
 
 test('legacy promotion is disabled by policy',()=>{
   assert.equal(canLegacySignalPromote(),false);
+});
+
+test('BUY label and measured flag alone cannot bypass readiness and completed-test evidence',()=>{
+ assert.equal(buildCanonicalDecision({evidenceDecision:finalist,realTestEvidence:{status:'BUY_READY',buyReady:true,measuredRealWorldEvidence:true}}).stage,'FINALIST');
 });

@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {FREE_SHORTLIST_STORAGE_KEY,freeProductKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from '../free-shortlist.js';
+import {FREE_SHORTLIST_STORAGE_KEY,freeProductKey,freeShortlistStorageKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from '../free-shortlist.js';
 
 const memory=()=>{const values=new Map();return {getItem:key=>values.get(key)||null,setItem:(key,value)=>values.set(key,value),values};};
 
 test('Free shortlist stores only explicit product keys on the device',()=>{
   const storage=memory();
   const key=freeProductKey({asin:'b012345678'});
-  assert.equal(key,'AMAZON_ARCHIVE:B012345678');
+  assert.equal(key,'LIVE:B012345678');
   const added=toggleFreeShortlist(new Set(),key,storage);
   assert.equal(added.added,true);
   assert.deepEqual([...readFreeShortlist(storage)],[key]);
@@ -24,4 +24,50 @@ test('comparison is session-only and limited to three products',()=>{
   assert.equal(blocked.limitReached,true);
   assert.deepEqual([...blocked.values],['a','b','c']);
   assert.equal(toggleComparison(state,'b').values.has('b'),false);
+});
+
+test('retired product keys are purged while current shortlist entries remain',()=>{
+ const storage=memory();storage.setItem(FREE_SHORTLIST_STORAGE_KEY,JSON.stringify(['AMAZON_ARCHIVE:OLD','EBAY:CURRENT']));
+ assert.deepEqual([...readFreeShortlist(storage)],['EBAY:CURRENT']);
+ assert.deepEqual(JSON.parse(storage.getItem(FREE_SHORTLIST_STORAGE_KEY)),['EBAY:CURRENT']);
+});
+
+test('shortlists remain separate when two accounts share one browser',()=>{
+ const storage=memory(),a='11111111-1111-4111-8111-111111111111',b='22222222-2222-4222-8222-222222222222';
+ toggleFreeShortlist(new Set(),'EBAY:A',storage,a);
+ toggleFreeShortlist(new Set(),'EBAY:B',storage,b);
+ toggleFreeShortlist(new Set(),'EBAY:GUEST',storage);
+ assert.deepEqual([...readFreeShortlist(storage,a)],['EBAY:A']);
+ assert.deepEqual([...readFreeShortlist(storage,b)],['EBAY:B']);
+ assert.deepEqual([...readFreeShortlist(storage)],['EBAY:GUEST']);
+ assert.notEqual(freeShortlistStorageKey(a),freeShortlistStorageKey(b));
+ assert.throws(()=>freeShortlistStorageKey('invalid-user'));
+ assert.deepEqual([...readFreeShortlist(storage,'invalid-user')],[]);
+});
+
+test('failed browser writes never report a saved or removed product',()=>{
+  const storage={setItem(){throw new Error('QuotaExceededError');}},original=new Set(['EBAY:EXISTING']);
+  for(const key of ['EBAY:NEW','EBAY:EXISTING']){
+    const result=toggleFreeShortlist(original,key,storage);
+    assert.equal(result.changed,false);assert.equal(result.added,false);assert.equal(result.reason,'STORAGE_UNAVAILABLE');
+    assert.deepEqual([...result.values],['EBAY:EXISTING']);assert.deepEqual([...original],['EBAY:EXISTING']);
+  }
+});
+
+test('disabled localStorage getter is contained on both read and write',()=>{
+  const previous=Object.getOwnPropertyDescriptor(globalThis,'localStorage');
+  Object.defineProperty(globalThis,'localStorage',{configurable:true,get(){throw new Error('SecurityError');}});
+  try{
+    assert.deepEqual([...readFreeShortlist()],[]);
+    assert.equal(toggleFreeShortlist(new Set(),'EBAY:NEW').reason,'STORAGE_UNAVAILABLE');
+  }finally{if(previous)Object.defineProperty(globalThis,'localStorage',previous);else delete globalThis.localStorage;}
+});
+
+test('invalid keys and a full list cannot count as successful shortlist actions',()=>{
+  const storage=memory(),full=new Set(Array.from({length:100},(_,i)=>`EBAY:${i}`));
+  for(const key of ['','AMAZON_ARCHIVE:OLD','x'.repeat(221)])assert.equal(toggleFreeShortlist(new Set(),key,storage).reason,'INVALID_KEY');
+  assert.equal(toggleFreeShortlist(full,'EBAY:NEW',storage).reason,'LIMIT_REACHED');
+  assert.equal(storage.values.size,0);
+  const removed=toggleFreeShortlist(full,'EBAY:0',storage);
+  assert.equal(removed.changed,true);assert.equal(readFreeShortlist(storage).size,99);
 });
