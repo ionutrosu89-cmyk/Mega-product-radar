@@ -23,3 +23,16 @@ test('all evidence clears the machine gate only for human review',()=>{
   assert.equal(result.automaticLaunchAllowed,false);
   assert.equal(result.paidBillingEnabled,false);
 });
+
+test('negative, missing or string incident counts cannot clear the launch gate',()=>{
+  for(const criticalIssues of [-1,null,undefined,'0',Infinity,NaN]){
+    const result=evaluateFreeGoLive({...complete,evidence:{...complete.evidence,criticalIssues}});
+    assert.ok(result.blockers.includes('CRITICAL_ISSUES_NOT_CLEARED'));
+  }
+});
+
+test('impossible coverage and beta percentages cannot clear the launch gate',()=>{
+  assert.ok(evaluateFreeGoLive({...complete,coverage:{curatedNicheCount:26,curatedPositions:650}}).blockers.includes('CURATED_25_X_25_REQUIRED'));
+  for(const understandingPct of [Infinity,101,'80',null])assert.ok(evaluateFreeGoLive({...complete,study:{...complete.study,understandingPct}}).blockers.includes('REAL_BETA_THRESHOLDS_UNMET'));
+  assert.ok(evaluateFreeGoLive({...complete,study:{...complete.study,productFlowSessions:6}}).blockers.includes('REAL_BETA_THRESHOLDS_UNMET'));
+});
