@@ -35,7 +35,7 @@ function accessState(platform,accessByPlatform={}){
   if(platform.kind==='CURATED')return 'WAITING_FOR_REVIEWED_GENERIC_LISTS';
   if(platform.id==='CONSENSUS')return 'WAITING_FOR_TWO_LIVE_PLATFORMS';
   const status=upper(accessByPlatform[platform.id]);
-  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','PUBLIC_DISPLAY_RIGHTS_REQUIRED','API_AVAILABILITY_REVIEW_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
+  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','PUBLIC_DISPLAY_RIGHTS_REQUIRED','SUBSCRIPTION_REQUIRED','API_AVAILABILITY_REVIEW_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
 }
 
 function https(value){try{return new URL(clean(value)).protocol==='https:';}catch{return false;}}
