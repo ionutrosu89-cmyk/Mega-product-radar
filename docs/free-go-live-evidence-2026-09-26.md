@@ -17,10 +17,10 @@ Acesta este un test de scriere și persistență pentru un singur cont. Nu doved
 
 ## Ce nu este încă demonstrat
 
-- Niciun apel Keepa real și niciun produs public nou nu au fost obținute prin colector. Nu există încă aprobarea de afișare, abonamentul/bugetul, categoria de pilot aprobată și politica de retenție agreată cu furnizorul.
+- Niciun apel Keepa real și niciun produs public nou nu au fost obținute prin colector. Acordul scris condiționat de abonament a sosit pe 26 septembrie. Proprietarul nu dorește să plătească acum; nu există abonament, buget sau categorie de pilot aprobată. Ștergerea la încetarea abonamentului și restricția privind API-ul public rămân de rezolvat înainte de activare.
 - Colectarea Keepa nu este programată automat. Protocolul de operare și condițiile de activare sunt în `KEEPA_CONTROLLED_COLLECTION.md`.
 - Nu avem încă 625 de concepte aprobate, ofertele furnizorilor, cele cinci sesiuni beta, testul pe telefon și toate dovezile operaționale necesare lansării.
-- Solicitarea de licențiere Keepa a fost aprobată explicit și trimisă pe 26 septembrie; Gmail a confirmat trimiterea. Nu este un acord de licențiere sau o comandă de abonament. La următoarea verificare nu exista încă un răspuns.
+- Solicitarea de licențiere Keepa a primit răspuns scris pe 26 septembrie. Acesta permite afișarea în limita scopului descris numai în timpul unui abonament API activ; nu este o comandă sau o plată. Detaliile și limitele sunt în `KEEPA_CONTROLLED_COLLECTION.md`.
 
 Verdictul de lansare publică Free rămâne **NO_GO**. Nicio activare de plăți sau publicare a site-ului nu rezultă din aceste teste.
 
