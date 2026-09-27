@@ -16,15 +16,15 @@ export function filterPublicDisplaySnapshots(snapshots,env){
     const sourcePlatform=platform==='MPR_GENERIC'?curatedSourcePlatform(row?.market,row?.source_key):platform;
     if(!displayPlatforms.has(sourcePlatform))return false;
     const flag=publicDisplayApprovalKey(sourcePlatform,row?.source_key);
-    return Boolean(flag&&approved(env,flag));
+    return Boolean(flag&&approved(env,flag)&&(row?.source_key!=='KEEPA_BEST_SELLERS'||approved(env,'MPR_KEEPA_SUBSCRIPTION_ACTIVE')));
   });
 }
 function buildServerAccessState(env){
   return {
     ALIEXPRESS:aliexpressPublicDisplayAccessState(env),
     EBAY:ebayPublicDisplayAccessState(env),
-    AMAZON_US:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
-    AMAZON_DE:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
+    AMAZON_US:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED')==='READY_TO_COLLECT'&&!approved(env,'MPR_KEEPA_SUBSCRIPTION_ACTIVE')?'SUBSCRIPTION_REQUIRED':access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
+    AMAZON_DE:access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED')==='READY_TO_COLLECT'&&!approved(env,'MPR_KEEPA_SUBSCRIPTION_ACTIVE')?'SUBSCRIPTION_REQUIRED':access(env,['KEEPA_API_KEY'],'MPR_KEEPA_TERMS_APPROVED','MPR_KEEPA_PUBLIC_DISPLAY_APPROVED'),
     TIKTOK:'SUPPORTING_SIGNAL_ONLY',
     GOOGLE:'SUPPORTING_SIGNAL_ONLY',
     ROMANIA:'SUPPORTING_SIGNAL_ONLY'
