@@ -12,8 +12,8 @@ export function evaluateOpenProductsFactsRecord(raw,{now=new Date(),maxAgeDays=9
   const code=clean(raw?.code||raw?._id),name=clean(raw?.product_name||raw?.product_name_en);
   const brand=clean(raw?.brands),categories=Array.isArray(raw?.categories_tags)?raw.categories_tags.join(' '):clean(raw?.categories);
   if(!/^\d{8,14}$/.test(code)||name.length<5||name.length>220)return {status:'INVALID_IDENTITY'};
-  const context=normalize(`${name} ${categories}`);
-  if(!OFFICE.test(context)||!ORGANIZATION.test(context))return {status:'OUT_OF_NICHE'};
+  const normalizedName=normalize(name),context=normalize(`${name} ${categories}`);
+  if(!OFFICE.test(context)||!ORGANIZATION.test(normalizedName))return {status:'OUT_OF_NICHE'};
   const modifiedSeconds=Number(raw?.last_modified_t),nowMs=now.getTime();
   if(!Number.isSafeInteger(modifiedSeconds)||modifiedSeconds<=0||!Number.isFinite(nowMs)||!Number.isSafeInteger(maxAgeDays)||maxAgeDays<1)return {status:'DATE_UNKNOWN'};
   const observedAt=new Date(modifiedSeconds*1000),ageMs=nowMs-observedAt.getTime();
