@@ -6,7 +6,7 @@ import {parseKeepaTargets,keepaCollectionAccessState,reserveKeepaBudget,collectK
 const now=new Date('2026-09-25T12:00:00Z');
 const keepaMinutes=iso=>Date.parse(iso)/60_000-21_564_000;
 const target={nicheId:'BIROU_ORGANIZARE',domain:1,categoryId:'12345',mappingStatus:'APPROVED',reviewer:'Category reviewer',reviewedAt:'2026-09-24T12:00:00Z',categoryEvidenceUrl:'https://www.amazon.com/gp/bestsellers/office-products/12345'};
-const env=()=>({MPR_INTERNAL_REFRESH_SECRET:'internal-test',KEEPA_API_KEY:'provider-secret-test',MPR_KEEPA_TERMS_APPROVED:'true',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_PAID_PROVIDER_CALLS_ENABLED:'true',MPR_KEEPA_COLLECTION_ENABLED:'true',MPR_KEEPA_DAILY_TOKEN_CAP:'150',MPR_KEEPA_TOP25_TARGETS_JSON:JSON.stringify([target])});
+const env=()=>({MPR_INTERNAL_REFRESH_SECRET:'internal-test',KEEPA_API_KEY:'provider-secret-test',MPR_KEEPA_TERMS_APPROVED:'true',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true',MPR_PAID_PROVIDER_CALLS_ENABLED:'true',MPR_KEEPA_COLLECTION_ENABLED:'true',MPR_KEEPA_DAILY_TOKEN_CAP:'150',MPR_KEEPA_TOP25_TARGETS_JSON:JSON.stringify([target])});
 const asins=Array.from({length:105},(_,index)=>`B${String(index).padStart(9,'0')}`);
 const list=()=>({bestSellersList:{domainId:1,categoryId:'12345',lastUpdate:keepaMinutes('2026-09-25T10:00:00Z'),asinList:asins}});
 const products=()=>({products:asins.map(asin=>({asin,domainId:1,title:`Desk tray ${asin}`,brand:'Independent maker',lastUpdate:keepaMinutes('2026-09-25T09:00:00Z')}))});
@@ -21,7 +21,7 @@ function memoryStore(){
 const request=(body={nicheId:target.nicheId},secret='internal-test')=>new Request('https://mpr.example/api/internal/keepa-top25-collect',{method:'POST',headers:{'x-mpr-internal-secret':secret,'content-type':'application/json'},body:JSON.stringify(body)});
 
 test('Keepa collection requires reviewed mapping, rights, credentials and explicit capped spending',async()=>{
-  for(const [key,value] of [['KEEPA_API_KEY',''],['MPR_KEEPA_TERMS_APPROVED','false'],['MPR_KEEPA_PUBLIC_DISPLAY_APPROVED','false'],['MPR_PAID_PROVIDER_CALLS_ENABLED','false'],['MPR_KEEPA_COLLECTION_ENABLED','false'],['MPR_KEEPA_DAILY_TOKEN_CAP','0'],['MPR_KEEPA_DAILY_TOKEN_CAP','3751'],['MPR_KEEPA_DAILY_TOKEN_CAP','Infinity']]){
+  for(const [key,value] of [['KEEPA_API_KEY',''],['MPR_KEEPA_TERMS_APPROVED','false'],['MPR_KEEPA_PUBLIC_DISPLAY_APPROVED','false'],['MPR_KEEPA_SUBSCRIPTION_ACTIVE','false'],['MPR_PAID_PROVIDER_CALLS_ENABLED','false'],['MPR_KEEPA_COLLECTION_ENABLED','false'],['MPR_KEEPA_DAILY_TOKEN_CAP','0'],['MPR_KEEPA_DAILY_TOKEN_CAP','3751'],['MPR_KEEPA_DAILY_TOKEN_CAP','Infinity']]){
     const config={...env(),[key]:value};assert.notEqual(keepaCollectionAccessState(config),'READY_TO_COLLECT');
     const handler=createKeepaTop25CollectHandler({env:config,now:()=>now,storeFactory:()=>{throw Error('must not allocate store');},fetchImpl:()=>{throw Error('must not call provider');}});
     assert.equal((await handler(request())).status,409,key);
