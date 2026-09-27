@@ -36,6 +36,26 @@ test('Keepa approval cannot publish a different licensed Amazon feed',async()=>{
   assert.equal((await response.json()).results[0].status,'PUBLIC_DISPLAY_RIGHTS_REQUIRED');
 });
 
+test('a Keepa purge lock blocks even approved live ingest before any database write',async()=>{
+  let writes=0;
+  const handler=createTop25LiveIngestHandler({env:{MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true'},keepaStoreFactory:()=>({get:async()=>({state:'LOCKED'})}),fetchImpl:async()=>{writes++;throw Error('database must not be touched');}});
+  const keepa={nicheId:'BIROU_ORGANIZARE',platform:'AMAZON_US',market:'AMAZON_US',sourceKey:'KEEPA_BEST_SELLERS',products:[]};
+  const request=new Request('https://mpr.example/api/internal/top25-live-ingest',{method:'POST',headers:{'content-type':'application/json','x-mpr-internal-secret':'internal'},body:JSON.stringify({snapshots:[keepa]})});
+  const response=await handler(request);
+  assert.equal(response.status,422);
+  assert.equal((await response.json()).results[0].status,'PURGE_LOCKED');
+  assert.equal(writes,0);
+});
+
+test('Keepa ingest fails closed if the purge lock cannot be checked',async()=>{
+  let writes=0;
+  const handler=createTop25LiveIngestHandler({env:{MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true'},keepaStoreFactory:()=>{throw Error('store unavailable');},fetchImpl:async()=>{writes++;throw Error('database must not be touched');}});
+  const request=new Request('https://mpr.example/api/internal/top25-live-ingest',{method:'POST',headers:{'content-type':'application/json','x-mpr-internal-secret':'internal'},body:JSON.stringify({snapshots:[{nicheId:'BIROU_ORGANIZARE',platform:'AMAZON_US',sourceKey:'KEEPA_BEST_SELLERS',products:[]}]})});
+  const response=await handler(request);
+  assert.equal((await response.json()).results[0].status,'PURGE_LOCK_CHECK_FAILED');
+  assert.equal(writes,0);
+});
+
 test('curated generic ingest stores MPR rank separately and requires source-specific rights',async()=>{
   const candidates=Array.from({length:26},(_,index)=>({name:index===0?'Nike shoes':`Desk organizer ${index}`,externalId:`item-${index}`,sourceRank:index+1,nicheId:'BIROU_ORGANIZARE',sourceUrl:`https://www.ebay.com/itm/${index}`,observedAt:'2026-09-20T06:00:00Z'}));
   const reviews=Object.fromEntries(candidates.map(row=>[row.externalId,{decision:'GENERIC_PRIVATE_LABEL',reviewer:'Analyst',reviewedAt:'2026-09-20T06:00:00Z',evidenceUrl:'https://review.example/brand',nicheId:'BIROU_ORGANIZARE',nicheDecision:'IN_SCOPE',nicheEvidenceUrl:'https://review.example/niche',conceptKey:`CONCEPT_${row.externalId}`} ]));
@@ -55,3 +75,4 @@ test('curated generic ingest stores MPR rank separately and requires source-spec
   assert.equal(stored.products[0].sourceRank,2);
   assert.equal(stored.products[24].sourceRank,26);
 });
+
