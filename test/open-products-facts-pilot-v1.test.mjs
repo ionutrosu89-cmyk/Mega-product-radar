@@ -23,6 +23,7 @@ test('stale, unknown-date, unrelated and established-brand records cannot enter 
   assert.equal(evaluateOpenProductsFactsRecord(record({last_modified_t:Math.floor(Date.parse('2026-01-01T00:00:00Z')/1000)}),{now}).status,'STALE_RECORD');
   assert.equal(evaluateOpenProductsFactsRecord(record({last_modified_t:null}),{now}).status,'DATE_UNKNOWN');
   assert.equal(evaluateOpenProductsFactsRecord(record({product_name:'Kitchen sponge',categories_tags:['en:kitchen']}),{now}).status,'OUT_OF_NICHE');
+  assert.equal(evaluateOpenProductsFactsRecord(record({product_name:'Bullet planner',categories_tags:['en:office-supplies','en:calendars-organizers-planners']}),{now}).status,'OUT_OF_NICHE');
   assert.equal(evaluateOpenProductsFactsRecord(record({brands:'Logitech'}),{now}).status,'ESTABLISHED_BRAND');
   assert.equal(evaluateOpenProductsFactsRecord(record({code:'not-a-gtin'}),{now}).status,'INVALID_IDENTITY');
 });
