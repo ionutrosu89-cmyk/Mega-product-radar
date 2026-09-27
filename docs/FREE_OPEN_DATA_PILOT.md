@@ -15,6 +15,14 @@ Stare la 27 septembrie 2026: am descărcat exportul oficial Open Products Facts,
 
 Common Crawl rămâne numai o posibilă sursă internă de descoperire: [arhiva este gratuită](https://commoncrawl.org/get-started), dar drepturile site-urilor de origine nu sunt cedate automat. Google Trends API [necesită acces alfa](https://developers.google.com/search/apis/trends). Nu integrăm niciuna ca flux public până la clarificarea accesului și a drepturilor.
 
+## Verificare suplimentară a acoperirii gratuite — 27 septembrie 2026
+
+Am verificat separat întregul export Open Products Facts, fără să echivalăm modificarea fișei cu o verificare a pieței: din 46.233 înregistrări, **28.365** au cod numeric de 8–14 cifre și titlu de minimum cinci caractere, iar **4.306** dintre acestea au `last_modified_t` în ultimele 90 de zile. **1.112** dintre cele recente nu au marcă declarată; absența mărcii nu dovedește totuși că sunt private label sau nebranduite.
+
+O căutare largă, doar orientativă, în titlurile celor 4.306 fișe pentru termeni expliciți de organizare/depozitare a găsit **9 înregistrări**, toate cu marcă declarată. Exemplele includ coșuri de rufe, suporturi audio și genți de depozitare; nu reprezintă nouă produse aprobate pentru `ORGANIZARE_CASA` sau `BIROU_ORGANIZARE`. Această căutare nu este o clasificare completă a celor 25 de nișe, dar arată că extinderea automată a filtrului de birou nu ar produce o listă Top25 verificată. Niciuna dintre fișele inspectate nu aduce rang de vânzări ori drepturi asupra imaginilor comercianților.
+
+Am verificat și [catalogul indexurilor Common Crawl](https://index.commoncrawl.org/collinfo.json): indexul din septembrie 2026 (`CC-MAIN-2026-39`) era listat. Prima interogare îngustă, pentru o pagină de categorie a unui furnizor, a răspuns `504 Gateway Time-out`; nu avem un eșantion valid de URL-uri de produs din această sursă. [Common Crawl avertizează](https://commoncrawl.org/faq) că indexul este limitat ca rată și că arhiva este doar un eșantion al webului. Chiar și dacă interogarea ar funcționa, [termenii săi](https://commoncrawl.org/terms-of-use) lasă aplicabile drepturile și condițiile site-urilor de origine. **Decizie:** nu construim un import public și nu promitem acoperire Top25 pe baza Common Crawl. Îl păstrăm numai ca pistă de cercetare internă, cu verificare separată a fiecărui site și produs.
+
 ## Rulare pentru `BIROU_ORGANIZARE`
 
 1. Se obține arhiva oficială `https://static.openproductsfacts.org/data/openproductsfacts-products.jsonl.gz` din [pagina publică a datasetului](https://www.data.gouv.fr/datasets/open-products-facts). Fișierul mare rămâne local și nu se adaugă în Git.
