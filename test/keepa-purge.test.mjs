@@ -7,7 +7,7 @@ const request=(mode='DRY_RUN',extra={},secret='internal-test')=>new Request('htt
 function fixture({keys=['candidates/2026-09-25/BIROU_ORGANIZARE','receipts/2026-09-25/BIROU_ORGANIZARE','budget/2026-09-25'],snapshots=2}={}){
   const blobs=new Set(keys),calls=[];
   let count=snapshots;
-  const store={async list(){return {blobs:[...blobs].map(key=>({key}))};},async delete(key){blobs.delete(key);}};
+  const store={async list(){return {blobs:[...blobs].map(key=>({key}))};},async delete(key){blobs.delete(key);},async setJSON(key){if(blobs.has(key))return {modified:false};blobs.add(key);return {modified:true};},async get(key){return blobs.has(key)?{state:'LOCKED'}:null;}};
   const fetchImpl=async(url,options)=>{
     calls.push({url:String(url),options});
     assert.equal(new URL(url).searchParams.get('source_key'),'eq.KEEPA_BEST_SELLERS');
@@ -49,9 +49,9 @@ test('purge deletes only Keepa rows and dedicated-store keys, then verifies zero
   const handler=createKeepaPurgeHandler({env:baseEnv,storeFactory:()=>data.store,fetchImpl:data.fetchImpl});
   const response=await handler(request('EXECUTE',{confirmation:'DELETE_KEEPA_DATA',expectedBlobCount:3,expectedSnapshotCount:2}));
   assert.deepEqual(await response.json(),{ok:true,status:'PURGE_VERIFIED',deletedBlobCount:3,deletedSnapshotCount:2,remainingBlobCount:0,remainingSnapshotCount:0});
-  assert.equal(data.blobs.size,0);
+  assert.deepEqual([...data.blobs],['control/purge-lock']);
   assert.equal(data.count,0);
-  assert.deepEqual(data.calls.map(call=>call.options.method),['HEAD','DELETE','HEAD']);
+  assert.deepEqual(data.calls.map(call=>call.options.method),['HEAD','HEAD','DELETE','HEAD']);
 });
 
 test('unexpected keys, failed deletion and failed verification never produce a success receipt',async()=>{
@@ -62,7 +62,7 @@ test('unexpected keys, failed deletion and failed verification never produce a s
   const broken=fixture();
   const failing=createKeepaPurgeHandler({env:baseEnv,storeFactory:()=>broken.store,fetchImpl:async(url,options)=>options.method==='DELETE'?new Response(null,{status:503}):broken.fetchImpl(url,options)});
   assert.equal((await (await failing(request('EXECUTE',{confirmation:'DELETE_KEEPA_DATA',expectedBlobCount:3,expectedSnapshotCount:2}))).json()).status,'SNAPSHOT_DELETE_FAILED');
-  assert.equal(broken.blobs.size,3);
+  assert.equal(broken.blobs.size,4);
   const racing=fixture();
   const store={...racing.store,async delete(key){await racing.store.delete(key);if(key==='budget/2026-09-25')racing.blobs.add('candidates/2026-09-26/BIROU_ORGANIZARE');}};
   const raceHandler=createKeepaPurgeHandler({env:baseEnv,storeFactory:()=>store,fetchImpl:racing.fetchImpl});
