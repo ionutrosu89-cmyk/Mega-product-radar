@@ -115,8 +115,9 @@ test('revoking the public-display flag removes an approved current snapshot from
 test('an Amazon licensed feed cannot inherit Keepa display approval',()=>{
   const keepa={platform:'AMAZON_US',source_key:'KEEPA_BEST_SELLERS'};
   const licensed={platform:'AMAZON_US',source_key:'AMAZON_LICENSED_BEST_SELLERS'};
-  const env={MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'};
+  const env={MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true'};
   assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[keepa]);
+  assert.deepEqual(filterPublicDisplaySnapshots([keepa],{MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'}),[]);
   assert.deepEqual(filterPublicDisplaySnapshots([licensed],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[licensed]);
   assert.deepEqual(filterPublicDisplaySnapshots([{platform:'AMAZON_US'}],env),[]);
 });
