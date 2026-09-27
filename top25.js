@@ -12,7 +12,7 @@ const normalizeSearch=value=>String(value||'').toLowerCase().normalize('NFD').re
 const fmtDate=value=>{if(!value)return '—';const raw=String(value),date=new Date(raw.length===10?`${raw}T00:00:00`:raw);return Number.isNaN(date.getTime())?raw:new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(date);};
 const fmtMetric=metric=>{if(!metric)return '—';const value=Number(metric.value||0).toLocaleString('ro-RO');if(metric.unit==='searches')return `${value} căutări`;if(metric.unit==='results')return `${value} rezultate`;if(metric.unit==='reviews_historical')return `${value} recenzii istorice`;return `${value}${metric.label?` · ${metric.label}`:''}`;};
 const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',HISTORICAL_PRODUCT:'PRODUS ISTORIC LICENȚIAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
-const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE',WAITING_FOR_REVIEWED_GENERIC_LISTS:'AȘTEAPTĂ 25 PRODUSE REVIZUITE'}[status]||'ÎN PREGĂTIRE');
+const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',SUBSCRIPTION_REQUIRED:'ABONAMENT NECESAR',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE',WAITING_FOR_REVIEWED_GENERIC_LISTS:'AȘTEAPTĂ 25 PRODUSE REVIZUITE'}[status]||'ÎN PREGĂTIRE');
 
 let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='MPR_GENERIC';
 let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
@@ -148,6 +148,7 @@ async function loadData(){
   const market=crossResult.status==='fulfilled'?crossResult.value:null;
   if(market?.response.ok&&market.payload?.ok&&Array.isArray(market.payload.platforms))crossMarket=market.payload;
   else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':platform.kind==='CURATED'?'WAITING_FOR_REVIEWED_GENERIC_LISTS':'ACCESS_REQUIRED',publishedPositions:0})),rankings:[],coverage:{livePositions:0,curatedPositions:0}};
+  $('#keepaAttribution').hidden=!crossMarket.rankings.some(ranking=>ranking.products?.some(product=>product.sourceKey==='KEEPA_BEST_SELLERS'));
   selectedPlatform='MPR_GENERIC';
   document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate · ${Number(crossMarket.coverage.livePositions||0)} poziții brute de sursă · 25 nișe configurate`;
   return niches.length===25;
