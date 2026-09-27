@@ -10,6 +10,7 @@ export const KEEPA_RUN_TOKEN_RESERVATION=150;
 export function keepaCollectionAccessState(env={}){
   if(!clean(env.KEEPA_API_KEY))return 'ACCESS_REQUIRED';
   if(!enabled(env.MPR_KEEPA_TERMS_APPROVED)||!enabled(env.MPR_KEEPA_PUBLIC_DISPLAY_APPROVED))return 'SOURCE_RIGHTS_REQUIRED';
+  if(!enabled(env.MPR_KEEPA_SUBSCRIPTION_ACTIVE))return 'SUBSCRIPTION_REQUIRED';
   if(!enabled(env.MPR_PAID_PROVIDER_CALLS_ENABLED)||!enabled(env.MPR_KEEPA_COLLECTION_ENABLED))return 'PAID_COLLECTION_DISABLED';
   const cap=Number(env.MPR_KEEPA_DAILY_TOKEN_CAP);
   if(!Number.isSafeInteger(cap)||cap<KEEPA_RUN_TOKEN_RESERVATION||cap>3750)return 'DAILY_TOKEN_CAP_REQUIRED';
