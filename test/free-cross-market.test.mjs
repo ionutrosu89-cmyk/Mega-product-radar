@@ -112,14 +112,27 @@ test('revoking the public-display flag removes an approved current snapshot from
   assert.deepEqual(revoked.rankings,[]);
 });
 
-test('an Amazon licensed feed cannot inherit Keepa display approval',()=>{
+test('Keepa snapshots never leave the public JSON API, even with display approval and subscription flags',()=>{
   const keepa={platform:'AMAZON_US',source_key:'KEEPA_BEST_SELLERS'};
   const licensed={platform:'AMAZON_US',source_key:'AMAZON_LICENSED_BEST_SELLERS'};
   const env={MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true'};
-  assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[keepa]);
+  assert.deepEqual(filterPublicDisplaySnapshots([keepa,licensed],env),[]);
   assert.deepEqual(filterPublicDisplaySnapshots([keepa],{MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true'}),[]);
   assert.deepEqual(filterPublicDisplaySnapshots([licensed],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[licensed]);
+  assert.deepEqual(filterPublicDisplaySnapshots([{...licensed,products:[{sourceKey:'KEEPA_BEST_SELLERS'}]}],{MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED:'true'}),[]);
   assert.deepEqual(filterPublicDisplaySnapshots([{platform:'AMAZON_US'}],env),[]);
+});
+
+test('the public handler does not serialize Keepa products from a current database snapshot',async()=>{
+  const snapshot={niche_id:'BIROU_ORGANIZARE',platform:'AMAZON_US',market:'AMAZON_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,index)=>({...product(index+1),sourceKey:'KEEPA_BEST_SELLERS',name:`Private Keepa item ${index+1}`})),source_key:'KEEPA_BEST_SELLERS',source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  const fetchImpl=async url=>String(url).includes('/rpc/consume_api_rate_limit')?Response.json([{allowed:true,limit:90,hitCount:1}]):Response.json([snapshot]);
+  const handler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service',SECURITY_AUDIT_SALT:'salt',KEEPA_API_KEY:'present',MPR_KEEPA_TERMS_APPROVED:'true',MPR_KEEPA_PUBLIC_DISPLAY_APPROVED:'true',MPR_KEEPA_SUBSCRIPTION_ACTIVE:'true'},now:()=>new Date('2026-09-03T08:00:00Z')});
+  const response=await handler(new Request('https://mpr.example/api/free/cross-market'));
+  const body=await response.json();
+  assert.equal(response.status,200);
+  assert.equal(body.coverage.livePositions,0);
+  assert.deepEqual(body.rankings,[]);
+  assert.equal(JSON.stringify(body).includes('Private Keepa item'),false);
 });
 
 test('revoking eBay display approval also hides curated opportunities derived from eBay',()=>{
@@ -129,3 +142,4 @@ test('revoking eBay display approval also hides curated opportunities derived fr
   assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,25);
   assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,0);
 });
+
