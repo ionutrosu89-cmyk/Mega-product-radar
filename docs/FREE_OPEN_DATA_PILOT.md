@@ -1,6 +1,6 @@
 # Pilot gratuit pentru candidați de produse
 
-Stare la 27 septembrie 2026: am identificat exportul oficial Open Products Facts, dar accesul direct la API și la arhiva de circa 379 MB este blocat în mediul de verificare curent. **Nu am măsurat încă acoperirea reală a nișei** și nu există produse noi aprobate sau publicate. Scriptul local este pregătit și testat pe fixturi sintetice; nu face apeluri externe și nu generează costuri de API.
+Stare la 27 septembrie 2026: am descărcat exportul oficial Open Products Facts, modificat la `2026-09-27T03:01:57Z` și având 39.394.403 octeți comprimați. Pilotul a parcurs **46.233 de înregistrări**. După verificarea identității, a nișei și a modificării în ultimele 90 de zile, a rezultat **zero candidați** pentru `BIROU_ORGANIZARE`. Un prim filtru permisiv identificase un planner deoarece categoria conținea termenul „organizers”; titlul nu descria un organizator de birou. Filtrul a fost corectat și rerulat. Nu există produse noi aprobate sau publicate. Exportul și raportul detaliat rămân locale, ignorate de Git. Nu s-au făcut apeluri API plătite.
 
 ## Surse și roluri
 
@@ -22,4 +22,4 @@ Common Crawl rămâne numai o posibilă sursă internă de descoperire: [arhiva 
 3. Raportul numără toate înregistrările, cele din nișă, cele cu dată necunoscută sau veche, brandurile consacrate excluse și cel mult 100 de candidați recenți. Pragul pilotului este maximum 90 de zile de la modificarea **înregistrării sursei**, nu 72 h de la o observație marketplace. Lista rămâne `HUMAN_REVIEW_REQUIRED`.
 4. Pentru fiecare candidat se verifică manual conceptul distinct, brandul, categoria, sursele de cerere, comparabilele RO, riscurile și drepturile de afișare. Un candidat nu poate intra prin acest script în `/api/free/cross-market` și nu primește rang de vânzări. Înaintea publicării unei baze derivate din OPF, implementăm atribuirea ODbL și separarea bazei derivate conform licenței.
 
-Extinderea către celelalte 24 de nișe începe numai după măsurarea efectivă a acoperirii pilotului și revizia categoriilor. Dacă rămân sub 25 de concepte eligibile, interfața arată acoperirea reală, nu completează artificial lista.
+**Decizie:** Open Products Facts nu poate alimenta nișa pilot la standardul actual și nu este sursa principală pentru Top25. Nu extindem automat aceeași promisiune la celelalte 24 de nișe. Următorul experiment gratuit trebuie să pornească de la o altă sursă de descoperire, cu drepturile de afișare clarificate înainte de publicare. Dacă rămân sub 25 de concepte eligibile, interfața arată acoperirea reală, nu completează artificial lista.
