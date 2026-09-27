@@ -15,7 +15,7 @@ Cererea către un potențial furnizor trebuie să solicite în scris: (1) acoper
 
 Aprobarea este legată de **furnizor**, nu doar de marketplace: `KEEPA_BEST_SELLERS` folosește `MPR_KEEPA_PUBLIC_DISPLAY_APPROVED`, iar un eventual `AMAZON_LICENSED_BEST_SELLERS` folosește separat `MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED`. Înainte de activarea celei de-a doua variabile se identifică furnizorul concret și contractul său; cheia Keepa nu poate autoriza alt feed.
 
-Text pregătit pentru solicitarea către Keepa (de trimis de operator, nu a fost trimis). Pagina oficială de planuri indică `info@keepa.com` ca adresă de contact pentru întrebări de plată; operatorul poate cere acolo redirecționarea către echipa de licențiere:
+Textul solicitării trimise către Keepa pe 26 septembrie 2026. Furnizorul a răspuns în scris în aceeași zi și a aprobat afișarea publică numai în limitele descrise și pe durata unui abonament API activ. Proprietarul nu dorește să cumpere abonamentul momentan. Condițiile concrete și punctele rămase deschise sunt în `docs/KEEPA_CONTROLLED_COLLECTION.md`:
 
 > Subject: Licensing request — Best Sellers data display in Romanian product research SaaS
 >
