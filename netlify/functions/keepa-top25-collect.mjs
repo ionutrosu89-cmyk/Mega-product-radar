@@ -18,21 +18,35 @@ export function createKeepaTop25CollectHandler({env=process.env,fetchImpl=fetch,
     if(!target)return reply({ok:false,status:'APPROVED_TARGET_REQUIRED',providerCalls:0},409);
     try{
       if(request.method==='GET'){
+        const store=storeFactory();
+        if(await store.get('control/purge-lock',{type:'json',consistency:'strong'}))return reply({ok:false,status:'PURGE_LOCKED'},409);
         const requestedDay=clean(payload?.day||day);
         if(!/^\d{4}-\d{2}-\d{2}$/.test(requestedDay))return reply({ok:false,status:'INVALID_DAY'},400);
-        const batch=await storeFactory().get(`candidates/${requestedDay}/${target.nicheId}`,{type:'json',consistency:'strong'});
+        const batch=await store.get(`candidates/${requestedDay}/${target.nicheId}`,{type:'json',consistency:'strong'});
         return batch?reply({ok:true,batch}):reply({ok:false,status:'BATCH_NOT_FOUND'},404);
       }
       const access=keepaCollectionAccessState(env);
       if(access!=='READY_TO_COLLECT')return reply({ok:false,status:access,providerCalls:0},409);
       const store=storeFactory();
+      if(await store.get('control/purge-lock',{type:'json',consistency:'strong'}))return reply({ok:false,status:'PURGE_LOCKED',providerCalls:0},409);
       const reservation=await reserveKeepaBudget(store,{day,nicheId:target.nicheId,cap:Number(env.MPR_KEEPA_DAILY_TOKEN_CAP)});
       if(!reservation.ok)return reply({ok:false,status:reservation.code,providerCalls:0},409);
       const collected=await collectKeepaCandidates({target,env,fetchImpl,now:timestamp});
+      if(await store.get('control/purge-lock',{type:'json',consistency:'strong'}))return reply({ok:false,status:'PURGE_LOCKED',providerCalls:collected.providerCalls,published:0},409);
       const receipt={status:collected.code,checkedAt:timestamp.toISOString(),providerCalls:collected.providerCalls,reservedTokens:reservation.reservedTokens,published:0};
-      await store.setJSON(`receipts/${day}/${target.nicheId}`,receipt);
+      const receiptKey=`receipts/${day}/${target.nicheId}`,candidateKey=`candidates/${day}/${target.nicheId}`;
+      await store.setJSON(receiptKey,receipt);
+      if(await store.get('control/purge-lock',{type:'json',consistency:'strong'})){
+        await store.delete(receiptKey);
+        return reply({ok:false,status:'PURGE_LOCKED',providerCalls:collected.providerCalls,published:0},409);
+      }
       if(!collected.ok)return reply({ok:false,...receipt},422);
-      await store.setJSON(`candidates/${day}/${target.nicheId}`,collected.batch);
+      await store.setJSON(candidateKey,collected.batch);
+      if(await store.get('control/purge-lock',{type:'json',consistency:'strong'})){
+        await store.delete(candidateKey);
+        await store.delete(receiptKey);
+        return reply({ok:false,status:'PURGE_LOCKED',providerCalls:collected.providerCalls,published:0},409);
+      }
       return reply({ok:true,...receipt,candidateCount:collected.batch.candidates.length,excludedCount:collected.batch.excluded.length});
     }catch{
       // Neither provider URLs, credentials nor store error details reach clients.
@@ -43,3 +57,4 @@ export function createKeepaTop25CollectHandler({env=process.env,fetchImpl=fetch,
 
 export default createKeepaTop25CollectHandler();
 export const config={path:'/api/internal/keepa-top25-collect'};
+
