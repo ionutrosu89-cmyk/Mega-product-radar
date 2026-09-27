@@ -36,8 +36,9 @@ async function inspect({env,fetchImpl,store}){
   const [snapshotResult,listing]=await Promise.all([snapshotCount({env,fetchImpl}),store.list()]);
   if(!snapshotResult.ok)return snapshotResult;
   if(!Array.isArray(listing?.blobs))return {ok:false,code:'BLOB_LIST_FAILED'};
-  const keys=listing.blobs.map(row=>row?.key);
-  if(keys.some(key=>typeof key!=='string'))return {ok:false,code:'BLOB_LIST_FAILED'};
+  const allKeys=listing.blobs.map(row=>row?.key);
+  if(allKeys.some(key=>typeof key!=='string'))return {ok:false,code:'BLOB_LIST_FAILED'};
+  const keys=allKeys.filter(key=>key!=='control/purge-lock');
   return {ok:true,snapshotCount:snapshotResult.count,blobCount:keys.length,unexpectedKeys:keys.filter(key=>!allowedKey(key)).length,keys};
 }
 
@@ -58,6 +59,13 @@ export function createKeepaPurgeHandler({env=process.env,fetchImpl=fetch,storeFa
       if(mode==='DRY_RUN')return reply({ok:true,status:'DRY_RUN',...summary});
       if(before.unexpectedKeys)return reply({ok:false,status:'UNEXPECTED_STORE_KEYS',...summary},409);
       if(body.expectedBlobCount!==before.blobCount||body.expectedSnapshotCount!==before.snapshotCount)return reply({ok:false,status:'INVENTORY_CHANGED',...summary},409);
+      const lock=await store.setJSON('control/purge-lock',{state:'LOCKED'},{onlyIfNew:true});
+      if(lock.modified!==true){
+        const existing=await store.get('control/purge-lock',{type:'json',consistency:'strong'});
+        if(existing?.state!=='LOCKED')return reply({ok:false,status:'INVALID_PURGE_LOCK'},409);
+      }
+      const lockedInventory=await inspect({env,fetchImpl,store});
+      if(!lockedInventory.ok||lockedInventory.blobCount!==before.blobCount||lockedInventory.snapshotCount!==before.snapshotCount||lockedInventory.unexpectedKeys)return reply({ok:false,status:'INVENTORY_CHANGED_AFTER_LOCK'},409);
       const url=snapshotUrl(env),service=env.SUPABASE_SERVICE_ROLE_KEY;
       const deleted=await fetchImpl(url,{method:'DELETE',headers:{apikey:service,authorization:`Bearer ${service}`,prefer:'return=minimal'}});
       if(!deleted.ok)return reply({ok:false,status:'SNAPSHOT_DELETE_FAILED',...summary},503);
