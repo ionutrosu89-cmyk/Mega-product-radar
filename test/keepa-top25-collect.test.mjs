@@ -12,7 +12,7 @@ const list=()=>({bestSellersList:{domainId:1,categoryId:'12345',lastUpdate:keepa
 const products=()=>({products:asins.map(asin=>({asin,domainId:1,title:`Desk tray ${asin}`,brand:'Independent maker',lastUpdate:keepaMinutes('2026-09-25T09:00:00Z')}))});
 function memoryStore(){
   const rows=new Map();let version=0;
-  return {rows,async getWithMetadata(key){return structuredClone(rows.get(key)||null);},async get(key){return structuredClone(rows.get(key)?.data||null);},async setJSON(key,data,options={}){
+  return {rows,async getWithMetadata(key){return structuredClone(rows.get(key)||null);},async get(key){return structuredClone(rows.get(key)?.data||null);},async delete(key){rows.delete(key);},async setJSON(key,data,options={}){
     const existing=rows.get(key);
     if(options.onlyIfNew&&existing||options.onlyIfMatch&&existing?.etag!==options.onlyIfMatch)return {modified:false};
     rows.set(key,{data:structuredClone(data),etag:String(++version)});return {modified:true};
@@ -88,8 +88,49 @@ test('successful collection stores a private review batch and never writes publi
   assert.equal((await handler(new Request(read().url))).status,401);
 });
 
+test('a persistent purge lock blocks preview reads and collection before any provider call',async()=>{
+  const store=memoryStore();
+  await store.setJSON('control/purge-lock',{state:'LOCKED'});
+  let calls=0;
+  const handler=createKeepaTop25CollectHandler({env:env(),now:()=>now,storeFactory:()=>store,fetchImpl:async()=>{calls++;throw Error('provider must not be called');}});
+  assert.equal((await (await handler(request())).json()).status,'PURGE_LOCKED');
+  const read=new Request('https://mpr.example/api/internal/keepa-top25-collect?nicheId=BIROU_ORGANIZARE&day=2026-09-25',{headers:{'x-mpr-internal-secret':'internal-test'}});
+  assert.equal((await (await handler(read)).json()).status,'PURGE_LOCKED');
+  assert.equal(calls,0);
+  assert.equal(store.rows.has('budget/2026-09-25'),false);
+});
+
+test('a lock raised during an in-flight collection prevents saving the fetched batch',async()=>{
+  const store=memoryStore();let calls=0;
+  const handler=createKeepaTop25CollectHandler({env:env(),now:()=>now,storeFactory:()=>store,fetchImpl:async()=>{
+    calls++;
+    if(calls===1)await store.setJSON('control/purge-lock',{state:'LOCKED'});
+    return Response.json(calls===1?list():products());
+  }});
+  const result=await handler(request());
+  assert.equal((await result.json()).status,'PURGE_LOCKED');
+  assert.equal(store.rows.has('candidates/2026-09-25/BIROU_ORGANIZARE'),false);
+  assert.equal(store.rows.has('receipts/2026-09-25/BIROU_ORGANIZARE'),false);
+});
+
+test('a lock raised during storage removes the just-written Keepa batch and receipt',async()=>{
+  const store=memoryStore(),write=store.setJSON.bind(store);
+  store.setJSON=async(key,data,options)=>{
+    const result=await write(key,data,options);
+    if(key.startsWith('candidates/'))await write('control/purge-lock',{state:'LOCKED'});
+    return result;
+  };
+  let calls=0;
+  const handler=createKeepaTop25CollectHandler({env:env(),now:()=>now,storeFactory:()=>store,fetchImpl:async()=>Response.json(++calls===1?list():products())});
+  assert.equal((await (await handler(request())).json()).status,'PURGE_LOCKED');
+  assert.equal(store.rows.has('candidates/2026-09-25/BIROU_ORGANIZARE'),false);
+  assert.equal(store.rows.has('receipts/2026-09-25/BIROU_ORGANIZARE'),false);
+  assert.equal(store.rows.has('control/purge-lock'),true);
+});
+
 test('unavailable persistence fails before consuming provider tokens',async()=>{
   let calls=0;
   const handler=createKeepaTop25CollectHandler({env:env(),now:()=>now,storeFactory:()=>{throw Error('store unavailable');},fetchImpl:async()=>{calls++;}});
   assert.equal((await handler(request())).status,503);assert.equal(calls,0);
 });
+
