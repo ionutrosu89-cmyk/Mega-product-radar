@@ -19,9 +19,10 @@ export function createTop25LiveIngestHandler({env=process.env,fetchImpl=fetch,no
     for(const raw of submitted){
       const platform=clean(raw?.platform).toUpperCase(),sourcePlatform=platform==='MPR_GENERIC'?clean(raw?.sourcePlatform).toUpperCase():platform;
       const rightsKey=publicDisplayApprovalKey(sourcePlatform,raw?.sourceKey||raw?.source_key);
+      const keepaActive=clean(raw?.sourceKey||raw?.source_key).toUpperCase()!=='KEEPA_BEST_SELLERS'||approved(env,'MPR_KEEPA_SUBSCRIPTION_ACTIVE');
       const normalized=platform==='MPR_GENERIC'
-        ?normalizeGenericTop25Snapshot(raw,raw?.reviews,{now:now(),rightsApproved:approved(env,rightsKey)})
-        :normalizeCurrentTop25Snapshot(raw,{now:now(),rightsApproved:approved(env,rightsKey)});
+        ?normalizeGenericTop25Snapshot(raw,raw?.reviews,{now:now(),rightsApproved:approved(env,rightsKey)&&keepaActive})
+        :normalizeCurrentTop25Snapshot(raw,{now:now(),rightsApproved:approved(env,rightsKey)&&keepaActive});
       if(!normalized.ok){results.push({nicheId:clean(raw?.nicheId||raw?.niche_id).toUpperCase(),platform,status:normalized.code,published:false});continue;}
       const persisted=await persistCurrentTop25Snapshot({env,fetchImpl,snapshot:normalized.snapshot});
       results.push({nicheId:normalized.snapshot.niche_id,platform,status:persisted.code,published:persisted.ok});
