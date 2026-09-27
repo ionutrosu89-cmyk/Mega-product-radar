@@ -12,11 +12,14 @@ const access=(env,credentials,terms,publicDisplay)=>credentials.some(key=>!prese
 const displayPlatforms=new Set(['ALIEXPRESS','EBAY','AMAZON_US','AMAZON_DE']);
 export function filterPublicDisplaySnapshots(snapshots,env){
   return snapshots.filter(row=>{
+    // Keepa permits a page display under a subscription, but forbids a public data API.
+    // This endpoint returns complete JSON snapshots, so it must never emit Keepa rows.
+    if(String(row?.source_key||'').toUpperCase()==='KEEPA_BEST_SELLERS'||Array.isArray(row?.products)&&row.products.some(product=>String(product?.sourceKey||product?.source_key||'').toUpperCase()==='KEEPA_BEST_SELLERS'))return false;
     const platform=String(row?.platform||'').toUpperCase();
     const sourcePlatform=platform==='MPR_GENERIC'?curatedSourcePlatform(row?.market,row?.source_key):platform;
     if(!displayPlatforms.has(sourcePlatform))return false;
     const flag=publicDisplayApprovalKey(sourcePlatform,row?.source_key);
-    return Boolean(flag&&approved(env,flag)&&(row?.source_key!=='KEEPA_BEST_SELLERS'||approved(env,'MPR_KEEPA_SUBSCRIPTION_ACTIVE')));
+    return Boolean(flag&&approved(env,flag));
   });
 }
 function buildServerAccessState(env){
@@ -67,3 +70,4 @@ export function createFreeCrossMarketHandler({fetch:fetchImpl=fetch,env=process.
 export {buildServerAccessState,loadCrossMarketSnapshots};
 export default createFreeCrossMarketHandler();
 export const config={path:'/api/free/cross-market',method:'GET'};
+
