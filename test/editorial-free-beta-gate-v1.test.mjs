@@ -10,7 +10,11 @@ const candidate=index=>({
   rationale:'Concept de cercetare, fără afirmații despre vânzări.',
   brandReview:{status:'GENERIC_CONCEPT_REVIEWED',reviewer:'Reviewer MPR',reviewedAt:'2026-09-27T10:00:00Z'},
   publication:{status:'APPROVED_RESEARCH',rightsBasis:'ORIGINAL_MPR_SUMMARY_AND_LINKS',reviewer:'Reviewer MPR',reviewedAt:'2026-09-27T11:00:00Z'},
-  evidence:[{type:'IDENTITY',sourceName:'Sursa de referință',sourceUrl:`https://example.com/product/${index}`,observedAt:'2026-09-27T09:00:00Z',retrievedAt:'2026-09-27T10:00:00Z',summary:'Identitatea conceptului generic a fost observată în listarea de referință.',usage:'LINK_WITH_ORIGINAL_SUMMARY',verification:'OBSERVED'}],
+  evidence:[
+    {type:'IDENTITY',sourceName:'Sursa de referință',sourceUrl:`https://example.com/product/${index}`,observedAt:'2026-09-27T09:00:00Z',retrievedAt:'2026-09-27T10:00:00Z',summary:'Identitatea conceptului generic a fost observată în listarea de referință.',usage:'LINK_WITH_ORIGINAL_SUMMARY',verification:'OBSERVED'},
+    {type:'RO_COMPARABLE',sourceName:'Ofertă RO',sourceUrl:`https://example.com/product/${index}`,observedAt:'2026-09-27T09:00:00Z',retrievedAt:'2026-09-27T10:00:00Z',summary:'O ofertă românească analogă a fost observată la data verificării.',usage:'LINK_WITH_ORIGINAL_SUMMARY',verification:'OBSERVED'},
+    {type:'DEMAND',demandScope:'PRODUCT_SPECIFIC',sourceName:'Interes independent',sourceUrl:`https://trends.google.com/trends/explore?geo=RO&q=concept-${index}`,observedAt:'2026-09-27T09:00:00Z',retrievedAt:'2026-09-27T10:00:00Z',summary:'Interesul pentru expresia precisă a produsului a fost observat; nu dovedește vânzări.',usage:'LINK_WITH_ORIGINAL_SUMMARY',verification:'OBSERVED'}
+  ],
 });
 const candidates=products=>({schema:'MPR_EDITORIAL_CANDIDATES_V1',products});
 const study={status:'PASS',participants:5,productFlowSessions:5,understandingPct:80,usefulnessPct:60,watchlistPct:80};
@@ -22,6 +26,7 @@ test('ten current reviewed cards in one niche only reach human review after real
   const result=evaluate(complete);
   assert.equal(result.status,'READY_FOR_HUMAN_REVIEW');
   assert.equal(result.reviewedCardCount,10);
+  assert.equal(result.betaEligibleCardCount,10);
   assert.deepEqual(result.blockers,[]);
   assert.equal(result.automaticLaunchAllowed,false);
   assert.equal(result.paidBillingEnabled,false);
@@ -55,4 +60,24 @@ test('technical coverage does not bypass human scope, rights, phone and study ga
   const result=evaluate({...complete,study:{status:'INCOMPLETE',participants:0},evidence:{criticalIssues:0}});
   for(const code of ['EDITORIAL_BETA_SCOPE_NOT_APPROVED','SOURCE_DISPLAY_RIGHTS_UNVERIFIED','PHYSICAL_PHONE_TEST_MISSING','REAL_BETA_THRESHOLDS_UNMET'])assert.ok(result.blockers.includes(code));
   assert.equal(result.status,'NO_GO');
+});
+
+test('ten reviewed identity-only cards cannot clear the beta quality threshold',()=>{
+  const thin=complete.editorialCandidates.products.map(row=>({...row,evidence:row.evidence.filter(item=>item.type==='IDENTITY')}));
+  const result=evaluate({...complete,editorialCandidates:candidates(thin)});
+  assert.equal(result.reviewedCardCount,10);
+  assert.equal(result.betaEligibleCardCount,0);
+  assert.ok(result.blockers.includes('EACH_CARD_NEEDS_PRODUCT_INTEREST_AND_RO_COMPARABLE'));
+});
+
+test('niche-level interest or same-site demand is not independent product interest',()=>{
+  const first=complete.editorialCandidates.products[0];
+  const nicheInterest={...first,evidence:first.evidence.map(row=>row.type==='DEMAND'?{...row,demandScope:'NICHE_CONTEXT'}:row)};
+  const sameSite={...first,evidence:first.evidence.map(row=>row.type==='DEMAND'?{...row,sourceUrl:'https://example.com/reviews/product-1'}:row)};
+  const merchantSubdomain={...first,evidence:first.evidence.map(row=>row.type==='DEMAND'?{...row,sourceUrl:'https://reviews.example.com/product-1'}:row)};
+  for(const bad of [nicheInterest,sameSite,merchantSubdomain]){
+    const result=evaluate({...complete,editorialCandidates:candidates([bad,...complete.editorialCandidates.products.slice(1)])});
+    assert.equal(result.betaEligibleCardCount,9);
+    assert.ok(result.blockers.includes('EACH_CARD_NEEDS_PRODUCT_INTEREST_AND_RO_COMPARABLE'));
+  }
 });

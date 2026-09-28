@@ -28,7 +28,7 @@ Această propunere restrânge prima lansare față de `MPR_MASTER_ROADMAP.md`, c
 | Migrările Supabase | Produse canonice, aliasuri, observații, furnizori, oferte, costuri, coadă de actualizare | Mapare la schema efectiv instalată și replay într-o bază curată înainte de extindere |
 | Login, onboarding, watchlist, studiu beta | Parcursul utilizatorului | Dovezile complete cu două conturi, utilizatori reali, recuperarea accesului și telefon fizic |
 
-Ultima validare locală, pe ramura de integrare pornită din PR #596: **1.854 teste trecute și build reușit**. Verificarea lanțului include 99 de migrări, dar nu echivalează cu replay-ul lor într-o bază nouă. Replay-ul curat din CI este consemnat mai jos. Schimbările pentru fluxul editorial sunt pregătite separat de checkoutul local de cercetare; publicarea rămâne blocată.
+Ultima validare locală, pe ramura de integrare pornită din PR #596: **1.857 teste trecute și build reușit**. Verificarea lanțului include 99 de migrări, dar nu echivalează cu replay-ul lor într-o bază nouă. Replay-ul curat a trecut în CI pentru commitul `01fbc8a`. Schimbările pentru fluxul editorial sunt pregătite separat de checkoutul local de cercetare; publicarea rămâne blocată.
 
 Actualizare 28 septembrie: [workflow-ul GitHub Clean Supabase Migration Replay](https://github.com/ionutrosu89-cmyk/Mega-product-radar/actions/runs/36301205936) a trecut pentru commitul `64e1607` din PR #596. Logul arată 99 de migrări aplicate și patru teste SQL trecute (izolarea watchlistului comercial, izolarea și tranzițiile Intervention Watch, izolarea preferințelor). Aceasta este dovadă pentru acel commit, nu pentru modificările locale încă necomise. Proiectul Supabase conectat raportează 135 de migrări istorice, iar repository-ul are 99 de fișiere consolidate; numele și numărul nu se compară direct. Rămâne de verificat paritatea schemei efective după integrarea schimbărilor locale.
 
@@ -159,13 +159,13 @@ Primul pachet P0 + P1 parțial este implementat: schema editorială, stagingul e
 
 ## 10. Criterii de lansare
 
-Recomand o **beta editorială Free limitată**, cu o nișă și minimum zece fișe utile revizuite. Este o propunere de schimbare a scopului primei lansări, nu îndeplinirea țintei 25 × 25. Codul actual rămâne `NO_GO` pentru lansarea completă.
+Recomand o **beta editorială Free limitată**, cu o nișă și minimum zece fișe utile revizuite. Fiecare fișă numărată pentru pragul beta trebuie să arate identitatea, interes specific produsului dintr-un domeniu independent și un comparabil românesc actual; un semnal la nivel de nișă nu îndeplinește această condiție. Este o propunere de schimbare a scopului primei lansări, nu îndeplinirea țintei 25 × 25. Codul actual rămâne `NO_GO` pentru lansarea completă.
 
 Pentru beta propusă sunt obligatorii: utilizarea permisă a fiecărui câmp public, date actuale pentru afirmațiile curente, etichete exacte, fluxul cu două conturi, testul pe telefon, recuperarea accesului, suportul și proba de restaurare. Minimum cinci utilizatori reali trebuie să parcurgă protocolul, cu minimum 80% înțelegere a dovezilor, 60% utilitate și 80% finalizare watchlist. Sunt necesare zero probleme critice și cel puțin un flux de produs confirmat. Mostrele sau testele comerciale care necesită bani rămân blocate la bugetul actual.
 
 Testăm emailul cu adrese externe echipei: [SMTP-ul implicit Supabase are restricții de destinatari și este destinat testării](https://supabase.com/docs/guides/auth/auth-smtp). Verificăm configurația instalată înainte să alegem un furnizor sau să promitem înregistrare publică.
 
-Lansarea completă Top25 păstrează toate probele de mai sus și condiția 25 de nișe × 25 de produse eligibile. Poarta completă nu se dezactivează. Poarta separată pentru beta editorială este implementată, dar rezultatul actual este `NO_GO`: 0/10 fișe revizuite, scopul beta neaprobat și probe operaționale lipsă. Niciun rezultat al porții nu publică automat site-ul. Plățile se analizează după utilitatea demonstrată.
+Lansarea completă Top25 păstrează toate probele de mai sus și condiția 25 de nișe × 25 de produse eligibile. Poarta completă nu se dezactivează. Poarta separată pentru beta editorială este implementată, dar rezultatul actual este `NO_GO`: 0/10 fișe revizuite și eligibile pentru beta, scopul beta neaprobat și probe operaționale lipsă. Niciun rezultat al porții nu publică automat site-ul. Plățile se analizează după utilitatea demonstrată.
 
 ## 11. Buget și operare
 

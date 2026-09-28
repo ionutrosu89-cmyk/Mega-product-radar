@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {buildEditorialRadarFeed,freshEditorialProducts,normalizeEditorialCandidate} from '../editorial-radar-v1.js';
+import {buildEditorialRadarFeed,freshEditorialProducts,normalizeEditorialCandidate,normalizeEditorialEvidence} from '../editorial-radar-v1.js';
 import {freeProductKey,readFreeShortlist,toggleFreeShortlist} from '../free-shortlist.js';
 
 const now=new Date('2026-09-27T12:00:00Z');
@@ -47,6 +47,13 @@ test('repeated observations from the same source expose the newest reviewed snap
   const feed=buildEditorialRadarFeed(input([{...candidate,evidence:[candidate.evidence[0],newer]}]),{now});
   assert.equal(feed.products[0].evidence.length,1);
   assert.equal(feed.products[0].evidence[0].summary,newer.summary);
+});
+
+test('niche search context cannot be laundered into product-specific demand',()=>{
+  const demand={...candidate.evidence[0],type:'DEMAND',sourceUrl:'https://trends.google.com/trends/explore?geo=RO&q=suport%20A4',demandScope:'NICHE_CONTEXT'};
+  assert.equal(normalizeEditorialEvidence(demand,{now}),null);
+  const specific=normalizeEditorialEvidence({...demand,demandScope:'PRODUCT_SPECIFIC'},{now});
+  assert.equal(specific.demandScope,'PRODUCT_SPECIFIC');
 });
 
 test('stable editorial key survives reload and keeps account scopes distinct',()=>{

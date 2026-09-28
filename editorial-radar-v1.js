@@ -24,13 +24,14 @@ const shortText=(value,max)=>{const text=clean(value);return text&&text.length<=
 export function normalizeEditorialEvidence(raw,{now=new Date()}={}){
   const type=clean(raw?.type).toUpperCase(),policy=EDITORIAL_EVIDENCE_TYPES[type];
   if(!policy||raw?.usage!=='LINK_WITH_ORIGINAL_SUMMARY'||raw?.verification!=='OBSERVED')return null;
+  if(type==='DEMAND'&&raw?.demandScope!=='PRODUCT_SPECIFIC')return null;
   const observedAt=validDate(raw.observedAt,now,policy.maxAgeDays);
   const retrievedAt=validDate(raw.retrievedAt,now,policy.maxAgeDays);
   const sourceUrl=validUrl(raw.sourceUrl);
   const sourceName=shortText(raw.sourceName,80),summary=shortText(raw.summary,240);
   if(!observedAt||!retrievedAt||Date.parse(retrievedAt)<Date.parse(observedAt)||!sourceUrl||!sourceName||!summary)return null;
   if(/\b(?:bestseller|v[aâ]nz[aă]ri confirmate|unit[aă][țt]i v[aâ]ndute|profit garantat)\b/i.test(summary))return null;
-  return {type,label:policy.label,sourceName,sourceUrl,observedAt,retrievedAt,summary,verification:'OBSERVED'};
+  return {type,label:policy.label,sourceName,sourceUrl,observedAt,retrievedAt,summary,verification:'OBSERVED',...(type==='DEMAND'?{demandScope:'PRODUCT_SPECIFIC'}:{})};
 }
 
 export function normalizeEditorialCandidate(raw,{now=new Date()}={}){
