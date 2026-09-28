@@ -2,11 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {evaluateQuoteNegotiation,rankNegotiationQuotes} from '../supplier-negotiation-engine.js';
 
+const quoteDates={quotedAt:new Date(Date.now()-86_400_000).toISOString(),manualVerifiedAt:new Date(Date.now()-82_800_000).toISOString(),quoteValidUntil:new Date(Date.now()+30*86_400_000).toISOString()};
+
 const baseQuote={
   productCanonicalKey:'car sunglasses magnetic visor holder',supplierName:'Supplier A',platform:'Alibaba',sourceUrl:'https://example.com/quote-a',supplierSkuOrModel:'MAG-01',exactProductConfirmed:true,
   unitPrice:0.5,currency:'USD',quoteQuantity:100,moq:20,sampleCost:1,sampleShippingToRomania:8,leadTimeDays:10,incoterm:'DAP',bulkShippingToRomania:20,shippingCurrency:'USD',
   cartonQuantity:100,cartonGrossWeightKg:8,cartonLengthCm:40,cartonWidthCm:30,cartonHeightCm:25,paymentTerms:'30/70',tradeAssuranceOrEquivalent:true,inspectionAccepted:true,
-  complianceStatus:'NOT_APPLICABLE',complianceEvidence:[],complianceNotApplicableBasis:'Reviewed product scope and applicable EU requirements; no product-specific conformity marking requirement identified. Basis recorded by verifier.',quotedAt:'2026-08-24T06:00:00Z',quoteValidUntil:'2026-09-24T06:00:00Z',manualVerifiedAt:'2026-08-24T06:05:00Z',manualVerifiedBy:'operator'
+  complianceStatus:'NOT_APPLICABLE',complianceEvidence:[],complianceNotApplicableBasis:'Reviewed product scope and applicable EU requirements; no product-specific conformity marking requirement identified. Basis recorded by verifier.',...quoteDates,manualVerifiedBy:'operator'
 };
 
 test('incomplete quote never reaches economics screening',()=>{

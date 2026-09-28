@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {buildFreeSignalResearchFeed,normalizeFreeSignalObservation} from '../free-signal-research-v1.js';
+import {buildEditorialRadarFeed} from '../editorial-radar-v1.js';
 const root=process.cwd(),out=path.join(root,'_site');
 await fs.rm(out,{recursive:true,force:true});
 await fs.mkdir(out,{recursive:true});
@@ -22,11 +24,19 @@ for(const file of[
   'saas-config.js','supabase-client.js','workspace-client.js','cloud-sync.js','billing-plans.js','billing-client.js','free-beta-mode.js','saas-shell.js','commercial-access.js','commercial-decision-client.js','commercial-decision-engine.js','commercial-identity-v1.js','product-evidence-decision.js','evidence-status-ui.js','evidence-stage-policy.js','evidence-freshness.js','deployment-readiness-state.js','market-trend-ui.js','free-intelligence-ui.js','profit-engine-v2.js','product-ro.js','opportunity-v5.js','opportunity-ux-v1.js','premium-ui.css','contrast-fix.css','customer-ui.css','customer-navigation-access.js','customer-shell.js','login.html','login.js','account.html','account.js',
   'golden-pipeline.html','commercial-validation.html','commercial-validation.js','commercial-hardening-live.json','commercial-observations.json','golden-pipeline-live.json','finalist-economics-live.json','opportunity-shortlist-live.json','paid-budget-live.json',
   'home.html','home.js','onboarding.html','onboarding.js','onboarding-persistence.js','account-browser-storage.js','plan-recommendation-v1.js','seller-preferences.js','journey-events.js','free-demand.js',
-  'top25.html','top25.js','free-top25-expanded-registry.js','free-cross-market-registry.js','free-shortlist.js','brand-policy-v1.js',
+  'top25.html','top25.js','editorial-radar.html','editorial-radar.js','editorial-radar-v1.js','free-top25-expanded-registry.js','free-top25-live-taxonomy-v1.js','free-cross-market-registry.js','free-shortlist.js','free-signal-research-v1.js','brand-policy-v1.js',
   'discover.html','discover.js','discover-ranking.js','commercial-radar.html','commercial-radar.js','commercial-product.html','commercial-product.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js','commercial-launch.html','commercial-launch.js','academy.html','academy.js',
   'pricing.html','pricing.js','beta.html','beta.js','beta-study.html','beta-study.js','beta-study-answers.js','feedback.html','feedback.js','beta-feedback.html','beta-feedback.js','privacy.html','terms.html','sources.html',
   'beta-analytics.html','beta-analytics.js','beta-ops.html','beta-ops.js','beta-participants.html','beta-participants.js','launch-readiness.html','launch-readiness.js','deployment-readiness.html','deployment-readiness.js','STRIPE_SANDBOX_RUNBOOK.md','BETA_LAUNCH_CHECKLIST.md'
 ])await copyIfExists(file);
+const freeSignalInput=JSON.parse(await fs.readFile(path.join(root,'data/free-signal-observations-v1.json'),'utf8'));
+if(freeSignalInput.schema!=='MPR_FREE_SIGNAL_OBSERVATIONS_V1'||!Array.isArray(freeSignalInput.observations))throw new Error('FREE_SIGNAL_INPUT_INVALID');
+const freeSignalFeed=buildFreeSignalResearchFeed(freeSignalInput);
+if(freeSignalInput.observations.some(row=>!normalizeFreeSignalObservation(row)))throw new Error('FREE_SIGNAL_REVIEW_OR_FRESHNESS_REQUIRED');
+await fs.writeFile(path.join(out,'free-signal-observations-v1.json'),JSON.stringify(freeSignalFeed)+'\n');
+const editorialInput=JSON.parse(await fs.readFile(path.join(root,'data/editorial-radar-candidates-v1.json'),'utf8'));
+const editorialFeed=buildEditorialRadarFeed(editorialInput);
+await fs.writeFile(path.join(out,'editorial-radar-v1.json'),JSON.stringify(editorialFeed)+'\n');
 
 // P0 policy: supplier candidates, RFQ dispatch payloads, manual evidence and negotiation dossiers are private server-side data.
 // Never copy supplier-candidates/, supplier-rfq-dispatch/ or supplier-evidence/ into the customer static bundle.
@@ -36,7 +46,7 @@ for(const forbidden of['supplier-candidates','supplier-rfq-dispatch','supplier-e
 }
 
 const lightBodyPattern=/body\s*\{[^}]*background\s*:\s*(?:var\(--bg\)|#f[0-9a-f]{5}|#fff(?:fff)?|white)/i;
-const customerPages=new Set(['home.html','onboarding.html','top25.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','academy.html','account.html','intervention-watch.html']);
+const customerPages=new Set(['home.html','onboarding.html','top25.html','editorial-radar.html','discover.html','commercial-radar.html','commercial-product.html','commercial-watchlist.html','commercial-launch.html','academy.html','account.html','intervention-watch.html']);
 for(const entry of await fs.readdir(out)){
   if(!entry.endsWith('.html'))continue;
   const target=path.join(out,entry);let html=await fs.readFile(target,'utf8');

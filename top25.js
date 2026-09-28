@@ -3,6 +3,7 @@ import {installFreeDemandTracking,trackFreeDemand} from './free-demand.js';
 import {FREE_CROSS_MARKET_PLATFORMS} from './free-cross-market-registry.js';
 import {freeProductKey,readFreeShortlist,toggleComparison,toggleFreeShortlist} from './free-shortlist.js';
 import {classifyPublicBrandGate,publicCommerciallyEligible} from './brand-policy-v1.js';
+import {buildFreeSignalResearchFeed,freeResearchLinks,freshPublishedFreeSignalResearchFeed} from './free-signal-research-v1.js';
 import {getCurrentSession} from './supabase-client.js';
 
 const $=selector=>document.querySelector(selector);
@@ -15,6 +16,7 @@ const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'
 const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',SUBSCRIPTION_REQUIRED:'ABONAMENT NECESAR',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE',WAITING_FOR_REVIEWED_GENERIC_LISTS:'AȘTEAPTĂ 25 PRODUSE REVIZUITE'}[status]||'ÎN PREGĂTIRE');
 
 let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='MPR_GENERIC';
+let freeSignals=buildFreeSignalResearchFeed({observations:[]});
 let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
 
 async function refreshShortlistScope(){
@@ -126,6 +128,16 @@ function emptyState(platform){
   return `<div class="empty-state"><b>${esc(platform.label)} nu este încă publicat pentru ${esc(current.label)}.</b><p>Nu completăm spațiul cu rezultate inventate. Publicăm lista numai când avem 25 poziții recente, sursă permisă și etichetare corectă a semnalului.</p><button type="button" data-empty-request="${esc(platform.id)}">Anunță interesul pentru această listă</button></div>`;
 }
 
+function renderFreeResearch(){
+  const links=freeResearchLinks(current?.id);
+  const rows=freeSignals.observations.filter(row=>row.nicheId===current?.id);
+  $('#freeResearchStatus').textContent=rows.length
+    ?`${rows.length} observații editoriale recente, cu sursă și dată. Sunt semnale de cercetare, nu vânzări confirmate și nu completează Top 25.`
+    :'Încă nu există observații gratuite revizuite pentru această nișă. Sursele de mai jos pot fi consultate fără abonament; Top 25 rămâne nepublicat până la aprobarea produselor și a drepturilor.';
+  $('#freeResearchLinks').innerHTML=(links?.sources||[]).map(source=>`<a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer" title="${esc(source.note)}">${esc(source.label)} ↗</a>`).join('');
+  $('#freeResearchList').innerHTML=rows.map(row=>`<article class="free-research-item"><b>${esc(row.concept||row.sourceLabel)} · ${esc(row.sourceLabel)}</b><p>${esc(row.summary)}</p><small>${esc(row.claim==='SEARCH_INTEREST'?'Interes relativ de căutare':'Activitate publicitară observată')} · verificat ${esc(fmtDate(row.observedAt))} · revizor ${esc(row.reviewer)}</small><a class="source-link" href="${esc(safeUrl(row.sourceUrl))}" target="_blank" rel="noopener noreferrer">Vezi sursa</a></article>`).join('');
+}
+
 async function render({trackSearch=false}={}){
   if(!current)return;
   const niche=current,platform=currentPlatform(),allSourceProducts=platformProducts(),sourceProducts=allSourceProducts,excludedCount=allSourceProducts.filter(product=>!publicCommerciallyEligible(product)).length,products=filteredProducts(sourceProducts);
@@ -137,12 +149,15 @@ async function render({trackSearch=false}={}){
   $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} marcate ca excluse comercial`:''}`;
   $('#trackingStatus').textContent=`${statusLabel(platform.status)} · prospețime maximă ${platform.freshnessDays||'—'} zile`;
   $('#grid').innerHTML=products.map(raw=>card(raw,null,null,null,raw.observedAt)).join('')||emptyState(platform);
+  renderFreeResearch();
   drawCompareTray();
   if(trackSearch)trackJourneyEvent('TOP25_SEARCHED',{nicheId:niche.id,nicheLabel:niche.label,productCount:sourceProducts.length,evidenceMode:platform.id});
 }
 
 async function loadData(){
-  const [top25Result,crossResult]=await Promise.allSettled([fetch('/api/free/top25',{headers:{accept:'application/json'},cache:'no-store'}).then(async response=>({response,payload:await response.json()})),fetch('/api/free/cross-market',{headers:{accept:'application/json'},cache:'no-store'}).then(async response=>({response,payload:await response.json()}))]);
+  const [top25Result,crossResult,signalResult]=await Promise.allSettled([fetch('/api/free/top25',{headers:{accept:'application/json'},cache:'no-store'}).then(async response=>({response,payload:await response.json()})),fetch('/api/free/cross-market',{headers:{accept:'application/json'},cache:'no-store'}).then(async response=>({response,payload:await response.json()})),fetch('/free-signal-observations-v1.json',{headers:{accept:'application/json'},cache:'no-store'}).then(async response=>({response,payload:await response.json()}))]);
+  const signalPayload=signalResult.status==='fulfilled'&&signalResult.value.response.ok?signalResult.value.payload:{observations:[]};
+  freeSignals=freshPublishedFreeSignalResearchFeed(signalPayload);
   const top25=top25Result.status==='fulfilled'?top25Result.value:null;if(!top25?.response.ok||!top25.payload?.ok||!Array.isArray(top25.payload.niches))return false;
   niches=top25.payload.niches.slice(0,25).map(niche=>({...niche,id:niche.id||niche.nicheKey,emoji:niche.emoji||'📊'}));current=niches[0]||null;
   const market=crossResult.status==='fulfilled'?crossResult.value:null;
