@@ -63,8 +63,20 @@ jobs:
         run: |
           mkdir -p artifacts
           jq -n --arg expectedSha "$GITHUB_SHA" '{action:"targets",expectedSha:$expectedSha,limit:25}' >/tmp/targets-request.json
-          curl --fail-with-body --retry 2 --retry-delay 2 --retry-all-errors -sS -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' --data-binary @/tmp/targets-request.json \
-            'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1' | tee artifacts/amazon-need-history-targets.json
+          for attempt in 1 2 3; do
+            if curl --fail-with-body --max-time 20 -sS \
+              --output artifacts/amazon-need-history-targets.json \
+              -H "Authorization: Bearer $OIDC_TOKEN" -H 'Content-Type: application/json' \
+              --data-binary @/tmp/targets-request.json \
+              'https://xqzsbebbuovcyeyxdqxo.supabase.co/functions/v1/github-oidc-amazon-need-history-v1'; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo 'TARGETS_REQUEST_FAILED_AFTER_RETRIES' >&2
+              exit 1
+            fi
+            sleep 2
+          done
           jq -e '.ok == true and .schema == "MPR_AMAZON_NEED_HISTORY_TARGETS_V1" and (.targets|length) == 25' artifacts/amazon-need-history-targets.json >/dev/null
           jq -e 'all(.targets[]; (.existing_observation_count|tonumber) <= 1)' artifacts/amazon-need-history-targets.json >/dev/null
           jq -e 'all(.targets[]; (.external_id|startswith("B")))' artifacts/amazon-need-history-targets.json >/dev/null
