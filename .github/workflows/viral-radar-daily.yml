@@ -29,7 +29,7 @@ jobs:
       MPR_VIRAL_ROMANIA_ROUTING_APPROVED: ${{ vars.MPR_VIRAL_ROMANIA_ROUTING_APPROVED }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
       - name: Run guarded viral pipeline
