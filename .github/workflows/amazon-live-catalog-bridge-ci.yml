@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -46,7 +46,7 @@ jobs:
       AMAZON_LIVE_ARTIFACT_ID: '9735301241'
       AMAZON_LIVE_ARTIFACT_SHA256: 'b232b829b4e8cc0451171650d93f8a6991cbe65658778ae8ada6e6f5a4e1b664'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 24

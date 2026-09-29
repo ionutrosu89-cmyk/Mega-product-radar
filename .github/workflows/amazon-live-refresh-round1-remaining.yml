@@ -20,7 +20,7 @@ jobs:
       matrix:
         offset: [100,200,300,400,500,600,700,800,900]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -53,7 +53,7 @@ jobs:
     if: always() && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[EXECUTE_AMAZON_REMAINING_ZERO_COST]'))
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v4
         with:
           pattern: amazon-live-round1-*

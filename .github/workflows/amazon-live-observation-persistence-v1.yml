@@ -23,7 +23,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Validate pinned live catalog contract
         run: |
           test "$(git hash-object amazon-live-catalog.json)" = "b3b97975dbf8e953f8286037d0ba2c52a68f9442"
@@ -38,7 +38,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Mint scoped GitHub OIDC token
         id: oidc
         shell: bash
