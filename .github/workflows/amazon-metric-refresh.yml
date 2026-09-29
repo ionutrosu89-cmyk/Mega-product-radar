@@ -1,25 +1,24 @@
 name: Amazon Metric Refresh
 
+# A valid baseline artifact and source-access review are required before a refresh.
+# Do not run a public-page probe on a timer with an expired baseline.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'amazon-metric-comparison-v1.js'
-      - 'scripts/run-amazon-metric-refresh.mjs'
-      - 'test/amazon-metric-comparison-v1.test.mjs'
-      - '.github/workflows/amazon-metric-refresh.yml'
-  schedule:
-    - cron: '30 17 * * *'
   workflow_dispatch:
     inputs:
       baseline_run_id:
-        description: 'Run containing amazon-round1-canonical-bridge artifact'
-        required: false
-        default: '33324435777'
+        description: 'Run containing a current amazon-round1-canonical-bridge artifact'
+        required: true
+        type: string
+      source_access_reviewed:
+        description: 'Confirm current source terms permit this internal public-page probe'
+        required: true
+        default: false
+        type: boolean
       min_interval_ms:
         description: 'Minimum interval before comparison'
         required: false
         default: '86400000'
+        type: string
 
 permissions:
   contents: read
@@ -27,6 +26,7 @@ permissions:
 
 jobs:
   refresh:
+    if: inputs.source_access_reviewed == true
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -42,13 +42,13 @@ jobs:
           name: amazon-round1-canonical-bridge
           path: artifacts/amazon-metric-source
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.inputs.baseline_run_id || '33324435777' }}
+          run-id: ${{ inputs.baseline_run_id }}
       - name: Run gated metric refresh
         run: >-
           node scripts/run-amazon-metric-refresh.mjs
           --input=artifacts/amazon-metric-source/amazon-round1-canonical-bridge.json
           --out=artifacts/amazon-metric-refresh/amazon-metric-comparison.json
-          --minIntervalMs=${{ github.event.inputs.min_interval_ms || '86400000' }}
+          --minIntervalMs=${{ inputs.min_interval_ms || '86400000' }}
           --concurrency=5
       - name: Validate fail-closed metric contract
         run: |
