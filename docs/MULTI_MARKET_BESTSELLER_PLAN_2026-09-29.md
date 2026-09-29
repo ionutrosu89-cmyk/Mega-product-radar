@@ -11,7 +11,7 @@ O listă capturată o dată pe lună se numește „snapshot observat la data X�
 - Există 25 de nișe în `free-top25-expanded-registry.js` și șase interogări EN/RO pe nișă în `free-top25-live-taxonomy-v1.js`.
 - Toate mapările oficiale de categorii Amazon/eBay/AliExpress sunt încă `null` și cer revizie umană. Un query nu este echivalent cu o categorie bestseller.
 - `top25.html` și `top25.js` au căutarea nișei, taburi pe surse și comparația produselor. Acest pas face vizibile direct și sursele încă nepublicate și afișează data observației pentru clasamentele publicate.
-- `current_top25_snapshots_v1` și `/api/free/cross-market` acceptă numai 25 poziții complete, recente și cu drepturi aprobate. Prospețimea actuală este 72 de ore, deci nu există încă un istoric public bilunar/lunar.
+- `current_top25_snapshots_v1` acceptă la ingestie numai 25 poziții complete observate în ultimele 72 de ore și cu drepturi aprobate. `/api/free/cross-market` retrage automat orice listă când cea mai veche poziție depășește 30 de zile. La 14 zile lista este marcată ca scadentă pentru reîmprospătare. Nu există încă un istoric public bilunar/lunar.
 - Accesul Developer eBay și cheile API nu confirmă accesul Production la Buy Marketing API. Amazon Creators API oferă căutare și BSR pe produs, dar nu furnizează prin `SearchItems` un Top 25 al categoriei sortat după vânzări.
 
 ## Fluxul de construcție
@@ -22,7 +22,7 @@ O listă capturată o dată pe lună se numește „snapshot observat la data X�
 4. **Validare:** se resping rândurile duplicate, rangurile lipsă, URL-urile greșite, seturile sub 25, drepturile absente și datele expirate. Eșecul unui refresh nu înlocuiește ultimul snapshot valid, dar acesta se marchează expirat.
 5. **Istoric:** se introduce un store separat, append-only, pentru snapshoturi autorizate. Cheia logică este `(platformă, piață, nișă, categorie sursă, observat_la)`. API-ul public expune doar câmpurile permise de licență; un istoric de date cu drepturi revocate este retras din API.
 6. **Interfață:** implicit se arată ultima observație validă, apoi selectorul „snapshot anterior”. Datele de observație și actualizare sunt afișate separat. Amazon, eBay și AliExpress rămân liste independente; Consensus compară concepte numai când există dovezi din cel puțin două surse.
-7. **Ritm:** ținta este un refresh la 14 zile pentru sursele care îl permit și lunar unde licența sau limitele API îl cer. Frecvența se configurează separat de expirarea datelor. Un job ratat ridică alertă; nu transformă un snapshot vechi în „recent”.
+7. **Ritm:** schedulerul existent verifică zilnic expirarea și, numai dacă drepturile sunt aprobate, încearcă refresh eBay/AliExpress. 14 zile este pragul de reîmprospătare vizibil în API și UI, iar 30 de zile este limita strictă de afișare. Înainte de activarea colectării trebuie stabilite quota și costul fiecărei surse și adăugată limitarea apelurilor la ritmul permis de ea. Un job ratat nu transformă un snapshot vechi în „recent”; după 30 de zile lista dispare.
 
 ## Ordinea realistă de livrare
 

@@ -43,8 +43,33 @@ test('a live platform ranking is published only with exactly 25 fresh valid posi
   assert.equal(normalized.products.length,25);
   assert.equal(normalized.platform,'EBAY');
   assert.equal(normalized.products[0].salesEvidenceClass,'PLATFORM_RANK_NOT_UNIT_SALES');
+  assert.equal(normalized.refreshDue,false);
+  assert.equal(normalized.refreshDueAt,'2026-09-17T06:00:00.000Z');
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,products:snapshot.products.slice(0,24)},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,reviewed_at:'2026-08-01'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+});
+
+test('a Top25 remains visible while refresh is due and disappears after 30 days',()=>{
+  const snapshot={niche_id:crossMarketSnapshotKey('EBAY','AUTO'),reviewed_at:'2026-09-03',products:Array.from({length:25},(_,i)=>product(i+1))};
+  const due=buildFreeCrossMarketExperience({snapshots:[snapshot],now:new Date('2026-09-17T06:00:00Z')});
+  assert.equal(due.rankings[0].refreshDue,true);
+  assert.equal(due.coverage.refreshDueRankings,1);
+  assert.equal(due.policy.refreshTargetDays,14);
+  assert.equal(due.policy.maxObservationAgeDays,30);
+  assert.equal(normalizeCrossMarketSnapshot(snapshot,{now:new Date('2026-10-03T06:00:00Z')})?.products.length,25);
+  const expired=buildFreeCrossMarketExperience({snapshots:[snapshot],now:new Date('2026-10-03T06:00:00.001Z')});
+  assert.equal(expired.rankings.length,0);
+  assert.equal(expired.coverage.livePositions,0);
+});
+
+test('a recent snapshot cannot mask one product observation older than 30 days',()=>{
+  const products=Array.from({length:25},(_,i)=>product(i+1));
+  products[0].observedAt='2026-09-01T06:00:00Z';
+  const snapshot={niche_id:crossMarketSnapshotKey('EBAY','AUTO'),reviewed_at:'2026-09-30',products};
+  const current=normalizeCrossMarketSnapshot(snapshot,{now:new Date('2026-10-01T06:00:00Z')});
+  assert.equal(current.oldestObservedAt,'2026-09-01T06:00:00Z');
+  assert.equal(current.refreshDue,true);
+  assert.equal(normalizeCrossMarketSnapshot(snapshot,{now:new Date('2026-10-01T06:00:00.001Z')}),null);
 });
 
 test('current snapshot rows require approved rights and current freshness',()=>{

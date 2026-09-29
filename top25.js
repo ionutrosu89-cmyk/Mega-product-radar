@@ -150,8 +150,8 @@ async function render({trackSearch=false}={}){
   $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} marcate ca excluse comercial`:''}`;
   const market=sourceProducts[0]?.market;
   $('#trackingStatus').textContent=ranking
-    ?`${statusLabel(platform.status)} · clasament observat ${fmtDate(ranking.reviewedAt||sourceProducts[0]?.observedAt)}${market?` · piață ${market}`:''} · ${sourceProducts[0]?.rankingBasis||platform.rankingBasis} · poziții observate, nu vânzări lunare`
-    :`${statusLabel(platform.status)} · fără clasament publicat pentru această nișă · verificăm sursa și dreptul de afișare`;
+    ?`${statusLabel(platform.status)} · cea mai veche observație ${fmtDate(ranking.oldestObservedAt||ranking.reviewedAt||sourceProducts[0]?.observedAt)}${market?` · piață ${market}`:''} · ${sourceProducts[0]?.rankingBasis||platform.rankingBasis} · ${ranking.refreshDue?'reîmprospătare scadentă':`refresh țintă ${fmtDate(ranking.refreshDueAt)}`} · poziții observate, nu vânzări lunare`
+    :`${statusLabel(platform.status)} · fără clasament publicat pentru această nișă · listele mai vechi de 30 de zile sunt retrase automat`;
   $('#grid').innerHTML=products.map(raw=>card(raw,null,null,null,raw.observedAt)).join('')||emptyState(platform);
   renderFreeResearch();
   drawCompareTray();

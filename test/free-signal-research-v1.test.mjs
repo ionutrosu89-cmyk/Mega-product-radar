@@ -20,6 +20,7 @@ test('only recent reviewed original summaries with a matching official source ar
   assert.equal(normalizeFreeSignalObservation({...observation,publicStatus:'PENDING'},{now}),null);
   assert.equal(normalizeFreeSignalObservation({...observation,sourceUrl:'https://example.com/'},{now}),null);
   assert.equal(normalizeFreeSignalObservation({...observation,observedAt:'2026-07-01T00:00:00Z'},{now}),null);
+  assert.equal(normalizeFreeSignalObservation({...observation,observedAt:'2026-08-27T11:59:59Z',periodEnd:'2026-08-27'},{now}),null);
   assert.equal(normalizeFreeSignalObservation({...observation,claim:'VERIFIED_SALES'},{now}),null);
   assert.equal(normalizeFreeSignalObservation({...observation,summary:'Bestseller cu vânzări confirmate'},{now}),null);
   assert.equal(normalizeFreeSignalObservation({...observation,sourceUrl:'https://trends.google.com/trends/explore?geo=US&q=organizator%20birou'},{now}),null);

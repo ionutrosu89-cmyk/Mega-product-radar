@@ -3,13 +3,14 @@ import {aliexpressPublicDisplayAccessState} from './_aliexpress-hot-products.mjs
 import {createEbayCrossMarketRefreshHandler} from './ebay-cross-market-refresh.mjs';
 import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 import {markExpiredCurrentTop25Snapshots} from './_top25-current-store.mjs';
+import {FREE_TOP25_MAX_AGE_DAYS} from '../../free-cross-market-registry.js';
 
 const clean=value=>String(value??'').trim();
 
 export function createTop25LiveRefreshHandler({env=process.env,fetchImpl=fetch,now=()=>new Date(),logger=console}={}){
   return async ()=>{
     const checkedAt=now();
-    const expiry=await markExpiredCurrentTop25Snapshots({env,fetchImpl,cutoff:new Date(checkedAt.getTime()-72*3_600_000)}).catch(()=>({code:'EXPIRY_MAINTENANCE_FAILED'}));
+    const expiry=await markExpiredCurrentTop25Snapshots({env,fetchImpl,cutoff:new Date(checkedAt.getTime()-FREE_TOP25_MAX_AGE_DAYS*86_400_000)}).catch(()=>({code:'EXPIRY_MAINTENANCE_FAILED'}));
     const summary={checkedAt:checkedAt.toISOString(),freshnessMaintenance:expiry.code,providers:[],purchaseAuthorized:false};
     for(const [provider,access,createHandler,path] of [
       ['EBAY',ebayPublicDisplayAccessState(env),createEbayCrossMarketRefreshHandler,'ebay-cross-market-refresh'],

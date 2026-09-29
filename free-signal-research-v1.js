@@ -6,7 +6,7 @@ const normalizeTerm=value=>clean(value).normalize('NFKC').replace(/\s+/g,' ').to
 const byNiche=new Map(FREE_TOP25_LIVE_TAXONOMY.map(niche=>[niche.id,niche]));
 
 export const FREE_RESEARCH_SOURCES=Object.freeze({
-  GOOGLE_TRENDS:Object.freeze({label:'Google Trends',claim:'SEARCH_INTEREST',maxAgeDays:35,host:'trends.google.com',url:'https://trends.google.com/trends/',note:'Interes relativ de căutare; nu arată numărul de vânzări.'}),
+  GOOGLE_TRENDS:Object.freeze({label:'Google Trends',claim:'SEARCH_INTEREST',maxAgeDays:30,host:'trends.google.com',url:'https://trends.google.com/trends/',note:'Interes relativ de căutare; nu arată numărul de vânzări.'}),
   TIKTOK_CREATIVE_CENTER:Object.freeze({label:'TikTok Creative Center',claim:'AD_ACTIVITY',maxAgeDays:7,host:'ads.tiktok.com',url:'https://ads.tiktok.com/creative/creativeCenter',note:'Produse și reclame promovate; popularitatea reclamei nu dovedește vânzări.'}),
   META_AD_LIBRARY:Object.freeze({label:'Meta Ad Library',claim:'AD_ACTIVITY',maxAgeDays:7,host:'facebook.com',url:'https://www.facebook.com/ads/library/',note:'Reclame active Facebook și Instagram; prezența unei reclame nu dovedește cerere sau vânzări.'})
 });
