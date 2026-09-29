@@ -85,7 +85,10 @@ test('Top 25 UI publishes only current platform evidence',async()=>{
   assert.match(js,/FAIL-CLOSED/);
   assert.match(js,/FREE_TOP25_VIEW/);
   assert.match(html,/25 de nișe pentru produse recente/i);
-  assert.match(html,/Topuri live în pregătire/i);
+  assert.match(html,/Alege marketplace-ul și compară dovezile/i);
+  assert.match(html,/Alte surse pentru validare/i);
+  assert.match(js,/platform\.kind!=='SIGNAL'/);
+  assert.match(js,/clasament observat/);
   assert.match(js,/brand gate/i);
   assert.doesNotMatch(js,/tse\d?\.mm\.bing\.net/i);
   assert.doesNotMatch(js,/FREE_TOP25_NICHES/);
