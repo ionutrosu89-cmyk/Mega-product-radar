@@ -15,7 +15,7 @@ const fmtMetric=metric=>{if(!metric)return '—';const value=Number(metric.value
 const evidenceTypeLabel=type=>({EXACT_RANK:'RANK EXACT OBSERVAT',EXACT_PRODUCT:'PRODUS LISTAT',HISTORICAL_PRODUCT:'PRODUS ISTORIC LICENȚIAT',SEARCH_VOLUME:'VOLUM CĂUTĂRI',TREND_SIGNAL:'SEMNAL TREND',EDITORIAL_SIGNAL:'SEMNAL EDITORIAL',CATEGORY_EVIDENCE:'DOVADĂ CATEGORIE'}[type]||'DOVADĂ PUBLICĂ');
 const statusLabel=status=>({LIVE:'LIVE',ACCESS_REQUIRED:'ACCES NECESAR',TERMS_REVIEW_REQUIRED:'TERMENI ÎN REVIZIE',PUBLIC_DISPLAY_RIGHTS_REQUIRED:'DREPTURI DE AFIȘARE NECESARE',SUBSCRIPTION_REQUIRED:'ABONAMENT NECESAR',API_AVAILABILITY_REVIEW_REQUIRED:'API ÎN VERIFICARE',READY_TO_COLLECT:'GATA DE COLECTARE',SUPPORTING_SIGNAL_ONLY:'SEMNAL DE VALIDARE',WAITING_FOR_TWO_LIVE_PLATFORMS:'AȘTEAPTĂ 2 SURSE',WAITING_FOR_REVIEWED_GENERIC_LISTS:'AȘTEAPTĂ 25 PRODUSE REVIZUITE'}[status]||'ÎN PREGĂTIRE');
 
-let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='MPR_GENERIC';
+let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,rankings:[],coverage:{}},selectedPlatform='AMAZON_US';
 let freeSignals=buildFreeSignalResearchFeed({observations:[]});
 let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
 
@@ -54,12 +54,13 @@ function installNicheTabs(){
 }
 
 function drawMarketTabs(){
-  const available=crossMarket.platforms.filter(platform=>platform.id==='MPR_GENERIC'||platform.status==='LIVE');
-  const upcoming=crossMarket.platforms.filter(platform=>!available.includes(platform));
-  $('#marketTabs').innerHTML=available.map(platform=>`<button type="button" data-platform="${esc(platform.id)}" class="${platform.id===selectedPlatform?'active':''}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
-  $('#upcomingPlatforms').innerHTML=upcoming.map(platform=>`<button type="button" data-platform="${esc(platform.id)}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
-  $('#upcomingSummary').textContent=`Topuri live în pregătire (${upcoming.length})`;
-  $('#upcoming').hidden=upcoming.length===0;
+  const order=['AMAZON_US','EBAY','ALIEXPRESS','AMAZON_DE','MPR_GENERIC','CONSENSUS'];
+  const rankings=crossMarket.platforms.filter(platform=>platform.kind!=='SIGNAL').sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+  const signals=crossMarket.platforms.filter(platform=>platform.kind==='SIGNAL');
+  $('#marketTabs').innerHTML=rankings.map(platform=>`<button type="button" data-platform="${esc(platform.id)}" class="${platform.id===selectedPlatform?'active':platform.status==='LIVE'?'':'pending'}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
+  $('#upcomingPlatforms').innerHTML=signals.map(platform=>`<button type="button" data-platform="${esc(platform.id)}"><span>${esc(platform.emoji)}</span><b>${esc(platform.shortLabel)}</b><small>${esc(statusLabel(platform.status))}</small></button>`).join('');
+  $('#upcomingSummary').textContent=`Alte surse pentru validare (${signals.length})`;
+  $('#upcoming').hidden=signals.length===0;
   drawMarketContext();
 }
 
@@ -140,14 +141,17 @@ function renderFreeResearch(){
 
 async function render({trackSearch=false}={}){
   if(!current)return;
-  const niche=current,platform=currentPlatform(),allSourceProducts=platformProducts(),sourceProducts=allSourceProducts,excludedCount=allSourceProducts.filter(product=>!publicCommerciallyEligible(product)).length,products=filteredProducts(sourceProducts);
+  const niche=current,platform=currentPlatform(),ranking=currentRanking(),allSourceProducts=platformProducts(),sourceProducts=allSourceProducts,excludedCount=allSourceProducts.filter(product=>!publicCommerciallyEligible(product)).length,products=filteredProducts(sourceProducts);
   $('#nicheTitle').textContent=`${niche.emoji} ${platform.shortLabel} · ${niche.label}`;
   $('#nicheText').textContent=platform.id==='MPR_GENERIC'
     ?sourceProducts.length?'25 de concepte distincte aprobate manual; rangul MPR și rangul sursei sunt separate.':'Lista generică așteaptă 25 de produse distincte, revizuite și publicabile.'
     :sourceProducts.length?`${sourceProducts.length} poziții brute ale sursei; ${excludedCount} branduri marcate ca excluse comercial.`:'Publicăm clasamentul sursei când există 25 de poziții recente și drept de afișare.';
   $('#coverage').textContent=`${allSourceProducts.length}/25 ${platform.id==='MPR_GENERIC'?'GENERIC':'LIVE'}`;
   $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} marcate ca excluse comercial`:''}`;
-  $('#trackingStatus').textContent=`${statusLabel(platform.status)} · prospețime maximă ${platform.freshnessDays||'—'} zile`;
+  const market=sourceProducts[0]?.market;
+  $('#trackingStatus').textContent=ranking
+    ?`${statusLabel(platform.status)} · clasament observat ${fmtDate(ranking.reviewedAt||sourceProducts[0]?.observedAt)}${market?` · piață ${market}`:''} · ${sourceProducts[0]?.rankingBasis||platform.rankingBasis} · poziții observate, nu vânzări lunare`
+    :`${statusLabel(platform.status)} · fără clasament publicat pentru această nișă · verificăm sursa și dreptul de afișare`;
   $('#grid').innerHTML=products.map(raw=>card(raw,null,null,null,raw.observedAt)).join('')||emptyState(platform);
   renderFreeResearch();
   drawCompareTray();
@@ -164,7 +168,7 @@ async function loadData(){
   if(market?.response.ok&&market.payload?.ok&&Array.isArray(market.payload.platforms))crossMarket=market.payload;
   else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':platform.kind==='CURATED'?'WAITING_FOR_REVIEWED_GENERIC_LISTS':'ACCESS_REQUIRED',publishedPositions:0})),rankings:[],coverage:{livePositions:0,curatedPositions:0}};
   $('#keepaAttribution').hidden=!crossMarket.rankings.some(ranking=>ranking.products?.some(product=>product.sourceKey==='KEEPA_BEST_SELLERS'));
-  selectedPlatform='MPR_GENERIC';
+  selectedPlatform=crossMarket.platforms.find(platform=>platform.kind==='LIVE'&&platform.status==='LIVE')?.id||'AMAZON_US';
   document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate · ${Number(crossMarket.coverage.livePositions||0)} poziții brute de sursă · 25 nișe configurate`;
   return niches.length===25;
 }
