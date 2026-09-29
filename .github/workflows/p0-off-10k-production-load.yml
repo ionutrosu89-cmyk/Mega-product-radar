@@ -85,7 +85,7 @@ jobs:
       - name: Verify persisted 10K inventory and provenance
         run: node scripts/run-off-production-load-evidence.mjs
       - name: Upload production load evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: off-10k-production-load-evidence
           path: artifacts/off-10k-production-load/

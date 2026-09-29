@@ -29,7 +29,7 @@ jobs:
           if(ids.size!==x.observations.length) process.exitCode=6;
           console.log(JSON.stringify({baselineCapturedCount:x.baselineCapturedCount,missingBeforeRun:x.missingBeforeRun,requested:x.requested,validObservations:x.validObservations,successRatePct:x.successRatePct,coverage:x.coverage,overlap:x.overlapWithAlreadyCaptured},null,2));
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: amazon-live-refresh-missing-round1

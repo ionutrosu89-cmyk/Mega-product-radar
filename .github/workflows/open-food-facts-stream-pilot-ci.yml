@@ -49,7 +49,7 @@ jobs:
       - name: Full test suite
         run: npm test
       - name: Upload pilot evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: off-official-stream-pilot-evidence
           path: artifacts/off-official-stream-pilot-v1/

@@ -54,7 +54,7 @@ jobs:
           jq -e '.truthPolicy.amazonEngagementSignalIsNotSales == true' artifacts/free-top25-monetization-coverage/report.json >/dev/null
           jq -e '.truthPolicy.paidProviderSpendAuthorized == false and .truthPolicy.purchaseAuthorized == false' artifacts/free-top25-monetization-coverage/report.json >/dev/null
       - name: Upload coverage evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: free-top25-monetization-coverage
           path: artifacts/free-top25-monetization-coverage/report.json

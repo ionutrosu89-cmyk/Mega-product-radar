@@ -51,7 +51,7 @@ jobs:
           console.log(JSON.stringify({uniqueProducts:r.uniqueProducts,targetReached:r.targetReached,requests:r.requestsTriggered,runSpendUsd:r.providerReportedSpendUsd,historicalSpendUsd:r.historicalAccountedSpendUsd,totalSpendAfterRunUsd:r.totalAccountedSpendAfterRunUsd,balanceBeforeUsd:r.accountBalanceBeforeUsd,stopReason:r.stopReason},null,2));
           NODE
       - name: Upload discovery evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dataforseo-amazon-100k-discovery
           path: artifacts/dataforseo-amazon-100k-discovery.json

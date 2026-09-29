@@ -46,7 +46,7 @@ jobs:
           if(s.truthPolicy.purchaseAuthorized!==false)throw new Error('PURCHASE_AUTHORIZED');
           NODE
       - name: Upload recovered supplier price evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-apify-alibaba-supplier-price-recovery
           path: artifacts/apify-alibaba-supplier-pilot-recovery/

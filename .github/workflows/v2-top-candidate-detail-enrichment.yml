@@ -40,7 +40,7 @@ jobs:
           if(s.policy.unknownEqualsZero!==false)throw new Error('UNKNOWN_ZERO_VIOLATION');
           NODE
       - name: Upload detail enrichment evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-top-candidate-detail-enrichment
           path: artifacts/top-candidate-detail-enrichment

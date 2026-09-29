@@ -38,7 +38,7 @@ jobs:
           if(r.truthPolicy.salesEvidenceClass!=='NOT_VERIFIED_SALES'||r.truthPolicy.verifiedSalesRows!==0)process.exit(4);
           NODE
       - name: Upload live structured price evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-dataforseo-amazon-price-pilot
           path: |

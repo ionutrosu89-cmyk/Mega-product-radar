@@ -61,7 +61,7 @@ jobs:
           if(x.policy.purchaseAuthorized!==false||x.policy.scaleAuthorized!==false) throw new Error('AUTHORIZATION_POLICY_INVALID');
           console.log(JSON.stringify({canonicalCount:x.manifest.canonicalCount,coverage:x.source.coverage,policy:x.policy},null,2));
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: amazon-round1-canonical-bridge
           path: artifacts/amazon-round1-canonical/amazon-round1-canonical-bridge.json

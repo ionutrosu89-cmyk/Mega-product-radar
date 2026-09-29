@@ -94,7 +94,7 @@ jobs:
           curl --fail --silent --show-error -H "Authorization: Bearer $GH_OIDC" -H 'Content-Type: application/json' --data-binary @/tmp/finalize.json "$EDGE_URL" | tee /tmp/final-receipt.json
           jq -e '.ok==true and .distinctAsins==500000 and .distinctProducts==500000 and .ambiguousAsins==0 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' /tmp/final-receipt.json >/dev/null
       - name: Upload receipts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-kaggle-500k-production-import-${{ github.run_id }}
           path: |

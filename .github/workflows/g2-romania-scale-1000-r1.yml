@@ -27,7 +27,7 @@ jobs:
           node scripts/build-romania-scale-1000-r1.mjs data/real-products-1000.compact.json romania-scale-1000-r1.json romania-scale-1000-summary.json
           jq -e '.schemaVersion == "MPR_ROMANIA_SCALE_1000_R1_V1" and .productCount == 1000 and .surfaceCount == 3 and .slotCount == 3000 and .unknownSlots == 3000 and .unknownRate == 1 and .providerSpendEur == 0 and .paidCallsTriggered == 0 and .purchaseAuthorized == false' romania-scale-1000-summary.json >/dev/null
       - name: Preserve scale evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-romania-scale-1000-r1-${{ github.sha }}
           path: |

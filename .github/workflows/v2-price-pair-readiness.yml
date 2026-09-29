@@ -30,7 +30,7 @@ jobs:
       - name: Run fail-closed price-pair readiness audit
         run: node scripts/run-price-pair-readiness-audit-v1.mjs --root=data --out=artifacts/price-pair-readiness-v1.json
       - name: Upload readiness artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-price-pair-readiness
           path: artifacts/price-pair-readiness-v1.json

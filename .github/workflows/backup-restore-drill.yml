@@ -59,7 +59,7 @@ jobs:
           validated_tables=workspaces,workspace_members,canonical_products,product_aliases,subscriptions
           archive_uploaded=false
           EOF
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: success()
         with:
           name: backup-restore-drill-report

@@ -53,7 +53,7 @@ jobs:
           jq -c --arg sha "$GITHUB_SHA" '{action:"persist",expectedSha:$sha,rows:.rows}' markup-history-pilot-rows.json > persist-request.json
           curl --fail-with-body --silent --show-error -X POST "$EDGE_URL" -H "Authorization: Bearer $TOKEN" -H 'content-type: application/json' --data-binary @persist-request.json | tee markup-history-persist-receipt.json
           jq -e '.ok==true and .schema=="MPR_AMAZON_MARKUP_HISTORY_PERSIST_RECEIPT_V1" and .deploymentSha==env.GITHUB_SHA and .receipt.ok==true and .receipt.inputRows==25 and .receipt.matchedExactAsin==25 and .receipt.sourceKey=="the_markup_amazon_searches_2021" and .receipt.verifiedSales==false and .receipt.providerSpendEur==0 and .receipt.paidCallsTriggered==0 and .receipt.purchaseAuthorized==false' markup-history-persist-receipt.json >/dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: g2-markup-search-history-pilot-${{ github.sha }}
           path: |

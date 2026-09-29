@@ -39,7 +39,7 @@ jobs:
             and .paidCallsTriggered==0
             and .purchaseAuthorized==false' /tmp/amazon-kaggle-million-selection-receipt.json >/dev/null
       - name: Upload selection receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-kaggle-million-new-v1-${{ github.run_id }}
           path: |

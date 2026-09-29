@@ -44,7 +44,7 @@ jobs:
           python3 scripts/build-amazon-kaggle-500k-import-payload-v1.py
           jq -e '.schema=="MPR_AMAZON_KAGGLE_500K_IMPORT_PAYLOAD_V1" and .rowCount==400000 and .shardCount==8 and .shardSize==50000 and (.shardDigestsSha256|length)==8 and .manifestSha256=="3492ad16cfd2be451646492bd6e014a95182893f7f5867e195655b2d9db07dd2" and .verifiedSales==false and .databaseWrites==0 and .providerSpendEur==0 and .paidCallsTriggered==0 and .purchaseAuthorized==false' /tmp/amazon-kaggle-500k-payload/receipt.json >/dev/null
       - name: Upload validation receipt only
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-kaggle-500k-import-validation-${{ github.run_id }}
           path: /tmp/amazon-kaggle-500k-payload/receipt.json

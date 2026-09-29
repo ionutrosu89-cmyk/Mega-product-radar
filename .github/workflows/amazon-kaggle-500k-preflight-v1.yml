@@ -28,7 +28,7 @@ jobs:
           set -euo pipefail
           python3 scripts/preflight-amazon-kaggle-500k-v1.py
       - name: Upload read-only receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amazon-kaggle-500k-preflight-v1-${{ github.run_id }}
           path: /tmp/amazon-kaggle-500k-preflight.json

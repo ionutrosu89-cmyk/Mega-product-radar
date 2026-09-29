@@ -43,7 +43,7 @@ jobs:
           echo "searchesSha256=$(jq -r '.searchesSha256' markup-searches-9k-preflight.json)"
           echo "detectedFields=$(jq -c '.detectedFields' markup-searches-9k-preflight.json)"
           echo "searchCoverage=$(jq -c '.coverage' markup-searches-9k-preflight.json)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: markup-9k-metrics-preflight-${{ github.sha }}
           path: |

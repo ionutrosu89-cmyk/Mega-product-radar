@@ -48,7 +48,7 @@ jobs:
           grep -q 'i % 20 == 0' .github/workflows/g2-amazon-canonical-100k-import-r1.yml
           grep -q 'Mint fresh GitHub OIDC token for finalize' .github/workflows/g2-amazon-canonical-100k-import-r1.yml
       - name: Preserve validation evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-canonical-100k-validation-${{ github.sha }}
           path: |
@@ -124,7 +124,7 @@ jobs:
           test "$HTTP" = "200" || { cat final-receipt.json; exit 1; }
           jq -e '.ok==true and .schemaVersion=="MPR_AMAZON_CANONICAL_SCALE_100K_OIDC_RECEIPT_V1" and .amazonAliasCount==100000 and .policy.providerSpendEur==0 and .policy.paidCallsTriggered==0 and .policy.purchaseAuthorized==false' final-receipt.json >/dev/null
       - name: Preserve import receipts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-canonical-100k-import-r1-${{ github.sha }}
           path: |

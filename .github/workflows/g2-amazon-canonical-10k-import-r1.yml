@@ -58,7 +58,7 @@ jobs:
             .policy.purchaseAuthorized == false
           ' amazon-canonical-10k-build-receipt-r1.json >/dev/null
       - name: Preserve validation evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-canonical-10k-import-validation-${{ github.sha }}
           path: |
@@ -174,7 +174,7 @@ jobs:
             .policy.purchaseAuthorized == false
           ' final-receipt.json >/dev/null
       - name: Preserve import receipts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-canonical-10k-import-r1-${{ github.sha }}
           path: |

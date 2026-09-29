@@ -45,7 +45,7 @@ jobs:
             .policy.databaseWrites == 0
           ' amazon-10k-source-preflight.json >/dev/null
       - name: Preserve exact preflight evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: g2-amazon-10k-public-source-preflight-${{ github.sha }}
           path: |

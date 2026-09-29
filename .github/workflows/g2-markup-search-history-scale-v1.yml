@@ -68,7 +68,7 @@ jobs:
           jq -s '{schemaVersion:"MPR_MARKUP_SEARCH_HISTORY_SCALE_PERSIST_V1",batches:length,inputRows:(map(.receipt.inputRows)|add),matchedExactAsin:(map(.receipt.matchedExactAsin)|add),observationRowsInserted:(map(.receipt.observationRowsInserted)|add),providerSpendEur:(map(.receipt.providerSpendEur)|add),paidCallsTriggered:(map(.receipt.paidCallsTriggered)|add),purchaseAuthorized:(map(.receipt.purchaseAuthorized)|any)}' scale-receipts.ndjson | tee markup-history-scale-persist-receipt.json
           PLANNED="$(jq -r '.observationRowsPlanned' markup-history-scale-receipt.json)"
           jq -e --argjson planned "$PLANNED" '.schemaVersion=="MPR_MARKUP_SEARCH_HISTORY_SCALE_PERSIST_V1" and .batches==9 and .inputRows==2100 and .matchedExactAsin==2100 and .observationRowsInserted==$planned and .providerSpendEur==0 and .paidCallsTriggered==0 and .purchaseAuthorized==false' markup-history-scale-persist-receipt.json >/dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: g2-markup-search-history-scale-${{ github.sha }}
           path: |

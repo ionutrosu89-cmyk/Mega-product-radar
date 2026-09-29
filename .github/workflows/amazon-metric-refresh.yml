@@ -66,7 +66,7 @@ jobs:
           if(x.policy.providerSpendEur!==0||x.policy.paidCallsTriggered!==0||x.policy.purchaseAuthorized!==false||x.policy.scaleAuthorized!==false)throw new Error('COMPARISON_AUTH_POLICY_INVALID');
           console.log(JSON.stringify({comparableCount:x.manifest.comparableCount,priceDeltaKnownCount:x.manifest.priceDeltaKnownCount,ratingDeltaKnownCount:x.manifest.ratingDeltaKnownCount,reviewDeltaKnownCount:x.manifest.reviewDeltaKnownCount,refresh:x.refresh,policy:x.policy},null,2));
           NODE
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: amazon-metric-refresh
           path: artifacts/amazon-metric-refresh/amazon-metric-comparison.json

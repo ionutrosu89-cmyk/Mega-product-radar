@@ -54,7 +54,7 @@ jobs:
           }
           NODE
       - name: Upload current-engine rematch
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-current-engine-rematch-top10
           path: artifacts/current-engine-rematch-top10.json

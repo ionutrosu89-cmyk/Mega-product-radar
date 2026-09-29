@@ -88,7 +88,7 @@ jobs:
           for(const x of d.screeningCandidates){if(!x.evidence?.distinctiveConfigConfirmed)throw new Error('NON_DISTINCTIVE_CONFIG_PROMOTED');if(!x.evidence?.dimensions)throw new Error('UNLABELED_DIMENSIONS_PROMOTED');if(x.evidence?.truthPolicy?.publicPageIsVerifiedQuote!==false)throw new Error('PUBLIC_PAGE_PROMOTED_TO_QUOTE');}
           NODE
       - name: Upload focused supplier evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2-focused-supplier-evidence-discovery
           path: |
