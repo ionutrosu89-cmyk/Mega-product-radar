@@ -17,13 +17,18 @@ on:
       - 'supabase/migrations/20260901_intelligence_priority_routing_v1.sql'
       - 'scripts/amazon-need-history-pilot.mjs'
       - '.github/workflows/amazon-need-history-pilot-v1.yml'
-  schedule:
-    - cron: '37 */6 * * *'
+  # This pilot yielded 2 valid observations from 25 pages on 2026-09-29.
+  # Keep validation on PR/push, but require a deliberate source review before probing again.
   workflow_dispatch:
+    inputs:
+      internal_source_reviewed:
+        description: 'Confirm current terms permit this internal public-page probe'
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   validate:
@@ -42,8 +47,11 @@ jobs:
           if grep -E "DataForSEO|Apify|purchaseAuthorized:true|paidCallsTriggered:[1-9]" scripts/amazon-need-history-pilot.mjs; then exit 2; fi
 
   pilot:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch' && inputs.internal_source_reviewed == true
     needs: validate
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
