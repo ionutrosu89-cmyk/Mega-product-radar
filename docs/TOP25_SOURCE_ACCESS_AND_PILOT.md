@@ -65,7 +65,7 @@ Pentru fiecare nișă și piață, operatorul verifică în taxonomy-ul oficial 
 
 ### Limita eBay pentru o listă filtrată
 
-[Ghidul oficial eBay Marketing](https://developer.ebay.com/develop/guides/buy/marketing-and-discounts-guide) documentează `metric_name`, `category_id` și `aspect_filter` pentru `getMerchandisedProducts`, dar nu documentează paginare pentru acest apel. Colectorul actual cere 25 poziții; dacă printre ele există branduri consacrate, nu putem completa onest lista filtrată la 25 folosind poziții suplimentare din același clasament. Înainte de a promite 25 oportunități pe fiecare nișă, trebuie confirmat cu eBay un volum suficient de poziții ori contractată o altă sursă licențiată de candidați clasați. Rezultatele Browse neclasate după vânzări pot servi la descoperire, dar nu vor fi etichetate „best selling”.
+[Ghidul oficial eBay Marketing](https://developer.ebay.com/develop/guides/buy/marketing-and-discounts-guide) documentează `metric_name`, `category_id` și `aspect_filter` pentru `getMerchandisedProducts`; [referința oficială eBay](https://www.ebay.co.jp/developer/api/marketing_api_buy/documentation) indică `limit` maxim 100, fără paginare documentată. Modul intern de revizie poate solicita 100 de poziții într-un apel și păstrează rangurile 26–100 pentru evaluare; colectarea obișnuită și lista brută publică rămân 1–25. Dacă după filtrarea brandurilor și a duplicatelor rămân sub 25 de produse revizuite, lista „Top 25 fără brand” rămâne incompletă. Volumul efectiv și drepturile pentru cazul nostru trebuie confirmate în producție. Rezultatele Browse neclasate după vânzări pot servi la descoperire, dar nu vor fi etichetate „best selling”.
 
 ## 5. Dacă accesul este refuzat
 

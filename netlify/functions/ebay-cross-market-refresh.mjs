@@ -1,7 +1,7 @@
 import {timingSafeEqual} from 'node:crypto';
 import {normalizeCurrentTop25Snapshot} from '../../top25-current-snapshot-v1.js';
 import {collectEbayBestSellingTarget,parseEbayTargets} from './_ebay-best-selling.mjs';
-import {ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
+import {ebayBuyAccessState,ebayPublicDisplayAccessState} from './_ebay-buy-auth.mjs';
 import {persistCurrentTop25Snapshot} from './_top25-current-store.mjs';
 
 const clean=value=>String(value??'').trim();
@@ -16,6 +16,19 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
     try{
       if(request.method!=='POST')return Response.json({ok:false,error:'Method not allowed'},{status:405,headers:{allow:'POST','Cache-Control':'no-store'}});
       if(!safeEqual(request.headers.get('x-mpr-internal-secret'),internalSecret(env)))return Response.json({ok:false,error:'Unauthorized'},{status:401,headers:{'Cache-Control':'no-store'}});
+      let input;
+      try{input=JSON.parse(await request.text()||'{}');}catch{return Response.json({ok:false,status:'INVALID_REQUEST_JSON'},{status:400,headers:{'Cache-Control':'no-store'}});}
+      if(!input||typeof input!=='object'||Array.isArray(input))return Response.json({ok:false,status:'INVALID_REQUEST_BODY'},{status:400,headers:{'Cache-Control':'no-store'}});
+      if(input.mode==='REVIEW_CANDIDATES'){
+        const access=ebayBuyAccessState(env);
+        if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
+        const nicheId=clean(input.nicheId).toUpperCase(),marketplaceId=clean(input.marketplaceId).toUpperCase();
+        const target=parseEbayTargets(env).find(row=>row.nicheId===nicheId&&row.marketplaceId===marketplaceId);
+        if(!target)return Response.json({ok:false,status:'REVIEW_TARGET_NOT_CONFIGURED',providerCalls:0},{status:400,headers:{'Cache-Control':'no-store'}});
+        const collected=await collectEbayBestSellingTarget({target,env,fetchImpl,now,reviewPool:true});
+        return Response.json({ok:collected.candidates.length>0,status:collected.code,nicheId,marketplaceId,candidateCount:collected.candidates.length,candidates:collected.candidates,policy:{internalReviewOnly:true,published:0,autoApproved:0,purchaseAuthorized:false}},{status:collected.candidates.length>0?200:422,headers:{'Cache-Control':'no-store'}});
+      }
+      if(input.mode!==undefined&&input.mode!=='PUBLISH')return Response.json({ok:false,status:'UNSUPPORTED_MODE',providerCalls:0},{status:400,headers:{'Cache-Control':'no-store'}});
       const access=ebayPublicDisplayAccessState(env);
       if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
       const targets=parseEbayTargets(env);

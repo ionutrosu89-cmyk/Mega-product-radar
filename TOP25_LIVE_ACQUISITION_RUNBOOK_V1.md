@@ -14,7 +14,7 @@ Pentru eBay, rulează endpointul intern `POST /api/internal/ebay-category-review
 
 ### eBay
 
-Colectorul direct este implementat. Sunt necesare credențialele aplicației, accesul de producție, revizuirea termenilor și aprobarea explicită pentru afișarea publică. Jobul programat rulează zilnic la 05:30 UTC, marchează automat drept `STALE` snapshoturile mai vechi de 72 de ore și nu efectuează apeluri la provider dacă oricare dintre gate-uri lipsește.
+Colectorul direct este implementat. Sunt necesare credențialele aplicației, accesul de producție, revizuirea termenilor și aprobarea explicită pentru afișarea publică. Jobul programat rulează zilnic la 05:30 UTC, marchează automat drept `STALE` snapshoturile mai vechi de 72 de ore și nu efectuează apeluri la provider dacă oricare dintre gate-uri lipsește. După obținerea accesului, modul intern de revizie poate solicita până la 100 de produse clasate; colectarea obișnuită și snapshotul brut public păstrează strict primele 25. Numărul efectiv returnat trebuie verificat pentru fiecare categorie și piață.
 
 ### Amazon
 
@@ -35,6 +35,8 @@ Keyword Planner validează cererea de căutare și se actualizează lunar. Nu pr
 Commercial Content API poate furniza activitate publicitară, nu vânzări. Observațiile eMAG/retail trebuie etichetate `NOT_VERIFIED_SALES`; API-ul de seller nu reprezintă întreaga piață. Aceste surse sunt semnale de validare și nu sunt acceptate de endpointul de ingestie ca Top 25.
 
 ## Contract de ingestie
+
+Pentru a examina rapid un bazin mai mare de candidați eBay, endpointul intern `POST /api/internal/ebay-cross-market-refresh` acceptă un corp `{"mode":"REVIEW_CANDIDATES","nicheId":"BIROU_ORGANIZARE","marketplaceId":"EBAY_US"}`. Este necesar secretul intern și o țintă de categorie configurată. Modul cere cel mult 100 de poziții dintr-o singură categorie, returnează rangurile sursei și **nu scrie niciun snapshot**, nu aprobă branduri și nu publică produse. Necesită accesul eBay Buy Marketing în producție și revizia termenilor; dreptul de afișare publică rămâne un gate separat. Până la aprobare, răspunde fără apel la provider. [Documentația eBay pentru `getMerchandisedProducts`](https://www.ebay.co.jp/developer/api/marketing_api_buy/documentation) indică `limit` maxim 100, dar nu garantează 100 de produse pentru fiecare categorie.
 
 `POST /api/internal/top25-live-ingest` necesită `x-mpr-internal-secret` și acceptă maximum 25 de snapshoturi:
 
