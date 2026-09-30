@@ -23,7 +23,7 @@ export function createTop25LiveRefreshHandler({env=process.env,fetchImpl=fetch,n
       if(!secret){result.status='INTERNAL_SECRET_REQUIRED';continue;}
       try{
         const handler=createHandler({env,fetchImpl,now:()=>checkedAt});
-        const response=await handler(new Request(`https://scheduled.mpr.invalid/api/internal/${path}`,{method:'POST',headers:{'x-mpr-internal-secret':secret}}));
+        const response=await handler(new Request(`https://scheduled.mpr.invalid/api/internal/${path}`,{method:'POST',headers:{'x-mpr-internal-secret':secret,'content-type':'application/json'},body:JSON.stringify({mode:'PUBLISH_DUE'})}));
         const body=await response.json();
         result.status=String(body?.status||`HTTP_${response.status}`);
         result.published=Number(body?.published||0);

@@ -16,6 +16,7 @@ test('scheduled live refresh makes zero provider calls before credentials and di
 test('scheduled live refresh cadence is daily and contains no paid provider',async()=>{
   const source=await fs.readFile(new URL('../netlify/functions/top25-live-refresh.mjs',import.meta.url),'utf8');
   assert.match(source,/schedule:'30 5 \* \* \*'/);
+  assert.match(source,/mode:'PUBLISH_DUE'/);
   assert.doesNotMatch(source,/KEEPA|DATAFORSEO|OPENAI_API_KEY/i);
 });
 
