@@ -1,8 +1,9 @@
+import {currentCommercialEvidence} from './fixtures/current-commercial-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {evaluateCommercialDecision,normalizeProductKey} from '../commercial-decision-engine.js';
 
-function product(){return{
+function product(){return{...currentCommercialEvidence(),
   name:'Under desk headphone hanger clamp',
   romaniaDemand:{readyForTestDemandGate:true},
   commercialHardening:{gates:{pricingVerified:true,salesVerified:false,supplierVerified:false,reviewVerified:true}},

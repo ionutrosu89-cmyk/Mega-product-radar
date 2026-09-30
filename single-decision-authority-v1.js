@@ -1,3 +1,4 @@
+import {evaluateStageFacts} from './evidence-stage-policy.js';
 const text=v=>String(v??'').trim();
 const upper=v=>text(v).toUpperCase();
 
@@ -10,8 +11,10 @@ const STAGE_RANK=Object.freeze(Object.fromEntries(CANONICAL_DECISION_STAGES.map(
 function evidenceStage(packet={}){
   const status=upper(packet.status);
   if(packet.purchaseAuthorized===true)return {stage:'BLOCKED',reason:'PURCHASE_AUTHORITY_FORBIDDEN_IN_DECISION_PACKET'};
-  if(status==='FINALIST_EVIDENCE_READY'&&packet.finalistEvidenceReady===true)return {stage:'FINALIST',reason:'FINALIST_EVIDENCE_CONFIRMED'};
-  if(packet.validateEligible===true)return {stage:'VALIDATE',reason:'VALIDATE_EVIDENCE_CONFIRMED'};
+  const g=packet.gates||{};
+  const canonical=evaluateStageFacts({promising:packet.validateEligible===true,marketQualified:true,confidence:packet.confidence,trendConfirmed:g.trendConfirmed,romaniaExact:g.romaniaGapConfirmed,supplierVerified:g.supplierVerified,economicsConfirmed:g.economicsConfirmed,importabilityPassed:g.importabilityPassed,fresh:g.fresh});
+  if(status==='FINALIST_EVIDENCE_READY'&&packet.finalistEvidenceReady===true&&canonical.stage==='FINALIST')return {stage:'FINALIST',reason:'FINALIST_EVIDENCE_CONFIRMED'};
+  if(packet.validateEligible===true&&canonical.stage==='VALIDATE')return {stage:'VALIDATE',reason:'VALIDATE_EVIDENCE_CONFIRMED'};
   if(status.includes('REVIEW'))return {stage:'REVIEW',reason:'EVIDENCE_REVIEW_REQUIRED'};
   return {stage:'BLOCKED',reason:'EVIDENCE_NOT_READY'};
 }
@@ -19,8 +22,8 @@ function evidenceStage(packet={}){
 function testStage(realTestEvidence={}){
   const status=upper(realTestEvidence.status);
   const measured=realTestEvidence.measuredRealWorldEvidence===true;
-  if(!measured)return null;
-  if(realTestEvidence.buyReady===true&&status==='BUY_READY')return 'BUY_READY';
+  if(!measured||realTestEvidence.testGatesPassed!==true)return null;
+  if(realTestEvidence.buyReady===true&&status==='BUY_READY'&&realTestEvidence.completedRealTest===true&&Boolean(realTestEvidence.measuredAt)&&realTestEvidence.testOutcome==='TEST_PASS_CANDIDATE')return 'BUY_READY';
   if(realTestEvidence.testValidated===true||status==='TEST_VALIDATED')return 'TEST_VALIDATED';
   if(realTestEvidence.testRunning===true||status==='TEST_RUNNING')return 'TEST_RUNNING';
   if(realTestEvidence.testReady===true||status==='TEST_READY')return 'TEST_READY';

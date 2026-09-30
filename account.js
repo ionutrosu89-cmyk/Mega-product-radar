@@ -24,7 +24,8 @@ async function refreshBilling({retry=false,expectedCancel=null,stripeFallback=nu
     const pending=backendPending&&stripeFallback?Boolean(stripeFallback.cancelAtPeriodEnd):Boolean(sub?.cancelAtPeriodEnd);
     const periodEnd=backendPending&&stripeFallback?.currentPeriodEnd?stripeFallback.currentPeriodEnd:sub?.currentPeriodEnd;
     $('#billingState').textContent=sub?billingStateLabel(sub.status):'FREE';
-    $('#billingEnd').textContent=fmtDate(periodEnd);
+    const periodEndMs=Date.parse(periodEnd),periodIsFuture=Number.isFinite(periodEndMs)&&periodEndMs>Date.now();
+    $('#billingEnd').textContent=periodIsFuture?fmtDate(periodEnd):'—';
     $('#plan').textContent=data.workspace?.plan||$('#plan').textContent;
     const managed=Boolean(sub?.managedByStripe),activeLike=['active','trialing','past_due'].includes(String(sub?.status||'').toLowerCase());
     $('#cancelBilling').hidden=!managed||pending||!activeLike;
@@ -33,7 +34,7 @@ async function refreshBilling({retry=false,expectedCancel=null,stripeFallback=nu
     $('#resumeBilling').disabled=false;
     if(backendPending&&stripeFallback){message.textContent=expectedCancel?`Stripe a confirmat anularea programată până la ${fmtDate(periodEnd)}. Statusul contului se actualizează după webhook; accesul rămâne controlat exclusiv de starea verificată Stripe.`:'Stripe a confirmat retragerea anulării. Statusul contului se actualizează după webhook; accesul rămâne controlat exclusiv de starea verificată Stripe.';return;}
     if(planPending){message.textContent=`Stripe a confirmat schimbarea către ${normalizedExpectedPlan}. Planul afișat rămâne starea verificată până când webhook-ul Stripe finalizează sincronizarea.`;return;}
-    message.textContent=pending?`Anulare programată. Accesul rămâne activ până la ${fmtDate(periodEnd)}. Poți retrage anularea înainte de această dată.`:managed?'Abonamentul este activ și poate fi schimbat din pagina de planuri.':'Nu există încă un abonament plătit activ.';
+    message.textContent=pending&&activeLike&&periodIsFuture?`Anulare programată. Accesul rămâne activ până la ${fmtDate(periodEnd)}. Poți retrage anularea înainte de această dată.`:pending&&!activeLike?`Abonamentul plătit este anulat. Planul curent este ${String(data.workspace?.plan||'FREE').toUpperCase()}.`:pending?'Statusul abonamentului se actualizează. Verifică planul curent afișat mai sus.':managed&&activeLike?'Abonamentul este activ și poate fi schimbat din pagina de planuri.':'Nu există încă un abonament plătit activ.';
   }catch(e){message.textContent=stripeFallback?'Stripe a confirmat acțiunea, dar statusul contului nu a putut fi reîncărcat momentan. Entitlement-ul nu este modificat din browser.':'Informațiile despre abonament nu sunt disponibile momentan.';$('#cancelBilling').disabled=false;$('#resumeBilling').disabled=false;}
 }
 async function load(){

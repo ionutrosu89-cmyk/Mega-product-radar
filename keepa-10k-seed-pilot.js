@@ -7,11 +7,12 @@ import {buildKeepaBestSellerPlan} from './keepa-acquisition-adapter.js';
 const clean=v=>String(v??'').trim();
 const uniq=values=>[...new Set((values||[]).map(clean).filter(Boolean))];
 
-export function buildKeepaCategoryResolutionPlan(universe,{domain=3,level='CATEGORY',maxNodes=40}={}){
-  const nodes=flattenCategoryUniverse(universe).filter(row=>row.level===level).slice(0,Math.max(0,Number(maxNodes)||0));
+export function buildKeepaCategoryResolutionPlan(universe,{domain=1,level='CATEGORY',maxNodes=40}={}){
+  const domainId=[1,3].includes(Number(domain))?Number(domain):null;
+  const nodes=domainId===null?[]:flattenCategoryUniverse(universe).filter(row=>row.level===level).slice(0,Math.max(0,Number(maxNodes)||0));
   const tasks=nodes.map(row=>({
     type:'CATEGORY_SEARCH',
-    domain:Number(domain)||3,
+    domain:domainId,
     mprKey:row.key,
     parentKey:row.parentKey||null,
     searchTerm:row.label,
@@ -25,6 +26,8 @@ export function buildKeepaCategoryResolutionPlan(universe,{domain=3,level='CATEG
     taskCount:tasks.length,
     estimatedTokens:tasks.length,
     tasks,
+    valid:domainId!==null,
+    reason:domainId===null?'UNSUPPORTED_DOMAIN':null,
     paidExecutionAuthorized:false
   };
 }
@@ -48,7 +51,7 @@ export function resolveKeepaCategoryMatches(resolutionPlan,matches=[]){
   });
 }
 
-export function buildTenKSeedPlan({resolvedCategories=[],targetProducts=10000,domain=3,maxCategories=40}={}){
+export function buildTenKSeedPlan({resolvedCategories=[],targetProducts=10000,domain=1,maxCategories=40}={}){
   const accepted=(resolvedCategories||[]).filter(x=>x?.accepted===true&&clean(x.categoryId)).slice(0,Math.max(1,Number(maxCategories)||40));
   const target=Math.max(0,Number(targetProducts)||0);
   if(!accepted.length)return{targetProducts:target,categoryCount:0,allocationPerCategory:0,bestSellerPlan:buildKeepaBestSellerPlan({domain,categoryIds:[]}),selectionPolicy:'NO_ACCEPTED_CATEGORIES',paidExecutionAuthorized:false};
@@ -75,13 +78,13 @@ export function seedPilotReadiness({resolutionPlan,resolvedCategories,seedPlan}=
   const total=Number(resolutionPlan?.taskCount||0);
   const accepted=(resolvedCategories||[]).filter(x=>x?.accepted===true).length;
   const coveragePct=total>0?Number((accepted/total*100).toFixed(1)):0;
-  const ready=accepted>=5&&Number(seedPlan?.targetProducts||0)>0&&Number(seedPlan?.categoryCount||0)>=5;
+  const ready=resolutionPlan?.valid!==false&&seedPlan?.bestSellerPlan?.valid!==false&&accepted>=5&&Number(seedPlan?.targetProducts||0)>0&&Number(seedPlan?.categoryCount||0)>=5;
   return {
     ready,
     categoryResolutionCoveragePct:coveragePct,
     acceptedCategories:accepted,
     minimumAcceptedCategories:5,
-    blocker:ready?null:'MANUALLY_REVIEW_AT_LEAST_5_KEEPA_CATEGORY_MATCHES',
+    blocker:ready?null:resolutionPlan?.valid===false||seedPlan?.bestSellerPlan?.valid===false?'UNSUPPORTED_DOMAIN':'MANUALLY_REVIEW_AT_LEAST_5_KEEPA_CATEGORY_MATCHES',
     paidExecutionAuthorized:false
   };
 }

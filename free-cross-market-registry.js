@@ -1,19 +1,29 @@
 const DAY_MS=86_400_000;
+export const FREE_TOP25_REFRESH_DAYS=14;
+export const FREE_TOP25_MAX_AGE_DAYS=30;
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
 
 export const FREE_CROSS_MARKET_PLATFORMS=Object.freeze([
-  Object.freeze({id:'CONSENSUS',label:'Consensus',shortLabel:'Consensus',emoji:'✦',kind:'DERIVED',rankingBasis:'MULTI_PLATFORM_CONFIRMATION',sourceLabel:'Mega Product Radar',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7}),
-  Object.freeze({id:'ALIEXPRESS',label:'AliExpress Hot Products',shortLabel:'AliExpress',emoji:'🛍️',kind:'LIVE',rankingBasis:'HOT_PRODUCTS',sourceLabel:'AliExpress Open Platform',officialUrl:'https://developer.alibaba.com/docs/api.htm?apiId=45794',freshnessDays:3}),
-  Object.freeze({id:'EBAY',label:'eBay Best Selling',shortLabel:'eBay',emoji:'🏷️',kind:'LIVE',rankingBasis:'BEST_SELLING',sourceLabel:'eBay Marketing API',officialUrl:'https://developer.ebay.com/api-docs/buy/marketing/overview.html',freshnessDays:3}),
-  Object.freeze({id:'AMAZON_US',label:'Amazon US Live',shortLabel:'Amazon US',emoji:'🇺🇸',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:3}),
-  Object.freeze({id:'AMAZON_DE',label:'Amazon DE Live',shortLabel:'Amazon DE',emoji:'🇩🇪',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:3}),
+  Object.freeze({id:'MPR_GENERIC',label:'Oportunități fără brand consacrat',shortLabel:'Generic MPR',emoji:'✳',kind:'CURATED',rankingBasis:'MPR_GENERIC_CURATED_FROM_SOURCE_RANK',sourceLabel:'Mega Product Radar',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
+  Object.freeze({id:'CONSENSUS',label:'Consensus',shortLabel:'Consensus',emoji:'✦',kind:'DERIVED',rankingBasis:'MULTI_PLATFORM_CONFIRMATION',sourceLabel:'Mega Product Radar',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
+  Object.freeze({id:'ALIEXPRESS',label:'AliExpress Hot Products',shortLabel:'AliExpress',emoji:'🛍️',kind:'LIVE',rankingBasis:'HOT_PRODUCTS',sourceLabel:'AliExpress Open Platform',officialUrl:'https://developer.alibaba.com/docs/api.htm?apiId=45794',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
+  Object.freeze({id:'EBAY',label:'eBay Best Selling',shortLabel:'eBay',emoji:'🏷️',kind:'LIVE',rankingBasis:'BEST_SELLING',sourceLabel:'eBay Marketing API',officialUrl:'https://developer.ebay.com/api-docs/buy/marketing/overview.html',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
+  Object.freeze({id:'AMAZON_US',label:'Amazon US Live',shortLabel:'Amazon US',emoji:'🇺🇸',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
+  Object.freeze({id:'AMAZON_DE',label:'Amazon DE Live',shortLabel:'Amazon DE',emoji:'🇩🇪',kind:'LIVE',rankingBasis:'OFFICIAL_RANK_OR_BSR',sourceLabel:'Amazon official/licensed data',officialUrl:'https://webservices.amazon.com/paapi5/documentation/',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
   Object.freeze({id:'TIKTOK',label:'TikTok Shop & Ads',shortLabel:'TikTok',emoji:'♪',kind:'SIGNAL',rankingBasis:'AD_MOMENTUM_ONLY',sourceLabel:'TikTok official access',officialUrl:'https://developers.tiktok.com/',freshnessDays:7}),
-  Object.freeze({id:'GOOGLE',label:'Google Search Demand',shortLabel:'Google',emoji:'G',kind:'SIGNAL',rankingBasis:'SEARCH_DEMAND_ONLY',sourceLabel:'Google Ads Keyword Planner',officialUrl:'https://developers.google.com/google-ads/api/docs/keyword-planning/overview',freshnessDays:35}),
+  Object.freeze({id:'GOOGLE',label:'Google Search Demand',shortLabel:'Google',emoji:'G',kind:'SIGNAL',rankingBasis:'SEARCH_DEMAND_ONLY',sourceLabel:'Google Ads Keyword Planner',officialUrl:'https://developers.google.com/google-ads/api/docs/keyword-planning/overview',freshnessDays:FREE_TOP25_MAX_AGE_DAYS}),
   Object.freeze({id:'ROMANIA',label:'Oferta din România',shortLabel:'România',emoji:'🇷🇴',kind:'SIGNAL',rankingBasis:'COMPARABLE_OFFERS_ONLY',sourceLabel:'MPR Romania evidence',officialUrl:'https://mega-product-radar.netlify.app/sources.html',freshnessDays:7})
 ]);
 
 const BY_ID=new Map(FREE_CROSS_MARKET_PLATFORMS.map(platform=>[platform.id,platform]));
+export function curatedSourcePlatform(market,sourceKey){
+  const key=`${upper(market)}:${upper(sourceKey)}`;
+  if(['EBAY_US:EBAY_BUY_MARKETING_BEST_SELLING','EBAY_DE:EBAY_BUY_MARKETING_BEST_SELLING'].includes(key))return 'EBAY';
+  if(key==='ALIEXPRESS_GLOBAL:ALIEXPRESS_HOT_PRODUCTS_API')return 'ALIEXPRESS';
+  if(['AMAZON_US','AMAZON_DE'].includes(upper(market))&&['KEEPA_BEST_SELLERS','AMAZON_LICENSED_BEST_SELLERS'].includes(upper(sourceKey)))return upper(market);
+  return null;
+}
 export const crossMarketSnapshotKey=(platform,nicheId)=>`XMARKET:${upper(platform)}:${upper(nicheId)}`;
 
 export function parseCrossMarketSnapshotKey(value){
@@ -24,9 +34,10 @@ export function parseCrossMarketSnapshotKey(value){
 
 function accessState(platform,accessByPlatform={}){
   if(platform.kind==='SIGNAL')return 'SUPPORTING_SIGNAL_ONLY';
+  if(platform.kind==='CURATED')return 'WAITING_FOR_REVIEWED_GENERIC_LISTS';
   if(platform.id==='CONSENSUS')return 'WAITING_FOR_TWO_LIVE_PLATFORMS';
   const status=upper(accessByPlatform[platform.id]);
-  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','PUBLIC_DISPLAY_RIGHTS_REQUIRED','API_AVAILABILITY_REVIEW_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
+  return ['ACCESS_REQUIRED','TERMS_REVIEW_REQUIRED','PUBLIC_DISPLAY_RIGHTS_REQUIRED','SUBSCRIPTION_REQUIRED','API_AVAILABILITY_REVIEW_REQUIRED','READY_TO_COLLECT'].includes(status)?status:'ACCESS_REQUIRED';
 }
 
 function https(value){try{return new URL(clean(value)).protocol==='https:';}catch{return false;}}
@@ -41,6 +52,8 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
   if(!name||!externalId||rank!==index+1||!https(sourceUrl)||!Number.isFinite(Date.parse(observedAt)))return null;
   return {
     name,externalId,rank,platform,sourceUrl,observedAt,
+    sourceRank:Number.isInteger(Number(row.sourceRank))?Number(row.sourceRank):null,
+    sourcePlatform:upper(row.sourcePlatform)||null,
     conceptKey:upper(row.conceptKey||row.canonicalProductId).slice(0,160)||null,
     sourceKey:clean(row.sourceKey).slice(0,100)||null,
     sourceLabel:clean(row.sourceLabel).slice(0,160)||BY_ID.get(platform)?.sourceLabel||platform,
@@ -57,10 +70,25 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
   };
 }
 
+function curatedProductReviewed(row,now,expectedSourcePlatform){
+  if(upper(row?.commercialGate)!=='GENERIC_PRIVATE_LABEL'||upper(row?.brandPolicyClass)!=='GENERIC_PRIVATE_LABEL'||!clean(row?.conceptKey))return false;
+  if(!Number.isInteger(Number(row.sourceRank))||Number(row.sourceRank)<Number(row.rank)||upper(row.sourcePlatform)!==expectedSourcePlatform)return false;
+  const host=new URL(clean(row.sourceUrl)).hostname;
+  if(expectedSourcePlatform==='EBAY'&&!/^(?:www\.)?ebay\.(?:com|de)$/i.test(host))return false;
+  if(expectedSourcePlatform==='ALIEXPRESS'&&!/(^|\.)aliexpress\.com$/i.test(host))return false;
+  if(expectedSourcePlatform==='AMAZON_US'&&!/^(?:www\.)?amazon\.com$/i.test(host))return false;
+  if(expectedSourcePlatform==='AMAZON_DE'&&!/^(?:www\.)?amazon\.de$/i.test(host))return false;
+  return [row.brandReview,row.nicheReview].every(review=>{
+    const at=Date.parse(review?.reviewedAt||'');
+    return clean(review?.reviewer)&&https(review?.evidenceUrl)&&Number.isFinite(at)&&at<=now.getTime()&&now.getTime()-at<=30*DAY_MS;
+  });
+}
+
 export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   const explicitPlatform=upper(raw?.platform),explicitNiche=upper(raw?.niche_id);
   const key=BY_ID.has(explicitPlatform)?{platform:explicitPlatform,nicheId:explicitNiche}:parseCrossMarketSnapshotKey(raw?.niche_id);
-  if(!key||BY_ID.get(key.platform)?.kind!=='LIVE')return null;
+  const kind=BY_ID.get(key?.platform)?.kind;
+  if(!key||!['LIVE','CURATED'].includes(kind))return null;
   if(explicitPlatform&&(!explicitNiche||raw?.product_count!==25||upper(raw?.source_rights_status)!=='APPROVED'||upper(raw?.freshness_status)!=='CURRENT'))return null;
   const platform=BY_ID.get(key.platform);
   const reviewedAt=clean(raw?.window_end||raw?.reviewed_at);
@@ -69,10 +97,15 @@ export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   if(!Number.isFinite(ageMs)||ageMs<0||ageMs>platform.freshnessDays*DAY_MS)return null;
   const source=Array.isArray(raw?.products)?raw.products:[];
   if(source.length!==25)return null;
+  const curatedSource=kind==='CURATED'?curatedSourcePlatform(raw?.market,raw?.source_key):null;
+  if(kind==='CURATED'&&(!curatedSource||source.some(row=>!https(row?.sourceUrl)||!curatedProductReviewed(row,now,curatedSource))))return null;
   const products=source.map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis})).filter(Boolean);
   if(products.length!==25||new Set(products.map(p=>p.externalId)).size!==25)return null;
+  if(kind==='CURATED'&&new Set(products.map(p=>p.conceptKey)).size!==25)return null;
   if(products.some(p=>now.getTime()-Date.parse(p.observedAt)<0||now.getTime()-Date.parse(p.observedAt)>platform.freshnessDays*DAY_MS))return null;
-  return {...key,reviewedAt,products,evidenceMode:'LIVE_PLATFORM_EVIDENCE'};
+  const oldestObservedAt=products.map(row=>row.observedAt).sort()[0];
+  const refreshDueAt=new Date(Date.parse(oldestObservedAt)+FREE_TOP25_REFRESH_DAYS*DAY_MS).toISOString();
+  return {...key,reviewedAt,oldestObservedAt,refreshDueAt,refreshDue:now.getTime()>=Date.parse(refreshDueAt),products,evidenceMode:'LIVE_PLATFORM_EVIDENCE'};
 }
 
 function deriveConsensusRankings(rankings,now){
@@ -96,7 +129,9 @@ function deriveConsensusRankings(rankings,now){
     const products=confirmed.slice(0,25).map(({conceptKey,rows},index)=>({
       name:rows[0].name,externalId:`CONSENSUS:${conceptKey}`,conceptKey,rank:index+1,platform:'CONSENSUS',sourceUrl:rows[0].sourceUrl,observedAt:rows.map(row=>row.observedAt).sort().at(-1),sourceKey:'MPR_CROSS_MARKET_CONSENSUS',sourceLabel:`${rows.length} platforme independente`,rankingBasis:'MULTI_PLATFORM_CONFIRMATION',market:null,price:null,currency:null,rating:null,reviewCount:null,sourceMetric:{label:'Platforme independente',value:rows.length,unit:'platforms'},evidenceClass:'DERIVED',salesEvidenceClass:'NOT_UNIT_SALES',commercialGate:'BRAND_REVIEW_REQUIRED',platformConfirmations:rows.map(row=>row.platform).sort()
     }));
-    consensus.push({platform:'CONSENSUS',nicheId,reviewedAt:now.toISOString().slice(0,10),products,evidenceMode:'DERIVED_MULTI_PLATFORM_EVIDENCE'});
+    const oldestObservedAt=confirmed.slice(0,25).flatMap(({rows})=>rows.map(row=>row.observedAt)).sort()[0];
+    const refreshDueAt=new Date(Date.parse(oldestObservedAt)+FREE_TOP25_REFRESH_DAYS*DAY_MS).toISOString();
+    consensus.push({platform:'CONSENSUS',nicheId,reviewedAt:now.toISOString().slice(0,10),oldestObservedAt,refreshDueAt,refreshDue:now.getTime()>=Date.parse(refreshDueAt),products,evidenceMode:'DERIVED_MULTI_PLATFORM_EVIDENCE'});
   }
   return consensus;
 }
@@ -108,12 +143,13 @@ export function buildFreeCrossMarketExperience({snapshots=[],accessByPlatform={}
     const key=`${row.platform}:${row.nicheId}`,previous=latest.get(key);
     if(!previous||row.reviewedAt>previous.reviewedAt)latest.set(key,row);
   }
-  const liveRankings=[...latest.values()];
+  const liveRankings=[...latest.values()].filter(row=>BY_ID.get(row.platform)?.kind==='LIVE');
+  const curatedRankings=[...latest.values()].filter(row=>row.platform==='MPR_GENERIC');
   const consensusRankings=deriveConsensusRankings(liveRankings,now);
-  const rankings=[...liveRankings,...consensusRankings];
+  const rankings=[...curatedRankings,...liveRankings,...consensusRankings];
   const publishedByPlatform={};
   for(const row of rankings)publishedByPlatform[row.platform]=(publishedByPlatform[row.platform]||0)+1;
-  const livePlatforms=Object.entries(publishedByPlatform).filter(([id,count])=>id!=='CONSENSUS'&&count>0).map(([id])=>id);
+  const livePlatforms=Object.entries(publishedByPlatform).filter(([id,count])=>BY_ID.get(id)?.kind==='LIVE'&&count>0).map(([id])=>id);
   const platforms=FREE_CROSS_MARKET_PLATFORMS.map(platform=>{
     const publishedNiches=publishedByPlatform[platform.id]||0;
     let status=publishedNiches>0?'LIVE':accessState(platform,accessByPlatform);
@@ -124,7 +160,7 @@ export function buildFreeCrossMarketExperience({snapshots=[],accessByPlatform={}
     schema:'MPR_FREE_CROSS_MARKET_V1',generatedAt:now.toISOString(),
     platforms,
     rankings,
-    coverage:{platformCount:platforms.length,livePlatformCount:livePlatforms.length,liveNicheRankings:liveRankings.length,livePositions:liveRankings.length*25,consensusNicheRankings:consensusRankings.length,consensusPositions:consensusRankings.length*25,consensusReady:consensusRankings.length>0},
-    policy:{noSyntheticRankings:true,minimumProductsPerPublishedRanking:25,liveFreshnessRequired:true,salesClaimsRequireExplicitEvidence:true,establishedBrandsBlockedFromCommercialFunnel:true,paidCallsTriggered:0,purchaseAuthorized:false}
+    coverage:{platformCount:platforms.length,curatedNicheCount:curatedRankings.length,curatedPositions:curatedRankings.length*25,livePlatformCount:livePlatforms.length,liveNicheRankings:liveRankings.length,livePositions:liveRankings.length*25,refreshDueRankings:rankings.filter(row=>row.refreshDue).length,consensusNicheRankings:consensusRankings.length,consensusPositions:consensusRankings.length*25,consensusReady:consensusRankings.length>0},
+    policy:{noSyntheticRankings:true,minimumProductsPerPublishedRanking:25,refreshTargetDays:FREE_TOP25_REFRESH_DAYS,maxObservationAgeDays:FREE_TOP25_MAX_AGE_DAYS,liveFreshnessRequired:true,salesClaimsRequireExplicitEvidence:true,establishedBrandsBlockedFromCommercialFunnel:true,paidCallsTriggered:0,purchaseAuthorized:false}
   };
 }
