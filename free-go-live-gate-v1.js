@@ -34,6 +34,14 @@ export function evaluateFreeGoLive({coverage={},study={},evidence={}}={},options
     &&new Set(nicheIds).size===FREE_TOP25_EXPANDED_IDS.length
     &&FREE_TOP25_EXPANDED_IDS.every(id=>nicheIds.includes(id));
   if(!coverageVerified||count(coverage.curatedNicheCount)!==25||count(coverage.curatedPositions)!==625)blockers.push('CURATED_25_X_25_REQUIRED');
+  const liveSnapshots=Array.isArray(coverage.liveSnapshots)?coverage.liveSnapshots:[];
+  const liveByNiche=new Map(FREE_TOP25_EXPANDED_IDS.map(id=>[id,new Set()]));
+  for(const raw of liveSnapshots){
+    if(!raw?.platform)continue;
+    const row=normalizeCrossMarketSnapshot(raw,{now});
+    if(row&&['EBAY','ALIEXPRESS','AMAZON_US','AMAZON_DE'].includes(row.platform)&&liveByNiche.has(row.nicheId))liveByNiche.get(row.nicheId).add(row.platform);
+  }
+  if([...liveByNiche.values()].some(platforms=>platforms.size<2))blockers.push('TWO_MARKETPLACES_PER_NICHE_REQUIRED');
   blockers.push(...evaluateFreeReleaseEvidence({study,evidence}));
   return Object.freeze({schema:'MPR_FREE_GO_LIVE_GATE_V1',status:blockers.length?'NO_GO':'READY_FOR_HUMAN_REVIEW',blockers:Object.freeze(blockers),automaticLaunchAllowed:false,paidBillingEnabled:false});
 }
