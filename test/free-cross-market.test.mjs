@@ -48,6 +48,7 @@ test('a live platform ranking is published only with exactly 25 fresh valid posi
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,products:snapshot.products.slice(0,24)},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,reviewed_at:'2026-08-01'},{now:new Date('2026-09-04T08:00:00Z')}),null);
 });
+const currentEbayProduct=index=>({...product(index),sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',market:'EBAY_US'});
 
 test('a Top25 remains visible while refresh is due and disappears after 30 days',()=>{
   const snapshot={niche_id:crossMarketSnapshotKey('EBAY','AUTO'),reviewed_at:'2026-09-03',products:Array.from({length:25},(_,i)=>product(i+1))};
@@ -73,11 +74,21 @@ test('a recent snapshot cannot mask one product observation older than 30 days',
 });
 
 test('current snapshot rows require approved rights and current freshness',()=>{
-  const products=Array.from({length:25},(_,i)=>product(i+1));
-  const row={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products,source_rights_status:'APPROVED',freshness_status:'CURRENT'};
-  assert.equal(normalizeCrossMarketSnapshot(row,{now:new Date('2026-09-04T08:00:00Z')})?.products.length,25);
+  const products=Array.from({length:25},(_,i)=>currentEbayProduct(i+1));
+  const row={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products,source_key:'EBAY_BUY_MARKETING_BEST_SELLING',source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  const normalized=normalizeCrossMarketSnapshot(row,{now:new Date('2026-09-04T08:00:00Z')});
+  assert.equal(normalized?.products.length,25);
+  assert.equal(normalized.products[0].price,null);
+  assert.equal(normalized.products[0].rating,null);
+  assert.equal(normalized.products[0].reviewCount,null);
+  assert.equal(normalized.products[0].sourceRank,null);
   assert.equal(normalizeCrossMarketSnapshot({...row,source_rights_status:'REVIEW_REQUIRED'},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...row,freshness_status:'STALE'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,source_key:'UNREVIEWED_FEED'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,market:'EBAY_FR'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceUrl:'https://www.amazon.com/dp/ABC'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceUrl:'https://www.ebay.de/p/123'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceKey:'OTHER_SOURCE'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
 });
 
 test('demand, advertising and Romanian comparable data remain supporting signals',()=>{
@@ -117,7 +128,7 @@ test('Free Cross-Market endpoint returns live coverage and fails closed on missi
 });
 
 test('revoking the public-display flag removes an approved current snapshot from the public API',async()=>{
-  const snapshot={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,i)=>product(i+1)),source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+  const snapshot={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,i)=>currentEbayProduct(i+1)),source_key:'EBAY_BUY_MARKETING_BEST_SELLING',source_rights_status:'APPROVED',freshness_status:'CURRENT'};
   const fetchImpl=async url=>{
     if(String(url).includes('/rpc/consume_api_rate_limit'))return Response.json([{allowed:true,limit:90,hitCount:1}]);
     if(String(url).includes('/rest/v1/current_top25_snapshots_v1'))return Response.json([snapshot]);

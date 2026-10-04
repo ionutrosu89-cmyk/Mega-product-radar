@@ -17,6 +17,12 @@ export const FREE_CROSS_MARKET_PLATFORMS=Object.freeze([
 ]);
 
 const BY_ID=new Map(FREE_CROSS_MARKET_PLATFORMS.map(platform=>[platform.id,platform]));
+const EXPLICIT_LIVE_SOURCES=Object.freeze({
+  EBAY:{markets:new Set(['EBAY_US','EBAY_DE']),sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',hosts:{EBAY_US:/^(?:www\.)?ebay\.com$/i,EBAY_DE:/^(?:www\.)?ebay\.de$/i}},
+  ALIEXPRESS:{markets:new Set(['ALIEXPRESS_GLOBAL']),sourceKey:'ALIEXPRESS_HOT_PRODUCTS_API',hosts:{ALIEXPRESS_GLOBAL:/(^|\.)aliexpress\.com$/i}},
+  AMAZON_US:{markets:new Set(['AMAZON_US']),sourceKey:'AMAZON_LICENSED_BEST_SELLERS',hosts:{AMAZON_US:/^(?:www\.)?amazon\.com$/i}},
+  AMAZON_DE:{markets:new Set(['AMAZON_DE']),sourceKey:'AMAZON_LICENSED_BEST_SELLERS',hosts:{AMAZON_DE:/^(?:www\.)?amazon\.de$/i}}
+});
 export function curatedSourcePlatform(market,sourceKey){
   const key=`${upper(market)}:${upper(sourceKey)}`;
   if(['EBAY_US:EBAY_BUY_MARKETING_BEST_SELLING','EBAY_DE:EBAY_BUY_MARKETING_BEST_SELLING'].includes(key))return 'EBAY';
@@ -41,6 +47,14 @@ function accessState(platform,accessByPlatform={}){
 }
 
 function https(value){try{return new URL(clean(value)).protocol==='https:';}catch{return false;}}
+const numberOrNull=value=>(typeof value==='number'||typeof value==='string')&&String(value).trim()!==''&&Number.isFinite(Number(value))?Number(value):null;
+
+function explicitLiveSourceValid(raw,products,platform){
+  const policy=EXPLICIT_LIVE_SOURCES[platform];
+  const market=upper(raw?.market),sourceKey=upper(raw?.source_key);
+  if(!policy||!policy.markets.has(market)||sourceKey!==policy.sourceKey)return false;
+  return products.every(product=>policy.hosts[market].test(new URL(product.sourceUrl).hostname)&&product.sourceKey===sourceKey&&product.market===market);
+}
 
 export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}){
   const row=raw&&typeof raw==='object'?raw:{};
@@ -49,20 +63,21 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
   const sourceUrl=clean(row.sourceUrl).slice(0,500);
   const observedAt=clean(row.observedAt);
   const rank=Number(row.rank??index+1);
+  const sourceRank=numberOrNull(row.sourceRank),price=numberOrNull(row.price),rating=numberOrNull(row.rating),reviewCount=numberOrNull(row.reviewCount);
   if(!name||!externalId||rank!==index+1||!https(sourceUrl)||!Number.isFinite(Date.parse(observedAt)))return null;
   return {
     name,externalId,rank,platform,sourceUrl,observedAt,
-    sourceRank:Number.isInteger(Number(row.sourceRank))?Number(row.sourceRank):null,
+    sourceRank:Number.isInteger(sourceRank)&&sourceRank>0?sourceRank:null,
     sourcePlatform:upper(row.sourcePlatform)||null,
     conceptKey:upper(row.conceptKey||row.canonicalProductId).slice(0,160)||null,
     sourceKey:clean(row.sourceKey).slice(0,100)||null,
     sourceLabel:clean(row.sourceLabel).slice(0,160)||BY_ID.get(platform)?.sourceLabel||platform,
     rankingBasis:clean(row.rankingBasis).slice(0,120)||rankingBasis,
     market:upper(row.market).slice(0,20)||null,
-    price:Number.isFinite(Number(row.price))&&Number(row.price)>=0?Number(row.price):null,
+    price:price!==null&&price>=0?price:null,
     currency:upper(row.currency).slice(0,8)||null,
-    rating:Number.isFinite(Number(row.rating))&&Number(row.rating)>=0&&Number(row.rating)<=5?Number(row.rating):null,
-    reviewCount:Number.isInteger(Number(row.reviewCount))&&Number(row.reviewCount)>=0?Number(row.reviewCount):null,
+    rating:rating!==null&&rating>=0&&rating<=5?rating:null,
+    reviewCount:Number.isInteger(reviewCount)&&reviewCount>=0?reviewCount:null,
     sourceMetric:row.sourceMetric&&typeof row.sourceMetric==='object'?row.sourceMetric:null,
     evidenceClass:['DIRECT','LICENSED','DERIVED'].includes(upper(row.evidenceClass))?upper(row.evidenceClass):'DIRECT',
     salesEvidenceClass:'PLATFORM_RANK_NOT_UNIT_SALES',
@@ -101,6 +116,7 @@ export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   if(kind==='CURATED'&&(!curatedSource||source.some(row=>!https(row?.sourceUrl)||!curatedProductReviewed(row,now,curatedSource))))return null;
   const products=source.map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis})).filter(Boolean);
   if(products.length!==25||new Set(products.map(p=>p.externalId)).size!==25)return null;
+  if(explicitPlatform&&kind==='LIVE'&&!explicitLiveSourceValid(raw,products,key.platform))return null;
   if(kind==='CURATED'&&new Set(products.map(p=>p.conceptKey)).size!==25)return null;
   if(products.some(p=>now.getTime()-Date.parse(p.observedAt)<0||now.getTime()-Date.parse(p.observedAt)>platform.freshnessDays*DAY_MS))return null;
   const oldestObservedAt=products.map(row=>row.observedAt).sort()[0];
