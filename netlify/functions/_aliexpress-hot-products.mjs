@@ -1,5 +1,5 @@
 import {createHmac} from 'node:crypto';
-import {FREE_TOP25_LIVE_TAXONOMY_BY_ID} from '../../free-top25-live-taxonomy-v1.js';
+import {approvedTop25CategoryTarget} from '../../top25-category-approval-v1.js';
 
 const API_URL='https://eco.taobao.com/router/rest';
 const METHOD='aliexpress.affiliate.hotproduct.query';
@@ -18,20 +18,19 @@ export function aliexpressPublicDisplayAccessState(env=process.env){
   return 'READY_TO_COLLECT';
 }
 
-export function parseAliExpressTargets(env=process.env){
+export function parseAliExpressTargets(env=process.env,now=new Date()){
   let raw;
   try{raw=JSON.parse(clean(env.MPR_ALIEXPRESS_TOP25_TARGETS_JSON)||'[]');}catch{return [];}
-  if(!Array.isArray(raw))return [];
+  if(!Array.isArray(raw)||raw.length>25)return [];
   const seen=new Set();
-  return raw.flatMap(row=>{
-    const nicheId=upper(row?.nicheId);
-    const categoryIds=(Array.isArray(row?.categoryIds)?row.categoryIds:clean(row?.categoryIds).split(','))
-      .map(clean).filter(value=>/^\d+$/.test(value)).slice(0,5);
-    const keywords=clean(row?.keywords).slice(0,120);
-    if(!FREE_TOP25_LIVE_TAXONOMY_BY_ID.has(nicheId)||(!categoryIds.length&&!keywords)||seen.has(nicheId))return [];
-    seen.add(nicheId);
-    return [{nicheId,categoryIds,keywords}];
-  }).slice(0,25);
+  const targets=[];
+  for(const row of raw){
+    const target=approvedTop25CategoryTarget(row,{provider:'ALIEXPRESS',now});
+    if(!target||seen.has(target.nicheId))return [];
+    seen.add(target.nicheId);
+    targets.push({...target,keywords:clean(row?.keywords).slice(0,120)});
+  }
+  return targets;
 }
 
 function chinaTimestamp(date){

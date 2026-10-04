@@ -4,17 +4,20 @@ import {EBAY_BUY_AUTH,resetEbayTokenCacheForTests} from '../netlify/functions/_e
 import {collectEbayBestSellingTarget,normalizeEbayBestSelling,normalizeEbayBestSellingCandidates,parseEbayTargets} from '../netlify/functions/_ebay-best-selling.mjs';
 import {createEbayCrossMarketRefreshHandler,internalSecret} from '../netlify/functions/ebay-cross-market-refresh.mjs';
 
+const approvedTarget={nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US',mappingStatus:'APPROVED',reviewer:'Category reviewer',reviewedAt:'2026-09-03T06:00:00Z',categoryEvidenceUrl:'https://api.ebay.com/commerce/taxonomy/v1/category_tree/0'};
 const approvedEnv={
   EBAY_CLIENT_ID:'client',EBAY_CLIENT_SECRET:'secret',MPR_EBAY_TERMS_APPROVED:'true',MPR_EBAY_PRODUCTION_ACCESS_APPROVED:'true',MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true',
-  MPR_EBAY_CROSS_MARKET_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US'}]),
+  MPR_EBAY_CROSS_MARKET_TARGETS_JSON:JSON.stringify([approvedTarget]),
   MPR_INTERNAL_REFRESH_SECRET:'internal-secret',SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'
 };
 const payload=count=>({merchandisedProducts:Array.from({length:count},(_,i)=>({epid:`EPID${i+1}`,title:`Product ${i+1}`,averageRating:'4.5',reviewCount:i+10}))});
 
 test('eBay target parser accepts only explicit category mappings',()=>{
-  assert.deepEqual(parseEbayTargets(approvedEnv),[{nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US'}]);
+  assert.deepEqual(parseEbayTargets(approvedEnv,new Date('2026-09-04')), [{nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US',reviewer:'Category reviewer',reviewedAt:'2026-09-03T06:00:00.000Z',categoryEvidenceUrl:'https://api.ebay.com/commerce/taxonomy/v1/category_tree/0'}]);
   assert.deepEqual(parseEbayTargets({MPR_EBAY_CROSS_MARKET_TARGETS_JSON:'not-json'}),[]);
-  assert.deepEqual(parseEbayTargets({MPR_EBAY_CROSS_MARKET_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryId:'not-a-category'}])}),[]);
+  for(const changed of [{categoryId:'not-a-category'},{nicheId:'UNKNOWN'},{mappingStatus:'PENDING'},{reviewedAt:'2026-01-01'},{categoryEvidenceUrl:'https://evil.example/category'},{marketplaceId:'EBAY_FR'}]){
+    assert.deepEqual(parseEbayTargets({MPR_EBAY_CROSS_MARKET_TARGETS_JSON:JSON.stringify([{...approvedTarget,...changed}])},new Date('2026-09-04')),[]);
+  }
 });
 
 test('eBay normalizer fails closed unless 25 ranked products are usable',()=>{

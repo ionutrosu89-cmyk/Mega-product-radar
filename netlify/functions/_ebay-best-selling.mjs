@@ -1,4 +1,5 @@
 import {getEbayApplicationToken,ebayBuyAccessState} from './_ebay-buy-auth.mjs';
+import {approvedTop25CategoryTarget} from '../../top25-category-approval-v1.js';
 
 const API_URL='https://api.ebay.com/buy/marketing/v1/merchandised_product';
 const REVIEW_CANDIDATE_LIMIT=100;
@@ -8,21 +9,22 @@ const upper=value=>clean(value).toUpperCase();
 const finite=value=>Number.isFinite(Number(value));
 const https=value=>{try{return new URL(clean(value)).protocol==='https:';}catch{return false;}};
 
-export function parseEbayTargets(env=process.env){
+export function parseEbayTargets(env=process.env,now=new Date()){
   let raw;
   try{raw=JSON.parse(clean(env.MPR_EBAY_CROSS_MARKET_TARGETS_JSON)||'[]');}catch{return [];}
-  if(!Array.isArray(raw))return [];
+  if(!Array.isArray(raw)||raw.length>50)return [];
   const seen=new Set();
-  return raw.flatMap(row=>{
-    const nicheId=upper(row?.nicheId);
-    const categoryId=clean(row?.categoryId);
+  const targets=[];
+  for(const row of raw){
     const marketplaceId=upper(row?.marketplaceId||'EBAY_US');
-    if(!/^[A-Z0-9_]+$/.test(nicheId)||!/^[0-9]+$/.test(categoryId)||!MARKETPLACE_HOSTS[marketplaceId])return [];
-    const key=`${nicheId}:${marketplaceId}`;
+    const target=approvedTop25CategoryTarget({...row,marketplaceId},{provider:marketplaceId,now});
+    if(!target||!MARKETPLACE_HOSTS[marketplaceId])return [];
+    const key=`${target.nicheId}:${marketplaceId}`;
     if(seen.has(key))return [];
     seen.add(key);
-    return [{nicheId,categoryId,marketplaceId}];
-  }).slice(0,25);
+    targets.push(target);
+  }
+  return targets;
 }
 
 function productUrl(epid,marketplaceId){

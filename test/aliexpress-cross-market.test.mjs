@@ -3,10 +3,17 @@ import test from 'node:test';
 import {createHmac} from 'node:crypto';
 import {aliexpressPublicDisplayAccessState,parseAliExpressTargets,buildAliExpressRequest,normalizeAliExpressHotProducts,collectAliExpressHotProductsTarget} from '../netlify/functions/_aliexpress-hot-products.mjs';
 import {createAliExpressCrossMarketRefreshHandler} from '../netlify/functions/aliexpress-cross-market-refresh.mjs';
-const env={ALIEXPRESS_APP_KEY:'key',ALIEXPRESS_APP_SECRET:'secret',ALIEXPRESS_TRACKING_ID:'tracking',MPR_ALIEXPRESS_TERMS_APPROVED:'true',MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED:'true',MPR_ALIEXPRESS_API_CURRENT_CONFIRMED:'true',MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_ALIEXPRESS_TOP25_TARGETS_JSON:JSON.stringify([{nicheId:'AUTO',categoryIds:['123']}]),SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'};
+const approvedTarget={nicheId:'AUTO',categoryIds:['123'],mappingStatus:'APPROVED',reviewer:'Category reviewer',reviewedAt:'2026-09-22T07:00:00Z',categoryEvidenceUrl:'https://developer.alibaba.com/docs/doc.htm?articleId=45794'};
+const env={ALIEXPRESS_APP_KEY:'key',ALIEXPRESS_APP_SECRET:'secret',ALIEXPRESS_TRACKING_ID:'tracking',MPR_ALIEXPRESS_TERMS_APPROVED:'true',MPR_ALIEXPRESS_PUBLIC_DISPLAY_APPROVED:'true',MPR_ALIEXPRESS_API_CURRENT_CONFIRMED:'true',MPR_INTERNAL_REFRESH_SECRET:'internal',MPR_ALIEXPRESS_TOP25_TARGETS_JSON:JSON.stringify([approvedTarget]),SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'service'};
 const now=()=>new Date('2026-09-23T07:00:00Z');
 const rows=()=>Array.from({length:25},(_,i)=>({product_id:String(i+1),product_title:`Product ${i+1}`,product_detail_url:`https://www.aliexpress.com/item/${i+1}.html`,target_sale_price:'10.50',lastest_volume:100-i}));
 const payload=products=>({aliexpress_affiliate_hotproduct_query_response:{resp_result:{resp_code:200,result:{products:{product:products}}}}});
+test('AliExpress targets require reviewed categories; keywords alone cannot claim a category Top25',()=>{
+ assert.equal(parseAliExpressTargets(env,now()).length,1);
+ for(const change of [{categoryIds:[] ,keywords:'car accessories'},{mappingStatus:'PENDING'},{reviewedAt:'2026-01-01'},{categoryEvidenceUrl:'https://evil.example/category'},{categoryIds:['abc']},{nicheId:'UNKNOWN'}]){
+  assert.deepEqual(parseAliExpressTargets({...env,MPR_ALIEXPRESS_TOP25_TARGETS_JSON:JSON.stringify([{...approvedTarget,...change}])},now()),[]);
+ }
+});
 test('AliExpress gates make zero calls without display rights',async()=>{
  let calls=0;
  assert.equal(aliexpressPublicDisplayAccessState({}),'ACCESS_REQUIRED');

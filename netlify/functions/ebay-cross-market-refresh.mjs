@@ -23,7 +23,7 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
         const access=ebayBuyAccessState(env);
         if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
         const nicheId=clean(input.nicheId).toUpperCase(),marketplaceId=clean(input.marketplaceId).toUpperCase();
-        const target=parseEbayTargets(env).find(row=>row.nicheId===nicheId&&row.marketplaceId===marketplaceId);
+        const target=parseEbayTargets(env,now()).find(row=>row.nicheId===nicheId&&row.marketplaceId===marketplaceId);
         if(!target)return Response.json({ok:false,status:'REVIEW_TARGET_NOT_CONFIGURED',providerCalls:0},{status:400,headers:{'Cache-Control':'no-store'}});
         const collected=await collectEbayBestSellingTarget({target,env,fetchImpl,now,reviewPool:true});
         return Response.json({ok:collected.candidates.length>0,status:collected.code,nicheId,marketplaceId,candidateCount:collected.candidates.length,candidates:collected.candidates,policy:{internalReviewOnly:true,published:0,autoApproved:0,purchaseAuthorized:false}},{status:collected.candidates.length>0?200:422,headers:{'Cache-Control':'no-store'}});
@@ -31,7 +31,7 @@ export function createEbayCrossMarketRefreshHandler({env=process.env,fetchImpl=f
       if(input.mode!==undefined&&!['PUBLISH','PUBLISH_DUE'].includes(input.mode))return Response.json({ok:false,status:'UNSUPPORTED_MODE',providerCalls:0},{status:400,headers:{'Cache-Control':'no-store'}});
       const access=ebayPublicDisplayAccessState(env);
       if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
-      const targets=parseEbayTargets(env);
+      const targets=parseEbayTargets(env,now());
       if(!targets.length)return Response.json({ok:false,status:'TARGETS_REQUIRED',published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
 
       const timestamp=now();

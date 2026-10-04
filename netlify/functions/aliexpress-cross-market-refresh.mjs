@@ -17,7 +17,7 @@ export function createAliExpressCrossMarketRefreshHandler({env=process.env,fetch
       if(!input||typeof input!=='object'||Array.isArray(input)||input.mode!==undefined&&!['PUBLISH','PUBLISH_DUE'].includes(input.mode))return Response.json({ok:false,status:'UNSUPPORTED_MODE',providerCalls:0},{status:400,headers:{'Cache-Control':'no-store'}});
       const access=aliexpressPublicDisplayAccessState(env);
       if(access!=='READY_TO_COLLECT')return Response.json({ok:false,status:access,published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
-      const targets=parseAliExpressTargets(env);
+      const targets=parseAliExpressTargets(env,now());
       if(!targets.length)return Response.json({ok:false,status:'TARGETS_REQUIRED',published:0,providerCalls:0},{status:409,headers:{'Cache-Control':'no-store'}});
       const timestamp=now(),results=[];
       let selectedTargets=targets;

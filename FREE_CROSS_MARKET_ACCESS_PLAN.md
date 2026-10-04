@@ -34,7 +34,7 @@ Implementarea eBay este fail-closed. Starea devine `READY_TO_COLLECT` numai cân
 
 Tokenul OAuth de tip Application Access Token este generat prin client-credentials grant cu scope-ul minim Buy Marketing și reutilizat până aproape de expirare. Tokenul nu se stochează în repository, nu se trimite în browser și nu trebuie introdus manual în Netlify.
 
-Top 25 eBay folosește `BEST_SELLING` numai pentru nișe care au o mapare explicit aprobată la `category_id`. Categoria nu este ghicită din numele nișei. Configurația server-side `MPR_EBAY_CROSS_MARKET_TARGETS_JSON` conține doar mapările aprobate, de forma `nicheId + categoryId + marketplaceId`. În prima versiune sunt acceptate numai `EBAY_US` și `EBAY_DE`, pentru care avem și link public de produs determinist. Dacă lista API nu produce exact 25 de produse valide, snapshot-ul nu este scris.
+Top 25 eBay folosește `BEST_SELLING` numai pentru nișe care au o mapare explicit aprobată la `category_id`. Categoria nu este ghicită din numele nișei. Configurația server-side `MPR_EBAY_CROSS_MARKET_TARGETS_JSON` conține doar mapările aprobate, cu `nicheId`, `categoryId`, `marketplaceId`, `mappingStatus: "APPROVED"`, `reviewer`, `reviewedAt` (maximum 90 de zile) și `categoryEvidenceUrl` HTTPS pe un domeniu oficial eBay. Lipsa unui câmp, un ID de nișă necunoscut, o revizie expirată sau o țintă duplicată opresc întregul lot înainte de apelul către furnizor. În prima versiune sunt acceptate numai `EBAY_US` și `EBAY_DE`, pentru care avem și link public de produs determinist. Dacă lista API nu produce exact 25 de produse valide, snapshot-ul nu este scris.
 
 Refresh-ul este expus numai pe ruta internă protejată și folosește `MPR_INTERNAL_REFRESH_SECRET`. Secretul se generează și se păstrează numai în Netlify. Un refresh reușit scrie în `current_top25_snapshots_v1`; endpoint-ul public Cross-Market îl preia apoi prin contractul existent, fără bypass al validării de prospețime și 25/25.
 
@@ -42,7 +42,7 @@ Refresh-ul este expus numai pe ruta internă protejată și folosește `MPR_INTE
 
 Maparea nișelor la categoriile eBay se face printr-un flux separat de review. Aplicația poate apela Taxonomy API oficial pentru a obține `categoryTreeId`, versiunea arborelui și maximum 10 categorii leaf sugerate pentru o interogare. Rezultatele sunt doar propuneri de lucru: fiecare este etichetat `REVIEW_REQUIRED`, `activationEligible=false` și `EBAY_TAXONOMY_SUGGESTION`.
 
-Ruta internă `/api/internal/ebay-category-review` este protejată de `MPR_INTERNAL_REFRESH_SECRET`. Nu persistă automat o mapare și nu modifică `MPR_EBAY_CROSS_MARKET_TARGETS_JSON`. Numai după review uman și aprobarea explicită a perechii `nicheId + marketplaceId + categoryId` poate categoria fi introdusă în configurația de colectare. O schimbare a versiunii taxonomy este motiv de reverificare a mapărilor, nu de auto-migrare.
+Ruta internă `/api/internal/ebay-category-review` este protejată de `MPR_INTERNAL_REFRESH_SECRET`. Nu persistă automat o mapare și nu modifică `MPR_EBAY_CROSS_MARKET_TARGETS_JSON`. Numai după review uman și aprobarea explicită a perechii `nicheId + marketplaceId + categoryId` poate categoria fi introdusă în configurația de colectare. Matricea de review ține aprobarea separat în `providerReviews.EBAY_US` și `providerReviews.EBAY_DE`; aprobarea unei piețe nu se transferă celeilalte. O schimbare a versiunii taxonomy este motiv de reverificare a mapărilor, nu de auto-migrare.
 
 ## Secret management
 

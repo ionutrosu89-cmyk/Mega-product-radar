@@ -16,5 +16,9 @@ test('approved category needs reviewer, recent date and provider category ID',()
   changed.niches[0].ebayUsCategoryId='12345';
   assert.equal(compileTop25Targets(changed,{provider:'EBAY_US',now:new Date('2026-09-23')}).ok,false);
   Object.assign(changed.niches[0],{reviewer:'Operator',reviewedAt:'2026-09-23',categoryEvidenceUrl:'https://developer.ebay.com/category/12345'});
-  assert.deepEqual(compileTop25Targets(changed,{provider:'EBAY_US',now:new Date('2026-09-23')}).targets,[{nicheId:'CASA',categoryId:'12345',marketplaceId:'EBAY_US'}]);
+  assert.deepEqual(compileTop25Targets(changed,{provider:'EBAY_US',now:new Date('2026-09-23')}).targets,[]);
+  changed.niches[0].providerReviews={EBAY_US:{mappingStatus:'APPROVED',reviewer:'Operator',reviewedAt:'2026-09-23',categoryEvidenceUrl:'https://api.ebay.com/commerce/taxonomy/v1/category_tree/0'}};
+  assert.deepEqual(compileTop25Targets(changed,{provider:'EBAY_US',now:new Date('2026-09-23')}).targets,[{nicheId:'CASA',categoryId:'12345',marketplaceId:'EBAY_US',reviewer:'Operator',reviewedAt:'2026-09-23T00:00:00.000Z',categoryEvidenceUrl:'https://api.ebay.com/commerce/taxonomy/v1/category_tree/0'}]);
+  changed.niches[0].ebayDeCategoryId='12345';
+  assert.deepEqual(compileTop25Targets(changed,{provider:'EBAY_DE',now:new Date('2026-09-23')}).targets,[]);
 });
