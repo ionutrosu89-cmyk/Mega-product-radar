@@ -37,6 +37,21 @@ test('eBay normalizer fails closed unless 25 ranked products are usable',()=>{
   assert.equal(normalizeEbayBestSelling(payload(100),{target}).length,25);
 });
 
+test('eBay missing commercial metrics stay unknown rather than becoming zero',()=>{
+  const target={nicheId:'AUTO',categoryId:'6000',marketplaceId:'EBAY_US'};
+  const sample=payload(25);
+  delete sample.merchandisedProducts[0].averageRating;
+  delete sample.merchandisedProducts[0].reviewCount;
+  sample.merchandisedProducts[1].marketPriceDetails=[{estimatedStartPrice:{value:null},marketPrice:{value:'12.50',currency:'USD'}}];
+  sample.merchandisedProducts[2].marketPriceDetails=[{marketPrice:{value:'0',currency:'USD'}}];
+  const rows=normalizeEbayBestSelling(sample,{target});
+  assert.equal(rows[0].price,null);
+  assert.equal(rows[0].rating,null);
+  assert.equal(rows[0].reviewCount,null);
+  assert.equal(rows[1].price,12.5);
+  assert.equal(rows[2].price,0);
+});
+
 test('collector requests 100 ranked review candidates while keeping the public Top25 at 25',async()=>{
   resetEbayTokenCacheForTests();
   const calls=[];

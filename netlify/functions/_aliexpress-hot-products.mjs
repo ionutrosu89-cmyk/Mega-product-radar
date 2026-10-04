@@ -6,7 +6,7 @@ const METHOD='aliexpress.affiliate.hotproduct.query';
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
 const approved=(env,key)=>clean(env[key]).toLowerCase()==='true';
-const finite=value=>Number.isFinite(Number(value));
+const numberOrNull=value=>(typeof value==='number'||typeof value==='string')&&String(value).trim()!==''&&Number.isFinite(Number(value))?Number(value):null;
 
 export function aliexpressPublicDisplayAccessState(env=process.env){
   if(!clean(env.ALIEXPRESS_APP_KEY)||!clean(env.ALIEXPRESS_APP_SECRET)||!clean(env.ALIEXPRESS_TRACKING_ID))return 'ACCESS_REQUIRED';
@@ -84,13 +84,13 @@ export function normalizeAliExpressHotProducts(payload,{target,observedAt=new Da
     let parsed;try{parsed=new URL(sourceUrl);}catch{return [];}
     if(!externalId||!name||parsed.protocol!=='https:'||!/(^|\.)aliexpress\.com$/i.test(parsed.hostname)||seen.has(externalId))return [];
     seen.add(externalId);
-    const latestVolume=Number(row?.lastest_volume);
+    const latestVolume=numberOrNull(row?.lastest_volume);
     products.push({
       name,externalId,rank:products.length+1,platform:'ALIEXPRESS',sourceUrl,observedAt,
       conceptKey:null,sourceKey:'ALIEXPRESS_HOT_PRODUCTS_API',sourceLabel:'AliExpress Open Platform',rankingBasis:'HOT_PRODUCTS_LAST_VOLUME_DESC',market:'ALIEXPRESS_GLOBAL',
-      price:finite(row?.target_sale_price)?Number(row.target_sale_price):null,
+      price:numberOrNull(row?.target_sale_price),
       currency:upper(row?.target_sale_price_currency||'EUR'),rating:null,reviewCount:null,
-      sourceMetric:Number.isFinite(latestVolume)&&latestVolume>=0?{label:'Volum recent raportat de platformă',value:latestVolume,unit:'provider_latest_volume'}:null,
+      sourceMetric:latestVolume!==null&&latestVolume>=0?{label:'Volum recent raportat de platformă',value:latestVolume,unit:'provider_latest_volume'}:null,
       evidenceClass:'DIRECT',salesEvidenceClass:'PLATFORM_RANK_NOT_UNIT_SALES',commercialGate:'BRAND_REVIEW_REQUIRED'
     });
     if(products.length===25)break;

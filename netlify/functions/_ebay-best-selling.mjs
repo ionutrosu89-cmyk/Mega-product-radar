@@ -6,7 +6,7 @@ const REVIEW_CANDIDATE_LIMIT=100;
 const MARKETPLACE_HOSTS=Object.freeze({EBAY_US:'www.ebay.com',EBAY_DE:'www.ebay.de'});
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
-const finite=value=>Number.isFinite(Number(value));
+const numberOrNull=value=>(typeof value==='number'||typeof value==='string')&&String(value).trim()!==''&&Number.isFinite(Number(value))?Number(value):null;
 const https=value=>{try{return new URL(clean(value)).protocol==='https:';}catch{return false;}};
 
 export function parseEbayTargets(env=process.env,now=new Date()){
@@ -38,8 +38,9 @@ export function normalizeEbayBestSellingCandidates(payload,{target,observedAt=ne
     const epid=clean(row?.epid);
     const name=clean(row?.title).slice(0,220);
     if(!epid||!name)return null;
-    const priceDetail=Array.isArray(row?.marketPriceDetails)?row.marketPriceDetails.find(item=>finite(item?.estimatedStartPrice?.value))||row.marketPriceDetails.find(item=>finite(item?.marketPrice?.value)):null;
-    const amount=priceDetail?.estimatedStartPrice||priceDetail?.marketPrice||null;
+    const priceDetail=Array.isArray(row?.marketPriceDetails)?row.marketPriceDetails.find(item=>numberOrNull(item?.estimatedStartPrice?.value)!==null)||row.marketPriceDetails.find(item=>numberOrNull(item?.marketPrice?.value)!==null):null;
+    const amount=numberOrNull(priceDetail?.estimatedStartPrice?.value)!==null?priceDetail.estimatedStartPrice:priceDetail?.marketPrice||null;
+    const rating=numberOrNull(row?.averageRating),reviewCount=numberOrNull(row?.reviewCount);
     const sourceUrl=productUrl(epid,target.marketplaceId);
     if(!https(sourceUrl))return null;
     return {
@@ -56,10 +57,10 @@ export function normalizeEbayBestSellingCandidates(payload,{target,observedAt=ne
       sourceLabel:'eBay Buy Marketing API',
       rankingBasis:'BEST_SELLING',
       market:target.marketplaceId,
-      price:finite(amount?.value)?Number(amount.value):null,
+      price:numberOrNull(amount?.value),
       currency:upper(amount?.currency),
-      rating:finite(row?.averageRating)?Number(row.averageRating):null,
-      reviewCount:Number.isInteger(Number(row?.reviewCount))?Number(row.reviewCount):null,
+      rating,
+      reviewCount:Number.isInteger(reviewCount)&&reviewCount>=0?reviewCount:null,
       sourceMetric:{label:'eBay metric',value:'BEST_SELLING',unit:'platform_rank'},
       evidenceClass:'DIRECT',
       salesEvidenceClass:'PLATFORM_RANK_NOT_UNIT_SALES',

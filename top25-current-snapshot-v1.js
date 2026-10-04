@@ -3,6 +3,7 @@ import {FREE_TOP25_LIVE_TAXONOMY_BY_ID} from './free-top25-live-taxonomy-v1.js';
 const clean=value=>String(value??'').replace(/\s+/g,' ').trim();
 const upper=value=>clean(value).toUpperCase();
 const iso=value=>Number.isFinite(Date.parse(clean(value)))?new Date(Date.parse(clean(value))).toISOString():null;
+const numberOrNull=value=>(typeof value==='number'||typeof value==='string')&&String(value).trim()!==''&&Number.isFinite(Number(value))?Number(value):null;
 const https=value=>{try{return new URL(clean(value)).protocol==='https:';}catch{return false;}};
 const PLATFORM_POLICY=Object.freeze({
   EBAY:{markets:new Set(['EBAY_US','EBAY_DE']),sourceKeys:new Set(['EBAY_BUY_MARKETING_BEST_SELLING']),rankingBasis:'BEST_SELLING',freshnessHours:72,host:/^(?:www\.)?ebay\.(?:com|de)$/i},
@@ -23,7 +24,7 @@ function normalizeProduct(raw,index,{platform,market,sourceKey,rankingBasis,nowM
   if(policy.host&&!policy.host.test(parsedUrl.hostname))return null;
   const ageMs=nowMs-Date.parse(observedAt);
   if(ageMs<0||ageMs>freshnessHours*3_600_000)return null;
-  const price=Number(raw?.price),rating=Number(raw?.rating),reviewCount=Number(raw?.reviewCount);
+  const price=numberOrNull(raw?.price),rating=numberOrNull(raw?.rating),reviewCount=numberOrNull(raw?.reviewCount);
   return {
     name,externalId,rank,platform,market,sourceUrl,observedAt,sourceKey,
     sourceLabel:clean(raw?.sourceLabel).slice(0,160)||sourceKey,

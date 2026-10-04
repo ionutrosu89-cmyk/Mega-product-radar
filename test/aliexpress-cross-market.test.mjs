@@ -43,6 +43,17 @@ test('AliExpress rejects incomplete, duplicate and malformed original top positi
  const invalid=rows();invalid[0].product_detail_url='https://evil.example/item/1';invalid.push(valid[0]);
  assert.equal(normalizeAliExpressHotProducts(payload(invalid)).length,0);
 });
+test('AliExpress absent price and volume stay unknown while explicit zero stays zero',()=>{
+ const sample=rows();
+ delete sample[0].target_sale_price;delete sample[0].lastest_volume;
+ sample[1].target_sale_price='';sample[1].lastest_volume=null;
+ sample[2].target_sale_price='0';sample[2].lastest_volume=0;
+ const normalized=normalizeAliExpressHotProducts(payload(sample));
+ assert.equal(normalized.length,25);
+ assert.equal(normalized[0].price,null);assert.equal(normalized[0].sourceMetric,null);
+ assert.equal(normalized[1].price,null);assert.equal(normalized[1].sourceMetric,null);
+ assert.equal(normalized[2].price,0);assert.equal(normalized[2].sourceMetric.value,0);
+});
 test('AliExpress authenticated refresh persists only current normalized results',async()=>{
  const calls=[];const handler=createAliExpressCrossMarketRefreshHandler({env,now,fetchImpl:async(url,options)=>{
  calls.push({url:String(url),options});return String(url).includes('eco.taobao.com')?Response.json(payload(rows())):new Response(null,{status:201});

@@ -14,6 +14,9 @@ test('current snapshot accepts exactly 25 fresh unique official ranking rows',()
   assert.equal(result.snapshot.source_rights_status,'APPROVED');
   assert.equal(result.snapshot.products[0].salesEvidenceClass,'PLATFORM_RANK_NOT_UNIT_SALES');
   assert.equal(result.snapshot.products[0].rankingBasis,'BEST_SELLING');
+  assert.equal(result.snapshot.products[0].price,null);
+  assert.equal(result.snapshot.products[0].rating,null);
+  assert.equal(result.snapshot.products[0].reviewCount,null);
 });
 
 test('current snapshot fails closed on rights, stale data, incomplete rows and duplicates',()=>{
