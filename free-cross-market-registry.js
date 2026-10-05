@@ -17,6 +17,7 @@ export const FREE_CROSS_MARKET_PLATFORMS=Object.freeze([
 ]);
 
 const BY_ID=new Map(FREE_CROSS_MARKET_PLATFORMS.map(platform=>[platform.id,platform]));
+export const independentMarketplace=platform=>['AMAZON_US','AMAZON_DE'].includes(upper(platform))?'AMAZON':upper(platform);
 const EXPLICIT_LIVE_SOURCES=Object.freeze({
   EBAY:{markets:new Set(['EBAY_US','EBAY_DE']),sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',hosts:{EBAY_US:/^(?:www\.)?ebay\.com$/i,EBAY_DE:/^(?:www\.)?ebay\.de$/i}},
   ALIEXPRESS:{markets:new Set(['ALIEXPRESS_GLOBAL']),sourceKey:'ALIEXPRESS_HOT_PRODUCTS_API',hosts:{ALIEXPRESS_GLOBAL:/(^|\.)aliexpress\.com$/i}},
@@ -137,13 +138,13 @@ function deriveConsensusRankings(rankings,now){
       for(const product of ranking.products){
         if(!product.conceptKey)continue;
         if(!concepts.has(product.conceptKey))concepts.set(product.conceptKey,new Map());
-        concepts.get(product.conceptKey).set(ranking.platform,product);
+        concepts.get(product.conceptKey).set(independentMarketplace(ranking.platform),product);
       }
     }
     const confirmed=[...concepts.entries()].map(([conceptKey,platformRows])=>({conceptKey,rows:[...platformRows.values()]})).filter(row=>row.rows.length>=2).sort((a,b)=>a.rows.reduce((sum,row)=>sum+row.rank,0)/a.rows.length-b.rows.reduce((sum,row)=>sum+row.rank,0)/b.rows.length||a.conceptKey.localeCompare(b.conceptKey));
     if(confirmed.length<25)continue;
     const products=confirmed.slice(0,25).map(({conceptKey,rows},index)=>({
-      name:rows[0].name,externalId:`CONSENSUS:${conceptKey}`,conceptKey,rank:index+1,platform:'CONSENSUS',sourceUrl:rows[0].sourceUrl,observedAt:rows.map(row=>row.observedAt).sort().at(-1),sourceKey:'MPR_CROSS_MARKET_CONSENSUS',sourceLabel:`${rows.length} platforme independente`,rankingBasis:'MULTI_PLATFORM_CONFIRMATION',market:null,price:null,currency:null,rating:null,reviewCount:null,sourceMetric:{label:'Platforme independente',value:rows.length,unit:'platforms'},evidenceClass:'DERIVED',salesEvidenceClass:'NOT_UNIT_SALES',commercialGate:'BRAND_REVIEW_REQUIRED',platformConfirmations:rows.map(row=>row.platform).sort()
+      name:rows[0].name,externalId:`CONSENSUS:${conceptKey}`,conceptKey,rank:index+1,platform:'CONSENSUS',sourceUrl:rows[0].sourceUrl,observedAt:rows.map(row=>row.observedAt).sort().at(-1),sourceKey:'MPR_CROSS_MARKET_CONSENSUS',sourceLabel:`${rows.length} platforme independente`,rankingBasis:'MULTI_PLATFORM_CONFIRMATION',market:null,price:null,currency:null,rating:null,reviewCount:null,sourceMetric:{label:'Platforme independente',value:rows.length,unit:'platforms'},evidenceClass:'DERIVED',salesEvidenceClass:'NOT_UNIT_SALES',commercialGate:'BRAND_REVIEW_REQUIRED',platformConfirmations:rows.map(row=>independentMarketplace(row.platform)).sort()
     }));
     const oldestObservedAt=confirmed.slice(0,25).flatMap(({rows})=>rows.map(row=>row.observedAt)).sort()[0];
     const refreshDueAt=new Date(Date.parse(oldestObservedAt)+FREE_TOP25_REFRESH_DAYS*DAY_MS).toISOString();
@@ -165,7 +166,7 @@ export function buildFreeCrossMarketExperience({snapshots=[],accessByPlatform={}
   const rankings=[...curatedRankings,...liveRankings,...consensusRankings];
   const publishedByPlatform={};
   for(const row of rankings)publishedByPlatform[row.platform]=(publishedByPlatform[row.platform]||0)+1;
-  const livePlatforms=Object.entries(publishedByPlatform).filter(([id,count])=>BY_ID.get(id)?.kind==='LIVE'&&count>0).map(([id])=>id);
+  const livePlatforms=[...new Set(Object.entries(publishedByPlatform).filter(([id,count])=>BY_ID.get(id)?.kind==='LIVE'&&count>0).map(([id])=>independentMarketplace(id)))];
   const platforms=FREE_CROSS_MARKET_PLATFORMS.map(platform=>{
     const publishedNiches=publishedByPlatform[platform.id]||0;
     let status=publishedNiches>0?'LIVE':accessState(platform,accessByPlatform);

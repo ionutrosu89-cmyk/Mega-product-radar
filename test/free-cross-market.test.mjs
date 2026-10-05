@@ -113,6 +113,23 @@ test('consensus becomes ready only after 25 concepts match across two independen
   assert.deepEqual(consensus.products[0].platformConfirmations,['ALIEXPRESS','EBAY']);
 });
 
+test('Amazon US and DE alone cannot create cross-market consensus',()=>{
+  const amazon=(platform,host)=>({
+    niche_id:'AUTO',platform,market:platform,source_key:'AMAZON_LICENSED_BEST_SELLERS',
+    product_count:25,source_rights_status:'APPROVED',freshness_status:'CURRENT',window_end:'2026-09-03T06:00:00Z',
+    products:Array.from({length:25},(_,index)=>({
+      ...product(index+1),externalId:`${platform}-${index+1}`,sourceUrl:`https://www.amazon.${host}/dp/${index+1}`,
+      sourceKey:'AMAZON_LICENSED_BEST_SELLERS',market:platform
+    }))
+  });
+  const us=amazon('AMAZON_US','com'),de=amazon('AMAZON_DE','de');
+  const view=buildFreeCrossMarketExperience({snapshots:[us,de],now:new Date('2026-09-04T08:00:00Z')});
+  assert.equal(view.coverage.livePositions,50);
+  assert.equal(view.coverage.livePlatformCount,1);
+  assert.equal(view.coverage.consensusReady,false);
+  assert.equal(view.coverage.consensusPositions,0);
+});
+
 test('Free Cross-Market endpoint returns live coverage and fails closed on missing live snapshots',async()=>{
   const fetchImpl=async url=>{
     const value=String(url);
@@ -181,4 +198,3 @@ test('revoking eBay display approval also hides curated opportunities derived fr
   assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,25);
   assert.equal(buildFreeCrossMarketExperience({snapshots:filterPublicDisplaySnapshots([curated],{MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'false'}),now:new Date('2026-09-03T08:00:00Z')}).coverage.curatedPositions,0);
 });
-

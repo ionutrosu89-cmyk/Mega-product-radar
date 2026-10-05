@@ -1,5 +1,5 @@
 import {FREE_TOP25_EXPANDED_IDS} from './free-top25-expanded-registry.js';
-import {normalizeCrossMarketSnapshot} from './free-cross-market-registry.js';
+import {independentMarketplace,normalizeCrossMarketSnapshot} from './free-cross-market-registry.js';
 
 const passed=value=>value===true;
 const count=value=>Number.isSafeInteger(value)&&value>=0?value:0;
@@ -39,7 +39,7 @@ export function evaluateFreeGoLive({coverage={},study={},evidence={}}={},options
   for(const raw of liveSnapshots){
     if(!raw?.platform)continue;
     const row=normalizeCrossMarketSnapshot(raw,{now});
-    if(row&&['EBAY','ALIEXPRESS','AMAZON_US','AMAZON_DE'].includes(row.platform)&&liveByNiche.has(row.nicheId))liveByNiche.get(row.nicheId).add(row.platform);
+    if(row&&['EBAY','ALIEXPRESS','AMAZON_US','AMAZON_DE'].includes(row.platform)&&liveByNiche.has(row.nicheId))liveByNiche.get(row.nicheId).add(independentMarketplace(row.platform));
   }
   if([...liveByNiche.values()].some(platforms=>platforms.size<2))blockers.push('TWO_MARKETPLACES_PER_NICHE_REQUIRED');
   blockers.push(...evaluateFreeReleaseEvidence({study,evidence}));

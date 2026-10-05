@@ -18,9 +18,9 @@ const snapshot=nicheId=>({
 });
 const snapshots=FREE_TOP25_EXPANDED_IDS.map(snapshot);
 const marketplaceSnapshot=(nicheId,platform)=>{
-  const market=platform==='EBAY'?'EBAY_US':'ALIEXPRESS_GLOBAL';
-  const sourceKey=platform==='EBAY'?'EBAY_BUY_MARKETING_BEST_SELLING':'ALIEXPRESS_HOT_PRODUCTS_API';
-  const sourceHost=platform==='EBAY'?'www.ebay.com':'www.aliexpress.com';
+  const market=platform==='EBAY'?'EBAY_US':platform.startsWith('AMAZON_')?platform:'ALIEXPRESS_GLOBAL';
+  const sourceKey=platform==='EBAY'?'EBAY_BUY_MARKETING_BEST_SELLING':platform.startsWith('AMAZON_')?'AMAZON_LICENSED_BEST_SELLERS':'ALIEXPRESS_HOT_PRODUCTS_API';
+  const sourceHost=platform==='EBAY'?'www.ebay.com':platform==='AMAZON_US'?'www.amazon.com':platform==='AMAZON_DE'?'www.amazon.de':'www.aliexpress.com';
   return {niche_id:nicheId,platform,market,source_key:sourceKey,product_count:25,source_rights_status:'APPROVED',freshness_status:'CURRENT',window_end:reviewedAt,
     products:Array.from({length:25},(_,index)=>({name:`${platform} product ${index+1}`,externalId:`${platform}-${nicheId}-${index+1}`,rank:index+1,sourceUrl:`https://${sourceHost}/p/${index+1}`,observedAt:reviewedAt,sourceKey,market}))};
 };
@@ -50,6 +50,13 @@ test('every niche needs two distinct current marketplace rankings, not aggregate
     const result=evaluate({...complete,coverage:{...complete.coverage,liveSnapshots:rows,livePositions:1250}});
     assert.ok(result.blockers.includes('TWO_MARKETPLACES_PER_NICHE_REQUIRED'));
   }
+});
+
+test('Amazon US and Amazon DE count as one marketplace for Free launch',()=>{
+  const amazonOnly=FREE_TOP25_EXPANDED_IDS.flatMap(id=>[marketplaceSnapshot(id,'AMAZON_US'),marketplaceSnapshot(id,'AMAZON_DE')]);
+  const result=evaluate({...complete,coverage:{...complete.coverage,liveSnapshots:amazonOnly}});
+  assert.equal(result.status,'NO_GO');
+  assert.ok(result.blockers.includes('TWO_MARKETPLACES_PER_NICHE_REQUIRED'));
 });
 
 test('green tests without real study, phone and rights evidence remain NO_GO',()=>{
