@@ -89,6 +89,9 @@ test('current snapshot rows require approved rights and current freshness',()=>{
   assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceUrl:'https://www.amazon.com/dp/ABC'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceUrl:'https://www.ebay.de/p/123'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...row,products:products.map((product,index)=>index===0?{...product,sourceKey:'OTHER_SOURCE'}:product)},{now:new Date('2026-09-04T08:00:00Z')}),null);
+  const missingRank=products.map(product=>({...product}));
+  delete missingRank[0].rank;
+  assert.equal(normalizeCrossMarketSnapshot({...row,products:missingRank},{now:new Date('2026-09-04T08:00:00Z')}),null);
 });
 
 test('demand, advertising and Romanian comparable data remain supporting signals',()=>{

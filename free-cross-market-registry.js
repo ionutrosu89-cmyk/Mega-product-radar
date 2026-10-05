@@ -62,7 +62,7 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
   const externalId=clean(row.externalId||row.asin||row.productId).slice(0,120);
   const sourceUrl=clean(row.sourceUrl).slice(0,500);
   const observedAt=clean(row.observedAt);
-  const rank=Number(row.rank??index+1);
+  const rank=Number(row.rank);
   const sourceRank=numberOrNull(row.sourceRank),price=numberOrNull(row.price),rating=numberOrNull(row.rating),reviewCount=numberOrNull(row.reviewCount);
   if(!name||!externalId||rank!==index+1||!https(sourceUrl)||!Number.isFinite(Date.parse(observedAt)))return null;
   return {
