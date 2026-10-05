@@ -1,6 +1,16 @@
 # Top 25: acces la surse și pilotul de colectare
 
-Stare reverificată la 25 septembrie 2026: **0 conturi/API-uri aprobate pentru afișare în SaaS**, **0 mapări de categorie aprobate**, **0/25 clasamente live**. Acest document pregătește cererile; nu afirmă că au fost trimise.
+Stare reverificată la 5 octombrie 2026: **0 surse aprobate pentru afișare în SaaS**, **0 mapări de categorie aprobate** și **0/25 nișe cu clasamente live complete**. Cererile pentru drepturi și acces au fost trimise către eBay Partner Network și AliExpress Open Platform la 4 octombrie 2026; nu am primit încă aprobări. Confirmarea automată a cazului eBay #00452291 privește primirea cererii, nu accesul la date. Starea de lansare este urmărită în [planul Free](FREE_GO_LIVE_STEPS_2026-10-04.md).
+
+### Surse alternative evaluate la 5 octombrie 2026
+
+| Sursă oficială | Ce oferă documentația | Decizie pentru Top 25 MPR |
+| --- | --- | --- |
+| [Mercado Libre Highlights](https://developers.mercadolibre.com.ar/es_ar/api-docs-es/mas-vendidos-en-mercado-libre) | Endpoint `BEST_SELLER` pe categorie, dar documentează **Top 20**, pentru piețele Mercado Libre. | Poate fi semnal suplimentar după verificarea drepturilor și a accesului. Nu acoperă cerința de 25 poziții per clasament și nu înlocuiește o sursă Amazon/eBay/China. |
+| [Etsy Open API v3](https://developer.etsy.com/documentation/reference/) | Căutarea de listări poate fi sortată după `score`; documentația nu îl definește drept clasament după vânzări. | Util pentru descoperire de produse, dar un `score` de căutare nu poate fi etichetat bestseller. Drepturile de afișare pentru SaaS ar necesita verificare separată. |
+| [Walmart Marketplace Insights](https://developer.walmart.com/us-marketplace/docs/insights-api-overview) | Menționează best sellers pe departamente/categorii, dar cere acces de seller sau Solution Provider aprobat și OAuth. | Nu este un feed deschis pentru aplicația noastră. Mai întâi trebuie confirmate eligibilitatea, acoperirea, dreptul de afișare și costul; nu avem acest acces. |
+
+Aceste trei surse nu se numără în poarta de lansare. Nu completăm artificial 25 de poziții dintr-un Top 20 și nu prezentăm relevanța unei căutări drept vânzări. O eventuală integrare viitoare cere adaptor, drepturi documentate și teste cu răspunsuri reale.
 
 ## Decizia de achiziție a datelor
 
