@@ -11,7 +11,7 @@ Stare reverificată la 5 octombrie 2026: **0 surse aprobate pentru afișare în 
 | [Walmart Marketplace Insights](https://developer.walmart.com/us-marketplace/docs/insights-api-overview) | Menționează best sellers pe departamente/categorii, dar cere acces de seller sau Solution Provider aprobat și OAuth. | Nu este un feed deschis pentru aplicația noastră. Mai întâi trebuie confirmate eligibilitatea, acoperirea, dreptul de afișare și costul; nu avem acest acces. |
 | [eMAG Marketplace API](https://marketplace.emag.ro/infocenter/emag-academy/cum-se-adauga-un-produs/importul-prin-feed/documentatie-tehnica/) | Documentația oficială descrie integrarea ofertelor și produselor proprii ale sellerului și procesarea comenzilor; versiunea indicată este 4.5.1 din 2 martie 2026. | Accesul de seller nu oferă, prin această documentație, un Top 25 al pieței sau drept de republicare către utilizatorii MPR. Nu îl numărăm ca sursă de bestseller fără un feed și drepturi separate confirmate în scris. |
 
-Aceste trei surse nu se numără în poarta de lansare. Nu completăm artificial 25 de poziții dintr-un Top 20 și nu prezentăm relevanța unei căutări drept vânzări. O eventuală integrare viitoare cere adaptor, drepturi documentate și teste cu răspunsuri reale.
+Aceste patru surse nu se numără în poarta de lansare. Nu completăm artificial 25 de poziții dintr-un Top 20 și nu prezentăm relevanța unei căutări drept vânzări. O eventuală integrare viitoare cere adaptor, drepturi documentate și teste cu răspunsuri reale.
 
 ## Decizia de achiziție a datelor
 
