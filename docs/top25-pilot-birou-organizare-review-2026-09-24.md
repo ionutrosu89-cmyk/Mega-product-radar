@@ -37,6 +37,12 @@ Filtrarea automată este conservatoare: „în așteptare” nu înseamnă eligi
 | Organizator acrilic cu 16 sertare | Amazon rang 2 (`B0BY8V2VMS`), brand observat „caktraie”. Comparabila RO din dosarul local are **8 sertare**, deci nu este comparabilă exact; listarea Alibaba este altă configurație și nu este ofertă. | Comparabilă RO cu 16 sertare și aceleași dimensiuni, verificarea brandului, ofertă scrisă și costuri, drepturi. |
 | Suporturi acrilice pentru notițe pe monitor, set de 3 | [Listarea eBay inspectată](https://www.ebay.com/itm/389796776249) indică 3 bucăți, acrilic, 11 × 3,1 inci și brand „Unbranded” declarat de vânzător. Aceasta este observație de catalog, nu dovadă de bestseller sau cerere. | Confirmarea produsului și disponibilității, cerere, concurență RO exactă, furnizor cu ofertă scrisă, verificare brand și drepturi. |
 
+### Verificare comparabile RO pentru BO-05 — 6 octombrie 2026
+
+Am verificat un eșantion de căutări publice pentru „suport notițe monitor acrilic set 3”, „monitor memo board 3 bucăți”, precum și rezultate indexate pe eMAG și Altex. În acest eșantion nu am găsit o ofertă românească verificabilă pentru **setul exact de trei panouri identice, 28 × 8 cm, cu adeziv detașabil**. Absența din acest eșantion nu dovedește că produsul nu există pe piață.
+
+[O listare Joom disponibilă pentru livrare în România](https://www.joom.com/ro/products/6aa7f9fec64d99018e88cacc) arată un panou acrilic transparent de aproximativ 30 × 8 cm, la 45,90 lei pentru **o singură piesă** (preț observat în rezultatul indexat la 6 octombrie; de reverificat înainte de calcul). Este un substitut apropiat, nu o comparabilă exactă pentru pachetul de trei. Numerele de recenzii sau achiziții afișate de marketplace nu sunt tratate ca vânzări confirmate independent. Nu convertim prețul unei piese într-un preț confirmat pentru set și nu derivăm marjă din acest rezultat. Oferta preliminară BO-05 de la ACRYLIC2GO și costurile lipsă rămân urmărite separat în dosarul RFQ.
+
 ## Decizia de lucru
 
 1. Alegem **o specificație** pentru fiecare concept înainte de a compara prețuri sau de a cere oferte. Produsele cu pachete și dimensiuni diferite nu sunt „același produs”.
