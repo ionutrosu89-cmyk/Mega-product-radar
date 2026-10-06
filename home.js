@@ -19,15 +19,15 @@ async function load(){
   const plan=access.plan.code,rank=PLAN_RANK[plan]??0;
   $('#planName').textContent=plan;
   $('#subtitle').textContent=`Plan ${access.plan.name} · recomandări adaptate profilului tău`;
-  $('#welcomeTitle').textContent=plan==='FREE'?'Începe cu produsele documentate':plan==='DISCOVER'?'Găsește semnalele care merită urmărite':plan==='RADAR'?'Transformă semnalele în decizii comerciale':'Construiește planul de lansare';
-  $('#welcomeText').textContent=plan==='FREE'?'Alege nișa și explorează produse documentate cu sursă, poziție și statistici publice când există.':plan==='DISCOVER'?'Folosește Discover pentru a găsi produsele în creștere, apoi treci în Radar când vrei validare pentru România.':plan==='RADAR'?'Concentrează-te pe produsele cu cele mai puține blocaje și nu aloca bani până când landed cost-ul și gate-urile sunt confirmate.':'Folosește shortlist-ul personalizat, bugetul și traseul de execuție pentru testele reale.';
+  $('#welcomeTitle').textContent=plan==='FREE'?'Explorează cele 25 de nișe':plan==='DISCOVER'?'Găsește semnalele care merită urmărite':plan==='RADAR'?'Transformă semnalele în decizii comerciale':'Construiește planul de lansare';
+  $('#welcomeText').textContent=plan==='FREE'?'Vezi ce liste au poziții recente aprobate și compară sursele când sunt disponibile.':plan==='DISCOVER'?'Folosește Discover pentru a găsi produsele în creștere, apoi treci în Radar când vrei validare pentru România.':plan==='RADAR'?'Concentrează-te pe produsele cu cele mai puține blocaje și nu aloca bani până când landed cost-ul și gate-urile sunt confirmate.':'Folosește shortlist-ul personalizat, bugetul și traseul de execuție pentru testele reale.';
   $('#profileMeta').innerHTML=tags(prefs);
   const profileChecks=[Boolean(prefs.onboarding_completed),Number(prefs.monthly_budget_ron)>0,(prefs.marketplaces||[]).length>0,(prefs.categories||[]).length>0];
   const completed=profileChecks.filter(Boolean).length;
   $('#progressText').textContent=`${completed}/4 elemente completate`;
   $('#progressBar').style.width=`${completed/4*100}%`;
   const cards=[];
-  cards.push(card('1. Top 25 pe nișă','Explorează topuri documentate pentru categoriile principale.','top25.html','Vezi Top 25','HOME_OPEN_TOP25'));
+  cards.push(card('1. Top 25 pe nișă','Vezi nișele, sursele și starea fiecărui Top 25. Listele apar după verificarea datelor și a drepturilor.','top25.html','Vezi Top 25','HOME_OPEN_TOP25'));
   cards.push(card('2. Discover',rank>=1?'Vezi produse Rising/New, istoric, filtre și semnale prioritizate după dovezi.':'Înregistrează dacă ai testa semnalele dinamice și prioritizarea cross-source.',rank>=1?'discover.html':'pricing.html?interest=DISCOVER',rank>=1?'Deschide Discover':'Marchează interesul · €17,90',rank>=1?'HOME_OPEN_DISCOVER':'UPGRADE_INTENT_DISCOVER',rank<1));
   cards.push(card('3. Radar',rank>=2?'Vezi România Gap, furnizor, landed cost, profit, ROI și verdict TEST/HOLD.':'Înregistrează dacă ai testa validarea comercială pentru România.',rank>=2?'commercial-radar.html':'pricing.html?interest=RADAR',rank>=2?'Deschide Radar':'Marchează interesul · €29',rank>=2?'HOME_OPEN_RADAR':'UPGRADE_INTENT_RADAR',rank<2));
   cards.push(card('4. Launch',rank>=3?'Vezi shortlist-ul personalizat, bugetul și pașii de execuție.':'Înregistrează dacă ai testa planul complet de lansare și capital.',rank>=3?'commercial-launch.html':'pricing.html?interest=LAUNCH',rank>=3?'Deschide Launch':'Marchează interesul · €89',rank>=3?'HOME_OPEN_LAUNCH':'UPGRADE_INTENT_LAUNCH',rank<3));
