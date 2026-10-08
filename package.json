@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "check": "node scripts/check-project.mjs",
-    "test": "node --test",
+    "test": "node --test \"test/**/*.{js,mjs,cjs}\" \"tests/**/*.{js,mjs,cjs}\"",
     "editorial:report": "node scripts/report-editorial-pipeline.mjs",
     "editorial:beta-gate": "node scripts/report-editorial-free-beta.mjs docs/free-go-live-evidence-input.example.json",
     "qa:mobile": "node scripts/qa-mobile.mjs",
