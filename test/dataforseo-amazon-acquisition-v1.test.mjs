@@ -6,6 +6,8 @@ import {buildAmazonProductTasks,splitAmazonTaskPosts,estimateAmazonAcquisitionCo
 test('Amazon task planner bills one SERP per up-to-100 requested results',()=>{
   const p100=buildAmazonProductTasks({queries:['desk organizer'],depth:100});
   assert.equal(p100.billableSerps,1);
+  assert.equal(p100.tasks[0].location_name,'United States');
+  assert.equal(p100.tasks[0].language_name,'English (United States)');
   assert.equal(p100.maxResultsRequested,100);
   const p700=buildAmazonProductTasks({queries:['desk organizer'],depth:700});
   assert.equal(p700.billableSerps,7);
