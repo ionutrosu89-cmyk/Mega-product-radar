@@ -1,0 +1,13 @@
+# DataForSEO: răspuns de calificare a sursei (9 octombrie 2026)
+
+Stare: **util pentru un clasament derivat, neaprobat pentru afișare publică și nepotrivit ca sursă a pozițiilor oficiale Amazon Best Sellers**. Această notă consemnează răspunsul comercial primit de la Anna Chernishenko, DataForSEO, la 9 octombrie 2026, în firul „No-cost pilot and public SaaS display terms for Amazon/Google Shopping data — Mega Product Radar”. [Mesajul original](https://mail.google.com/mail/u/?authuser=office.redcommerce%40gmail.com#all/1a12184ce9e305cd). Secțiunea despre drepturi urmează să fie completată de reprezentantul lor juridic; nu presupunem o licență din răspunsul de vânzări.
+
+| Întrebare | Răspuns primit | Decizie pentru MPR |
+| --- | --- | --- |
+| Top 25 oficial Amazon.com Best Sellers, cu pozițiile categoriei | Nu există endpoint DataForSEO pentru pagina originală și pozițiile sale. Există poziții în rezultatele căutării după cuvinte-cheie, badge-uri și estimări de achiziții lunare. | Nu etichetăm aceste date „Amazon Best Sellers Top 25”. Un eventual Top 25 calculat de noi trebuie numit explicit „clasament MPR derivat din semnale Amazon”, cu metodă și data observației. |
+| Google Shopping | Rezultate și poziții pe interogare/localizare, prețuri și comercianți; nu există clasament de bestseller pe categorie. | Poate fi un semnal independent de vizibilitate, nu un Top 25 oficial Google. |
+| Test fără card | Înregistrare gratuită, credit de încercare de 1 USD fără expirare, sandbox cu răspunsuri de exemplu. | Se poate evalua forma datelor în privat, fără a activa o achiziție. Datele de sandbox nu pot valida acoperirea sau prospețimea reală. |
+| Buget | Limite zilnice per API/endpoint în cont; alimentarea minimă este 50 USD. | Nu facem alimentarea de 50 USD și nu activăm consum cu plată fără decizia explicită a proprietarului. Limita zilnică nu reduce suma minimă de alimentare. |
+| Drepturi de afișare, retenție, atribuire, redistribuire și permisiunile marketplace-urilor | Răspunsul este amânat către Andrii Cheban (legal@dataforseo.com). | **Blocat** pentru afișare publică Free sau în planurile plătite până la răspuns scris și revizie. |
+
+Pașii următori: așteptăm clarificarea juridică; apoi, dacă drepturile permit, facem un pilot privat gratuit cu căutări reprezentative pentru trei nișe și verificăm schema, acoperirea, timestampul, consistența și costul per actualizare. Comparăm doar observații reale și etichetăm separat estimările. Nu schimbăm cerința pentru clasamente oficiale de marketplace și nu activăm pilotul Amazon oprit prin PR #602. Nici acest răspuns, nici existența creditului gratuit nu fac sursa aprobată pentru cele 50 de liste/1.250 de poziții cerute de planul Free.
