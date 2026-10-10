@@ -3,6 +3,10 @@ name: Stripe Sandbox Billing E2E
 on:
   workflow_dispatch:
     inputs:
+      deployment_ref:
+        description: Full commit SHA deployed at base_url (required for preview verification)
+        required: false
+        type: string
       base_url:
         description: HTTPS deployment URL (optional; falls back to repository variable, then canonical Netlify production URL)
         required: false
@@ -28,6 +32,7 @@ jobs:
     timeout-minutes: 15
     env:
       MPR_BASE_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.base_url || vars.MPR_BASE_URL || 'https://mega-product-radar.netlify.app' }}
+      MPR_DEPLOYMENT_REF: ${{ inputs.deployment_ref || github.sha }}
       MPR_DEPLOYMENT_GATE: SANDBOX
     steps:
       - name: Checkout
@@ -45,6 +50,19 @@ jobs:
       - name: Mint short-lived readiness credential
         run: node scripts/github-actions-readiness-oidc.mjs
 
+      - name: Verify deployed commit before sandbox mutations
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const ref=process.env.MPR_DEPLOYMENT_REF;
+          if(!/^[0-9a-f]{40}$/i.test(ref||''))throw new Error('Full deployment SHA required');
+          const url=new URL('/api/internal/billing-e2e-acceptance',process.env.MPR_BASE_URL);
+          const response=await fetch(url,{headers:{authorization:'Bearer '+process.env.MPR_READINESS_PROBE_TOKEN}});
+          const body=await response.json();
+          if(!response.ok||body.ok!==true||body.deploymentRef!==ref)throw new Error('Deployed commit does not match requested SHA');
+          console.log('Verified deployed commit:',ref);
+          NODE
+
       - name: Ensure clean sandbox workspace
         shell: bash
         run: |
@@ -57,7 +75,7 @@ jobs:
             echo "Sandbox workspace already clean."
           else
             jq -n '{action:"CLEAN_SANDBOX"}' >/tmp/sandbox-cleanup.json
-            curl --fail-with-body --silent --show-error -X POST "$transition_url"               -H "$auth_header"               -H "x-mpr-deployment-ref: $GITHUB_SHA"               -H 'content-type: application/json'               --data-binary @/tmp/sandbox-cleanup.json               -o /tmp/sandbox-cleanup-response.json
+            curl --fail-with-body --silent --show-error -X POST "$transition_url"               -H "$auth_header"               -H "x-mpr-deployment-ref: $MPR_DEPLOYMENT_REF"               -H 'content-type: application/json'               --data-binary @/tmp/sandbox-cleanup.json               -o /tmp/sandbox-cleanup-response.json
             jq -e '.ok==true and .realMoney==false and .stripeMode=="SANDBOX" and .entitlementAuthority=="WEBHOOK_ONLY"' /tmp/sandbox-cleanup-response.json >/dev/null
             clean=false
             for attempt in $(seq 1 30); do
@@ -88,10 +106,10 @@ jobs:
         run: npm run verify:paid-beta-deployment
 
       - name: Ensure verified FREE baseline for this deployment SHA
-        run: node scripts/ensure-free-baseline.mjs
+        run: GITHUB_SHA="$MPR_DEPLOYMENT_REF" node scripts/ensure-free-baseline.mjs
 
       - name: Run resumable Stripe sandbox journey
-        run: npm run verify:stripe-sandbox-e2e
+        run: GITHUB_SHA="$MPR_DEPLOYMENT_REF" npm run verify:stripe-sandbox-e2e
 
       - name: Record machine GO summary
         if: success()
