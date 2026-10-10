@@ -1,4 +1,4 @@
-import {sandboxPerimeterDecision} from './sandbox-perimeter-policy.mjs';
+import {sandboxPerimeterDecision} from '../../sandbox-perimeter-policy.mjs';
 export default async function(request,context){
  const decision=sandboxPerimeterDecision(request,{
   MPR_SANDBOX_ISOLATION:Deno.env.get('MPR_SANDBOX_ISOLATION'),
