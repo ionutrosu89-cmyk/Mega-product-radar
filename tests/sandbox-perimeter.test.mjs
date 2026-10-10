@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sandboxPerimeterDecision as decide} from '../netlify/edge-functions/sandbox-perimeter-policy.mjs';
+import {sandboxPerimeterDecision as decide} from '../sandbox-perimeter-policy.mjs';
 const env={MPR_SANDBOX_ISOLATION:'true',MPR_SANDBOX_HOST:'sandbox.example'};
 const req=(path,method='GET',headers={})=>new Request('https://sandbox.example'+path,{method,headers});
 test('fails closed without explicit sandbox mode or matching dedicated host',()=>{
