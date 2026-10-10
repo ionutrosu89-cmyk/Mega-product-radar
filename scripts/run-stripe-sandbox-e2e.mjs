@@ -100,7 +100,7 @@ export async function runStripeSandboxE2e({baseUrl,token,deploymentRef,fetchImpl
 }
 
 if(import.meta.url===`file://${process.argv[1]}`){
-  runStripeSandboxE2e({baseUrl:process.env.MPR_BASE_URL,token:process.env.MPR_READINESS_PROBE_TOKEN,deploymentRef:process.env.GITHUB_SHA})
+  runStripeSandboxE2e({baseUrl:process.env.MPR_BASE_URL,token:process.env.MPR_READINESS_PROBE_TOKEN,deploymentRef:process.env.MPR_DEPLOYMENT_REF||process.env.GITHUB_SHA})
     .then(result=>console.log(JSON.stringify(result,null,2)))
     .catch(error=>{console.error(String(error?.message||error));process.exit(1);});
 }
