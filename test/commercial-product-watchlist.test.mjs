@@ -39,6 +39,13 @@ test('watchlist migration is workspace scoped with RLS and unique product key',a
   assert.match(sql,/unique\(workspace_id, product_key\)/);
 });
 
+test('watchlist page enforces the paid route before reading workspace records',async()=>{
+  const source=await readFile(new URL('../commercial-watchlist-page.js',import.meta.url),'utf8');
+  assert.match(source,/customerNavigationAccess\(workspace\.plan,'commercial-watchlist\.html'\)/);
+  assert.match(source,/customerNavigationHref\(workspace\.plan,'commercial-watchlist\.html'\)/);
+  assert.ok(source.indexOf("if(!gate.allowed)")<source.indexOf('items=await listCommercialWatchlist()'));
+});
+
 test('Netlify build includes Opportunity Detail and watchlist runtime dependencies',async()=>{
   const build=await readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');
   for(const file of ['commercial-product.html','commercial-product.js','opportunity-v5.js','opportunity-ux-v1.js','commercial-watchlist.html','commercial-watchlist.js','commercial-watchlist-page.js'])assert.match(build,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));

@@ -86,7 +86,7 @@ export function createBillingE2eAcceptanceHandler({fetch:fetchImpl=fetch,env=pro
       if(!current.ok)return Response.json({ok:false,code:'ACCEPTANCE_LOOKUP_FAILED',error:'Billing E2E acceptance state unavailable'},{status:502,headers:RESPONSE_HEADERS});
       const row=Array.isArray(current.body)?current.body[0]||null:null;
 
-      if(request.method==='GET')return Response.json({ok:true,...safeRun(row)},{headers:RESPONSE_HEADERS});
+      if(request.method==='GET')return Response.json({ok:true,deploymentRef,...safeRun(row)},{headers:RESPONSE_HEADERS});
       if(request.method!=='POST')return new Response(null,{status:405,headers:RESPONSE_HEADERS});
 
       const body=await request.json().catch(()=>({}));

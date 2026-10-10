@@ -2,12 +2,24 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs/promises';
 import {categoryPreferenceScore,DEFAULT_SELLER_PREFERENCES} from '../seller-preferences.js';
+import {accountBrowserStorageKey} from '../account-browser-storage.js';
 
 test('seller preference matching boosts preferred categories only',()=>{
   assert.equal(categoryPreferenceScore({name:'Desk headphone hanger',cat:'Office'},{categories:['office']}),15);
   assert.equal(categoryPreferenceScore({name:'Desk headphone hanger',cat:'Office'},{categories:['pet']}),0);
   assert.equal(DEFAULT_SELLER_PREFERENCES.risk_profile,'BALANCED');
   assert.equal(DEFAULT_SELLER_PREFERENCES.import_vat_treatment,'UNKNOWN');
+});
+
+test('plan recommendation choices cannot cross accounts in a shared browser',async()=>{
+  const base='mpr_plan_finder_v1',a='11111111-1111-4111-8111-111111111111',b='22222222-2222-4222-8222-222222222222';
+  const storage=new Map([[accountBrowserStorageKey(base,a),'A'],[accountBrowserStorageKey(base,b),'B'],[base,'legacy']]);
+  assert.equal(storage.get(accountBrowserStorageKey(base,a)),'A');
+  assert.equal(storage.get(accountBrowserStorageKey(base,b)),'B');
+  assert.notEqual(accountBrowserStorageKey(base,a),base);
+  const onboarding=await fs.readFile(new URL('../onboarding.js',import.meta.url),'utf8');
+  assert.match(onboarding,/localStorage\.getItem\(planFinderStorageKey\)/);
+  assert.match(onboarding,/storageKey:planFinderStorageKey/);
 });
 
 test('onboarding persists business profile behind workspace RLS',async()=>{

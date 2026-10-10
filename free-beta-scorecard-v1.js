@@ -41,6 +41,28 @@ function eligibleEvidence(participants,events,feedback){
 
 const workspacesWith=(rows,predicate)=>new Set(rows.filter(predicate).map(row=>row.workspace_id).filter(Boolean));
 
+export function buildFreeBetaStudyEvidence(participants=[],events=[]){
+  const usersByWorkspace=new Map(linkedCohort(participants).map(row=>[row.workspace_id,row.user_id]));
+  const latest=new Map();
+  for(const event of events){
+    if(!usersByWorkspace.has(event?.workspace_id)||usersByWorkspace.get(event.workspace_id)!==event?.user_id||!eventName(event,'BETA_VALIDATION_SESSION'))continue;
+    const at=timestamp(event.created_at);if(at===null)continue;
+    const previous=latest.get(event.workspace_id);
+    if(!previous||at>=previous.at)latest.set(event.workspace_id,{at,meta:eventMeta(event)});
+  }
+  const sessions=[...latest.values()].map(row=>row.meta),participantsCount=sessions.length;
+  const flow=sessions.filter(row=>row.studyVersion==='STABILIZATION_2'&&row.productFlowTested===true&&typeof row.product==='string'&&row.product.trim().length>0&&['yes','no'].includes(row.watchlistStatus));
+  const rate=key=>pct(flow.filter(row=>row[key]===true).length,participantsCount);
+  const understandingPct=rate('understoodEvidence'),usefulnessPct=rate('useful'),watchlistPct=rate('completedWatchlist');
+  const blockers=[];
+  if(participantsCount<5)blockers.push('FIVE_REAL_SESSIONS_REQUIRED');
+  if(flow.length<5)blockers.push('FIVE_PRODUCT_FLOW_SESSIONS_REQUIRED');
+  if(!(understandingPct>=80))blockers.push('UNDERSTANDING_BELOW_80_PERCENT');
+  if(!(usefulnessPct>=60))blockers.push('USEFULNESS_BELOW_60_PERCENT');
+  if(!(watchlistPct>=80))blockers.push('WATCHLIST_BELOW_80_PERCENT');
+  return Object.freeze({participants:participantsCount,productFlowSessions:flow.length,understandingPct,usefulnessPct,watchlistPct,status:blockers.length?'INCOMPLETE':'PASS',blockers:Object.freeze(blockers)});
+}
+
 function wtpMetric(feedback,activatedCount){
   const answered=workspacesWith(feedback,row=>typeof row?.would_pay==='boolean'||typeof feedbackMeta(row).wouldPay29==='boolean');
   const yes=workspacesWith(feedback,row=>row?.would_pay===true||feedbackMeta(row).wouldPay29===true);
@@ -77,6 +99,7 @@ export function buildFreeBetaScorecardV1({participants=[],events=[],feedback=[],
   const feedbackUsers=workspacesWith(evidence.feedback,()=>true);
   const decisionChanging=workspacesWith(evidence.feedback,row=>feedbackMeta(row).decisionChanged===true);
   const criticalIncidents=evidence.events.filter(row=>eventName(row,'CRITICAL_INCIDENT_RECORDED')).length;
+  const study=buildFreeBetaStudyEvidence(cohort,evidence.events);
   const metrics=Object.freeze({
     invitedUsers:countMetric('invitedUsers','Utilizatori invitați',cohort.length,FREE_BETA_TARGETS.invitedUsers),
     activatedUsers:countMetric('activatedUsers','Conturi activate',linked.length,FREE_BETA_TARGETS.activatedUsers),
@@ -96,6 +119,7 @@ export function buildFreeBetaScorecardV1({participants=[],events=[],feedback=[],
   else if(metrics.activatedUsers.status!=='PASS')status='ACTIVATE_COHORT';
   else if(unknown.length)status='MEASURING';
   else if(failed.length)status='ITERATE_FREE';
+  else if(study.status!=='PASS')status='VALIDATE_STUDY';
   else status='FREE_BETA_TARGETS_MET';
-  return Object.freeze({schemaVersion:'MPR_FREE_BETA_SCORECARD_V1',status,investmentDecision:status==='FREE_BETA_TARGETS_MET'?'ELIGIBLE_FOR_HUMAN_INVESTMENT_REVIEW':status,participantCount:cohort.length,linkedParticipantCount:linked.length,metrics,diagnostics:Object.freeze({linked:linked.length,unlinked:Math.max(0,cohort.length-linked.length),onboarding:onboarding.size,top25:top25.size,productOpened:productOpened.size,decisions:decisions.size,feedback:feedbackUsers.size,decisionChanging:decisionChanging.size}),participantProgress:progress,unknown:Object.freeze(unknown),failed:Object.freeze(failed),automaticLaunchAllowed:false,purchaseAuthorized:false,generatedAt:new Date(timestamp(now)??Date.now()).toISOString()});
+  return Object.freeze({schemaVersion:'MPR_FREE_BETA_SCORECARD_V1',status,investmentDecision:status==='FREE_BETA_TARGETS_MET'?'ELIGIBLE_FOR_HUMAN_INVESTMENT_REVIEW':status,participantCount:cohort.length,linkedParticipantCount:linked.length,metrics,study,diagnostics:Object.freeze({linked:linked.length,unlinked:Math.max(0,cohort.length-linked.length),onboarding:onboarding.size,top25:top25.size,productOpened:productOpened.size,decisions:decisions.size,feedback:feedbackUsers.size,decisionChanging:decisionChanging.size}),participantProgress:progress,unknown:Object.freeze(unknown),failed:Object.freeze(failed),automaticLaunchAllowed:false,purchaseAuthorized:false,generatedAt:new Date(timestamp(now)??Date.now()).toISOString()});
 }

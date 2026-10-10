@@ -7,7 +7,7 @@ const clean=v=>String(v??'').trim();
 const uniq=values=>[...new Set((values||[]).map(clean).filter(Boolean))];
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,Number(v)||min));
 
-export function buildAmazonProductTasks({queries=[],locationName='Germany',languageName='German',depth=100,department=null}={}){
+export function buildAmazonProductTasks({queries=[],locationName='United States',languageName='English (United States)',depth=100,department=null}={}){
   const terms=uniq(queries);
   const normalizedDepth=clamp(depth,1,700);
   const billableSerpsPerTask=Math.ceil(normalizedDepth/100);

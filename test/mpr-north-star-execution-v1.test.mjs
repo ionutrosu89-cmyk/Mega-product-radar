@@ -16,7 +16,7 @@ test('plan finder maps each user job to the agreed commercial tier',()=>{
 });
 
 test('Opportunity V4 follows strict funnel and never turns TEST_READY into purchase authority',()=>{
-  const base={trend:{score:82,confidence:80},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',score:78},dataConfidence:75};
+  const base={trend:{score:82,confidence:80},amazonTrendFusion:confirmedFusion,evidenceFreshness:{status:'CURRENT'},importability:{status:'PASS'},romaniaGap:{status:'READY',exactComparableCount:true,score:78},dataConfidence:75};
   assert.equal(calculateOpportunityV4(base).funnelStage,'VALIDATE');
   const finalist=calculateOpportunityV4({...base,supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:30,roiPct:80,profitPerUnit:20}});
   assert.equal(finalist.funnelStage,'FINALIST');
@@ -26,7 +26,7 @@ test('Opportunity V4 follows strict funnel and never turns TEST_READY into purch
 });
 
 test('Opportunity V4 shortlist hard caps finalists at three',()=>{
-  const rows=Array.from({length:7},(_,i)=>({productKey:`p${i}`,trend:{score:90-i,confidence:90},amazonTrendFusion:confirmedFusion,romaniaGap:{status:'READY',score:85},supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:35,roiPct:90,profitPerUnit:22},dataConfidence:80}));
+  const rows=Array.from({length:7},(_,i)=>({productKey:`p${i}`,trend:{score:90-i,confidence:90},amazonTrendFusion:confirmedFusion,evidenceFreshness:{status:'CURRENT'},importability:{status:'PASS'},romaniaGap:{status:'READY',exactComparableCount:true,score:85},supplier:{verifiedQuote:true,quoteCount:3,benchmarkConfidence:80},economics:{landedCostConfirmed:true,marginPct:35,roiPct:90,profitPerUnit:22},dataConfidence:80}));
   const out=buildOpportunityShortlistV4(rows,3);
   assert.equal(out.finalists,3);
   assert.equal(out.rows.filter(x=>x.blockers.includes('FINALIST_CAP_REACHED')).length,4);

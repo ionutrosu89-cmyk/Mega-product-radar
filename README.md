@@ -1,10 +1,36 @@
 # Mega Product Radar
 
-Mega Product Radar este o aplicație statică publicată pe GitHub Pages, cu scanare automată zilnică prin GitHub Actions.
+Mega Product Radar V7 folosește Netlify pentru frontend și funcții server, Supabase pentru autentificare și workspace-uri și Netlify Blobs pentru scanări. GitHub Pages nu este configurația SaaS de producție.
 
-## Arhitectura curentă
+## Instalare și verificare
 
-- interfața rulează pe GitHub Pages;
+Node.js 22+ (CI: Node 24), npm și package-lock.json.
+
+```sh
+npm ci --ignore-scripts --no-fund
+npm test
+npm run check
+npm run verify:migrations
+npm run build
+```
+
+Build-ul generează `_site/`, publicat de Netlify. Nu publica rădăcina: conține artefacte private. Pornește configurația serverului de la `.env.example`; cheile de serviciu și secretul radar nu se pun în browser. `saas-config.js` conține doar URL-ul și cheia publică Supabase. Un server static local nu execută `/api/*`; pentru integrare folosește un site Netlify de dezvoltare configurat. Păstrează furnizorii plătiți opriți în testele unitare.
+
+Aplică migrările conform `supabase/README.md`. `verify:migrations` validează fișierele, nu rulează SQL pe o bază goală. Testele SQL tranzacționale din `supabase/tests/` necesită un rol administrativ și se termină cu rollback.
+
+Reguli, surse, lot pilot și acceptanță beta: [STABILIZATION.md](STABILIZATION.md). Recalculare locală, fără colectare plătită:
+
+```sh
+node scripts/commercial-final-decision.mjs
+node scripts/golden-product-pipeline.mjs
+node scripts/run-validation-pilot.mjs
+```
+
+Consultă `validation-pilot.html` și `beta-study.html`. Lotul pilot este o verificare documentară; ofertele și testele comerciale reale trebuie obținute separat.
+
+## Pipeline istoric de cercetare
+
+- interfața SaaS se publică pe Netlify din `_site/`;
 - `products.json` este baza de date fallback;
 - `radar-live.json` conține rezultatele scanării automate;
 - `scan-status.json` păstrează starea ultimei rulări;
@@ -25,4 +51,4 @@ Workflow-ul `Mega Product Radar Scan` rulează:
 - automat zilnic la 04:30 UTC;
 - la modificări ale motorului radar.
 
-După fiecare scan reușit, rezultatele sunt salvate în repository și aceeași rulare redeployează GitHub Pages, astfel încât aplicația publică să primească datele actualizate fără intervenție manuală.
+Artefactele de cercetare salvate în repository sunt separate de scanările SaaS pe workspace. Configurația efectivă de producție este `netlify.toml`; nu interpreta un fișier regenerat drept dovadă proaspăt colectată.

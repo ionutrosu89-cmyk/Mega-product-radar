@@ -1,8 +1,9 @@
+import {currentCommercialEvidence} from './fixtures/current-commercial-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {evaluateCommercialDecision} from '../commercial-decision-engine.js';
 
-function product(){return {name:'Car sunglasses magnetic visor holder',commercialHardening:{gates:{pricingVerified:true,supplierVerified:true,reviewVerified:true,salesVerified:false}},romaniaDemand:{readyForTestDemandGate:true},salesEstimation:{status:'ESTIMATED_HIGH_CONFIDENCE',estimatedUnits30d:120,confidence:100},launchScore:{enoughEvidence:true},evidenceCoverage:{evidenceReady:true},competitors:{evidenceMarkets:2},dataConfidence:{overall:70},trendIntelligence:{status:'RISING'},profitEngineV2:{derivedSalePrice:44.74}};}
+function product(){return {...currentCommercialEvidence(),name:'Car sunglasses magnetic visor holder',commercialHardening:{gates:{pricingVerified:true,supplierVerified:true,reviewVerified:true,salesVerified:false}},romaniaDemand:{readyForTestDemandGate:true},salesEstimation:{status:'ESTIMATED_HIGH_CONFIDENCE',estimatedUnits30d:120,confidence:100},launchScore:{enoughEvidence:true},evidenceCoverage:{evidenceReady:true},competitors:{evidenceMarkets:2},dataConfidence:{overall:70},trendIntelligence:{status:'RISING'},profitEngineV2:{derivedSalePrice:44.74}};}
 function baseState(){return {supplierRecords:{},supplierOffers:[],observations:[],landedCosts:{'car sunglasses magnetic visor holder':{productName:'Car sunglasses magnetic visor holder',confirmed:true,landedPerUnit:2}},testExecutions:[]};}
 function measured(status,metrics={sellThroughPct:75,returnRatePct:5,netMarginPct:22,contributionProfitRon:132}){return {productName:'Car sunglasses magnetic visor holder',status:'MEASURED',measuredAt:'2026-08-24T06:00:00.000Z',unitsReceived:20,unitsSold:15,outcome:{status,automaticBuy:false,metrics}};}
 

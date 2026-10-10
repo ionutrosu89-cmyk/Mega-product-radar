@@ -1,0 +1,20 @@
+{
+  "schema": "MPR_AMAZON_PILOT_TITLE_EXCLUSIONS_V1",
+  "method": "TITLE_ONLY_NEGATIVE_TRIAGE",
+  "status": "NO_PRODUCT_APPROVALS",
+  "pilotNicheIds": ["BIROU_ORGANIZARE", "ORGANIZARE_CASA", "CALATORII"],
+  "brandEvidence": {
+    "sterilite": "https://www.sterilite.com/our-story/",
+    "tessan": "https://www.tessansupply.com/about-us/"
+  },
+  "exclusions": [
+    {"nicheId":"BIROU_ORGANIZARE","asin":"B0FD9XWQYM","reason":"Organizator pentru accesorii de păr; utilizarea la birou este incidentală."},
+    {"nicheId":"BIROU_ORGANIZARE","asin":"B0CZQJL89S","reason":"Organizator pentru tubulare și trusă de scule; aparține nișei DIY_SCULE."},
+    {"nicheId":"ORGANIZARE_CASA","asin":"B0B45ZH9M2","reason":"Organizator pentru markere și materiale de artă; aparține nișei HOBBY_CRAFT."},
+    {"nicheId":"CALATORII","asin":"B07GRD5WLD","reason":"Pulverizator pentru păr și uz casnic; călătoria nu este utilizarea principală."},
+    {"nicheId":"CALATORII","asin":"B0CSBZVR6F","reason":"Pulverizator pentru păr și curățenie; călătoria nu este utilizarea principală."},
+    {"nicheId":"CALATORII","asin":"B0D22PPZCL","reason":"Pulverizator pentru păr sau uz casnic; nu este accesoriu specific de călătorie."},
+    {"nicheId":"CALATORII","asin":"B0CVZWMD34","reason":"Pulverizator pentru păr; nu este accesoriu specific de călătorie."},
+    {"nicheId":"CALATORII","asin":"B0DRFK937T","reason":"Pulverizator pentru păr și plante; nu este accesoriu specific de călătorie."}
+  ]
+}

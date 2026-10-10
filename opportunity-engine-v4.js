@@ -1,4 +1,5 @@
 import {calculateOpportunityV3} from './opportunity-engine-v3.js';
+import {evaluateStageFacts} from './evidence-stage-policy.js';
 
 const n=v=>{if(v===null||v===undefined||v==='')return null;const x=Number(v);return Number.isFinite(x)?x:null;};
 const bool=v=>v===true;
@@ -9,7 +10,7 @@ function supplierVerified(s={}){
 }
 function economicsConfirmed(e={}){
   const margin=n(e.marginPct),roi=n(e.roiPct),profit=n(e.profitPerUnit);
-  return bool(e.landedCostConfirmed)&&margin!==null&&roi!==null&&profit!==null&&margin>0&&roi>0&&profit>0;
+  return bool(e.landedCostConfirmed)&&margin!==null&&roi!==null&&profit!==null&&margin>=20&&roi>=45&&profit>0;
 }
 function romaniaEvidenceState(input={}){
   const gap=input.romaniaGap||{};
@@ -17,8 +18,7 @@ function romaniaEvidenceState(input={}){
   const sampledEligible=sampled.eligibleForSampledSignal===true||['SINGLE_PLATFORM_ESTIMATE','MULTI_PLATFORM_ESTIMATE'].includes(up(sampled.status))||up(sampled.evidenceClass).includes('DERIVED');
   const explicitlyNonExact=gap.romaniaGapExactGateSatisfied===false||gap.exactComparableCount===false||['DERIVED_ESTIMATE','DERIVED_FROM_REVIEWED_PUBLIC_SAMPLE','SAMPLED_ESTIMATE'].includes(up(gap.evidenceClass));
   const explicitlyExact=gap.romaniaGapExactGateSatisfied===true||gap.exactComparableCount===true;
-  const legacyReadyWithoutEstimateMarkers=gap.status==='READY'&&!sampledEligible&&!explicitlyNonExact;
-  const exactReady=gap.status==='READY'&&(explicitlyExact||legacyReadyWithoutEstimateMarkers);
+  const exactReady=gap.status==='READY'&&explicitlyExact&&!explicitlyNonExact;
   return {
     exactReady,
     sampledEligible,
@@ -81,6 +81,12 @@ export function calculateOpportunityV4(input={}){
   if(funnelStage==='TEST_READY'&&!bool(input.testGateReady))blockers.push('TEST_GATE_MISSING');
   if(funnelStage==='TEST_READY'&&!bool(input.complianceGateReady))blockers.push('COMPLIANCE_GATE_MISSING');
 
+  const canonical=evaluateStageFacts({promising:['PROMISING','VALIDATE','FINALIST','TEST_READY'].includes(funnelStage),marketQualified:marketReady&&base.marketOpportunityScore>=65,
+    confidence:evidenceConfidence,trendConfirmed:trendEvidence.confirmedAcceleration,romaniaExact:romaniaEvidence.exactReady,
+    supplierVerified:supplierReady,economicsConfirmed:economicsReady,importabilityPassed:input.importability?.status==='PASS'||input.importability?.gateStatus==='PASS',
+    fresh:input.evidenceFreshness?.status==='CURRENT',testGatesPassed:bool(input.testGateReady)&&bool(input.complianceGateReady)});
+  funnelStage=canonical.stage;
+  blockers.push(...canonical.blockers);
   return {
     ...base,
     version:'4.2',

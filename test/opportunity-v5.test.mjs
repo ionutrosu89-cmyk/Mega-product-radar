@@ -4,13 +4,13 @@ import {analyzeOpportunityV5,opportunityWeightAuditV5} from '../opportunity-v5.j
 
 const A='11111111-1111-4111-8111-111111111111';
 const B='22222222-2222-4222-8222-222222222222';
-const demand={canonicalProductId:A,score:85,confidence:80,evidenceClass:'DIRECT_OBSERVED',status:'PASS'};
-const trend={canonicalProductId:A,trendScore:80,confidence:75,evidenceClass:'DERIVED',gateStatus:'PASS'};
-const gap={canonicalProductId:A,gapScore:85,confidence:80,evidenceClass:'DERIVED',gateStatus:'PASS'};
-const importability={canonicalProductId:A,status:'PASS',confidence:85,evidenceClass:'DERIVED'};
-const supplier={canonicalProductId:A,status:'PASS',confidence:80,evidenceClass:'DERIVED'};
-const economics={canonicalProductId:A,status:'PASS',confidence:80,evidenceClass:'DERIVED'};
-const packet=overrides=>({canonicalProductId:A,globalDemand:demand,trend,romaniaGap:gap,importability,supplier,economics,...overrides});
+const demand={observedAt:new Date().toISOString(),canonicalProductId:A,score:85,confidence:80,evidenceClass:'DIRECT_OBSERVED',status:'PASS'};
+const trend={observedAt:new Date().toISOString(),canonicalProductId:A,trendScore:80,confidence:75,signal:'CONFIRMED_ACCELERATION',evidenceClass:'FUSED_LONGITUDINAL_PUBLIC_TREND',trendEvidenceLevel:'RANK_PLUS_REVIEW_LONGITUDINAL',demandEvidenceConfirmed:true,gateStatus:'PASS'};
+const gap={exactComparableCount:true,observedAt:new Date().toISOString(),canonicalProductId:A,gapScore:85,confidence:80,evidenceClass:'DERIVED',gateStatus:'PASS'};
+const importability={observedAt:new Date().toISOString(),canonicalProductId:A,status:'PASS',confidence:85,evidenceClass:'DERIVED'};
+const supplier={verifiedQuote:true,observedAt:new Date().toISOString(),canonicalProductId:A,status:'PASS',confidence:80,evidenceClass:'DERIVED'};
+const economics={landedCostConfirmed:true,marginPct:30,roiPct:80,profitPerUnit:25,observedAt:new Date().toISOString(),canonicalProductId:A,status:'PASS',confidence:80,evidenceClass:'DERIVED'};
+const packet=overrides=>({observedAt:new Date().toISOString(),canonicalProductId:A,globalDemand:demand,trend,romaniaGap:gap,importability,supplier,economics,...overrides});
 
 test('canonical weights sum to 100',()=>{const r=opportunityWeightAuditV5();assert.equal(r.total,100);assert.equal(r.valid,true);});
 
@@ -21,7 +21,7 @@ test('all pre-test gates pass can recommend FINALIST but never TEST_READY or BUY
 
 test('score cannot compensate for Romania Gap review',()=>{
  const r=analyzeOpportunityV5(packet({globalDemand:{...demand,score:100},trend:{...trend,trendScore:100},romaniaGap:{...gap,gapScore:100,gateStatus:'REVIEW'}}));
- assert.notEqual(r.recommendation,'FINALIST');assert.equal(r.recommendation,'VALIDATE');assert.ok(r.blockers.includes('ROMANIAGAP_NOT_PASS'));
+ assert.notEqual(r.recommendation,'FINALIST');assert.equal(r.recommendation,'PROMISING');assert.ok(r.blockers.includes('ROMANIAGAP_NOT_PASS'));
 });
 
 test('importability BLOCKED overrides otherwise excellent components',()=>{
@@ -39,10 +39,10 @@ test('cross-product economics evidence is rejected',()=>{
  assert.ok(r.identityMismatches.includes('economics'));assert.ok(r.blockers.includes('CROSS_PRODUCT_EVIDENCE_REJECTED'));assert.notEqual(r.recommendation,'FINALIST');
 });
 
-test('high opportunity with low confidence remains VALIDATE',()=>{
- const low={canonicalProductId:A,score:100,confidence:10,evidenceClass:'DIRECT_OBSERVED',status:'PASS'};
- const r=analyzeOpportunityV5({canonicalProductId:A,globalDemand:low,trend:{...trend,trendScore:100,confidence:10},romaniaGap:{...gap,gapScore:100,confidence:10},importability:{...importability,confidence:10},supplier:{...supplier,confidence:10},economics:{...economics,confidence:10}});
- assert.ok(r.opportunityScore>=60);assert.ok(r.confidence<50);assert.equal(r.recommendation,'VALIDATE');
+test('high opportunity with low confidence remains PROMISING',()=>{
+ const low={observedAt:new Date().toISOString(),canonicalProductId:A,score:100,confidence:10,evidenceClass:'DIRECT_OBSERVED',status:'PASS'};
+ const r=analyzeOpportunityV5({observedAt:new Date().toISOString(),canonicalProductId:A,globalDemand:low,trend:{...trend,trendScore:100,confidence:10},romaniaGap:{...gap,gapScore:100,confidence:10},importability:{...importability,confidence:10},supplier:{...supplier,confidence:10},economics:{...economics,confidence:10}});
+ assert.ok(r.opportunityScore>=60);assert.ok(r.confidence<50);assert.equal(r.recommendation,'PROMISING');
 });
 
 test('legacy BUY is explicitly non-authoritative',()=>{
@@ -52,4 +52,8 @@ test('legacy BUY is explicitly non-authoritative',()=>{
 
 test('Opportunity V5 never infers verified sales',()=>{
  const r=analyzeOpportunityV5(packet());assert.equal(r.verifiedSales,null);assert.equal(r.salesEvidenceClass,'NOT_INFERRED_BY_OPPORTUNITY_ENGINE');
+});
+
+test('PASS labels cannot replace trend contract, economic amounts or current dates',()=>{
+ for(const overrides of [{trend:{...trend,demandEvidenceConfirmed:false}},{economics:{...economics,profitPerUnit:-1}},{economics:{...economics,roiPct:44}},{supplier:{...supplier,observedAt:'2021-01-01T00:00:00Z'}},{trend:{...trend,observedAt:null}}])assert.equal(analyzeOpportunityV5(packet(overrides)).finalistEligible,false);
 });

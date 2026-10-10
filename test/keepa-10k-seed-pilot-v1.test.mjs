@@ -13,8 +13,18 @@ const universe={version:'2.0',departments:[{key:'home',label:'Home',children:[
 test('taxonomy becomes category-search tasks without network execution',()=>{
   const plan=buildKeepaCategoryResolutionPlan(universe,{maxNodes:5});
   assert.equal(plan.taskCount,5);
+  assert.ok(plan.tasks.every(x=>x.domain===1));
   assert.equal(plan.estimatedTokens,5);
   assert.ok(plan.tasks.every(x=>x.type==='CATEGORY_SEARCH'&&x.executeAutomatically===false));
+});
+
+test('a category plan cannot silently switch an unsupported locale to another market',()=>{
+  const resolution=buildKeepaCategoryResolutionPlan(universe,{domain:12,maxNodes:5});
+  assert.equal(resolution.valid,false);
+  assert.equal(resolution.taskCount,0);
+  const seed=buildTenKSeedPlan({resolvedCategories:[{categoryId:'123',accepted:true}],domain:12});
+  assert.equal(seed.bestSellerPlan.valid,false);
+  assert.equal(seedPilotReadiness({resolutionPlan:resolution,resolvedCategories:[],seedPlan:seed}).blocker,'UNSUPPORTED_DOMAIN');
 });
 
 test('category mapping requires both confidence and manual review',()=>{

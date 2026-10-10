@@ -1,3 +1,4 @@
+import {productEvidenceDecision} from './product-evidence-decision.js';
 import {profitEngineV2} from './profit-engine-v2.js';
 import {verifySupplierQuote} from './supplier-quote-verifier.js';
 import {commercialScoreV1,deriveCommercialScoreInputs} from './commercial-score-v1.js';
@@ -61,7 +62,8 @@ export function evaluateCommercialDecision(p={},state={}){
   const economicsHealthy=Boolean(landed&&economics?.priceComplete&&n(economics.margin)>=20&&n(economics.roi)>=45&&n(economics.profit)>0),confidenceReady=n(p?.dataConfidence?.overall)>=50,trendStatus=String(p?.trendIntelligence?.status||'').trim().toUpperCase(),trendSafe=Boolean(trendStatus)&&trendStatus!=='DECLINING';
   const gates={demandReady,pricingVerified,estimatedSalesReady,supplierVerified,reviewVerified,marketEvidence,economicsHealthy,confidenceReady,trendSafe};
   const labels={demandReady:'cerere România suficient validată pentru TEST',pricingVerified:'pricing România verificat',estimatedSalesReady:'sales estimate cu confidence ≥75 sau vânzări observate',supplierVerified:'ofertă furnizor completă și verificată',reviewVerified:'review evidence verificat',marketEvidence:'market evidence concret suficient',economicsHealthy:landed?'economics reale: marjă ≥20%, ROI ≥45%, profit pozitiv':'landed cost confirmat din costurile reale de import',confidenceReady:'Data Confidence ≥50',trendSafe:'trend verificat și non-declining'};
-  const blockers=Object.entries(gates).filter(([,ok])=>!ok).map(([k])=>labels[k]),testReady=blockers.length===0,feedback=completedCommercialTest(p.name,state),buyReady=testReady&&feedback?.passed===true;
+  const evidenceDecision=productEvidenceDecision({...p,supplierEvidence:{verifiedQuote:supplierVerified},economics:economics||{},landedCost:{confirmed:Boolean(landed)}});
+  const blockers=Object.entries(gates).filter(([,ok])=>!ok).map(([k])=>labels[k]).concat(evidenceDecision.blockers),testReady=blockers.length===0&&['FINALIST','TEST_READY','BUY_READY'].includes(evidenceDecision.stage),feedback=completedCommercialTest(p.name,state),buyReady=testReady&&feedback?.passed===true;
   let quantity=0;if(testReady&&!buyReady){quantity=20;if(n(p?.dataConfidence?.overall)>=60&&n(economics?.roi)>=60&&n(salesModel.confidence)>=80)quantity=25;if(n(p?.dataConfidence?.overall)>=70&&n(economics?.roi)>=80&&n(salesModel.confidence)>=85&&['RISING','ACCELERATING'].includes(String(p?.trendIntelligence?.status||'')))quantity=30;}
   const commercialAction=buyReady?'BUY':testReady?'TEST':'HOLD',status=buyReady?'BUY':testReady?'TEST_BUY':'HOLD',verdict=buyReady?'BUY — TEST REAL VALIDAT':testReady?`TEST — CUMPĂRĂ ${quantity} BUCĂȚI`:'NU TESTA ÎNCĂ';
   const quantityKey=normalizeProductKey(p.name),quantityEconomics=state?.quantityEconomics?.[quantityKey]||state?.quantityEconomics?.[p.name]||null;

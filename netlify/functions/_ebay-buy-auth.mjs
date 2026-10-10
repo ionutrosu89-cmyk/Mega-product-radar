@@ -12,6 +12,13 @@ export function ebayBuyAccessState(env=process.env){
   return 'READY_TO_COLLECT';
 }
 
+export function ebayPublicDisplayAccessState(env=process.env){
+  const collection=ebayBuyAccessState(env);
+  if(collection!=='READY_TO_COLLECT')return collection;
+  if(!approved(env,'MPR_EBAY_PUBLIC_DISPLAY_APPROVED'))return 'PUBLIC_DISPLAY_RIGHTS_REQUIRED';
+  return 'READY_TO_COLLECT';
+}
+
 function basicAuth(clientId,clientSecret){
   return Buffer.from(`${clientId}:${clientSecret}`,'utf8').toString('base64');
 }

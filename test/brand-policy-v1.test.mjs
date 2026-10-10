@@ -17,6 +17,14 @@ test('generic and unclassified small-brand candidates remain reviewable, not app
   assert.equal(publicCommerciallyEligible({name:'Foldable under-sink organizer'}),true);
 });
 
+test('researched established pilot brands are excluded',()=>{
+  for(const name of ['Sterilite Storage Boxes','TESSAN European Travel Plug Adapter']){
+    const result=classifyPublicBrandGate({name});
+    assert.equal(result.brandPolicyClass,'ESTABLISHED_EXCLUDE');
+    assert.equal(result.commercialEligible,false);
+  }
+});
+
 test('an explicit upstream stop cannot be weakened by title classification',()=>{
   assert.equal(publicCommerciallyEligible({name:'Generic item',commercialGate:'STOP_BRAND_GATE'}),false);
 });

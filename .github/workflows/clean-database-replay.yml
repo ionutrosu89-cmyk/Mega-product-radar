@@ -1,0 +1,42 @@
+name: Clean Supabase Migration Replay
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: clean-database-replay-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: supabase/setup-cli@v3
+        with:
+          version: 2.117.0
+      - name: Start isolated Supabase database without production credentials
+        shell: bash
+        run: |
+          supabase --version
+          supabase --help
+          supabase init --help
+          supabase db start --help
+          mkdir -p "$RUNNER_TEMP/mpr-clean-replay"
+          cd "$RUNNER_TEMP/mpr-clean-replay"
+          supabase init
+          sed -i 's/^project_id = .*/project_id = "mpr-clean-replay"/' supabase/config.toml
+          supabase db start
+      - name: Replay every repository migration and transactional isolation tests
+        run: node scripts/replay-clean-database.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: clean-database-replay
+          path: artifacts/clean-database-replay.json
+          if-no-files-found: warn

@@ -1,27 +1,30 @@
 import {getEbayApplicationToken,ebayBuyAccessState} from './_ebay-buy-auth.mjs';
+import {approvedTop25CategoryTarget} from '../../top25-category-approval-v1.js';
 
 const API_URL='https://api.ebay.com/buy/marketing/v1/merchandised_product';
+const REVIEW_CANDIDATE_LIMIT=100;
 const MARKETPLACE_HOSTS=Object.freeze({EBAY_US:'www.ebay.com',EBAY_DE:'www.ebay.de'});
 const clean=value=>String(value??'').trim();
 const upper=value=>clean(value).toUpperCase();
-const finite=value=>Number.isFinite(Number(value));
+const numberOrNull=value=>(typeof value==='number'||typeof value==='string')&&String(value).trim()!==''&&Number.isFinite(Number(value))?Number(value):null;
 const https=value=>{try{return new URL(clean(value)).protocol==='https:';}catch{return false;}};
 
-export function parseEbayTargets(env=process.env){
+export function parseEbayTargets(env=process.env,now=new Date()){
   let raw;
   try{raw=JSON.parse(clean(env.MPR_EBAY_CROSS_MARKET_TARGETS_JSON)||'[]');}catch{return [];}
-  if(!Array.isArray(raw))return [];
+  if(!Array.isArray(raw)||raw.length>50)return [];
   const seen=new Set();
-  return raw.flatMap(row=>{
-    const nicheId=upper(row?.nicheId);
-    const categoryId=clean(row?.categoryId);
+  const targets=[];
+  for(const row of raw){
     const marketplaceId=upper(row?.marketplaceId||'EBAY_US');
-    if(!/^[A-Z0-9_]+$/.test(nicheId)||!/^[0-9]+$/.test(categoryId)||!MARKETPLACE_HOSTS[marketplaceId])return [];
-    const key=`${nicheId}:${marketplaceId}`;
+    const target=approvedTop25CategoryTarget({...row,marketplaceId},{provider:marketplaceId,now});
+    if(!target||!MARKETPLACE_HOSTS[marketplaceId])return [];
+    const key=`${target.nicheId}:${marketplaceId}`;
     if(seen.has(key))return [];
     seen.add(key);
-    return [{nicheId,categoryId,marketplaceId}];
-  }).slice(0,25);
+    targets.push(target);
+  }
+  return targets;
 }
 
 function productUrl(epid,marketplaceId){
@@ -29,20 +32,23 @@ function productUrl(epid,marketplaceId){
   return host?`https://${host}/p/${encodeURIComponent(epid)}`:'';
 }
 
-export function normalizeEbayBestSelling(payload,{target,observedAt=new Date().toISOString()}={}){
+export function normalizeEbayBestSellingCandidates(payload,{target,observedAt=new Date().toISOString()}={}){
   const rows=Array.isArray(payload?.merchandisedProducts)?payload.merchandisedProducts:[];
-  const normalized=rows.slice(0,25).map((row,index)=>{
+  return rows.slice(0,REVIEW_CANDIDATE_LIMIT).map((row,index)=>{
     const epid=clean(row?.epid);
     const name=clean(row?.title).slice(0,220);
     if(!epid||!name)return null;
-    const priceDetail=Array.isArray(row?.marketPriceDetails)?row.marketPriceDetails.find(item=>finite(item?.estimatedStartPrice?.value))||row.marketPriceDetails.find(item=>finite(item?.marketPrice?.value)):null;
-    const amount=priceDetail?.estimatedStartPrice||priceDetail?.marketPrice||null;
+    const priceDetail=Array.isArray(row?.marketPriceDetails)?row.marketPriceDetails.find(item=>numberOrNull(item?.estimatedStartPrice?.value)!==null)||row.marketPriceDetails.find(item=>numberOrNull(item?.marketPrice?.value)!==null):null;
+    const amount=numberOrNull(priceDetail?.estimatedStartPrice?.value)!==null?priceDetail.estimatedStartPrice:priceDetail?.marketPrice||null;
+    const rating=numberOrNull(row?.averageRating),reviewCount=numberOrNull(row?.reviewCount);
     const sourceUrl=productUrl(epid,target.marketplaceId);
     if(!https(sourceUrl))return null;
     return {
       name,
+      nicheId:target.nicheId,
       externalId:epid,
       rank:index+1,
+      sourceRank:index+1,
       platform:'EBAY',
       sourceUrl,
       observedAt,
@@ -51,33 +57,38 @@ export function normalizeEbayBestSelling(payload,{target,observedAt=new Date().t
       sourceLabel:'eBay Buy Marketing API',
       rankingBasis:'BEST_SELLING',
       market:target.marketplaceId,
-      price:finite(amount?.value)?Number(amount.value):null,
+      price:numberOrNull(amount?.value),
       currency:upper(amount?.currency),
-      rating:finite(row?.averageRating)?Number(row.averageRating):null,
-      reviewCount:Number.isInteger(Number(row?.reviewCount))?Number(row.reviewCount):null,
+      rating,
+      reviewCount:Number.isInteger(reviewCount)&&reviewCount>=0?reviewCount:null,
       sourceMetric:{label:'eBay metric',value:'BEST_SELLING',unit:'platform_rank'},
       evidenceClass:'DIRECT',
       salesEvidenceClass:'PLATFORM_RANK_NOT_UNIT_SALES',
       commercialGate:'BRAND_REVIEW_REQUIRED'
     };
   }).filter(Boolean);
-  return normalized.length===25?normalized:[];
 }
 
-export async function collectEbayBestSellingTarget({target,env=process.env,fetchImpl=fetch,now=()=>new Date()}={}){
+export function normalizeEbayBestSelling(payload,options={}){
+  const products=normalizeEbayBestSellingCandidates(payload,options).filter(row=>row.rank<=25);
+  return products.length===25?products:[];
+}
+
+export async function collectEbayBestSellingTarget({target,env=process.env,fetchImpl=fetch,now=()=>new Date(),reviewPool=false}={}){
   if(ebayBuyAccessState(env)!=='READY_TO_COLLECT')return {ok:false,code:'EBAY_ACCESS_NOT_READY',target,products:[]};
   if(!MARKETPLACE_HOSTS[target?.marketplaceId])return {ok:false,code:'EBAY_MARKETPLACE_UNSUPPORTED',target,products:[]};
   const token=await getEbayApplicationToken({env,fetchImpl,now:()=>now().getTime()});
   const url=new URL(API_URL);
   url.searchParams.set('category_id',target.categoryId);
   url.searchParams.set('metric_name','BEST_SELLING');
-  url.searchParams.set('limit','25');
+  url.searchParams.set('limit',String(reviewPool?REVIEW_CANDIDATE_LIMIT:25));
   const response=await fetchImpl(url,{headers:{authorization:`Bearer ${token}`,'X-EBAY-C-MARKETPLACE-ID':target.marketplaceId,accept:'application/json'}});
-  if(!response.ok)return {ok:false,code:`EBAY_MARKETING_HTTP_${response.status}`,target,products:[]};
+  if(!response.ok)return {ok:false,code:`EBAY_MARKETING_HTTP_${response.status}`,target,products:[],candidates:[]};
   const payload=await response.json();
-  const products=normalizeEbayBestSelling(payload,{target,observedAt:now().toISOString()});
-  if(products.length!==25)return {ok:false,code:'EBAY_TOP25_INCOMPLETE',target,products:[]};
-  return {ok:true,code:'READY',target,products};
+  const candidates=normalizeEbayBestSellingCandidates(payload,{target,observedAt:now().toISOString()});
+  const products=candidates.filter(row=>row.rank<=25);
+  if(products.length!==25)return {ok:false,code:'EBAY_TOP25_INCOMPLETE',target,products:[],candidates};
+  return {ok:true,code:'READY',target,products,candidates};
 }
 
-export const EBAY_BEST_SELLING={apiUrl:API_URL,metric:'BEST_SELLING',requiredCount:25,supportedMarketplaces:Object.keys(MARKETPLACE_HOSTS)};
+export const EBAY_BEST_SELLING={apiUrl:API_URL,metric:'BEST_SELLING',requiredCount:25,reviewCandidateLimit:REVIEW_CANDIDATE_LIMIT,supportedMarketplaces:Object.keys(MARKETPLACE_HOSTS)};

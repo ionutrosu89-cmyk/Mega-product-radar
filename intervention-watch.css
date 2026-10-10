@@ -1,0 +1,9 @@
+.layout{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+.panel,.layout>*,.toolbar>*{min-width:0}
+.panelhead{flex-wrap:wrap}
+.itemtop,.side-row{overflow-wrap:anywhere}
+.drawer-panel{padding-bottom:100px}
+.drawer-head h2{overflow-wrap:anywhere}
+.toast{bottom:90px;max-width:calc(100vw - 36px)}
+@media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}.shell{padding-bottom:100px}.panelhead{align-items:flex-start;flex-direction:column}.filters{width:100%}.filter,.btn,.control{min-height:44px}.control{font-size:16px}.itemtop{flex-wrap:wrap}}
+@media(max-width:440px){.toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar input{grid-column:1/-1}}
