@@ -19,11 +19,25 @@ let niches=[],current=null,crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS,ra
 let freeSignals=buildFreeSignalResearchFeed({observations:[]});
 let shortlist=new Set(),shortlistUserId=undefined,shortlistRefreshId=0,comparison=new Set(),shortlistOnly=false;
 
+function updateAccountCtas(userId){
+  const authenticated=Boolean(userId&&userId!=='UNAVAILABLE');
+  const header=$('#freeAccountCta'),feedback=$('#freeFeedbackCta'),copy=$('#freeAccountCopy');
+  for(const [link,label,href] of [[header,'Contul meu','account.html'],[feedback,'Trimite feedback','beta-feedback.html']]){
+    if(!link)continue;
+    link.textContent=authenticated?label:'Creează cont gratuit';
+    link.setAttribute('href',authenticated?href:'login.html?next=top25.html');
+    if(authenticated)link.removeAttribute('data-free-event');
+    else link.setAttribute('data-free-event','FREE_SIGNUP_CTA_CLICK');
+  }
+  if(copy)copy.textContent=authenticated?'Contul tău Free este activ. Trimite-ne feedback despre aplicație. Când publicăm produse, le vei putea salva în browserul acestui dispozitiv.':'Creează contul gratuit pentru a testa aplicația și a ne trimite feedback. Când publicăm produse, le vei putea salva în browserul acestui dispozitiv. Nu cerem card.';
+}
+
 async function refreshShortlistScope(){
   const refreshId=++shortlistRefreshId;
   let userId=null;
   try{userId=(await getCurrentSession())?.user?.id||null;}catch{userId='UNAVAILABLE';}
   if(refreshId!==shortlistRefreshId)return;
+  updateAccountCtas(userId);
   if(userId===shortlistUserId)return;
   shortlistUserId=userId;shortlist=readFreeShortlist(undefined,userId);comparison=new Set();
   if(current)render();
