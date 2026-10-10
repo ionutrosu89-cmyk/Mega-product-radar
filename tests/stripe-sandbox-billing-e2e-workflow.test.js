@@ -26,3 +26,11 @@ test('Stripe sandbox E2E workflow never consumes live billing or static readines
   assert.match(workflow,/Real-money authority: NONE/);
   assert.match(workflow,/Entitlement authority: WEBHOOK ONLY/);
 });
+
+test('preview verification binds the deployed SHA before any sandbox cleanup',()=>{
+  assert.match(workflow,/deployment_ref:/);
+  assert.match(workflow,/MPR_DEPLOYMENT_REF:/);
+  assert.match(workflow,/body\.deploymentRef!==ref/);
+  assert.ok(workflow.indexOf('Verify deployed commit before sandbox mutations')<workflow.indexOf('Ensure clean sandbox workspace'));
+  assert.match(workflow,/x-mpr-deployment-ref: \$MPR_DEPLOYMENT_REF/);
+});
