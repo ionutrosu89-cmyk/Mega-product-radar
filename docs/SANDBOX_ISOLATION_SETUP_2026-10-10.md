@@ -9,3 +9,9 @@ Before activation: verify Netlify quotas/costs, use isolated Supabase test crede
 The webhook isolation guard rejects missing/Live event or object modes, malformed configuration and any metadata/client reference outside the dedicated workspace before event claiming or database access. Production behavior is unchanged unless isolation is explicitly enabled.
 
 Required deployed evidence remains: actual Edge routing, unauthorized/foreign request rejection, valid test Stripe delivery, the six webhook-backed billing checkpoints, return to Free and zero real-money operations. The prepared code and tests are not release acceptance or proof that the new environment exists.
+
+## Prepare the isolated deploy artifact
+
+Run `node scripts/prepare-sandbox-bundle.mjs sandbox-package` from a reviewed repository checkout. The output directory must be new and inside the checkout. The script copies only the seven billing entrypoints and their static import dependencies, strips committed Supabase production defaults, excludes environment files, schedules, collectors and customer/product assets, and writes the explicit Edge perimeter mapping. The publish directory contains only robots.txt. Its Netlify build command does not run the normal product build or provider probes.
+
+The artifact is not uploaded or activated by this command. Configure isolated runtime credentials, inspect the manifest and verify costs/quotas and external exposure before deploying. The generated package was exercised against the source files from commit 653965ab1af04f9d23cf2f9017a9a4021e94b632; 21 source modules were included. Three packaging tests pass locally. This does not prove deployed Edge enforcement, isolated database provisioning or Stripe delivery.
