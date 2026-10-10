@@ -34,7 +34,7 @@ jobs:
           node-version: '22'
       - name: Run guarded viral pipeline
         run: node scripts/run-viral-pipeline.mjs --execute=${{ github.event_name == 'workflow_dispatch' && inputs.execute_live || false }}
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v6
         with:
           name: viral-pipeline-run
           path: artifacts/viral-pipeline-run.json

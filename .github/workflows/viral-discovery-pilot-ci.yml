@@ -17,7 +17,7 @@ jobs:
       - run: node --check scripts/run-viral-discovery-pilot.mjs
       - run: node --test test/viral-growth-engine-v1.test.mjs test/viral-collector-contract-v1.test.mjs
       - run: node scripts/run-viral-discovery-pilot.mjs
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v6
         with:
           name: viral-discovery-pilot-report
           path: artifacts/viral-discovery-pilot-report.json
