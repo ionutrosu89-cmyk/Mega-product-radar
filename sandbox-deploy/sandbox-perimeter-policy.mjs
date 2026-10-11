@@ -4,6 +4,7 @@ const ROUTES=new Map([
  ['/api/internal/paid-beta-runtime-readiness',new Set(['GET'])],
  ['/api/internal/legal-readiness',new Set(['GET'])],
  ['/api/internal/sandbox-preflight-readiness',new Set(['GET'])],
+ ['/api/internal/billing-journey-snapshot',new Set(['GET'])],
  ['/api/internal/billing-e2e-acceptance',new Set(['GET','POST'])],
  ['/api/internal/billing-e2e-sandbox-transition',new Set(['POST'])]
 ]);
@@ -20,6 +21,11 @@ export function sandboxPerimeterDecision(request,env={}){
    if(!request.headers.get('stripe-signature'))return denied('STRIPE_SIGNATURE_REQUIRED',400);
  }else if(!/^Bearer \S+$/i.test(request.headers.get('authorization')||'')){
    return denied('READINESS_AUTH_REQUIRED',401);
+ }
+ if(url.pathname==='/api/internal/billing-journey-snapshot'){
+   const workspace=String(env.MPR_SANDBOX_WORKSPACE_ID||'').trim();
+   if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(workspace))return denied('SANDBOX_WORKSPACE_REQUIRED',503);
+   if(request.headers.get('x-mpr-workspace-id')!==workspace)return denied('SANDBOX_WORKSPACE_MISMATCH',403);
  }
  // This only admits the request to its handler. Signature/OIDC verification and
  // workspace authorization remain mandatory in the handler before any write.
