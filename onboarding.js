@@ -19,16 +19,26 @@ function showRecommendation(rec){
   box.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-$('#next').addEventListener('click',()=>{if(step<4){step++;renderStep();trackJourneyEvent('ONBOARDING_STEP_VIEW',{step});}});
-$('#back').addEventListener('click',()=>{if(step>1){step--;renderStep();}});
+$('#next').addEventListener('click',()=>{if(profileLoaded&&step<4){step++;renderStep();trackJourneyEvent('ONBOARDING_STEP_VIEW',{step});}});
+$('#back').addEventListener('click',()=>{if(profileLoaded&&step>1){step--;renderStep();}});
 
+function lockProfile(locked){
+  $('#profileFields').disabled=locked;
+  for(const id of ['next','back','save'])$('#'+id).disabled=locked;
+  $('#form').setAttribute('aria-busy',String(locked));
+}
+installChips($('#marketplaces'));installChips($('#categories'));
+$('#retryLoad').addEventListener('click',load);
 async function load(){
+  profileLoaded=false;lockProfile(true);$('#retryLoad').hidden=true;
+  $('#status').textContent='Se încarcă profilul…';
+  try{
   const session=await getCurrentSession();
   if(!session){location.href='login.html?next=onboarding.html';return;}
   planFinderStorageKey=accountBrowserStorageKey('mpr_plan_finder_v1',session.user.id);
-  installChips($('#marketplaces'));installChips($('#categories'));
-  try{
     const p=await loadSellerPreferences();
+    const current=await getCurrentSession();
+    if(current?.user?.id!==session.user.id)throw new Error('Contul s-a schimbat. Reîncearcă încărcarea profilului.');
     $('#experience').value=p.experience_level||'BEGINNER';
     $('#budget').value=onboardingBudget(p.monthly_budget_ron);
     $('#goal').value=p.goal||'FIND_PRODUCTS';
@@ -37,15 +47,16 @@ async function load(){
     $('#importVatTreatment').value=p.import_vat_treatment||'UNKNOWN';
     setSelected($('#marketplaces'),p.marketplaces?.length?p.marketplaces:['EMAG_RO']);
     setSelected($('#categories'),p.categories||[]);
-    profileLoaded=true;
+    profileLoaded=true;lockProfile(false);$('#status').textContent='';
     try{const saved=JSON.parse(localStorage.getItem(planFinderStorageKey)||'{}');if(saved.decisionNeed)$('#decisionNeed').value=saved.decisionNeed;if(saved.chinaAgent)$('#chinaAgent').value=saved.chinaAgent;}catch{}
     trackJourneyEvent('ONBOARDING_VIEW',{completed:Boolean(p.onboarding_completed)});
-  }catch(e){$('#status').textContent=`Nu am putut încărca profilul: ${e.message}`;}
+  }catch(e){profileLoaded=false;lockProfile(true);$('#form').setAttribute('aria-busy','false');$('#retryLoad').hidden=false;$('#status').textContent=`Nu am putut încărca profilul: ${e.message}`;}
   renderStep();
 }
 
 $('#form').addEventListener('submit',async e=>{
   e.preventDefault();
+  if(!profileLoaded){$('#status').textContent='Așteaptă încărcarea profilului sau reîncearcă.';return;}
   $('#status').textContent='Salvăm profilul și calculăm recomandarea…';
   $('#save').disabled=true;
   try{
