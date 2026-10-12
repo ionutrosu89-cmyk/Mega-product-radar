@@ -26,3 +26,12 @@ test('failed hydration stays locked and retry can recover without defaults being
  fail=false;await h.node('retryLoad').listeners.click();await tick();
  assert.equal(h.node('save').disabled,false);assert.equal(h.node('retryLoad').hidden,true);
 });
+
+test('account switch during loading cannot apply the previous account profile',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));await tick();
+ h.context.getCurrentSession=async()=>({user:{id:'B'}});
+ resolve({monthly_budget_ron:7800});await tick();
+ assert.equal(h.node('profileFields').disabled,true);
+ assert.equal(h.node('budget').value,'');
+ assert.equal(h.node('retryLoad').hidden,false);
+});
