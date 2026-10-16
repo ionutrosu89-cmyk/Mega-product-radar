@@ -4,8 +4,9 @@ function positive(v){return hasNumericValue(v)&&Number(v)>0;}
 function nonNegative(v){return hasNumericValue(v)&&Number(v)>=0;}
 function isoDate(v){const d=new Date(v);return Boolean(v)&&Number.isFinite(d.getTime());}
 
-export function verifySupplierQuote(input={}){
+export function verifySupplierQuote(input={},options={}){
   const blockers=[];
+  const now=options.now instanceof Date&&Number.isFinite(options.now.getTime())?options.now:new Date();
   const requireText=(field,label=field)=>{if(!text(input[field]))blockers.push(label);};
   const requirePositive=(field,label=field)=>{if(!positive(input[field]))blockers.push(label);};
   const requireNonNegative=(field,label=field)=>{if(!nonNegative(input[field]))blockers.push(label);};
@@ -43,9 +44,12 @@ export function verifySupplierQuote(input={}){
   if(compliance==='PROVIDED'&&(!Array.isArray(input.complianceEvidence)||input.complianceEvidence.length===0))blockers.push('compliance evidence files/references');
   if(compliance==='NOT_APPLICABLE'&&!text(input.complianceNotApplicableBasis))blockers.push('explicit compliance not-applicable basis');
 
-  if(!isoDate(input.quotedAt))blockers.push('quote timestamp');
-  if(!isoDate(input.quoteValidUntil))blockers.push('quote validity');
-  if(!isoDate(input.manualVerifiedAt))blockers.push('manual verification timestamp');
+  const quotedAt=isoDate(input.quotedAt)?new Date(input.quotedAt).getTime():null;
+  const quoteValidUntil=isoDate(input.quoteValidUntil)?new Date(input.quoteValidUntil).getTime():null;
+  const manualVerifiedAt=isoDate(input.manualVerifiedAt)?new Date(input.manualVerifiedAt).getTime():null;
+  if(quotedAt===null||quotedAt>now.getTime())blockers.push('quote timestamp');
+  if(quoteValidUntil===null||quoteValidUntil<=now.getTime()||quotedAt!==null&&quoteValidUntil<=quotedAt)blockers.push('quote validity');
+  if(manualVerifiedAt===null||manualVerifiedAt>now.getTime()||quotedAt!==null&&manualVerifiedAt<quotedAt||quoteValidUntil!==null&&manualVerifiedAt>=quoteValidUntil)blockers.push('manual verification timestamp');
   requireText('manualVerifiedBy','manual verifier');
 
   const verified=blockers.length===0;

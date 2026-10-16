@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-09-19T12:00:00Z",
+  "generatedAt": "2026-09-19T11:58:24.559Z",
+  "niche": "Accesorii de birou",
+  "method": "DESK_REVIEW_PUBLIC_SOURCES_NOT_SUPPLIER_CONFIRMATION",
+  "warning": "Prezența unei listări nu dovedește vânzări. Rezultatele indexate nu sunt verificări curente de preț sau stoc. HOLD respinge avansarea, nu demonstrează că produsul este neprofitabil.",
+  "stats": {
+    "products": 5,
+    "advanced": 0,
+    "held": 5,
+    "disagreements": 0
+  },
+  "items": [
+    {
+      "name": "Under desk headphone hanger clamp",
+      "review": "Există rezultate RO și un candidat de furnizor cu prindere sub birou. Nu avem aceeași specificație verificată, istoric de cerere ori ofertă pentru cantitatea dorită. Un suport cu încărcător USB nu este un comparabil mecanic exact.",
+      "nextEvidence": "Dimensiuni clemă, material, sarcină, SKU, ofertă datată și transport pentru lot.",
+      "sources": [
+        {
+          "scope": "România",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://www.emag.ro/organizator-birou-pliabil-suport-casti-gaming-design-compact-cu-organizator-cabluri-zlpl250402267366/pd/DYMCPD3BM/"
+        },
+        {
+          "scope": "Furnizor candidat",
+          "access": "SEARCH_INDEX_ONLY_NO_QUOTE",
+          "url": "https://www.alibaba.com/product-detail/Folding-Headphone-Under-Desk-Space-Save_1601211922596.html"
+        }
+      ],
+      "applicationStage": "PROMISING",
+      "applicationBlockers": [
+        "TRENDCONFIRMED_REQUIRED",
+        "ROMANIAEXACT_REQUIRED",
+        "SUPPLIERVERIFIED_REQUIRED",
+        "ECONOMICSCONFIRMED_REQUIRED",
+        "IMPORTABILITYPASSED_REQUIRED",
+        "FRESH_REQUIRED",
+        "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+      ],
+      "freshness": {
+        "status": "STALE",
+        "observedAt": "2026-09-01T21:41:37.965Z",
+        "ageHours": 422.3,
+        "maxAgeHours": 72,
+        "source": null,
+        "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+      },
+      "manualDecision": "HOLD_FOR_EVIDENCE",
+      "comparison": "AGREES_DO_NOT_ADVANCE",
+      "confirmedDemand": false,
+      "exactRomaniaComparison": false,
+      "verifiedSupplierQuote": false,
+      "confirmedLandedCost": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "name": "Magnetic cable organizer clips set",
+      "review": "Listările Baseus și Ugreen indică existența categoriei, dar brandul și numărul de cleme diferă. Nu rezultă cerere măsurată ori concurență RO enumerată complet.",
+      "nextEvidence": "Specificație unică pentru set, fixare și dimensiuni; comparabile exacte și ofertă verificată.",
+      "sources": [
+        {
+          "scope": "România, analog de brand",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://www.toydem.ro/produs/organizator-cabluri-magnetic-baseus-negru"
+        },
+        {
+          "scope": "Extern, 3 bucăți",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://ugreen.com.pk/product/ugreen-45797-megnetic-cable-organizer-3-pack"
+        },
+        {
+          "scope": "Furnizor candidat, 6 bucăți",
+          "access": "SEARCH_INDEX_ONLY_NO_QUOTE",
+          "url": "https://germany.alibaba.com/product-detail/6-Pack-Home-Office-Magnetic-Cable_10000041212978.html"
+        }
+      ],
+      "applicationStage": "DISCOVERED",
+      "applicationBlockers": [
+        "TRENDCONFIRMED_REQUIRED",
+        "ROMANIAEXACT_REQUIRED",
+        "SUPPLIERVERIFIED_REQUIRED",
+        "ECONOMICSCONFIRMED_REQUIRED",
+        "IMPORTABILITYPASSED_REQUIRED",
+        "FRESH_REQUIRED",
+        "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+      ],
+      "freshness": {
+        "status": "STALE",
+        "observedAt": "2026-08-28T22:01:59.945Z",
+        "ageHours": 518,
+        "maxAgeHours": 72,
+        "source": null,
+        "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+      },
+      "manualDecision": "HOLD_FOR_EVIDENCE",
+      "comparison": "AGREES_DO_NOT_ADVANCE",
+      "confirmedDemand": false,
+      "exactRomaniaComparison": false,
+      "verifiedSupplierQuote": false,
+      "confirmedLandedCost": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "name": "Desk drawer organizer modular trays",
+      "review": "Pagina IKEA RO NOJIG a fost citită: recipient PP 15×20×5 cm, 2,50 RON pe unitate la verificare. Acesta este un reper local, nu un set modular identic. Recenziile nu sunt vânzări RO. Un furnizor de tăvi din bambus nu validează un produs din plastic.",
+      "nextEvidence": "Compoziția exactă a setului, material, preț pe set comparabil, ofertă de furnizor și cost complet pentru cantitatea testată.",
+      "sources": [
+        {
+          "scope": "România, reper pe unitate",
+          "access": "PAGE_READ",
+          "observedPriceRon": 2.5,
+          "url": "https://www.ikea.com/ro/ro/p/nojig-organizator-plastic-bej-50468104/"
+        },
+        {
+          "scope": "Extern, același SKU IKEA",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://www.ikea.com/us/en/p/nojig-organizer-plastic-beige-50468104/"
+        },
+        {
+          "scope": "Nepotrivire de material",
+          "access": "SEARCH_INDEX_ONLY_REJECTED_MATCH",
+          "url": "https://vietnamese.alibaba.com/product-detail/Bamboo-Drawer-Organizer-Tray-Adjustable-Cutlery-1601686813299.html"
+        }
+      ],
+      "applicationStage": "DISCOVERED",
+      "applicationBlockers": [
+        "TRENDCONFIRMED_REQUIRED",
+        "ROMANIAEXACT_REQUIRED",
+        "SUPPLIERVERIFIED_REQUIRED",
+        "ECONOMICSCONFIRMED_REQUIRED",
+        "IMPORTABILITYPASSED_REQUIRED",
+        "FRESH_REQUIRED",
+        "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+      ],
+      "freshness": {
+        "status": "STALE",
+        "observedAt": "2026-08-25T22:56:37.772Z",
+        "ageHours": 589.1,
+        "maxAgeHours": 72,
+        "source": null,
+        "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+      },
+      "manualDecision": "HOLD_FOR_EVIDENCE",
+      "comparison": "AGREES_DO_NOT_ADVANCE",
+      "confirmedDemand": false,
+      "exactRomaniaComparison": false,
+      "verifiedSupplierQuote": false,
+      "confirmedLandedCost": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "name": "Monitor memo board side panel set",
+      "review": "Rezultatele externe indică panouri laterale acrilice. Rezultatul Joom în română descrie alt tip de suport și nu certifică o concurență locală exactă. Lipsa rezultatelor eMAG în căutare nu înseamnă absența concurenței.",
+      "nextEvidence": "Verificarea aceleiași perechi, dimensiuni, adeziv, compatibilitate; comparabile RO și ofertă datată.",
+      "sources": [
+        {
+          "scope": "Extern",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://www.walmart.com/ip/19913019966"
+        },
+        {
+          "scope": "Rezultat în română, comparabil respins",
+          "access": "SEARCH_INDEX_ONLY_REJECTED_MATCH",
+          "url": "https://www.joom.com/ro/products/6a561147bfcd8d016dd9499f"
+        },
+        {
+          "scope": "Furnizor candidat",
+          "access": "SEARCH_INDEX_ONLY_NO_QUOTE",
+          "url": "https://www.alibaba.com/product-detail/Message-Memo-Pc-Screen-Computer-Monitors_1600248141487.html"
+        }
+      ],
+      "applicationStage": "DISCOVERED",
+      "applicationBlockers": [
+        "TRENDCONFIRMED_REQUIRED",
+        "ROMANIAEXACT_REQUIRED",
+        "SUPPLIERVERIFIED_REQUIRED",
+        "ECONOMICSCONFIRMED_REQUIRED",
+        "IMPORTABILITYPASSED_REQUIRED",
+        "FRESH_REQUIRED",
+        "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+      ],
+      "freshness": {
+        "status": "STALE",
+        "observedAt": "2026-08-29T21:38:31.490Z",
+        "ageHours": 494.4,
+        "maxAgeHours": 72,
+        "source": null,
+        "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+      },
+      "manualDecision": "HOLD_FOR_EVIDENCE",
+      "comparison": "AGREES_DO_NOT_ADVANCE",
+      "confirmedDemand": false,
+      "exactRomaniaComparison": false,
+      "verifiedSupplierQuote": false,
+      "confirmedLandedCost": false,
+      "purchaseAuthorized": false
+    },
+    {
+      "name": "Foldable laptop riser portable",
+      "review": "Există listări RO pentru suporturi pliabile din aluminiu. Modelele pentru 10–15,6 și 10–17 inch nu sunt automat identice. Un suport adeziv din piele vegană este un comparabil respins. Oferta și transportul nu sunt confirmate.",
+      "nextEvidence": "Material, greutate, sarcină și dimensiuni ambalaj; SKU comparabile; ofertă, transport și costurile locale pentru lot.",
+      "sources": [
+        {
+          "scope": "România",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://www.emag.ro/suport-pentru-laptop-echo-soulr-reglabil-pe-inaltime-pliabil-din-aluminiu-detasabil-10-15-6-negru-0734896599934/pd/D8RPS6MBM/"
+        },
+        {
+          "scope": "România",
+          "access": "SEARCH_INDEX_ONLY",
+          "url": "https://staryon.ro/product/suport-laptop-aluminiu-staryon-10-17/"
+        },
+        {
+          "scope": "Furnizor candidat",
+          "access": "SEARCH_INDEX_ONLY_NO_QUOTE",
+          "url": "https://www.alibaba.com/product-detail/Wholesale-Foldable-Portable-CNC-Aluminum-Alloy_1601193464856.html"
+        },
+        {
+          "scope": "Extern, material diferit",
+          "access": "SEARCH_INDEX_ONLY_REJECTED_MATCH",
+          "url": "https://www.amazon.ie/MOFT-Foldable-Adjustable-Compatible-Self-Adhesive/dp/B0967TBFCD"
+        }
+      ],
+      "applicationStage": "DISCOVERED",
+      "applicationBlockers": [
+        "TRENDCONFIRMED_REQUIRED",
+        "ROMANIAEXACT_REQUIRED",
+        "SUPPLIERVERIFIED_REQUIRED",
+        "ECONOMICSCONFIRMED_REQUIRED",
+        "IMPORTABILITYPASSED_REQUIRED",
+        "FRESH_REQUIRED",
+        "CONFIDENCE_60_REQUIRED_FOR_FINALIST"
+      ],
+      "freshness": {
+        "status": "STALE",
+        "observedAt": "2026-08-26T13:31:02.339Z",
+        "ageHours": 574.5,
+        "maxAgeHours": 72,
+        "source": null,
+        "evidenceClass": "ESTIMATED_OR_UNCONFIRMED"
+      },
+      "manualDecision": "HOLD_FOR_EVIDENCE",
+      "comparison": "AGREES_DO_NOT_ADVANCE",
+      "confirmedDemand": false,
+      "exactRomaniaComparison": false,
+      "verifiedSupplierQuote": false,
+      "confirmedLandedCost": false,
+      "purchaseAuthorized": false
+    }
+  ]
+}

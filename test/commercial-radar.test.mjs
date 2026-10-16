@@ -22,12 +22,12 @@ test('Discover plan cannot access protected commercial Radar payload',async()=>{
 });
 
 test('Radar plan gets decision inputs without supplier sourcing payload',async()=>{
-  const handler=createCommercialRadarHandler({fetch:mockFetch('RADAR'),env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
+  const handler=createCommercialRadarHandler({fetch:mockFetch('RADAR'),readRadar:async()=> (await mockFetch('RADAR')('https://fixture/radar-live.json')).json(),env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
   const response=await handler(new Request('https://radar.example/api/commercial/radar',{headers}));
   assert.equal(response.status,200);const body=await response.json();assert.equal(body.plan,'RADAR');assert.equal(body.workspaceId,'w1');assert.equal(body.products.length,1);assert.equal(body.products[0].name,'Test product');assert.equal(body.products[0].score,82);assert.deepEqual(body.products[0].derivedRomaniaGap,{score:64,evidence:'DERIVED_PROXY'});assert.equal('sourcing' in body.products[0],false);assert.equal('landedEstimate' in body.products[0],false);assert.equal(body.integrity.moneyGate,'CONFIRMED_LANDED_COST_REQUIRED');assert.equal(body.integrity.legacyScore,'DERIVED_DISPLAY_ONLY');assert.equal(body.integrity.legacyRomaniaGap,'DERIVED_PROXY_DISPLAY_ONLY');
 });
 
-test('commercial Radar live source exists in the Netlify static build',async()=>{const fn=await fs.readFile(new URL('../netlify/functions/commercial-radar.mjs',import.meta.url),'utf8');const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');assert.match(fn,/new URL\('\/radar-live\.json'/);assert.doesNotMatch(fn,/market-intelligence-live\.json/);assert.match(build,/'radar-live\.json'/);await fs.access(new URL('../radar-live.json',import.meta.url));});
+test('commercial Radar live source exists in the Netlify static build',async()=>{const fn=await fs.readFile(new URL('../netlify/functions/commercial-radar.mjs',import.meta.url),'utf8');const build=await fs.readFile(new URL('../scripts/build-site.mjs',import.meta.url),'utf8');assert.match(fn,/readRadar\('radar-live\.json'/);const config=await fs.readFile(new URL('../netlify.toml',import.meta.url),'utf8');assert.match(config,/included_files[^\n]+radar-live\.json/);assert.doesNotMatch(fn,/market-intelligence-live\.json/);assert.match(build,/'radar-live\.json'/);await fs.access(new URL('../radar-live.json',import.meta.url));});
 
 test('Opportunities UI uses canonical Opportunity V5 rather than legacy nine-gate authority',async()=>{
   const html=await fs.readFile(new URL('../commercial-radar.html',import.meta.url),'utf8');
@@ -42,4 +42,17 @@ test('Opportunities UI uses canonical Opportunity V5 rather than legacy nine-gat
   assert.match(js,/x-mpr-workspace-id/);
   assert.doesNotMatch(js,/applyPrivateCommercialDecisions/);
   assert.doesNotMatch(js,/landedEstimate/);
+});
+
+
+test('protected preview reads bundled intelligence without a public HTTP request',async()=>{
+ const base=mockFetch('RADAR');
+ const handler=createCommercialRadarHandler({fetch:async url=>{assert.equal(String(url).includes('/radar-live.json'),false);return base(url);},env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
+ const response=await handler(new Request('https://protected-preview.example/api/commercial/radar',{headers}));
+ assert.equal(response.status,200);assert.ok((await response.json()).products.length>0);
+});
+test('missing bundled intelligence fails closed',async()=>{
+ const handler=createCommercialRadarHandler({fetch:mockFetch('RADAR'),readRadar:async()=>{throw new Error('ENOENT');},env:{SUPABASE_URL:'https://example.supabase.co',SUPABASE_ANON_KEY:'anon'}});
+ const response=await handler(new Request('https://radar.example/api/commercial/radar',{headers}));
+ assert.equal(response.status,503);assert.equal((await response.json()).error,'Radar intelligence unavailable');
 });

@@ -3,7 +3,7 @@ import test from 'node:test';
 import {calculateOpportunityV4} from '../opportunity-engine-v4.js';
 
 const exactRomania={status:'READY',score:80,romaniaGapExactGateSatisfied:true,exactComparableCount:true};
-const strongMarket={trend:{score:90,confidence:90},romaniaGap:exactRomania,dataConfidence:85};
+const strongMarket={evidenceFreshness:{status:'CURRENT'},importability:{status:'PASS'},trend:{score:90,confidence:90},romaniaGap:exactRomania,dataConfidence:85};
 const confirmedFusion={signal:'CONFIRMED_ACCELERATION',evidenceClass:'FUSED_LONGITUDINAL_PUBLIC_TREND',trendEvidenceLevel:'RANK_PLUS_REVIEW_LONGITUDINAL',demandEvidenceConfirmed:true,salesEvidenceClass:'NOT_VERIFIED_SALES',purchaseAuthorized:false};
 
 test('review-only longitudinal evidence is capped at PROMISING',()=>{

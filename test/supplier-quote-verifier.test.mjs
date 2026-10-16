@@ -9,9 +9,10 @@ const complete={
   cartonQuantity:100,cartonGrossWeightKg:12,cartonLengthCm:50,cartonWidthCm:40,cartonHeightCm:35,paymentTerms:'30% deposit / 70% before shipment',tradeAssuranceOrEquivalent:true,inspectionAccepted:true,
   complianceStatus:'NOT_APPLICABLE',complianceEvidence:[],complianceNotApplicableBasis:'Reviewed product scope and applicable EU requirements; no product-specific conformity marking requirement identified. Basis recorded by verifier.',quotedAt:'2026-08-23T10:00:00Z',quoteValidUntil:'2026-09-06T10:00:00Z',manualVerifiedAt:'2026-08-23T11:00:00Z',manualVerifiedBy:'admin'
 };
+const verificationTime={now:new Date('2026-08-24T10:00:00Z')};
 
 test('complete direct manually verified quote can become landed-cost eligible',()=>{
-  const result=verifySupplierQuote(complete);
+  const result=verifySupplierQuote(complete,verificationTime);
   assert.equal(result.verified,true);
   assert.equal(result.evidenceStatus,'MANUALLY_VERIFIED_QUOTE');
   assert.equal(result.landedCostEligible,true);
@@ -28,19 +29,19 @@ test('public price-like data without quote evidence fails closed',()=>{
 });
 
 test('missing compliance evidence blocks when supplier says evidence is provided',()=>{
-  const result=verifySupplierQuote({...complete,complianceStatus:'PROVIDED',complianceEvidence:[]});
+  const result=verifySupplierQuote({...complete,complianceStatus:'PROVIDED',complianceEvidence:[]},verificationTime);
   assert.equal(result.verified,false);
   assert.ok(result.blockers.includes('compliance evidence files/references'));
 });
 
 test('supplier freight may be omitted when carrier-ready carton logistics are verified',()=>{
-  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null});
+  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null},verificationTime);
   assert.equal(result.verified,true);
   assert.equal(result.landedCostEligible,true);
 });
 
 test('missing supplier freight and missing carrier-ready logistics fail closed',()=>{
-  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null,cartonGrossWeightKg:null});
+  const result=verifySupplierQuote({...complete,bulkShippingToRomania:null,shippingCurrency:null,cartonGrossWeightKg:null},verificationTime);
   assert.equal(result.verified,false);
   assert.equal(result.landedCostEligible,false);
   assert.ok(result.blockers.includes('carton gross weight'));
@@ -49,6 +50,20 @@ test('missing supplier freight and missing carrier-ready logistics fail closed',
 
 
 test('explicit lead-time range is accepted when exact days are not provided',()=>{
-  const result=verifySupplierQuote({...complete,leadTimeDays:null,leadTimeDaysMin:7,leadTimeDaysMax:20});
+  const result=verifySupplierQuote({...complete,leadTimeDays:null,leadTimeDaysMin:7,leadTimeDaysMax:20},verificationTime);
   assert.equal(result.verified,true);
+});
+
+test('an expired quotation cannot satisfy supplier or landed-cost gates',()=>{
+  const result=verifySupplierQuote(complete,{now:new Date('2026-09-07T10:00:00Z')});
+  assert.equal(result.verified,false);
+  assert.equal(result.landedCostEligible,false);
+  assert.ok(result.blockers.includes('quote validity'));
+});
+
+test('future, reversed and post-expiry review timestamps fail closed',()=>{
+  assert.ok(verifySupplierQuote({...complete,quotedAt:'2026-08-25T10:00:00Z'},verificationTime).blockers.includes('quote timestamp'));
+  assert.ok(verifySupplierQuote({...complete,quoteValidUntil:'2026-08-22T10:00:00Z'},verificationTime).blockers.includes('quote validity'));
+  assert.ok(verifySupplierQuote({...complete,manualVerifiedAt:'2026-08-22T10:00:00Z'},verificationTime).blockers.includes('manual verification timestamp'));
+  assert.ok(verifySupplierQuote({...complete,manualVerifiedAt:'2026-09-07T10:00:00Z'},verificationTime).blockers.includes('manual verification timestamp'));
 });

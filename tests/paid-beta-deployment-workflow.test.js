@@ -5,7 +5,7 @@ import test from 'node:test';
 const workflowPath='.github/workflows/paid-beta-deployment-acceptance.yml';
 const oidcHelperPath='scripts/github-actions-readiness-oidc.mjs';
 
-async function workflow(){return readFile(workflowPath,'utf8');}
+async function workflow(){return (await readFile(workflowPath,'utf8')).replace(/\r\n/g,'\n');}
 
 test('deployment acceptance has a distinct operator-visible job and bounded runtime',async()=>{
   const source=await workflow();

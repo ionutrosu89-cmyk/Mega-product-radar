@@ -1,13 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {verifySupplierQuote} from '../supplier-quote-verifier.js';
+
+const quoteDates={quotedAt:new Date(Date.now()-86_400_000).toISOString(),manualVerifiedAt:new Date(Date.now()-82_800_000).toISOString(),quoteValidUntil:new Date(Date.now()+30*86_400_000).toISOString()};
 import fs from 'node:fs/promises';
 
 const base={
   productCanonicalKey:'demo-product',supplierName:'Demo Supplier',platform:'Alibaba',sourceUrl:'https://example.com/quote',supplierSkuOrModel:'SKU-1',exactProductConfirmed:true,
   unitPrice:1,currency:'USD',quoteQuantity:30,moq:1,sampleCost:0,sampleShippingToRomania:0,leadTimeDays:3,incoterm:'DDP',bulkShippingToRomania:10,shippingCurrency:'USD',
   cartonQuantity:30,cartonGrossWeightKg:5,cartonLengthCm:40,cartonWidthCm:30,cartonHeightCm:20,paymentTerms:'Trade Assurance',tradeAssuranceOrEquivalent:true,inspectionAccepted:true,
-  quotedAt:'2026-08-24T06:00:00Z',quoteValidUntil:'2026-08-31T06:00:00Z',manualVerifiedAt:'2026-08-24T06:10:00Z',manualVerifiedBy:'Reviewer'
+  ...quoteDates,manualVerifiedBy:'Reviewer'
 };
 
 test('NOT_APPLICABLE compliance fails closed without an explicit reviewed basis',()=>{

@@ -1,3 +1,4 @@
+begin;
 create table if not exists public.romania_scale_10000_membership_v1 (
   product_id uuid primary key references public.canonical_products(id) on delete cascade,
   selection_rank integer not null unique,
@@ -15,6 +16,12 @@ select product_id, selection_rank, external_id from (
 on conflict(product_id) do update set selection_rank=excluded.selection_rank,amazon_asin=excluded.amazon_asin;
 do $$ declare c integer; d integer; begin
  select count(*),count(distinct amazon_asin) into c,d from public.romania_scale_10000_membership_v1;
+ -- A schema-only installation has no catalogue to hydrate. Never manufacture
+ -- 10,000 products for a migration, or relax the check on a populated database.
+ if c=0 and not exists(select 1 from public.canonical_products) then
+  raise notice 'EMPTY_CATALOGUE: 10K data backfill deferred until catalogue import';
+  return;
+ end if;
  if c<>10000 or d<>10000 then raise exception 'ROMANIA_10K_MEMBERSHIP_COUNT_REJECTED count=% distinct=%',c,d; end if;
 end $$;
 insert into public.refresh_queue(product_id,tier,reason,due_at,estimated_cost_eur,information_value,state,target_surface,evidence_kind,priority_score,shard_key,dedupe_key,provider_policy)
@@ -33,3 +40,4 @@ from public.romania_scale_10000_membership_v1 m cross join(values('TRENDYOL_RO')
 where not exists(select 1 from public.refresh_queue q where q.product_id=m.product_id and q.target_surface=s.surface and q.evidence_kind='ROMANIA_MARKET_EVIDENCE' and q.state in('PENDING','RUNNING','DONE'));
 create index if not exists romania_scale_10000_rank_idx on public.romania_scale_10000_membership_v1(selection_rank);
 create index if not exists romania_scale_10000_asin_idx on public.romania_scale_10000_membership_v1(amazon_asin);
+commit;
