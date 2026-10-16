@@ -19,7 +19,8 @@ const product=index=>({
   observedAt:'2026-09-03T06:00:00Z',
   sourceKey:'EBAY_MARKETING_API',
   rankingBasis:'BEST_SELLING',
-  evidenceClass:'DIRECT'
+  evidenceClass:'DIRECT',
+  brandPolicyClass:'GENERIC_PRIVATE_LABEL',brandReview:{reviewer:'Fixture reviewer',reviewedAt:'2026-09-03T06:00:00Z',evidenceUrl:'https://review.example/brand'}
 });
 
 test('Free Cross-Market registry exposes comparison surfaces without leaking credential names',async()=>{
@@ -47,6 +48,21 @@ test('a live platform ranking is published only with exactly 25 fresh valid posi
   assert.equal(normalized.refreshDueAt,'2026-09-17T06:00:00.000Z');
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,products:snapshot.products.slice(0,24)},{now:new Date('2026-09-04T08:00:00Z')}),null);
   assert.equal(normalizeCrossMarketSnapshot({...snapshot,reviewed_at:'2026-08-01'},{now:new Date('2026-09-04T08:00:00Z')}),null);
+});
+
+test('public snapshots fail closed for established or unreviewed brands, without renumbering a partial list',()=>{
+  const snapshot={niche_id:crossMarketSnapshotKey('EBAY','AUTO'),reviewed_at:'2026-09-03',products:Array.from({length:25},(_,i)=>product(i+1))};
+  const now=new Date('2026-09-04T08:00:00Z');
+  for(const bad of [{name:'Rubbermaid drawer'},{brand:'Amazon Basics'},{brandPolicyClass:'UNKNOWN_REVIEW'},{brandReview:null},{commercialGate:'STOP_BRAND_GATE'}]){
+    const input={...snapshot,products:snapshot.products.map((row,i)=>i===0?{...row,...bad}:row)};
+    assert.equal(normalizeCrossMarketSnapshot(input,{now}),null);
+    const view=buildFreeCrossMarketExperience({snapshots:[input],now});
+    assert.equal(view.coverage.livePositions,0);
+    assert.deepEqual(view.rankings,[]);
+  }
+  const result=normalizeCrossMarketSnapshot(snapshot,{now});
+  assert.equal(result.products[0].brandPolicyClass,'GENERIC_PRIVATE_LABEL');
+  assert.equal(result.products[0].brandReview.reviewer,'Fixture reviewer');
 });
 const currentEbayProduct=index=>({...product(index),sourceKey:'EBAY_BUY_MARKETING_BEST_SELLING',market:'EBAY_US'});
 
@@ -145,6 +161,20 @@ test('Free Cross-Market endpoint returns live coverage and fails closed on missi
   assert.equal(body.ok,true);
   assert.equal(body.coverage.livePositions,0);
   assert.equal(body.policy.noSyntheticRankings,true);
+});
+
+test('public JSON never serializes established or unreviewed products even when source rights are approved',async()=>{
+  for(const bad of [{name:'Rubbermaid private rejected item'},{name:'Unreviewed private item',brandReview:null}]){
+    const snapshot={niche_id:'AUTO',platform:'EBAY',market:'EBAY_US',window_end:'2026-09-03T06:00:00Z',product_count:25,products:Array.from({length:25},(_,i)=>({...currentEbayProduct(i+1),...(i===0?bad:{})})),source_key:'EBAY_BUY_MARKETING_BEST_SELLING',source_rights_status:'APPROVED',freshness_status:'CURRENT'};
+    const fetchImpl=async url=>String(url).includes('/rpc/consume_api_rate_limit')?Response.json([{allowed:true,limit:90,hitCount:1}]):Response.json([snapshot]);
+    const handler=createFreeCrossMarketHandler({fetch:fetchImpl,env:{SUPABASE_URL:'https://db.example',SUPABASE_SERVICE_ROLE_KEY:'fixture-service',MPR_EBAY_PUBLIC_DISPLAY_APPROVED:'true'},now:()=>new Date('2026-09-04T08:00:00Z')});
+    const response=await handler(new Request('https://mpr.example/api/free/cross-market'));
+    const body=await response.json();
+    assert.equal(response.status,200);
+    assert.equal(body.coverage.livePositions,0);
+    assert.deepEqual(body.rankings,[]);
+    assert.equal(JSON.stringify(body).includes(bad.name),false);
+  }
 });
 
 test('revoking the public-display flag removes an approved current snapshot from the public API',async()=>{

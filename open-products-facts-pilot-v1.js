@@ -20,7 +20,7 @@ export function evaluateOpenProductsFactsRecord(raw,{now=new Date(),maxAgeDays=9
   if(!Number.isFinite(observedAt.getTime())||ageMs<0)return {status:'DATE_UNKNOWN'};
   if(ageMs>maxAgeDays*DAY_MS)return {status:'STALE_RECORD'};
   const gate=classifyPublicBrandGate({name,brand});
-  if(!gate.commercialEligible)return {status:'ESTABLISHED_BRAND'};
+  if(gate.brandPolicyClass==='ESTABLISHED_EXCLUDE')return {status:'ESTABLISHED_BRAND'};
   return {status:'HUMAN_REVIEW_REQUIRED',candidate:{sourceKey:'OPEN_PRODUCTS_FACTS',sourceLicense:'ODbL-1.0',nicheId:'BIROU_ORGANIZARE',code,name,brand:brand||null,categories:categories.slice(0,300),sourceUrl:`https://world.openproductsfacts.org/product/${code}`,recordModifiedAt:observedAt.toISOString(),fetchedAt:null,brandPolicyClass:'UNKNOWN_REVIEW',sourceRank:null,salesEvidenceClass:'NONE',published:false}};
 }
 

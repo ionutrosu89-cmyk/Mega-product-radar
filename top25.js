@@ -139,8 +139,8 @@ function openComparison(){
 
 function emptyState(platform){
   if(shortlistOnly)return '<div class="empty-state"><b>Shortlist-ul este gol pentru această listă.</b><p>Salvează produsele interesante cu butonul „Salvează”. Lista rămâne numai pe dispozitivul tău.</p></div>';
-  if(platform.id==='MPR_GENERIC')return `<div class="empty-state"><b>Nu există încă 25 de oportunități generice aprobate pentru ${esc(current.label)}.</b><p>Lista apare numai după revizia individuală a brandului, nișei și identității fiecărui produs, cu date recente și drept de afișare pentru sursă. Clasamentele brute ale platformelor rămân separate.</p></div>`;
-  return `<div class="empty-state"><b>${esc(platform.label)} nu este încă publicat pentru ${esc(current.label)}.</b><p>Nu completăm spațiul cu rezultate inventate. Publicăm lista numai când avem 25 poziții recente, sursă permisă și etichetare corectă a semnalului.</p><button type="button" data-empty-request="${esc(platform.id)}">Anunță interesul pentru această listă</button></div>`;
+  if(platform.id==='MPR_GENERIC')return `<div class="empty-state"><b>Nu există încă 25 de oportunități generice aprobate pentru ${esc(current.label)}.</b><p>Lista apare numai după revizia individuală a brandului, nișei și identității fiecărui produs, cu date recente și drept de afișare pentru sursă.</p></div>`;
+  return `<div class="empty-state"><b>${esc(platform.label)} nu este încă publicat pentru ${esc(current.label)}.</b><p>Publicăm lista când avem 25 de produse recente fără brand consacrat, cu revizia brandului aprobată, sursă permisă și etichetare corectă a semnalului.</p><button type="button" data-empty-request="${esc(platform.id)}">Anunță interesul pentru această listă</button></div>`;
 }
 
 function renderFreeResearch(){
@@ -155,13 +155,13 @@ function renderFreeResearch(){
 
 async function render({trackSearch=false}={}){
   if(!current)return;
-  const niche=current,platform=currentPlatform(),ranking=currentRanking(),allSourceProducts=platformProducts(),sourceProducts=allSourceProducts,excludedCount=allSourceProducts.filter(product=>!publicCommerciallyEligible(product)).length,products=filteredProducts(sourceProducts);
+  const niche=current,platform=currentPlatform(),ranking=currentRanking(),allSourceProducts=platformProducts(),sourceProducts=eligiblePlatformProducts(),excludedCount=allSourceProducts.length-sourceProducts.length,products=filteredProducts(sourceProducts);
   $('#nicheTitle').textContent=`${niche.emoji} ${platform.shortLabel} · ${niche.label}`;
   $('#nicheText').textContent=platform.id==='MPR_GENERIC'
     ?sourceProducts.length?'25 de concepte distincte aprobate manual; rangul MPR și rangul sursei sunt separate.':'Lista generică așteaptă 25 de produse distincte, revizuite și publicabile.'
-    :sourceProducts.length?`${sourceProducts.length} poziții brute ale sursei; ${excludedCount} branduri marcate ca excluse comercial.`:'Publicăm clasamentul sursei când există 25 de poziții recente și drept de afișare.';
-  $('#coverage').textContent=`${allSourceProducts.length}/25 ${platform.id==='MPR_GENERIC'?'GENERIC':'LIVE'}`;
-  $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} marcate ca excluse comercial`:''}`;
+    :sourceProducts.length?`${sourceProducts.length} produse fără brand consacrat, cu revizia brandului aprobată. Pozițiile originale ale sursei sunt păstrate.`:'Publicăm numai produse fără brand consacrat, după verificarea brandului și a drepturilor.';
+  $('#coverage').textContent=`${sourceProducts.length}/25 ${platform.id==='MPR_GENERIC'?'GENERIC':'LIVE'}`;
+  $('#resultCount').textContent=`${products.length} rezultate afișate${excludedCount?` · ${excludedCount} produse excluse sau cu brand neverificat, ascunse`:''}`;
   const market=sourceProducts[0]?.market;
   $('#trackingStatus').textContent=ranking
     ?`${statusLabel(platform.status)} · cea mai veche observație ${fmtDate(ranking.oldestObservedAt||ranking.reviewedAt||sourceProducts[0]?.observedAt)}${market?` · piață ${market}`:''} · ${sourceProducts[0]?.rankingBasis||platform.rankingBasis} · ${ranking.refreshDue?'reîmprospătare scadentă':`refresh țintă ${fmtDate(ranking.refreshDueAt)}`} · poziții observate, nu vânzări lunare`
@@ -183,7 +183,7 @@ async function loadData(){
   else crossMarket={platforms:FREE_CROSS_MARKET_PLATFORMS.map(platform=>({...platform,status:platform.kind==='SIGNAL'?'SUPPORTING_SIGNAL_ONLY':platform.kind==='CURATED'?'WAITING_FOR_REVIEWED_GENERIC_LISTS':'ACCESS_REQUIRED',publishedPositions:0})),rankings:[],coverage:{livePositions:0,curatedPositions:0}};
   $('#keepaAttribution').hidden=!crossMarket.rankings.some(ranking=>ranking.products?.some(product=>product.sourceKey==='KEEPA_BEST_SELLERS'));
   selectedPlatform=crossMarket.platforms.find(platform=>platform.kind==='LIVE'&&platform.status==='LIVE')?.id||'AMAZON_US';
-  document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate · ${Number(crossMarket.coverage.livePositions||0)} poziții brute de sursă · 25 nișe configurate`;
+  document.querySelector('.live-ribbon').textContent=`${Number(crossMarket.coverage.curatedPositions||0)} oportunități generice aprobate · ${Number(crossMarket.coverage.livePositions||0)} poziții de sursă cu brand revizuit · 25 nișe configurate`;
   return niches.length===25;
 }
 

@@ -7,16 +7,29 @@ export const ESTABLISHED_BRAND_PHRASES=Object.freeze([
 ]);
 
 const boundaryMatch=(text,phrase)=>` ${text} `.includes(` ${phrase} `);
+const upper=value=>String(value??'').trim().toUpperCase();
+export const PUBLIC_BRAND_REVIEW_MAX_AGE_DAYS=30;
 
-export function classifyPublicBrandGate(product={}){
-  const explicit=String(product.brandPolicyClass||product.commercialGate||'').toUpperCase();
-  if(explicit==='ESTABLISHED_EXCLUDE'||explicit==='STOP_BRAND_GATE')return {brandPolicyClass:'ESTABLISHED_EXCLUDE',commercialEligible:false,reason:'Brand consacrat exclus din strategia comercială MPR.'};
-  const haystack=clean(`${product.brand||''} ${product.name||product.title||''}`);
-  const matchedBrand=ESTABLISHED_BRAND_PHRASES.find(phrase=>boundaryMatch(haystack,phrase));
-  if(matchedBrand)return {brandPolicyClass:'ESTABLISHED_EXCLUDE',commercialEligible:false,matchedBrand,reason:'Brand consacrat exclus; nu îl promovăm ca oportunitate de import.'};
-  return {brandPolicyClass:explicit==='GENERIC_PRIVATE_LABEL'?'GENERIC_PRIVATE_LABEL':'UNKNOWN_REVIEW',commercialEligible:true,matchedBrand:null,reason:'Generic, brand mic sau brand încă neclasificat; verificarea rămâne obligatorie înainte de sourcing.'};
+function currentBrandReview(review,now){
+  const at=Date.parse(review?.reviewedAt||'');
+  let evidence;try{evidence=new URL(String(review?.evidenceUrl||''));}catch{return false;}
+  return Boolean(String(review?.reviewer||'').trim())&&evidence.protocol==='https:'&&
+    Number.isFinite(now.getTime())&&Number.isFinite(at)&&at<=now.getTime()&&
+    now.getTime()-at<=PUBLIC_BRAND_REVIEW_MAX_AGE_DAYS*86_400_000;
 }
 
-export function publicCommerciallyEligible(product={}){
-  return classifyPublicBrandGate(product).commercialEligible;
+export function classifyPublicBrandGate(product={},options={}){
+  const classes=[upper(product.brandPolicyClass),upper(product.commercialGate)];
+  if(classes.some(value=>['ESTABLISHED_EXCLUDE','STOP_BRAND_GATE'].includes(value)))return {brandPolicyClass:'ESTABLISHED_EXCLUDE',commercialEligible:false,reason:'Brand consacrat exclus din strategia comercială MPR.'};
+  const haystack=clean(`${product.brand||''} ${product.name||''} ${product.title||''}`);
+  const matchedBrand=ESTABLISHED_BRAND_PHRASES.find(phrase=>boundaryMatch(haystack,phrase));
+  if(matchedBrand)return {brandPolicyClass:'ESTABLISHED_EXCLUDE',commercialEligible:false,matchedBrand,reason:'Brand consacrat exclus; nu îl promovăm ca oportunitate de import.'};
+  const now=options?.now instanceof Date?options.now:new Date(options?.now??Date.now());
+  const reviewed=upper(product.brandPolicyClass||product.commercialGate)==='GENERIC_PRIVATE_LABEL'&&
+    !classes.includes('BRAND_REVIEW_REQUIRED')&&currentBrandReview(product.brandReview,now);
+  return {brandPolicyClass:reviewed?'GENERIC_PRIVATE_LABEL':'UNKNOWN_REVIEW',commercialEligible:reviewed,matchedBrand:null,reason:reviewed?'Produs fără brand consacrat, cu revizie documentată recentă.':'Brand neverificat: păstrat doar pentru cercetare privată, exclus din catalogul public.'};
+}
+
+export function publicCommerciallyEligible(product={},options={}){
+  return classifyPublicBrandGate(product,options).commercialEligible;
 }

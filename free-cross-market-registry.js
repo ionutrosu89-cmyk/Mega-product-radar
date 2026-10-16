@@ -1,3 +1,5 @@
+import {publicCommerciallyEligible} from './brand-policy-v1.js';
+
 const DAY_MS=86_400_000;
 export const FREE_TOP25_REFRESH_DAYS=14;
 export const FREE_TOP25_MAX_AGE_DAYS=30;
@@ -57,7 +59,7 @@ function explicitLiveSourceValid(raw,products,platform){
   return products.every(product=>policy.hosts[market].test(new URL(product.sourceUrl).hostname)&&product.sourceKey===sourceKey&&product.market===market);
 }
 
-export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}){
+export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis,now=new Date()}={}){
   const row=raw&&typeof raw==='object'?raw:{};
   const name=clean(row.name||row.title).slice(0,220);
   const externalId=clean(row.externalId||row.asin||row.productId).slice(0,120);
@@ -66,6 +68,7 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
   const rank=Number(row.rank);
   const sourceRank=numberOrNull(row.sourceRank),price=numberOrNull(row.price),rating=numberOrNull(row.rating),reviewCount=numberOrNull(row.reviewCount);
   if(!name||!externalId||rank!==index+1||!https(sourceUrl)||!Number.isFinite(Date.parse(observedAt)))return null;
+  if(!publicCommerciallyEligible(row,{now}))return null;
   return {
     name,externalId,rank,platform,sourceUrl,observedAt,
     sourceRank:Number.isInteger(sourceRank)&&sourceRank>0?sourceRank:null,
@@ -82,7 +85,9 @@ export function normalizeCrossMarketProduct(raw,index,{platform,rankingBasis}={}
     sourceMetric:row.sourceMetric&&typeof row.sourceMetric==='object'?row.sourceMetric:null,
     evidenceClass:['DIRECT','LICENSED','DERIVED'].includes(upper(row.evidenceClass))?upper(row.evidenceClass):'DIRECT',
     salesEvidenceClass:'PLATFORM_RANK_NOT_UNIT_SALES',
-    commercialGate:clean(row.commercialGate).slice(0,80)||'BRAND_REVIEW_REQUIRED'
+    brand:clean(row.brand).slice(0,160)||null,
+    brandPolicyClass:'GENERIC_PRIVATE_LABEL',commercialGate:'GENERIC_PRIVATE_LABEL',
+    brandReview:{reviewer:clean(row.brandReview.reviewer).slice(0,160),reviewedAt:new Date(row.brandReview.reviewedAt).toISOString(),evidenceUrl:clean(row.brandReview.evidenceUrl).slice(0,500)}
   };
 }
 
@@ -115,7 +120,7 @@ export function normalizeCrossMarketSnapshot(raw,{now=new Date()}={}){
   if(source.length!==25)return null;
   const curatedSource=kind==='CURATED'?curatedSourcePlatform(raw?.market,raw?.source_key):null;
   if(kind==='CURATED'&&(!curatedSource||source.some(row=>!https(row?.sourceUrl)||!curatedProductReviewed(row,now,curatedSource))))return null;
-  const products=source.map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis})).filter(Boolean);
+  const products=source.map((product,index)=>normalizeCrossMarketProduct(product,index,{platform:key.platform,rankingBasis:platform.rankingBasis,now})).filter(Boolean);
   if(products.length!==25||new Set(products.map(p=>p.externalId)).size!==25)return null;
   if(explicitPlatform&&kind==='LIVE'&&!explicitLiveSourceValid(raw,products,key.platform))return null;
   if(kind==='CURATED'&&new Set(products.map(p=>p.conceptKey)).size!==25)return null;
@@ -144,7 +149,7 @@ function deriveConsensusRankings(rankings,now){
     const confirmed=[...concepts.entries()].map(([conceptKey,platformRows])=>({conceptKey,rows:[...platformRows.values()]})).filter(row=>row.rows.length>=2).sort((a,b)=>a.rows.reduce((sum,row)=>sum+row.rank,0)/a.rows.length-b.rows.reduce((sum,row)=>sum+row.rank,0)/b.rows.length||a.conceptKey.localeCompare(b.conceptKey));
     if(confirmed.length<25)continue;
     const products=confirmed.slice(0,25).map(({conceptKey,rows},index)=>({
-      name:rows[0].name,externalId:`CONSENSUS:${conceptKey}`,conceptKey,rank:index+1,platform:'CONSENSUS',sourceUrl:rows[0].sourceUrl,observedAt:rows.map(row=>row.observedAt).sort().at(-1),sourceKey:'MPR_CROSS_MARKET_CONSENSUS',sourceLabel:`${rows.length} platforme independente`,rankingBasis:'MULTI_PLATFORM_CONFIRMATION',market:null,price:null,currency:null,rating:null,reviewCount:null,sourceMetric:{label:'Platforme independente',value:rows.length,unit:'platforms'},evidenceClass:'DERIVED',salesEvidenceClass:'NOT_UNIT_SALES',commercialGate:'BRAND_REVIEW_REQUIRED',platformConfirmations:rows.map(row=>independentMarketplace(row.platform)).sort()
+      name:rows[0].name,externalId:`CONSENSUS:${conceptKey}`,conceptKey,rank:index+1,platform:'CONSENSUS',sourceUrl:rows[0].sourceUrl,observedAt:rows.map(row=>row.observedAt).sort().at(-1),sourceKey:'MPR_CROSS_MARKET_CONSENSUS',sourceLabel:`${rows.length} platforme independente`,rankingBasis:'MULTI_PLATFORM_CONFIRMATION',market:null,price:null,currency:null,rating:null,reviewCount:null,sourceMetric:{label:'Platforme independente',value:rows.length,unit:'platforms'},evidenceClass:'DERIVED',salesEvidenceClass:'NOT_UNIT_SALES',brand:rows[0].brand,brandPolicyClass:'GENERIC_PRIVATE_LABEL',brandReview:rows[0].brandReview,commercialGate:'GENERIC_PRIVATE_LABEL',platformConfirmations:rows.map(row=>independentMarketplace(row.platform)).sort()
     }));
     const oldestObservedAt=confirmed.slice(0,25).flatMap(({rows})=>rows.map(row=>row.observedAt)).sort()[0];
     const refreshDueAt=new Date(Date.parse(oldestObservedAt)+FREE_TOP25_REFRESH_DAYS*DAY_MS).toISOString();
@@ -178,6 +183,6 @@ export function buildFreeCrossMarketExperience({snapshots=[],accessByPlatform={}
     platforms,
     rankings,
     coverage:{platformCount:platforms.length,curatedNicheCount:curatedRankings.length,curatedPositions:curatedRankings.length*25,livePlatformCount:livePlatforms.length,liveNicheRankings:liveRankings.length,livePositions:liveRankings.length*25,refreshDueRankings:rankings.filter(row=>row.refreshDue).length,consensusNicheRankings:consensusRankings.length,consensusPositions:consensusRankings.length*25,consensusReady:consensusRankings.length>0},
-    policy:{noSyntheticRankings:true,minimumProductsPerPublishedRanking:25,refreshTargetDays:FREE_TOP25_REFRESH_DAYS,maxObservationAgeDays:FREE_TOP25_MAX_AGE_DAYS,liveFreshnessRequired:true,salesClaimsRequireExplicitEvidence:true,establishedBrandsBlockedFromCommercialFunnel:true,paidCallsTriggered:0,purchaseAuthorized:false}
+    policy:{noSyntheticRankings:true,minimumProductsPerPublishedRanking:25,refreshTargetDays:FREE_TOP25_REFRESH_DAYS,maxObservationAgeDays:FREE_TOP25_MAX_AGE_DAYS,liveFreshnessRequired:true,salesClaimsRequireExplicitEvidence:true,establishedBrandsBlockedFromCommercialFunnel:true,unreviewedBrandsBlockedFromPublicCatalogue:true,brandReviewRequired:true,paidCallsTriggered:0,purchaseAuthorized:false}
   };
 }

@@ -22,7 +22,7 @@ const marketplaceSnapshot=(nicheId,platform)=>{
   const sourceKey=platform==='EBAY'?'EBAY_BUY_MARKETING_BEST_SELLING':platform.startsWith('AMAZON_')?'AMAZON_LICENSED_BEST_SELLERS':'ALIEXPRESS_HOT_PRODUCTS_API';
   const sourceHost=platform==='EBAY'?'www.ebay.com':platform==='AMAZON_US'?'www.amazon.com':platform==='AMAZON_DE'?'www.amazon.de':'www.aliexpress.com';
   return {niche_id:nicheId,platform,market,source_key:sourceKey,product_count:25,source_rights_status:'APPROVED',freshness_status:'CURRENT',window_end:reviewedAt,
-    products:Array.from({length:25},(_,index)=>({name:`${platform} product ${index+1}`,externalId:`${platform}-${nicheId}-${index+1}`,rank:index+1,sourceUrl:`https://${sourceHost}/p/${index+1}`,observedAt:reviewedAt,sourceKey,market}))};
+    products:Array.from({length:25},(_,index)=>({name:`${platform} product ${index+1}`,externalId:`${platform}-${nicheId}-${index+1}`,rank:index+1,sourceUrl:`https://${sourceHost}/p/${index+1}`,observedAt:reviewedAt,sourceKey,market,brandPolicyClass:'GENERIC_PRIVATE_LABEL',brandReview:review}))};
 };
 const liveSnapshots=FREE_TOP25_EXPANDED_IDS.flatMap(id=>[marketplaceSnapshot(id,'EBAY'),marketplaceSnapshot(id,'ALIEXPRESS')]);
 const complete={coverage:{curatedNicheCount:25,curatedPositions:625,livePositions:1250,curatedSnapshots:snapshots,liveSnapshots},study:{status:'PASS',participants:5,productFlowSessions:5,understandingPct:80,usefulnessPct:60,watchlistPct:80},evidence:{sourceDisplayRightsVerified:true,pilotProductFlowConfirmed:true,twoWorkspaceJourneyPassed:true,physicalPhonePassed:true,publicDomainAndRecoveryPassed:true,supportAndRestorePassed:true,criticalIssues:0}};
