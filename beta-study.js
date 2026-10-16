@@ -1,11 +1,16 @@
 import {trackJourneyEvent} from './journey-events.js';
-import {betaProductFlowTested} from './beta-study-answers.js';
+import {buildBetaStudyMetadata} from './beta-study-answers.js';
 document.querySelector('#study').addEventListener('submit',async event=>{
  event.preventDefault();const form=event.currentTarget,button=form.querySelector('button'),status=document.querySelector('#status');
+ if(button.disabled)return;
  button.disabled=true;
- const values=new FormData(form),product=String(values.get('product')||'').trim(),watchlistStatus=String(values.get('watchlist')||'');
- if(watchlistStatus==='yes'&&!product){status.textContent='Numește produsul salvat ca să putem verifica rezultatul.';button.disabled=false;return;}
- const metadata={studyVersion:'STABILIZATION_2',product:product||null,productFlowTested:betaProductFlowTested(product,watchlistStatus),understoodEvidence:values.get('understood')==='yes',useful:values.get('useful')==='yes',watchlistStatus,completedWatchlist:watchlistStatus==='yes',completedIntervention:values.get('intervention')==='yes'};
- const saved=await trackJourneyEvent('BETA_VALIDATION_SESSION',metadata);
- status.textContent=saved?'Evaluarea a fost salvată. Mulțumim!':'Evaluarea nu a fost salvată. Autentifică-te și încearcă din nou.';button.disabled=false;
+ try{
+  let metadata;
+  try{metadata=buildBetaStudyMetadata(new FormData(form));}
+  catch(error){status.textContent=error.message;return;}
+  const saved=await trackJourneyEvent('BETA_VALIDATION_SESSION',metadata);
+  status.textContent=saved?'Evaluarea a fost salvată. Mulțumim!':'Evaluarea nu a fost salvată. Autentifică-te și încearcă din nou.';
+ }catch{
+  status.textContent='Evaluarea nu a fost salvată. Verifică conexiunea și încearcă din nou.';
+ }finally{button.disabled=false;}
 });
