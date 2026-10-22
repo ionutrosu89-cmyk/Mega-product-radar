@@ -20,15 +20,16 @@ test('signup preserves validated next destination like login does',async()=>{
   assert.doesNotMatch(source,/if\(data\.session\)location\.href='home\.html'/);
 });
 
-test('pricing Free reflects only verified Top 25 coverage while the beta remains available',async()=>{
+test('pricing Free leads to editorial research while Top 25 remains rights-gated',async()=>{
   const pricing=await readFile('pricing.html','utf8');
   const pricingClient=await readFile('pricing.js','utf8');
   const publicPricing=`${pricing}\n${pricingClient}`;
   const discoverFn=await readFile('netlify/functions/commercial-discover.mjs','utf8');
   assert.match(publicPricing,/25 de nișe configurate/);
   assert.match(publicPricing,/Top 25 numai când există 25\/25 poziții validate/);
-  assert.match(publicPricing,/Top Sellers \+ Top Brands/);
-  assert.match(publicPricing,/Vezi acoperirea actuală/);
+  assert.match(publicPricing,/Surse și nivelul dovezilor/);
+  assert.match(publicPricing,/href="editorial-radar\.html">Cercetează nișele/);
+  assert.match(pricing,/lansarea publică a planului Free așteaptă revizia editorială/i);
   assert.doesNotMatch(publicPricing,/Free este activ/);
   assert.doesNotMatch(publicPricing,/<td class="yes">Activ limitat<\/td>/);
   assert.doesNotMatch(publicPricing,/3 vizualizări\/credite/);

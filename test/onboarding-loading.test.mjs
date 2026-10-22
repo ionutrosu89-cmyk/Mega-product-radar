@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
-const source=(await readFile(new URL('../onboarding.js',import.meta.url),'utf8')).replace(/^import .*;\n/gm,'');
+const source=(await readFile(new URL('../onboarding.js',import.meta.url),'utf8')).replace(/^import .*;\r?\n/gm,'');
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function harness(loadSellerPreferences){
  const nodes=new Map();

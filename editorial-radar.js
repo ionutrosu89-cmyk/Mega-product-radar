@@ -1,4 +1,5 @@
 import {freshEditorialProducts,EDITORIAL_EVIDENCE_TYPES} from './editorial-radar-v1.js';
+import {freeResearchLinks,freshPublishedFreeSignalResearchFeed} from './free-signal-research-v1.js';
 import {freeProductKey,readFreeShortlist,toggleFreeShortlist} from './free-shortlist.js';
 import {getCurrentSession} from './supabase-client.js';
 
@@ -7,7 +8,29 @@ const node=(tag,text,className)=>{const element=document.createElement(tag);if(t
 const formatDate=value=>new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(value));
 const sourceCount=product=>new Set(product.evidence.map(row=>row.sourceUrl)).size;
 const keyFor=product=>freeProductKey({externalId:product.id},'MPR_EDITORIAL');
-let feed=null,products=[],saved=new Set(),userId=undefined;
+let feed=null,products=[],signals=[],saved=new Set(),userId=undefined;
+
+function renderResearch(){
+  const root=$('#research');root.replaceChildren();
+  const nicheId=$('#nicheSelect').value||feed.niches[0]?.id;
+  const niche=feed.niches.find(row=>row.id===nicheId),research=freeResearchLinks(nicheId);
+  if(!niche||!research){root.hidden=true;return;}
+  root.hidden=false;
+  root.append(node('h2',`Cercetează: ${niche.label}`),node('p',`Termen de pornire: „${research.query}”. Deschide sursele originale și notează separat ce ai observat. Aceste linkuri nu sunt clasamente și nu confirmă vânzări.`));
+  const links=node('div',undefined,'research-links');
+  for(const source of research.sources){
+    const link=node('a',`Deschide ${source.label}`);link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';links.append(link);
+  }
+  root.append(links);
+  const observations=signals.filter(row=>row.nicheId===nicheId);
+  if(!observations.length){root.append(node('p','Nu există încă un semnal editorial actual și aprobat pentru această nișă. Linkurile sunt doar puncte de pornire pentru cercetarea ta.','unknown'));return;}
+  root.append(node('h3','Semnale revizuite și încă actuale'));
+  for(const observation of observations){
+    const item=node('div',undefined,'research-signal');
+    item.append(node('b',`${observation.sourceLabel} · ${observation.concept||'nișă'}`),node('p',observation.summary),node('small',`Observat ${formatDate(observation.observedAt)} · interes sau activitate, nu vânzări confirmate.`));
+    const link=node('a','Vezi observația la sursă');link.href=observation.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';item.append(link);root.append(item);
+  }
+}
 
 function saveButton(product){
   const button=node('button',saved.has(keyFor(product))?'★ Salvat':'☆ Salvează');
@@ -45,6 +68,7 @@ function render(){
     const actions=node('div',undefined,'actions'),link=node('a','Vezi fișa');link.href=`editorial-radar.html?product=${encodeURIComponent(product.id)}`;actions.append(link,saveButton(product));card.append(actions);grid.append(card);
   }
   const selected=new URLSearchParams(location.search).get('product');renderDetail(products.find(item=>item.id===selected)||null);
+  renderResearch();
 }
 
 async function refreshAccount(){
@@ -58,6 +82,10 @@ async function start(){
     if(!response.ok)throw new Error('FEED_UNAVAILABLE');
     feed=await response.json();products=freshEditorialProducts(feed);
     if(feed?.schema!=='MPR_EDITORIAL_RADAR_V1')throw new Error('FEED_INVALID');
+    try{
+      const signalResponse=await fetch('free-signal-observations-v1.json',{cache:'no-store'});
+      if(signalResponse.ok)signals=freshPublishedFreeSignalResearchFeed(await signalResponse.json()).observations;
+    }catch{signals=[];}
     for(const niche of feed.niches){const option=node('option',`${niche.emoji} ${niche.label} (${products.filter(item=>item.nicheId===niche.id).length})`);option.value=niche.id;$('#nicheSelect').append(option);}
     $('#nicheSelect').addEventListener('change',render);$('#search').addEventListener('input',render);$('#savedOnly').addEventListener('change',render);
     document.addEventListener('click',event=>{

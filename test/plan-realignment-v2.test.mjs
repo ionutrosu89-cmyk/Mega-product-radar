@@ -40,7 +40,7 @@ test('pricing presents the four-level roadmap as non-billing interest hypotheses
   assert.match(publicPricing,/25 de nișe configurate/);
   assert.match(client,/Rising \/ trenduri \/ alerte globale/);
   assert.match(client,/Brand gate \+ importability/);
-  assert.match(publicPricing,/Vezi acoperirea actuală/);
+  assert.match(publicPricing,/Cercetează nișele/);
   assert.match(html,/Checkout-ul și abonamentele reale sunt oprite/);
   assert.doesNotMatch(client,/startSubscriptionCheckout/);
 });
