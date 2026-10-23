@@ -136,9 +136,16 @@ function negotiationLabel(x){
   if(x.status==='QUOTE_INCOMPLETE')return'OFERTĂ INCOMPLETĂ';
   return esc(x.status||'NECALCULAT');
 }
-function commercialGate(x){return x?.commercialVerified===true&&x?.decisionEligible===true?'VERIFICAT STRICT':x?.commercialVerified===true?'IDENTITATE NECANONICĂ':'INCOMPLET';}
+function commercialGate(x){
+  const validUntil=Date.parse(x?.strictQuote?.quoteValidUntil);
+  if(Number.isFinite(validUntil)&&validUntil<=Date.now())return'OFERTĂ EXPIRATĂ';
+  return x?.commercialVerified===true&&x?.decisionEligible===true?'VERIFICAT STRICT':x?.commercialVerified===true?'IDENTITATE NECANONICĂ':'INCOMPLET';
+}
 function render(){
-  const filter=value('#filter').toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter));
+  const filter=value('#filter').toLowerCase(),rows=read().filter(x=>!filter||String(x.product).toLowerCase().includes(filter)).map(x=>{
+    const verification=verifySupplierQuote(x.strictQuote||{});
+    return {...x,verification,commercialVerified:x.commercialVerified===true&&verification.verified===true};
+  });
   const ranked=rankSuppliers(rows,{targetQty:Number(value('#qty')),targetUnitCost:Number(value('#target'))});
   const opts=negotiationOptions();
   const evaluated=ranked.map(x=>({...x,negotiation:evaluateQuoteNegotiation(x.strictQuote||{},opts)}));

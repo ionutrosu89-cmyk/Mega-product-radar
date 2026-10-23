@@ -43,5 +43,5 @@ test('all Top 25 public sources are deduplicated for one refresh run',()=>{
 test('scheduled refresh stays free of paid DataForSEO/OpenAI calls',async()=>{
   const source=await import('node:fs/promises').then(fs=>fs.readFile('netlify/functions/top25-refresh.mjs','utf8'));
   assert.doesNotMatch(source,/DATAFORSEO|OPENAI_API_KEY|api\.openai\.com/i);
-  assert.match(source,/schedule:'15 5 \* \* \*'/);
+  assert.doesNotMatch(source,/schedule:/);
 });

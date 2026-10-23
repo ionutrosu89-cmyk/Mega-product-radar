@@ -1,0 +1,89 @@
+# Top 25: acces la surse și pilotul de colectare
+
+Stare reverificată la 5 octombrie 2026: **0 surse aprobate pentru afișare în SaaS**, **0 mapări de categorie aprobate** și **0/25 nișe cu clasamente live complete**. Cererile pentru drepturi și acces au fost trimise către eBay Partner Network și AliExpress Open Platform la 4 octombrie 2026; nu am primit încă aprobări. Confirmarea automată a cazului eBay #00452291 privește primirea cererii, nu accesul la date. Starea de lansare este urmărită în [planul Free](FREE_GO_LIVE_STEPS_2026-10-04.md).
+
+### Surse alternative evaluate la 5 octombrie 2026
+
+| Sursă oficială | Ce oferă documentația | Decizie pentru Top 25 MPR |
+| --- | --- | --- |
+| [Mercado Libre Highlights](https://developers.mercadolibre.com.ar/es_ar/api-docs-es/mas-vendidos-en-mercado-libre) | Endpoint `BEST_SELLER` pe categorie, dar documentează **Top 20**, pentru piețele Mercado Libre. | Poate fi semnal suplimentar după verificarea drepturilor și a accesului. Nu acoperă cerința de 25 poziții per clasament și nu înlocuiește o sursă Amazon/eBay/China. |
+| [Etsy Open API v3](https://developer.etsy.com/documentation/reference/) | Căutarea de listări poate fi sortată după `score`; documentația nu îl definește drept clasament după vânzări. | Util pentru descoperire de produse, dar un `score` de căutare nu poate fi etichetat bestseller. Drepturile de afișare pentru SaaS ar necesita verificare separată. |
+| [Walmart Marketplace Insights](https://developer.walmart.com/us-marketplace/docs/insights-api-overview) | Menționează best sellers pe departamente/categorii, dar cere acces de seller sau Solution Provider aprobat și OAuth. | Nu este un feed deschis pentru aplicația noastră. Mai întâi trebuie confirmate eligibilitatea, acoperirea, dreptul de afișare și costul; nu avem acest acces. |
+| [eMAG Marketplace API](https://marketplace.emag.ro/infocenter/emag-academy/cum-se-adauga-un-produs/importul-prin-feed/documentatie-tehnica/) | Documentația oficială descrie integrarea ofertelor și produselor proprii ale sellerului și procesarea comenzilor; versiunea indicată este 4.5.1 din 2 martie 2026. | Accesul de seller nu oferă, prin această documentație, un Top 25 al pieței sau drept de republicare către utilizatorii MPR. Nu îl numărăm ca sursă de bestseller fără un feed și drepturi separate confirmate în scris. |
+
+Aceste patru surse nu se numără în poarta de lansare. Nu completăm artificial 25 de poziții dintr-un Top 20 și nu prezentăm relevanța unei căutări drept vânzări. O eventuală integrare viitoare cere adaptor, drepturi documentate și teste cu răspunsuri reale.
+
+## Decizia de achiziție a datelor
+
+| Rută | Ce poate aduce | Ce trebuie confirmat înainte de publicare |
+| --- | --- | --- |
+| [eBay Buy Marketing](https://developer.ebay.com/api-docs/buy/marketing/overview.html) | Metric `BEST_SELLING` pe categorii și piețe acceptate | Acces Production, contractele cerute de eBay, dreptul pentru aplicația SaaS de cercetare, câmpurile afișabile, atribuirea și retenția. Endpointul este gândit pentru aplicații de cumpărare; nu presupunem că aprobarea acoperă automat modelul nostru. |
+| [Keepa Best Sellers](https://keepa.com/api-docs/best-sellers.html) pentru Amazon.com | Listă de ASIN-uri pe categorie, cu actualizare frecventă | Ofertă și permisiune scrisă pentru afișare către utilizatorii MPR, păstrarea snapshoturilor, derivarea unei liste fără brand consacrat și folosirea titlurilor/linkurilor. Documentația precizează că subcategoriile pot folosi rangul principal și nu reflectă întotdeauna ordinea exactă Amazon; interfața trebuie să numească sursa/rangul corect. |
+| Amazon Associates / PA API | Conținut pentru trimiterea cumpărătorilor spre Amazon | [Licența Amazon Associates](https://affiliate-program.amazon.com/help/operating/policies) limitează scopul la promovarea Amazon și include restricții pentru extragere, agregare și aplicații pentru vânzători. Nu folosim această cale pentru SaaS-ul de cercetare fără aprobare scrisă explicită pentru cazul nostru. |
+| Feed licențiat alternativ | Clasament și metadate pentru 25 nișe | Contract pentru afișare în SaaS, actualizare cel mult la 72 h, rang și piață verificabile, stocare, export, derivare și proces de revocare. O listă de căutare fără bază de rang nu este „bestseller”. |
+
+Cererea către un potențial furnizor trebuie să solicite în scris: (1) acoperirea Amazon.com SUA sau altă piață definită, inclusiv ID-urile categoriilor și minimum 100 candidați/nișă; (2) definiția rangului și frecvența actualizării; (3) dreptul de a afișa titlu, identificator, rang, URL și momentul observației în Free; (4) dreptul de a filtra brandurile consacrate și de a publica un rang editorial MPR separat; (5) retenția, cache-ul, atribuirea, prețul/limita de apel și procedura la revocare. Răspunsul semnat sau contractul se înregistrează înainte de activarea `MPR_*_PUBLIC_DISPLAY_APPROVED`.
+
+Aprobarea este legată de **furnizor**, nu doar de marketplace: `KEEPA_BEST_SELLERS` folosește `MPR_KEEPA_PUBLIC_DISPLAY_APPROVED`, iar un eventual `AMAZON_LICENSED_BEST_SELLERS` folosește separat `MPR_AMAZON_LICENSED_PUBLIC_DISPLAY_APPROVED`. Înainte de activarea celei de-a doua variabile se identifică furnizorul concret și contractul său; cheia Keepa nu poate autoriza alt feed.
+
+Textul solicitării trimise către Keepa pe 26 septembrie 2026. Furnizorul a răspuns în scris în aceeași zi și a aprobat afișarea publică numai în limitele descrise și pe durata unui abonament API activ. Proprietarul nu dorește să cumpere abonamentul momentan. Condițiile concrete și punctele rămase deschise sunt în `docs/KEEPA_CONTROLLED_COLLECTION.md`:
+
+> Subject: Licensing request — Best Sellers data display in Romanian product research SaaS
+>
+> Hello Keepa team, we operate Mega Product Radar, a Romanian SaaS that helps sellers research generic/private-label product opportunities. We would like to evaluate your Amazon.com Best Sellers API for 25 defined niches, refresh the data at least daily, and display up to 25 reviewed products per niche to our Free users. We would show the source, observed time, ASIN, a short product label, source link and source rank, while separately labeling any MPR editorial ranking. Can you confirm in writing whether your license permits this public SaaS display, retention of dated snapshots, filtering established brands, and derived cross-market comparisons? Please specify required attribution, cache/retention limits, redistribution restrictions, API plan/token needs and any Amazon-origin content restrictions. We will not publish Keepa-sourced data until the permitted scope is clear.
+
+[Documentația Keepa](https://keepa.com/api-docs/plans-tokens.html) descrie 50 de tokenuri per cerere Best Sellers și abonamente lunare, dar nu stabilește singură dreptul de afișare pentru modelul nostru. Nu cumpărăm un plan doar pentru a presupune aceste drepturi.
+
+Pilotul ales este **Amazon.com SUA**: în [documentația Keepa Best Sellers](https://keepa.com/api-docs/best-sellers.html), `domain=1` înseamnă `.com`, iar `domain=3` înseamnă `.de`. Planificatoarele locale folosesc implicit `1` și resping codurile de piață neacceptate; ele doar estimează cereri și tokenuri, fără apeluri sau cheltuieli automate.
+
+Parserul de test pentru răspunsul Best Sellers verifică `domainId`, `categoryId` și `lastUpdate` din [formatul Keepa Time](https://keepa.com/api-docs/tracking-object.html). O listă fără timestamp valid, mai veche de 72 h sau din altă piață/categorie este respinsă. Momentul descărcării nu devine automat momentul observației sursei. Parserul pregătește integrarea, dar **nu colectează și nu publică** date fără drepturi și buget aprobate.
+
+## 1. Acces eBay
+
+Operatorul creează contul [eBay Developers Program](https://developer.ebay.com/develop/get-started) și contul [eBay Partner Network](https://partnernetwork.ebay.com/solutions/joining-the-ebay-partner-network) pe identitatea firmei. Pentru Buy Marketing API în producție, [eBay cere aprobarea modelului de afaceri și contracte](https://developer.ebay.com/api-docs/buy/buy-requirements.html). Aplicația EPN trebuie să descrie explicit SaaS-ul, publicul din România, afișarea titlului, linkului, rangului și datei, stocarea snapshoturilor și durata de păstrare. Un cont sau chei Sandbox nu reprezintă acces Production.
+
+Text de lucru pentru aplicație, care trebuie adaptat și trimis de operator:
+
+> Mega Product Radar, operat de RED COMMERCE S.R.L., este o aplicație de cercetare a produselor pentru comercianți din România. Solicităm acces la Buy Marketing API, resursa `merchandised_product`, metric `BEST_SELLING`, pentru categorii eBay US/DE revizuite manual. Vrem să afișăm utilizatorilor rangul, titlul, identificatorul, linkul sursei și momentul observației pentru maximum 25 de produse pe categorie. Nu prezentăm rangul ca unități vândute. Vă rugăm să confirmați în scris drepturile de afișare, stocare, derivare și perioada permisă de păstrare pentru acest model SaaS.
+
+După aprobarea EPN, operatorul urmează procesul oficial de acces Buy API în producție și configurează `EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET`, `MPR_EBAY_TERMS_APPROVED`, `MPR_EBAY_PRODUCTION_ACCESS_APPROVED` și `MPR_EBAY_PUBLIC_DISPLAY_APPROVED` în Netlify. Cheile nu se pun în repository sau în conversație.
+
+## 2. Acces AliExpress
+
+[Documentația Hot Products](https://developer.alibaba.com/docs/doc.htm?articleId=45794&docType=2&treeId=674) este în secțiunea etichetată **„Affiliate API (depreciat)”**. Înainte de configurarea colectorului, operatorul trebuie să obțină confirmare de la AliExpress că acest endpoint încă funcționează pentru aplicația sa sau să primească documentația API-ului actual care îl înlocuiește.
+
+Text de lucru pentru cerere:
+
+> Mega Product Radar dorește să analizeze produse pentru 25 de nișe și să afișeze în SaaS 25 de produse pe nișă, cu titlu, identificator, link, poziție și data colectării. `aliexpress.affiliate.hotproduct.query` apare în documentația „Affiliate API (depreciat)”. Este endpointul disponibil pentru un cont nou? Dacă nu, care este API-ul actual pentru produse populare pe categorii? Vă rugăm să confirmați drepturile de afișare către utilizatori, stocarea snapshoturilor, perioada de păstrare, limitele de apel și semnificația exactă a câmpului `lastest_volume`.
+
+Colectorul rămâne blocat prin `MPR_ALIEXPRESS_API_CURRENT_CONFIRMED=false` până la această confirmare. După confirmare, operatorul configurează App Key, App Secret, Tracking ID, aprobarea termenilor și a afișării publice în Netlify. Dacă se furnizează un API nou, adaptorul trebuie actualizat și testat înainte de activare.
+
+## 3. Maparea celor 25 de nișe
+
+[Matricea de revizuire](../data/top25-niche-review-v1.json) definește produsele incluse și excluse din fiecare nișă și marchează trei nișe pilot: `ORGANIZARE_CASA`, `BIROU_ORGANIZARE`, `CALATORII`. Niciun ID de categorie nu este aprobat implicit.
+
+Pentru fiecare nișă și piață, operatorul verifică în taxonomy-ul oficial categoria leaf, versiunea arborelui, numărul de rezultate și cel puțin zece produse exemplu. Înregistrarea aprobării conține `mappingStatus: "APPROVED"`, numele revizorului, `reviewedAt`, `categoryEvidenceUrl` și ID-ul categoriei. În matrice, revizia generală a nișei rămâne la nivelul rândului, iar revizia mapării se trece separat în `providerReviews.EBAY_US`, `providerReviews.EBAY_DE` sau `providerReviews.ALIEXPRESS`. Fiecare țintă generată include aceste dovezi; colectoarele resping ținte fără revizie valabilă de maximum 90 de zile și URL HTTPS oficial. Pentru AliExpress sunt necesare ID-uri de categorie; un cuvânt cheie fără categorie nu poate produce un clasament de categorie. Rularea `node scripts/report-top25-category-readiness.mjs` arată acoperirea actuală și produce lista de ținte numai pentru mapări aprobate. Acea listă se introduce în variabila Netlify corespunzătoare; nu se copiază ID-uri din exemplele testelor.
+
+## 4. Pilotul pe trei nișe
+
+1. Se aprobă accesul și trei mapări relevante. Se rulează colectarea în mediu de test pentru fiecare sursă, fără publicare dacă drepturile de afișare lipsesc.
+2. Pentru fiecare din primele 25 de poziții se salvează: sursa, piața, nișa, categoria, ID-ul produsului, titlul, rangul, URL-ul și `observedAt`. Se verifică manual primele 10 și un eșantion din restul listei pentru relevanță, variații duplicate și categoria corectă.
+3. Se colectează un bazin de candidați mai mare decât 25, numai dacă sursa și drepturile permit acest lucru. Clasamentul brut al sursei rămâne distinct de lista de oportunități MPR. `top25-generic-selection-v1.js` exclude brandurile consacrate cunoscute și cere o revizie umană documentată pentru fiecare brand necunoscut sau generic. Un produs cu rangul 26 în sursă poate avea rangul 25 în lista MPR, dar interfața trebuie să păstreze ambele ranguri și să explice filtrarea. Dacă rămân sub 25 produse aprobate, lista este incompletă și nu se prezintă drept „Top 25 fără brand”.
+   - Când există 25 produse distincte aprobate, ingestia internă primește un snapshot `platform: "MPR_GENERIC"` cu `sourcePlatform`, `market`, `sourceKey`, `nicheId`, `candidates` și `reviews` indexate după `externalId`. Fiecare candidat are rangul original, URL-ul sursei și `observedAt`; fiecare revizie are decizie de brand, revizor, dată, URL de dovadă, decizie de nișă și `conceptKey`. `top25-generic-snapshot-v1.js` construiește lista separată de clasamentul brut. Este obligatorie aprobarea explicită de afișare a sursei concrete; revizia nu înlocuiește licența.
+   - API-ul public reverifică prospețimea, cele 25 poziții, conceptele distincte și dovezile reviziei. Dacă aprobarea sursei este retrasă, ascunde inclusiv snapshoturile editoriale deja stocate. Acoperirea `curatedPositions` este separată de pozițiile brute `livePositions`; selecția editorială nu contează ca a doua platformă independentă pentru Consensus.
+4. Se repetă trei zile. O listă incompletă, veche de peste 72 de ore sau fără drept de afișare nu se publică. Se compară stabilitatea rangurilor și proporția de produse relevante.
+5. După pilot se completează mapările rămase. Pragul pentru „Top 25 fără brand consacrat” este 25 nișe cu câte 25 oportunități revizuite și publicabile, timp de trei colectări zilnice consecutive, urmate de revizuire umană. Clasamentul brut și lista filtrată au praguri de acoperire separate.
+
+### Limita eBay pentru o listă filtrată
+
+[Ghidul oficial eBay Marketing](https://developer.ebay.com/develop/guides/buy/marketing-and-discounts-guide) documentează `metric_name`, `category_id` și `aspect_filter` pentru `getMerchandisedProducts`; [referința oficială eBay](https://www.ebay.co.jp/developer/api/marketing_api_buy/documentation) indică `limit` maxim 100, fără paginare documentată. Modul intern de revizie poate solicita 100 de poziții într-un apel și păstrează rangurile 26–100 pentru evaluare; colectarea obișnuită și lista brută publică rămân 1–25. Dacă după filtrarea brandurilor și a duplicatelor rămân sub 25 de produse revizuite, lista „Top 25 fără brand” rămâne incompletă. Volumul efectiv și drepturile pentru cazul nostru trebuie confirmate în producție. Rezultatele Browse neclasate după vânzări pot servi la descoperire, dar nu vor fi etichetate „best selling”.
+
+## 5. Dacă accesul este refuzat
+
+Se solicită oferte de la furnizori de feeduri licențiate pentru clasamente pe categorii. Contractul trebuie să permită explicit afișarea în SaaS, stocarea, actualizarea zilnică și derivarea. Până la obținerea unei astfel de surse, pagina Free arată acoperirea reală și nu promite 625 de produse recente.
+
+### Pilot fără EPN
+
+Înscrierea EPN poate fi amânată fără oprirea cercetării. [eBay precizează](https://partnernetwork.ebay.com/page/developer-questionnaire) că Browse API nu necesită aprobare suplimentară, dar [Browse](https://developer.ebay.com/api-docs/buy/api-browse.html) este o sursă de descoperire prin căutare, nu dovadă de vânzări sau rang `BEST_SELLING`. Cheile Production, termenii aplicabili și limitele trebuie totuși verificați înainte de automatizare. Nu se pornește publicarea din rezultate de căutare fără drepturi clare de afișare.
+
+Lotul intern [generic-office-discovery-2026-09-23.json](../data/generic-office-discovery-2026-09-23.json) conține cinci listări publice găsite manual în două nișe de birou. Mențiunea `Unbranded` este declarația vânzătorului din rezultatul indexat; nu este verificare independentă a brandului. Rangul, cererea, comparabilele românești, furnizorul și costul rămân necunoscute. Lotul nu este servit de API-ul public.

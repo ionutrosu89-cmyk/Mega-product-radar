@@ -53,4 +53,5 @@ test('beta operations UI exposes the zero-cost scorecard, journey next action an
   const js=await readFile(new URL('../beta-participants.js',import.meta.url),'utf8');
   assert.match(html,/nu generează utilizatori fictivi/i);assert.match(html,/Free Beta Scorecard/i);assert.match(html,/25 invitați/i);assert.match(html,/Registru beta \+ next action/i);assert.match(html,/Journey coverage indisponibil/i);
   assert.match(js,/Leagă contul real/i);assert.match(js,/RUN_TOP25_SEARCH/);assert.match(js,/REACH_PRODUCT_DECISION/);assert.match(js,/\/api\/internal\/closed-beta-scorecard/);assert.match(js,/LINK_IDENTITY/);assert.match(js,/lansare automată=false/);assert.match(js,/achiziții autorizate=false/);
+  assert.match(html,/id="studyMetrics"/);assert.match(js,/productFlowSessions/);assert.match(js,/understandingPct/);
 });

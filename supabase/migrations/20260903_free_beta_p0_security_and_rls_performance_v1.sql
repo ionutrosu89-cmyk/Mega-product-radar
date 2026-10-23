@@ -1,5 +1,36 @@
 begin;
 
+-- Restore the privacy-request foundation omitted from the historical chain.
+-- Matches the live schema; the scoped policy is defined below.
+create table if not exists public.privacy_requests (
+ id uuid primary key default gen_random_uuid(),
+ workspace_id uuid not null references public.workspaces(id) on delete cascade,
+ user_id uuid not null references auth.users(id) on delete cascade,
+ request_type text not null check(request_type in ('ACCESS','PORTABILITY','RECTIFICATION','ERASURE','RESTRICTION','OBJECTION')),
+ status text not null default 'OPEN' check(status in ('OPEN','IN_REVIEW','COMPLETED','REJECTED')),
+ note text,
+ created_at timestamptz not null default now(),
+ updated_at timestamptz not null default now()
+);
+alter table public.privacy_requests enable row level security;
+
+-- Restore the commercial-observation foundation present in production but
+-- omitted from the consolidated repository migrations.
+create table if not exists public.commercial_observations (
+ id uuid primary key default gen_random_uuid(),
+ workspace_id uuid not null references public.workspaces(id) on delete cascade,
+ product_name text not null,
+ kind text not null check(kind in ('ROMANIA_PRICE','COMPETITOR_SALES','SUPPLIER_QUOTE','REVIEW_EVIDENCE','COMMERCIAL_TEST')),
+ verified boolean not null default false,
+ source_url text,
+ payload jsonb not null default '{}'::jsonb,
+ created_at timestamptz not null default now(),
+ updated_at timestamptz not null default now()
+);
+create index if not exists commercial_observations_workspace_product_idx
+ on public.commercial_observations(workspace_id,product_name);
+alter table public.commercial_observations enable row level security;
+
 create schema if not exists private;
 revoke all on schema private from public, anon;
 grant usage on schema private to authenticated, service_role;

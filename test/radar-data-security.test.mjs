@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createRadarDataHandler} from '../netlify/functions/radar-data.mjs';
 
-function storeWith(payload=null){return {async get(key){if(key==='latest')return payload?JSON.stringify(payload):null;if(key==='scan-status')return JSON.stringify({status:'idle'});return null;},async set(){}};}
+function storeWith(payload=null){return {async getWithMetadata(key){assert.equal(key,'workspaces/w1/state');return {etag:'1',data:{scan:{status:'idle'},latest:payload?{...payload,workspaceId:'w1'}:null}};}};}
 function mockFetch(plan='RADAR'){return async url=>{const u=String(url);if(u.includes('/auth/v1/user'))return Response.json({id:'u1'});if(u.includes('/rest/v1/workspace_members'))return Response.json([{workspace_id:'w1',user_id:'u1',role:'MEMBER'}]);if(u.includes('/rest/v1/workspaces'))return Response.json([{id:'w1',name:'W',plan,owner_id:'owner'}]);return new Response(null,{status:404});};}
 const headers={authorization:'Bearer token','x-mpr-workspace-id':'w1'};
 

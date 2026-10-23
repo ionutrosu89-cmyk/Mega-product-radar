@@ -1,3 +1,5 @@
+import {evaluateStageFacts} from './evidence-stage-policy.js';
+import {evidenceFreshness} from './evidence-freshness.js';
 const text=v=>String(v??'').trim();
 const key=v=>text(v).toUpperCase();
 
@@ -14,20 +16,20 @@ function rowMatchesCandidate(row={},asin=''){
 
 function candidateSupplierVerified(evidence={},asin=''){
   return evidenceRows(evidence).some(row=>rowMatchesCandidate(row,asin)&&(
-    row.manuallyVerified===true||row.supplierVerified===true||row.currentEvidenceLevel==='MANUALLY_VERIFIED'||row.evidenceLevel==='MANUALLY_VERIFIED'
+    (row.manuallyVerified===true||row.supplierVerified===true||row.currentEvidenceLevel==='MANUALLY_VERIFIED'||row.evidenceLevel==='MANUALLY_VERIFIED')&&evidenceFreshness(row.observedAt,{kind:'supplier'}).status==='CURRENT'
   ));
 }
 
 function candidateEconomicsConfirmed(evidence={},asin=''){
   return evidenceRows(evidence).some(row=>rowMatchesCandidate(row,asin)&&(
-    row.landedEconomicsConfirmed===true||row.economicsConfirmed===true||row.confirmedLandedEconomics===true||row.status==='CONFIRMED_LANDED_ECONOMICS'
+    (row.landedEconomicsConfirmed===true||row.economicsConfirmed===true||row.confirmedLandedEconomics===true||row.status==='CONFIRMED_LANDED_ECONOMICS')&&Number(row.marginPct)>=20&&Number(row.roiPct)>=45&&Number(row.profitPerUnit)>0&&evidenceFreshness(row.observedAt,{kind:'freight'}).status==='CURRENT'
   ));
 }
 
-export function buildFirstFinalistDecision({candidateAsin,trendFusion={},romaniaEvidence={},importabilityEvidence={},supplierEvidence={},economicsEvidence={}}={}){
+export function buildFirstFinalistDecision({candidateAsin,trendFusion={},romaniaEvidence={},importabilityEvidence={},supplierEvidence={},economicsEvidence={},confidence=null}={}){
   const asin=key(candidateAsin);
   const trendRow=(trendFusion.rows||[]).find(r=>key(r.externalId)===asin);
-  const trendConfirmed=!!trendRow&&trendRow.confirmedAcceleration===true&&trendRow.status==='CONFIRMED_ACCELERATION';
+  const trendConfirmed=!!trendRow&&trendRow.confirmedAcceleration===true&&trendRow.status==='CONFIRMED_ACCELERATION'&&trendRow.evidenceClass==='FUSED_LONGITUDINAL_PUBLIC_TREND'&&trendRow.trendEvidenceLevel==='RANK_PLUS_REVIEW_LONGITUDINAL'&&trendRow.demandEvidenceConfirmed===true;
   const sameRomaniaCandidate=key(romaniaEvidence.candidateAsin)===asin;
   const romaniaGapConfirmed=sameRomaniaCandidate&&romaniaEvidence.promotion?.exactRomaniaGapConfirmed===true&&romaniaEvidence.promotion?.promotionEligible===true;
   const sameImportabilityCandidate=key(importabilityEvidence.candidateAsin)===asin;
@@ -37,14 +39,20 @@ export function buildFirstFinalistDecision({candidateAsin,trendFusion={},romania
   const economicsConfirmed=candidateEconomicsConfirmed(economicsEvidence,asin);
   const purchaseAuthorized=false;
 
-  const gates={trendConfirmed,romaniaGapConfirmed,importabilityPassed,supplierVerified,economicsConfirmed};
+  const fresh=[trendRow?.observedAt,romaniaEvidence.observedAt].every(at=>evidenceFreshness(at).status==='CURRENT');
+  const canonical=evaluateStageFacts({promising:Boolean(asin),marketQualified:true,confidence,trendConfirmed,romaniaExact:romaniaGapConfirmed,importabilityPassed,supplierVerified,economicsConfirmed,fresh});
+  const gates={fresh,trendConfirmed,romaniaGapConfirmed,importabilityPassed,supplierVerified,economicsConfirmed};
   const passed=Object.values(gates).filter(Boolean).length;
   let status='BLOCKED_BEFORE_VALIDATE';
   if(trendConfirmed&&romaniaGapConfirmed) status='VALIDATE_SUPPORT_READY';
   if(trendConfirmed&&romaniaGapConfirmed&&!importabilityReviewEligible) status='VALIDATE_READY_IMPORTABILITY_BLOCKED';
   if(trendConfirmed&&romaniaGapConfirmed&&importabilityPassed&&supplierVerified&&economicsConfirmed) status='FINALIST_EVIDENCE_READY';
 
+  if(canonical.stage==='DISCOVERED'||canonical.stage==='PROMISING')status='BLOCKED_BEFORE_VALIDATE';
+  if(status==='FINALIST_EVIDENCE_READY'&&canonical.stage!=='FINALIST')status='VALIDATE_SUPPORT_READY';
   const blockers=[];
+  if(!fresh)blockers.push('CURRENT_MARKET_EVIDENCE_REQUIRED');
+  if(confidence===null||confidence<50)blockers.push('CONFIDENCE_50_REQUIRED_FOR_VALIDATE');
   if(!trendConfirmed) blockers.push('CONFIRMED_TREND_FUSION_MISSING');
   if(!romaniaGapConfirmed) blockers.push('EXACT_ROMANIA_GAP_MISSING');
   if(!importabilityPassed) blockers.push('CANDIDATE_IMPORTABILITY_PASS_MISSING');
@@ -52,11 +60,11 @@ export function buildFirstFinalistDecision({candidateAsin,trendFusion={},romania
   if(!economicsConfirmed) blockers.push('CANDIDATE_CONFIRMED_LANDED_ECONOMICS_MISSING');
 
   return {
-    schemaVersion:'MPR_FIRST_FINALIST_DECISION_V1',candidateAsin:asin||null,status,
-    gatesPassed:passed,gatesTotal:5,gates,blockers,
-    validateEligible:trendConfirmed&&romaniaGapConfirmed,
+    schemaVersion:'MPR_FIRST_FINALIST_DECISION_V1',confidence,stage:canonical.stage,policyVersion:canonical.policyVersion,candidateAsin:asin||null,status,
+    gatesPassed:passed,gatesTotal:6,gates,blockers,
+    validateEligible:['VALIDATE','FINALIST'].includes(canonical.stage),
     supplierSourcingEligible:trendConfirmed&&romaniaGapConfirmed&&importabilityReviewEligible,
-    finalistEvidenceReady:trendConfirmed&&romaniaGapConfirmed&&importabilityPassed&&supplierVerified&&economicsConfirmed,
+    finalistEvidenceReady:canonical.stage==='FINALIST',
     testReady:false,
     salesEvidenceClass:'NOT_VERIFIED_SALES',verifiedSalesRows:0,paidCallsTriggered:0,providerSpendEur:0,purchaseAuthorized,
     policy:'FAIL_CLOSED; SAME_ASIN_TREND_ROMANIA_IMPORTABILITY_SUPPLIER_ECONOMICS; IMPORTABILITY_REQUIRED_BEFORE_SUPPLIER_SOURCING; STRICT_IMPORTABILITY_PASS_REQUIRED_FOR_FINALIST; CANDIDATE_SPECIFIC_MANUAL_SUPPLIER_REQUIRED; CANDIDATE_SPECIFIC_CONFIRMED_LANDED_ECONOMICS_REQUIRED; GLOBAL_COUNTS_NEVER_SATISFY_CANDIDATE_GATES; FINALIST_EVIDENCE_DOES_NOT_AUTHORIZE_PURCHASE; NEVER_INFER_SALES'
