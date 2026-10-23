@@ -65,3 +65,9 @@ test('stable editorial key survives reload and keeps account scopes distinct',()
   assert.equal(readFreeShortlist(storage,first).has(key),true);
   assert.equal(readFreeShortlist(storage,second).has(key),false);
 });
+
+test('product-specific interest expires after 30 days even with a recent retrieval',()=>{
+  const demand={...candidate.evidence[0],type:'DEMAND',demandScope:'PRODUCT_SPECIFIC',observedAt:new Date(now.getTime()-30*86_400_000).toISOString(),retrievedAt:now.toISOString()};
+  assert.ok(normalizeEditorialEvidence(demand,{now}));
+  assert.equal(normalizeEditorialEvidence({...demand,observedAt:new Date(Date.parse(demand.observedAt)-1).toISOString()},{now}),null);
+});

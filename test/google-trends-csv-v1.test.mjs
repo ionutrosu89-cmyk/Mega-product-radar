@@ -43,3 +43,9 @@ test('malformed, multi-series and non-RO source input fails closed',()=>{
   assert.throws(()=>stageGoogleTrendsObservation(csv,{...options,concept:'suport documente'}),/QUERY_MISMATCH/);
   assert.throws(()=>stageGoogleTrendsObservation(csv.replaceAll('2026-09','2023-09'),options),/PERIOD_STALE_OR_FUTURE/);
 });
+
+test('CSV staging enforces the 30-day freshness boundary',()=>{
+  const retrievedAt='2026-10-19T00:00:00Z';
+  assert.equal(stageGoogleTrendsObservation(csv,{...options,retrievedAt}).publicStatus,'PENDING_REVIEW');
+  assert.throws(()=>stageGoogleTrendsObservation(csv,{...options,retrievedAt:'2026-10-19T00:00:00.001Z'}),/PERIOD_STALE_OR_FUTURE/);
+});

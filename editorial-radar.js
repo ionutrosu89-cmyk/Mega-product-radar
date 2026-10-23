@@ -8,7 +8,7 @@ const node=(tag,text,className)=>{const element=document.createElement(tag);if(t
 const formatDate=value=>new Intl.DateTimeFormat('ro-RO',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(value));
 const sourceCount=product=>new Set(product.evidence.map(row=>row.sourceUrl)).size;
 const keyFor=product=>freeProductKey({externalId:product.id},'MPR_EDITORIAL');
-let feed=null,products=[],signals=[],saved=new Set(),userId=undefined;
+let feed=null,signalFeed=null,products=[],signals=[],saved=new Set(),userId=undefined;
 
 function renderResearch(){
   const root=$('#research');root.replaceChildren();
@@ -57,6 +57,14 @@ function renderDetail(product){
 }
 
 function render(){
+  if(!feed)return;
+  products=freshEditorialProducts(feed);
+  signals=freshPublishedFreeSignalResearchFeed(signalFeed).observations;
+  for(const option of $('#nicheSelect').options){
+    if(!option.value)continue;
+    const niche=feed.niches.find(row=>row.id===option.value);
+    if(niche)option.textContent=`${niche.emoji} ${niche.label} (${products.filter(item=>item.nicheId===niche.id).length})`;
+  }
   const niche=$('#nicheSelect').value,search=$('#search').value.toLocaleLowerCase('ro').trim(),savedOnly=$('#savedOnly').checked;
   const visible=products.filter(product=>(!niche||product.nicheId===niche)&&(!search||`${product.title} ${product.need}`.toLocaleLowerCase('ro').includes(search))&&(!savedOnly||saved.has(keyFor(product))));
   $('#count').textContent=`${visible.length} produse afișate · ${products.length} fișe editoriale actuale · 25 nișe configurate`;
@@ -73,7 +81,7 @@ function render(){
 
 async function refreshAccount(){
   let next=null;try{next=(await getCurrentSession())?.user?.id||null;}catch{next='UNAVAILABLE';}
-  if(next===userId)return;userId=next;saved=readFreeShortlist(undefined,userId);render();
+  if(next!==userId){userId=next;saved=readFreeShortlist(undefined,userId);}render();
 }
 
 async function start(){
@@ -84,18 +92,21 @@ async function start(){
     if(feed?.schema!=='MPR_EDITORIAL_RADAR_V1')throw new Error('FEED_INVALID');
     try{
       const signalResponse=await fetch('free-signal-observations-v1.json',{cache:'no-store'});
-      if(signalResponse.ok)signals=freshPublishedFreeSignalResearchFeed(await signalResponse.json()).observations;
-    }catch{signals=[];}
+      if(signalResponse.ok)signalFeed=await signalResponse.json();
+    }catch{signalFeed=null;}
     for(const niche of feed.niches){const option=node('option',`${niche.emoji} ${niche.label} (${products.filter(item=>item.nicheId===niche.id).length})`);option.value=niche.id;$('#nicheSelect').append(option);}
     $('#nicheSelect').addEventListener('change',render);$('#search').addEventListener('input',render);$('#savedOnly').addEventListener('change',render);
     document.addEventListener('click',event=>{
       const button=event.target.closest?.('[data-save]');if(!button)return;
+      render();
       const product=products.find(row=>row.id===button.dataset.save);if(!product)return;
       const result=toggleFreeShortlist(saved,keyFor(product),undefined,userId);
       if(result.changed){saved=result.values;$('#saveStatus').textContent=result.added?'Produs salvat în acest browser.':'Produs eliminat din lista salvată.';render();}
       else $('#saveStatus').textContent=result.reason==='LIMIT_REACHED'?'Lista salvată are maximum 100 de produse.':'Nu am putut salva în browser. Verifică permisiunile de stocare.';
     });
     window.addEventListener('focus',refreshAccount);window.addEventListener('pageshow',refreshAccount);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+    setInterval(()=>{if(!document.hidden)render();},60_000);
     await refreshAccount();render();
   }catch{$('#count').textContent='Selecția nu poate fi încărcată acum.';$('#grid').replaceChildren(node('div','Datele editoriale nu sunt disponibile. Încearcă din nou mai târziu.','empty'));}
 }

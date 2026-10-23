@@ -13,7 +13,7 @@ Selecția MPR este destinația pentru cercetarea proprie a conceptelor generice.
 3. Numai după revizia reală se setează `brandReview.status=GENERIC_CONCEPT_REVIEWED` și `publication.status=APPROVED_RESEARCH`, cu numele reviewerului și orele ISO ale verificării. Nu se completează aceste câmpuri pentru a demonstra funcționarea interfeței.
 4. Buildul validează fișele aprobate și generează `_site/editorial-radar-v1.json`. Fișele draft nu sunt copiate în `_site`, dar fișierul `data/editorial-radar-candidates-v1.json` este urmărit în Git: nu se introduc aici oferte, date personale sau alte documente private. Materialele private rămân în depozitul protejat deja folosit de proiect.
 5. `editorial-radar.html` afișează numărul real de fișe, dosarul, dovezile încă actuale și ce lipsește. Cheia stabilă `MPR_EDITORIAL:<ID>` păstrează shortlistul local per cont după reîncărcare.
-6. Identitatea și revizia expiră după 30 de zile. Observațiile de cerere după 35, ofertele RO și costurile după 7, iar furnizorul după 30 de zile. La expirare, browserul retrage dovada; dacă expiră identitatea, retrage cardul. Reconstruirea site-ului cu o fișă aprobată dar expirată eșuează până la revizie.
+6. Identitatea, revizia, observațiile de cerere și furnizorul expiră după maximum 30 de zile; ofertele RO și costurile după 7 zile. Browserul revalidează la fiecare afișare, revenire în pagină, salvare și o dată pe minut cât timp pagina este vizibilă. La expirare retrage dovada; dacă expiră identitatea, retrage cardul. Reconstruirea site-ului cu o fișă aprobată dar expirată eșuează până la revizie. Contractul complet: [EDITORIAL_FRESHNESS_2026-10-23.md](EDITORIAL_FRESHNESS_2026-10-23.md).
 
 ## Import gratuit Google Trends
 
@@ -23,7 +23,7 @@ Exportă din interfața oficială Google Trends un CSV **Interest over time** pe
 node scripts/stage-google-trends.mjs --csv C:\cale\export.csv --niche BIROU_ORGANIZARE --concept "suport documente" --source-url "https://trends.google.com/trends/explore?date=today%2012-m&geo=RO&q=suport%20documente"
 ```
 
-Importul acceptă date ISO, indicii întregi 0–100, maximum 35 de zile de la ultimul interval și exportul oficial cu regiunea România. Termenul din CSV trebuie să coincidă cu `q` din URL și cu `--concept`; altfel importul eșuează. Rezultatul este un JSON `PENDING_REVIEW` în `artifacts/trends-imports/`. Nu apelează API-ul, nu plătește, nu publică automat și nu transformă indicele relativ în volum de căutări sau vânzări. Reviewerul verifică exportul și URL-ul, apoi poate transcrie rezumatul original în `data/free-signal-observations-v1.json` conform contractului existent. Semnalul de nișă nu devine automat dovadă de cerere pentru un produs individual.
+Importul acceptă date ISO, indicii întregi 0–100, maximum 30 de zile de la ultimul interval și exportul oficial cu regiunea România. Termenul din CSV trebuie să coincidă cu `q` din URL și cu `--concept`; altfel importul eșuează. Rezultatul este un JSON `PENDING_REVIEW` în `artifacts/trends-imports/`. Nu apelează API-ul, nu plătește, nu publică automat și nu transformă indicele relativ în volum de căutări sau vânzări. Reviewerul verifică exportul și URL-ul, apoi poate transcrie rezumatul original în `data/free-signal-observations-v1.json` conform contractului existent. Semnalul de nișă nu devine automat dovadă de cerere pentru un produs individual.
 
 ## Verificare și limite actuale
 

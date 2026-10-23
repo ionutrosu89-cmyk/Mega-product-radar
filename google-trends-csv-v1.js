@@ -43,7 +43,7 @@ export function stageGoogleTrendsObservation(csv,{nicheId,concept,sourceUrl,retr
   const date=new Date(retrievedAt);
   if(Number.isNaN(date.getTime())||date.getTime()>Date.now())throw new Error('TRENDS_RETRIEVED_AT_INVALID');
   const endMs=Date.parse(`${summary.periodEnd}T00:00:00Z`);
-  if(endMs>date.getTime()||date.getTime()-endMs>35*86_400_000)throw new Error('TRENDS_PERIOD_STALE_OR_FUTURE');
+  if(endMs>date.getTime()||date.getTime()-endMs>30*86_400_000)throw new Error('TRENDS_PERIOD_STALE_OR_FUTURE');
   const originalSummary=`Export Google Trends RO pentru „${summary.query}”, ${summary.pointCount} intervale (${summary.periodStart}–${summary.periodEnd}); indice relativ 0–100: ultimul ${summary.latestIndex}, interval ${summary.minIndex}–${summary.maxIndex}, valori >0 în ${summary.nonzeroPointCount}/${summary.pointCount}. Zero nu înseamnă zero căutări; nu arată vânzări.`;
   if(originalSummary.length>240)throw new Error('TRENDS_SUMMARY_TOO_LONG');
   return {schema:'MPR_FREE_SIGNAL_DRAFT_V1',nicheId:niche,sourceKey:'GOOGLE_TRENDS',claim:'SEARCH_INTEREST',concept:name,sourceUrl:url.href,observedAt:date.toISOString(),periodStart:summary.periodStart,periodEnd:summary.periodEnd,nonzeroPointCount:summary.nonzeroPointCount,pointCount:summary.pointCount,summary:originalSummary,reviewer:'',publicStatus:'PENDING_REVIEW'};

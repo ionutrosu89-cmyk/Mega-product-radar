@@ -44,3 +44,12 @@ test('the public feed survives browser validation and expires when its observati
   assert.equal(freshPublishedFreeSignalResearchFeed(published,{now:new Date('2026-11-01T12:00:00Z')}).observations.length,0);
   assert.equal(freshPublishedFreeSignalResearchFeed({...published,schema:'WRONG'},{now}).observations.length,0);
 });
+
+test('a recent observation cannot renew a Google Trends interval older than 30 days',()=>{
+  const currentObservation={...observation,observedAt:'2026-09-27T12:00:00Z',periodEnd:'2026-08-28'};
+  assert.equal(normalizeFreeSignalObservation(currentObservation,{now}),null);
+  const earlierObservation={...observation,observedAt:'2026-09-20T12:00:00Z',periodEnd:'2026-08-29'};
+  const published=buildFreeSignalResearchFeed({observations:[earlierObservation]},{now:new Date('2026-09-20T12:00:00Z')});
+  assert.equal(published.observations.length,1);
+  assert.equal(freshPublishedFreeSignalResearchFeed(published,{now:new Date('2026-09-29T00:00:01Z')}).observations.length,0);
+});

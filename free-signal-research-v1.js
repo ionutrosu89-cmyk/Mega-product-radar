@@ -52,7 +52,7 @@ export function normalizeFreeSignalObservation(raw,{now=new Date()}={}){
     periodStart=clean(raw.periodStart);periodEnd=clean(raw.periodEnd);
     const dateMs=value=>/^\d{4}-\d{2}-\d{2}$/.test(value)?Date.parse(`${value}T00:00:00Z`):NaN;
     const startMs=dateMs(periodStart),endMs=dateMs(periodEnd);
-    if(url.pathname!=='/trends/explore'||url.searchParams.get('geo')!=='RO'||!concept||normalizeTerm(url.searchParams.get('q'))!==normalizeTerm(concept)||!Number.isFinite(startMs)||!Number.isFinite(endMs)||new Date(startMs).toISOString().slice(0,10)!==periodStart||new Date(endMs).toISOString().slice(0,10)!==periodEnd||startMs>endMs||endMs>observedMs||observedMs-endMs>source.maxAgeDays*DAY_MS)return null;
+    if(url.pathname!=='/trends/explore'||url.searchParams.get('geo')!=='RO'||!concept||normalizeTerm(url.searchParams.get('q'))!==normalizeTerm(concept)||!Number.isFinite(startMs)||!Number.isFinite(endMs)||new Date(startMs).toISOString().slice(0,10)!==periodStart||new Date(endMs).toISOString().slice(0,10)!==periodEnd||startMs>endMs||endMs>observedMs||now.getTime()-endMs>source.maxAgeDays*DAY_MS)return null;
   }
   return {nicheId,sourceKey,sourceLabel:source.label,claim:source.claim,sourceUrl,observedAt:new Date(observedMs).toISOString(),periodStart,periodEnd,summary,concept:concept||null,reviewer:clean(raw.reviewer)};
 }

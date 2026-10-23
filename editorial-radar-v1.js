@@ -4,7 +4,7 @@ export const EDITORIAL_INPUT_SCHEMA='MPR_EDITORIAL_CANDIDATES_V1';
 export const EDITORIAL_FEED_SCHEMA='MPR_EDITORIAL_RADAR_V1';
 export const EDITORIAL_EVIDENCE_TYPES=Object.freeze({
   IDENTITY:{label:'Identitate',maxAgeDays:30},
-  DEMAND:{label:'Interes',maxAgeDays:35},
+  DEMAND:{label:'Interes',maxAgeDays:30},
   RO_COMPARABLE:{label:'Ofertă în România',maxAgeDays:7},
   SUPPLIER:{label:'Furnizor',maxAgeDays:30},
   COST:{label:'Cost',maxAgeDays:7}
